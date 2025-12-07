@@ -1,0 +1,474 @@
+/**
+ * 🌌 DESIGN SYSTEM DARK MODE - KOUNDOUL
+ * Palette professionnelle pour l'éducation scientifique par IA
+ * Communique: Confiance, Intelligence, Modernité
+ */
+
+:root {
+  /* ========================================
+     PALETTE PRINCIPALE - DARK MODE
+     ======================================== */
+  
+  /* Couleurs de Base */
+  --koundoul-primary: #0D0623;        /* Indigo Profond - Base */
+  --koundoul-primary-light: #0F0A30;  /* Indigo Profond Clair */
+  --koundoul-secondary: #8B5CF6;      /* Violet Électrique - Accent IA */
+  --koundoul-tertiary: #3B82F6;       /* Bleu Ciel - Action */
+  
+  /* Couleurs Neutres */
+  --koundoul-text-primary: #E5E7EB;   /* Blanc Cassé - Texte principal */
+  --koundoul-text-secondary: #9CA3AF; /* Gris Clair - Texte secondaire */
+  --koundoul-text-muted: #6B7280;     /* Gris Moyen - Texte atténué */
+  
+  /* Couleurs de Fond */
+  --koundoul-bg-primary: #0D0623;      /* Fond principal */
+  --koundoul-bg-secondary: #1F1B2E;   /* Fond secondaire */
+  --koundoul-bg-tertiary: #2A2438;    /* Fond tertiaire */
+  --koundoul-bg-card: rgba(255, 255, 255, 0.05); /* Cartes translucides */
+  --koundoul-bg-card-hover: rgba(255, 255, 255, 0.08);
+  
+  /* Couleurs de Feedback */
+  --koundoul-success: #10B981;        /* Vert Vif - Succès */
+  --koundoul-success-bg: rgba(16, 185, 129, 0.1);
+  --koundoul-error: #EF4444;          /* Rouge - Erreur */
+  --koundoul-error-bg: rgba(239, 68, 68, 0.1);
+  --koundoul-warning: #F59E0B;        /* Jaune - Attention */
+  --koundoul-warning-bg: rgba(245, 158, 11, 0.1);
+  --koundoul-info: #06B6D4;           /* Cyan - Information */
+  --koundoul-info-bg: rgba(6, 182, 212, 0.1);
+  
+  /* Couleurs de Gamification */
+  --koundoul-xp: #F59E0B;             /* Jaune/Or - XP */
+  --koundoul-xp-bg: rgba(245, 158, 11, 0.1);
+  --koundoul-progress: #3B82F6;       /* Bleu - Progression */
+  --koundoul-badge-gold: #FFD700;     /* Or - Badges */
+  --koundoul-badge-silver: #C0C0C0;   /* Argent */
+  --koundoul-badge-bronze: #CD7F32;   /* Bronze */
+  
+  /* Couleurs par Matière */
+  --koundoul-math: #3B82F6;           /* Bleu Ciel - Mathématiques */
+  --koundoul-physics: #8B5CF6;        /* Violet - Physique */
+  --koundoul-chemistry: #10B981;      /* Vert - Chimie */
+  --koundoul-biology: #F59E0B;        /* Orange - Biologie */
+  
+  /* Bordures et Séparateurs */
+  --koundoul-border: rgba(139, 92, 246, 0.2);     /* Bordure violette subtile */
+  --koundoul-border-hover: rgba(139, 92, 246, 0.4); /* Bordure au hover */
+  --koundoul-border-focus: rgba(59, 130, 246, 0.6); /* Bordure au focus */
+  
+  /* Ombres */
+  --koundoul-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --koundoul-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --koundoul-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --koundoul-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+  --koundoul-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3); /* Glow violet */
+  
+  /* Dégradés */
+  --koundoul-gradient-primary: linear-gradient(135deg, #0D0623 0%, #8B5CF6 100%);
+  --koundoul-gradient-secondary: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+  --koundoul-gradient-card: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(139,92,246,0.1) 100%);
+  --koundoul-gradient-hero: linear-gradient(135deg, #0D0623 0%, #1F1B2E 50%, #8B5CF6 100%);
+  
+  /* Transitions */
+  --koundoul-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --koundoul-transition-fast: all 0.15s ease-in-out;
+  --koundoul-transition-slow: all 0.5s ease-in-out;
+}
+
+/* ========================================
+   BASE STYLES - DARK MODE FORCÉ
+   ======================================== */
+
+html {
+  background-color: var(--koundoul-bg-primary);
+  color: var(--koundoul-text-primary);
+}
+
+body {
+  background: var(--koundoul-gradient-hero);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* ========================================
+   COMPOSANTS PRINCIPAUX
+   ======================================== */
+
+/* Cartes avec effet flottant */
+.koundoul-card {
+  background: var(--koundoul-bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--koundoul-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: var(--koundoul-transition);
+  box-shadow: var(--koundoul-shadow-md);
+}
+
+.koundoul-card:hover {
+  background: var(--koundoul-bg-card-hover);
+  border-color: var(--koundoul-border-hover);
+  box-shadow: var(--koundoul-shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Boutons avec dégradé */
+.koundoul-btn-primary {
+  background: var(--koundoul-gradient-secondary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: var(--koundoul-transition);
+  box-shadow: var(--koundoul-shadow-md);
+}
+
+.koundoul-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--koundoul-shadow-lg), var(--koundoul-shadow-glow);
+}
+
+/* Champs de saisie */
+.koundoul-input {
+  background: rgba(31, 27, 46, 0.8);
+  border: 1px solid var(--koundoul-border);
+  color: var(--koundoul-text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: var(--koundoul-transition);
+}
+
+.koundoul-input:focus {
+  outline: none;
+  border-color: var(--koundoul-border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.koundoul-input::placeholder {
+  color: var(--koundoul-text-muted);
+}
+
+/* Barre de navigation */
+.koundoul-navbar {
+  background: var(--koundoul-gradient-primary);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--koundoul-border);
+  box-shadow: var(--koundoul-shadow-lg);
+}
+
+/* Onglets */
+.koundoul-tab {
+  color: var(--koundoul-text-secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: var(--koundoul-transition);
+}
+
+.koundoul-tab.active {
+  background: rgba(139, 92, 246, 0.2);
+  color: var(--koundoul-text-primary);
+  border: 1px solid var(--koundoul-border);
+}
+
+.koundoul-tab:hover {
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--koundoul-text-primary);
+}
+
+/* ========================================
+   MODULE RÉSOLVEUR - DESIGN SPÉCIALISÉ
+   ======================================== */
+
+/* Zone de saisie du problème */
+.koundoul-solver-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--koundoul-border);
+  color: var(--koundoul-text-primary);
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: var(--koundoul-transition);
+}
+
+.koundoul-solver-input:focus {
+  border-color: var(--koundoul-tertiary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Solution étape-par-étape */
+.koundoul-solution-step {
+  background: var(--koundoul-bg-card);
+  border-left: 4px solid var(--koundoul-tertiary);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  transition: var(--koundoul-transition);
+}
+
+.koundoul-solution-step:hover {
+  border-left-color: var(--koundoul-secondary);
+  background: var(--koundoul-bg-card-hover);
+}
+
+/* Solution finale */
+.koundoul-solution-final {
+  background: rgba(16, 185, 129, 0.1);
+  border: 2px solid var(--koundoul-success);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: var(--koundoul-shadow-glow);
+}
+
+/* Formules LaTeX */
+.koundoul-formula {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--koundoul-border);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-family: 'KaTeX_Main', 'Times New Roman', serif;
+  color: var(--koundoul-text-primary);
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+/* ========================================
+   GAMIFICATION ET PROGRESSION
+   ======================================== */
+
+/* Barres de progression */
+.koundoul-progress-bar {
+  background: rgba(107, 114, 128, 0.3);
+  border-radius: 10px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.koundoul-progress-fill {
+  background: var(--koundoul-gradient-secondary);
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Badges */
+.koundoul-badge {
+  background: var(--koundoul-bg-card);
+  border: 1px solid var(--koundoul-border);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: var(--koundoul-transition);
+}
+
+.koundoul-badge.gold {
+  border-color: var(--koundoul-badge-gold);
+  color: var(--koundoul-badge-gold);
+}
+
+.koundoul-badge.silver {
+  border-color: var(--koundoul-badge-silver);
+  color: var(--koundoul-badge-silver);
+}
+
+.koundoul-badge.bronze {
+  border-color: var(--koundoul-badge-bronze);
+  color: var(--koundoul-badge-bronze);
+}
+
+/* Cartes Quiz */
+.koundoul-quiz-card {
+  background: var(--koundoul-bg-card);
+  border: 1px solid var(--koundoul-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: var(--koundoul-transition);
+  cursor: pointer;
+}
+
+.koundoul-quiz-card:hover {
+  border-color: var(--koundoul-secondary);
+  background: var(--koundoul-bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--koundoul-shadow-lg);
+}
+
+/* ========================================
+   FEEDBACK ET NOTIFICATIONS
+   ======================================== */
+
+/* Messages de succès */
+.koundoul-success {
+  background: var(--koundoul-success-bg);
+  border: 1px solid var(--koundoul-success);
+  color: var(--koundoul-success);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Messages d'erreur */
+.koundoul-error {
+  background: var(--koundoul-error-bg);
+  border: 1px solid var(--koundoul-error);
+  color: var(--koundoul-error);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Messages d'information */
+.koundoul-info {
+  background: var(--koundoul-info-bg);
+  border: 1px solid var(--koundoul-info);
+  color: var(--koundoul-info);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* ========================================
+   ANIMATIONS ET EFFETS
+   ======================================== */
+
+/* Animation de chargement */
+@keyframes koundoul-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.koundoul-loading {
+  animation: koundoul-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Animation de glow */
+@keyframes koundoul-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.6); }
+}
+
+.koundoul-glow {
+  animation: koundoul-glow 2s ease-in-out infinite;
+}
+
+/* Animation de montée */
+@keyframes koundoul-float-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.koundoul-float-up {
+  animation: koundoul-float-up 0.5s ease-out;
+}
+
+/* Animation bounce-in pour les modales */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5s ease-out;
+}
+
+/* Animation de succès */
+@keyframes success {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate-success {
+  animation: success 0.6s ease-in-out;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .koundoul-card {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  
+  .koundoul-solver-input {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+  
+  .koundoul-btn-primary {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ========================================
+   UTILITAIRES
+   ======================================== */
+
+.koundoul-text-gradient {
+  background: var(--koundoul-gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.koundoul-border-gradient {
+  border: 1px solid transparent;
+  background: linear-gradient(var(--koundoul-bg-card), var(--koundoul-bg-card)) padding-box,
+              var(--koundoul-gradient-secondary) border-box;
+}
+
+.koundoul-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   OVERRIDE TAILWIND POUR DARK MODE
+   ======================================== */
+
+/* Forcer le dark mode sur tous les éléments */
+* {
+  color-scheme: dark;
+}
+
+/* Override des couleurs Tailwind par défaut */
+.bg-white { background-color: var(--koundoul-bg-secondary) !important; }
+.text-gray-900 { color: var(--koundoul-text-primary) !important; }
+.text-gray-600 { color: var(--koundoul-text-secondary) !important; }
+.border-gray-200 { border-color: var(--koundoul-border) !important; }
+.bg-gray-50 { background-color: var(--koundoul-bg-card) !important; }
+
+/* Boutons */
+.bg-blue-600 { background: var(--koundoul-gradient-secondary) !important; }
+.bg-blue-600:hover { background: var(--koundoul-gradient-primary) !important; }
+
+/* Cartes */
+.bg-white { background: var(--koundoul-bg-card) !important; }
+.shadow-sm { box-shadow: var(--koundoul-shadow-sm) !important; }
+.shadow-md { box-shadow: var(--koundoul-shadow-md) !important; }
+
+/* Inputs */
+.border-gray-300 { border-color: var(--koundoul-border) !important; }
+.focus\:border-blue-500:focus { border-color: var(--koundoul-border-focus) !important; }
+.focus\:ring-blue-500:focus { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important; }
