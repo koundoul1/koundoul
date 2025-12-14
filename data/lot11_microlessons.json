@@ -1,0 +1,345 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Physique",
+    "lesson_range": "P1-01 à P1-10",
+    "chapters": [
+      "Mécanique"
+    ],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Début du chapitre Mécanique en Physique Première (P1-01 à P1-10)"
+  },
+  "lessons": [
+    {
+      "id": "P1-01",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Forces et interactions fondamentales",
+      "duration_min": 11,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": [
+        "Identifier les 4 interactions fondamentales",
+        "Représenter une force par un vecteur",
+        "Caractéristiques d'une force (point d'application, direction, sens, intensité)"
+      ],
+      "prerequisites": [
+        "Vecteurs",
+        "Unités SI",
+        "Notion de force"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "forces",
+        "interactions",
+        "vecteur",
+        "Newton"
+      ]
+    },
+    {
+      "id": "P1-02",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Principe d'inertie - Première loi de Newton",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Énoncer le principe d'inertie",
+        "Identifier un référentiel galiléen",
+        "Conditions d'équilibre ou de mouvement rectiligne uniforme"
+      ],
+      "prerequisites": [
+        "Forces",
+        "Référentiel",
+        "Vecteurs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "inertie",
+        "Newton",
+        "référentiel galiléen",
+        "équilibre"
+      ]
+    },
+    {
+      "id": "P1-03",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Deuxième loi de Newton - F = ma",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": [
+        "Appliquer la relation ΣF = ma",
+        "Calculer l'accélération à partir des forces",
+        "Résoudre des problèmes de dynamique"
+      ],
+      "prerequisites": [
+        "Principe d'inertie",
+        "Vecteurs",
+        "Dérivation (notion)"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "Newton",
+        "dynamique",
+        "accélération",
+        "F=ma"
+      ]
+    },
+    {
+      "id": "P1-04",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Troisième loi de Newton - Action et réaction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": [
+        "Énoncer le principe des actions réciproques",
+        "Identifier les paires action-réaction",
+        "Appliquer à des situations concrètes"
+      ],
+      "prerequisites": [
+        "Forces",
+        "Lois de Newton"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "action-réaction",
+        "Newton",
+        "paire",
+        "interaction"
+      ]
+    },
+    {
+      "id": "P1-05",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Référentiels et relativité du mouvement",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir un référentiel",
+        "Comprendre la relativité du mouvement",
+        "Changer de référentiel"
+      ],
+      "prerequisites": [
+        "Cinématique",
+        "Vecteurs",
+        "Vitesse"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "référentiel",
+        "relativité",
+        "mouvement",
+        "changement"
+      ]
+    },
+    {
+      "id": "P1-06",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Mouvement dans un champ de pesanteur uniforme",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Étudier la chute libre",
+        "Équations horaires x(t), y(t), v(t)",
+        "Mouvement parabolique d'un projectile"
+      ],
+      "prerequisites": [
+        "F=ma",
+        "Cinématique",
+        "Équations différentielles simples"
+      ],
+      "content_types": [
+        "video",
+        "simulation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "chute libre",
+        "pesanteur",
+        "projectile",
+        "parabole"
+      ]
+    },
+    {
+      "id": "P1-07",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Travail d'une force",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": [
+        "Définir le travail W = F·d·cos(θ)",
+        "Calculer le travail d'une force constante",
+        "Travail moteur, résistant, nul"
+      ],
+      "prerequisites": [
+        "Forces",
+        "Produit scalaire",
+        "Vecteurs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "travail",
+        "force",
+        "énergie",
+        "produit scalaire"
+      ]
+    },
+    {
+      "id": "P1-08",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Puissance mécanique",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir la puissance P = W/Δt ou P = F·v",
+        "Calculer la puissance moyenne et instantanée",
+        "Unité : le Watt"
+      ],
+      "prerequisites": [
+        "Travail",
+        "Vitesse",
+        "Dérivée"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "puissance",
+        "Watt",
+        "énergie",
+        "temps"
+      ]
+    },
+    {
+      "id": "P1-09",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie cinétique et théorème de l'énergie cinétique",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Calculer Ec = (1/2)mv²",
+        "Appliquer le théorème ΔEc = W(F)",
+        "Résoudre des problèmes avec le théorème"
+      ],
+      "prerequisites": [
+        "Travail",
+        "Vitesse",
+        "Énergie"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "énergie cinétique",
+        "théorème",
+        "travail",
+        "vitesse"
+      ]
+    },
+    {
+      "id": "P1-10",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie potentielle de pesanteur",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir Ep = mgh",
+        "Comprendre la conservation de l'énergie mécanique",
+        "Relation entre Ep et travail du poids"
+      ],
+      "prerequisites": [
+        "Énergie cinétique",
+        "Travail",
+        "Pesanteur"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "énergie potentielle",
+        "pesanteur",
+        "altitude",
+        "conservation"
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

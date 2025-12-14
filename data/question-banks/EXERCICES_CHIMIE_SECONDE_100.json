@@ -1,0 +1,2159 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Chimie Seconde",
+    "level": "Seconde",
+    "subject": "Chimie",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Constitution de la matière",
+      "Transformations chimiques",
+      "Solutions aqueuses",
+      "Synthèse & Extraction"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "C2-EX-001",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Donner la composition de l'atome de carbone ¹²C (Z=6, A=12).",
+      "solution": {
+        "steps": [
+          "Z = 6 → 6 protons",
+          "Atome neutre → 6 électrons",
+          "N = A − Z = 12 − 6 = 6 neutrons"
+        ],
+        "final_answer": "6 protons, 6 neutrons, 6 électrons"
+      },
+      "hints": [
+        "Z = nombre de protons",
+        "A = nombre de nucléons (protons + neutrons)",
+        "Atome neutre : nombre d'électrons = nombre de protons"
+      ],
+      "related_lesson": "C2-02"
+    },
+    {
+      "id": "C2-EX-002",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "L'atome d'oxygène a pour symbole ¹⁶O. Déterminer Z, A, et le nombre de neutrons.",
+      "solution": {
+        "steps": [
+          "Oxygène : Z = 8 (numéro atomique)",
+          "A = 16 (nombre de masse)",
+          "N = A − Z = 16 − 8 = 8 neutrons"
+        ],
+        "final_answer": "Z = 8, A = 16, N = 8 neutrons"
+      },
+      "hints": [
+        "Consulte le tableau périodique pour Z",
+        "Le nombre en exposant est A"
+      ],
+      "related_lesson": "C2-03"
+    },
+    {
+      "id": "C2-EX-003",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la masse d'un atome de carbone sachant que m_proton ≈ m_neutron ≈ 1.67×10⁻²⁷ kg et que l'atome ¹²C contient 6 protons et 6 neutrons.",
+      "solution": {
+        "steps": [
+          "Masse ≈ masse des nucléons (électrons négligeables)",
+          "m = (6 protons + 6 neutrons) × 1.67×10⁻²⁷ kg",
+          "m = 12 × 1.67×10⁻²⁷",
+          "m ≈ 2×10⁻²⁶ kg"
+        ],
+        "final_answer": "m ≈ 2×10⁻²⁶ kg"
+      },
+      "hints": [
+        "La masse de l'atome ≈ masse du noyau",
+        "Masse électron négligeable"
+      ],
+      "related_lesson": "C2-02"
+    },
+    {
+      "id": "C2-EX-004",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Les isotopes du chlore sont ³⁵Cl (75%) et ³⁷Cl (25%). Calculer la masse atomique moyenne du chlore.",
+      "solution": {
+        "steps": [
+          "M_moyenne = Σ (abondance × masse isotope)",
+          "M = 0.75 × 35 + 0.25 × 37",
+          "M = 26.25 + 9.25",
+          "M = 35.5 u"
+        ],
+        "final_answer": "M ≈ 35.5 u"
+      },
+      "hints": [
+        "Moyenne pondérée par les abondances",
+        "u = unité de masse atomique"
+      ],
+      "related_lesson": "C2-04"
+    },
+    {
+      "id": "C2-EX-005",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Donner la formule brute de l'eau et indiquer le nombre d'atomes de chaque élément.",
+      "solution": {
+        "steps": [
+          "Formule de l'eau : H₂O",
+          "2 atomes d'hydrogène",
+          "1 atome d'oxygène"
+        ],
+        "final_answer": "H₂O : 2 H et 1 O"
+      },
+      "hints": [
+        "L'indice indique le nombre d'atomes"
+      ],
+      "related_lesson": "C2-05"
+    },
+    {
+      "id": "C2-EX-006",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer la charge et le nombre d'électrons de l'ion Fe³⁺ sachant que Z_fer = 26.",
+      "solution": {
+        "steps": [
+          "Charge : +3 (indiquée par ³⁺)",
+          "Atome neutre Fe : 26 électrons",
+          "Ion Fe³⁺ a perdu 3 électrons",
+          "Nombre d'électrons = 26 − 3 = 23 électrons"
+        ],
+        "final_answer": "Charge +3, 23 électrons"
+      },
+      "hints": [
+        "Ion positif = perte d'électrons",
+        "Nombre d'électrons = Z − charge"
+      ],
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-EX-007",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "L'ion sulfure S²⁻ dérive de l'atome de soufre (Z=16). Combien d'électrons possède-t-il ?",
+      "solution": {
+        "steps": [
+          "Atome S neutre : 16 électrons",
+          "Ion S²⁻ a gagné 2 électrons",
+          "Nombre d'électrons = 16 + 2 = 18 électrons"
+        ],
+        "final_answer": "18 électrons"
+      },
+      "hints": [
+        "Ion négatif = gain d'électrons",
+        "S²⁻ : charge −2"
+      ],
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-EX-008",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer le nombre de moles contenues dans 48 g de carbone (M_C = 12 g/mol).",
+      "solution": {
+        "steps": [
+          "Formule : n = m / M",
+          "n = 48 g / 12 g/mol",
+          "n = 4 mol"
+        ],
+        "final_answer": "n = 4 mol"
+      },
+      "hints": [
+        "n = m/M",
+        "M est la masse molaire"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-009",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer le nombre d'atomes dans 0.5 mol de fer (N_A = 6.02×10²³ mol⁻¹).",
+      "solution": {
+        "steps": [
+          "N = n × N_A",
+          "N = 0.5 × 6.02×10²³",
+          "N = 3.01×10²³ atomes"
+        ],
+        "final_answer": "N = 3.01×10²³ atomes"
+      },
+      "hints": [
+        "N_A = nombre d'Avogadro",
+        "N = n × N_A"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-010",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la masse de 2 moles d'eau H₂O (M = 18 g/mol).",
+      "solution": {
+        "steps": [
+          "m = n × M",
+          "m = 2 mol × 18 g/mol",
+          "m = 36 g"
+        ],
+        "final_answer": "m = 36 g"
+      },
+      "hints": [
+        "m = n × M"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-011",
+      "chapter": "Transformations chimiques",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Écrire l'équation de la synthèse de l'eau à partir de dihydrogène et de dioxygène.",
+      "solution": {
+        "steps": [
+          "Réactifs : H₂ et O₂",
+          "Produit : H₂O",
+          "Équation non équilibrée : H₂ + O₂ → H₂O",
+          "Équation équilibrée : 2H₂ + O₂ → 2H₂O"
+        ],
+        "final_answer": "2H₂ + O₂ → 2H₂O"
+      },
+      "hints": [
+        "Pense à équilibrer l'équation",
+        "Conserve le nombre d'atomes de chaque élément"
+      ],
+      "related_lesson": "C2-12"
+    },
+    {
+      "id": "C2-EX-012",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Équilibrer l'équation : Fe + O₂ → Fe₂O₃",
+      "solution": {
+        "steps": [
+          "Fe₂O₃ contient 2 Fe et 3 O",
+          "Il faut 4 Fe pour avoir 2 Fe₂O₃",
+          "Il faut 3 O₂ pour avoir 6 O",
+          "Équation équilibrée : 4Fe + 3O₂ → 2Fe₂O₃"
+        ],
+        "final_answer": "4Fe + 3O₂ → 2Fe₂O₃"
+      },
+      "hints": [
+        "Commence par équilibrer Fe puis O",
+        "Vérifie : 4 Fe des deux côtés, 6 O des deux côtés"
+      ],
+      "related_lesson": "C2-13"
+    },
+    {
+      "id": "C2-EX-013",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Écrire l'équation équilibrée de la combustion complète du méthane CH₄.",
+      "solution": {
+        "steps": [
+          "Combustion complète : CH₄ + O₂ → CO₂ + H₂O",
+          "Équilibrer C : 1 CO₂",
+          "Équilibrer H : 2 H₂O (4 H)",
+          "Équilibrer O : 2 O₂ (4 O)",
+          "CH₄ + 2O₂ → CO₂ + 2H₂O"
+        ],
+        "final_answer": "CH₄ + 2O₂ → CO₂ + 2H₂O"
+      },
+      "hints": [
+        "Combustion complète produit CO₂ et H₂O",
+        "Équilibre C, puis H, puis O"
+      ],
+      "related_lesson": "C2-14"
+    },
+    {
+      "id": "C2-EX-014",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dans la réaction 2H₂ + O₂ → 2H₂O, combien de moles de H₂O sont produites si on fait réagir 3 moles de H₂ ?",
+      "solution": {
+        "steps": [
+          "Rapport stœchiométrique : 2 H₂ → 2 H₂O",
+          "Donc 1 H₂ → 1 H₂O",
+          "3 moles de H₂ → 3 moles de H₂O"
+        ],
+        "final_answer": "3 moles de H₂O"
+      },
+      "hints": [
+        "Utilise les coefficients stœchiométriques",
+        "Rapport 2:2 = 1:1"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-015",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On fait réagir 4 moles de Fe avec 4 moles de O₂ selon : 4Fe + 3O₂ → 2Fe₂O₃. Quel est le réactif limitant ?",
+      "solution": {
+        "steps": [
+          "Rapport théorique : 4 Fe nécessitent 3 O₂",
+          "On a 4 Fe → il faut 3 O₂",
+          "On a 4 O₂ disponibles > 3 O₂ nécessaires",
+          "Fe est le réactif limitant (consommé en premier)"
+        ],
+        "final_answer": "Fe est le réactif limitant"
+      },
+      "hints": [
+        "Compare les rapports disponibles et nécessaires",
+        "Le limitant est consommé en premier"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-016",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la masse molaire de CO₂ (C=12, O=16 g/mol).",
+      "solution": {
+        "steps": [
+          "M(CO₂) = M(C) + 2×M(O)",
+          "M(CO₂) = 12 + 2×16",
+          "M(CO₂) = 12 + 32",
+          "M(CO₂) = 44 g/mol"
+        ],
+        "final_answer": "M(CO₂) = 44 g/mol"
+      },
+      "hints": [
+        "Somme des masses atomiques",
+        "Attention aux indices"
+      ],
+      "related_lesson": "C2-20"
+    },
+    {
+      "id": "C2-EX-017",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quelle masse de CO₂ (M=44 g/mol) est produite par combustion complète de 0.5 mol de CH₄ ? (CH₄ + 2O₂ → CO₂ + 2H₂O)",
+      "solution": {
+        "steps": [
+          "Rapport : 1 CH₄ → 1 CO₂",
+          "0.5 mol CH₄ → 0.5 mol CO₂",
+          "m = n × M = 0.5 × 44",
+          "m = 22 g"
+        ],
+        "final_answer": "m(CO₂) = 22 g"
+      },
+      "hints": [
+        "Utilise le rapport stœchiométrique",
+        "m = n × M"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-018",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Identifier les réactifs et les produits dans : N₂ + 3H₂ → 2NH₃",
+      "solution": {
+        "steps": [
+          "À gauche de la flèche : réactifs",
+          "À droite de la flèche : produits",
+          "Réactifs : N₂ et H₂",
+          "Produit : NH₃"
+        ],
+        "final_answer": "Réactifs: N₂ et H₂; Produit: NH₃"
+      },
+      "hints": [
+        "Réactifs → Produits"
+      ],
+      "related_lesson": "C2-12"
+    },
+    {
+      "id": "C2-EX-019",
+      "chapter": "Transformations chimiques",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Que signifie le symbole (g) dans une équation chimique ?",
+      "solution": {
+        "steps": [
+          "(g) signifie 'gaz'",
+          "Indique l'état physique gazeux"
+        ],
+        "final_answer": "(g) = état gazeux"
+      },
+      "hints": [
+        "(s)=solide, (l)=liquide, (g)=gaz, (aq)=aqueux"
+      ],
+      "related_lesson": "C2-12"
+    },
+    {
+      "id": "C2-EX-020",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la masse de Al₂O₃ formée par réaction de 5.4 g d'aluminium selon : 4Al + 3O₂ → 2Al₂O₃ (M_Al=27 g/mol, M_Al₂O₃=102 g/mol).",
+      "solution": {
+        "steps": [
+          "n(Al) = 5.4 / 27 = 0.2 mol",
+          "Rapport : 4 Al → 2 Al₂O₃",
+          "n(Al₂O₃) = 0.2 × (2/4) = 0.1 mol",
+          "m(Al₂O₃) = 0.1 × 102 = 10.2 g"
+        ],
+        "final_answer": "m(Al₂O₃) = 10.2 g"
+      },
+      "hints": [
+        "Convertis la masse en moles",
+        "Utilise le rapport stœchiométrique",
+        "Reconvertis en masse"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-021",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Définir ce qu'est une solution aqueuse.",
+      "solution": {
+        "steps": [
+          "Une solution est un mélange homogène",
+          "Solution aqueuse : eau est le solvant",
+          "Le soluté est dissous dans l'eau"
+        ],
+        "final_answer": "Mélange homogène où l'eau est le solvant"
+      },
+      "hints": [
+        "Aqueux = qui contient de l'eau"
+      ],
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-EX-022",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la concentration molaire d'une solution contenant 0.5 mol de NaCl dans 2 L.",
+      "solution": {
+        "steps": [
+          "C = n / V",
+          "C = 0.5 mol / 2 L",
+          "C = 0.25 mol/L"
+        ],
+        "final_answer": "C = 0.25 mol/L"
+      },
+      "hints": [
+        "C = n/V",
+        "V doit être en litres"
+      ],
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-EX-023",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle quantité de matière de soluté contient 500 mL d'une solution à 0.4 mol/L ?",
+      "solution": {
+        "steps": [
+          "n = C × V",
+          "Convertir : 500 mL = 0.5 L",
+          "n = 0.4 × 0.5",
+          "n = 0.2 mol"
+        ],
+        "final_answer": "n = 0.2 mol"
+      },
+      "hints": [
+        "n = C × V",
+        "Convertis mL en L"
+      ],
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-EX-024",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quelle masse de NaCl (M=58.5 g/mol) faut-il dissoudre dans l'eau pour préparer 500 mL de solution à 0.2 mol/L ?",
+      "solution": {
+        "steps": [
+          "n = C × V = 0.2 × 0.5 = 0.1 mol",
+          "m = n × M",
+          "m = 0.1 × 58.5",
+          "m = 5.85 g"
+        ],
+        "final_answer": "m = 5.85 g"
+      },
+      "hints": [
+        "Calcule d'abord n = C×V",
+        "Puis m = n×M"
+      ],
+      "related_lesson": "C2-23"
+    },
+    {
+      "id": "C2-EX-025",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "On dilue 10 mL d'une solution à 1 mol/L en ajoutant 90 mL d'eau. Quelle est la nouvelle concentration ?",
+      "solution": {
+        "steps": [
+          "Conservation : C₁V₁ = C₂V₂",
+          "V₂ = 10 + 90 = 100 mL",
+          "1 × 10 = C₂ × 100",
+          "C₂ = 10/100 = 0.1 mol/L"
+        ],
+        "final_answer": "C₂ = 0.1 mol/L"
+      },
+      "hints": [
+        "C₁V₁ = C₂V₂",
+        "V_final = V_initial + V_ajouté"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-026",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quel volume de solution mère à 2 mol/L faut-il prélever pour préparer 250 mL de solution à 0.5 mol/L ?",
+      "solution": {
+        "steps": [
+          "C₁V₁ = C₂V₂",
+          "2 × V₁ = 0.5 × 250",
+          "2V₁ = 125",
+          "V₁ = 62.5 mL"
+        ],
+        "final_answer": "V₁ = 62.5 mL"
+      },
+      "hints": [
+        "C₁V₁ = C₂V₂",
+        "Résous pour V₁"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-027",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Classer les solutions suivantes selon leur pH : vinaigre (pH=3), eau pure (pH=7), eau de Javel (pH=12).",
+      "solution": {
+        "steps": [
+          "pH < 7 : acide",
+          "pH = 7 : neutre",
+          "pH > 7 : basique",
+          "Vinaigre (3) : acide",
+          "Eau pure (7) : neutre",
+          "Eau de Javel (12) : basique"
+        ],
+        "final_answer": "Acide: vinaigre; Neutre: eau pure; Basique: eau de Javel"
+      },
+      "hints": [
+        "pH < 7 = acide",
+        "pH > 7 = basique"
+      ],
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-EX-028",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la concentration massique d'une solution contenant 30 g de sucre dans 500 mL d'eau.",
+      "solution": {
+        "steps": [
+          "C_m = m / V",
+          "C_m = 30 g / 0.5 L",
+          "C_m = 60 g/L"
+        ],
+        "final_answer": "C_m = 60 g/L"
+      },
+      "hints": [
+        "C_m = m/V",
+        "Convertis mL en L"
+      ],
+      "related_lesson": "C2-26"
+    },
+    {
+      "id": "C2-EX-029",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une solution de glucose (M=180 g/mol) a une concentration massique de 90 g/L. Calculer sa concentration molaire.",
+      "solution": {
+        "steps": [
+          "C = C_m / M",
+          "C = 90 / 180",
+          "C = 0.5 mol/L"
+        ],
+        "final_answer": "C = 0.5 mol/L"
+      },
+      "hints": [
+        "C = C_m / M",
+        "Ou : n = m/M puis C = n/V"
+      ],
+      "related_lesson": "C2-26"
+    },
+    {
+      "id": "C2-EX-030",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Écrire l'équation de dissolution du chlorure de sodium NaCl dans l'eau.",
+      "solution": {
+        "steps": [
+          "NaCl solide se dissocie en ions",
+          "NaCl(s) → Na⁺(aq) + Cl⁻(aq)"
+        ],
+        "final_answer": "NaCl(s) → Na⁺(aq) + Cl⁻(aq)"
+      },
+      "hints": [
+        "Dissolution = séparation en ions",
+        "(aq) = en solution aqueuse"
+      ],
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-EX-031",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Définir ce qu'est une synthèse chimique.",
+      "solution": {
+        "steps": [
+          "Synthèse = fabrication d'une espèce chimique",
+          "À partir de réactifs plus simples",
+          "Par transformation chimique"
+        ],
+        "final_answer": "Fabrication d'une espèce chimique à partir de réactifs"
+      },
+      "hints": [
+        "Synthèse ≠ extraction naturelle"
+      ],
+      "related_lesson": "C2-31"
+    },
+    {
+      "id": "C2-EX-032",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Citer trois techniques de séparation et préciser leur usage.",
+      "solution": {
+        "steps": [
+          "1. Filtration : séparer solide/liquide",
+          "2. Distillation : séparer liquides miscibles",
+          "3. Décantation : séparer liquides non miscibles"
+        ],
+        "final_answer": "Filtration (solide/liquide), Distillation (liquides miscibles), Décantation (liquides non miscibles)"
+      },
+      "hints": [
+        "Pense aux différents types de mélanges"
+      ],
+      "related_lesson": "C2-32"
+    },
+    {
+      "id": "C2-EX-033",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Expliquer le principe de la distillation.",
+      "solution": {
+        "steps": [
+          "Chauffer le mélange pour vaporiser le composant le plus volatil",
+          "Les vapeurs montent dans la colonne",
+          "Condensation dans le réfrigérant",
+          "Récupération du distillat"
+        ],
+        "final_answer": "Séparation basée sur les différences de températures d'ébullition : vaporisation puis condensation"
+      },
+      "hints": [
+        "Le plus volatil s'évapore en premier"
+      ],
+      "related_lesson": "C2-33"
+    },
+    {
+      "id": "C2-EX-034",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un mélange eau/éthanol doit être séparé. L'eau bout à 100°C et l'éthanol à 78°C. Lequel récupère-t-on en premier par distillation ?",
+      "solution": {
+        "steps": [
+          "Le composant le plus volatil s'évapore en premier",
+          "Plus volatil = température d'ébullition plus basse",
+          "T_éb(éthanol) = 78°C < T_éb(eau) = 100°C",
+          "L'éthanol est distillé en premier"
+        ],
+        "final_answer": "L'éthanol (T_éb = 78°C)"
+      },
+      "hints": [
+        "Le plus volatil bout à plus basse température"
+      ],
+      "related_lesson": "C2-33"
+    },
+    {
+      "id": "C2-EX-035",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Décrire l'usage d'une ampoule à décanter.",
+      "solution": {
+        "steps": [
+          "Séparer deux liquides non miscibles",
+          "La phase la moins dense reste en haut",
+          "Ouvrir le robinet pour évacuer la phase inférieure",
+          "Récupérer séparément les deux phases"
+        ],
+        "final_answer": "Séparation de liquides non miscibles par décantation"
+      },
+      "hints": [
+        "Les liquides forment deux phases distinctes",
+        "Densité détermine la position"
+      ],
+      "related_lesson": "C2-34"
+    },
+    {
+      "id": "C2-EX-036",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer le rendement d'une synthèse si on obtient 8 g de produit alors que la théorie prévoit 10 g.",
+      "solution": {
+        "steps": [
+          "Rendement (%) = (masse réelle / masse théorique) × 100",
+          "η = (8 / 10) × 100",
+          "η = 0.8 × 100",
+          "η = 80%"
+        ],
+        "final_answer": "Rendement = 80%"
+      },
+      "hints": [
+        "η = (m_réelle / m_théorique) × 100"
+      ],
+      "related_lesson": "C2-36"
+    },
+    {
+      "id": "C2-EX-037",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Pourquoi chauffe-t-on souvent à reflux lors d'une synthèse ?",
+      "solution": {
+        "steps": [
+          "Pour accélérer la réaction (augmenter la température)",
+          "Le réfrigérant condense les vapeurs",
+          "Évite les pertes de réactifs volatils",
+          "Permet un chauffage prolongé en sécurité"
+        ],
+        "final_answer": "Accélérer la réaction tout en évitant les pertes de réactifs volatils"
+      },
+      "hints": [
+        "Reflux = vapeurs condensées et renvoyées"
+      ],
+      "related_lesson": "C2-37"
+    },
+    {
+      "id": "C2-EX-038",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On veut synthétiser 20 g d'aspirine (M=180 g/mol) avec un rendement attendu de 75%. Quelle quantité théorique faut-il prévoir ?",
+      "solution": {
+        "steps": [
+          "η = (masse obtenue / masse théorique) × 100",
+          "75 = (20 / m_théo) × 100",
+          "m_théo = 20 × 100 / 75",
+          "m_théo = 26.7 g"
+        ],
+        "final_answer": "Masse théorique = 26.7 g"
+      },
+      "hints": [
+        "Réarrange la formule du rendement",
+        "m_théo = m_réelle / (η/100)"
+      ],
+      "related_lesson": "C2-36"
+    },
+    {
+      "id": "C2-EX-039",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Qu'est-ce qu'un agent desséchant et à quoi sert-il ?",
+      "solution": {
+        "steps": [
+          "Substance qui absorbe l'eau",
+          "Utilisé pour sécher un produit organique",
+          "Exemples : MgSO₄, Na₂SO₄ anhydres",
+          "Élimine les traces d'eau après extraction"
+        ],
+        "final_answer": "Substance qui absorbe l'eau pour sécher un produit"
+      },
+      "hints": [
+        "Anhydre = sans eau"
+      ],
+      "related_lesson": "C2-38"
+    },
+    {
+      "id": "C2-EX-040",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "En chromatographie sur couche mince, une substance A migre de 4 cm tandis que le front de solvant atteint 8 cm. Calculer le rapport frontal Rf.",
+      "solution": {
+        "steps": [
+          "R_f = distance parcourue par la substance / distance parcourue par le solvant",
+          "R_f = 4 / 8",
+          "R_f = 0.5"
+        ],
+        "final_answer": "R_f = 0.5"
+      },
+      "hints": [
+        "R_f = d_substance / d_solvant",
+        "0 < R_f < 1"
+      ],
+      "related_lesson": "C2-40"
+    },
+    {
+      "id": "C2-EX-041",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la masse molaire de H₂SO₄ (H=1, S=32, O=16 g/mol).",
+      "solution": {
+        "steps": [
+          "M(H₂SO₄) = 2×M(H) + M(S) + 4×M(O)",
+          "M = 2×1 + 32 + 4×16",
+          "M = 2 + 32 + 64",
+          "M = 98 g/mol"
+        ],
+        "final_answer": "M(H₂SO₄) = 98 g/mol"
+      },
+      "hints": [
+        "Additionne toutes les masses atomiques"
+      ],
+      "related_lesson": "C2-20"
+    },
+    {
+      "id": "C2-EX-042",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Combien y a-t-il de molécules dans 3 moles d'eau (N_A = 6.02×10²³ mol⁻¹) ?",
+      "solution": {
+        "steps": [
+          "N = n × N_A",
+          "N = 3 × 6.02×10²³",
+          "N = 1.806×10²⁴ molécules"
+        ],
+        "final_answer": "N = 1.806×10²⁴ molécules"
+      },
+      "hints": [
+        "N_A = nombre d'Avogadro",
+        "N = n × N_A"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-043",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un échantillon contient 1.204×10²⁴ atomes de carbone. Combien de moles représente-t-il ?",
+      "solution": {
+        "steps": [
+          "n = N / N_A",
+          "n = 1.204×10²⁴ / 6.02×10²³",
+          "n = 2 mol"
+        ],
+        "final_answer": "n = 2 mol"
+      },
+      "hints": [
+        "n = N / N_A"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-044",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Équilibrer: C₂H₆ + O₂ → CO₂ + H₂O",
+      "solution": {
+        "steps": [
+          "C₂H₆ contient 2 C et 6 H",
+          "Produits : 2 CO₂ et 3 H₂O",
+          "Oxygène : 2×2 + 3×1 = 7 O → 3.5 O₂",
+          "Multiplier par 2 : 2C₂H₆ + 7O₂ → 4CO₂ + 6H₂O"
+        ],
+        "final_answer": "2C₂H₆ + 7O₂ → 4CO₂ + 6H₂O"
+      },
+      "hints": [
+        "Équilibre C, puis H, puis O",
+        "Multiplie tout par 2 si nécessaire pour éviter les fractions"
+      ],
+      "related_lesson": "C2-13"
+    },
+    {
+      "id": "C2-EX-045",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Combien de grammes d'oxygène (M=32 g/mol) sont nécessaires pour brûler complètement 16 g de méthane CH₄ (M=16 g/mol) ? CH₄ + 2O₂ → CO₂ + 2H₂O",
+      "solution": {
+        "steps": [
+          "n(CH₄) = 16 / 16 = 1 mol",
+          "Rapport : 1 CH₄ nécessite 2 O₂",
+          "n(O₂) = 1 × 2 = 2 mol",
+          "m(O₂) = 2 × 32 = 64 g"
+        ],
+        "final_answer": "m(O₂) = 64 g"
+      },
+      "hints": [
+        "Convertis masse en moles",
+        "Utilise les coefficients stœchiométriques",
+        "Reconvertis en masse"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-046",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle est la différence entre une transformation physique et une transformation chimique ?",
+      "solution": {
+        "steps": [
+          "Transformation physique : changement d'état ou de forme",
+          "Pas de modification de la nature chimique",
+          "Transformation chimique : formation de nouvelles espèces",
+          "Modification de la nature chimique (liaisons)"
+        ],
+        "final_answer": "Physique: pas de changement de nature chimique; Chimique: nouvelles espèces formées"
+      },
+      "hints": [
+        "Fusion, dissolution = physique",
+        "Combustion, oxydation = chimique"
+      ],
+      "related_lesson": "C2-10"
+    },
+    {
+      "id": "C2-EX-047",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On mélange 50 mL de solution de NaCl à 0.6 mol/L avec 150 mL de solution de NaCl à 0.2 mol/L. Calculer la concentration finale.",
+      "solution": {
+        "steps": [
+          "n₁ = C₁V₁ = 0.6 × 0.05 = 0.03 mol",
+          "n₂ = C₂V₂ = 0.2 × 0.15 = 0.03 mol",
+          "n_total = 0.03 + 0.03 = 0.06 mol",
+          "V_total = 50 + 150 = 200 mL = 0.2 L",
+          "C_finale = 0.06 / 0.2 = 0.3 mol/L"
+        ],
+        "final_answer": "C = 0.3 mol/L"
+      },
+      "hints": [
+        "Calcule n pour chaque solution",
+        "n_total = n₁ + n₂",
+        "C = n_total / V_total"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-048",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Expliquer pourquoi le pH d'une solution acide est inférieur à 7.",
+      "solution": {
+        "steps": [
+          "Une solution acide libère des ions H₃O⁺",
+          "Plus il y a de H₃O⁺, plus le pH est faible",
+          "[H₃O⁺] > 10⁻⁷ mol/L → pH < 7"
+        ],
+        "final_answer": "Une solution acide contient plus de H₃O⁺, donc pH < 7"
+      },
+      "hints": [
+        "pH = −log[H₃O⁺]",
+        "Plus de H₃O⁺ → pH plus petit"
+      ],
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-EX-049",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quel volume d'eau faut-il ajouter à 100 mL d'une solution à 1.5 mol/L pour obtenir une solution à 0.3 mol/L ?",
+      "solution": {
+        "steps": [
+          "C₁V₁ = C₂V₂",
+          "1.5 × 100 = 0.3 × V₂",
+          "150 = 0.3V₂",
+          "V₂ = 500 mL",
+          "Volume à ajouter = 500 − 100 = 400 mL"
+        ],
+        "final_answer": "V_ajouté = 400 mL"
+      },
+      "hints": [
+        "Trouve d'abord V₂ total",
+        "Volume ajouté = V₂ − V₁"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-050",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Pourquoi lave-t-on un produit organique extrait avec de l'eau distillée ?",
+      "solution": {
+        "steps": [
+          "Pour éliminer les impuretés hydrosolubles",
+          "Sels, acides, bases restants",
+          "Améliore la pureté du produit final"
+        ],
+        "final_answer": "Éliminer les impuretés hydrosolubles (sels, acides, bases)"
+      },
+      "hints": [
+        "Les impuretés ioniques sont solubles dans l'eau"
+      ],
+      "related_lesson": "C2-38"
+    },
+    {
+      "id": "C2-EX-051",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Donner la formule de l'ion hydroxyde.",
+      "solution": {
+        "steps": [
+          "L'ion hydroxyde est OH⁻",
+          "1 oxygène + 1 hydrogène, charge −1"
+        ],
+        "final_answer": "OH⁻"
+      },
+      "hints": [
+        "Ion basique caractéristique"
+      ],
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-EX-052",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "L'ion aluminium Al³⁺ provient de l'atome d'aluminium (Z=13). Combien d'électrons possède-t-il ?",
+      "solution": {
+        "steps": [
+          "Atome Al neutre : 13 électrons",
+          "Al³⁺ a perdu 3 électrons",
+          "Nombre d'électrons = 13 − 3 = 10"
+        ],
+        "final_answer": "10 électrons"
+      },
+      "hints": [
+        "Charge +3 = perte de 3 e⁻"
+      ],
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-EX-053",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Écrire l'équation de la réaction entre l'acide chlorhydrique HCl et l'hydroxyde de sodium NaOH.",
+      "solution": {
+        "steps": [
+          "Réaction acide-base (neutralisation)",
+          "HCl + NaOH → NaCl + H₂O",
+          "Ou sous forme ionique :",
+          "H⁺ + OH⁻ → H₂O"
+        ],
+        "final_answer": "HCl + NaOH → NaCl + H₂O"
+      },
+      "hints": [
+        "Acide + base → sel + eau"
+      ],
+      "related_lesson": "C2-16"
+    },
+    {
+      "id": "C2-EX-054",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dans la réaction 2Al + 3S → Al₂S₃, on dispose de 5.4 g d'Al (M=27 g/mol) et 9.6 g de S (M=32 g/mol). Quel est le réactif limitant ?",
+      "solution": {
+        "steps": [
+          "n(Al) = 5.4/27 = 0.2 mol",
+          "n(S) = 9.6/32 = 0.3 mol",
+          "Rapport théorique : 2 Al pour 3 S",
+          "Pour 0.2 mol Al, il faut 0.2×(3/2) = 0.3 mol S",
+          "On a exactement 0.3 mol S → proportions stœchiométriques",
+          "Aucun réactif en excès"
+        ],
+        "final_answer": "Proportions stœchiométriques: aucun réactif limitant (ou les deux sont limitants)"
+      },
+      "hints": [
+        "Calcule les quantités de matière",
+        "Compare aux proportions stœchiométriques"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-055",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Pourquoi utilise-t-on de la verrerie jaugée (fiole, pipette jaugée) plutôt qu'un bécher pour préparer une solution précise ?",
+      "solution": {
+        "steps": [
+          "La verrerie jaugée a une précision élevée",
+          "Trait de jauge pour volume exact",
+          "Le bécher est gradué mais peu précis"
+        ],
+        "final_answer": "La verrerie jaugée est beaucoup plus précise pour mesurer les volumes"
+      },
+      "hints": [
+        "Jaugé = précis, Gradué = approximatif"
+      ],
+      "related_lesson": "C2-23"
+    },
+    {
+      "id": "C2-EX-056",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Décrire le protocole pour préparer 500 mL d'une solution de NaCl à 0.1 mol/L à partir de NaCl solide (M=58.5 g/mol).",
+      "solution": {
+        "steps": [
+          "1. Calculer m : n = C×V = 0.1×0.5 = 0.05 mol",
+          "   m = n×M = 0.05×58.5 = 2.925 g",
+          "2. Peser 2.925 g de NaCl",
+          "3. Dissoudre dans un peu d'eau dans un bécher",
+          "4. Transvaser dans une fiole jaugée de 500 mL",
+          "5. Rincer le bécher et ajouter à la fiole",
+          "6. Compléter avec de l'eau jusqu'au trait de jauge",
+          "7. Boucher et homogénéiser"
+        ],
+        "final_answer": "Peser 2.925 g de NaCl, dissoudre, transvaser dans fiole de 500 mL, compléter au trait de jauge"
+      },
+      "hints": [
+        "Calcule d'abord la masse nécessaire",
+        "Utilise une fiole jaugée pour la précision"
+      ],
+      "related_lesson": "C2-23"
+    },
+    {
+      "id": "C2-EX-057",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Qu'est-ce qu'un catalyseur et quelles sont ses propriétés ?",
+      "solution": {
+        "steps": [
+          "Substance qui accélère une réaction",
+          "Sans être consommée",
+          "Ne modifie pas l'équilibre final",
+          "Abaisse l'énergie d'activation"
+        ],
+        "final_answer": "Accélère la réaction sans être consommé ni modifier l'équilibre"
+      },
+      "hints": [
+        "Retrouvé intact en fin de réaction"
+      ],
+      "related_lesson": "C2-39"
+    },
+    {
+      "id": "C2-EX-058",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On réalise une chromatographie. Deux substances A et B ont des Rf de 0.3 et 0.7. Laquelle est la plus polaire ?",
+      "solution": {
+        "steps": [
+          "Rf faible = substance peu entraînée = plus polaire",
+          "Rf élevé = substance très entraînée = moins polaire",
+          "A (Rf=0.3) < B (Rf=0.7)",
+          "A est plus polaire que B"
+        ],
+        "final_answer": "A est plus polaire (Rf plus faible)"
+      },
+      "hints": [
+        "Plus polaire = plus retenu par la phase stationnaire",
+        "Rf faible = plus polaire"
+      ],
+      "related_lesson": "C2-40"
+    },
+    {
+      "id": "C2-EX-059",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle est la masse de 0.25 mol de dioxyde de carbone CO₂ (M=44 g/mol) ?",
+      "solution": {
+        "steps": [
+          "m = n × M",
+          "m = 0.25 × 44",
+          "m = 11 g"
+        ],
+        "final_answer": "m = 11 g"
+      },
+      "hints": [
+        "m = n × M"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-060",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Identifier le test chimique permettant de détecter le dioxyde de carbone.",
+      "solution": {
+        "steps": [
+          "Test : eau de chaux Ca(OH)₂",
+          "En présence de CO₂, l'eau de chaux se trouble",
+          "Formation de carbonate de calcium CaCO₃ (précipité blanc)"
+        ],
+        "final_answer": "Eau de chaux qui se trouble"
+      },
+      "hints": [
+        "Ca(OH)₂ + CO₂ → CaCO₃ + H₂O"
+      ],
+      "related_lesson": "C2-18"
+    },
+    {
+      "id": "C2-EX-061",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une solution de concentration C est diluée 4 fois. Quelle est la nouvelle concentration ?",
+      "solution": {
+        "steps": [
+          "Diluer 4 fois signifie V₂ = 4V₁",
+          "C₁V₁ = C₂V₂",
+          "C₁V₁ = C₂(4V₁)",
+          "C₂ = C₁/4"
+        ],
+        "final_answer": "C₂ = C/4"
+      },
+      "hints": [
+        "Dilution facteur 4 = diviser C par 4"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-062",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la masse molaire de CaCO₃ (Ca=40, C=12, O=16 g/mol).",
+      "solution": {
+        "steps": [
+          "M(CaCO₃) = M(Ca) + M(C) + 3×M(O)",
+          "M = 40 + 12 + 3×16",
+          "M = 40 + 12 + 48",
+          "M = 100 g/mol"
+        ],
+        "final_answer": "M(CaCO₃) = 100 g/mol"
+      },
+      "hints": [
+        "Additionne toutes les masses atomiques"
+      ],
+      "related_lesson": "C2-20"
+    },
+    {
+      "id": "C2-EX-063",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Lors d'une synthèse, on devrait théoriquement obtenir 15 g de produit mais on n'obtient que 12 g. Calculer le rendement et expliquer pourquoi il n'est pas de 100%.",
+      "solution": {
+        "steps": [
+          "η = (12/15) × 100 = 80%",
+          "Causes d'un rendement < 100% :",
+          "- Pertes lors des transferts",
+          "- Réaction incomplète",
+          "- Réactions secondaires",
+          "- Purification imparfaite"
+        ],
+        "final_answer": "η = 80%. Rendement < 100% : pertes, réaction incomplète, réactions secondaires"
+      },
+      "hints": [
+        "Les pertes sont inévitables en pratique"
+      ],
+      "related_lesson": "C2-36"
+    },
+    {
+      "id": "C2-EX-064",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Donner la formule de l'ion nitrate.",
+      "solution": {
+        "steps": [
+          "L'ion nitrate est NO₃⁻",
+          "1 azote + 3 oxygènes, charge −1"
+        ],
+        "final_answer": "NO₃⁻"
+      },
+      "hints": [
+        "Ion polyatomique fréquent"
+      ],
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-EX-065",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Pourquoi dit-on que l'eau pure est un mauvais conducteur électrique ?",
+      "solution": {
+        "steps": [
+          "La conductivité dépend des ions présents",
+          "L'eau pure contient très peu d'ions",
+          "Seulement H₃O⁺ et OH⁻ en très faible quantité",
+          "Donc conductivité très faible"
+        ],
+        "final_answer": "L'eau pure contient très peu d'ions donc conduit très peu l'électricité"
+      },
+      "hints": [
+        "Conductivité électrique = présence d'ions"
+      ],
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-EX-066",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quelle masse de magnésium (M=24 g/mol) faut-il pour produire 2 L de dihydrogène dans les CNTP selon : Mg + 2HCl → MgCl₂ + H₂ ? (V_molaire = 24 L/mol aux CNTP)",
+      "solution": {
+        "steps": [
+          "n(H₂) = V/V_molaire = 2/24 ≈ 0.083 mol",
+          "Rapport : 1 Mg → 1 H₂",
+          "n(Mg) = n(H₂) = 0.083 mol",
+          "m(Mg) = n × M = 0.083 × 24 = 2 g"
+        ],
+        "final_answer": "m(Mg) = 2 g"
+      },
+      "hints": [
+        "Aux CNTP, V_molaire = 24 L/mol",
+        "n = V/V_molaire"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-067",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dans quel ordre place-t-on les phases dans une ampoule à décanter après extraction : dichlorométhane (d=1.33) et eau (d=1.00) ?",
+      "solution": {
+        "steps": [
+          "La phase la moins dense est en haut",
+          "Eau (d=1.00) < Dichlorométhane (d=1.33)",
+          "Ordre : eau en haut, dichlorométhane en bas"
+        ],
+        "final_answer": "Eau (haut), Dichlorométhane (bas)"
+      },
+      "hints": [
+        "Moins dense = au-dessus"
+      ],
+      "related_lesson": "C2-34"
+    },
+    {
+      "id": "C2-EX-068",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une solution de saccharose (M=342 g/mol) contient 34.2 g dans 200 mL. Calculer sa concentration molaire et massique.",
+      "solution": {
+        "steps": [
+          "n = m/M = 34.2/342 = 0.1 mol",
+          "V = 200 mL = 0.2 L",
+          "C = n/V = 0.1/0.2 = 0.5 mol/L",
+          "C_m = m/V = 34.2/0.2 = 171 g/L"
+        ],
+        "final_answer": "C = 0.5 mol/L, C_m = 171 g/L"
+      },
+      "hints": [
+        "C = n/V, C_m = m/V"
+      ],
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-EX-069",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Comparer les isotopes ¹²C et ¹³C. Qu'ont-ils de commun et de différent ?",
+      "solution": {
+        "steps": [
+          "Commun : même Z=6 (6 protons), même élément",
+          "Différent : A différent (12 vs 13)",
+          "¹²C : 6 neutrons, ¹³C : 7 neutrons",
+          "Propriétés chimiques identiques"
+        ],
+        "final_answer": "Même Z (protons), différent nombre de neutrons"
+      },
+      "hints": [
+        "Isotopes = même Z, différent N"
+      ],
+      "related_lesson": "C2-04"
+    },
+    {
+      "id": "C2-EX-070",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Écrire l'équation de décomposition thermique du carbonate de calcium CaCO₃ en oxyde de calcium CaO et dioxyde de carbone.",
+      "solution": {
+        "steps": [
+          "Décomposition : CaCO₃ → CaO + CO₂",
+          "Équation déjà équilibrée",
+          "Réaction endothermique (nécessite chaleur)"
+        ],
+        "final_answer": "CaCO₃ → CaO + CO₂"
+      },
+      "hints": [
+        "Décomposition thermique = chauffage"
+      ],
+      "related_lesson": "C2-12"
+    },
+    {
+      "id": "C2-EX-071",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Qu'est-ce qu'une solution saturée ?",
+      "solution": {
+        "steps": [
+          "Solution qui contient le maximum de soluté dissous",
+          "À une température donnée",
+          "Tout ajout de soluté reste non dissous"
+        ],
+        "final_answer": "Solution contenant le maximum de soluté dissous possible à une température donnée"
+      },
+      "hints": [
+        "Ne peut plus dissoudre davantage"
+      ],
+      "related_lesson": "C2-29"
+    },
+    {
+      "id": "C2-EX-072",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dans une réaction, 10 g d'un réactif A (M=50 g/mol) réagissent avec un excès de B. On obtient 8 g de produit C (M=40 g/mol). Calculer le rendement.",
+      "solution": {
+        "steps": [
+          "n(A) = 10/50 = 0.2 mol",
+          "Si rapport 1:1, n_théo(C) = 0.2 mol",
+          "m_théo(C) = 0.2 × 40 = 8 g",
+          "On obtient 8 g → rendement = (8/8)×100 = 100%"
+        ],
+        "final_answer": "Rendement = 100%"
+      },
+      "hints": [
+        "Calcule la masse théorique attendue",
+        "Compare à la masse réelle"
+      ],
+      "related_lesson": "C2-36"
+    },
+    {
+      "id": "C2-EX-073",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Expliquer le principe de la recristallisation pour purifier un solide.",
+      "solution": {
+        "steps": [
+          "1. Dissoudre le solide impur dans un solvant à chaud",
+          "2. Filtrer à chaud pour éliminer les impuretés insolubles",
+          "3. Refroidir lentement",
+          "4. Le produit pur cristallise, les impuretés restent en solution",
+          "5. Filtrer et sécher les cristaux"
+        ],
+        "final_answer": "Dissolution à chaud, filtration, refroidissement pour cristallisation du produit pur"
+      },
+      "hints": [
+        "Solubilité augmente avec température",
+        "Le pur cristallise en premier"
+      ],
+      "related_lesson": "C2-38"
+    },
+    {
+      "id": "C2-EX-074",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer le nombre d'atomes d'oxygène dans 9 g d'eau H₂O (M=18 g/mol, N_A=6.02×10²³).",
+      "solution": {
+        "steps": [
+          "n(H₂O) = 9/18 = 0.5 mol",
+          "Nombre de molécules = 0.5 × 6.02×10²³ = 3.01×10²³",
+          "Chaque H₂O contient 1 atome O",
+          "N(O) = 3.01×10²³ atomes"
+        ],
+        "final_answer": "N = 3.01×10²³ atomes d'oxygène"
+      },
+      "hints": [
+        "1 molécule H₂O → 1 atome O"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-075",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Décrire deux méthodes pour mesurer le pH d'une solution.",
+      "solution": {
+        "steps": [
+          "1. pH-mètre : mesure électronique précise",
+          "2. Papier pH : indicateur coloré, précision ±1",
+          "3. Indicateur coloré en solution (BBT, phénolphtaléine)"
+        ],
+        "final_answer": "pH-mètre (précis), papier pH ou indicateurs colorés (approximatif)"
+      },
+      "hints": [
+        "pH-mètre = le plus précis"
+      ],
+      "related_lesson": "C2-28"
+    },
+    {
+      "id": "C2-EX-076",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle est la différence entre une combustion complète et incomplète ?",
+      "solution": {
+        "steps": [
+          "Combustion complète : excès d'O₂",
+          "Produits : CO₂ + H₂O (flamme bleue)",
+          "Combustion incomplète : manque d'O₂",
+          "Produits : CO + C (suie) + H₂O (flamme jaune/orange)"
+        ],
+        "final_answer": "Complète: CO₂+H₂O (excès O₂); Incomplète: CO+C+H₂O (manque O₂)"
+      },
+      "hints": [
+        "CO est toxique (combustion incomplète)"
+      ],
+      "related_lesson": "C2-14"
+    },
+    {
+      "id": "C2-EX-077",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "En chromatographie sur couche mince, trois substances ont des Rf de 0.2, 0.5 et 0.8. Laquelle est la plus difficile à séparer des autres ? Justifier.",
+      "solution": {
+        "steps": [
+          "Plus les Rf sont proches, plus difficile la séparation",
+          "Rf: 0.2, 0.5, 0.8",
+          "Écarts : 0.5-0.2=0.3 et 0.8-0.5=0.3",
+          "Écarts égaux, mais toutes bien séparées",
+          "Aucune n'est particulièrement difficile ici"
+        ],
+        "final_answer": "Les trois sont bien séparées (écarts de 0.3), aucune difficulté particulière"
+      },
+      "hints": [
+        "Plus l'écart de Rf est grand, meilleure la séparation"
+      ],
+      "related_lesson": "C2-40"
+    },
+    {
+      "id": "C2-EX-078",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On dissout 5.85 g de NaCl (M=58.5 g/mol) dans de l'eau. Quel volume d'eau faut-il pour obtenir une concentration de 0.5 mol/L ?",
+      "solution": {
+        "steps": [
+          "n(NaCl) = 5.85/58.5 = 0.1 mol",
+          "C = n/V",
+          "V = n/C = 0.1/0.5 = 0.2 L",
+          "V = 200 mL"
+        ],
+        "final_answer": "V = 200 mL"
+      },
+      "hints": [
+        "V = n/C"
+      ],
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-EX-079",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Donner la configuration électronique simplifiée de l'ion Mg²⁺ (Z_Mg=12).",
+      "solution": {
+        "steps": [
+          "Mg neutre : 12 électrons",
+          "Mg²⁺ a perdu 2 électrons : 10 électrons",
+          "Configuration: 1s² 2s² 2p⁶",
+          "Ou: (Ne) = structure du néon"
+        ],
+        "final_answer": "1s² 2s² 2p⁶ ou (Ne)"
+      },
+      "hints": [
+        "10 électrons = structure du néon"
+      ],
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-EX-080",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "La masse de 1 L de dihydrogène aux CNTP est 0.09 g. Calculer la masse molaire du H₂. (V_molaire = 24 L/mol aux CNTP)",
+      "solution": {
+        "steps": [
+          "1 L correspond à n = 1/24 mol",
+          "M = m/n = 0.09 / (1/24)",
+          "M = 0.09 × 24",
+          "M = 2.16 g/mol ≈ 2 g/mol"
+        ],
+        "final_answer": "M(H₂) ≈ 2 g/mol"
+      },
+      "hints": [
+        "n = V/V_molaire",
+        "M = m/n"
+      ],
+      "related_lesson": "C2-20"
+    },
+    {
+      "id": "C2-EX-081",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Pourquoi l'eau de mer conduit-elle bien l'électricité contrairement à l'eau pure ?",
+      "solution": {
+        "steps": [
+          "L'eau de mer contient de nombreux ions dissous",
+          "Na⁺, Cl⁻, Mg²⁺, SO₄²⁻, etc.",
+          "Ces ions assurent la conductivité électrique",
+          "L'eau pure a très peu d'ions"
+        ],
+        "final_answer": "L'eau de mer contient de nombreux ions qui conduisent l'électricité"
+      },
+      "hints": [
+        "Conductivité = présence d'ions"
+      ],
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-EX-082",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Citer trois types de verrerie utilisée en synthèse organique et leur rôle.",
+      "solution": {
+        "steps": [
+          "1. Ballon : contient le mélange réactionnel",
+          "2. Réfrigérant : condense les vapeurs",
+          "3. Ampoule à décanter : sépare phases liquides",
+          "4. Entonnoir Büchner : filtration sous vide"
+        ],
+        "final_answer": "Ballon (réaction), Réfrigérant (condensation), Ampoule à décanter (séparation)"
+      },
+      "hints": [
+        "Chaque élément a un rôle spécifique"
+      ],
+      "related_lesson": "C2-37"
+    },
+    {
+      "id": "C2-EX-083",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer et calculer: combien de litres de O₂ (aux CNTP) sont nécessaires pour brûler 32 g de méthane CH₄ (M=16 g/mol) ? CH₄ + O₂ → CO₂ + H₂O (V_molaire=24 L/mol)",
+      "solution": {
+        "steps": [
+          "Équation équilibrée : CH₄ + 2O₂ → CO₂ + 2H₂O",
+          "n(CH₄) = 32/16 = 2 mol",
+          "Rapport : 1 CH₄ nécessite 2 O₂",
+          "n(O₂) = 2 × 2 = 4 mol",
+          "V(O₂) = n × V_molaire = 4 × 24 = 96 L"
+        ],
+        "final_answer": "V(O₂) = 96 L"
+      },
+      "hints": [
+        "Équilibre d'abord l'équation",
+        "V = n × V_molaire"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-084",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la masse molaire de l'ion sulfate SO₄²⁻ (S=32, O=16 g/mol).",
+      "solution": {
+        "steps": [
+          "M(SO₄²⁻) = M(S) + 4×M(O)",
+          "M = 32 + 4×16",
+          "M = 32 + 64",
+          "M = 96 g/mol"
+        ],
+        "final_answer": "M(SO₄²⁻) = 96 g/mol"
+      },
+      "hints": [
+        "La charge n'affecte pas la masse molaire"
+      ],
+      "related_lesson": "C2-20"
+    },
+    {
+      "id": "C2-EX-085",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Décrire le protocole de dilution précis pour passer de 20 mL de solution à 2 mol/L à une solution de 100 mL à 0.4 mol/L.",
+      "solution": {
+        "steps": [
+          "Vérifier: C₁V₁ = C₂V₂ → 2×20 = 0.4×100 → 40 = 40 ✓",
+          "1. Prélever 20 mL de solution mère avec pipette jaugée",
+          "2. Introduire dans fiole jaugée de 100 mL",
+          "3. Rincer la pipette avec de l'eau, ajouter à la fiole",
+          "4. Compléter avec de l'eau distillée jusqu'au trait",
+          "5. Boucher et homogénéiser"
+        ],
+        "final_answer": "Prélever 20 mL avec pipette jaugée, introduire dans fiole de 100 mL, compléter au trait"
+      },
+      "hints": [
+        "Utilise la verrerie jaugée pour la précision"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-086",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Qu'est-ce qu'un montage à reflux et quand l'utilise-t-on ?",
+      "solution": {
+        "steps": [
+          "Montage : ballon + réfrigérant vertical",
+          "Les vapeurs montent et sont condensées",
+          "Le condensat retourne dans le ballon",
+          "Utilisation : réactions nécessitant chauffage prolongé",
+          "Évite les pertes de solvant/réactifs volatils"
+        ],
+        "final_answer": "Chauffage avec condensation des vapeurs pour éviter les pertes, utilisé pour réactions longues"
+      },
+      "hints": [
+        "Reflux = retour dans le ballon"
+      ],
+      "related_lesson": "C2-37"
+    },
+    {
+      "id": "C2-EX-087",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On fait réagir 7 g de fer Fe (M=56 g/mol) avec un excès d'acide chlorhydrique selon : Fe + 2HCl → FeCl₂ + H₂. Quel volume de H₂ est produit aux CNTP (V_molaire=24 L/mol) ?",
+      "solution": {
+        "steps": [
+          "n(Fe) = 7/56 = 0.125 mol",
+          "Rapport : 1 Fe → 1 H₂",
+          "n(H₂) = 0.125 mol",
+          "V(H₂) = n × V_molaire = 0.125 × 24 = 3 L"
+        ],
+        "final_answer": "V(H₂) = 3 L"
+      },
+      "hints": [
+        "Rapport 1:1 entre Fe et H₂"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-088",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Expliquer ce qu'est le facteur de dilution et le calculer pour une dilution de 10 mL à 100 mL.",
+      "solution": {
+        "steps": [
+          "Facteur de dilution F = V_final / V_initial",
+          "F = 100 / 10 = 10",
+          "La solution est diluée 10 fois",
+          "C_finale = C_initiale / F"
+        ],
+        "final_answer": "F = 10 (dilution au dixième)"
+      },
+      "hints": [
+        "F = V₂/V₁",
+        "C₂ = C₁/F"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-089",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Combien y a-t-il d'atomes d'hydrogène dans 90 g de glucose C₆H₁₂O₆ (M=180 g/mol, N_A=6.02×10²³) ?",
+      "solution": {
+        "steps": [
+          "n(glucose) = 90/180 = 0.5 mol",
+          "Nombre de molécules = 0.5 × 6.02×10²³ = 3.01×10²³",
+          "Chaque molécule contient 12 atomes H",
+          "N(H) = 12 × 3.01×10²³ = 3.612×10²⁴ atomes"
+        ],
+        "final_answer": "N = 3.612×10²⁴ atomes d'hydrogène"
+      },
+      "hints": [
+        "1 molécule C₆H₁₂O₆ → 12 atomes H"
+      ],
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-EX-090",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Lors d'une extraction liquide-liquide, un composé organique est 10 fois plus soluble dans l'éther que dans l'eau. Expliquer pourquoi on utilise plusieurs extractions successives plutôt qu'une seule.",
+      "solution": {
+        "steps": [
+          "Plusieurs petites extractions sont plus efficaces qu'une grande",
+          "À chaque extraction, on retire une fraction du produit",
+          "Exemple: 3×50 mL extrait plus que 1×150 mL",
+          "Principe: efficacité d'extraction augmente avec le nombre d'extractions"
+        ],
+        "final_answer": "Plusieurs petites extractions sont plus efficaces qu'une seule grande extraction (meilleur rendement d'extraction)"
+      },
+      "hints": [
+        "3×50 mL > 1×150 mL en efficacité"
+      ],
+      "related_lesson": "C2-34"
+    },
+    {
+      "id": "C2-EX-091",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Quelle est la formule de l'ion ammonium ?",
+      "solution": {
+        "steps": [
+          "L'ion ammonium est NH₄⁺",
+          "1 azote + 4 hydrogènes, charge +1"
+        ],
+        "final_answer": "NH₄⁺"
+      },
+      "hints": [
+        "Ion polyatomique positif"
+      ],
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-EX-092",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Identifier la couleur de flamme caractéristique des ions sodium Na⁺.",
+      "solution": {
+        "steps": [
+          "Test à la flamme pour Na⁺",
+          "Couleur caractéristique : jaune orangé intense",
+          "Très facilement observable"
+        ],
+        "final_answer": "Jaune orangé"
+      },
+      "hints": [
+        "Lampes au sodium = lumière jaune"
+      ],
+      "related_lesson": "C2-19"
+    },
+    {
+      "id": "C2-EX-093",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une solution A (100 mL à 0.3 mol/L) est mélangée avec une solution B (200 mL à 0.6 mol/L). Les deux contiennent le même soluté. Quelle est la concentration finale après mélange complet ?",
+      "solution": {
+        "steps": [
+          "n(A) = C_A × V_A = 0.3 × 0.1 = 0.03 mol",
+          "n(B) = C_B × V_B = 0.6 × 0.2 = 0.12 mol",
+          "n_total = 0.03 + 0.12 = 0.15 mol",
+          "V_total = 100 + 200 = 300 mL = 0.3 L",
+          "C_finale = 0.15 / 0.3 = 0.5 mol/L"
+        ],
+        "final_answer": "C = 0.5 mol/L"
+      },
+      "hints": [
+        "n_total = n_A + n_B",
+        "V_total = V_A + V_B"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-094",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Pourquoi lave-t-on souvent la phase organique avec une solution de bicarbonate de sodium lors d'une extraction ?",
+      "solution": {
+        "steps": [
+          "Pour neutraliser les traces d'acides",
+          "NaHCO₃ est une base faible",
+          "Réagit avec les acides résiduels",
+          "Passe en phase aqueuse (éliminé)"
+        ],
+        "final_answer": "Neutraliser et éliminer les traces d'acides résiduels"
+      },
+      "hints": [
+        "NaHCO₃ = bicarbonate, base faible"
+      ],
+      "related_lesson": "C2-38"
+    },
+    {
+      "id": "C2-EX-095",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dans la réaction : CuO + H₂SO₄ → CuSO₄ + H₂O. On fait réagir 8 g de CuO (M=80 g/mol) avec un excès d'acide. Calculer la masse de CuSO₄ formée (M=160 g/mol).",
+      "solution": {
+        "steps": [
+          "n(CuO) = 8/80 = 0.1 mol",
+          "Rapport : 1 CuO → 1 CuSO₄",
+          "n(CuSO₄) = 0.1 mol",
+          "m(CuSO₄) = 0.1 × 160 = 16 g"
+        ],
+        "final_answer": "m(CuSO₄) = 16 g"
+      },
+      "hints": [
+        "Rapport stœchiométrique 1:1"
+      ],
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-EX-096",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle est la différence entre diluer et concentrer une solution ?",
+      "solution": {
+        "steps": [
+          "Diluer : ajouter du solvant",
+          "→ concentration diminue, volume augmente",
+          "Concentrer : enlever du solvant (évaporation)",
+          "→ concentration augmente, volume diminue"
+        ],
+        "final_answer": "Diluer: ajouter solvant (C diminue); Concentrer: enlever solvant (C augmente)"
+      },
+      "hints": [
+        "Dilution ↔ Concentration"
+      ],
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-EX-097",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un échantillon de 11.2 L de CO₂ aux CNTP a une masse de 22 g. En déduire la masse molaire du CO₂ (V_molaire = 24 L/mol aux CNTP).",
+      "solution": {
+        "steps": [
+          "n = V/V_molaire = 11.2/24 ≈ 0.467 mol",
+          "M = m/n = 22/0.467",
+          "M ≈ 47.1 g/mol",
+          "Arrondi : M ≈ 44 g/mol (valeur théorique)"
+        ],
+        "final_answer": "M ≈ 44 g/mol"
+      },
+      "hints": [
+        "n = V/V_molaire",
+        "M = m/n"
+      ],
+      "related_lesson": "C2-20"
+    },
+    {
+      "id": "C2-EX-098",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Lors d'une chromatographie, deux taches ont des Rf de 0.45 et 0.50. Sont-elles bien séparées ? Proposer une amélioration.",
+      "solution": {
+        "steps": [
+          "Écart : 0.50 − 0.45 = 0.05",
+          "Écart très faible = séparation difficile",
+          "Améliorations possibles :",
+          "- Changer d'éluant (solvant)",
+          "- Augmenter la distance de migration",
+          "- Utiliser chromatographie préparative"
+        ],
+        "final_answer": "Séparation difficile (Rf trop proches). Amélioration: changer d'éluant"
+      },
+      "hints": [
+        "Plus les Rf sont proches, plus difficile la séparation"
+      ],
+      "related_lesson": "C2-40"
+    },
+    {
+      "id": "C2-EX-099",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle est la différence entre précipitation et cristallisation ?",
+      "solution": {
+        "steps": [
+          "Précipitation : formation rapide d'un solide lors d'une réaction",
+          "Solide souvent amorphe ou mal cristallisé",
+          "Cristallisation : formation lente et ordonnée de cristaux",
+          "Par refroidissement ou évaporation lente",
+          "Cristaux bien formés, plus purs"
+        ],
+        "final_answer": "Précipitation: rapide, peu organisée; Cristallisation: lente, ordonnée"
+      },
+      "hints": [
+        "Précipitation = réaction chimique",
+        "Cristallisation = processus physique"
+      ],
+      "related_lesson": "C2-19"
+    },
+    {
+      "id": "C2-EX-100",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer le pH d'une solution sachant que [H₃O⁺] = 10⁻³ mol/L. La solution est-elle acide, neutre ou basique ?",
+      "solution": {
+        "steps": [
+          "pH = −log[H₃O⁺]",
+          "pH = −log(10⁻³)",
+          "pH = 3",
+          "pH < 7 → solution acide"
+        ],
+        "final_answer": "pH = 3 (solution acide)"
+      },
+      "hints": [
+        "pH = −log[H₃O⁺]",
+        "pH < 7 = acide"
+      ],
+      "related_lesson": "C2-25"
+    }
+  ]
+}

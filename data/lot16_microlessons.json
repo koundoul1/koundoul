@@ -1,0 +1,166 @@
+[
+  {
+    "id": "M2-09",
+    "content_sections": [
+      { "title": "Introduction", "content": "Notion de fonction : associer à chaque x au plus une image f(x). Domaine, image, antécédent et notation f : x ↦ f(x)." },
+      { "title": "Objectifs", "items": ["Comprendre f, f(x)", "Identifier Df", "Calculer images", "Trouver antécédents"] },
+      { "title": "Prérequis", "items": ["Ensembles de nombres (M2-01)", "Intervalles (M2-03)", "Correspondances (collège)"] },
+      { "title": "Concepts clés", "items": ["Définition : f : A→B, y=f(x)", "Df : x où f(x) existe", "Image/antécédent", "Notation : f : x ↦ expression"] },
+      { "title": "Formules / Faits", "items": ["x ∈ Df ⇔ f(x) existe", "Image : y = f(x)"] },
+      { "title": "Exemple guidé", "content": "Pour f(x)=x²−3x+2, f(2)=0 ; antécédents de 0 : solutions de x²−3x+2=0." },
+      { "title": "Exercices", "items": ["Calculer f(0), f(2), f(−1) pour f(x)=x²−3x+2", "Trouver x tel que 2x−5=1"] },
+      { "title": "Astuces", "items": ["Toujours vérifier Df avant de calculer", "Un y peut avoir plusieurs antécédents"] }
+    ]
+  },
+  {
+    "id": "M2-10",
+    "content_sections": [
+      { "title": "Introduction", "content": "Courbe Cf : ensemble des points (x; f(x)). Lecture d’images/antécédents, intersections avec axes." },
+      { "title": "Objectifs", "items": ["Tracer une courbe", "Lire f(a)", "Lire antécédents de b", "Interpréter graphiquement"] },
+      { "title": "Prérequis", "items": ["Notion de fonction", "Repérage plan", "Tracé de points"] },
+      { "title": "Concepts clés", "items": ["M ∈ Cf ⇔ yM=f(xM)", "f(a) : verticale x=a", "Antécédents de b : horizontale y=b", "Intersections axes : (0;f(0)) et f(x)=0"] },
+      { "title": "Formules / Faits", "items": ["Point : (x; f(x))", "Oy : (0;f(0))", "Ox : solutions f(x)=0"] },
+      { "title": "Exemple guidé", "content": "Lire f(2) et les antécédents de 0 sur un graphique donné." },
+      { "title": "Exercices", "items": ["Construire Cf de f(x)=x² sur [−3;3]", "Lire f(−1), f(0), f(2) sur un graphe"] },
+      { "title": "Astuces", "items": ["Image: verticale ↓", "Antécédent: horizontale →"] }
+    ]
+  },
+  {
+    "id": "M2-11",
+    "content_sections": [
+      { "title": "Introduction", "content": "Fonctions affines f(x)=ax+b : droite, pente a, ordonnée à l’origine b." },
+      { "title": "Objectifs", "items": ["Identifier/tracer", "Rôle de a et b", "Retrouver l’équation", "Résoudre ax+b=c"] },
+      { "title": "Prérequis", "items": ["Fonctions", "Graphiques", "Équations 1er degré"] },
+      { "title": "Concepts clés", "items": ["a : coefficient directeur (pente)", "b : f(0)", "2 points suffisent pour tracer", "Cas particuliers : constante, linéaire"] },
+      { "title": "Formules / Faits", "items": ["f(x)=ax+b", "a=(y2−y1)/(x2−x1)"] },
+      { "title": "Exemple guidé", "content": "Droite passant par (0;2) et (2;4) : y=x+2 ; déterminer a,b à partir de deux points." },
+      { "title": "Exercices", "items": ["Trouver y=2x+1 à partir de points", "Tracer y=−2x+4, y=3"] },
+      { "title": "Astuces", "items": ["a>0 : croissante ; a<0 : décroissante", "Tracer vite avec (0;b) et (1;a+b)"] }
+    ]
+  },
+  {
+    "id": "M2-12",
+    "content_sections": [
+      { "title": "Introduction", "content": "Fonction carré f(x)=x² : parabole, parité paire, variations et équations x²=a." },
+      { "title": "Objectifs", "items": ["Tracer x²", "Propriétés (paire, image)", "Résoudre x²=a", "Lire variations"] },
+      { "title": "Prérequis", "items": ["Fonctions", "Graphiques", "Carré (collège)"] },
+      { "title": "Concepts clés", "items": ["Df=ℝ, Im=[0;+∞[", "Parabole sommet (0;0)", "Paire : f(−x)=f(x)", "Décroît sur ]−∞;0], croît sur [0;+∞["] },
+      { "title": "Formules / Faits", "items": ["x²=a ⇒ x=±√a (a>0)", "x²=0 ⇒ x=0", "a<0 ⇒ pas de solution réelle"] },
+      { "title": "Exemple guidé", "content": "Tracer x² via points symétriques ; résoudre x²=7." },
+      { "title": "Exercices", "items": ["Calculs : 7², (−3)², (√2)²", "Résoudre x²=25, x²=−4"] },
+      { "title": "Astuces", "items": ["Le carré d’un négatif est positif", "f(x)=f(−x)"] }
+    ]
+  },
+  {
+    "id": "M2-13",
+    "content_sections": [
+      { "title": "Introduction", "content": "Fonction inverse f(x)=1/x : Df=ℝ*, hyperbole, asymptotes, parité impaire." },
+      { "title": "Objectifs", "items": ["Tracer 1/x", "Déterminer Df", "Comprendre variations", "Résoudre 1/x=a"] },
+      { "title": "Prérequis", "items": ["Fonctions", "Graphiques", "Fractions"] },
+      { "title": "Concepts clés", "items": ["Df=ℝ\\{0}", "Hyperbole, asymptotes x=0, y=0", "Impaire : f(−x)=−f(x)", "Décroissante sur ]−∞;0[ et ]0;+∞["] },
+      { "title": "Formules / Faits", "items": ["1/x=a ⇒ x=1/a (a≠0)"] },
+      { "title": "Exemple guidé", "content": "Points caractéristiques : (1;1),(2;0,5),(−1;−1)… tracer sans toucher les axes." },
+      { "title": "Exercices", "items": ["Calculs 1/5, 1/(1/3)", "Résoudre 1/x=2, 1/x=0 (impossible)"] },
+      { "title": "Astuces", "items": ["Jamais 0", "Plus |x| grand ⇒ 1/x proche de 0"] }
+    ]
+  },
+  {
+    "id": "M2-14",
+    "content_sections": [
+      { "title": "Introduction", "content": "Variations : croissante/décroissante/constante. Lecture graphique et définition par inégalités." },
+      { "title": "Objectifs", "items": ["Définir variations", "Étudier variations", "Lire sur un graphe", "Comparer images/antécédents"] },
+      { "title": "Prérequis", "items": ["Notion de fonction", "Graphiques", "Intervalles"] },
+      { "title": "Concepts clés", "items": ["Croissante : x1<x2 ⇒ f(x1)≤f(x2)", "Décroissante : x1<x2 ⇒ f(x1)≥f(x2)", "Strictement : inégalités strictes", "Constante : →"] },
+      { "title": "Formules / Faits", "items": ["Affine : signe de a donne le sens", "x² : ↘ sur ]−∞;0], ↗ sur [0;+∞["] },
+      { "title": "Exemple guidé", "content": "Identifier les intervalles de croissance/décroissance d’une courbe donnée." },
+      { "title": "Exercices", "items": ["Classer 5x+2, −2x+1, 10", "Comparer f(1), f(3) si f croît"] },
+      { "title": "Astuces", "items": ["Monter=↗, descendre=↘", "Peut varier différemment selon les intervalles"] }
+    ]
+  },
+  {
+    "id": "M2-15",
+    "content_sections": [
+      { "title": "Introduction", "content": "Tableau de variations : synthèse visuelle des sens de variation et extremums." },
+      { "title": "Objectifs", "items": ["Construire", "Lire/interpréter", "Relier à la courbe", "Identifier extremums"] },
+      { "title": "Prérequis", "items": ["Variations (M2-14)", "Graphiques", "Lecture de tableaux"] },
+      { "title": "Concepts clés", "items": ["2 lignes : x / f(x)", "Flèches ↗/↘/→", "Valeurs aux bornes et points clés", "↘ puis ↗ ⇒ minimum"] },
+      { "title": "Formules / Faits", "items": ["Minimum/maximum visibles", "Ordres de lecture horizontale"] },
+      { "title": "Exemple guidé", "content": "x² sur [−2;3] : 4 ↘ 0 ↗ 9 avec borne x : −2 → 0 → 3." },
+      { "title": "Exercices", "items": ["Construire tableau pour 2x+1", "Lire extremums depuis un tableau"] },
+      { "title": "Astuces", "items": ["Placer les valeurs aux changements de variation", "Tableau = résumé immédiat"] }
+    ]
+  },
+  {
+    "id": "M2-16",
+    "content_sections": [
+      { "title": "Introduction", "content": "Extremums : maximum/minimum, locaux vs globaux. Détection graphique et via tableau." },
+      { "title": "Objectifs", "items": ["Définir max/min", "Distinguer local/global", "Lire sur graphe", "Identifier dans tableau"] },
+      { "title": "Prérequis", "items": ["Variations", "Tableau de variations"] },
+      { "title": "Concepts clés", "items": ["Max : f(a)≥f(x)", "Min : f(a)≤f(x)", "Local vs global", "↘↗ : min ; ↗↘ : max"] },
+      { "title": "Formules / Faits", "items": ["x² : minimum global en 0", "−x² : maximum global en 0"] },
+      { "title": "Exemple guidé", "content": "f(x)=x²−4x+5 = (x−2)²+1 : minimum = 1 en x=2." },
+      { "title": "Exercices", "items": ["Repérer extremums sur un graphe", "Déterminer extremums d’expressions simples"] },
+      { "title": "Astuces", "items": ["Sommet/parabole", "Changement de flèche = extremum"] }
+    ]
+  },
+  {
+    "id": "M2-17",
+    "content_sections": [
+      { "title": "Introduction", "content": "Résolution graphique : f(x)=k, f(x)=g(x), et inéquations (au‑dessus/en‑dessous)." },
+      { "title": "Objectifs", "items": ["Résoudre f(x)=k", "Résoudre f=g", "Inéquations graphiques", "Interprétation des zones"] },
+      { "title": "Prérequis", "items": ["Représentation graphique", "Image/antécédent", "Équations"] },
+      { "title": "Concepts clés", "items": ["Intersections avec y=k", "Intersections Cf et Cg", "Au‑dessus : f>k ; en‑dessous : f<k", "Ordre constant entre intersections"] },
+      { "title": "Formules / Faits", "items": ["Solutions = abscisses d’intersections", "Inéquations = zones"] },
+      { "title": "Exemple guidé", "content": "x²=4 : intersections avec y=4 ⇒ x=±2. x²=2x : intersections des courbes." },
+      { "title": "Exercices", "items": ["x²≤4 : x∈[−2;2]", "2x+1=5 : x=2"] },
+      { "title": "Astuces", "items": ["Toujours tracer les 2 courbes", "Vérifier en remplaçant"] }
+    ]
+  },
+  {
+    "id": "M2-18",
+    "content_sections": [
+      { "title": "Introduction", "content": "Parité : fonctions paires/impaire, tests algébriques et reconnaissance graphique." },
+      { "title": "Objectifs", "items": ["Définir paire/impaire", "Tester la parité", "Reconnaître graphiquement", "Exploiter la parité"] },
+      { "title": "Prérequis", "items": ["Fonctions", "Graphiques", "Valeur absolue"] },
+      { "title": "Concepts clés", "items": ["Paire : f(−x)=f(x), symétrie /Oy", "Impaire : f(−x)=−f(x), symétrie /O", "Df symétrique nécessaire", "Ni paire ni impaire"] },
+      { "title": "Formules / Faits", "items": ["Exemples : x² paire, x³ impaire, x+1 ni l’un ni l’autre"] },
+      { "title": "Exemple guidé", "content": "Tester f(x)=x⁴ (paire), g(x)=x³+x (impaire)." },
+      { "title": "Exercices", "items": ["Déterminer parité de x²+2x, |x|", "Utiliser parité pour calculs"] },
+      { "title": "Astuces", "items": ["Vérifier Df symétrique", "Paire : ‘oublie’ le signe ; Impaire : ‘retourne’ le signe"] }
+    ]
+  },
+  {
+    "id": "M2-19",
+    "content_sections": [
+      { "title": "Introduction", "content": "Comparer deux fonctions : algébriquement via le signe de f−g, et graphiquement via la position relative." },
+      { "title": "Objectifs", "items": ["Comparer f et g", "Résoudre f≤g", "Étudier position relative", "Utiliser en problèmes"] },
+      { "title": "Prérequis", "items": ["Fonctions", "Graphiques", "Variations"] },
+      { "title": "Concepts clés", "items": ["Signe de f−g", "Cf au‑dessus ⇒ f≥g", "Intersections : f=g", "Ordre constant entre deux intersections"] },
+      { "title": "Formules / Faits", "items": ["Étudier f(x)−g(x)", "Résoudre égalités pour points de croisement"] },
+      { "title": "Exemple guidé", "content": "x² vs x+2 : intersections en x=−1 et x=2 ; x²>x+2 pour x<−1 ou x>2." },
+      { "title": "Exercices", "items": ["Comparer x² et 4 : égalités, zones < et >", "Position relative de x² et x"] },
+      { "title": "Astuces", "items": ["Graphiquement : ‘courbe du dessus’", "Entre intersections, l’ordre ne change pas"] }
+    ]
+  },
+  {
+    "id": "M2-20",
+    "content_sections": [
+      { "title": "Introduction", "content": "Synthèse Fonctions : usuelles (affine, carré, inverse), variations, extremums, parité, résolution graphique." },
+      { "title": "Objectifs", "items": ["Consolider les notions", "Résoudre des problèmes complets", "Appliquer en contexte", "Se préparer aux évaluations"] },
+      { "title": "Concepts clés", "items": ["Affines : y=ax+b", "Carré : parabole", "Inverse : hyperbole", "Variations, extremums, parité, équations/inéquations"] },
+      { "title": "Formules / Faits", "items": ["Df, variations, extremums, parité", "f(x)=k ; f=g"] },
+      { "title": "Exemples & Problèmes", "items": ["Étude complète de x²−4 : Df, variations, min, parité, graph, zéros", "Problème de trajectoire : h(t)=−5t²+20t+2"] },
+      { "title": "Astuces", "items": ["Toujours commencer par Df", "S’aider des courbes et tableaux"] }
+    ]
+  }
+]
+
+
+
+
+
+
+
+
+
+

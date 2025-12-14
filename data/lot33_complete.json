@@ -1,0 +1,543 @@
+{
+  "metadata": {
+    "lot_number": 29,
+    "lot_name": "Lot 29 - Probabilités Avancées",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Probabilités Avancées",
+    "lesson_range": "MT-78 à MT-90",
+    "total_lessons": 13
+  },
+  "lessons": [
+    {
+      "id": "MT-78",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Probabilités conditionnelles - Définition",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir la probabilité conditionnelle", "Calculer P(A|B)", "Interpréter la notation", "Utiliser la formule de base"],
+      "prerequisites": ["M1-61"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["conditionnelle", "probabilité"],
+      "detailed_content": {
+        "introduction": "La probabilité conditionnelle mesure la probabilité d'un événement A sachant qu'un autre événement B est réalisé. C'est une notion fondamentale pour les probabilités avancées.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "P(A|B) = P(A∩B) / P(B). Condition P(B) > 0", "example": "Notation" },
+          { "name": "Interprétation", "explanation": "Probabilité de A dans l'univers réduit à B", "example": "Restriction" },
+          { "name": "Propriétés", "explanation": "P(B|B)=1, P(∅|B)=0, 0 ≤ P(A|B) ≤ 1", "example": "Caractéristiques" },
+          { "name": "Formule équivalente", "explanation": "P(A∩B) = P(B) × P(A|B)", "example": "Symétrie" }
+        ],
+        "guided_example": {
+          "statement": "Dé : B = pair, A = ≥4. Calculer P(A|B).",
+          "solution_steps": ["B = {2,4,6}, A = {4,5,6}", "A∩B = {4,6}", "P(A|B) = (1/3)/(1/2) = 2/3"]
+        },
+        "quick_exercises": [
+          "60% filles, 40% filles font du sport. P(fille ET sport) ?",
+          "Calculer probabilités conditionnelles"
+        ],
+        "common_mistakes": [
+          "Confondre P(A|B) et P(B|A)",
+          "Oublier P(B) > 0"
+        ],
+        "summary": {
+          "key_concept": "P(A|B) = P(A∩B) / P(B). P(A∩B) = P(B) × P(A|B)",
+          "key_method": "'Sachant que' = restriction de l'univers. P(A|B) ≠ P(B|A) en général",
+          "next_step": "Formule des probabilités totales"
+        }
+      }
+    },
+    {
+      "id": "MT-79",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Formule des probabilités totales",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Utiliser un système complet d'événements", "Appliquer la formule des probabilités totales", "Décomposer un événement", "Résoudre des problèmes complexes"],
+      "prerequisites": ["MT-78"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["probabilités", "totales"],
+      "detailed_content": {
+        "introduction": "La formule des probabilités totales permet de calculer la probabilité d'un événement en le décomposant selon différents cas mutuellement exclusifs.",
+        "key_concepts": [
+          { "name": "Système complet", "explanation": "B₁,...,Bₙ disjoints et union = Ω. Partition de l'univers", "example": "Cas exhaustifs" },
+          { "name": "Formule", "explanation": "P(A) = ΣP(Bᵢ)P(A|Bᵢ). Décomposition", "example": "Somme" },
+          { "name": "Méthode", "explanation": "1) Identifier partition, 2) P(Bᵢ), 3) P(A|Bᵢ), 4) Appliquer formule", "example": "Étapes" },
+          { "name": "Applications", "explanation": "Urnes, étapes successives, tests médicaux", "example": "Problèmes" }
+        ],
+        "guided_example": {
+          "statement": "Urne 1: 2R3B, Urne 2: 4R1B. Choisir urne au hasard, puis boule. P(rouge) ?",
+          "solution_steps": ["B₁=Urne 1, B₂=Urne 2", "P(B₁)=P(B₂)=1/2", "P(R) = (1/2)(2/5) + (1/2)(4/5) = 3/5"]
+        },
+        "quick_exercises": [
+          "Maladie 1%, test+ 90% si malade, 5% si sain. P(test+) ?",
+          "Probabilités totales"
+        ],
+        "common_mistakes": [
+          "Oublier un cas dans la partition",
+          "Ne pas vérifier disjoints"
+        ],
+        "summary": {
+          "key_concept": "Partition : disjoints + union = Ω. P(A) = ΣP(Bᵢ)P(A|Bᵢ)",
+          "key_method": "Décomposer en cas simples. Vérifier Σ P(Bᵢ) = 1",
+          "next_step": "Formule de Bayes"
+        }
+      }
+    },
+    {
+      "id": "MT-80",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Formule de Bayes",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre et appliquer la formule de Bayes", "Inverser les probabilités conditionnelles", "Résoudre des problèmes d'inférence", "Interpréter les résultats"],
+      "prerequisites": ["MT-79"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Bayes", "inférence"],
+      "detailed_content": {
+        "introduction": "La formule de Bayes permet de calculer P(B|A) à partir de P(A|B). C'est un outil fondamental en statistique inférentielle et théorie de la décision.",
+        "key_concepts": [
+          { "name": "Formule", "explanation": "P(B|A) = [P(A|B) × P(B)] / P(A). Inversion", "example": "Deux événements" },
+          { "name": "Généralisée", "explanation": "P(Bᵢ|A) = [P(A|Bᵢ)P(Bᵢ)] / [ΣP(A|Bⱼ)P(Bⱼ)]", "example": "Système complet" },
+          { "name": "Interprétation", "explanation": "P(Bᵢ) a priori, P(Bᵢ|A) a posteriori, P(A|Bᵢ) vraisemblance", "example": "Bayésien" },
+          { "name": "Applications", "explanation": "Tests médicaux, diagnostics, filtres spam, ML", "example": "Contexte" }
+        ],
+        "guided_example": {
+          "statement": "Maladie 1%, sensibilité 90%, spécificité 95%. Si test+, P(malade) ?",
+          "solution_steps": ["P(M)=0.01, P(S)=0.99", "P(T+) = 0.01×0.9 + 0.99×0.05 = 0.0585", "P(M|T+) = (0.9×0.01)/0.0585 ≈ 15.4%"]
+        },
+        "quick_exercises": [
+          "Machines A(60%) et B(40%). Défaut A=2%, B=4%. Pièce défaut, P(A) ?",
+          "Formule de Bayes"
+        ],
+        "common_mistakes": [
+          "Confondre P(A|B) et P(B|A)",
+          "Oublier dénominateur"
+        ],
+        "summary": {
+          "key_concept": "Bayes : inverse la conditionnelle. P(B|A) = P(A|B)P(B) / P(A)",
+          "key_method": "Dénominateur = probabilités totales. A priori → A posteriori",
+          "next_step": "Indépendance d'événements"
+        }
+      }
+    },
+    {
+      "id": "MT-81",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Indépendance d'événements",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir l'indépendance de deux événements", "Utiliser la caractérisation P(A∩B) = P(A)P(B)", "Distinguer indépendance et incompatibilité", "Appliquer aux calculs"],
+      "prerequisites": ["MT-78"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["indépendance"],
+      "detailed_content": {
+        "introduction": "Deux événements sont indépendants si la réalisation de l'un n'influence pas la probabilité de l'autre. C'est une notion centrale en probabilités.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "P(A∩B) = P(A) × P(B) ⟺ P(A|B) = P(A). Indépendants", "example": "Caractérisation" },
+          { "name": "Propriétés", "explanation": "Si A et B indépendants : A et B̄, Ā et B, Ā et B̄ aussi. Symétrie", "example": "Règles" },
+          { "name": "Incompatibilité", "explanation": "Indépendants ≠ disjoints. Disjoints NON indép si non triviaux", "example": "ATTENTION" },
+          { "name": "Mutuelle", "explanation": "A₁,...,Aₙ mutuellement indép si P(Aᵢ₁∩...∩Aᵢₖ) = P(Aᵢ₁)...P(Aᵢₖ)", "example": "Généralisation" }
+        ],
+        "guided_example": {
+          "statement": "2 lancers dé. A='6 au 1er', B='pair au 2ème'. Indépendants ?",
+          "solution_steps": ["P(A)=1/6, P(B)=1/2", "P(A∩B) = (1/6)(1/2) = 1/12", "Oui, indépendants"]
+        },
+        "quick_exercises": [
+          "Lancer pièce : A='pile', B='face'. Indépendants ?",
+          "Indépendance vs incompatibilité"
+        ],
+        "common_mistakes": [
+          "Confondre indépendants et disjoints",
+          "Penser disjoints ⇒ indépendants (FAUX)"
+        ],
+        "summary": {
+          "key_concept": "Indépendants ⟺ P(A∩B) = P(A)P(B). Disjoints ≠ indépendants",
+          "key_method": "P(A|B) = P(A) si indépendants. Expériences séparées souvent indép",
+          "next_step": "Arbres pondérés"
+        }
+      }
+    },
+    {
+      "id": "MT-82",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Arbres pondérés",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Construire un arbre pondéré", "Lire les probabilités sur l'arbre", "Calculer des probabilités avec l'arbre", "Résoudre des problèmes à étapes"],
+      "prerequisites": ["MT-78"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["arbre", "pondéré"],
+      "detailed_content": {
+        "introduction": "L'arbre pondéré est un outil graphique pour représenter et calculer des probabilités dans des expériences à plusieurs étapes. Il visualise les probabilités conditionnelles.",
+        "key_concepts": [
+          { "name": "Construction", "explanation": "Nœuds = étapes. Branches = issues avec proba. Somme branches d'un nœud = 1", "example": "Structure" },
+          { "name": "Lecture", "explanation": "Prob chemin = produit des probas des branches. Chemin = succession branches", "example": "Multiplication" },
+          { "name": "Calcul", "explanation": "Chemin : multiplication (ET). Événement : addition (OU). Formule des totaux", "example": "Règles" },
+          { "name": "Règles", "explanation": "Multiplication le long chemin, addition entre chemins. Somme feuilles = 1", "example": "Pratique" }
+        ],
+        "guided_example": {
+          "statement": "Urne 3R2B, 2 boules sans remise. P(2 rouges) ?",
+          "solution_steps": ["R₁ : 3/5, B₁ : 2/5", "Si R₁ : R₂ : 2/4", "Chemin RR : (3/5)(2/4) = 3/10"]
+        },
+        "quick_exercises": [
+          "Test médical 1% malades. Sensibilité 90%, spécificité 95%. Construire arbre et P(test+)",
+          "Arbres pondérés"
+        ],
+        "common_mistakes": [
+          "Confondre multiplication et addition",
+          "Oublier des chemins"
+        ],
+        "summary": {
+          "key_concept": "Chemin : multiplication (ET). Plusieurs chemins : addition (OU)",
+          "key_method": "Vérifier sommes à chaque nœud. Arbre = visualisation des formules",
+          "next_step": "Variables aléatoires"
+        }
+      }
+    },
+    {
+      "id": "MT-83",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Variables aléatoires - Rappels et lois",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Rappeler la notion de variable aléatoire", "Calculer espérance et variance", "Utiliser les propriétés de E et V", "Appliquer aux lois discrètes"],
+      "prerequisites": ["M1-61"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["variable", "aléatoire"],
+      "detailed_content": {
+        "introduction": "Une variable aléatoire associe un nombre réel à chaque issue d'une expérience aléatoire. L'espérance et la variance sont des indicateurs centraux de sa loi de probabilité.",
+        "key_concepts": [
+          { "name": "Rappels", "explanation": "Loi P(X=xᵢ)=pᵢ, Σpᵢ=1. E(X)=Σxᵢpᵢ, V(X)=E(X²)-[E(X)]²", "example": "Définitions" },
+          { "name": "Espérance", "explanation": "Linéarité E(aX+b)=aE(X)+b, E(X+Y)=E(X)+E(Y)", "example": "Propriétés" },
+          { "name": "Variance", "explanation": "V(aX+b)=a²V(X), σ(aX+b)=|a|σ(X). Si indép : V(X+Y)=V(X)+V(Y)", "example": "Caractéristiques" },
+          { "name": "Interprétation", "explanation": "E(X) moyenne attendue, V(X) dispersion, σ(X) écart-type", "example": "Signification" }
+        ],
+        "guided_example": {
+          "statement": "X : P(0)=0.5, P(1)=0.3, P(2)=0.2. Calculer E(X) et V(X).",
+          "solution_steps": ["E(X) = 0×0.5 + 1×0.3 + 2×0.2 = 0.7", "E(X²) = 1×0.3 + 4×0.2 = 1.1", "V(X) = 1.1 - 0.49 = 0.61"]
+        },
+        "quick_exercises": [
+          "Y = 3X - 5 où E(X)=2, V(X)=4. Calculer E(Y) et V(Y)",
+          "Espérance et variance"
+        ],
+        "common_mistakes": [
+          "Oublier carré dans V(aX+b)",
+          "Additionner V(X+Y) sans indépendance"
+        ],
+        "summary": {
+          "key_concept": "E(X) = Σxᵢpᵢ. V(X) = E(X²) - [E(X)]²",
+          "key_method": "E linéaire, V quadratique. V(aX+b) = a²V(X)",
+          "next_step": "Loi binomiale"
+        }
+      }
+    },
+    {
+      "id": "MT-84",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Loi binomiale - Définition et propriétés",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir un schéma de Bernoulli", "Reconnaître une loi binomiale", "Calculer P(X=k) avec la formule", "Utiliser E(X) et V(X)"],
+      "prerequisites": ["M1-67", "MT-83"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["binomiale", "Bernoulli"],
+      "detailed_content": {
+        "introduction": "La loi binomiale modélise le nombre de succès dans n épreuves indépendantes de Bernoulli. C'est une des lois discrètes les plus importantes.",
+        "key_concepts": [
+          { "name": "Schéma", "explanation": "n épreuves Bernoulli indep identiques. X = nombre succès. X ~ B(n,p)", "example": "Répétition" },
+          { "name": "Loi", "explanation": "P(X=k) = C(n,k) × p^k × (1-p)^(n-k). Coefficient binomial", "example": "Formule" },
+          { "name": "Paramètres", "explanation": "E(X) = np, V(X) = np(1-p), σ(X) = √[np(1-p)]", "example": "Indicateurs" },
+          { "name": "Propriétés", "explanation": "ΣP(X=k) = 1. Si n=1 : Bernoulli. Si p=0.5 : symétrique", "example": "Caractéristiques" }
+        ],
+        "guided_example": {
+          "statement": "5 lancers pièce équilibrée. X = nombre pile. P(X=3) ?",
+          "solution_steps": ["X ~ B(5, 0.5)", "P(X=3) = C(5,3) × (0.5)^5", "= 10/32 = 5/16"]
+        },
+        "quick_exercises": [
+          "Archer 0.7, 10 tirs. X = touche. E(X) et σ(X) ?",
+          "Loi binomiale"
+        ],
+        "common_mistakes": [
+          "Oublier C(n,k) dans P(X=k)",
+          "Confondre p et 1-p"
+        ],
+        "summary": {
+          "key_concept": "X ~ B(n,p) : n épreuves, proba p. P(X=k) = C(n,k) p^k (1-p)^(n-k)",
+          "key_method": "E(X) = np, V(X) = np(1-p). Calculatrice pour C et P",
+          "next_step": "Loi normale"
+        }
+      }
+    },
+    {
+      "id": "MT-85",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Loi normale - Introduction",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Comprendre la loi normale", "Connaître la loi N(μ, σ²)", "Utiliser la courbe en cloche", "Interpréter μ et σ"],
+      "prerequisites": ["MT-83"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["normale", "Gauss"],
+      "detailed_content": {
+        "introduction": "La loi normale, ou loi de Gauss, est la loi de probabilité continue la plus importante en statistique. Elle apparaît naturellement dans de nombreux phénomènes.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "X ~ N(μ, σ²). Courbe en cloche symétrique en μ. Loi continue P(X=a)=0", "example": "Forme" },
+          { "name": "Paramètres", "explanation": "μ espérance (centre), σ écart-type (dispersion). Plus σ grand, plus étalée", "example": "Caractéristiques" },
+          { "name": "Propriétés", "explanation": "E(X)=μ, V(X)=σ². [μ-σ;μ+σ] ≈ 68%, [μ-2σ;μ+2σ] ≈ 95%", "example": "Règles" },
+          { "name": "Centrée réduite", "explanation": "N(0,1) référence. Z=(X-μ)/σ si X ~ N(μ,σ²)", "example": "Transformation" }
+        ],
+        "guided_example": {
+          "statement": "X ~ N(100, 15²). Espérance et écart-type ?",
+          "solution_steps": ["E(X) = μ = 100", "σ(X) = 15"]
+        },
+        "quick_exercises": [
+          "Taille ~ N(170, 10²). % entre 160 et 180 ?",
+          "Loi normale"
+        ],
+        "common_mistakes": [
+          "Confondre σ et σ²",
+          "Oublier loi continue"
+        ],
+        "summary": {
+          "key_concept": "N(μ, σ²) : μ espérance, σ écart-type. Courbe cloche symétrique",
+          "key_method": "68% dans [μ-σ;μ+σ]. 95% dans [μ-2σ;μ+2σ]",
+          "next_step": "Calculs avec la loi normale"
+        }
+      }
+    },
+    {
+      "id": "MT-86",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Calculs avec la loi normale",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Calculer des probabilités avec N(μ, σ²)", "Utiliser la table ou la calculatrice", "Centrer et réduire une variable", "Résoudre des problèmes appliqués"],
+      "prerequisites": ["MT-85"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["calcul", "normale"],
+      "detailed_content": {
+        "introduction": "Pour calculer des probabilités avec une loi normale quelconque N(μ, σ²), on la ramène à la loi centrée réduite N(0, 1) dont on possède les tables de valeurs.",
+        "key_concepts": [
+          { "name": "Centrage", "explanation": "Z = (X-μ)/σ ~ N(0,1). Transformation", "example": "Réduction" },
+          { "name": "Calculatrice", "explanation": "normalcdf(a, b, μ, σ). Calcul direct P(a≤X≤b)", "example": "Outil" },
+          { "name": "Propriétés", "explanation": "Symétrie P(X≤μ-a)=P(X≥μ+a). Complément P(X≥a)=1-P(X≤a)", "example": "Règles" },
+          { "name": "Inverse", "explanation": "invNorm(p, μ, σ) pour trouver seuils", "example": "Quantiles" }
+        ],
+        "guided_example": {
+          "statement": "X ~ N(100, 15²). P(X ≤ 110) ?",
+          "solution_steps": ["normalcdf(-1E99, 110, 100, 15)", "≈ 0.747"]
+        },
+        "quick_exercises": [
+          "Notes ~ N(12, 2²). % entre 10 et 14 ?",
+          "Calculs probabilités"
+        ],
+        "common_mistakes": [
+          "Confondre σ et σ²",
+          "Inverser bornes"
+        ],
+        "summary": {
+          "key_concept": "normalcdf(a, b, μ, σ) sur calculatrice",
+          "key_method": "Z = (X-μ)/σ pour centrer-réduire. Symétrie utile",
+          "next_step": "Approximation binomiale"
+        }
+      }
+    },
+    {
+      "id": "MT-87",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Approximation de la loi binomiale par la loi normale",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Savoir quand approximer B(n,p) par une loi normale", "Utiliser l'approximation N(np, np(1-p))", "Appliquer la correction de continuité", "Résoudre des problèmes avec grands n"],
+      "prerequisites": ["MT-84", "MT-86"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["approximation"],
+      "detailed_content": {
+        "introduction": "Lorsque n est grand, le calcul direct avec la loi binomiale devient fastidieux. On peut alors approximer B(n, p) par une loi normale, ce qui simplifie grandement les calculs.",
+        "key_concepts": [
+          { "name": "Conditions", "explanation": "n ≥ 30, np ≥ 5, n(1-p) ≥ 5. B(n,p) ≈ N(np, np(1-p))", "example": "Critères" },
+          { "name": "Correction", "explanation": "±0.5 aux bornes : P(X=k) ≈ P(k-0.5 ≤ Y ≤ k+0.5)", "example": "Continuité" },
+          { "name": "Méthode", "explanation": "1) Vérifier conditions, 2) μ=np, σ=√[np(1-p)], 3) Correction, 4) normalcdf", "example": "Étapes" },
+          { "name": "Intérêt", "explanation": "Évite calculs lourds C(n,k). Gain temps pour grands n", "example": "Pratique" }
+        ],
+        "guided_example": {
+          "statement": "X ~ B(100, 0.4). Estimer P(X ≤ 45).",
+          "solution_steps": ["Conditions OK", "μ=40, σ≈4.90", "P(X≤45) ≈ P(Y≤45.5)", "≈ 0.869"]
+        },
+        "quick_exercises": [
+          "200 lancers pièce, 90-110 pile. Probabilité ?",
+          "Approximation normale"
+        ],
+        "common_mistakes": [
+          "Oublier conditions",
+          "Ne pas appliquer correction"
+        ],
+        "summary": {
+          "key_concept": "Conditions : np ≥ 5 ET n(1-p) ≥ 5. B(n,p) ≈ N(np, np(1-p))",
+          "key_method": "Correction : ±0.5 aux bornes. Gain de temps pour grands n",
+          "next_step": "Échantillonnage"
+        }
+      }
+    },
+    {
+      "id": "MT-88",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Échantillonnage et fluctuation",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Comprendre la notion d'échantillon", "Définir la fréquence observée", "Étudier la fluctuation d'échantillonnage", "Utiliser l'intervalle de fluctuation"],
+      "prerequisites": ["MT-85"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["échantillonnage", "fluctuation"],
+      "detailed_content": {
+        "introduction": "Lorsqu'on prélève un échantillon aléatoire dans une population, la fréquence observée fluctue autour de la proportion théorique. L'échantillonnage permet d'étudier cette fluctuation.",
+        "key_concepts": [
+          { "name": "Échantillon", "explanation": "Fréquence F = X/n. X ~ B(n,p), F variable aléatoire", "example": "Définition" },
+          { "name": "Loi de F", "explanation": "E(F) = p, V(F) = p(1-p)/n, σ(F) = √[p(1-p)/n]", "example": "Caractéristiques" },
+          { "name": "Approximation", "explanation": "F ≈ N(p, p(1-p)/n) si n≥30, np≥5, n(1-p)≥5", "example": "Normale" },
+          { "name": "Intervalle", "explanation": "IF au seuil 95% : [p - 1.96σ(F) ; p + 1.96σ(F)]. [p - 2√(p(1-p)/n) ; p + 2√(p(1-p)/n)] simplifié", "example": "Formule" }
+        ],
+        "guided_example": {
+          "statement": "Population p=0.3, n=100. IF de F au seuil 95%.",
+          "solution_steps": ["√(p(1-p)/n) ≈ 0.046", "I ≈ [0.3 - 1.96×0.046 ; 0.3 + 1.96×0.046]", "≈ [0.210 ; 0.390]"]
+        },
+        "quick_exercises": [
+          "Sondage n=400, p=0.5. IF au seuil 95% (simplifié) ?",
+          "Échantillonnage"
+        ],
+        "common_mistakes": [
+          "Confondre p et F",
+          "Oublier racine carrée"
+        ],
+        "summary": {
+          "key_concept": "F = X/n, E(F) = p. σ(F) = √[p(1-p)/n]",
+          "key_method": "IF au seuil 95% : p ± 1.96σ(F). Plus n grand, plus F précise",
+          "next_step": "Intervalle de confiance"
+        }
+      }
+    },
+    {
+      "id": "MT-89",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Intervalle de confiance",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir l'intervalle de confiance", "Estimer une proportion inconnue", "Calculer l'intervalle au seuil 95%", "Interpréter correctement"],
+      "prerequisites": ["MT-88"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["confiance", "estimation"],
+      "detailed_content": {
+        "introduction": "L'intervalle de confiance permet d'estimer une proportion inconnue p dans une population à partir d'un échantillon. C'est l'outil de base de la statistique inférentielle.",
+        "key_concepts": [
+          { "name": "Problématique", "explanation": "p inconnu, échantillon donne f observé. Estimer p par intervalle", "example": "Situation" },
+          { "name": "Intervalle", "explanation": "IC = [f - 1/√n ; f + 1/√n] au niveau 95% si conditions OK", "example": "Formule" },
+          { "name": "Amplitude", "explanation": "Amplitude = 2/√n. Plus n grand, plus étroit. Pour /2 amplitude, ×4 n", "example": "Précision" },
+          { "name": "Interprétation", "explanation": "Méthode produit IC contenant p avec proba 95%. Pas 'p a 95% chance'", "example": "Nuance" }
+        ],
+        "guided_example": {
+          "statement": "Sondage n=400, 160 'oui'. Estimer p.",
+          "solution_steps": ["f = 0.4", "IC = [0.4 - 1/20 ; 0.4 + 1/20]", "= [0.35 ; 0.45]"]
+        },
+        "quick_exercises": [
+          "n=900, 540 favorables. IC de p au niveau 95% ?",
+          "Intervalles de confiance"
+        ],
+        "common_mistakes": [
+          "Confondre IC et IF",
+          "Mal interpréter niveau confiance"
+        ],
+        "summary": {
+          "key_concept": "IC = [f - 1/√n ; f + 1/√n] au niveau 95%",
+          "key_method": "f observé, p inconnu. Plus n grand, plus IC étroit",
+          "next_step": "Synthèse finale"
+        }
+      }
+    },
+    {
+      "id": "MT-90",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités Avancées",
+      "title": "Synthèse - Probabilités Avancées",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 140,
+      "objectives": ["Maîtriser tous les outils de probabilités", "Choisir la bonne méthode selon le problème", "Résoudre des problèmes de synthèse", "Interpréter les résultats dans un contexte"],
+      "prerequisites": ["MT-78", "MT-84", "MT-86", "MT-89"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "probabilités"],
+      "detailed_content": {
+        "introduction": "Les probabilités avancées combinent plusieurs notions : conditionnelles, indépendance, lois discrètes et continues, échantillonnage. Cette synthèse regroupe tous les outils et propose une méthodologie.",
+        "key_concepts": [
+          { "name": "Conditionnelles", "explanation": "P(A|B), probas totales, Bayes. Indépendance P(A∩B)=P(A)P(B). Arbres", "example": "Base" },
+          { "name": "Lois", "explanation": "B(n,p) : E=np, V=np(1-p). N(μ,σ²) : courbe cloche. Approximation si n grand", "example": "Discrète et continue" },
+          { "name": "Échantillonnage", "explanation": "F=X/n. IF (p connu) vs IC (p inconnu). Distinction fondamentale", "example": "Estimation" },
+          { "name": "Stratégie", "explanation": "1) Lire énoncé, 2) Identifier type problème, 3) Choisir outils, 4) Appliquer, 5) Vérifier conditions, 6) Interpréter", "example": "Méthodologie" }
+        ],
+        "guided_example": {
+          "statement": "Test COVID : 2% malades, sensibilité 95%, spécificité 90%. P(malade|test+) ?",
+          "solution_steps": ["Probas totales + Bayes", "P(M|T+) ≈ 16.2%"]
+        },
+        "quick_exercises": [
+          "Entreprise 3% défauts, n=200. a) Loi de X ? b) P(X≤10) ? c) IC de p ?",
+          "Problèmes de synthèse"
+        ],
+        "common_mistakes": [
+          "Choisir mauvaise méthode",
+          "Confondre formules"
+        ],
+        "summary": {
+          "key_concept": "Conditionnelles : arbre ou formules. Lois : reconnaître B ou N. Échantillonnage : IF vs IC",
+          "key_method": "Toujours contextualiser. Rigueur et méthode essentielles ! 🎉",
+          "next_step": "Fin chapitre Mathématiques Terminale"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,495 @@
+{
+  "metadata": {
+    "lot_number": 27,
+    "lot_name": "Lot 27 - Géométrie dans l'Espace",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Géométrie dans l'Espace",
+    "lesson_range": "MT-56 à MT-67",
+    "total_lessons": 12
+  },
+  "lessons": [
+    {
+      "id": "MT-56",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Repérage dans l'espace - Coordonnées",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Se repérer dans l'espace en 3D", "Utiliser un repère orthonormé (O; i, j, k)", "Déterminer les coordonnées d'un point", "Calculer des distances dans l'espace"],
+      "prerequisites": ["M2-27"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["repérage", "3D"],
+      "detailed_content": {
+        "introduction": "L'espace que nous habitons est tridimensionnel. Pour le décrire mathématiquement, on utilise un repère orthonormé avec trois axes perpendiculaires.",
+        "key_concepts": [
+          { "name": "Repère", "explanation": "Repère orthonormé (O; i, j, k) : origine O et 3 vecteurs orthogonaux unitaires", "example": "3 axes perpendiculaires" },
+          { "name": "Coordonnées", "explanation": "Point M(x; y; z) : x abscisse, y ordonnée, z cote. OM = xi + yj + zk", "example": "3 dimensions" },
+          { "name": "Distance", "explanation": "AB = √[(xᵦ-xₐ)² + (yᵦ-yₐ)² + (zᵦ-zₐ)²]. Pythagore en 3D", "example": "Trois termes" },
+          { "name": "Milieu", "explanation": "I((xₐ+xᵦ)/2; (yₐ+yᵦ)/2; (zₐ+zᵦ)/2). Moyenne des coordonnées", "example": "Géométrie" }
+        ],
+        "guided_example": {
+          "statement": "Calculer la distance AB avec A(1; 2; 3) et B(4; 6; 11).",
+          "solution_steps": ["AB = √[(4-1)² + (6-2)² + (11-3)²]", "= √[9 + 16 + 64] = √89"]
+        },
+        "quick_exercises": [
+          "Coordonnées du milieu I de [AB] avec A(2; -1; 5) et B(6; 3; -1)",
+          "Calculer distances et milieux"
+        ],
+        "common_mistakes": [
+          "Oublier une coordonnée",
+          "Oublier la racine carrée"
+        ],
+        "summary": {
+          "key_concept": "3D = 3 coordonnées (x, y, z)",
+          "key_method": "Distance et milieu : formule similaire au plan avec terme supplémentaire",
+          "next_step": "Manipuler les vecteurs de l'espace"
+        }
+      }
+    },
+    {
+      "id": "MT-57",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Vecteurs de l'espace",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Manipuler les vecteurs de l'espace", "Calculer les coordonnées d'un vecteur", "Effectuer des opérations sur les vecteurs", "Calculer la norme d'un vecteur"],
+      "prerequisites": ["MT-56"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["vecteurs", "norme"],
+      "detailed_content": {
+        "introduction": "Les vecteurs de l'espace se manipulent comme ceux du plan, mais avec une troisième coordonnée. Ils permettent de décrire des déplacements et des directions dans l'espace 3D.",
+        "key_concepts": [
+          { "name": "Coordonnées", "explanation": "AB(xᵦ-xₐ; yᵦ-yₐ; zᵦ-zₐ). B - A", "example": "Soustraire coordonnées" },
+          { "name": "Opérations", "explanation": "u + v, λu, -u : opérations coordonnée par coordonnée", "example": "Comme dans le plan" },
+          { "name": "Norme", "explanation": "||u|| = √(x² + y² + z²). Longueur du vecteur", "example": "Pythagore" },
+          { "name": "Colinéarité", "explanation": "u et v colinéaires ⟺ x/x' = y/y' = z/z' (rapports proportionnels)", "example": "Même direction" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ||u|| pour u(3; -4; 12).",
+          "solution_steps": ["||u|| = √(3² + (-4)² + 12²)", "= √(9 + 16 + 144) = √169 = 13"]
+        },
+        "quick_exercises": [
+          "u(2; -1; 3) et v(6; -3; 9) sont-ils colinéaires ?",
+          "Calculer normes et colinéarité"
+        ],
+        "common_mistakes": [
+          "Oublier une coordonnée",
+          "Erreurs dans le calcul de la norme"
+        ],
+        "summary": {
+          "key_concept": "AB = B - A. ||u|| = √(x² + y² + z²)",
+          "key_method": "Colinéaires : rapports égaux. Opérations coordonnée par coordonnée",
+          "next_step": "Colinéarité et coplanarité"
+        }
+      }
+    },
+    {
+      "id": "MT-58",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Colinéarité et coplanarité",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Déterminer si deux vecteurs sont colinéaires", "Définir la coplanarité de trois vecteurs", "Utiliser le déterminant pour la coplanarité", "Appliquer aux problèmes géométriques"],
+      "prerequisites": ["MT-57"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["colinéarité", "coplanarité"],
+      "detailed_content": {
+        "introduction": "En géométrie 3D, la colinéarité concerne deux vecteurs (même direction), tandis que la coplanarité concerne trois vecteurs ou plus (dans un même plan).",
+        "key_concepts": [
+          { "name": "Colinéarité", "explanation": "2 vecteurs : u = kv. x/x' = y/y' = z/z'", "example": "Même direction" },
+          { "name": "Coplanarité", "explanation": "3 vecteurs : w = au + bv ou det(u,v,w) = 0", "example": "Même plan" },
+          { "name": "Déterminant", "explanation": "det(u,v,w) = x(y'z''-z'y'') - y(x'z''-z'x'') + z(x'y''-y'x'')", "example": "Test" },
+          { "name": "Applications", "explanation": "4 points coplanaires ⟺ AB, AC, AD coplanaires", "example": "Géométrie" }
+        ],
+        "guided_example": {
+          "statement": "u(1; 0; 2), v(0; 1; 1), w(2; 1; 5) sont-ils coplanaires ?",
+          "solution_steps": ["det = 1(1×5 - 1×1) - 0(...) + 2(0×1 - 1×2)", "= 4 - 4 = 0 ⟹ coplanaires"]
+        },
+        "quick_exercises": [
+          "A(1;0;0), B(0;1;0), C(0;0;1), D(1;1;1) coplanaires ?",
+          "Utiliser déterminant"
+        ],
+        "common_mistakes": [
+          "Erreurs dans déterminant",
+          "Confondre colinéarité et coplanarité"
+        ],
+        "summary": {
+          "key_concept": "det = 0 ⟺ coplanaires. det ≠ 0 ⟺ base de l'espace",
+          "key_method": "Coplanarité = 3 vecteurs. Colinéarité = 2 vecteurs",
+          "next_step": "Produit scalaire"
+        }
+      }
+    },
+    {
+      "id": "MT-59",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Produit scalaire dans l'espace",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir le produit scalaire dans l'espace", "Calculer u·v avec les coordonnées", "Utiliser les propriétés du produit scalaire", "Appliquer aux calculs d'angles et de distances"],
+      "prerequisites": ["MT-57", "M1-51"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["produit", "scalaire"],
+      "detailed_content": {
+        "introduction": "Le produit scalaire généralise dans l'espace la notion vue dans le plan. Il permet de calculer des angles, des distances et de caractériser l'orthogonalité.",
+        "key_concepts": [
+          { "name": "Formule", "explanation": "u·v = xx' + yy' + zz'. Multiplier et additionner", "example": "Coordonnées" },
+          { "name": "Géométrique", "explanation": "u·v = ||u|| ||v|| cos(θ). Calculer l'angle", "example": "Angle entre vecteurs" },
+          { "name": "Orthogonalité", "explanation": "u·v = 0 ⟺ u ⊥ v. Produit nul", "example": "Perpendiculaires" },
+          { "name": "Propriétés", "explanation": "u·u = ||u||², symétrie, bilinéarité", "example": "Classiques" }
+        ],
+        "guided_example": {
+          "statement": "u·v avec u(1; 2; -1) et v(3; -1; 2).",
+          "solution_steps": ["u·v = 1×3 + 2×(-1) + (-1)×2", "= 3 - 2 - 2 = -1"]
+        },
+        "quick_exercises": [
+          "u(1; 2; 2) et v(2; -1; 0) orthogonaux ?",
+          "Calculer produits scalaires"
+        ],
+        "common_mistakes": [
+          "Oublier une coordonnée",
+          "Confondre produit scalaire et norme"
+        ],
+        "summary": {
+          "key_concept": "u·v = xx' + yy' + zz'. u·v = 0 ⟺ u ⊥ v",
+          "key_method": "||u||² = u·u, cos(θ) = (u·v)/(||u|| ||v||)",
+          "next_step": "Équation cartésienne d'un plan"
+        }
+      }
+    },
+    {
+      "id": "MT-60",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Équation cartésienne d'un plan",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 130,
+      "objectives": ["Définir un plan par son vecteur normal", "Établir l'équation cartésienne ax + by + cz + d = 0", "Déterminer un vecteur normal à partir de l'équation", "Résoudre des problèmes sur les plans"],
+      "prerequisites": ["MT-59"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["plan", "équation"],
+      "detailed_content": {
+        "introduction": "Dans l'espace, un plan peut être défini par une équation linéaire en x, y, z. Le vecteur normal au plan joue un rôle central dans cette caractérisation.",
+        "key_concepts": [
+          { "name": "Vecteur normal", "explanation": "n(a; b; c) normal à P si orthogonal à tous les vecteurs de P", "example": "Perpendiculaire" },
+          { "name": "Équation", "explanation": "P: ax + by + cz + d = 0. Vecteur normal n(a; b; c)", "example": "Forme générale" },
+          { "name": "Détermination", "explanation": "Point A et vecteur normal n : développer n·AM = 0", "example": "Construction" },
+          { "name": "Parallélisme", "explanation": "P et P' parallèles ⟺ n et n' colinéaires. Perpendiculaires ⟺ n·n' = 0", "example": "Positions" }
+        ],
+        "guided_example": {
+          "statement": "Plan passant par A(1; 2; 3) de vecteur normal n(1; -1; 2).",
+          "solution_steps": ["n·AM = 0", "1(x-1) - 1(y-2) + 2(z-3) = 0", "x - y + 2z - 5 = 0"]
+        },
+        "quick_exercises": [
+          "Vecteur normal au plan 2x - 3y + z - 7 = 0",
+          "Déterminer équations de plans"
+        ],
+        "common_mistakes": [
+          "Oublier une coordonnée",
+          "Confondre vecteur normal et vecteur directeur"
+        ],
+        "summary": {
+          "key_concept": "ax + by + cz + d = 0. Vecteur normal n(a; b; c)",
+          "key_method": "Parallèles ⟺ normales colinéaires. Perpendiculaires ⟺ n·n' = 0",
+          "next_step": "Représentation paramétrique d'une droite"
+        }
+      }
+    },
+    {
+      "id": "MT-61",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Représentation paramétrique d'une droite",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir une droite par un point et un vecteur directeur", "Établir une représentation paramétrique", "Vérifier qu'un point appartient à une droite", "Déterminer l'intersection de deux droites"],
+      "prerequisites": ["MT-57"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["droite", "paramétrique"],
+      "detailed_content": {
+        "introduction": "Dans l'espace, une droite ne peut pas être définie par une seule équation cartésienne. On utilise une représentation paramétrique avec un paramètre réel.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Droite = point A + vecteur directeur u. M = A + tu", "example": "Paramètre t" },
+          { "name": "Représentation", "explanation": "{ x = x₀ + at ; y = y₀ + bt ; z = z₀ + ct }, t ∈ ℝ", "example": "3 équations" },
+          { "name": "Appartenance", "explanation": "M ∈ D ⟺ ∃ t tel que x₁ = x₀ + at, y₁ = y₀ + bt, z₁ = z₀ + ct", "example": "Vérifier" },
+          { "name": "Parallélisme", "explanation": "D et D' parallèles ⟺ u et u' colinéaires", "example": "Même direction" }
+        ],
+        "guided_example": {
+          "statement": "Droite D passant par A(1; 0; -1) de vecteur u(2; 1; 3).",
+          "solution_steps": ["{ x = 1 + 2t ; y = t ; z = -1 + 3t }, t ∈ ℝ"]
+        },
+        "quick_exercises": [
+          "Le point B(5; 2; 5) appartient-il à D ?",
+          "Représentations paramétriques"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier toutes les coordonnées",
+          "Confondre vecteur directeur et point"
+        ],
+        "summary": {
+          "key_concept": "Droite = A + tu. { x = x₀ + at ; y = y₀ + bt ; z = z₀ + ct }",
+          "key_method": "Vérifier appartenance : isoler t, puis vérifier",
+          "next_step": "Positions relatives"
+        }
+      }
+    },
+    {
+      "id": "MT-62",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Positions relatives : droites et plans",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 130,
+      "objectives": ["Étudier la position d'une droite par rapport à un plan", "Déterminer l'intersection droite-plan", "Caractériser le parallélisme droite-plan", "Résoudre des problèmes de position"],
+      "prerequisites": ["MT-60", "MT-61"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["positions", "intersection"],
+      "detailed_content": {
+        "introduction": "Une droite et un plan dans l'espace peuvent avoir trois types de positions relatives : la droite est incluse dans le plan, parallèle au plan, ou sécante au plan.",
+        "key_concepts": [
+          { "name": "Trois cas", "explanation": "D ⊂ P (infini de points), D // P (aucun point), D ∩ P = {I} (un point)", "example": "Positions" },
+          { "name": "Test", "explanation": "D // P ou D ⊂ P ⟺ u·n = 0. D sécante ⟺ u·n ≠ 0", "example": "Orthogonalité" },
+          { "name": "Intersection", "explanation": "Injecter représentation paramétrique dans équation du plan", "example": "Résoudre pour t" },
+          { "name": "Cas", "explanation": "Si u·n = 0 et point ∈ P : D ⊂ P. Si u·n = 0 et point ∉ P : D // P", "example": "Distinguer" }
+        ],
+        "guided_example": {
+          "statement": "D: {x = 1+t; y = 2t; z = -1+3t} et P: x - y + z + 1 = 0.",
+          "solution_steps": ["u(1; 2; 3), n(1; -1; 1)", "u·n = 2 ≠ 0 ⟹ sécante", "Injection: t = -1/2, I(1/2; -1; -5/2)"]
+        },
+        "quick_exercises": [
+          "Position de D: {x = 2+t; y = 1-t; z = 3+2t} et P: x + y - 4 = 0",
+          "Étudier positions relatives"
+        ],
+        "common_mistakes": [
+          "Oublier tester appartenance si u·n = 0",
+          "Erreurs dans l'injection"
+        ],
+        "summary": {
+          "key_concept": "u·n = 0 ⟺ D // P ou D ⊂ P. u·n ≠ 0 ⟺ D sécante à P",
+          "key_method": "Intersection : injecter D dans P",
+          "next_step": "Distance d'un point à un plan"
+        }
+      }
+    },
+    {
+      "id": "MT-63",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Distance d'un point à un plan",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Calculer la distance d'un point à un plan", "Utiliser la formule avec coordonnées", "Interpréter géométriquement", "Appliquer aux problèmes de projection"],
+      "prerequisites": ["MT-60", "MT-59"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["distance"],
+      "detailed_content": {
+        "introduction": "La distance d'un point à un plan est la plus courte distance entre ce point et un point du plan. Elle correspond à la longueur de la projection orthogonale.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "d(A; P) = longueur [AH] où H projeté orthogonal de A sur P", "example": "Plus courte distance" },
+          { "name": "Formule", "explanation": "d = |ax₀+by₀+cz₀+d| / √(a²+b²+c²). Valeur absolue + norme", "example": "Calcul direct" },
+          { "name": "Cas particulier", "explanation": "A ∈ P ⟺ d = 0", "example": "Point dans plan" },
+          { "name": "Projection", "explanation": "Droite (AH) : vecteur directeur n. Injecter dans P pour trouver H", "example": "Construction" }
+        ],
+        "guided_example": {
+          "statement": "Distance de A(1; 2; 3) au plan P: 2x - y + 2z - 5 = 0.",
+          "solution_steps": ["d = |2-2+6-5| / √(4+1+4)", "= 1 / 3"]
+        },
+        "quick_exercises": [
+          "Distance de B(0; 0; 0) au plan x + 2y - 2z + 9 = 0",
+          "Calculer des distances"
+        ],
+        "common_mistakes": [
+          "Oublier valeur absolue",
+          "Erreur dans calcul de la norme"
+        ],
+        "summary": {
+          "key_concept": "d = |ax₀+by₀+cz₀+d| / ||n||. Toujours ≥ 0",
+          "key_method": "d = 0 ⟺ point dans plan",
+          "next_step": "Sections de solides"
+        }
+      }
+    },
+    {
+      "id": "MT-64",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Sections de solides par un plan",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Déterminer la section d'un solide par un plan", "Caractériser la nature de la section", "Appliquer aux solides usuels", "Visualiser en 3D"],
+      "prerequisites": ["MT-60", "MT-62"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["section", "solides"],
+      "detailed_content": {
+        "introduction": "La section d'un solide par un plan est la figure obtenue en coupant le solide par ce plan. Sa nature dépend du solide et de la position du plan.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Section = S ∩ P. Figure plane contenue dans P", "example": "Intersection" },
+          { "name": "Cube", "explanation": "Section : triangle, quadrilatère, pentagone ou hexagone selon faces coupées", "example": "Polygones" },
+          { "name": "Tétraèdre", "explanation": "Section : triangle ou quadrilatère (max 4 faces)", "example": "Polygones" },
+          { "name": "Sphère", "explanation": "Section = cercle. Si plan passe par centre : grand cercle", "example": "Toujours cercle" }
+        ],
+        "guided_example": {
+          "statement": "Plan coupe un cube au milieu des arêtes [AB], [BC], [CG], [GH].",
+          "solution_steps": ["Le plan coupe 4 arêtes", "Section : quadrilatère (carré par symétrie)"]
+        },
+        "quick_exercises": [
+          "Plan sécant d'un tétraèdre : combien de faces maximum ?",
+          "Sections de solides"
+        ],
+        "common_mistakes": [
+          "Ne pas visualiser en 3D",
+          "Oublier des arêtes coupées"
+        ],
+        "summary": {
+          "key_concept": "Visualiser en 3D. Compter arêtes/faces coupées",
+          "key_method": "Cube: max hexagone. Sphère: toujours cercle",
+          "next_step": "Produit vectoriel"
+        }
+      }
+    },
+    {
+      "id": "MT-65",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Produit vectoriel (introduction)",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Définir le produit vectoriel u ∧ v", "Calculer les coordonnées de u ∧ v", "Interpréter géométriquement", "Appliquer aux calculs de vecteurs normaux"],
+      "prerequisites": ["MT-57", "MT-59"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["produit", "vectoriel"],
+      "detailed_content": {
+        "introduction": "Le produit vectoriel de deux vecteurs de l'espace est un troisième vecteur orthogonal aux deux premiers. C'est un outil puissant en géométrie et en physique.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "u ∧ v orthogonal à u et v. ||u ∧ v|| = ||u|| ||v|| sin(θ)", "example": "Perpendiculaire" },
+          { "name": "Coordonnées", "explanation": "u ∧ v = (yz'-zy'; zx'-xz'; xy'-yx'). Développer déterminant", "example": "Formule" },
+          { "name": "Propriétés", "explanation": "u ∧ v = -(v ∧ u). u ∧ u = 0. u ∧ v = 0 ⟺ colinéaires", "example": "Anticommutativité" },
+          { "name": "Géométrique", "explanation": "||u ∧ v|| = aire du parallélogramme. Vecteur normal au plan (u,v)", "example": "Aire" }
+        ],
+        "guided_example": {
+          "statement": "Calculer u ∧ v avec u(1; 0; 2) et v(0; 1; 1).",
+          "solution_steps": ["u ∧ v = (0-2; 2-1; 1-0)", "= (-2; -1; 1)"]
+        },
+        "quick_exercises": [
+          "Vérifier u ∧ v ⊥ u et v pour u(1;2;3) et v(2;-1;0)",
+          "Produit vectoriel"
+        ],
+        "common_mistakes": [
+          "Erreurs de signe",
+          "Confondre scalaire et vectoriel"
+        ],
+        "summary": {
+          "key_concept": "u ∧ v ⊥ u et v. ||u ∧ v|| = aire du parallélogramme",
+          "key_method": "u ∧ v = (yz'-y'z; zx'-z'x; xy'-x'y)",
+          "next_step": "Systèmes d'équations"
+        }
+      }
+    },
+    {
+      "id": "MT-66",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Systèmes d'équations et intersections",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Résoudre un système d'équations de plans", "Déterminer l'intersection de deux plans", "Trouver l'intersection de trois plans", "Interpréter géométriquement les solutions"],
+      "prerequisites": ["MT-60", "MT-61", "MT-62"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["systèmes", "intersection"],
+      "detailed_content": {
+        "introduction": "L'intersection de plusieurs plans dans l'espace peut donner différentes configurations : droite, point, plan, ou ensemble vide. La résolution se fait par systèmes d'équations.",
+        "key_concepts": [
+          { "name": "Deux plans", "explanation": "P ∩ P' : droite si sécants, ∅ si parallèles. Résoudre système 2 équations", "example": "Droite" },
+          { "name": "Trois plans", "explanation": "P₁ ∩ P₂ ∩ P₃ : point, droite, ∅ ou plan selon cas", "example": "Plusieurs cas" },
+          { "name": "Méthode", "explanation": "Gauss ou substitution. Éliminer variables progressivement", "example": "Résolution" },
+          { "name": "Cas", "explanation": "Normales coplanaires ⟹ droite commune. Deux plans parallèles ⟹ possible ∅", "example": "Particularités" }
+        ],
+        "guided_example": {
+          "statement": "Trouver P ∩ P' avec P: x + y - z = 1 et P': 2x - y + z = 3.",
+          "solution_steps": ["Additionner : 3x = 4 ⟹ x = 4/3", "y = z - 1/3. Droite D paramétrique"]
+        },
+        "quick_exercises": [
+          "Résoudre {x + y + z = 6; x - y + z = 2; 2x + z = 7}",
+          "Intersections de plans"
+        ],
+        "common_mistakes": [
+          "Erreurs de calcul",
+          "Ne pas paramétrer si droite"
+        ],
+        "summary": {
+          "key_concept": "2 plans sécants → droite. 3 plans → point (cas général)",
+          "key_method": "Méthode de Gauss efficace. Vérifier solution",
+          "next_step": "Synthèse finale"
+        }
+      }
+    },
+    {
+      "id": "MT-67",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie dans l'Espace",
+      "title": "Synthèse - Géométrie dans l'Espace",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 130,
+      "objectives": ["Maîtriser tous les outils de géométrie 3D", "Résoudre des problèmes de synthèse", "Combiner plusieurs techniques", "Visualiser dans l'espace"],
+      "prerequisites": ["MT-56", "MT-60", "MT-61", "MT-62", "MT-63"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "géométrie", "espace"],
+      "detailed_content": {
+        "introduction": "La géométrie dans l'espace nécessite de combiner plusieurs outils : repérage, vecteurs, équations de plans et droites, produits scalaire et vectoriel. Cette synthèse regroupe toutes ces notions.",
+        "key_concepts": [
+          { "name": "Repérage", "explanation": "Point M(x; y; z). Distance, milieu. Opérations vecteurs", "example": "Base 3D" },
+          { "name": "Produits", "explanation": "Scalaire : u·v = xx' + yy' + zz'. Vectoriel : u ∧ v. Orthogonalité", "example": "Outils" },
+          { "name": "Plans et droites", "explanation": "Plan: ax + by + cz + d = 0. Droite: {x=x₀+at; y=y₀+bt; z=z₀+ct}", "example": "Représentations" },
+          { "name": "Positions", "explanation": "Distance point-plan. Intersections. Colinéarité, coplanarité", "example": "Problèmes" }
+        ],
+        "guided_example": {
+          "statement": "Volume tétraèdre ABCD avec A(1;0;0), B(0;1;0), C(0;0;1), D(1;1;1).",
+          "solution_steps": ["V = (1/6)|det(AB, AC, AD)|", "det = 2, V = 1/3"]
+        },
+        "quick_exercises": [
+          "Distance du point A à la droite D",
+          "Problèmes de synthèse complexes"
+        ],
+        "common_mistakes": [
+          "Ne pas visualiser en 3D",
+          "Mélanger formules 2D/3D"
+        ],
+        "summary": {
+          "key_concept": "Maîtriser vecteurs, plans, droites. Produit scalaire pour angles/distances",
+          "key_method": "Produit vectoriel pour normales. Rigueur et visualisation",
+          "next_step": "Vers autres chapitres"
+        }
+      }
+    }
+  ]
+}
+

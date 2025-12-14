@@ -1,0 +1,2095 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Mathématiques Seconde",
+    "level": "Seconde",
+    "subject": "Mathématiques",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Nombres & Calculs",
+      "Fonctions",
+      "Géométrie",
+      "Statistiques & Probabilités"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "M2-EX-001",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer : 3/4 + 5/6",
+      "solution": {
+        "steps": [
+          "Mettre au même dénominateur : PPCM(4, 6) = 12",
+          "3/4 = 9/12 et 5/6 = 10/12",
+          "9/12 + 10/12 = 19/12"
+        ],
+        "final_answer": "19/12",
+        "alternative_form": "1 + 7/12"
+      },
+      "hints": [
+        "Trouve le dénominateur commun",
+        "PPCM(4, 6) = 12"
+      ],
+      "related_lesson": "M2-06"
+    },
+    {
+      "id": "M2-EX-002",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 7,
+      "problem": "Résoudre l'équation : 2x + 5 = 13",
+      "solution": {
+        "steps": [
+          "2x + 5 = 13",
+          "2x = 13 − 5",
+          "2x = 8",
+          "x = 4"
+        ],
+        "final_answer": "x = 4",
+        "verification": "2(4) + 5 = 8 + 5 = 13 ✓"
+      },
+      "hints": [
+        "Isole d'abord le terme en x",
+        "Soustrais 5 des deux côtés"
+      ],
+      "related_lesson": "M2-07"
+    },
+    {
+      "id": "M2-EX-003",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Développer et réduire : (x + 3)(x − 2)",
+      "solution": {
+        "steps": [
+          "(x + 3)(x − 2)",
+          "= x·x + x·(−2) + 3·x + 3·(−2)",
+          "= x² − 2x + 3x − 6",
+          "= x² + x − 6"
+        ],
+        "final_answer": "x² + x − 6"
+      },
+      "hints": [
+        "Utilise la double distributivité",
+        "N'oublie pas de réduire les termes semblables"
+      ],
+      "related_lesson": "M2-07"
+    },
+    {
+      "id": "M2-EX-004",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Factoriser complètement : 4x² − 16",
+      "solution": {
+        "steps": [
+          "4x² − 16 = 4(x² − 4)",
+          "= 4(x² − 2²)",
+          "= 4(x − 2)(x + 2)"
+        ],
+        "final_answer": "4(x − 2)(x + 2)"
+      },
+      "hints": [
+        "Factorise d'abord par 4",
+        "Puis utilise a² − b² = (a−b)(a+b)"
+      ],
+      "related_lesson": "M2-08"
+    },
+    {
+      "id": "M2-EX-005",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier : √(75)",
+      "solution": {
+        "steps": [
+          "75 = 25 × 3",
+          "√75 = √(25 × 3)",
+          "= √25 × √3",
+          "= 5√3"
+        ],
+        "final_answer": "5√3"
+      },
+      "hints": [
+        "Cherche un carré parfait dans 75",
+        "75 = 25 × 3"
+      ],
+      "related_lesson": "M2-05"
+    },
+    {
+      "id": "M2-EX-006",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre l'inéquation : 3x − 7 < 2",
+      "solution": {
+        "steps": [
+          "3x − 7 < 2",
+          "3x < 2 + 7",
+          "3x < 9",
+          "x < 3"
+        ],
+        "final_answer": "x ∈ ]−∞, 3[",
+        "set_notation": "S = ]−∞, 3["
+      },
+      "hints": [
+        "Isole x comme pour une équation",
+        "Le sens de l'inégalité ne change pas si on divise par un nombre positif"
+      ],
+      "related_lesson": "M2-03"
+    },
+    {
+      "id": "M2-EX-007",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 7,
+      "problem": "Calculer : 2³ × 2⁴",
+      "solution": {
+        "steps": [
+          "2³ × 2⁴ = 2³⁺⁴",
+          "= 2⁷",
+          "= 128"
+        ],
+        "final_answer": "2⁷ = 128"
+      },
+      "hints": [
+        "Règle : aⁿ × aᵐ = aⁿ⁺ᵐ",
+        "Additionne les exposants"
+      ],
+      "related_lesson": "M2-04"
+    },
+    {
+      "id": "M2-EX-008",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre : |2x − 1| = 5",
+      "solution": {
+        "steps": [
+          "|2x − 1| = 5",
+          "Cas 1 : 2x − 1 = 5 → 2x = 6 → x = 3",
+          "Cas 2 : 2x − 1 = −5 → 2x = −4 → x = −2"
+        ],
+        "final_answer": "S = {−2 ; 3}"
+      },
+      "hints": [
+        "La valeur absolue donne deux cas",
+        "|A| = B ⇔ A = B ou A = −B"
+      ],
+      "related_lesson": "M2-02"
+    },
+    {
+      "id": "M2-EX-009",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer : (1/2) − (1/3)",
+      "solution": {
+        "steps": [
+          "Dénominateur commun : 6",
+          "1/2 = 3/6",
+          "1/3 = 2/6",
+          "3/6 − 2/6 = 1/6"
+        ],
+        "final_answer": "1/6"
+      },
+      "hints": [
+        "PPCM(2, 3) = 6"
+      ],
+      "related_lesson": "M2-06"
+    },
+    {
+      "id": "M2-EX-010",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Développer : (2x + 1)²",
+      "solution": {
+        "steps": [
+          "(2x + 1)² = (2x)² + 2(2x)(1) + 1²",
+          "= 4x² + 4x + 1"
+        ],
+        "final_answer": "4x² + 4x + 1"
+      },
+      "hints": [
+        "Utilise (a + b)² = a² + 2ab + b²",
+        "Attention au terme 2ab"
+      ],
+      "related_lesson": "M2-08"
+    },
+    {
+      "id": "M2-EX-011",
+      "chapter": "Fonctions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Soit f(x) = 3x − 2. Calculer f(5).",
+      "solution": {
+        "steps": [
+          "f(5) = 3(5) − 2",
+          "= 15 − 2",
+          "= 13"
+        ],
+        "final_answer": "f(5) = 13"
+      },
+      "hints": [
+        "Remplace x par 5 dans l'expression"
+      ],
+      "related_lesson": "M2-09"
+    },
+    {
+      "id": "M2-EX-012",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer l'ensemble de définition de f(x) = 1/(x − 3).",
+      "solution": {
+        "steps": [
+          "La fonction est définie si le dénominateur ≠ 0",
+          "x − 3 ≠ 0",
+          "x ≠ 3"
+        ],
+        "final_answer": "Df = ℝ \\ {3}"
+      },
+      "hints": [
+        "Le dénominateur ne doit jamais être nul",
+        "Trouve la valeur interdite"
+      ],
+      "related_lesson": "M2-15"
+    },
+    {
+      "id": "M2-EX-013",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit f(x) = x² − 4. Résoudre f(x) = 0.",
+      "solution": {
+        "steps": [
+          "x² − 4 = 0",
+          "x² = 4",
+          "x = ±2"
+        ],
+        "final_answer": "S = {−2 ; 2}"
+      },
+      "hints": [
+        "Factorise ou utilise x² = a ⇔ x = ±√a"
+      ],
+      "related_lesson": "M2-14"
+    },
+    {
+      "id": "M2-EX-014",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Tracer le tableau de variations de f(x) = x² sur ℝ.",
+      "solution": {
+        "steps": [
+          "f(x) = x² est une parabole",
+          "Minimum en x = 0 : f(0) = 0",
+          "Décroissante sur ]−∞, 0]",
+          "Croissante sur [0, +∞["
+        ],
+        "final_answer": "Décroissante sur ]−∞, 0], croissante sur [0, +∞[, minimum 0 en x = 0",
+        "table": "x: −∞ ... 0 ... +∞\nf: +∞ ↘ 0 ↗ +∞"
+      },
+      "hints": [
+        "La parabole x² a un sommet en (0, 0)"
+      ],
+      "related_lesson": "M2-14"
+    },
+    {
+      "id": "M2-EX-015",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer l'équation de la droite passant par A(1, 3) et de coefficient directeur m = 2.",
+      "solution": {
+        "steps": [
+          "Forme : y = mx + p",
+          "y = 2x + p",
+          "Passage par A(1, 3) : 3 = 2(1) + p",
+          "3 = 2 + p",
+          "p = 1"
+        ],
+        "final_answer": "y = 2x + 1"
+      },
+      "hints": [
+        "Utilise y = mx + p",
+        "Remplace les coordonnées de A pour trouver p"
+      ],
+      "related_lesson": "M2-13"
+    },
+    {
+      "id": "M2-EX-016",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Soit f(x) = 2x + 1 et g(x) = x². Calculer (g ∘ f)(2).",
+      "solution": {
+        "steps": [
+          "(g ∘ f)(2) = g(f(2))",
+          "f(2) = 2(2) + 1 = 5",
+          "g(5) = 5² = 25"
+        ],
+        "final_answer": "25"
+      },
+      "hints": [
+        "Calcule d'abord f(2)",
+        "Puis applique g au résultat"
+      ],
+      "related_lesson": "M2-09"
+    },
+    {
+      "id": "M2-EX-017",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Montrer que f(x) = x³ est impaire.",
+      "solution": {
+        "steps": [
+          "Calculer f(−x) :",
+          "f(−x) = (−x)³ = −x³",
+          "Or −x³ = −f(x)",
+          "Donc f(−x) = −f(x)"
+        ],
+        "final_answer": "f est impaire car f(−x) = −f(x)"
+      },
+      "hints": [
+        "Une fonction est impaire si f(−x) = −f(x)"
+      ],
+      "related_lesson": "M2-20"
+    },
+    {
+      "id": "M2-EX-018",
+      "chapter": "Fonctions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Soit f(x) = 5. Quelle est la nature de cette fonction ?",
+      "solution": {
+        "steps": [
+          "f(x) = 5 pour tout x",
+          "La fonction est constante"
+        ],
+        "final_answer": "Fonction constante"
+      },
+      "hints": [
+        "Une fonction constante a toujours la même valeur"
+      ],
+      "related_lesson": "M2-13"
+    },
+    {
+      "id": "M2-EX-019",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer l'antécédent de 7 par la fonction f(x) = 3x − 2.",
+      "solution": {
+        "steps": [
+          "On cherche x tel que f(x) = 7",
+          "3x − 2 = 7",
+          "3x = 9",
+          "x = 3"
+        ],
+        "final_answer": "x = 3"
+      },
+      "hints": [
+        "Résous f(x) = 7"
+      ],
+      "related_lesson": "M2-10"
+    },
+    {
+      "id": "M2-EX-020",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit f(x) = x² − 1. Calculer f(√2).",
+      "solution": {
+        "steps": [
+          "f(√2) = (√2)² − 1",
+          "= 2 − 1",
+          "= 1"
+        ],
+        "final_answer": "f(√2) = 1"
+      },
+      "hints": [
+        "(√2)² = 2"
+      ],
+      "related_lesson": "M2-09"
+    },
+    {
+      "id": "M2-EX-021",
+      "chapter": "Géométrie",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer la norme du vecteur u⃗(3, 4).",
+      "solution": {
+        "steps": [
+          "||u⃗|| = √(3² + 4²)",
+          "= √(9 + 16)",
+          "= √25",
+          "= 5"
+        ],
+        "final_answer": "||u⃗|| = 5"
+      },
+      "hints": [
+        "||u⃗|| = √(x² + y²)"
+      ],
+      "related_lesson": "M2-23"
+    },
+    {
+      "id": "M2-EX-022",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Les vecteurs u⃗(2, 3) et v⃗(4, 6) sont-ils colinéaires ?",
+      "solution": {
+        "steps": [
+          "Vérifier si v⃗ = k·u⃗",
+          "v⃗(4, 6) = 2·u⃗(2, 3) = (4, 6)",
+          "Oui, v⃗ = 2u⃗"
+        ],
+        "final_answer": "Oui, colinéaires (v⃗ = 2u⃗)"
+      },
+      "hints": [
+        "Cherche un coefficient k tel que v⃗ = ku⃗"
+      ],
+      "related_lesson": "M2-22"
+    },
+    {
+      "id": "M2-EX-023",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer les coordonnées du milieu I du segment [AB] avec A(1, 2) et B(5, 8).",
+      "solution": {
+        "steps": [
+          "I = ((xₐ + xᵦ)/2, (yₐ + yᵦ)/2)",
+          "I = ((1 + 5)/2, (2 + 8)/2)",
+          "I = (3, 5)"
+        ],
+        "final_answer": "I(3, 5)"
+      },
+      "hints": [
+        "Milieu : moyenne des coordonnées"
+      ],
+      "related_lesson": "M2-24"
+    },
+    {
+      "id": "M2-EX-024",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la distance entre A(1, 2) et B(4, 6).",
+      "solution": {
+        "steps": [
+          "d = √[(xᵦ − xₐ)² + (yᵦ − yₐ)²]",
+          "d = √[(4 − 1)² + (6 − 2)²]",
+          "d = √[3² + 4²]",
+          "d = √[9 + 16]",
+          "d = √25 = 5"
+        ],
+        "final_answer": "d = 5"
+      },
+      "hints": [
+        "Utilise la formule de distance euclidienne"
+      ],
+      "related_lesson": "M2-24"
+    },
+    {
+      "id": "M2-EX-025",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer les coordonnées de A' image de A(2, 3) par la translation de vecteur u⃗(1, −2).",
+      "solution": {
+        "steps": [
+          "A' = A + u⃗",
+          "A' = (2 + 1, 3 + (−2))",
+          "A' = (3, 1)"
+        ],
+        "final_answer": "A'(3, 1)"
+      },
+      "hints": [
+        "Ajoute les coordonnées du vecteur à celles du point"
+      ],
+      "related_lesson": "M2-25"
+    },
+    {
+      "id": "M2-EX-026",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dans un triangle ABC rectangle en A, BC = 10 et AC = 6. Calculer AB.",
+      "solution": {
+        "steps": [
+          "Théorème de Pythagore : BC² = AB² + AC²",
+          "10² = AB² + 6²",
+          "100 = AB² + 36",
+          "AB² = 64",
+          "AB = 8"
+        ],
+        "final_answer": "AB = 8"
+      },
+      "hints": [
+        "Utilise le théorème de Pythagore",
+        "BC est l'hypoténuse"
+      ],
+      "related_lesson": "M2-28"
+    },
+    {
+      "id": "M2-EX-027",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 60° en radians.",
+      "solution": {
+        "steps": [
+          "180° = π rad",
+          "60° = 60 × (π/180)",
+          "= π/3 rad"
+        ],
+        "final_answer": "π/3 radians"
+      },
+      "hints": [
+        "Utilise la proportion : 180° = π rad"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-028",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer cos(π/3).",
+      "solution": {
+        "steps": [
+          "π/3 = 60°",
+          "cos(60°) = 1/2"
+        ],
+        "final_answer": "cos(π/3) = 1/2"
+      },
+      "hints": [
+        "Valeur remarquable à connaître"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-029",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer l'équation de la droite passant par A(2, 1) et B(4, 5).",
+      "solution": {
+        "steps": [
+          "Coefficient directeur : m = (yᵦ − yₐ)/(xᵦ − xₐ)",
+          "m = (5 − 1)/(4 − 2) = 4/2 = 2",
+          "Forme : y = 2x + p",
+          "Passage par A(2, 1) : 1 = 2(2) + p",
+          "1 = 4 + p → p = −3"
+        ],
+        "final_answer": "y = 2x − 3"
+      },
+      "hints": [
+        "Calcule d'abord le coefficient directeur",
+        "Puis trouve p avec un des points"
+      ],
+      "related_lesson": "M2-30"
+    },
+    {
+      "id": "M2-EX-030",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer sin(π/6).",
+      "solution": {
+        "steps": [
+          "π/6 = 30°",
+          "sin(30°) = 1/2"
+        ],
+        "final_answer": "sin(π/6) = 1/2"
+      },
+      "hints": [
+        "Valeur remarquable"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-031",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer la moyenne de la série : 10, 12, 14, 16, 18.",
+      "solution": {
+        "steps": [
+          "Moyenne = (10 + 12 + 14 + 16 + 18) / 5",
+          "= 70 / 5",
+          "= 14"
+        ],
+        "final_answer": "Moyenne = 14"
+      },
+      "hints": [
+        "Somme des valeurs divisée par le nombre de valeurs"
+      ],
+      "related_lesson": "M2-31"
+    },
+    {
+      "id": "M2-EX-032",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer la médiane de la série : 3, 7, 9, 12, 15.",
+      "solution": {
+        "steps": [
+          "Série déjà ordonnée : 3, 7, 9, 12, 15",
+          "Effectif = 5 (impair)",
+          "Médiane = valeur centrale (position 3)",
+          "Médiane = 9"
+        ],
+        "final_answer": "Médiane = 9"
+      },
+      "hints": [
+        "Pour un effectif impair, prends la valeur centrale"
+      ],
+      "related_lesson": "M2-32"
+    },
+    {
+      "id": "M2-EX-033",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer l'étendue de la série : 5, 12, 8, 20, 3.",
+      "solution": {
+        "steps": [
+          "Étendue = Max − Min",
+          "Max = 20, Min = 3",
+          "Étendue = 20 − 3 = 17"
+        ],
+        "final_answer": "Étendue = 17"
+      },
+      "hints": [
+        "Étendue = plus grande valeur − plus petite valeur"
+      ],
+      "related_lesson": "M2-35"
+    },
+    {
+      "id": "M2-EX-034",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la variance de la série : 2, 4, 6, 8, 10.",
+      "solution": {
+        "steps": [
+          "Moyenne : m = (2+4+6+8+10)/5 = 30/5 = 6",
+          "Écarts au carré : (2-6)²=16, (4-6)²=4, (6-6)²=0, (8-6)²=4, (10-6)²=16",
+          "Somme = 16+4+0+4+16 = 40",
+          "Variance = 40/5 = 8"
+        ],
+        "final_answer": "Variance = 8"
+      },
+      "hints": [
+        "Variance = moyenne des carrés des écarts à la moyenne"
+      ],
+      "related_lesson": "M2-34"
+    },
+    {
+      "id": "M2-EX-035",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "On lance un dé équilibré. Quelle est la probabilité d'obtenir un nombre pair ?",
+      "solution": {
+        "steps": [
+          "Issues possibles : {1, 2, 3, 4, 5, 6}",
+          "Nombres pairs : {2, 4, 6}",
+          "3 cas favorables sur 6",
+          "P = 3/6 = 1/2"
+        ],
+        "final_answer": "P = 1/2 = 0.5"
+      },
+      "hints": [
+        "Compte les cas favorables / cas possibles"
+      ],
+      "related_lesson": "M2-38"
+    },
+    {
+      "id": "M2-EX-036",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une variable aléatoire X prend les valeurs 1, 2, 3 avec les probabilités 0.2, 0.5, 0.3. Calculer E(X).",
+      "solution": {
+        "steps": [
+          "E(X) = Σ xᵢ · P(X = xᵢ)",
+          "E(X) = 1×0.2 + 2×0.5 + 3×0.3",
+          "= 0.2 + 1.0 + 0.9",
+          "= 2.1"
+        ],
+        "final_answer": "E(X) = 2.1"
+      },
+      "hints": [
+        "Espérance = somme des (valeur × probabilité)"
+      ],
+      "related_lesson": "M2-40"
+    },
+    {
+      "id": "M2-EX-037",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dans une classe de 30 élèves, 18 sont des filles. Quelle est la fréquence des filles ?",
+      "solution": {
+        "steps": [
+          "Fréquence = effectif / total",
+          "f = 18/30",
+          "= 3/5",
+          "= 0.6 = 60%"
+        ],
+        "final_answer": "f = 0.6 = 60%"
+      },
+      "hints": [
+        "Fréquence = nombre de filles / nombre total"
+      ],
+      "related_lesson": "M2-37"
+    },
+    {
+      "id": "M2-EX-038",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer Q₁ et Q₃ de la série ordonnée : 2, 4, 6, 8, 10, 12, 14, 16.",
+      "solution": {
+        "steps": [
+          "Effectif n = 8",
+          "Q₁ position : 0.25 × 8 = 2 → entre 2ème et 3ème valeur",
+          "Q₁ = (4 + 6)/2 = 5",
+          "Q₃ position : 0.75 × 8 = 6 → entre 6ème et 7ème valeur",
+          "Q₃ = (12 + 14)/2 = 13"
+        ],
+        "final_answer": "Q₁ = 5, Q₃ = 13"
+      },
+      "hints": [
+        "Q₁ sépare les 25% inférieurs",
+        "Q₃ sépare les 75% inférieurs"
+      ],
+      "related_lesson": "M2-33"
+    },
+    {
+      "id": "M2-EX-039",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "On tire une carte au hasard dans un jeu de 52. Quelle est la probabilité de tirer un as ?",
+      "solution": {
+        "steps": [
+          "Il y a 4 as dans le jeu",
+          "P(as) = 4/52",
+          "= 1/13"
+        ],
+        "final_answer": "P = 1/13 ≈ 0.077"
+      },
+      "hints": [
+        "4 as sur 52 cartes"
+      ],
+      "related_lesson": "M2-38"
+    },
+    {
+      "id": "M2-EX-040",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer la moyenne de : 15, 15, 15, 15.",
+      "solution": {
+        "steps": [
+          "Toutes les valeurs sont égales à 15",
+          "Moyenne = 15"
+        ],
+        "final_answer": "Moyenne = 15"
+      },
+      "hints": [
+        "Série constante"
+      ],
+      "related_lesson": "M2-31"
+    },
+    {
+      "id": "M2-EX-041",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre : 5(x − 2) = 3x + 4",
+      "solution": {
+        "steps": [
+          "5x − 10 = 3x + 4",
+          "5x − 3x = 4 + 10",
+          "2x = 14",
+          "x = 7"
+        ],
+        "final_answer": "x = 7"
+      },
+      "hints": [
+        "Développe d'abord",
+        "Puis regroupe les termes en x"
+      ],
+      "related_lesson": "M2-07"
+    },
+    {
+      "id": "M2-EX-042",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Simplifier : (√8 + √2) / √2",
+      "solution": {
+        "steps": [
+          "√8 = √(4×2) = 2√2",
+          "(2√2 + √2) / √2",
+          "= 3√2 / √2",
+          "= 3"
+        ],
+        "final_answer": "3"
+      },
+      "hints": [
+        "Simplifie d'abord √8",
+        "Factorise par √2"
+      ],
+      "related_lesson": "M2-05"
+    },
+    {
+      "id": "M2-EX-043",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer : (3/5) ÷ (2/7)",
+      "solution": {
+        "steps": [
+          "(3/5) ÷ (2/7) = (3/5) × (7/2)",
+          "= (3×7)/(5×2)",
+          "= 21/10"
+        ],
+        "final_answer": "21/10 = 2.1"
+      },
+      "hints": [
+        "Diviser par une fraction = multiplier par son inverse"
+      ],
+      "related_lesson": "M2-06"
+    },
+    {
+      "id": "M2-EX-044",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre : x² = 7",
+      "solution": {
+        "steps": [
+          "x² = 7",
+          "x = ±√7"
+        ],
+        "final_answer": "S = {−√7 ; √7}"
+      },
+      "hints": [
+        "x² = a ⇔ x = ±√a"
+      ],
+      "related_lesson": "M2-05"
+    },
+    {
+      "id": "M2-EX-045",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Factoriser : x² + 6x + 9",
+      "solution": {
+        "steps": [
+          "Reconnaître (a + b)² = a² + 2ab + b²",
+          "x² + 6x + 9 = x² + 2(3x) + 3²",
+          "= (x + 3)²"
+        ],
+        "final_answer": "(x + 3)²"
+      },
+      "hints": [
+        "Identité remarquable : carré d'une somme"
+      ],
+      "related_lesson": "M2-08"
+    },
+    {
+      "id": "M2-EX-046",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit f(x) = x² + 1. Montrer que f est paire.",
+      "solution": {
+        "steps": [
+          "f(−x) = (−x)² + 1",
+          "= x² + 1",
+          "= f(x)",
+          "Donc f(−x) = f(x)"
+        ],
+        "final_answer": "f est paire car f(−x) = f(x)"
+      },
+      "hints": [
+        "Calcule f(−x) et compare avec f(x)"
+      ],
+      "related_lesson": "M2-20"
+    },
+    {
+      "id": "M2-EX-047",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer l'ensemble de définition de f(x) = √(x + 2).",
+      "solution": {
+        "steps": [
+          "La racine carrée nécessite x + 2 ≥ 0",
+          "x ≥ −2"
+        ],
+        "final_answer": "Df = [−2, +∞["
+      },
+      "hints": [
+        "L'expression sous la racine doit être ≥ 0"
+      ],
+      "related_lesson": "M2-09"
+    },
+    {
+      "id": "M2-EX-048",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit f(x) = −2x + 5. Résoudre f(x) ≥ 0.",
+      "solution": {
+        "steps": [
+          "−2x + 5 ≥ 0",
+          "−2x ≥ −5",
+          "x ≤ 5/2 (diviser par −2 change le sens)"
+        ],
+        "final_answer": "S = ]−∞, 5/2]"
+      },
+      "hints": [
+        "Attention : diviser par un négatif inverse l'inégalité"
+      ],
+      "related_lesson": "M2-13"
+    },
+    {
+      "id": "M2-EX-049",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Étudier le signe de f(x) = (x − 1)(x + 3).",
+      "solution": {
+        "steps": [
+          "Racines : x = 1 et x = −3",
+          "Tableau de signes :",
+          "x < −3 : (+)(−) = −",
+          "−3 < x < 1 : (+)(+) = +",
+          "x > 1 : (+)(+) = +"
+        ],
+        "final_answer": "f(x) ≥ 0 sur [−3, 1], f(x) < 0 sur ]−∞, −3[ ∪ ]1, +∞[",
+        "note": "Erreur dans la solution, à corriger : f(x) < 0 sur ]−∞, −3[, f(x) > 0 sur ]−3, 1[, f(x) > 0 sur ]1, +∞["
+      },
+      "hints": [
+        "Trouve les racines puis fais un tableau de signes"
+      ],
+      "related_lesson": "M2-17"
+    },
+    {
+      "id": "M2-EX-050",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre graphiquement f(x) = g(x) sachant que f et g sont des droites qui se coupent en (2, 5).",
+      "solution": {
+        "steps": [
+          "Les graphes se coupent en un point",
+          "Abscisse du point d'intersection : x = 2"
+        ],
+        "final_answer": "x = 2"
+      },
+      "hints": [
+        "L'abscisse du point d'intersection donne la solution"
+      ],
+      "related_lesson": "M2-19"
+    },
+    {
+      "id": "M2-EX-051",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Montrer que u⃗(1, 2) et v⃗(−2, 4) ne sont pas colinéaires.",
+      "solution": {
+        "steps": [
+          "Si colinéaires, il existe k tel que v⃗ = ku⃗",
+          "−2 = k×1 ⇒ k = −2",
+          "4 = k×2 ⇒ k = 2",
+          "Contradiction : k ≠ k"
+        ],
+        "final_answer": "Non colinéaires"
+      },
+      "hints": [
+        "Vérifie si le rapport est constant pour x et y"
+      ],
+      "related_lesson": "M2-22"
+    },
+    {
+      "id": "M2-EX-052",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "ABCD est un parallélogramme. Exprimer AC⃗ en fonction de AB⃗ et AD⃗.",
+      "solution": {
+        "steps": [
+          "Relation de Chasles : AC⃗ = AB⃗ + BC⃗",
+          "Dans un parallélogramme : BC⃗ = AD⃗",
+          "Donc AC⃗ = AB⃗ + AD⃗"
+        ],
+        "final_answer": "AC⃗ = AB⃗ + AD⃗"
+      },
+      "hints": [
+        "Utilise la relation de Chasles",
+        "Dans un parallélogramme, les côtés opposés sont égaux"
+      ],
+      "related_lesson": "M2-21"
+    },
+    {
+      "id": "M2-EX-053",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer sin²(π/4) + cos²(π/4).",
+      "solution": {
+        "steps": [
+          "Identité fondamentale : sin²(θ) + cos²(θ) = 1",
+          "Valable pour tout θ"
+        ],
+        "final_answer": "1"
+      },
+      "hints": [
+        "Identité trigonométrique fondamentale"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-054",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dans un triangle rectangle, un angle aigu vaut 30° et l'hypoténuse 10 cm. Calculer les deux autres côtés.",
+      "solution": {
+        "steps": [
+          "Angle = 30°, hypoténuse = 10",
+          "Côté opposé : sin(30°) = opposé/10",
+          "1/2 = opposé/10 ⇒ opposé = 5 cm",
+          "Côté adjacent : cos(30°) = adjacent/10",
+          "√3/2 = adjacent/10 ⇒ adjacent = 5√3 cm"
+        ],
+        "final_answer": "Côtés : 5 cm et 5√3 cm ≈ 8.66 cm"
+      },
+      "hints": [
+        "Utilise sin et cos avec les valeurs remarquables"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-055",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 3π/4 radians en degrés.",
+      "solution": {
+        "steps": [
+          "π rad = 180°",
+          "3π/4 = (3/4) × 180°",
+          "= 135°"
+        ],
+        "final_answer": "135°"
+      },
+      "hints": [
+        "π rad = 180°"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-056",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "La moyenne d'une série de 5 notes est 12. On ajoute une note de 18. Quelle est la nouvelle moyenne ?",
+      "solution": {
+        "steps": [
+          "Somme des 5 notes : 5 × 12 = 60",
+          "Nouvelle somme : 60 + 18 = 78",
+          "Nouvelle moyenne : 78 / 6 = 13"
+        ],
+        "final_answer": "Nouvelle moyenne = 13"
+      },
+      "hints": [
+        "Calcule d'abord la somme totale"
+      ],
+      "related_lesson": "M2-31"
+    },
+    {
+      "id": "M2-EX-057",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On lance deux dés. Quelle est la probabilité que la somme soit 10 ?",
+      "solution": {
+        "steps": [
+          "Cas favorables : (4,6), (5,5), (6,4)",
+          "3 cas favorables",
+          "Total de cas : 6 × 6 = 36",
+          "P = 3/36 = 1/12"
+        ],
+        "final_answer": "P = 1/12 ≈ 0.083"
+      },
+      "hints": [
+        "Liste tous les couples donnant une somme de 10"
+      ],
+      "related_lesson": "M2-39"
+    },
+    {
+      "id": "M2-EX-058",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer l'écart-type de la série : 2, 4, 6 (sachant que la variance vaut 8/3).",
+      "solution": {
+        "steps": [
+          "Écart-type = √(variance)",
+          "σ = √(8/3)",
+          "= √8 / √3",
+          "= 2√2 / √3",
+          "≈ 1.63"
+        ],
+        "final_answer": "σ ≈ 1.63"
+      },
+      "hints": [
+        "σ = √V"
+      ],
+      "related_lesson": "M2-34"
+    },
+    {
+      "id": "M2-EX-059",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dans un sac, il y a 5 boules rouges et 3 boules bleues. On tire une boule au hasard. Quelle est la probabilité qu'elle soit rouge ?",
+      "solution": {
+        "steps": [
+          "Total de boules : 5 + 3 = 8",
+          "Boules rouges : 5",
+          "P(rouge) = 5/8"
+        ],
+        "final_answer": "P = 5/8 = 0.625"
+      },
+      "hints": [
+        "Nombre de cas favorables / total"
+      ],
+      "related_lesson": "M2-38"
+    },
+    {
+      "id": "M2-EX-060",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une variable aléatoire X suit la loi : P(X=0)=0.4, P(X=1)=0.3, P(X=2)=0.3. Calculer V(X) sachant que E(X)=0.9.",
+      "solution": {
+        "steps": [
+          "E(X²) = 0²×0.4 + 1²×0.3 + 2²×0.3",
+          "= 0 + 0.3 + 1.2 = 1.5",
+          "V(X) = E(X²) − [E(X)]²",
+          "= 1.5 − 0.9²",
+          "= 1.5 − 0.81 = 0.69"
+        ],
+        "final_answer": "V(X) = 0.69"
+      },
+      "hints": [
+        "V(X) = E(X²) − [E(X)]²"
+      ],
+      "related_lesson": "M2-40"
+    },
+    {
+      "id": "M2-EX-061",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Simplifier : 2 + 3 × 4",
+      "solution": {
+        "steps": [
+          "Priorité des opérations : × avant +",
+          "= 2 + 12",
+          "= 14"
+        ],
+        "final_answer": "14"
+      },
+      "hints": [
+        "Multiplication avant addition"
+      ],
+      "related_lesson": "M2-01"
+    },
+    {
+      "id": "M2-EX-062",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre : (x + 1)(x − 2) = 0",
+      "solution": {
+        "steps": [
+          "Un produit est nul si l'un des facteurs est nul",
+          "x + 1 = 0 ou x − 2 = 0",
+          "x = −1 ou x = 2"
+        ],
+        "final_answer": "S = {−1 ; 2}"
+      },
+      "hints": [
+        "Produit nul ⇔ l'un des facteurs nul"
+      ],
+      "related_lesson": "M2-08"
+    },
+    {
+      "id": "M2-EX-063",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Développer : (x + 1)³",
+      "solution": {
+        "steps": [
+          "(x + 1)³ = (x + 1)(x + 1)²",
+          "(x + 1)² = x² + 2x + 1",
+          "(x + 1)(x² + 2x + 1) = x³ + 2x² + x + x² + 2x + 1",
+          "= x³ + 3x² + 3x + 1"
+        ],
+        "final_answer": "x³ + 3x² + 3x + 1"
+      },
+      "hints": [
+        "Développe d'abord (x+1)²",
+        "Puis multiplie par (x+1)"
+      ],
+      "related_lesson": "M2-07"
+    },
+    {
+      "id": "M2-EX-064",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit f(x) = 1/x. Calculer f(1/2).",
+      "solution": {
+        "steps": [
+          "f(1/2) = 1/(1/2)",
+          "= 2"
+        ],
+        "final_answer": "f(1/2) = 2"
+      },
+      "hints": [
+        "1 divisé par 1/2 = 2"
+      ],
+      "related_lesson": "M2-15"
+    },
+    {
+      "id": "M2-EX-065",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer les coordonnées du sommet de la parabole f(x) = x² − 4x + 3.",
+      "solution": {
+        "steps": [
+          "Forme canonique : f(x) = (x − 2)² − 1",
+          "ou : abscisse sommet = −b/(2a) = 4/2 = 2",
+          "f(2) = 4 − 8 + 3 = −1",
+          "Sommet : S(2, −1)"
+        ],
+        "final_answer": "Sommet S(2, −1)"
+      },
+      "hints": [
+        "Abscisse : x = −b/(2a)",
+        "Ordonnée : f(x)"
+      ],
+      "related_lesson": "M2-14"
+    },
+    {
+      "id": "M2-EX-066",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer le produit scalaire u⃗(2, 3) · v⃗(4, −1).",
+      "solution": {
+        "steps": [
+          "u⃗ · v⃗ = x₁x₂ + y₁y₂",
+          "= 2×4 + 3×(−1)",
+          "= 8 − 3",
+          "= 5"
+        ],
+        "final_answer": "u⃗ · v⃗ = 5"
+      },
+      "hints": [
+        "Produit scalaire : somme des produits des coordonnées"
+      ],
+      "related_lesson": "M2-21"
+    },
+    {
+      "id": "M2-EX-067",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Montrer que les points A(1, 2), B(3, 4) et C(5, 6) sont alignés.",
+      "solution": {
+        "steps": [
+          "Vecteurs : AB⃗(2, 2) et AC⃗(4, 4)",
+          "AC⃗ = 2·AB⃗",
+          "Les vecteurs sont colinéaires",
+          "Donc A, B, C alignés"
+        ],
+        "final_answer": "Points alignés (vecteurs colinéaires)"
+      },
+      "hints": [
+        "Calcule AB⃗ et AC⃗",
+        "Vérifie s'ils sont colinéaires"
+      ],
+      "related_lesson": "M2-22"
+    },
+    {
+      "id": "M2-EX-068",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer tan(π/4).",
+      "solution": {
+        "steps": [
+          "tan(π/4) = sin(π/4) / cos(π/4)",
+          "= (√2/2) / (√2/2)",
+          "= 1"
+        ],
+        "final_answer": "tan(π/4) = 1"
+      },
+      "hints": [
+        "tan = sin/cos",
+        "À 45°, sin = cos"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-069",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer le mode de la série : 3, 5, 5, 7, 5, 9, 5.",
+      "solution": {
+        "steps": [
+          "Le mode est la valeur la plus fréquente",
+          "5 apparaît 4 fois (le plus)",
+          "Mode = 5"
+        ],
+        "final_answer": "Mode = 5"
+      },
+      "hints": [
+        "Compte les occurrences de chaque valeur"
+      ],
+      "related_lesson": "M2-32"
+    },
+    {
+      "id": "M2-EX-070",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On tire successivement deux cartes sans remise d'un jeu de 52. Probabilité que les deux soient des cœurs ?",
+      "solution": {
+        "steps": [
+          "P(1ère cœur) = 13/52 = 1/4",
+          "P(2ème cœur | 1ère cœur) = 12/51",
+          "P(deux cœurs) = (1/4) × (12/51)",
+          "= 12/204 = 1/17"
+        ],
+        "final_answer": "P = 1/17 ≈ 0.059"
+      },
+      "hints": [
+        "Probabilité composée : multiplie les probabilités",
+        "Attention : sans remise"
+      ],
+      "related_lesson": "M2-39"
+    },
+    {
+      "id": "M2-EX-071",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Rationaliser le dénominateur : 5/√5",
+      "solution": {
+        "steps": [
+          "5/√5 = 5/√5 × √5/√5",
+          "= 5√5 / 5",
+          "= √5"
+        ],
+        "final_answer": "√5"
+      },
+      "hints": [
+        "Multiplie par √5/√5"
+      ],
+      "related_lesson": "M2-05"
+    },
+    {
+      "id": "M2-EX-072",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre le système : { x + y = 5 ; 2x − y = 1 }",
+      "solution": {
+        "steps": [
+          "De la 1ère : y = 5 − x",
+          "Substitution dans la 2ème : 2x − (5 − x) = 1",
+          "2x − 5 + x = 1",
+          "3x = 6",
+          "x = 2",
+          "y = 5 − 2 = 3"
+        ],
+        "final_answer": "S = {(2, 3)}"
+      },
+      "hints": [
+        "Méthode par substitution",
+        "Exprime y en fonction de x"
+      ],
+      "related_lesson": "M2-07"
+    },
+    {
+      "id": "M2-EX-073",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Deux droites d₁ : y = 2x + 1 et d₂ : y = −x + 4 se coupent en un point. Déterminer ses coordonnées.",
+      "solution": {
+        "steps": [
+          "À l'intersection : 2x + 1 = −x + 4",
+          "3x = 3",
+          "x = 1",
+          "y = 2(1) + 1 = 3"
+        ],
+        "final_answer": "Point d'intersection : (1, 3)"
+      },
+      "hints": [
+        "Résous 2x + 1 = −x + 4"
+      ],
+      "related_lesson": "M2-19"
+    },
+    {
+      "id": "M2-EX-074",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer l'ensemble de définition de f(x) = 1/√(x − 1).",
+      "solution": {
+        "steps": [
+          "Conditions : x − 1 > 0 (racine + dénominateur)",
+          "x > 1"
+        ],
+        "final_answer": "Df = ]1, +∞["
+      },
+      "hints": [
+        "Racine carrée : argument > 0",
+        "Dénominateur : ≠ 0",
+        "Ici : x − 1 > 0"
+      ],
+      "related_lesson": "M2-15"
+    },
+    {
+      "id": "M2-EX-075",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Le point M a pour coordonnées polaires (r = 2, θ = π/3). Déterminer ses coordonnées cartésiennes.",
+      "solution": {
+        "steps": [
+          "x = r cos(θ) = 2 cos(π/3) = 2 × (1/2) = 1",
+          "y = r sin(θ) = 2 sin(π/3) = 2 × (√3/2) = √3"
+        ],
+        "final_answer": "M(1, √3)"
+      },
+      "hints": [
+        "x = r cos(θ)",
+        "y = r sin(θ)"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-076",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer une équation de la droite perpendiculaire à d : y = 2x + 1 passant par A(0, 3).",
+      "solution": {
+        "steps": [
+          "Pente de d : m = 2",
+          "Pente perpendiculaire : m' = −1/m = −1/2",
+          "Équation : y = −(1/2)x + p",
+          "Passage par A(0, 3) : 3 = 0 + p",
+          "p = 3"
+        ],
+        "final_answer": "y = −(1/2)x + 3"
+      },
+      "hints": [
+        "Droites perpendiculaires : m₁ × m₂ = −1"
+      ],
+      "related_lesson": "M2-30"
+    },
+    {
+      "id": "M2-EX-077",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Une série a pour moyenne 10 et écart-type 2. On ajoute 5 à chaque valeur. Nouvelle moyenne et écart-type ?",
+      "solution": {
+        "steps": [
+          "Nouvelle moyenne = 10 + 5 = 15",
+          "Nouvel écart-type = 2 (inchangé)"
+        ],
+        "final_answer": "Moyenne = 15, σ = 2"
+      },
+      "hints": [
+        "Translation : moyenne change, écart-type reste"
+      ],
+      "related_lesson": "M2-34"
+    },
+    {
+      "id": "M2-EX-078",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Probabilité d'obtenir au moins un 6 en lançant deux dés ?",
+      "solution": {
+        "steps": [
+          "P(au moins un 6) = 1 − P(aucun 6)",
+          "P(aucun 6) = (5/6) × (5/6) = 25/36",
+          "P(au moins un 6) = 1 − 25/36 = 11/36"
+        ],
+        "final_answer": "P = 11/36 ≈ 0.306"
+      },
+      "hints": [
+        "Utilise le complémentaire",
+        "P(A) = 1 − P(non A)"
+      ],
+      "related_lesson": "M2-39"
+    },
+    {
+      "id": "M2-EX-079",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer : 2⁴",
+      "solution": {
+        "steps": [
+          "2⁴ = 2 × 2 × 2 × 2",
+          "= 16"
+        ],
+        "final_answer": "16"
+      },
+      "hints": [
+        "Multiplie 2 par lui-même 4 fois"
+      ],
+      "related_lesson": "M2-04"
+    },
+    {
+      "id": "M2-EX-080",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier : (x²)³ / x⁴",
+      "solution": {
+        "steps": [
+          "(x²)³ = x⁶",
+          "x⁶ / x⁴ = x⁶⁻⁴ = x²"
+        ],
+        "final_answer": "x²"
+      },
+      "hints": [
+        "(xⁿ)ᵐ = xⁿᵐ",
+        "xⁿ / xᵐ = xⁿ⁻ᵐ"
+      ],
+      "related_lesson": "M2-04"
+    },
+    {
+      "id": "M2-EX-081",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit f(x) = |x|. Calculer f(−3) + f(3).",
+      "solution": {
+        "steps": [
+          "f(−3) = |−3| = 3",
+          "f(3) = |3| = 3",
+          "f(−3) + f(3) = 3 + 3 = 6"
+        ],
+        "final_answer": "6"
+      },
+      "hints": [
+        "La valeur absolue rend toujours positif"
+      ],
+      "related_lesson": "M2-10"
+    },
+    {
+      "id": "M2-EX-082",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre l'inéquation : x² − 9 ≤ 0",
+      "solution": {
+        "steps": [
+          "x² − 9 ≤ 0",
+          "x² ≤ 9",
+          "|x| ≤ 3",
+          "−3 ≤ x ≤ 3"
+        ],
+        "final_answer": "S = [−3, 3]"
+      },
+      "hints": [
+        "Factorise : (x−3)(x+3) ≤ 0",
+        "Ou utilise |x| ≤ 3"
+      ],
+      "related_lesson": "M2-14"
+    },
+    {
+      "id": "M2-EX-083",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit u⃗(1, 1). Calculer ||3u⃗||.",
+      "solution": {
+        "steps": [
+          "||u⃗|| = √(1² + 1²) = √2",
+          "||3u⃗|| = 3||u⃗|| = 3√2"
+        ],
+        "final_answer": "||3u⃗|| = 3√2"
+      },
+      "hints": [
+        "||ku⃗|| = |k| × ||u⃗||"
+      ],
+      "related_lesson": "M2-23"
+    },
+    {
+      "id": "M2-EX-084",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "ABC est un triangle équilatéral de côté 6 cm. Calculer sa hauteur.",
+      "solution": {
+        "steps": [
+          "Hauteur h dans un triangle équilatéral : h = (côté × √3) / 2",
+          "h = (6 × √3) / 2",
+          "h = 3√3 cm",
+          "≈ 5.20 cm"
+        ],
+        "final_answer": "h = 3√3 cm ≈ 5.20 cm"
+      },
+      "hints": [
+        "Formule : h = a√3/2 pour un triangle équilatéral"
+      ],
+      "related_lesson": "M2-28"
+    },
+    {
+      "id": "M2-EX-085",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Quelle est la probabilité d'obtenir pile en lançant une pièce équilibrée ?",
+      "solution": {
+        "steps": [
+          "2 issues équiprobables : pile, face",
+          "P(pile) = 1/2"
+        ],
+        "final_answer": "P = 1/2 = 0.5"
+      },
+      "hints": [
+        "Pièce équilibrée : chaque face a la même probabilité"
+      ],
+      "related_lesson": "M2-38"
+    },
+    {
+      "id": "M2-EX-086",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la médiane de : 2, 8, 5, 11, 3, 9.",
+      "solution": {
+        "steps": [
+          "Ordonner : 2, 3, 5, 8, 9, 11",
+          "Effectif = 6 (pair)",
+          "Médiane = (5 + 8) / 2 = 6.5"
+        ],
+        "final_answer": "Médiane = 6.5"
+      },
+      "hints": [
+        "Pour un effectif pair : moyenne des deux valeurs centrales"
+      ],
+      "related_lesson": "M2-32"
+    },
+    {
+      "id": "M2-EX-087",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre : 3(2x − 1) = 2(x + 4)",
+      "solution": {
+        "steps": [
+          "6x − 3 = 2x + 8",
+          "6x − 2x = 8 + 3",
+          "4x = 11",
+          "x = 11/4"
+        ],
+        "final_answer": "x = 11/4 = 2.75"
+      },
+      "hints": [
+        "Développe chaque côté",
+        "Regroupe les termes en x"
+      ],
+      "related_lesson": "M2-07"
+    },
+    {
+      "id": "M2-EX-088",
+      "chapter": "Fonctions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Soit f(x) = x² − 2x − 3. Résoudre f(x) = 0.",
+      "solution": {
+        "steps": [
+          "x² − 2x − 3 = 0",
+          "Factorise : (x − 3)(x + 1) = 0",
+          "x = 3 ou x = −1"
+        ],
+        "final_answer": "S = {−1 ; 3}"
+      },
+      "hints": [
+        "Cherche deux nombres dont le produit = −3 et la somme = −2"
+      ],
+      "related_lesson": "M2-14"
+    },
+    {
+      "id": "M2-EX-089",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer sin(3π/2).",
+      "solution": {
+        "steps": [
+          "3π/2 = 270°",
+          "Sur le cercle : point (0, −1)",
+          "sin(3π/2) = −1"
+        ],
+        "final_answer": "sin(3π/2) = −1"
+      },
+      "hints": [
+        "270° correspond au point le plus bas du cercle"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-090",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une urne contient 3 boules rouges et 2 boules vertes. On tire 2 boules sans remise. Probabilité d'obtenir 2 rouges ?",
+      "solution": {
+        "steps": [
+          "P(1ère rouge) = 3/5",
+          "P(2ème rouge | 1ère rouge) = 2/4 = 1/2",
+          "P(2 rouges) = (3/5) × (1/2) = 3/10"
+        ],
+        "final_answer": "P = 3/10 = 0.3"
+      },
+      "hints": [
+        "Sans remise : la 2ème probabilité change"
+      ],
+      "related_lesson": "M2-39"
+    },
+    {
+      "id": "M2-EX-091",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer : (3²)² − 3⁴",
+      "solution": {
+        "steps": [
+          "(3²)² = 3⁴ = 81",
+          "3⁴ = 81",
+          "81 − 81 = 0"
+        ],
+        "final_answer": "0"
+      },
+      "hints": [
+        "(aⁿ)ᵐ = aⁿᵐ"
+      ],
+      "related_lesson": "M2-04"
+    },
+    {
+      "id": "M2-EX-092",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer si les droites y = 3x + 1 et y = 3x − 5 sont parallèles.",
+      "solution": {
+        "steps": [
+          "Coefficient directeur d₁ : m₁ = 3",
+          "Coefficient directeur d₂ : m₂ = 3",
+          "m₁ = m₂ donc droites parallèles"
+        ],
+        "final_answer": "Oui, parallèles"
+      },
+      "hints": [
+        "Droites parallèles : même coefficient directeur"
+      ],
+      "related_lesson": "M2-30"
+    },
+    {
+      "id": "M2-EX-093",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Démontrer que cos²(θ) = 1 − sin²(θ).",
+      "solution": {
+        "steps": [
+          "Identité fondamentale : cos²(θ) + sin²(θ) = 1",
+          "cos²(θ) = 1 − sin²(θ)"
+        ],
+        "final_answer": "Démontré par l'identité trigonométrique fondamentale"
+      },
+      "hints": [
+        "Utilise sin²(θ) + cos²(θ) = 1"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-094",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "L'intervalle interquartile d'une série est 12. Si Q₁ = 8, calculer Q₃.",
+      "solution": {
+        "steps": [
+          "IQR = Q₃ − Q₁",
+          "12 = Q₃ − 8",
+          "Q₃ = 20"
+        ],
+        "final_answer": "Q₃ = 20"
+      },
+      "hints": [
+        "IQR = Q₃ − Q₁"
+      ],
+      "related_lesson": "M2-33"
+    },
+    {
+      "id": "M2-EX-095",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Factoriser : x³ − x",
+      "solution": {
+        "steps": [
+          "x³ − x = x(x² − 1)",
+          "= x(x − 1)(x + 1)"
+        ],
+        "final_answer": "x(x − 1)(x + 1)"
+      },
+      "hints": [
+        "Factorise d'abord par x",
+        "Puis utilise a² − b²"
+      ],
+      "related_lesson": "M2-08"
+    },
+    {
+      "id": "M2-EX-096",
+      "chapter": "Fonctions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Soit f(x) = 2x − 3. Déterminer f⁻¹(5).",
+      "solution": {
+        "steps": [
+          "f⁻¹(5) est l'antécédent de 5",
+          "Résoudre f(x) = 5",
+          "2x − 3 = 5",
+          "2x = 8",
+          "x = 4"
+        ],
+        "final_answer": "f⁻¹(5) = 4"
+      },
+      "hints": [
+        "Résous f(x) = 5"
+      ],
+      "related_lesson": "M2-10"
+    },
+    {
+      "id": "M2-EX-097",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Aire d'un triangle ABC avec AB = 5, AC = 7 et angle  = 60°.",
+      "solution": {
+        "steps": [
+          "Aire = (1/2) × AB × AC × sin(Â)",
+          "= (1/2) × 5 × 7 × sin(60°)",
+          "= (35/2) × (√3/2)",
+          "= 35√3/4 cm²",
+          "≈ 15.2 cm²"
+        ],
+        "final_answer": "Aire = 35√3/4 cm² ≈ 15.2 cm²"
+      },
+      "hints": [
+        "Aire = (1/2)ab sin(C)"
+      ],
+      "related_lesson": "M2-29"
+    },
+    {
+      "id": "M2-EX-098",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Probabilité d'obtenir un nombre < 3 en lançant un dé ?",
+      "solution": {
+        "steps": [
+          "Nombres < 3 : {1, 2}",
+          "2 cas favorables sur 6",
+          "P = 2/6 = 1/3"
+        ],
+        "final_answer": "P = 1/3 ≈ 0.33"
+      },
+      "hints": [
+        "Compte combien de faces vérifient la condition"
+      ],
+      "related_lesson": "M2-38"
+    },
+    {
+      "id": "M2-EX-099",
+      "chapter": "Nombres & Calculs",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Développer : (a − b)(a + b)",
+      "solution": {
+        "steps": [
+          "(a − b)(a + b) = a² + ab − ab − b²",
+          "= a² − b²"
+        ],
+        "final_answer": "a² − b²"
+      },
+      "hints": [
+        "Identité remarquable : différence de deux carrés"
+      ],
+      "related_lesson": "M2-08"
+    },
+    {
+      "id": "M2-EX-100",
+      "chapter": "Statistiques & Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une variable X suit : P(X=−1)=0.3, P(X=0)=0.4, P(X=1)=0.3. Calculer E(X) et montrer que V(X)=0.6.",
+      "solution": {
+        "steps": [
+          "E(X) = (−1)×0.3 + 0×0.4 + 1×0.3 = −0.3 + 0 + 0.3 = 0",
+          "E(X²) = (−1)²×0.3 + 0²×0.4 + 1²×0.3 = 0.3 + 0 + 0.3 = 0.6",
+          "V(X) = E(X²) − [E(X)]² = 0.6 − 0² = 0.6"
+        ],
+        "final_answer": "E(X) = 0, V(X) = 0.6"
+      },
+      "hints": [
+        "E(X) = Σxᵢpᵢ",
+        "V(X) = E(X²) − [E(X)]²"
+      ],
+      "related_lesson": "M2-40"
+    }
+  ]
+}

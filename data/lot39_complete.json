@@ -1,0 +1,423 @@
+{
+  "metadata": {
+    "lot_number": 31,
+    "lot_name": "Lot 39 - Ondes & Signaux",
+    "level": "Terminale",
+    "subject": "Physique",
+    "prefix": "PT",
+    "chapter": "Ondes & Signaux",
+    "lesson_range": "PT-11 à PT-20",
+    "total_lessons": 10
+  },
+  "lessons": [
+    {
+      "id": "PT-11",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes électromagnétiques - Nature",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Comprendre la nature des ondes électromagnétiques", "Distinguer champs E et B", "Connaître la vitesse c", "Identifier les caractéristiques"],
+      "prerequisites": ["P2-11", "P2-12"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["ondes", "EM"],
+      "detailed_content": {
+        "introduction": "Les ondes électromagnétiques sont des perturbations couplées des champs électrique et magnétique qui se propagent dans l'espace. Elles ne nécessitent pas de milieu matériel.",
+        "key_concepts": [
+          { "name": "Nature", "explanation": "Onde constituée champs E⃗ et B⃗ couplés oscillants. Transport énergie sans matière", "example": "Champs" },
+          { "name": "Propriétés", "explanation": "Transversales E⃗⊥B⃗, prop. rectiligne. Vitesse vide c ≈ 3×10⁸ m/s. Milieu v = c/n", "example": "Caractéristiques" },
+          { "name": "Grandeurs", "explanation": "Fréquence f, période T = 1/f, longueur d'onde λ. Relation λf = c. ω = 2πf, k = 2π/λ", "example": "Caractéristiques" },
+          { "name": "Équation", "explanation": "Propagation ∂²E⃗/∂t² = c²∂²E⃗/∂x². Solution E(x,t) = E₀cos(kx-ωt+φ)", "example": "Onde" }
+        ],
+        "guided_example": {
+          "statement": "Onde radio f=100 MHz. λ ?",
+          "solution_steps": ["λ = c/f", "= (3×10⁸)/(100×10⁶) = 3 m"]
+        },
+        "quick_exercises": [
+          "Lumière verte λ=500 nm. f ?",
+          "Ondes EM"
+        ],
+        "common_mistakes": [
+          "Confondre λ et f",
+          "Croire ondes EM ont besoin milieu"
+        ],
+        "summary": {
+          "key_concept": "λf = c dans le vide (formule clé). c ≈ 3×10⁸ m/s (à retenir)",
+          "key_method": "Ondes EM = pas milieu nécessaire. E⃗ ⊥ B⃗ ⊥ propagation",
+          "next_step": "Spectre EM"
+        }
+      }
+    },
+    {
+      "id": "PT-12",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Spectre électromagnétique",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Connaître les différentes zones du spectre", "Ordonner par fréquence et longueur d'onde", "Identifier les applications de chaque domaine", "Situer la lumière visible"],
+      "prerequisites": ["PT-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["spectre", "EM"],
+      "detailed_content": {
+        "introduction": "Le spectre électromagnétique regroupe toutes les ondes EM, classées par fréquence (ou longueur d'onde) croissante.",
+        "key_concepts": [
+          { "name": "Classification", "explanation": "Radio, micro-ondes, IR, visible, UV, X, gamma. f croissante, λ décroissante", "example": "Ordre" },
+          { "name": "Visible", "explanation": "400 nm (violet) à 800 nm (rouge). Domaine perceptible œil humain", "example": "Plage" },
+          { "name": "Énergie", "explanation": "E = hf. Plus f grand, plus E grand. Radio/IR : peu dangereuses. UV/X/γ : ionisants dangereux", "example": "Danger" },
+          { "name": "Applications", "explanation": "Radio/TV, WiFi, IR capteurs, photo, UV stérilisation, X imagerie, γ radiothérapie", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Classer par énergie : radio, rouge, X",
+          "solution_steps": ["E ∝ f", "Ordre f : radio < rouge < X", "Ordre énergie : radio < rouge < X"]
+        },
+        "quick_exercises": [
+          "UV λ=300 nm. f ? E photon ?",
+          "Spectre EM"
+        ],
+        "common_mistakes": [
+          "Confondre ordre spectre",
+          "Oublier E ∝ f"
+        ],
+        "summary": {
+          "key_concept": "f croissante : radio → γ. λ décroissante : radio → γ. Visible : 400-800 nm (petit domaine)",
+          "key_method": "E = hf (plus f grand, plus dangereux)",
+          "next_step": "Photons"
+        }
+      }
+    },
+    {
+      "id": "PT-13",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Photons et dualité onde-corpuscule",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre le concept de photon", "Appliquer E = hf", "Expliquer la dualité onde-corpuscule", "Relier aspect ondulatoire et corpusculaire"],
+      "prerequisites": ["PT-11", "PT-12"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["photon", "quantique"],
+      "detailed_content": {
+        "introduction": "La lumière présente un double aspect : ondulatoire (propagation) et corpusculaire (échanges d'énergie).",
+        "key_concepts": [
+          { "name": "Photon", "explanation": "Grain lumière, particule. m=0, vitesse c. E = hf = hc/λ. p = E/c = h/λ", "example": "Quantique" },
+          { "name": "Planck", "explanation": "h = 6.626×10⁻³⁴ J·s. Relie énergie et fréquence E = hf. 1 eV = 1.602×10⁻¹⁹ J", "example": "Constante" },
+          { "name": "Dualité", "explanation": "Ondulatoire interférences/diffraction. Corpusculaire photoélectrique/Compton. Complémentaires", "example": "Aspects" },
+          { "name": "Photoélectrique", "explanation": "Éjection électrons métal. E_c = hf - W. f seuil. Preuve corpuscule. Prix Nobel Einstein 1921", "example": "Effet" }
+        ],
+        "guided_example": {
+          "statement": "Rouge λ=700 nm. E en eV ?",
+          "solution_steps": ["E = hc/λ", "≈ 2.84×10⁻¹⁹ J", "≈ 1.77 eV"]
+        },
+        "quick_exercises": [
+          "Métal W=2 eV. f₀ ? λ₀ ?",
+          "Photons"
+        ],
+        "common_mistakes": [
+          "Confondre E = hf et E = mc²",
+          "Oublier conversion eV↔J"
+        ],
+        "summary": {
+          "key_concept": "E = hf = hc/λ (photon). h = 6.63×10⁻³⁴ J·s",
+          "key_method": "1 eV = 1.6×10⁻¹⁹ J. Photoélectrique : preuve corpuscule",
+          "next_step": "Diffraction"
+        }
+      }
+    },
+    {
+      "id": "PT-14",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Diffraction de la lumière",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Définir le phénomène de diffraction", "Calculer l'écart angulaire θ = λ/a", "Mesurer une longueur d'onde par diffraction", "Relier taille d'ouverture et diffraction"],
+      "prerequisites": ["PT-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["diffraction", "optique"],
+      "detailed_content": {
+        "introduction": "La diffraction est le phénomène d'étalement d'une onde lorsqu'elle rencontre un obstacle ou traverse une ouverture.",
+        "key_concepts": [
+          { "name": "Diffraction", "explanation": "Modification propagation obstacle/ouverture. Observable si a ≈ λ. Étalement", "example": "Phénomène" },
+          { "name": "Fente", "explanation": "Tache centrale largeur L, franges secondaires. θ = λ/a demi-angle. L = 2λD/a largeur", "example": "Dispositif" },
+          { "name": "Lois", "explanation": "Écart θ = λ/a. Largeur L = 2λD/a. Relation inverse a petit → L grand", "example": "Relations" },
+          { "name": "Applications", "explanation": "Mesure λ. Limite résolution optique (Rayleigh). Mesure tailles particules. Réseaux", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Laser λ=650 nm, a=0.1 mm, D=2 m. L ?",
+          "solution_steps": ["L = 2λD/a", "= (2×650×10⁻⁹×2)/(0.1×10⁻³)", "= 2.6 cm"]
+        },
+        "quick_exercises": [
+          "Tache L=3.2 cm, D=3 m, a=0.08 mm. λ ?",
+          "Diffraction"
+        ],
+        "common_mistakes": [
+          "Confondre L et θ",
+          "Oublier facteur 2"
+        ],
+        "summary": {
+          "key_concept": "θ = λ/a (angle). L = 2λD/a (largeur)",
+          "key_method": "a petit → grande diffraction. Diffraction ≠ réfraction",
+          "next_step": "Interférences"
+        }
+      }
+    },
+    {
+      "id": "PT-15",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Interférences lumineuses",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Comprendre le phénomène d'interférences", "Conditions pour observer des interférences", "Calculer l'interfrange i = λD/a", "Distinguer interférences constructives et destructives"],
+      "prerequisites": ["PT-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["interférences", "Young"],
+      "detailed_content": {
+        "introduction": "Les interférences lumineuses résultent de la superposition de deux ondes lumineuses cohérentes.",
+        "key_concepts": [
+          { "name": "Superposition", "explanation": "A_totale = A₁+A₂. Constructives δ=kλ max. Destructives δ=(k+½)λ min. Sources cohérentes", "example": "Principe" },
+          { "name": "Young", "explanation": "Deux fentes écart a, écran D. Franges brillantes/sombres. Interfrange i = λD/a", "example": "Dispositif" },
+          { "name": "Marche", "explanation": "Différence δ ≈ ax/D. Constructives δ=kλ. Destructives δ=(k+½)λ. Ordre k", "example": "Différence" },
+          { "name": "Mesure", "explanation": "λ = ia/D. Plus D grand → i grand. Plus a grand → i petit. Spectroscopie", "example": "Utilisation" }
+        ],
+        "guided_example": {
+          "statement": "λ=600 nm, a=1 mm, D=2 m. i ?",
+          "solution_steps": ["i = λD/a", "= (600×10⁻⁹×2)/(1×10⁻³)", "= 1.2 mm"]
+        },
+        "quick_exercises": [
+          "i=0.8 mm, D=1.5 m, λ=640 nm. a ?",
+          "Interférences"
+        ],
+        "common_mistakes": [
+          "Confondre a et i",
+          "Inverser formule"
+        ],
+        "summary": {
+          "key_concept": "i = λD/a (interfrange). Constructives : δ=kλ. Destructives : δ=(k+½)λ",
+          "key_method": "a petit → i grand",
+          "next_step": "Effet Doppler"
+        }
+      }
+    },
+    {
+      "id": "PT-16",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Effet Doppler",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Comprendre l'effet Doppler", "Calculer la variation de fréquence", "Appliquer aux différentes situations", "Identifier les applications"],
+      "prerequisites": ["PT-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Doppler", "vitesses"],
+      "detailed_content": {
+        "introduction": "L'effet Doppler est la modification apparente de la fréquence d'une onde lorsque la source ou l'observateur est en mouvement.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "f' ≠ f si mouvement relatif. Rapprochement f'>f. Éloignement f'<f. Compression/dilatation fronts", "example": "Phénomène" },
+          { "name": "Formules", "explanation": "Général f' = f(c±v_obs)/(c∓v_source). EM v<<c : Δf/f ≈ ±v/c. Décalage Δf", "example": "Relations" },
+          { "name": "Astronomie", "explanation": "Redshift éloignement → λ↗. Blueshift rapprochement → λ↘. v = c(Δλ/λ). Expansion univers Hubble", "example": "Applications" },
+          { "name": "Applications", "explanation": "Radar vitesse. Vélocimétrie. Échographie Doppler flux sanguin. Exoplanètes", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Étoile λ₀=656 nm, λ=660 nm. Vitesse ?",
+          "solution_steps": ["λ>λ₀ : éloignement", "v/c = Δλ/λ₀", "v ≈ 1830 km/s"]
+        },
+        "quick_exercises": [
+          "Radar f₀=10 GHz, f'=10.000200 GHz. Vitesse ?",
+          "Effet Doppler"
+        ],
+        "common_mistakes": [
+          "Confondre rapprochement/éloignement",
+          "Oublier facteur 2 radar"
+        ],
+        "summary": {
+          "key_concept": "Rapprochement : f'>f, λ'<λ. Éloignement : f'<f, λ'>λ",
+          "key_method": "Δf/f ≈ v/c (ondes EM). Radar : facteur 2 (aller-retour)",
+          "next_step": "Milieux"
+        }
+      }
+    },
+    {
+      "id": "PT-17",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Propagation de la lumière dans un milieu",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Définir l'indice de réfraction", "Calculer la vitesse v = c/n", "Comprendre la dispersion", "Appliquer aux différents milieux"],
+      "prerequisites": ["PT-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["indice", "milieu"],
+      "detailed_content": {
+        "introduction": "Lorsque la lumière se propage dans un milieu matériel transparent, sa vitesse diminue.",
+        "key_concepts": [
+          { "name": "Indice", "explanation": "n = c/v ≥ 1. Vide n=1, eau n≈1.33, verre n≈1.5. Plus n grand, plus v lent", "example": "Définition" },
+          { "name": "Vitesse", "explanation": "v = c/n. f constant. λ_milieu = λ_vide/n < λ_vide. n·λ_milieu = λ_vide", "example": "Relations" },
+          { "name": "Dispersion", "explanation": "n dépend λ. Généralement n↘ quand λ↗. Décomposition lumière blanche. Cauchy n(λ) = A+B/λ²", "example": "Phénomène" },
+          { "name": "Applications", "explanation": "Prisme dispersion. Arc-en-ciel. Fibres guidage. Lentilles. Aberration chromatique", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Eau n=1.33. Rouge λ_vide=650 nm. v ? λ_eau ?",
+          "solution_steps": ["v = c/n ≈ 2.26×10⁸ m/s", "λ_eau = λ_vide/n ≈ 489 nm"]
+        },
+        "quick_exercises": [
+          "Verre n=1.5, λ=400 nm. λ_vide ? f ?",
+          "Milieux"
+        ],
+        "common_mistakes": [
+          "Croire n < 1 possible",
+          "Confondre v et c"
+        ],
+        "summary": {
+          "key_concept": "n = c/v ≥ 1. v = c/n (diminue). λ = λ_vide/n (diminue)",
+          "key_method": "f constant (caractéristique source)",
+          "next_step": "Réfraction"
+        }
+      }
+    },
+    {
+      "id": "PT-18",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Réfraction et lois de Snell-Descartes",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Énoncer les lois de la réfraction", "Appliquer n₁sin(i₁) = n₂sin(i₂)", "Comprendre la réfraction vers/de la normale", "Calculer les angles"],
+      "prerequisites": ["PT-17"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["réfraction", "Snell"],
+      "detailed_content": {
+        "introduction": "La réfraction est le changement de direction de la lumière à l'interface entre deux milieux d'indices différents.",
+        "key_concepts": [
+          { "name": "Réfraction", "explanation": "Changement direction interface n₁≠n₂. Coplanaire incident/réfracté/normale", "example": "Phénomène" },
+          { "name": "Lois", "explanation": "Snell-Descartes n₁sin(i₁) = n₂sin(i₂). i₁ angle incidence, i₂ réfraction. Normale référence", "example": "Formulation" },
+          { "name": "Conséquences", "explanation": "n₂>n₁ → rapprochement normale. n₂<n₁ → éloignement. Limite réflexion totale", "example": "Directions" },
+          { "name": "Applications", "explanation": "Lentilles réfraction. Fibres guidage. Mirages. Profondeur apparente. Lunettes plongée", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Air→eau n₁=1, n₂=1.33, i₁=40°. i₂ ?",
+          "solution_steps": ["sin(i₂) = (n₁/n₂)sin(i₁)", "≈ 0.483", "i₂ ≈ 28.9°"]
+        },
+        "quick_exercises": [
+          "Eau→verre n₁=1.33, n₂=1.5, i₁=30°. i₂ ?",
+          "Réfraction"
+        ],
+        "common_mistakes": [
+          "Mesurer angles interface (FAUX : normale)",
+          "Inverser n₁ et n₂"
+        ],
+        "summary": {
+          "key_concept": "n₁sin(i₁) = n₂sin(i₂). Angles par rapport à la NORMALE",
+          "key_method": "n₂>n₁ → rapprochement. n₂<n₁ → éloignement",
+          "next_step": "Réflexion totale"
+        }
+      }
+    },
+    {
+      "id": "PT-19",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Réflexion totale",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Comprendre la réflexion totale", "Calculer l'angle limite sin(i_L) = n₂/n₁", "Identifier les conditions nécessaires", "Appliquer aux fibres optiques"],
+      "prerequisites": ["PT-18"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["réflexion", "totale"],
+      "detailed_content": {
+        "introduction": "La réflexion totale se produit lorsque la lumière passe d'un milieu plus réfringent vers un moins réfringent avec un angle d'incidence suffisamment grand.",
+        "key_concepts": [
+          { "name": "Condition", "explanation": "n₁>n₂ obligatoire. Angle i₁>i_L. Exemples eau→air possible, air→eau impossible", "example": "Requis" },
+          { "name": "Limite", "explanation": "i_L tel i₂=90°. sin(i_L) = n₂/n₁. i_L = arcsin(n₂/n₁). Exemple eau-air ≈ 48.8°", "example": "Angle" },
+          { "name": "Régimes", "explanation": "i₁<i_L : partielle+réfraction. i₁=i_L : réfraction rasante. i₁>i_L : totale 100% réfléchi", "example": "Cas" },
+          { "name": "Applications", "explanation": "Fibres guidage. Prismes 90°/180°. Diamant éclat. Mirages", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Verre→air n₁=1.5, n₂=1. i_L ?",
+          "solution_steps": ["sin(i_L) = 1/1.5 ≈ 0.667", "i_L ≈ 41.8°"]
+        },
+        "quick_exercises": [
+          "Fibre n₁=1.52, n₂=1.49. i_L ? i=85° : totale ?",
+          "Réflexion totale"
+        ],
+        "common_mistakes": [
+          "Appliquer si n₁ < n₂ (impossible)",
+          "Confondre limite et réfraction"
+        ],
+        "summary": {
+          "key_concept": "Condition : n₁>n₂. sin(i_L) = n₂/n₁. i>i_L → réflexion totale",
+          "key_method": "Fibres : guidage par réflexions totales",
+          "next_step": "Synthèse"
+        }
+      }
+    },
+    {
+      "id": "PT-20",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Synthèse - Ondes & Signaux",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Maîtriser tous les concepts d'ondes", "Relier les différents phénomènes", "Résoudre des problèmes de synthèse", "Appliquer aux situations concrètes"],
+      "prerequisites": ["PT-11", "PT-14", "PT-18", "PT-19"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "ondes"],
+      "detailed_content": {
+        "introduction": "Les ondes électromagnétiques présentent de nombreux phénomènes : propagation, diffraction, interférences, effet Doppler, réfraction.",
+        "key_concepts": [
+          { "name": "Nature", "explanation": "EM couplage E⃗-B⃗, c=3×10⁸ m/s. λf=c. Spectre. E=hf photons. Dualité onde-corpuscule", "example": "Fondamentaux" },
+          { "name": "Phénomènes", "explanation": "Diffraction θ=λ/a, L=2λD/a. Interférences i=λD/a. Doppler Δf/f≈v/c", "example": "Ondulatoires" },
+          { "name": "Milieux", "explanation": "n=c/v. v=c/n, λ=λ_vide/n, f constant. Snell n₁sin(i₁)=n₂sin(i₂). Réflexion totale n₁>n₂", "example": "Réfraction" },
+          { "name": "Stratégie", "explanation": "1) Identifier phénomène 2) Données 3) Formule 4) Unités 5) Calcul 6) Interpréter 7) Vérifier", "example": "Méthode" }
+        ],
+        "guided_example": {
+          "statement": "Laser λ=650 nm, a=0.5 mm, D=2 m. i ? λ dans eau ?",
+          "solution_steps": ["i_air = λD/a = 2.6 mm", "λ_eau = 650/1.33 ≈ 489 nm", "i_eau ≈ 1.96 mm"]
+        },
+        "quick_exercises": [
+          "Air→verre i₁=60°. i₂ ? Fente a=2 μm verre. θ ?",
+          "Problèmes synthèse"
+        ],
+        "common_mistakes": [
+          "Mélanger formules",
+          "Oublier convertir λ selon milieu"
+        ],
+        "summary": {
+          "key_concept": "λf=c. Diffraction θ=λ/a. Interférences i=λD/a. Réfraction n₁sin(i₁)=n₂sin(i₂)",
+          "key_method": "Réflexion totale n₁>n₂, i>i_L. Toujours vérifier unités et cohérence. Les ondes : un monde fascinant ! 🌊",
+          "next_step": "Fin Ondes & Signaux"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

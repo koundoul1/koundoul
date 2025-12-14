@@ -1,0 +1,26 @@
+# Cache des leçons générées
+lessons-cache.json
+
+# Logs
+*.log
+
+# Temporaires
+*.tmp
+.DS_Store
+
+# Garder uniquement la structure
+!README.md
+
+
+
+
+
+
+
+
+
+
+
+
+
+

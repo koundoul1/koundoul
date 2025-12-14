@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "total_lessons": 5,
+    "level": "Première",
+    "subject": "Chimie",
+    "lesson_range": "C1-21 à C1-25",
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Dernières leçons de Chimie Première - Polymères et Applications"
+  },
+  "lessons": [
+    {
+      "id": "C1-21",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Macromolécules - Introduction aux polymères",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Définir monomère, polymère et polymérisation",
+        "Distinguer polymérisation par addition et condensation",
+        "Identifier des polymères courants"
+      ],
+      "prerequisites": [
+        "Alcènes",
+        "Estérification",
+        "Groupes fonctionnels"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["polymères", "macromolécules", "monomère", "polymérisation"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon introduit les polymères, macromolécules formées par l'assemblage de monomères. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de comprendre les principes de polymérisation en 10 minutes.",
+        "method_step_by_step": [
+          "Identifier le monomère (petite molécule répétitive)",
+          "Déterminer le type de polymérisation : addition (alcènes) ou condensation (avec élimination)",
+          "Pour addition : ouverture de la double liaison C=C",
+          "Pour condensation : formation de liaisons avec élimination (H₂O, HCl...)",
+          "Représenter le motif répétitif avec n (degré de polymérisation)"
+        ],
+        "guided_example": {
+          "statement": "Décrire la polymérisation du styrène (C₆H₅-CH=CH₂) pour former le polystyrène.",
+          "solution_steps": [
+            "Monomère : styrène avec groupe vinyle -CH=CH₂",
+            "Type : polymérisation par addition (présence de C=C)",
+            "Mécanisme : ouverture de la double liaison",
+            "Formation : n(C₆H₅-CH=CH₂) → [-CH(C₆H₅)-CH₂-]ₙ",
+            "Conclusion : polystyrène = polymère d'addition, utilisé en emballage"
+          ]
+        },
+        "quick_exercises": [
+          "Le polyéthylène provient de quel monomère ?",
+          "L'estérification peut-elle conduire à un polymère ?",
+          "Identifier : PVC, PET, polyamides - addition ou condensation ?"
+        ],
+        "common_mistakes": [
+          "Confondre monomère et polymère",
+          "Oublier d'ouvrir la double liaison en addition",
+          "Ne pas indiquer le motif répétitif avec n"
+        ],
+        "summary": {
+          "key_concept": "Les polymères sont des macromolécules formées par répétition de monomères via addition ou condensation",
+          "key_method": "Monomère → Type polymérisation → Ouverture/Élimination → Motif [-X-]ₙ",
+          "next_step": "Étudier des polymères spécifiques (polyéthylène, PET, nylon)"
+        }
+      }
+    },
+    {
+      "id": "C1-22",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Polymères d'addition - Polyéthylène et dérivés",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Décrire la polymérisation du polyéthylène (PE)",
+        "Comparer PEBD et PEHD (propriétés)",
+        "Identifier les applications courantes"
+      ],
+      "prerequisites": [
+        "Polymérisation par addition",
+        "Alcènes",
+        "Liaisons covalentes"
+      ],
+      "content_types": ["video", "experiment", "quiz", "exercises"],
+      "tags": ["polyéthylène", "PE", "addition", "plastiques"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente le polyéthylène, polymère le plus produit au monde. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de comprendre sa synthèse et ses propriétés en 11 minutes.",
+        "method_step_by_step": [
+          "Monomère : éthylène (éthène) CH₂=CH₂",
+          "Polymérisation : n(CH₂=CH₂) → [-CH₂-CH₂-]ₙ",
+          "PEBD (Basse Densité) : ramifié, souple, films",
+          "PEHD (Haute Densité) : linéaire, rigide, bouteilles",
+          "Propriétés : inertie chimique, isolant électrique, recyclable"
+        ],
+        "guided_example": {
+          "statement": "Expliquer la différence de propriétés entre PEBD et PEHD à partir de leur structure.",
+          "solution_steps": [
+            "PEBD : chaînes ramifiées → empilage difficile → moins dense (0.92 g/cm³)",
+            "PEHD : chaînes linéaires → empilage compact → plus dense (0.95 g/cm³)",
+            "Conséquence : PEBD souple (sacs) vs PEHD rigide (bidons)",
+            "Points de fusion : PEBD ~110°C vs PEHD ~130°C",
+            "Conclusion : La structure (ramifications) détermine les propriétés"
+          ]
+        },
+        "quick_exercises": [
+          "Dessiner le motif répétitif du polyéthylène",
+          "Quel type de PE utiliser pour un sac plastique ?",
+          "Calculer la masse molaire d'un PE avec n=1000"
+        ],
+        "common_mistakes": [
+          "Confondre éthylène (monomère) et polyéthylène (polymère)",
+          "Oublier les crochets et l'indice n dans la formule",
+          "Ne pas relier structure et propriétés"
+        ],
+        "summary": {
+          "key_concept": "Le polyéthylène existe sous deux formes (PEBD/PEHD) avec propriétés différentes selon la structure",
+          "key_method": "Éthylène → Polymérisation → Structure (ramifié/linéaire) → Propriétés → Applications",
+          "next_step": "Étudier d'autres polymères d'addition (PVC, polystyrène)"
+        }
+      }
+    },
+    {
+      "id": "C1-23",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Polymères de condensation - Polyesters (PET)",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Décrire la formation du PET par polycondensation",
+        "Identifier les monomères du PET",
+        "Comprendre le recyclage du PET"
+      ],
+      "prerequisites": [
+        "Estérification",
+        "Acides carboxyliques",
+        "Alcools",
+        "Polymérisation"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["PET", "polyester", "condensation", "recyclage"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente le PET (polyéthylène téréphtalate), polyester utilisé dans les bouteilles. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de comprendre sa synthèse par polycondensation en 12 minutes.",
+        "method_step_by_step": [
+          "Identifier les deux monomères : acide téréphtalique + éthylène glycol",
+          "Réaction de polycondensation : estérification répétée",
+          "Élimination de H₂O à chaque liaison formée",
+          "Formation du motif : [-OC-C₆H₄-CO-O-CH₂-CH₂-]ₙ",
+          "Propriétés : transparent, résistant, recyclable (code 1)"
+        ],
+        "guided_example": {
+          "statement": "Écrire l'équation de formation du PET et calculer le nombre de molécules d'eau éliminées pour n=50.",
+          "solution_steps": [
+            "Monomères : HOOC-C₆H₄-COOH (acide) + HO-CH₂-CH₂-OH (diol)",
+            "1 liaison ester formée → 1 H₂O éliminée",
+            "Pour n motifs : (n-1) liaisons formées",
+            "n=50 → 49 molécules d'eau éliminées",
+            "Équation globale : n(acide) + n(diol) → PETₙ + (2n-1) H₂O"
+          ]
+        },
+        "quick_exercises": [
+          "Pourquoi le PET est-il un polyester ?",
+          "Identifier les fonctions présentes dans le PET",
+          "Comment recycler le PET (hydrolyse) ?"
+        ],
+        "common_mistakes": [
+          "Confondre polyéthylène et PET (noms similaires)",
+          "Oublier l'élimination d'eau dans la polycondensation",
+          "Ne pas compter correctement le nombre de H₂O éliminées"
+        ],
+        "summary": {
+          "key_concept": "Le PET est un polyester formé par polycondensation d'un diacide et d'un diol avec élimination d'eau",
+          "key_method": "Diacide + Diol → Estérification répétée → PET + nH₂O",
+          "next_step": "Étudier les polyamides (nylon)"
+        }
+      }
+    },
+    {
+      "id": "C1-24",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Synthèse organique - Stratégies et sélectivité",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Planifier une synthèse multi-étapes",
+        "Comprendre la notion de sélectivité",
+        "Optimiser un rendement de synthèse"
+      ],
+      "prerequisites": [
+        "Toutes les réactions organiques",
+        "Groupes fonctionnels",
+        "Réactivité"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["synthèse", "stratégie", "rendement", "sélectivité"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les stratégies de synthèse organique. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de planifier une synthèse efficace en 11 minutes.",
+        "method_step_by_step": [
+          "Analyser la molécule cible (groupes fonctionnels, squelette carboné)",
+          "Identifier les transformations nécessaires (rétrosynthèse)",
+          "Choisir l'ordre optimal des étapes",
+          "Protéger les groupes sensibles si nécessaire",
+          "Calculer le rendement global : R = R₁ × R₂ × ... × Rₙ"
+        ],
+        "guided_example": {
+          "statement": "Proposer une synthèse de l'acide propanoïque à partir du propan-1-ol.",
+          "solution_steps": [
+            "Cible : CH₃-CH₂-COOH (acide carboxylique)",
+            "Départ : CH₃-CH₂-CH₂-OH (alcool primaire)",
+            "Stratégie : oxydation alcool 1° → aldéhyde → acide",
+            "Étape 1 : CH₃-CH₂-CH₂-OH + [O] → CH₃-CH₂-CHO (propanal)",
+            "Étape 2 : CH₃-CH₂-CHO + [O] → CH₃-CH₂-COOH (acide propanoïque)",
+            "Alternative : oxydation directe avec excès d'oxydant (moins sélectif)"
+          ]
+        },
+        "quick_exercises": [
+          "Si R₁=80% et R₂=90%, quel est le rendement global ?",
+          "Synthétiser le butan-2-one à partir du butan-2-ol",
+          "Quelle protection utiliser pour synthétiser un aminoacide ?"
+        ],
+        "common_mistakes": [
+          "Oublier de protéger les groupes réactifs",
+          "Ne pas optimiser l'ordre des étapes",
+          "Multiplier les rendements au lieu de les additionner"
+        ],
+        "summary": {
+          "key_concept": "Une synthèse efficace nécessite une planification rigoureuse et l'optimisation du rendement global",
+          "key_method": "Cible → Rétrosynthèse → Étapes → Protection → Exécution → Rendement",
+          "next_step": "Appliquer à des synthèses industrielles"
+        }
+      }
+    },
+    {
+      "id": "C1-25",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Chimie verte et développement durable",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Définir les principes de la chimie verte",
+        "Calculer l'économie d'atomes",
+        "Identifier des alternatives durables"
+      ],
+      "prerequisites": [
+        "Réactions chimiques",
+        "Rendement",
+        "Synthèse organique"
+      ],
+      "content_types": ["video", "case-study", "quiz", "exercises"],
+      "tags": ["chimie verte", "durable", "économie d'atomes", "écologie"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la chimie verte, approche durable de la chimie. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de comprendre les enjeux environnementaux en 10 minutes.",
+        "method_step_by_step": [
+          "12 principes de la chimie verte (prévention, économie d'atomes, solvants verts...)",
+          "Calculer l'économie d'atomes : (M(produit utile) / M(tous réactifs)) × 100",
+          "Privilégier les réactions à économie d'atomes élevée",
+          "Remplacer solvants toxiques par H₂O, CO₂ supercritique, ionic liquids",
+          "Concevoir des molécules biodégradables"
+        ],
+        "guided_example": {
+          "statement": "Comparer l'économie d'atomes de deux synthèses de l'aspirine : Kolbe (réaction A) vs Hoffmann (réaction B).",
+          "solution_steps": [
+            "Réaction A : C₇H₆O₃ + (CH₃CO)₂O → C₉H₈O₄ + CH₃COOH",
+            "M(réactifs) = 138 + 102 = 240 g/mol",
+            "M(aspirine) = 180 g/mol",
+            "Économie d'atomes A : (180/240) × 100 = 75%",
+            "Réaction B : utilise plus d'étapes et réactifs → économie <50%",
+            "Conclusion : Réaction A plus verte (moins de déchets)"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer l'économie d'atomes : CH₄ + Cl₂ → CH₃Cl + HCl",
+          "Pourquoi privilégier la catalyse en chimie verte ?",
+          "Proposer une alternative verte au benzène comme solvant"
+        ],
+        "common_mistakes": [
+          "Confondre économie d'atomes et rendement",
+          "Négliger les sous-produits dans le calcul",
+          "Croire que toute réaction à haut rendement est verte"
+        ],
+        "summary": {
+          "key_concept": "La chimie verte minimise l'impact environnemental via économie d'atomes, catalyse, solvants verts et biodégradabilité",
+          "key_method": "Analyser réaction → Économie d'atomes → Solvants → Catalyse → Biodégradabilité",
+          "next_step": "Appliquer ces principes dans l'industrie pharmaceutique et agrochimique"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,503 @@
+{
+  "metadata": {
+    "lot_number": 34,
+    "lot_name": "Lot 34 - Équilibres & Dosages",
+    "level": "Terminale",
+    "subject": "Chimie",
+    "prefix": "CT",
+    "chapter": "Équilibres & Dosages",
+    "lesson_range": "CT-14 à CT-25",
+    "total_lessons": 12
+  },
+  "lessons": [
+    {
+      "id": "CT-14",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Titrages - Principe général",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Définir un titrage (ou dosage)", "Comprendre le principe de l'équivalence", "Identifier les types de titrages", "Connaître le matériel et le protocole"],
+      "prerequisites": ["C1-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["titrage", "dosage"],
+      "detailed_content": {
+        "introduction": "Un titrage est une technique d'analyse quantitative qui permet de déterminer la concentration d'une espèce chimique en solution. C'est une méthode précise et largement utilisée en chimie analytique.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Déterminer concentration inconnue (titré) par réaction avec titrant connu. Jusqu'à équivalence", "example": "Principe" },
+          { "name": "Équivalence", "explanation": "Proportions stœchiométriques. Réactifs entièrement consommés. Concentration calculée", "example": "Point" },
+          { "name": "Conditions", "explanation": "Réaction rapide, totale, unique. Équivalence facilement détectable", "example": "Requis" },
+          { "name": "Formule", "explanation": "C_titré × V_titré × coeff_titrant = C_titrant × V_E × coeff_titré", "example": "Calcul" }
+        ],
+        "guided_example": {
+          "statement": "Titre 10mL HCl inconnu par 0.1M NaOH. V_E=12.5mL. [HCl] ?",
+          "solution_steps": ["Réaction 1:1", "C_HCl × 10 = 0.1 × 12.5", "C_HCl = 0.125 mol/L"]
+        },
+        "quick_exercises": [
+          "Titre 20mL vinaigre par 0.5M NaOH. V_E=15mL. [acide acétique] ?",
+          "Principes titrage"
+        ],
+        "common_mistakes": [
+          "Confondre volume titré et V_E",
+          "Oublier coefficients"
+        ],
+        "summary": {
+          "key_concept": "Titrage : déterminer concentration inconnue. Équivalence : proportions stœchiométriques",
+          "key_method": "Formule (1:1) : C₁V₁ = C₂V₂. Réaction rapide, totale, unique",
+          "next_step": "Titrage pH-métrique"
+        }
+      }
+    },
+    {
+      "id": "CT-15",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Titrage acido-basique - Courbe de pH",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Tracer et interpréter une courbe de titrage pH-métrique", "Repérer l'équivalence sur la courbe", "Comprendre les zones tampon", "Déterminer le pKa d'un acide faible"],
+      "prerequisites": ["CT-14"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["pH", "titrage"],
+      "detailed_content": {
+        "introduction": "Le titrage pH-métrique d'un acide par une base permet de suivre l'évolution du pH au cours de l'ajout du réactif titrant.",
+        "key_concepts": [
+          { "name": "Courbe", "explanation": "pH = f(V_versé). Saut de pH à l'équivalence (point d'inflexion)", "example": "Représentation" },
+          { "name": "Acide/base forts", "explanation": "Saut marqué ΔpH≈6. pH_E=7. Méthode tangentes pour V_E", "example": "Cas" },
+          { "name": "Acide faible", "explanation": "Zone tampon, pH varie peu. Demi-équivalence : pH=pKa. pH_E>7", "example": "Cas" },
+          { "name": "pKa", "explanation": "Demi-équivalence V=V_E/2. pH_demi-éq = pKa", "example": "Détermination" }
+        ],
+        "guided_example": {
+          "statement": "Acide faible HA, V_E=20mL. À V=10mL, pH=4.8. pKa ?",
+          "solution_steps": ["V=10mL = V_E/2", "Demi-équivalence", "pH = pKa = 4.8"]
+        },
+        "quick_exercises": [
+          "Titre C₆H₅COOH (faible) par NaOH. V_E/2 : pH=4.2, V_E : pH=8.5. pKa ? pH_E>7 ?",
+          "Titrage pH-métrique"
+        ],
+        "common_mistakes": [
+          "Confondre équivalence et demi-équivalence",
+          "Croire pH_E=7 toujours"
+        ],
+        "summary": {
+          "key_concept": "Titrage pH-métrique : courbe pH=f(V). Équivalence : saut de pH",
+          "key_method": "Demi-équivalence : pH=pKa (acide faible). Acide faible + base forte : pH_E>7",
+          "next_step": "Indicateurs colorés"
+        }
+      }
+    },
+    {
+      "id": "CT-16",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Indicateurs colorés de pH",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Définir un indicateur coloré de pH", "Comprendre la zone de virage", "Choisir un indicateur adapté à un titrage", "Utiliser un indicateur pour repérer l'équivalence"],
+      "prerequisites": ["CT-15"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["indicateur", "pH"],
+      "detailed_content": {
+        "introduction": "Un indicateur coloré de pH est une substance dont la couleur dépend du pH de la solution. Il permet de repérer visuellement l'équivalence lors d'un titrage acido-basique.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Couple HIn/In⁻. HIn ⇌ H⁺+In⁻. Couleurs différentes", "example": "Principe" },
+          { "name": "Zone", "explanation": "Zone virage ≈ [pKa_indicateur - 1 ; pKa_indicateur + 1]. Transition", "example": "Plage" },
+          { "name": "Choix", "explanation": "Zone virage doit contenir pH_E. BBT zone [6;8], Phénolphtaléine [8;10]", "example": "Critère" },
+          { "name": "Utilisation", "explanation": "Quelques gouttes. Virage proche équivalence. ±1 goutte précision", "example": "Pratique" }
+        ],
+        "guided_example": {
+          "statement": "HCl par NaOH, pH_E≈7. Hélianthine [3;4.5], BBT [6;8], Phénolphtaléine [8;10]. Choix ?",
+          "solution_steps": ["pH_E ≈ 7", "BBT zone [6;8] contient 7", "Choisir BBT"]
+        },
+        "quick_exercises": [
+          "Acide faible + base forte, pH_E=8.7. Phénolphtaléine [8;10] convient ? BBT [6;8] ?",
+          "Choix indicateur"
+        ],
+        "common_mistakes": [
+          "Choisir sans vérifier zone virage",
+          "Croire tous conviennent"
+        ],
+        "summary": {
+          "key_concept": "Indicateur coloré : couple HIn/In⁻. Zone virage : [pKa_indicateur ± 1]",
+          "key_method": "Choisir indicateur : pH_E dans zone de virage",
+          "next_step": "Constante d'acidité"
+        }
+      }
+    },
+    {
+      "id": "CT-17",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Réactions acido-basiques - Constante d'acidité",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Définir la constante d'acidité Ka", "Relier Ka et pKa", "Calculer Ka à partir d'un équilibre", "Classer les acides par force"],
+      "prerequisites": ["CT-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["acidité", "Ka"],
+      "detailed_content": {
+        "introduction": "La constante d'acidité Ka caractérise la force d'un acide en solution aqueuse. Elle quantifie l'équilibre de dissociation de l'acide dans l'eau.",
+        "key_concepts": [
+          { "name": "Couple", "explanation": "AH/A⁻. Équilibre AH + H₂O ⇌ A⁻ + H₃O⁺. Ka = [A⁻][H₃O⁺]/[AH]", "example": "Définition" },
+          { "name": "pKa", "explanation": "pKa = -log(Ka). Plus pKa petit, plus acide fort. pKa<0 fort, 0-14 faible", "example": "Échelle" },
+          { "name": "Force", "explanation": "pKa petit ⇒ acide fort, base conjuguée faible. Exemple CH₃COOH pKa=4.8", "example": "Relation" },
+          { "name": "Applications", "explanation": "Prédire sens réaction, calculer pH, espèces prédominantes, tampons", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "HNO₂ pKa=3.3, NH₄⁺ pKa=9.2. Acide le plus fort ?",
+          "solution_steps": ["pKa(HNO₂)=3.3 < pKa(NH₄⁺)=9.2", "pKa petit = acide fort", "HNO₂ plus fort"]
+        },
+        "quick_exercises": [
+          "HA Ka=2×10⁻⁵. pKa ? Comparer à CH₃COOH pKa=4.8",
+          "Constante d'acidité"
+        ],
+        "common_mistakes": [
+          "Confondre Ka et pKa",
+          "Inverser relation pKa-force"
+        ],
+        "summary": {
+          "key_concept": "Ka = constante acidité. pKa = -log(Ka). pKa petit ⇒ acide fort",
+          "key_method": "Acide fort : pKa<0, faible : 0<pKa<14",
+          "next_step": "Solutions tampons"
+        }
+      }
+    },
+    {
+      "id": "CT-18",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Solutions tampons - Effet tampon",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Définir une solution tampon", "Comprendre l'effet tampon", "Calculer le pH d'une solution tampon", "Identifier des applications biologiques"],
+      "prerequisites": ["CT-17"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["tampon", "pH"],
+      "detailed_content": {
+        "introduction": "Une solution tampon est une solution dont le pH varie peu lorsqu'on ajoute de petites quantités d'acide ou de base. Les tampons jouent un rôle essentiel en biologie pour maintenir le pH constant.",
+        "key_concepts": [
+          { "name": "Tampon", "explanation": "Mélange acide faible AH + base conjuguée A⁻. pH varie peu. Exemple CH₃COOH + CH₃COO⁻", "example": "Définition" },
+          { "name": "Effet", "explanation": "Ajout H₃O⁺ : A⁻ neutralise. Ajout OH⁻ : AH neutralise. pH varie peu", "example": "Principe" },
+          { "name": "Henderson", "explanation": "pH = pKa + log([A⁻]/[AH]). Si [A⁻]=[AH], pH=pKa. Optimal si pH≈pKa", "example": "Formule" },
+          { "name": "Applications", "explanation": "Biologie sang pH=7.4 (H₂CO₃/HCO₃⁻). Laboratoire, médicaments, aquariophilie", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Tampon [CH₃COOH]=[CH₃COO⁻]=0.10M. pKa=4.8. pH ?",
+          "solution_steps": ["pH = 4.8 + log(0.10/0.10)", "= 4.8 + log(1) = 4.8"]
+        },
+        "quick_exercises": [
+          "Tampon NH₃ 0.20M, NH₄⁺ 0.10M. pKa=9.2. pH ? Effet ajout acide ?",
+          "Solutions tampons"
+        ],
+        "common_mistakes": [
+          "Confondre acide/base dans formule",
+          "Croire tampon avec acide/base forts"
+        ],
+        "summary": {
+          "key_concept": "Tampon = acide faible + base conjuguée. pH = pKa + log([base]/[acide])",
+          "key_method": "pH ≈ pKa si [base]≈[acide]. Résiste aux variations de pH",
+          "next_step": "Oxydoréduction"
+        }
+      }
+    },
+    {
+      "id": "CT-19",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Réactions d'oxydoréduction - Rappels",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 105,
+      "objectives": ["Rappeler les notions d'oxydation et réduction", "Identifier les couples redox", "Écrire les demi-équations électroniques", "Équilibrer une équation redox"],
+      "prerequisites": ["C1-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["redox", "oxydoréduction"],
+      "detailed_content": {
+        "introduction": "Les réactions d'oxydoréduction impliquent des transferts d'électrons entre espèces chimiques. Elles sont à la base de nombreux phénomènes : combustions, piles, corrosion, métabolisme.",
+        "key_concepts": [
+          { "name": "Définitions", "explanation": "Oxydation : perte électrons (réducteur). Réduction : gain électrons (oxydant). Couplées", "example": "Notions" },
+          { "name": "Couple", "explanation": "Ox/Red. Demi-équation : Ox + n e⁻ → Red. Exemples Fe³⁺/Fe²⁺, Cu²⁺/Cu", "example": "Représentation" },
+          { "name": "Équilibrage", "explanation": "1) Identifier couples, 2) Demi-équations, 3) Égaliser e⁻, 4) Additionner, 5) Vérifier", "example": "Méthode" },
+          { "name": "N.o.", "explanation": "Nombre oxydation. Oxydation : n.o. ↗. Réduction : n.o. ↘", "example": "Suivi" }
+        ],
+        "guided_example": {
+          "statement": "Demi-équation réduction couple I₂/I⁻",
+          "solution_steps": ["I₂ oxydant, I⁻ réducteur", "I₂ + 2 e⁻ → 2 I⁻"]
+        },
+        "quick_exercises": [
+          "Équilibrer Zn + Cu²⁺ → Zn²⁺ + Cu. Couples, demi-équations, vérifier",
+          "Oxydoréduction"
+        ],
+        "common_mistakes": [
+          "Confondre oxydation/réduction",
+          "Oublier électrons"
+        ],
+        "summary": {
+          "key_concept": "Oxydation : perte e⁻ (réducteur donne). Réduction : gain e⁻ (oxydant prend)",
+          "key_method": "Couple : Ox/Red. Demi-équation : Ox + n e⁻ → Red",
+          "next_step": "Titrage redox"
+        }
+      }
+    },
+    {
+      "id": "CT-20",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Titrage redox - Permanganométrie",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Comprendre le principe d'un titrage redox", "Réaliser un titrage par le permanganate", "Repérer l'équivalence (décoloration)", "Calculer une concentration par titrage redox"],
+      "prerequisites": ["CT-14", "CT-19"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["titrage", "redox"],
+      "detailed_content": {
+        "introduction": "Le titrage redox est un dosage basé sur une réaction d'oxydoréduction. La permanganométrie utilise MnO₄⁻ comme réactif titrant.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Déterminer concentration réducteur/oxydant par réaction redox. Rapide, totale", "example": "Fondamentaux" },
+          { "name": "MnO₄⁻", "explanation": "Oxydant fort. MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O. Milieu acide", "example": "Permanganate" },
+          { "name": "Fer", "explanation": "5Fe²⁺ + MnO₄⁻ + 8H⁺ → 5Fe³⁺ + Mn²⁺ + 4H₂O. Stœchiométrie 5:1", "example": "Dosage" },
+          { "name": "Équivalence", "explanation": "MnO₄⁻ violet → incolore avant. Rose persistant après. Auto-indicateur", "example": "Repérage" }
+        ],
+        "guided_example": {
+          "statement": "Titre 20mL Fe²⁺ par 0.020M MnO₄⁻. V_E=12.4mL. [Fe²⁺] ?",
+          "solution_steps": ["5:1 Fe:MnO₄⁻", "C_Fe × 20 = 5 × 0.020 × 12.4", "C_Fe = 0.062 mol/L"]
+        },
+        "quick_exercises": [
+          "Titre H₂O₂ par 0.010M MnO₄⁻. Réaction 5H₂O₂+2MnO₄⁻+6H⁺→. V=10mL, V_E=8.2mL. [H₂O₂] ?",
+          "Permanganométrie"
+        ],
+        "common_mistakes": [
+          "Oublier coefficients",
+          "Confondre rapports"
+        ],
+        "summary": {
+          "key_concept": "Titrage redox : réaction oxydoréduction. MnO₄⁻ : oxydant, auto-indicateur",
+          "key_method": "Équivalence : apparition rose. Tenir compte coefficients stœchiométriques",
+          "next_step": "Conductimétrie"
+        }
+      }
+    },
+    {
+      "id": "CT-21",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Titrage conductimétrique",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Comprendre le principe du titrage conductimétrique", "Interpréter une courbe de conductivité", "Repérer l'équivalence sur la courbe", "Expliquer les variations de conductivité"],
+      "prerequisites": ["CT-14"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["conductimétrie", "titrage"],
+      "detailed_content": {
+        "introduction": "Le titrage conductimétrique suit l'évolution de la conductivité de la solution au cours d'un titrage. La conductivité dépend de la nature et de la concentration des ions présents.",
+        "key_concepts": [
+          { "name": "Conductivité", "explanation": "σ mesure conduction courant. σ = Σλᵢ[ion_i]. Ions H₃O⁺ et OH⁻ très conducteurs", "example": "Grandeur" },
+          { "name": "Courbe", "explanation": "σ=f(V). Avant/après V_E variations différentes. Intersection portions linéaires = équivalence", "example": "Représentation" },
+          { "name": "Exemple", "explanation": "HCl+NaOH. Avant : H₃O⁺ remplacé → σ↘. Équivalence σ min. Après : OH⁻ ajouté → σ↗", "example": "Acide/base forts" },
+          { "name": "Avantages", "explanation": "Fonctionne si réaction non totale. Précision méthode tangentes. Pas indicateur", "example": "Intérêts" }
+        ],
+        "guided_example": {
+          "statement": "Titre 10mL HCl par NaOH. Conductivité min à V_E=12mL. Expliquer",
+          "solution_steps": ["Avant : H₃O⁺ remplacé (moins conducteur)", "Équivalence : NaCl (σ min)", "Après : OH⁻ ajouté (très conducteur)"]
+        },
+        "quick_exercises": [
+          "Titre NH₃ (faible) par HCl. Décrire courbe σ=f(V)",
+          "Conductimétrie"
+        ],
+        "common_mistakes": [
+          "Confondre σ et concentration",
+          "Ne pas prolonger portions linéaires"
+        ],
+        "summary": {
+          "key_concept": "Conductivité σ dépend des ions. H₃O⁺ et OH⁻ : très conducteurs",
+          "key_method": "Équivalence : changement pente. Méthode tangentes pour V_E",
+          "next_step": "Piles électrochimiques"
+        }
+      }
+    },
+    {
+      "id": "CT-22",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Piles électrochimiques",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Comprendre le principe d'une pile", "Identifier anode et cathode", "Écrire les demi-équations aux électrodes", "Calculer la tension d'une pile"],
+      "prerequisites": ["CT-19"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["pile", "électrochimie"],
+      "detailed_content": {
+        "introduction": "Une pile électrochimique est un dispositif qui convertit l'énergie chimique d'une réaction d'oxydoréduction en énergie électrique.",
+        "key_concepts": [
+          { "name": "Pile", "explanation": "Deux demi-piles reliées pont salin + circuit. Conversion chimique → électrique", "example": "Dispositif" },
+          { "name": "Anode", "explanation": "OXYDATION (perte e⁻). Pôle négatif. ANOx", "example": "Électrode" },
+          { "name": "Cathode", "explanation": "RÉDUCTION (gain e⁻). Pôle positif. CATRed", "example": "Électrode" },
+          { "name": "F.é.m.", "explanation": "E = E°_cathode - E°_anode. Tension maximale pile", "example": "Énergie" }
+        ],
+        "guided_example": {
+          "statement": "Pile Daniell. Identifier anode/cathode. Où oxydation ?",
+          "solution_steps": ["Oxydation : Zn → Zn²⁺+2e⁻", "Anode = Zn (pôle -)", "Cathode = Cu (pôle +)"]
+        },
+        "quick_exercises": [
+          "Pile Ag⁺/Ag et Zn²⁺/Zn. Zn dissous, Ag déposé. Demi-équations, anode/cathode, réaction",
+          "Piles"
+        ],
+        "common_mistakes": [
+          "Confondre anode/cathode",
+          "Inverser oxydation/réduction"
+        ],
+        "summary": {
+          "key_concept": "Pile : énergie chimique → électrique. Anode : oxydation (pôle -)",
+          "key_method": "Cathode : réduction (pôle +). ANOx, CATRed",
+          "next_step": "Électrolyse"
+        }
+      }
+    },
+    {
+      "id": "CT-23",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Électrolyse",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Comprendre le principe de l'électrolyse", "Distinguer électrolyse et pile", "Identifier les réactions aux électrodes", "Connaître des applications"],
+      "prerequisites": ["CT-22"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["électrolyse"],
+      "detailed_content": {
+        "introduction": "L'électrolyse est le processus inverse d'une pile : on impose un courant électrique pour forcer une réaction chimique non spontanée.",
+        "key_concepts": [
+          { "name": "Électrolyse", "explanation": "Tension imposée pour forcer réaction non spontanée. Électrique → chimique", "example": "Principe" },
+          { "name": "Électrodes", "explanation": "Anode (+) : oxydation. Cathode (-) : réduction. Polarités inversées vs pile", "example": "Définitions" },
+          { "name": "Eau", "explanation": "2H₂O → 2H₂ + O₂. Cathode : H₂. Anode : O₂. Non spontané", "example": "Exemple" },
+          { "name": "Applications", "explanation": "Production métaux Al, Cu. Placage. Substances Cl₂, H₂, NaOH. Eau → H₂", "example": "Industrie" }
+        ],
+        "guided_example": {
+          "statement": "Électrolyse CuCl₂. Cu déposé, Cl₂ dégagé. Identifier réactions",
+          "solution_steps": ["Cu : réduction Cu²⁺+2e⁻ → Cu (cathode -)", "Cl₂ : oxydation 2Cl⁻ → Cl₂+2e⁻ (anode +)"]
+        },
+        "quick_exercises": [
+          "Électrolyse acide sulfurique. H₂ cathode, O₂ anode. Demi-équations ? Pourquoi énergie ?",
+          "Électrolyse"
+        ],
+        "common_mistakes": [
+          "Confondre polarités pile/électrolyse",
+          "Oublier réaction forcée"
+        ],
+        "summary": {
+          "key_concept": "Électrolyse : énergie électrique → chimique. Réaction forcée (non spontanée)",
+          "key_method": "Anode (+) : oxydation, Cathode (-) : réduction. Pile ↔ Électrolyse (inverses)",
+          "next_step": "Corrosion"
+        }
+      }
+    },
+    {
+      "id": "CT-24",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Corrosion - Protection des métaux",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Comprendre le mécanisme de la corrosion", "Identifier les facteurs favorisant la corrosion", "Connaître les méthodes de protection", "Expliquer la protection cathodique et sacrificielle"],
+      "prerequisites": ["CT-22"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["corrosion", "protection"],
+      "detailed_content": {
+        "introduction": "La corrosion est la dégradation d'un matériau métallique par réaction chimique avec son environnement.",
+        "key_concepts": [
+          { "name": "Corrosion", "explanation": "Oxydation du métal. Pile de corrosion (anode/cathode surface). Métal perd e⁻", "example": "Mécanisme" },
+          { "name": "Rouille", "explanation": "Fe → Fe²⁺+2e⁻ anode, O₂+2H₂O+4e⁻→4OH⁻ cathode. Poreuse, poursuit", "example": "Fer" },
+          { "name": "Facteurs", "explanation": "Eau, O₂, ions (sels), pH, température, contact autre métal", "example": "Favorisants" },
+          { "name": "Protection", "explanation": "Revêtements (peinture, métaux Zn/Cr/Ni). Anodes sacrificielles (Zn, Mg). Cathodique. Passivation", "example": "Méthodes" }
+        ],
+        "guided_example": {
+          "statement": "Pourquoi fixer blocs zinc sur coques bateaux acier ?",
+          "solution_steps": ["Zn plus réducteur que Fe", "Zn s'oxyde à place de Fe", "Anode sacrificielle"]
+        },
+        "quick_exercises": [
+          "3 méthodes protéger clôture fer de rouille. Expliquer",
+          "Corrosion"
+        ],
+        "common_mistakes": [
+          "Croire rouille protège",
+          "Ne pas comprendre anode sacrificielle"
+        ],
+        "summary": {
+          "key_concept": "Corrosion = oxydation métal. Pile de corrosion : anode (métal) / cathode",
+          "key_method": "Protection : isoler, sacrifier, passiver. Anode sacrificielle : métal plus réducteur",
+          "next_step": "Synthèse finale"
+        }
+      }
+    },
+    {
+      "id": "CT-25",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Synthèse - Équilibres & Dosages",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Synthétiser les notions d'équilibres et dosages", "Choisir la bonne méthode de titrage", "Relier oxydoréduction et électrochimie", "Résoudre des problèmes de synthèse"],
+      "prerequisites": ["CT-14", "CT-19", "CT-22"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "équilibres"],
+      "detailed_content": {
+        "introduction": "Ce chapitre a abordé les équilibres chimiques (acido-basiques, redox) et leurs applications aux dosages et à l'électrochimie.",
+        "key_concepts": [
+          { "name": "Titrages", "explanation": "pH-métrique (saut pH), colorimétrique (indicateur), redox (MnO₄⁻ auto-indicateur), conductimétrique (σ)", "example": "Types" },
+          { "name": "Acido-basiques", "explanation": "Ka, pKa. Tampons pH=pKa+log([base]/[acide]). Henderson-Hasselbalch", "example": "Équilibres" },
+          { "name": "Redox", "explanation": "Oxydation/réduction. Piles (spontanée). Électrolyse (forcée). Corrosion. Protection", "example": "Équilibres" },
+          { "name": "Méthodologie", "explanation": "1) Identifier type, 2) Couples, 3) Réactions, 4) Relations, 5) Coefficients, 6) Vérifier, 7) Interpréter", "example": "Approche" }
+        ],
+        "guided_example": {
+          "statement": "Titre vinaigre CH₃COOH (pKa=4.8) par NaOH 0.5M. V_E=8mL. [CH₃COOH] ? V=4mL pH ? Indicateur (BBT/Phénol) ?",
+          "solution_steps": ["[CH₃COOH]=0.4M", "V/2 pH=pKa=4.8", "Phénolphtaléine"]
+        },
+        "quick_exercises": [
+          "Protéger réservoir acier : peinture vs Mg vs cathodique. Principes, sacrificielle, cathodique",
+          "Problèmes synthèse"
+        ],
+        "common_mistakes": [
+          "Confondre types titrages",
+          "Inverser anode/cathode pile/électrolyse"
+        ],
+        "summary": {
+          "key_concept": "Titrages : pH, colorimétrique, redox, conductimétrique. Tampons : Henderson. Pile vs électrolyse",
+          "key_method": "La chimie : comprendre et appliquer ! 🧪🎉",
+          "next_step": "Fin Chimie Terminale"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

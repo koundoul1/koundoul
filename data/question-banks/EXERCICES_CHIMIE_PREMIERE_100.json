@@ -1,0 +1,1421 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Chimie Première",
+    "level": "Première",
+    "subject": "Chimie",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Structure et transformation de la matière",
+      "Solutions aqueuses",
+      "Synthèse organique"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "CHI1-EX-001",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "L'atome de sodium a Z=11 et A=23. Calculer le nombre de neutrons.",
+      "solution": {
+        "steps": ["N = A - Z", "N = 23 - 11", "N = 12 neutrons"],
+        "final_answer": "12 neutrons"
+      },
+      "hints": ["N = A - Z"],
+      "related_lesson": "CHI1-01"
+    },
+    {
+      "id": "CHI1-EX-002",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Donner la configuration électronique de l'atome de carbone (Z=6).",
+      "solution": {
+        "steps": ["6 électrons à répartir", "K : 2 électrons", "L : 4 électrons", "Configuration : (K)² (L)⁴"],
+        "final_answer": "(K)² (L)⁴"
+      },
+      "hints": ["Couche K : max 2e⁻", "Couche L : max 8e⁻"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-003",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Un ion Cl⁻ a Z=17. Combien d'électrons possède-t-il ?",
+      "solution": {
+        "steps": ["Ion négatif = gain d'électrons", "Cl⁻ : 17 + 1 = 18 électrons"],
+        "final_answer": "18 électrons"
+      },
+      "hints": ["Anion = gain d'e⁻"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-004",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Le carbone-12 et le carbone-14 sont des isotopes. Expliquer la différence.",
+      "solution": {
+        "steps": ["¹²C : 6 protons, 6 neutrons", "¹⁴C : 6 protons, 8 neutrons", "Différence : nombre de neutrons"],
+        "final_answer": "Même Z (6 protons), N différent (6 vs 8 neutrons)"
+      },
+      "hints": ["Isotopes : même Z, A différent"],
+      "related_lesson": "CHI1-02"
+    },
+    {
+      "id": "CHI1-EX-005",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Donner la configuration électronique de l'ion Na⁺ (Z=11).",
+      "solution": {
+        "steps": ["Na : (K)² (L)⁸ (M)¹", "Na⁺ perd 1 e⁻", "Na⁺ : (K)² (L)⁸"],
+        "final_answer": "(K)² (L)⁸"
+      },
+      "hints": ["Cation = perte d'e⁻"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-006",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Combien de liaisons covalentes dans H₂O ?",
+      "solution": {
+        "steps": ["H₂O : 2 liaisons O-H"],
+        "final_answer": "2 liaisons covalentes"
+      },
+      "hints": ["Chaque H forme 1 liaison"],
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-EX-007",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Expliquer pourquoi NaCl est un composé ionique.",
+      "solution": {
+        "steps": ["Na (métal) perd 1 e⁻ → Na⁺", "Cl (non-métal) gagne 1 e⁻ → Cl⁻", "Attraction électrostatique Na⁺-Cl⁻"],
+        "final_answer": "Transfert d'électrons métal → non-métal"
+      },
+      "hints": ["Liaison ionique = transfert e⁻"],
+      "related_lesson": "CHI1-07"
+    },
+    {
+      "id": "CHI1-EX-008",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Combien de doublets liants dans N₂ (liaison triple) ?",
+      "solution": {
+        "steps": ["N≡N : liaison triple", "1 liaison triple = 3 doublets liants"],
+        "final_answer": "3 doublets liants"
+      },
+      "hints": ["Liaison triple = 3 doublets"],
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-EX-009",
+      "chapter": "Réactions chimiques",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Équilibrer : H₂ + O₂ → H₂O",
+      "solution": {
+        "steps": ["2H₂ + O₂ → 2H₂O"],
+        "final_answer": "2H₂ + O₂ → 2H₂O"
+      },
+      "hints": ["4H et 2O de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-010",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Équilibrer : C₃H₈ + O₂ → CO₂ + H₂O",
+      "solution": {
+        "steps": ["C₃H₈ + 5O₂ → 3CO₂ + 4H₂O"],
+        "final_answer": "C₃H₈ + 5O₂ → 3CO₂ + 4H₂O"
+      },
+      "hints": ["3C, 8H, 10O de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-011",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "2 mol de Al réagissent avec 3 mol de O₂. Qui est le réactif limitant si on a 4 mol de Al et 5 mol de O₂ ? (4Al + 3O₂ → 2Al₂O₃)",
+      "solution": {
+        "steps": ["4 mol Al nécessitent : (4×3)/4 = 3 mol O₂", "5 mol O₂ disponibles > 3 mol nécessaires", "Al est limitant"],
+        "final_answer": "Al est le réactif limitant"
+      },
+      "hints": ["Calcule les proportions"],
+      "related_lesson": "CHI1-11"
+    },
+    {
+      "id": "CHI1-EX-012",
+      "chapter": "Solutions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer la concentration molaire d'une solution contenant 0,5 mol dans 250 mL.",
+      "solution": {
+        "steps": ["C = n/V", "V = 250 mL = 0,25 L", "C = 0,5/0,25 = 2 mol/L"],
+        "final_answer": "C = 2 mol/L"
+      },
+      "hints": ["C = n/V", "Convertir mL en L"],
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-EX-013",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la masse de NaCl nécessaire pour préparer 500 mL d'une solution à 0,2 mol/L. (M(NaCl) = 58,5 g/mol)",
+      "solution": {
+        "steps": ["n = C×V = 0,2×0,5 = 0,1 mol", "m = n×M = 0,1×58,5", "m = 5,85 g"],
+        "final_answer": "m = 5,85 g"
+      },
+      "hints": ["n = C×V puis m = n×M"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-014",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Diluer 20 mL d'une solution à 1 mol/L pour obtenir 200 mL. Quelle est la concentration finale ?",
+      "solution": {
+        "steps": ["C₁V₁ = C₂V₂", "1×20 = C₂×200", "C₂ = 20/200 = 0,1 mol/L"],
+        "final_answer": "C₂ = 0,1 mol/L"
+      },
+      "hints": ["C₁V₁ = C₂V₂"],
+      "related_lesson": "CHI1-23"
+    },
+    {
+      "id": "CHI1-EX-015",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la quantité de matière dans 100 mL d'une solution à 0,5 mol/L.",
+      "solution": {
+        "steps": ["n = C×V", "n = 0,5×0,1", "n = 0,05 mol"],
+        "final_answer": "n = 0,05 mol"
+      },
+      "hints": ["n = C×V"],
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-EX-016",
+      "chapter": "Solutions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Une solution a un pH de 3. Est-elle acide, basique ou neutre ?",
+      "solution": {
+        "steps": ["pH < 7 : acide"],
+        "final_answer": "Acide"
+      },
+      "hints": ["pH < 7 = acide"],
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-EX-017",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la masse molaire de H₂SO₄. (H=1, S=32, O=16)",
+      "solution": {
+        "steps": ["M = 2×1 + 32 + 4×16", "M = 2 + 32 + 64", "M = 98 g/mol"],
+        "final_answer": "M = 98 g/mol"
+      },
+      "hints": ["Additionne les masses atomiques"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-018",
+      "chapter": "Chimie organique",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Donner la formule de l'éthane.",
+      "solution": {
+        "steps": ["Alcane à 2 carbones", "CₙH₂ₙ₊₂ avec n=2", "C₂H₆"],
+        "final_answer": "C₂H₆"
+      },
+      "hints": ["Alcanes : CₙH₂ₙ₊₂"],
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-EX-019",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Nommer le composé CH₃-CH₂-CH₂-CH₃.",
+      "solution": {
+        "steps": ["4 atomes de carbone", "Chaîne linéaire", "Alcane : but-", "Butane"],
+        "final_answer": "Butane"
+      },
+      "hints": ["4 C = but-", "Alcane = -ane"],
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-EX-020",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Identifier le groupe fonctionnel dans CH₃-COOH.",
+      "solution": {
+        "steps": ["Groupe -COOH", "Fonction acide carboxylique"],
+        "final_answer": "Acide carboxylique (-COOH)"
+      },
+      "hints": ["-COOH = acide carboxylique"],
+      "related_lesson": "CHI1-34"
+    },
+    {
+      "id": "CHI1-EX-021",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Donner la formule de l'éthanol.",
+      "solution": {
+        "steps": ["Alcool à 2 carbones", "C₂H₅-OH"],
+        "final_answer": "C₂H₅OH"
+      },
+      "hints": ["Éthanol : 2 C + -OH"],
+      "related_lesson": "CHI1-33"
+    },
+    {
+      "id": "CHI1-EX-022",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quelle est la formule brute du propène ?",
+      "solution": {
+        "steps": ["Alcène à 3 carbones", "CₙH₂ₙ avec n=3", "C₃H₆"],
+        "final_answer": "C₃H₆"
+      },
+      "hints": ["Alcènes : CₙH₂ₙ"],
+      "related_lesson": "CHI1-35"
+    },
+    {
+      "id": "CHI1-EX-023",
+      "chapter": "Transformations",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "L'oxydation d'un alcool primaire donne d'abord un...",
+      "solution": {
+        "steps": ["Alcool primaire → aldéhyde (oxydation ménagée)"],
+        "final_answer": "Aldéhyde"
+      },
+      "hints": ["Primaire → aldéhyde"],
+      "related_lesson": "CHI1-42"
+    },
+    {
+      "id": "CHI1-EX-024",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Que produit l'oxydation d'un alcool secondaire ?",
+      "solution": {
+        "steps": ["Alcool secondaire → cétone"],
+        "final_answer": "Cétone"
+      },
+      "hints": ["Secondaire → cétone"],
+      "related_lesson": "CHI1-42"
+    },
+    {
+      "id": "CHI1-EX-025",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Écrire l'équation de l'estérification entre CH₃COOH et CH₃OH.",
+      "solution": {
+        "steps": ["CH₃COOH + CH₃OH ⇌ CH₃COOCH₃ + H₂O"],
+        "final_answer": "CH₃COOH + CH₃OH ⇌ CH₃COOCH₃ + H₂O"
+      },
+      "hints": ["Acide + alcool ⇌ ester + eau"],
+      "related_lesson": "CHI1-45"
+    },
+    {
+      "id": "CHI1-EX-026",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "L'oxygène a Z=8. Donner sa configuration électronique.",
+      "solution": {
+        "steps": ["8 électrons", "K : 2e⁻, L : 6e⁻", "(K)² (L)⁶"],
+        "final_answer": "(K)² (L)⁶"
+      },
+      "hints": ["Total = 8 électrons"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-027",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "L'ion O²⁻ a combien d'électrons ?",
+      "solution": {
+        "steps": ["O : Z=8", "O²⁻ gagne 2 e⁻", "8 + 2 = 10 électrons"],
+        "final_answer": "10 électrons"
+      },
+      "hints": ["Gain de 2 e⁻"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-028",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Combien de doublets liants dans CO₂ (O=C=O) ?",
+      "solution": {
+        "steps": ["2 liaisons doubles", "Chaque liaison double = 2 doublets", "Total : 4 doublets liants"],
+        "final_answer": "4 doublets liants"
+      },
+      "hints": ["Double liaison = 2 doublets"],
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-EX-029",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : Fe + O₂ → Fe₂O₃",
+      "solution": {
+        "steps": ["4Fe + 3O₂ → 2Fe₂O₃"],
+        "final_answer": "4Fe + 3O₂ → 2Fe₂O₃"
+      },
+      "hints": ["4 Fe et 6 O de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-030",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle quantité de matière dans 36 g d'eau ? (M(H₂O) = 18 g/mol)",
+      "solution": {
+        "steps": ["n = m/M", "n = 36/18", "n = 2 mol"],
+        "final_answer": "n = 2 mol"
+      },
+      "hints": ["n = m/M"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-031",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Combien de mL d'une solution à 2 mol/L pour avoir 0,5 mol ?",
+      "solution": {
+        "steps": ["V = n/C", "V = 0,5/2", "V = 0,25 L = 250 mL"],
+        "final_answer": "V = 250 mL"
+      },
+      "hints": ["V = n/C"],
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-EX-032",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Donner la formule du propane.",
+      "solution": {
+        "steps": ["Alcane à 3 C", "C₃H₂ₙ₊₂ = C₃H₈"],
+        "final_answer": "C₃H₈"
+      },
+      "hints": ["n=3 dans CₙH₂ₙ₊₂"],
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-EX-033",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quel groupe fonctionnel dans CH₃-CHO ?",
+      "solution": {
+        "steps": ["Groupe -CHO", "Fonction aldéhyde"],
+        "final_answer": "Aldéhyde"
+      },
+      "hints": ["-CHO = aldéhyde"],
+      "related_lesson": "CHI1-36"
+    },
+    {
+      "id": "CHI1-EX-034",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Compléter : Acide + Alcool ⇌ ... + Eau",
+      "solution": {
+        "steps": ["Réaction d'estérification", "Produit : ester"],
+        "final_answer": "Ester"
+      },
+      "hints": ["Estérification"],
+      "related_lesson": "CHI1-45"
+    },
+    {
+      "id": "CHI1-EX-035",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Combien d'électrons dans un atome neutre de fluor (Z=9) ?",
+      "solution": {
+        "steps": ["Atome neutre : électrons = protons", "Z=9 donc 9 électrons"],
+        "final_answer": "9 électrons"
+      },
+      "hints": ["Neutre : e⁻ = Z"],
+      "related_lesson": "CHI1-01"
+    },
+    {
+      "id": "CHI1-EX-036",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Le magnésium (Z=12, A=24) perd 2 électrons. Configuration de Mg²⁺ ?",
+      "solution": {
+        "steps": ["Mg : (K)² (L)⁸ (M)²", "Perd 2 e⁻ de M", "Mg²⁺ : (K)² (L)⁸"],
+        "final_answer": "(K)² (L)⁸"
+      },
+      "hints": ["Perd couche externe"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-037",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Combien de liaisons dans NH₃ ?",
+      "solution": {
+        "steps": ["3 liaisons N-H"],
+        "final_answer": "3 liaisons covalentes"
+      },
+      "hints": ["3 atomes H"],
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-EX-038",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : N₂ + H₂ → NH₃",
+      "solution": {
+        "steps": ["N₂ + 3H₂ → 2NH₃"],
+        "final_answer": "N₂ + 3H₂ → 2NH₃"
+      },
+      "hints": ["2N et 6H de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-039",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Une solution a un pH de 12. Est-elle acide ou basique ?",
+      "solution": {
+        "steps": ["pH > 7 : basique"],
+        "final_answer": "Basique"
+      },
+      "hints": ["pH > 7 = base"],
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-EX-040",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la masse molaire de CaCO₃. (Ca=40, C=12, O=16)",
+      "solution": {
+        "steps": ["M = 40 + 12 + 3×16", "M = 40 + 12 + 48", "M = 100 g/mol"],
+        "final_answer": "M = 100 g/mol"
+      },
+      "hints": ["Somme des masses atomiques"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-041",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Nommer CH₃OH.",
+      "solution": {
+        "steps": ["1 carbone + -OH", "Méthanol"],
+        "final_answer": "Méthanol"
+      },
+      "hints": ["Méth- = 1C, -anol = alcool"],
+      "related_lesson": "CHI1-33"
+    },
+    {
+      "id": "CHI1-EX-042",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quelle est la formule de l'éthène ?",
+      "solution": {
+        "steps": ["Alcène à 2C", "C₂H₄"],
+        "final_answer": "C₂H₄"
+      },
+      "hints": ["Alcènes : CₙH₂ₙ"],
+      "related_lesson": "CHI1-35"
+    },
+    {
+      "id": "CHI1-EX-043",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Que produit la combustion complète de CH₄ ?",
+      "solution": {
+        "steps": ["CH₄ + 2O₂ → CO₂ + 2H₂O"],
+        "final_answer": "CO₂ et H₂O"
+      },
+      "hints": ["Combustion complète"],
+      "related_lesson": "CHI1-43"
+    },
+    {
+      "id": "CHI1-EX-044",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "L'azote a Z=7. Combien d'électrons de valence ?",
+      "solution": {
+        "steps": ["N : (K)² (L)⁵", "5 électrons de valence"],
+        "final_answer": "5 électrons de valence"
+      },
+      "hints": ["Couche externe = valence"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-045",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Le chlore (Z=17) forme l'ion Cl⁻. Configuration de Cl⁻ ?",
+      "solution": {
+        "steps": ["Cl : (K)² (L)⁸ (M)⁷", "Gagne 1 e⁻", "Cl⁻ : (K)² (L)⁸ (M)⁸"],
+        "final_answer": "(K)² (L)⁸ (M)⁸"
+      },
+      "hints": ["Gain de 1 e⁻"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-046",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quel type de liaison dans MgO ?",
+      "solution": {
+        "steps": ["Mg (métal) + O (non-métal)", "Liaison ionique"],
+        "final_answer": "Liaison ionique"
+      },
+      "hints": ["Métal + non-métal = ionique"],
+      "related_lesson": "CHI1-07"
+    },
+    {
+      "id": "CHI1-EX-047",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : Al + HCl → AlCl₃ + H₂",
+      "solution": {
+        "steps": ["2Al + 6HCl → 2AlCl₃ + 3H₂"],
+        "final_answer": "2Al + 6HCl → 2AlCl₃ + 3H₂"
+      },
+      "hints": ["2Al, 6H, 6Cl de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-048",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle masse de glucose (M=180 g/mol) dans 0,2 mol ?",
+      "solution": {
+        "steps": ["m = n×M", "m = 0,2×180", "m = 36 g"],
+        "final_answer": "m = 36 g"
+      },
+      "hints": ["m = n×M"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-049",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Préparer 1 L de solution à 0,5 mol/L de NaOH (M=40 g/mol). Quelle masse ?",
+      "solution": {
+        "steps": ["n = C×V = 0,5×1 = 0,5 mol", "m = n×M = 0,5×40", "m = 20 g"],
+        "final_answer": "m = 20 g"
+      },
+      "hints": ["n = C×V puis m = n×M"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-050",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Formule brute du pentane ?",
+      "solution": {
+        "steps": ["Alcane à 5C", "C₅H₁₂"],
+        "final_answer": "C₅H₁₂"
+      },
+      "hints": ["CₙH₂ₙ₊₂ avec n=5"],
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-EX-051",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Identifier : CH₃-CO-CH₃",
+      "solution": {
+        "steps": ["Groupe -CO- entre 2 carbones", "Cétone (propanone/acétone)"],
+        "final_answer": "Cétone"
+      },
+      "hints": ["-CO- = cétone"],
+      "related_lesson": "CHI1-36"
+    },
+    {
+      "id": "CHI1-EX-052",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Qu'est-ce qu'un catalyseur ?",
+      "solution": {
+        "steps": ["Accélère la réaction", "N'est pas consommé"],
+        "final_answer": "Espèce qui accélère sans être consommée"
+      },
+      "hints": ["Pas consommé"],
+      "related_lesson": "CHI1-44"
+    },
+    {
+      "id": "CHI1-EX-053",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Atome de lithium (Z=3). Configuration ?",
+      "solution": {
+        "steps": ["3 électrons", "(K)² (L)¹"],
+        "final_answer": "(K)² (L)¹"
+      },
+      "hints": ["3 e⁻ à répartir"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-054",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "L'aluminium (Z=13) forme Al³⁺. Combien d'électrons dans Al³⁺ ?",
+      "solution": {
+        "steps": ["Al : 13 électrons", "Al³⁺ perd 3 e⁻", "13 - 3 = 10 électrons"],
+        "final_answer": "10 électrons"
+      },
+      "hints": ["Perte de 3 e⁻"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-055",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Type de liaison dans Cl₂ ?",
+      "solution": {
+        "steps": ["2 non-métaux", "Partage d'électrons", "Liaison covalente"],
+        "final_answer": "Liaison covalente"
+      },
+      "hints": ["Non-métal + non-métal"],
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-EX-056",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : C₂H₆ + O₂ → CO₂ + H₂O",
+      "solution": {
+        "steps": ["2C₂H₆ + 7O₂ → 4CO₂ + 6H₂O"],
+        "final_answer": "2C₂H₆ + 7O₂ → 4CO₂ + 6H₂O"
+      },
+      "hints": ["4C, 12H, 14O de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-057",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Concentration après dilution : 50 mL à 2 mol/L → 200 mL ?",
+      "solution": {
+        "steps": ["C₁V₁ = C₂V₂", "2×50 = C₂×200", "C₂ = 100/200 = 0,5 mol/L"],
+        "final_answer": "C₂ = 0,5 mol/L"
+      },
+      "hints": ["C₁V₁ = C₂V₂"],
+      "related_lesson": "CHI1-23"
+    },
+    {
+      "id": "CHI1-EX-058",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Masse molaire de C₆H₁₂O₆ ? (C=12, H=1, O=16)",
+      "solution": {
+        "steps": ["M = 6×12 + 12×1 + 6×16", "M = 72 + 12 + 96", "M = 180 g/mol"],
+        "final_answer": "M = 180 g/mol"
+      },
+      "hints": ["Somme des atomes"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-059",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Formule du méthane ?",
+      "solution": {
+        "steps": ["Alcane à 1C", "CH₄"],
+        "final_answer": "CH₄"
+      },
+      "hints": ["Plus simple alcane"],
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-EX-060",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Groupe fonctionnel dans HCOOH ?",
+      "solution": {
+        "steps": ["Groupe -COOH", "Acide carboxylique (acide méthanoïque)"],
+        "final_answer": "Acide carboxylique"
+      },
+      "hints": ["-COOH"],
+      "related_lesson": "CHI1-34"
+    },
+    {
+      "id": "CHI1-EX-061",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Réaction entre alcool tertiaire et oxydant ?",
+      "solution": {
+        "steps": ["Alcool tertiaire ne s'oxyde pas"],
+        "final_answer": "Pas de réaction"
+      },
+      "hints": ["Tertiaire = inoxydable"],
+      "related_lesson": "CHI1-42"
+    },
+    {
+      "id": "CHI1-EX-062",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Combien de protons dans ¹⁶O ?",
+      "solution": {
+        "steps": ["Oxygène : Z=8", "8 protons"],
+        "final_answer": "8 protons"
+      },
+      "hints": ["Z = nombre de protons"],
+      "related_lesson": "CHI1-01"
+    },
+    {
+      "id": "CHI1-EX-063",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Le fer (Z=26) forme Fe²⁺. Configuration de Fe²⁺ ?",
+      "solution": {
+        "steps": ["Fe : (K)² (L)⁸ (M)¹⁴ (N)²", "Perd 2 e⁻ de N", "Fe²⁺ : (K)² (L)⁸ (M)¹⁴"],
+        "final_answer": "(K)² (L)⁸ (M)¹⁴"
+      },
+      "hints": ["Perd couche N"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-064",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Combien de liaisons dans CH₄ ?",
+      "solution": {
+        "steps": ["4 liaisons C-H"],
+        "final_answer": "4 liaisons covalentes"
+      },
+      "hints": ["4 atomes H"],
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-EX-065",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : Ca + O₂ → CaO",
+      "solution": {
+        "steps": ["2Ca + O₂ → 2CaO"],
+        "final_answer": "2Ca + O₂ → 2CaO"
+      },
+      "hints": ["2Ca et 2O de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-066",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "pH d'une solution neutre ?",
+      "solution": {
+        "steps": ["pH = 7"],
+        "final_answer": "pH = 7"
+      },
+      "hints": ["Neutre = 7"],
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-EX-067",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quelle masse de KCl (M=74,5 g/mol) pour 0,3 mol ?",
+      "solution": {
+        "steps": ["m = n×M", "m = 0,3×74,5", "m = 22,35 g"],
+        "final_answer": "m = 22,35 g"
+      },
+      "hints": ["m = n×M"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-068",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Formule brute du butène ?",
+      "solution": {
+        "steps": ["Alcène à 4C", "C₄H₈"],
+        "final_answer": "C₄H₈"
+      },
+      "hints": ["CₙH₂ₙ avec n=4"],
+      "related_lesson": "CHI1-35"
+    },
+    {
+      "id": "CHI1-EX-069",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Nommer CH₃-CH₂-COOH.",
+      "solution": {
+        "steps": ["3 carbones + -COOH", "Acide propanoïque"],
+        "final_answer": "Acide propanoïque"
+      },
+      "hints": ["Prop- = 3C, -oïque = acide"],
+      "related_lesson": "CHI1-34"
+    },
+    {
+      "id": "CHI1-EX-070",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Produit de : Ester + Base → ?",
+      "solution": {
+        "steps": ["Saponification", "Ion carboxylate + alcool"],
+        "final_answer": "Savon (carboxylate) + alcool"
+      },
+      "hints": ["Saponification"],
+      "related_lesson": "CHI1-46"
+    },
+    {
+      "id": "CHI1-EX-071",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Hélium (Z=2). Configuration ?",
+      "solution": {
+        "steps": ["2 électrons", "(K)²"],
+        "final_answer": "(K)²"
+      },
+      "hints": ["2 e⁻ sur K"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-072",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "L'ion S²⁻ (Z=16) a combien d'électrons ?",
+      "solution": {
+        "steps": ["S : 16 électrons", "S²⁻ gagne 2 e⁻", "16 + 2 = 18 électrons"],
+        "final_answer": "18 électrons"
+      },
+      "hints": ["Gain de 2 e⁻"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-073",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Type de liaison dans KBr ?",
+      "solution": {
+        "steps": ["K (métal) + Br (non-métal)", "Liaison ionique"],
+        "final_answer": "Liaison ionique"
+      },
+      "hints": ["Métal + non-métal"],
+      "related_lesson": "CHI1-07"
+    },
+    {
+      "id": "CHI1-EX-074",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : Mg + HCl → MgCl₂ + H₂",
+      "solution": {
+        "steps": ["Mg + 2HCl → MgCl₂ + H₂"],
+        "final_answer": "Mg + 2HCl → MgCl₂ + H₂"
+      },
+      "hints": ["1Mg, 2H, 2Cl de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-075",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quantité de matière dans 150 mL à 0,4 mol/L ?",
+      "solution": {
+        "steps": ["n = C×V", "n = 0,4×0,15", "n = 0,06 mol"],
+        "final_answer": "n = 0,06 mol"
+      },
+      "hints": ["n = C×V"],
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-EX-076",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Masse molaire de Al₂O₃ ? (Al=27, O=16)",
+      "solution": {
+        "steps": ["M = 2×27 + 3×16", "M = 54 + 48", "M = 102 g/mol"],
+        "final_answer": "M = 102 g/mol"
+      },
+      "hints": ["2 Al + 3 O"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-077",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Formule de l'hexane ?",
+      "solution": {
+        "steps": ["Alcane à 6C", "C₆H₁₄"],
+        "final_answer": "C₆H₁₄"
+      },
+      "hints": ["CₙH₂ₙ₊₂ avec n=6"],
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-EX-078",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Identifier : CH₃-CH₂-CHO",
+      "solution": {
+        "steps": ["Groupe -CHO terminal", "Aldéhyde (propanal)"],
+        "final_answer": "Aldéhyde"
+      },
+      "hints": ["-CHO = aldéhyde"],
+      "related_lesson": "CHI1-36"
+    },
+    {
+      "id": "CHI1-EX-079",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Test de Fehling positif indique ?",
+      "solution": {
+        "steps": ["Précipité rouge brique", "Présence d'aldéhyde"],
+        "final_answer": "Aldéhyde présent"
+      },
+      "hints": ["Rouge brique = aldéhyde"],
+      "related_lesson": "CHI1-47"
+    },
+    {
+      "id": "CHI1-EX-080",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Bore (Z=5). Configuration ?",
+      "solution": {
+        "steps": ["5 électrons", "(K)² (L)³"],
+        "final_answer": "(K)² (L)³"
+      },
+      "hints": ["2 sur K, 3 sur L"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-081",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calcium (Z=20) forme Ca²⁺. Configuration de Ca²⁺ ?",
+      "solution": {
+        "steps": ["Ca : (K)² (L)⁸ (M)⁸ (N)²", "Perd 2 e⁻", "Ca²⁺ : (K)² (L)⁸ (M)⁸"],
+        "final_answer": "(K)² (L)⁸ (M)⁸"
+      },
+      "hints": ["Perd couche N"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-082",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Combien de liaisons dans O₂ ?",
+      "solution": {
+        "steps": ["O=O : liaison double", "2 doublets liants"],
+        "final_answer": "1 liaison double (2 doublets)"
+      },
+      "hints": ["O=O"],
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-EX-083",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : C₄H₁₀ + O₂ → CO₂ + H₂O",
+      "solution": {
+        "steps": ["2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O"],
+        "final_answer": "2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O"
+      },
+      "hints": ["8C, 20H, 26O de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-084",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Une solution a un pH de 5. Est-elle plus acide que pH=3 ?",
+      "solution": {
+        "steps": ["pH plus bas = plus acide", "pH=3 < pH=5", "pH=3 plus acide"],
+        "final_answer": "Non, pH=3 est plus acide"
+      },
+      "hints": ["pH bas = très acide"],
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-EX-085",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Combien de moles dans 98 g de H₂SO₄ ? (M=98 g/mol)",
+      "solution": {
+        "steps": ["n = m/M", "n = 98/98", "n = 1 mol"],
+        "final_answer": "n = 1 mol"
+      },
+      "hints": ["n = m/M"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-086",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Formule du propène ?",
+      "solution": {
+        "steps": ["Alcène à 3C", "C₃H₆"],
+        "final_answer": "C₃H₆"
+      },
+      "hints": ["CₙH₂ₙ avec n=3"],
+      "related_lesson": "CHI1-35"
+    },
+    {
+      "id": "CHI1-EX-087",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Nommer CH₃-CH₂-CH₂-OH.",
+      "solution": {
+        "steps": ["3 carbones + -OH", "Propanol"],
+        "final_answer": "Propan-1-ol"
+      },
+      "hints": ["Prop- = 3C, -anol = alcool"],
+      "related_lesson": "CHI1-33"
+    },
+    {
+      "id": "CHI1-EX-088",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Oxydation d'un aldéhyde donne ?",
+      "solution": {
+        "steps": ["Aldéhyde → Acide carboxylique"],
+        "final_answer": "Acide carboxylique"
+      },
+      "hints": ["Oxydation poussée"],
+      "related_lesson": "CHI1-42"
+    },
+    {
+      "id": "CHI1-EX-089",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Néon (Z=10). Configuration ?",
+      "solution": {
+        "steps": ["10 électrons", "(K)² (L)⁸"],
+        "final_answer": "(K)² (L)⁸"
+      },
+      "hints": ["Couche L complète"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-090",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "L'ion N³⁻ (Z=7) a combien d'électrons ?",
+      "solution": {
+        "steps": ["N : 7 électrons", "N³⁻ gagne 3 e⁻", "7 + 3 = 10 électrons"],
+        "final_answer": "10 électrons"
+      },
+      "hints": ["Gain de 3 e⁻"],
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-EX-091",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Type de liaison dans CaCl₂ ?",
+      "solution": {
+        "steps": ["Ca (métal) + Cl (non-métal)", "Liaison ionique"],
+        "final_answer": "Liaison ionique"
+      },
+      "hints": ["Métal + non-métal"],
+      "related_lesson": "CHI1-07"
+    },
+    {
+      "id": "CHI1-EX-092",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équilibrer : NH₃ + O₂ → NO + H₂O",
+      "solution": {
+        "steps": ["4NH₃ + 5O₂ → 4NO + 6H₂O"],
+        "final_answer": "4NH₃ + 5O₂ → 4NO + 6H₂O"
+      },
+      "hints": ["4N, 12H, 10O de chaque côté"],
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-EX-093",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Volume pour avoir 0,8 mol dans une solution à 2 mol/L ?",
+      "solution": {
+        "steps": ["V = n/C", "V = 0,8/2", "V = 0,4 L = 400 mL"],
+        "final_answer": "V = 400 mL"
+      },
+      "hints": ["V = n/C"],
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-EX-094",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Masse molaire de Fe₂O₃ ? (Fe=56, O=16)",
+      "solution": {
+        "steps": ["M = 2×56 + 3×16", "M = 112 + 48", "M = 160 g/mol"],
+        "final_answer": "M = 160 g/mol"
+      },
+      "hints": ["2 Fe + 3 O"],
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-EX-095",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Formule de l'octane ?",
+      "solution": {
+        "steps": ["Alcane à 8C", "C₈H₁₈"],
+        "final_answer": "C₈H₁₈"
+      },
+      "hints": ["CₙH₂ₙ₊₂ avec n=8"],
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-EX-096",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Identifier : CH₃-CH₂-CO-CH₃",
+      "solution": {
+        "steps": ["Groupe -CO- entre carbones", "Cétone (butanone)"],
+        "final_answer": "Cétone"
+      },
+      "hints": ["-CO- = cétone"],
+      "related_lesson": "CHI1-36"
+    },
+    {
+      "id": "CHI1-EX-097",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déshydratation d'un alcool produit ?",
+      "solution": {
+        "steps": ["Alcool - H₂O → Alcène"],
+        "final_answer": "Alcène"
+      },
+      "hints": ["Perte d'eau"],
+      "related_lesson": "CHI1-51"
+    },
+    {
+      "id": "CHI1-EX-098",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Argon (Z=18). Configuration ?",
+      "solution": {
+        "steps": ["18 électrons", "(K)² (L)⁸ (M)⁸"],
+        "final_answer": "(K)² (L)⁸ (M)⁸"
+      },
+      "hints": ["Couche M complète"],
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-EX-099",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dans une réaction redox, l'oxydant...",
+      "solution": {
+        "steps": ["Oxydant capte des électrons", "Se réduit lui-même"],
+        "final_answer": "Capte des e⁻ et se réduit"
+      },
+      "hints": ["Oxydant = accepteur d'e⁻"],
+      "related_lesson": "CHI1-41"
+    },
+    {
+      "id": "CHI1-EX-100",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dans une réaction redox, le réducteur...",
+      "solution": {
+        "steps": ["Réducteur cède des électrons", "S'oxyde lui-même"],
+        "final_answer": "Cède des e⁻ et s'oxyde"
+      },
+      "hints": ["Réducteur = donneur d'e⁻"],
+      "related_lesson": "CHI1-41"
+    }
+  ]
+}

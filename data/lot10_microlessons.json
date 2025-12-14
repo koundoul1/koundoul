@@ -1,0 +1,244 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-61 à M1-70",
+    "chapters": ["Probabilités"],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Chapitre complet Probabilités (M1-61 à M1-70)"
+  },
+  "lessons": [
+    {
+      "id": "M1-61",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Probabilités conditionnelles - Définition",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Définir P(A|B) = P(A∩B) / P(B)", "Comprendre le conditionnement", "Calculer des probabilités conditionnelles"],
+      "prerequisites": ["Probabilités de base", "Événements", "Intersection"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["conditionnelle", "probabilité", "P(A|B)"],
+      "detailed_content": {
+        "introduction": "La probabilité conditionnelle mesure la probabilité de A sachant que B est réalisé.",
+        "method_step_by_step": ["Vérifier P(B)>0", "Appliquer P(A|B)=P(A∩B)/P(B)", "Traduire le contexte en événements", "Simplifier et calculer"],
+        "guided_example": {"statement": "On tire une carte : A='rouge', B='figure'. Calculer P(A|B).", "solution_steps": ["P(B)=12/52", "P(A∩B)=6/52", "P(A|B)=(6/52)/(12/52)=1/2"]},
+        "quick_exercises": ["Dé avec A={pair}, B={≥4}: P(A|B)?", "Sac: conditionner sur 'prise bleue'"],
+        "common_mistakes": ["Oublier P(B)>0", "Confondre P(A|B) et P(B|A)"],
+        "summary": {"key_concept": "P(A|B)=P(A∩B)/P(B)", "key_method": "Lister cas favorables sous la condition"}
+      }
+    },
+    {
+      "id": "M1-62",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Arbres pondérés",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Construire un arbre", "Utiliser les chemins pour P(A∩B)", "Interpréter l'arbre"],
+      "prerequisites": ["Probabilités conditionnelles", "Produit"],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["arbre", "chemin", "pondéré"],
+      "detailed_content": {
+        "introduction": "Les arbres pondérés structurent des expériences à étapes.",
+        "method_step_by_step": ["Lister étapes et issues", "Affecter les probabilités conditionnelles", "P(chemin)=produit des branches", "Additionner les chemins voulus"],
+        "guided_example": {"statement": "Deux tirages successifs sans remise : calculer P(2 rouges).", "solution_steps": ["P(R1)=r/N", "P(R2|R1)=(r-1)/(N-1)", "P= r/N × (r-1)/(N-1)"]},
+        "quick_exercises": ["Pile/Face biaisée puis urne", "Arbre avec conditionnement inversé"],
+        "common_mistakes": ["Additionner au lieu de multiplier sur un chemin", "Oublier la mise à jour sans remise"],
+        "summary": {"key_concept": "Chemin = produit; événement = somme de chemins"}
+      }
+    },
+    {
+      "id": "M1-63",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Formule des probabilités totales",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Utiliser une partition de l'univers", "P(A)=Σ P(A|B_i)P(B_i)", "Résoudre des problèmes complexes"],
+      "prerequisites": ["Conditionnelles", "Arbres", "Partition"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["totales", "partition", "somme"],
+      "detailed_content": {
+        "introduction": "Décomposer A selon une partition (B_i) de l'univers.",
+        "method_step_by_step": ["Choisir partition pertinente", "Écrire P(A)=Σ P(A|B_i)P(B_i)", "Calculer chaque terme", "Additionner"],
+        "guided_example": {"statement": "Test médical: P(M)=0.01, sensibilité 0.95, spécificité 0.9. P(test +)?", "solution_steps": ["B1=M, B2=\u00AFM", "P(+)=0.95·0.01 + 0.1·0.99 = 0.1085"]},
+        "quick_exercises": ["Deux filiales, défauts différents", "Pluie/soleil et retards"],
+        "common_mistakes": ["Oublier un élément de la partition", "Doubler des cas"],
+        "summary": {"key_concept": "P(A)=Σ P(A|B_i)P(B_i)", "key_method": "Partitionner puis sommer"}
+      }
+    },
+    {
+      "id": "M1-64",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Indépendance de deux événements",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Définir P(A∩B)=P(A)P(B)", "Ne pas confondre avec incompatibilité", "Tester l'indépendance"],
+      "prerequisites": ["Conditionnelles", "Événements"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["indépendance", "produit"],
+      "detailed_content": {
+        "introduction": "Indépendance: la réalisation de B n'influence pas A.",
+        "method_step_by_step": ["Calculer P(A)", "Calculer P(B)", "Calculer P(A∩B)", "Comparer au produit"],
+        "guided_example": {"statement": "Deux lancers d'un dé équilibré. A={pair au 1er}, B={>4 au 2e}.", "solution_steps": ["P(A)=1/2", "P(B)=1/3", "P(A∩B)=1/6", "Produit=1/6 → indépendants"]},
+        "quick_exercises": ["Tirages sans remise: indépendance?", "Pile/Face biaisée, événements"],
+        "common_mistakes": ["Confondre avec A∩B=∅", "Tester sur des fréquences trop petites"],
+        "summary": {"key_concept": "Indépendance ⇔ P(A∩B)=P(A)P(B)", "key_method": "Comparer produit et intersection"}
+      }
+    },
+    {
+      "id": "M1-65",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Variables aléatoires - Définition",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Définir X: \u03A9→\u211D", "Lister les valeurs possibles", "Calculer P(X=k)"],
+      "prerequisites": ["Probabilités", "Fonctions"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["variable aléatoire", "définition"],
+      "detailed_content": {
+        "introduction": "Une variable aléatoire associe un nombre réel à chaque issue.",
+        "method_step_by_step": ["Définir l'expérience et l'univers", "Définir X", "Construire la loi: P(X=xi)", "Vérifier somme=1"],
+        "guided_example": {"statement": "Deux lancers de dé, X=nombre de 6 obtenus.", "solution_steps": ["Valeurs: 0,1,2", "P(0)=25/36, P(1)=10/36, P(2)=1/36"]},
+        "quick_exercises": ["X=somme de deux dés", "X=indicateur d'un événement"],
+        "common_mistakes": ["Oublier des issues", "Probabilités qui ne somment pas à 1"],
+        "summary": {"key_concept": "X: \u03A9→\u211D, loi: P(X=xi)", "key_method": "Lister et sommer"}
+      }
+    },
+    {
+      "id": "M1-66",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Loi de probabilité d'une variable aléatoire",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Tableau de loi", "Σ P(X=xi)=1", "Représentation"],
+      "prerequisites": ["Variables aléatoires", "Probabilités"],
+      "content_types": ["video", "table", "quiz", "exercises"],
+      "tags": ["loi", "tableau", "distribution"],
+      "detailed_content": {
+        "introduction": "La loi de X résume toutes les probabilités des valeurs possibles.",
+        "method_step_by_step": ["Lister xi", "Calculer P(X=xi)", "Vérifier somme=1", "Représenter en diagramme"],
+        "guided_example": {"statement": "Lancer de pièce 3 fois, X=nb de piles.", "solution_steps": ["xi=0..3", "P= C(3,k) 2^{-3}", "Tableau et barres"]},
+        "quick_exercises": ["Construire la loi de X=somme de deux dés", "Comparer deux lois"],
+        "common_mistakes": ["Oublier une valeur xi", "Erreurs de calcul combinatoire"],
+        "summary": {"key_concept": "La loi est une distribution discrète", "key_method": "Tableau complet + vérifications"}
+      }
+    },
+    {
+      "id": "M1-67",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Espérance d'une variable aléatoire",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["E(X)=Σ xi·P(X=xi)", "Interprétation moyenne", "Propriétés"],
+      "prerequisites": ["Loi de probabilité", "Somme"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["espérance", "moyenne"],
+      "detailed_content": {
+        "introduction": "L'espérance est la moyenne théorique des valeurs de X.",
+        "method_step_by_step": ["Construire la loi", "Multiplier xi par P(X=xi)", "Additionner", "Interpréter"],
+        "guided_example": {"statement": "Jeu: gain 2€ avec p=0.3, sinon 0€.", "solution_steps": ["E(X)=2·0.3+0·0.7=0.6€", "Jeu défavorable si mise>0.6€"]},
+        "quick_exercises": ["Espérance d'un dé équilibré", "Espérance d'une loi binaire"],
+        "common_mistakes": ["Utiliser fréquences au lieu de probabilités", "Oublier des termes"],
+        "summary": {"key_concept": "E(X)=Σ xi·P(X=xi)", "key_method": "Moyenne pondérée"}
+      }
+    },
+    {
+      "id": "M1-68",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Variance et écart-type",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["V(X)=E(X^2)-[E(X)]^2", "σ(X)=√V(X)", "Interprétation dispersion"],
+      "prerequisites": ["Espérance", "Loi"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["variance", "écart-type", "dispersion"],
+      "detailed_content": {
+        "introduction": "La variance mesure la dispersion autour de l'espérance.",
+        "method_step_by_step": ["Calculer E(X)", "Calculer E(X^2)", "Var=E(X^2)-[E(X)]^2", "σ=√Var"],
+        "guided_example": {"statement": "X prend 0 avec 0.6, 2 avec 0.4.", "solution_steps": ["E(X)=0·0.6+2·0.4=0.8", "E(X^2)=0+4·0.4=1.6", "Var=1.6-0.64=0.96", "σ≈0.98"]},
+        "quick_exercises": ["Var d'un dé", "Comparer deux dispersions"],
+        "common_mistakes": ["Inverser E(X^2) et [E(X)]^2", "Oublier racine pour σ"],
+        "summary": {"key_concept": "Var=E(X^2)-[E(X)]^2", "key_method": "Deux calculs d'espérance"}
+      }
+    },
+    {
+      "id": "M1-69",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Loi de Bernoulli et schéma de Bernoulli",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Épreuve succès/échec", "E(X)=p, V(X)=p(1-p)", "Répétition indépendante"],
+      "prerequisites": ["Variables aléatoires", "Indépendance"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Bernoulli", "épreuve"],
+      "detailed_content": {
+        "introduction": "Une épreuve de Bernoulli a deux issues: succès (p) ou échec (1-p).",
+        "method_step_by_step": ["Définir succès/échec", "Associer X∈{0,1}", "E(X)=p, Var=p(1-p)", "Répéter indépendamment"],
+        "guided_example": {"statement": "Lancer de pièce biaisée p=0.6 pour pile.", "solution_steps": ["X=1 si pile", "E(X)=0.6", "Var=0.24"]},
+        "quick_exercises": ["Définir X pour un contrôle qualité", "Estimer p par fréquence"] ,
+        "common_mistakes": ["Confondre p et 1-p", "Supposer indépendance sans justification"],
+        "summary": {"key_concept": "Bernoulli: X∈{0,1}, E=p, V=p(1-p)", "key_method": "Modéliser l'épreuve"}
+      }
+    },
+    {
+      "id": "M1-70",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Probabilités",
+      "title": "Loi binomiale - Introduction",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["X~B(n,p)", "P(X=k)=C(n,k)p^k(1-p)^{n-k}", "E=np, V=np(1-p)"],
+      "prerequisites": ["Bernoulli", "Coefficients binomiaux"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["binomiale", "coefficients"],
+      "detailed_content": {
+        "introduction": "Répétition de n épreuves de Bernoulli indépendantes de paramètre p.",
+        "method_step_by_step": ["Identifier n et p", "Formule P(X=k)=C(n,k)p^k(1-p)^{n-k}", "E=np, V=np(1-p)", "Utiliser tableur/calculatrice"],
+        "guided_example": {"statement": "X~B(5,0.4). Calculer P(X=2).", "solution_steps": ["C(5,2)=10", "P=10·0.4^2·0.6^3≈0.3456"]},
+        "quick_exercises": ["P(X≥3) pour B(6,0.3)", "E et σ pour B(10,0.2)"],
+        "common_mistakes": ["Oublier les coefficients C(n,k)", "Arrondis prématurés"],
+        "summary": {"key_concept": "Binomiale: somme de Bernoulli", "key_method": "Combinaison + puissances"}
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

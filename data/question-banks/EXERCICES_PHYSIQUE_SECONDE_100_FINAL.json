@@ -1,0 +1,1422 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Physique Seconde COMPLET",
+    "level": "Seconde",
+    "subject": "Physique",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Cinématique & Mouvement",
+      "Forces & Interactions",
+      "Énergie",
+      "Ondes & Signaux"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "P2-EX-001",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Une voiture parcourt 150 km en 2 heures. Calculer sa vitesse moyenne.",
+      "solution": {
+        "steps": ["v = d/t", "v = 150/2", "v = 75 km/h"],
+        "final_answer": "v = 75 km/h"
+      },
+      "hints": ["v = distance/temps"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-002",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 90 km/h en m/s.",
+      "solution": {
+        "steps": ["90 km/h = 90/3,6", "= 25 m/s"],
+        "final_answer": "25 m/s"
+      },
+      "hints": ["Diviser par 3,6"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-003",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Un mobile parcourt 300 m en 15 secondes. Calculer sa vitesse.",
+      "solution": {
+        "steps": ["v = d/t", "v = 300/15", "v = 20 m/s"],
+        "final_answer": "v = 20 m/s"
+      },
+      "hints": ["v = d/t"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-004",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un mobile part du repos et atteint 20 m/s en 5 secondes. Calculer son accélération.",
+      "solution": {
+        "steps": ["a = Δv/Δt", "a = (20-0)/5", "a = 4 m/s²"],
+        "final_answer": "a = 4 m/s²"
+      },
+      "hints": ["a = (v-v₀)/t"],
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-EX-005",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un train roule à 120 km/h pendant 2h30. Quelle distance parcourt-il ?",
+      "solution": {
+        "steps": ["t = 2,5 h", "d = v×t", "d = 120×2,5 = 300 km"],
+        "final_answer": "d = 300 km"
+      },
+      "hints": ["d = v×t", "Convertir 30 min en 0,5 h"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-006",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 25 m/s en km/h.",
+      "solution": {
+        "steps": ["25 m/s = 25×3,6", "= 90 km/h"],
+        "final_answer": "90 km/h"
+      },
+      "hints": ["Multiplier par 3,6"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-007",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un objet en chute libre. Quelle est sa vitesse après 3 s ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["v = gt", "v = 10×3", "v = 30 m/s"],
+        "final_answer": "v = 30 m/s"
+      },
+      "hints": ["v = gt en chute libre"],
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-EX-008",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle distance parcourt un mobile à vitesse constante de 15 m/s pendant 20 s ?",
+      "solution": {
+        "steps": ["d = v×t", "d = 15×20", "d = 300 m"],
+        "final_answer": "d = 300 m"
+      },
+      "hints": ["d = v×t"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-009",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un mobile freine avec a = -4 m/s². Partant de 30 m/s, en combien de temps s'arrête-t-il ?",
+      "solution": {
+        "steps": ["v = v₀ + at", "0 = 30 + (-4)t", "t = 30/4 = 7,5 s"],
+        "final_answer": "t = 7,5 s"
+      },
+      "hints": ["v = v₀ + at", "v finale = 0"],
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-EX-010",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 108 km/h en m/s.",
+      "solution": {
+        "steps": ["108 km/h = 108/3,6", "= 30 m/s"],
+        "final_answer": "30 m/s"
+      },
+      "hints": ["÷ 3,6"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-011",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Quelle distance parcourt un objet en chute libre pendant 2 s ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["h = ½gt²", "h = ½×10×4", "h = 20 m"],
+        "final_answer": "h = 20 m"
+      },
+      "hints": ["h = ½gt²"],
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-EX-012",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un cycliste maintient 25 km/h. Combien de temps pour parcourir 50 km ?",
+      "solution": {
+        "steps": ["t = d/v", "t = 50/25", "t = 2 h"],
+        "final_answer": "t = 2 heures"
+      },
+      "hints": ["t = d/v"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-013",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un objet lancé verticalement à 20 m/s. Quelle hauteur max ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["v² = 2gh", "h = v²/(2g)", "h = 400/20 = 20 m"],
+        "final_answer": "h = 20 m"
+      },
+      "hints": ["Au sommet : v = 0"],
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-EX-014",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un avion décolle avec a = 3 m/s² et atteint 75 m/s. Calculer le temps.",
+      "solution": {
+        "steps": ["t = v/a", "t = 75/3", "t = 25 s"],
+        "final_answer": "t = 25 s"
+      },
+      "hints": ["t = Δv/a"],
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-EX-015",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un mobile parcourt 100 m en 10 s puis 150 m en 15 s. Vitesse moyenne totale ?",
+      "solution": {
+        "steps": ["d_total = 250 m", "t_total = 25 s", "v = 250/25 = 10 m/s"],
+        "final_answer": "v = 10 m/s"
+      },
+      "hints": ["Somme distances/temps"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-016",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer l'accélération : passage de 5 m/s à 25 m/s en 4 s.",
+      "solution": {
+        "steps": ["a = Δv/Δt", "a = 20/4", "a = 5 m/s²"],
+        "final_answer": "a = 5 m/s²"
+      },
+      "hints": ["a = (v-v₀)/t"],
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-EX-017",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Un coureur parcourt 400 m en 50 s. Calculer sa vitesse.",
+      "solution": {
+        "steps": ["v = d/t", "v = 400/50", "v = 8 m/s"],
+        "final_answer": "v = 8 m/s"
+      },
+      "hints": ["v = d/t"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-018",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Distance de freinage : de 20 m/s à 0 avec a = -5 m/s².",
+      "solution": {
+        "steps": ["v²-v₀²=2ad", "0-400=2×(-5)×d", "d = 40 m"],
+        "final_answer": "d = 40 m"
+      },
+      "hints": ["v²-v₀²=2ad"],
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-EX-019",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Temps de chute d'un objet lancé à 30 m/s vers le haut ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["t_montée = v/g = 3 s", "t_total = 2×3", "t = 6 s"],
+        "final_answer": "t = 6 s"
+      },
+      "hints": ["Montée + descente"],
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-EX-020",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un mobile accélère de 0 à 50 m/s en 10 s. Quelle distance ?",
+      "solution": {
+        "steps": ["a = 5 m/s²", "d = ½at²", "d = ½×5×100 = 250 m"],
+        "final_answer": "d = 250 m"
+      },
+      "hints": ["d = ½at² si v₀=0"],
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-EX-021",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Vitesse finale : v₀=10 m/s, a=3 m/s², t=6 s.",
+      "solution": {
+        "steps": ["v = v₀ + at", "v = 10 + 3×6", "v = 28 m/s"],
+        "final_answer": "v = 28 m/s"
+      },
+      "hints": ["v = v₀ + at"],
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-EX-022",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Distance parcourue en 45 min à 80 km/h ?",
+      "solution": {
+        "steps": ["t = 0,75 h", "d = 80×0,75", "d = 60 km"],
+        "final_answer": "d = 60 km"
+      },
+      "hints": ["45 min = 0,75 h"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-023",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Vitesse moyenne d'un marathon (42,195 km) en 2h30 ?",
+      "solution": {
+        "steps": ["t = 2,5 h", "v = 42,195/2,5", "v ≈ 16,9 km/h"],
+        "final_answer": "v ≈ 16,9 km/h"
+      },
+      "hints": ["v = d/t"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-024",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "De quelle hauteur est tombé un objet ayant v = 40 m/s ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["v² = 2gh", "h = v²/(2g)", "h = 1600/20 = 80 m"],
+        "final_answer": "h = 80 m"
+      },
+      "hints": ["v² = 2gh"],
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-EX-025",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Distance totale : 50 m en 10 s puis 30 m en 5 s. Vitesse moyenne ?",
+      "solution": {
+        "steps": ["d = 80 m", "t = 15 s", "v = 80/15 ≈ 5,3 m/s"],
+        "final_answer": "v ≈ 5,3 m/s"
+      },
+      "hints": ["v = d_total/t_total"],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-026",
+      "chapter": "Forces & Interactions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer le poids d'un objet de 5 kg sur Terre. (g = 10 m/s²)",
+      "solution": {
+        "steps": ["P = mg", "P = 5×10", "P = 50 N"],
+        "final_answer": "P = 50 N"
+      },
+      "hints": ["P = mg"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-027",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un objet de 3 kg subit une force de 15 N. Calculer son accélération.",
+      "solution": {
+        "steps": ["F = ma", "a = F/m", "a = 15/3 = 5 m/s²"],
+        "final_answer": "a = 5 m/s²"
+      },
+      "hints": ["F = ma donc a = F/m"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-028",
+      "chapter": "Forces & Interactions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Quelle est la masse d'un objet pesant 80 N ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["P = mg", "m = P/g", "m = 80/10 = 8 kg"],
+        "final_answer": "m = 8 kg"
+      },
+      "hints": ["m = P/g"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-029",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Deux forces perpendiculaires de 6 N et 8 N. Calculer la résultante.",
+      "solution": {
+        "steps": ["F² = 6² + 8²", "F² = 100", "F = 10 N"],
+        "final_answer": "F = 10 N"
+      },
+      "hints": ["Pythagore"],
+      "related_lesson": "P2-13"
+    },
+    {
+      "id": "P2-EX-030",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Poids d'un astronaute de 70 kg sur Mars (g = 3,7 m/s²).",
+      "solution": {
+        "steps": ["P = mg", "P = 70×3,7", "P = 259 N"],
+        "final_answer": "P = 259 N"
+      },
+      "hints": ["P = mg"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-031",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Force nécessaire pour accélérer 1500 kg de 0 à 25 m/s en 8 s ?",
+      "solution": {
+        "steps": ["a = 25/8 = 3,125 m/s²", "F = ma", "F = 1500×3,125 ≈ 4688 N"],
+        "final_answer": "F ≈ 4688 N"
+      },
+      "hints": ["Calcule a d'abord"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-032",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un objet de 10 kg subit 50 N vers droite et 20 N vers gauche. Calculer a.",
+      "solution": {
+        "steps": ["F_net = 50-20 = 30 N", "a = F/m", "a = 30/10 = 3 m/s²"],
+        "final_answer": "a = 3 m/s²"
+      },
+      "hints": ["Force résultante"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-033",
+      "chapter": "Forces & Interactions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Poids d'un objet de 12 kg ? (g = 9,8 m/s²)",
+      "solution": {
+        "steps": ["P = mg", "P = 12×9,8", "P = 117,6 N"],
+        "final_answer": "P ≈ 118 N"
+      },
+      "hints": ["P = mg"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-034",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Force de 60 N avec angle 30° sur horizontale. Composante horizontale ?",
+      "solution": {
+        "steps": ["Fx = F×cos(θ)", "Fx = 60×cos(30°)", "Fx = 60×0,866 ≈ 52 N"],
+        "final_answer": "Fx ≈ 52 N"
+      },
+      "hints": ["Fx = F·cos(θ)"],
+      "related_lesson": "P2-13"
+    },
+    {
+      "id": "P2-EX-035",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Quelle force pour accélérer 25 kg à 4 m/s² ?",
+      "solution": {
+        "steps": ["F = ma", "F = 25×4", "F = 100 N"],
+        "final_answer": "F = 100 N"
+      },
+      "hints": ["F = ma"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-036",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Sur Terre, objet pèse 600 N. Quelle est sa masse ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["P = mg", "m = P/g", "m = 600/10 = 60 kg"],
+        "final_answer": "m = 60 kg"
+      },
+      "hints": ["m = P/g"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-037",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Deux forces de 10 N et 15 N à 90°. Résultante et angle ?",
+      "solution": {
+        "steps": ["F = √(100+225) ≈ 18 N", "tan(α)=15/10=1,5", "α ≈ 56°"],
+        "final_answer": "F ≈ 18 N, α ≈ 56°"
+      },
+      "hints": ["Pythagore + arctan"],
+      "related_lesson": "P2-13"
+    },
+    {
+      "id": "P2-EX-038",
+      "chapter": "Forces & Interactions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Poids de 20 kg ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["P = mg", "P = 20×10", "P = 200 N"],
+        "final_answer": "P = 200 N"
+      },
+      "hints": ["P = mg"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-039",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Objet 8 kg : 40 N droite, 15 N gauche. Calculer accélération.",
+      "solution": {
+        "steps": ["F_net = 40-15 = 25 N", "a = 25/8", "a = 3,125 m/s²"],
+        "final_answer": "a ≈ 3,1 m/s²"
+      },
+      "hints": ["Force résultante puis a=F/m"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-040",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Force de 100 N sur 20 kg. Calculer accélération.",
+      "solution": {
+        "steps": ["a = F/m", "a = 100/20", "a = 5 m/s²"],
+        "final_answer": "a = 5 m/s²"
+      },
+      "hints": ["a = F/m"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-041",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Sur Lune (g=1,6 m/s²), poids de 50 kg ?",
+      "solution": {
+        "steps": ["P = mg", "P = 50×1,6", "P = 80 N"],
+        "final_answer": "P = 80 N"
+      },
+      "hints": ["P = mg"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-042",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Trois forces horizontales : 20 N, 15 N, 10 N même sens. Résultante ?",
+      "solution": {
+        "steps": ["F = 20+15+10", "F = 45 N"],
+        "final_answer": "F = 45 N"
+      },
+      "hints": ["Somme algébrique"],
+      "related_lesson": "P2-13"
+    },
+    {
+      "id": "P2-EX-043",
+      "chapter": "Forces & Interactions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Masse d'un objet pesant 150 N ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["m = P/g", "m = 150/10", "m = 15 kg"],
+        "final_answer": "m = 15 kg"
+      },
+      "hints": ["m = P/g"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-044",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Objet 5 kg : forces 30 N (→) et 18 N (←). Accélération ?",
+      "solution": {
+        "steps": ["F_net = 30-18 = 12 N", "a = 12/5", "a = 2,4 m/s²"],
+        "final_answer": "a = 2,4 m/s²"
+      },
+      "hints": ["F_net puis a=F/m"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-045",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Force verticale de 80 N. Composante à 45° ?",
+      "solution": {
+        "steps": ["F_45 = 80×cos(45°)", "F_45 = 80×0,707", "F_45 ≈ 56,6 N"],
+        "final_answer": "F ≈ 56,6 N"
+      },
+      "hints": ["F·cos(45°)"],
+      "related_lesson": "P2-13"
+    },
+    {
+      "id": "P2-EX-046",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Poids sur Jupiter (g=25 m/s²) d'un objet de 40 kg ?",
+      "solution": {
+        "steps": ["P = mg", "P = 40×25", "P = 1000 N"],
+        "final_answer": "P = 1000 N"
+      },
+      "hints": ["P = mg"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-047",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Force pour accélérer 12 kg à 3 m/s² ?",
+      "solution": {
+        "steps": ["F = ma", "F = 12×3", "F = 36 N"],
+        "final_answer": "F = 36 N"
+      },
+      "hints": ["F = ma"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-048",
+      "chapter": "Forces & Interactions",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Poids de 7 kg ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["P = mg", "P = 7×10", "P = 70 N"],
+        "final_answer": "P = 70 N"
+      },
+      "hints": ["P = mg"],
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-EX-049",
+      "chapter": "Forces & Interactions",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Deux forces égales à 120° l'une de l'autre, 10 N chacune. Résultante ?",
+      "solution": {
+        "steps": ["F = √(F₁²+F₂²+2F₁F₂cos120°)", "F = √(100+100-100)", "F = 10 N"],
+        "final_answer": "F = 10 N"
+      },
+      "hints": ["Loi du parallélogramme"],
+      "related_lesson": "P2-13"
+    },
+    {
+      "id": "P2-EX-050",
+      "chapter": "Forces & Interactions",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Accélération de 6 kg sous 42 N ?",
+      "solution": {
+        "steps": ["a = F/m", "a = 42/6", "a = 7 m/s²"],
+        "final_answer": "a = 7 m/s²"
+      },
+      "hints": ["a = F/m"],
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-EX-051",
+      "chapter": "Énergie",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Énergie cinétique d'un objet de 4 kg à 5 m/s.",
+      "solution": {
+        "steps": ["Ec = ½mv²", "Ec = ½×4×25", "Ec = 50 J"],
+        "final_answer": "Ec = 50 J"
+      },
+      "hints": ["Ec = ½mv²"],
+      "related_lesson": "P2-21"
+    },
+    {
+      "id": "P2-EX-052",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Énergie potentielle de 3 kg à 8 m de hauteur. (g = 10 m/s²)",
+      "solution": {
+        "steps": ["Ep = mgh", "Ep = 3×10×8", "Ep = 240 J"],
+        "final_answer": "Ep = 240 J"
+      },
+      "hints": ["Ep = mgh"],
+      "related_lesson": "P2-22"
+    },
+    {
+      "id": "P2-EX-053",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Bille 200 g lâchée de 10 m. Vitesse au sol ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["mgh = ½mv²", "gh = ½v²", "v = √(2×10×10) ≈ 14,1 m/s"],
+        "final_answer": "v ≈ 14,1 m/s"
+      },
+      "hints": ["Conservation énergie"],
+      "related_lesson": "P2-23"
+    },
+    {
+      "id": "P2-EX-054",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Ampoule 75 W pendant 4 h. Énergie en kWh ?",
+      "solution": {
+        "steps": ["E = P×t", "E = 0,075×4", "E = 0,3 kWh"],
+        "final_answer": "E = 0,3 kWh"
+      },
+      "hints": ["E = P×t"],
+      "related_lesson": "P2-24"
+    },
+    {
+      "id": "P2-EX-055",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Rendement : 900 J utiles pour 1200 J fournis.",
+      "solution": {
+        "steps": ["η = E_utile/E_fournie", "η = 900/1200", "η = 0,75 = 75%"],
+        "final_answer": "η = 75%"
+      },
+      "hints": ["η = E_utile/E_fournie"],
+      "related_lesson": "P2-25"
+    },
+    {
+      "id": "P2-EX-056",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Travail de 40 N sur 5 m (même direction).",
+      "solution": {
+        "steps": ["W = F×d", "W = 40×5", "W = 200 J"],
+        "final_answer": "W = 200 J"
+      },
+      "hints": ["W = F·d"],
+      "related_lesson": "P2-26"
+    },
+    {
+      "id": "P2-EX-057",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Coût d'un radiateur 2500 W, 2h/jour, 30 jours. 1 kWh = 0,17 € ?",
+      "solution": {
+        "steps": ["E_jour = 2,5×2 = 5 kWh", "E_mois = 5×30 = 150 kWh", "Coût = 150×0,17 = 25,5 €"],
+        "final_answer": "Coût = 25,50 €"
+      },
+      "hints": ["E = P×t×jours"],
+      "related_lesson": "P2-24"
+    },
+    {
+      "id": "P2-EX-058",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Ec d'une voiture 1200 kg à 72 km/h ?",
+      "solution": {
+        "steps": ["v = 20 m/s", "Ec = ½×1200×400", "Ec = 240 000 J = 240 kJ"],
+        "final_answer": "Ec = 240 kJ"
+      },
+      "hints": ["Convertir km/h"],
+      "related_lesson": "P2-21"
+    },
+    {
+      "id": "P2-EX-059",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Chauffe-eau 2000 W, 2,5 h/jour, 30 j. Coût si 1 kWh = 0,15 € ?",
+      "solution": {
+        "steps": ["E_jour = 2×2,5 = 5 kWh", "E_mois = 150 kWh", "Coût = 150×0,15 = 22,5 €"],
+        "final_answer": "Coût = 22,50 €"
+      },
+      "hints": ["E = P×t"],
+      "related_lesson": "P2-24"
+    },
+    {
+      "id": "P2-EX-060",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 5 kWh en joules.",
+      "solution": {
+        "steps": ["1 kWh = 3,6×10⁶ J", "5 kWh = 18×10⁶ J"],
+        "final_answer": "18 MJ"
+      },
+      "hints": ["1 kWh = 3,6 MJ"],
+      "related_lesson": "P2-24"
+    },
+    {
+      "id": "P2-EX-061",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Pendule 300 g, h = 2 m. Vitesse au point bas ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["mgh = ½mv²", "gh = ½v²", "v = √(2×10×2) ≈ 6,3 m/s"],
+        "final_answer": "v ≈ 6,3 m/s"
+      },
+      "hints": ["Conservation Em"],
+      "related_lesson": "P2-23"
+    },
+    {
+      "id": "P2-EX-062",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Travail pour soulever 40 kg à 5 m ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["W = mgh", "W = 40×10×5", "W = 2000 J"],
+        "final_answer": "W = 2 kJ"
+      },
+      "hints": ["W = mgh"],
+      "related_lesson": "P2-26"
+    },
+    {
+      "id": "P2-EX-063",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Cycliste 75 kg à 8 m/s. Quelle hauteur peut-il monter ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["½mv² = mgh", "½v² = gh", "h = 64/20 = 3,2 m"],
+        "final_answer": "h = 3,2 m"
+      },
+      "hints": ["Ec → Ep"],
+      "related_lesson": "P2-23"
+    },
+    {
+      "id": "P2-EX-064",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Rendement 70%, énergie fournie 3000 J. Énergie utile ?",
+      "solution": {
+        "steps": ["E_utile = η×E_fournie", "E_utile = 0,7×3000", "E_utile = 2100 J"],
+        "final_answer": "E_utile = 2100 J"
+      },
+      "hints": ["E_utile = η×E_fournie"],
+      "related_lesson": "P2-25"
+    },
+    {
+      "id": "P2-EX-065",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Ressort k = 200 N/m comprimé de 5 cm. Énergie stockée ?",
+      "solution": {
+        "steps": ["Ep = ½kx²", "x = 0,05 m", "Ep = ½×200×0,0025 = 0,25 J"],
+        "final_answer": "Ep = 0,25 J"
+      },
+      "hints": ["Ep = ½kx²"],
+      "related_lesson": "P2-22"
+    },
+    {
+      "id": "P2-EX-066",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Lampe 100 W allumée 10 h. Énergie consommée ?",
+      "solution": {
+        "steps": ["E = P×t", "E = 0,1×10", "E = 1 kWh"],
+        "final_answer": "E = 1 kWh"
+      },
+      "hints": ["E = P×t"],
+      "related_lesson": "P2-24"
+    },
+    {
+      "id": "P2-EX-067",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Objet 10 kg monte 5 m à vitesse constante en 4 s. Puissance ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["W = mgh = 500 J", "P = W/t", "P = 500/4 = 125 W"],
+        "final_answer": "P = 125 W"
+      },
+      "hints": ["P = W/t"],
+      "related_lesson": "P2-27"
+    },
+    {
+      "id": "P2-EX-068",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Doubler vitesse multiplie Ec par combien ?",
+      "solution": {
+        "steps": ["Ec ∝ v²", "Si v → 2v alors Ec → 4Ec"],
+        "final_answer": "× 4"
+      },
+      "hints": ["Ec ∝ v²"],
+      "related_lesson": "P2-21"
+    },
+    {
+      "id": "P2-EX-069",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Voiture 1400 kg à 90 km/h. Calculer Ec.",
+      "solution": {
+        "steps": ["v = 25 m/s", "Ec = ½×1400×625", "Ec = 437 500 J ≈ 438 kJ"],
+        "final_answer": "Ec ≈ 438 kJ"
+      },
+      "hints": ["Convertir km/h"],
+      "related_lesson": "P2-21"
+    },
+    {
+      "id": "P2-EX-070",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Rendement 80%, E_utile = 400 J. E_fournie ?",
+      "solution": {
+        "steps": ["E_fournie = E_utile/η", "E_fournie = 400/0,8", "E_fournie = 500 J"],
+        "final_answer": "E_fournie = 500 J"
+      },
+      "hints": ["E_fournie = E_utile/η"],
+      "related_lesson": "P2-25"
+    },
+    {
+      "id": "P2-EX-071",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Moteur consomme 2000 J, fournit 1600 J. η et pertes ?",
+      "solution": {
+        "steps": ["η = 1600/2000 = 0,8 = 80%", "Pertes = 2000-1600 = 400 J"],
+        "final_answer": "η = 80%, pertes = 400 J"
+      },
+      "hints": ["η = E_utile/E_fournie"],
+      "related_lesson": "P2-25"
+    },
+    {
+      "id": "P2-EX-072",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Objet 3 kg, Ec = 54 J. Calculer v.",
+      "solution": {
+        "steps": ["54 = ½×3×v²", "v² = 36", "v = 6 m/s"],
+        "final_answer": "v = 6 m/s"
+      },
+      "hints": ["v² = 2Ec/m"],
+      "related_lesson": "P2-21"
+    },
+    {
+      "id": "P2-EX-073",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Monter 30 kg à 6 m. Travail nécessaire ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["W = mgh", "W = 30×10×6", "W = 1800 J"],
+        "final_answer": "W = 1800 J"
+      },
+      "hints": ["W = mgh"],
+      "related_lesson": "P2-26"
+    },
+    {
+      "id": "P2-EX-074",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Appareil 800 W pendant 30 min. Énergie en kWh ?",
+      "solution": {
+        "steps": ["E = P×t", "E = 0,8×0,5", "E = 0,4 kWh"],
+        "final_answer": "E = 0,4 kWh"
+      },
+      "hints": ["30 min = 0,5 h"],
+      "related_lesson": "P2-24"
+    },
+    {
+      "id": "P2-EX-075",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Objet 5 kg descend 10 m. Variation d'Ep ? (g = 10 m/s²)",
+      "solution": {
+        "steps": ["ΔEp = -mgh", "ΔEp = -5×10×10", "ΔEp = -500 J"],
+        "final_answer": "ΔEp = -500 J"
+      },
+      "hints": ["Ep diminue"],
+      "related_lesson": "P2-22"
+    },
+    {
+      "id": "P2-EX-076",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Signal de période T = 0,05 s. Calculer f.",
+      "solution": {
+        "steps": ["f = 1/T", "f = 1/0,05", "f = 20 Hz"],
+        "final_answer": "f = 20 Hz"
+      },
+      "hints": ["f = 1/T"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-077",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Onde sonore 680 Hz à 340 m/s. Calculer λ.",
+      "solution": {
+        "steps": ["λ = v/f", "λ = 340/680", "λ = 0,5 m"],
+        "final_answer": "λ = 0,5 m"
+      },
+      "hints": ["λ = v/f"],
+      "related_lesson": "P2-32"
+    },
+    {
+      "id": "P2-EX-078",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Lumière : Soleil-Terre en 500 s. Distance ? (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["d = c×t", "d = 3×10⁸×500", "d = 1,5×10¹¹ m"],
+        "final_answer": "d = 1,5×10¹¹ m"
+      },
+      "hints": ["d = v×t"],
+      "related_lesson": "P2-33"
+    },
+    {
+      "id": "P2-EX-079",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Signal f = 880 Hz. Calculer T.",
+      "solution": {
+        "steps": ["T = 1/f", "T = 1/880", "T ≈ 0,00114 s = 1,14 ms"],
+        "final_answer": "T ≈ 1,14 ms"
+      },
+      "hints": ["T = 1/f"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-080",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Onde radio 95 MHz. Calculer λ. (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["f = 95×10⁶ Hz", "λ = c/f", "λ ≈ 3,16 m"],
+        "final_answer": "λ ≈ 3,16 m"
+      },
+      "hints": ["Convertir MHz"],
+      "related_lesson": "P2-34"
+    },
+    {
+      "id": "P2-EX-081",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Son parcourt 2,04 km à 340 m/s. Temps ?",
+      "solution": {
+        "steps": ["t = d/v", "t = 2040/340", "t = 6 s"],
+        "final_answer": "t = 6 s"
+      },
+      "hints": ["t = d/v"],
+      "related_lesson": "P2-32"
+    },
+    {
+      "id": "P2-EX-082",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Lumière bleue λ = 450 nm. Calculer f. (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["λ = 4,5×10⁻⁷ m", "f = c/λ", "f ≈ 6,67×10¹⁴ Hz"],
+        "final_answer": "f ≈ 6,67×10¹⁴ Hz"
+      },
+      "hints": ["Convertir nm en m"],
+      "related_lesson": "P2-35"
+    },
+    {
+      "id": "P2-EX-083",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Corde vibre à 25 Hz. Oscillations en 4 s ?",
+      "solution": {
+        "steps": ["N = f×t", "N = 25×4", "N = 100 oscillations"],
+        "final_answer": "100 oscillations"
+      },
+      "hints": ["N = f×t"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-084",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Onde f = 30 Hz, λ = 11,33 m. Calculer v.",
+      "solution": {
+        "steps": ["v = f×λ", "v = 30×11,33", "v ≈ 340 m/s"],
+        "final_answer": "v = 340 m/s"
+      },
+      "hints": ["v = f×λ"],
+      "related_lesson": "P2-32"
+    },
+    {
+      "id": "P2-EX-085",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Écho revient après 4 s. Distance obstacle ? (v_son = 340 m/s)",
+      "solution": {
+        "steps": ["d_aller-retour = 340×4 = 1360 m", "d = 1360/2", "d = 680 m"],
+        "final_answer": "d = 680 m"
+      },
+      "hints": ["Aller-retour"],
+      "related_lesson": "P2-32"
+    },
+    {
+      "id": "P2-EX-086",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Indice réfraction eau n = 1,33. Vitesse lumière dans l'eau ? (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["v = c/n", "v = 3×10⁸/1,33", "v ≈ 2,26×10⁸ m/s"],
+        "final_answer": "v ≈ 2,26×10⁸ m/s"
+      },
+      "hints": ["v = c/n"],
+      "related_lesson": "P2-36"
+    },
+    {
+      "id": "P2-EX-087",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 10 kHz en Hz.",
+      "solution": {
+        "steps": ["1 kHz = 1000 Hz", "10 kHz = 10 000 Hz"],
+        "final_answer": "10 000 Hz"
+      },
+      "hints": ["k = ×1000"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-088",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Ultrason 30 kHz à 340 m/s. Calculer λ.",
+      "solution": {
+        "steps": ["f = 30 000 Hz", "λ = v/f", "λ = 340/30000 ≈ 11,3 mm"],
+        "final_answer": "λ ≈ 11,3 mm"
+      },
+      "hints": ["λ = v/f"],
+      "related_lesson": "P2-32"
+    },
+    {
+      "id": "P2-EX-089",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Période T = 0,02 s. Oscillations en 5 s ?",
+      "solution": {
+        "steps": ["f = 1/T = 50 Hz", "N = f×t", "N = 50×5 = 250"],
+        "final_answer": "250 oscillations"
+      },
+      "hints": ["Calcule f d'abord"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-090",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "WiFi 5 GHz. Calculer λ. (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["f = 5×10⁹ Hz", "λ = c/f", "λ = 0,06 m = 6 cm"],
+        "final_answer": "λ = 6 cm"
+      },
+      "hints": ["G = ×10⁹"],
+      "related_lesson": "P2-34"
+    },
+    {
+      "id": "P2-EX-091",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Onde f = 60 Hz, λ = 5 m. Calculer v.",
+      "solution": {
+        "steps": ["v = f×λ", "v = 60×5", "v = 300 m/s"],
+        "final_answer": "v = 300 m/s"
+      },
+      "hints": ["v = f×λ"],
+      "related_lesson": "P2-32"
+    },
+    {
+      "id": "P2-EX-092",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Radar : onde revient après 0,0003 s. Distance ? (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["d_aller-retour = 3×10⁸×0,0003 = 90 km", "d = 45 km"],
+        "final_answer": "d = 45 km"
+      },
+      "hints": ["Aller-retour"],
+      "related_lesson": "P2-33"
+    },
+    {
+      "id": "P2-EX-093",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Signal f = 500 Hz. Oscillations en 0,1 s ?",
+      "solution": {
+        "steps": ["N = f×t", "N = 500×0,1", "N = 50"],
+        "final_answer": "50 oscillations"
+      },
+      "hints": ["N = f×t"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-094",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Lumière verre n = 1,5. Calculer v. (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["v = c/n", "v = 3×10⁸/1,5", "v = 2×10⁸ m/s"],
+        "final_answer": "v = 2×10⁸ m/s"
+      },
+      "hints": ["v = c/n"],
+      "related_lesson": "P2-36"
+    },
+    {
+      "id": "P2-EX-095",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Distance du son en 0,5 s ? (v = 340 m/s)",
+      "solution": {
+        "steps": ["d = v×t", "d = 340×0,5", "d = 170 m"],
+        "final_answer": "d = 170 m"
+      },
+      "hints": ["d = v×t"],
+      "related_lesson": "P2-32"
+    },
+    {
+      "id": "P2-EX-096",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "FM 98 MHz. Calculer λ. (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["f = 98×10⁶ Hz", "λ = c/f", "λ ≈ 3,06 m"],
+        "final_answer": "λ ≈ 3,06 m"
+      },
+      "hints": ["λ = c/f"],
+      "related_lesson": "P2-34"
+    },
+    {
+      "id": "P2-EX-097",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Temps pour lumière parcourir 3 km ? (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["t = d/c", "t = 3000/(3×10⁸)", "t = 10⁻⁵ s = 10 μs"],
+        "final_answer": "t = 10 μs"
+      },
+      "hints": ["t = d/c"],
+      "related_lesson": "P2-33"
+    },
+    {
+      "id": "P2-EX-098",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Signal f = 1 kHz. Calculer T.",
+      "solution": {
+        "steps": ["f = 1000 Hz", "T = 1/f", "T = 0,001 s = 1 ms"],
+        "final_answer": "T = 1 ms"
+      },
+      "hints": ["T = 1/f"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-099",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Convertir 1 MHz en Hz.",
+      "solution": {
+        "steps": ["M = 10⁶", "1 MHz = 10⁶ Hz"],
+        "final_answer": "1 000 000 Hz"
+      },
+      "hints": ["M = méga = 10⁶"],
+      "related_lesson": "P2-31"
+    },
+    {
+      "id": "P2-EX-100",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Laser rouge λ = 650 nm. Calculer f. (c = 3×10⁸ m/s)",
+      "solution": {
+        "steps": ["λ = 6,5×10⁻⁷ m", "f = c/λ", "f ≈ 4,62×10¹⁴ Hz"],
+        "final_answer": "f ≈ 4,6×10¹⁴ Hz"
+      },
+      "hints": ["f = c/λ"],
+      "related_lesson": "P2-35"
+    }
+  ]
+}

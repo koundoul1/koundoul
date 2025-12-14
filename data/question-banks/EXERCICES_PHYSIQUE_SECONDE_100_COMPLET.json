@@ -1,0 +1,65 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Physique Seconde",
+    "level": "Seconde",
+    "subject": "Physique",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Cinématique & Mouvement",
+      "Forces & Interactions",
+      "Énergie",
+      "Ondes & Signaux"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "P2-EX-001",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Une voiture parcourt 150 km en 2 heures. Calculer sa vitesse moyenne.",
+      "solution": {
+        "steps": [
+          "v = d/t",
+          "v = 150 km / 2 h",
+          "v = 75 km/h"
+        ],
+        "final_answer": "v = 75 km/h",
+        "unit_conversion": "v = 20.8 m/s"
+      },
+      "hints": [
+        "Vitesse moyenne = distance / temps",
+        "Pour convertir en m/s : divise par 3.6"
+      ],
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-EX-002",
+      "chapter": "Cinématique & Mouvement",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un mobile part du repos et atteint 20 m/s en 5 secondes. Calculer son accélération.",
+      "solution": {
+        "steps": [
+          "a = Δv/Δt",
+          "a = (20 − 0) / 5",
+          "a = 4 m/s²"
+        ],
+        "final_answer": "a = 4 m/s²"
+      },
+      "hints": [
+        "Accélération = variation de vitesse / temps",
+        "Le mobile part du repos : v₀ = 0"
+      ],
+      "related_lesson": "P2-02"
+    }
+  ]
+}

@@ -1,0 +1,601 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-31 à M1-40",
+    "chapters": ["Suites Numériques"],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Suite et fin du chapitre Suites Numériques (M1-31 à M1-40)"
+  },
+  "lessons": [
+    
+    {
+      "id": "M1-31",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Somme des termes d'une suite arithmétique",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Calculer la somme S = u₀ + u₁ + ... + uₙ",
+        "Utiliser la formule S = (n+1)(u₀ + uₙ)/2",
+        "Appliquer à des problèmes concrets"
+      ],
+      "prerequisites": [
+        "Suites arithmétiques",
+        "Terme général uₙ = u₀ + nr",
+        "Notation sigma"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["somme", "arithmétique", "formule", "Gauss"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente le calcul de somme pour les suites arithmétiques. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de maîtriser cette formule clé en 11 minutes.",
+        "method_step_by_step": [
+          "Somme des n+1 premiers termes : S = u₀ + u₁ + u₂ + ... + uₙ",
+          "Formule de Gauss : S = (nombre de termes) × (premier + dernier) / 2",
+          "S = (n+1)(u₀ + uₙ)/2 ou S = (n+1)(2u₀ + nr)/2",
+          "Méthode Gauss : écrire la somme dans les 2 sens et additionner",
+          "Application : somme des entiers de 1 à n = n(n+1)/2"
+        ],
+        "guided_example": {
+          "statement": "Suite arithmétique u₀ = 5, r = 3. Calculer la somme des 11 premiers termes (u₀ à u₁₀).",
+          "solution_steps": [
+            "Nombre de termes : n+1 = 11",
+            "Dernier terme : u₁₀ = u₀ + 10r = 5 + 30 = 35",
+            "Méthode 1 : S = 11(5 + 35)/2 = 11 × 40/2 = 11 × 20 = 220",
+            "Méthode 2 : S = 11(2×5 + 10×3)/2 = 11(10+30)/2 = 220",
+            "Vérification : moyenne des termes = 20, 11 termes → 11 × 20 = 220 ✓"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer 1 + 2 + 3 + ... + 100",
+          "Suite : 7, 10, 13, ... Somme des 15 premiers termes ?",
+          "Si S₁₀ = 110 et u₀ = 2, trouver r"
+        ],
+        "common_mistakes": [
+          "Oublier le +1 dans le nombre de termes (de u₀ à uₙ : n+1 termes)",
+          "Confondre n (indice) et nombre de termes",
+          "Utiliser la formule avec des indices incorrects"
+        ],
+        "summary": {
+          "key_concept": "La somme des termes d'une suite arithmétique est S = (nombre de termes)(premier + dernier)/2",
+          "key_method": "Identifier n, u₀, uₙ → S = (n+1)(u₀ + uₙ)/2 → Calculer",
+          "next_step": "Étudier les suites géométriques"
+        }
+      }
+    },
+    {
+      "id": "M1-32",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Suites géométriques - Définition et propriétés",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir une suite géométrique : uₙ₊₁ = q·uₙ",
+        "Calculer le terme général : uₙ = u₀·qⁿ",
+        "Reconnaître une suite géométrique"
+      ],
+      "prerequisites": [
+        "Suites arithmétiques",
+        "Puissances",
+        "Quotient"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["géométrique", "raison", "terme général", "puissance"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les suites géométriques, autre cas fondamental. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de maîtriser ce type de suite en 11 minutes.",
+        "method_step_by_step": [
+          "Définition : (uₙ) géométrique ⇔ uₙ₊₁ = q·uₙ (q = raison constante, q ≠ 0)",
+          "Forme explicite : uₙ = u₀·qⁿ",
+          "Reconnaissance : quotient constant entre termes consécutifs",
+          "Propriété : uₙ² = uₙ₋₁·uₙ₊₁ (moyenne géométrique)",
+          "Cas particuliers : q > 1 (croissance), 0 < q < 1 (décroissance), q < 0 (alternée)"
+        ],
+        "guided_example": {
+          "statement": "Suite (uₙ) avec u₀ = 2 et uₙ₊₁ = 3uₙ. a) Montrer géométrique. b) Formule uₙ. c) Calculer u₅.",
+          "solution_steps": [
+            "a) Relation uₙ₊₁ = 3uₙ : raison q = 3 constante → géométrique",
+            "b) Formule : uₙ = u₀·qⁿ = 2·3ⁿ",
+            "c) u₅ = 2·3⁵ = 2·243 = 486",
+            "Vérification : u₁ = 6, u₂ = 18, u₃ = 54, u₄ = 162 (×3 à chaque fois)",
+            "Observation : croissance exponentielle rapide"
+          ]
+        },
+        "quick_exercises": [
+          "Suite : 5, 10, 20, 40, ... Raison ? Formule de uₙ ?",
+          "Si u₀ = 100 et q = 0.5, calculer u₄",
+          "Est-ce géométrique ? 1, 3, 9, 27, ... (Oui, q = 3)"
+        ],
+        "common_mistakes": [
+          "Confondre raison q et premier terme u₀",
+          "Oublier l'exposant n dans uₙ = u₀·qⁿ",
+          "Confondre suite arithmétique (+ r) et géométrique (× q)"
+        ],
+        "summary": {
+          "key_concept": "Une suite géométrique a un quotient constant q entre termes consécutifs : uₙ = u₀·qⁿ",
+          "key_method": "Vérifier uₙ₊₁/uₙ = q → Formule uₙ = u₀·qⁿ → Calculs",
+          "next_step": "Étudier la somme des termes d'une suite géométrique"
+        }
+      }
+    },
+    {
+      "id": "M1-33",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Somme des termes d'une suite géométrique",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Calculer S = u₀ + u₁ + ... + uₙ pour une suite géométrique",
+        "Utiliser la formule S = u₀(1 - qⁿ⁺¹)/(1 - q) si q ≠ 1",
+        "Cas particulier q = 1"
+      ],
+      "prerequisites": [
+        "Suites géométriques",
+        "Puissances",
+        "Factorisation"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["somme", "géométrique", "formule", "série"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente le calcul de somme pour les suites géométriques. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de maîtriser cette formule en 12 minutes.",
+        "method_step_by_step": [
+          "Somme S = u₀ + u₁ + ... + uₙ = u₀(1 + q + q² + ... + qⁿ)",
+          "Si q ≠ 1 : S = u₀(1 - qⁿ⁺¹)/(1 - q) ou S = u₀(qⁿ⁺¹ - 1)/(q - 1)",
+          "Si q = 1 : S = (n+1)u₀ (suite constante)",
+          "Démonstration : multiplier S par q, soustraire, factoriser",
+          "Application : sommes géométriques (1 + 2 + 4 + 8 + ...)"
+        ],
+        "guided_example": {
+          "statement": "Suite géométrique u₀ = 3, q = 2. Calculer somme des 6 premiers termes (u₀ à u₅).",
+          "solution_steps": [
+            "Formule : S = u₀(1 - qⁿ⁺¹)/(1 - q) avec n = 5",
+            "S = 3(1 - 2⁶)/(1 - 2) = 3(1 - 64)/(-1) = 3(-63)/(-1)",
+            "S = 3 × 63 = 189",
+            "Vérification : 3 + 6 + 12 + 24 + 48 + 96 = 189 ✓",
+            "Alternative : S = 3(2⁶ - 1)/(2 - 1) = 3 × 63 = 189"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer 1 + 2 + 4 + 8 + 16 + 32",
+          "Suite géométrique u₀ = 5, q = 0.5. Somme des 5 premiers termes ?",
+          "Si S₄ = 40, u₀ = 5, q = 2, vérifier avec la formule"
+        ],
+        "common_mistakes": [
+          "Oublier le +1 dans l'exposant (qⁿ⁺¹ et non qⁿ)",
+          "Erreur de signe dans le dénominateur (1-q)",
+          "Oublier le cas particulier q = 1"
+        ],
+        "summary": {
+          "key_concept": "La somme d'une suite géométrique (q ≠ 1) est S = u₀(1 - qⁿ⁺¹)/(1 - q)",
+          "key_method": "Identifier u₀, q, n → Appliquer formule → Simplifier",
+          "next_step": "Étudier les variations des suites"
+        }
+      }
+    },
+    {
+      "id": "M1-34",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Sens de variation d'une suite",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir suite croissante, décroissante, constante",
+        "Étudier le signe de uₙ₊₁ - uₙ",
+        "Utiliser le quotient uₙ₊₁/uₙ pour suites positives"
+      ],
+      "prerequisites": [
+        "Suites",
+        "Inégalités",
+        "Comparaison"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["variations", "croissance", "monotonie", "comparaison"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'étude des variations des suites. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de déterminer la monotonie en 11 minutes.",
+        "method_step_by_step": [
+          "Suite croissante : uₙ₊₁ ≥ uₙ pour tout n (ou uₙ₊₁ - uₙ ≥ 0)",
+          "Suite décroissante : uₙ₊₁ ≤ uₙ pour tout n (ou uₙ₊₁ - uₙ ≤ 0)",
+          "Méthode 1 : étudier le signe de uₙ₊₁ - uₙ",
+          "Méthode 2 (si uₙ > 0) : comparer uₙ₊₁/uₙ à 1",
+          "Suite arithmétique : r > 0 ⇒ croissante, r < 0 ⇒ décroissante"
+        ],
+        "guided_example": {
+          "statement": "Étudier les variations de uₙ = n² - 4n.",
+          "solution_steps": [
+            "Calculer uₙ₊₁ - uₙ = [(n+1)² - 4(n+1)] - [n² - 4n]",
+            "= n² + 2n + 1 - 4n - 4 - n² + 4n",
+            "= 2n - 3",
+            "Signe : uₙ₊₁ - uₙ ≥ 0 ⇔ 2n - 3 ≥ 0 ⇔ n ≥ 3/2",
+            "Conclusion : suite décroissante jusqu'à n = 1, croissante à partir de n = 2"
+          ]
+        },
+        "quick_exercises": [
+          "Suite uₙ = 3n + 5 : croissante ou décroissante ?",
+          "Suite géométrique u₀ = 2, q = 0.8 : variations ?",
+          "vₙ = 1/n est-elle monotone ?"
+        ],
+        "common_mistakes": [
+          "Confondre suite croissante et suite positive",
+          "Erreur de développement dans uₙ₊₁ - uₙ",
+          "Oublier de préciser 'à partir d'un certain rang'"
+        ],
+        "summary": {
+          "key_concept": "Pour étudier les variations, calculer uₙ₊₁ - uₙ et étudier son signe",
+          "key_method": "uₙ₊₁ - uₙ → Simplifier → Signe → Conclusion variations",
+          "next_step": "Étudier les suites majorées, minorées, bornées"
+        }
+      }
+    },
+    {
+      "id": "M1-35",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Suites majorées, minorées et bornées",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir suite majorée, minorée, bornée",
+        "Démontrer qu'une suite est bornée",
+        "Lien avec la convergence"
+      ],
+      "prerequisites": [
+        "Suites",
+        "Inégalités",
+        "Variations"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["majorée", "minorée", "bornée", "borne"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les notions de bornes pour les suites. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de comprendre ces concepts en 10 minutes.",
+        "method_step_by_step": [
+          "Suite majorée : ∃M, ∀n, uₙ ≤ M (M est un majorant)",
+          "Suite minorée : ∃m, ∀n, uₙ ≥ m (m est un minorant)",
+          "Suite bornée : majorée ET minorée (∃m,M, m ≤ uₙ ≤ M)",
+          "Propriété : suite croissante majorée converge (admis en Première)",
+          "Méthode : utiliser les variations, résoudre inéquations"
+        ],
+        "guided_example": {
+          "statement": "Montrer que uₙ = 1/n est bornée.",
+          "solution_steps": [
+            "Pour tout n ≥ 1 : n ≥ 1 donc 1/n ≤ 1",
+            "Majorant : M = 1 (car u₁ = 1 est le maximum)",
+            "Pour tout n ≥ 1 : 1/n > 0",
+            "Minorant : m = 0 (borne inférieure)",
+            "Conclusion : 0 < uₙ ≤ 1 pour tout n ≥ 1, donc (uₙ) est bornée"
+          ]
+        },
+        "quick_exercises": [
+          "Suite uₙ = n est-elle majorée ? minorée ?",
+          "Suite vₙ = (-1)ⁿ est-elle bornée ?",
+          "wₙ = n/(n+1) : trouver un majorant"
+        ],
+        "common_mistakes": [
+          "Confondre borne et maximum (une borne peut ne pas être atteinte)",
+          "Oublier 'pour tout n' dans la définition",
+          "Penser que toute suite bornée converge (faux : (-1)ⁿ)"
+        ],
+        "summary": {
+          "key_concept": "Une suite bornée reste toujours entre deux valeurs m et M, pour tout n",
+          "key_method": "Trouver inégalité m ≤ uₙ ≤ M → Justifier pour tout n → Conclure",
+          "next_step": "Aborder la convergence et les limites"
+        }
+      }
+    },
+    {
+      "id": "M1-36",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Convergence et divergence - Introduction",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Comprendre la notion de limite d'une suite",
+        "Définir convergence et divergence (intuition)",
+        "Reconnaître visuellement la convergence"
+      ],
+      "prerequisites": [
+        "Suites",
+        "Variations",
+        "Suites bornées"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limite", "convergence", "divergence", "infini"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon introduit les notions de convergence et divergence. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de comprendre ces concepts fondamentaux en 12 minutes.",
+        "method_step_by_step": [
+          "Intuition : que devient uₙ quand n devient très grand ?",
+          "Suite convergente : lim(n→+∞) uₙ = ℓ (ℓ fini, uₙ se rapproche de ℓ)",
+          "Suite divergente : pas de limite finie (tend vers ±∞ ou oscille)",
+          "Notation : uₙ → ℓ quand n → +∞",
+          "Théorème admis : suite croissante majorée converge"
+        ],
+        "guided_example": {
+          "statement": "Étudier intuitivement les limites de : a) uₙ = 1/n, b) vₙ = n, c) wₙ = (-1)ⁿ.",
+          "solution_steps": [
+            "a) uₙ = 1/n : n grand ⇒ 1/n petit, proche de 0. Limite : 0 (converge)",
+            "b) vₙ = n : n devient infiniment grand. Limite : +∞ (diverge vers +∞)",
+            "c) wₙ = (-1)ⁿ : alterne entre -1 et +1, n'approche aucune valeur. Diverge sans limite",
+            "Graphiquement : a) descend vers 0, b) monte indéfiniment, c) oscille",
+            "Classification : a) convergente, b) divergente vers +∞, c) divergente oscillante"
+          ]
+        },
+        "quick_exercises": [
+          "Limite intuitive de uₙ = 2 + 1/n ?",
+          "vₙ = -n diverge vers quoi ?",
+          "wₙ = n/(n+1) converge-t-elle ? Vers quelle valeur ?"
+        ],
+        "common_mistakes": [
+          "Confondre convergence et croissance",
+          "Penser que suite bornée implique convergence",
+          "Mal interpréter les notations +∞ (ce n'est pas un nombre)"
+        ],
+        "summary": {
+          "key_concept": "Une suite converge si elle approche une valeur finie ℓ quand n → +∞, sinon elle diverge",
+          "key_method": "Observer comportement uₙ quand n grand → Identifier limite ou divergence",
+          "next_step": "Calculer rigoureusement les limites"
+        }
+      }
+    },
+    {
+      "id": "M1-37",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Limites de suites - Calculs et opérations",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Calculer des limites de suites usuelles",
+        "Utiliser les opérations sur les limites",
+        "Lever les formes indéterminées simples"
+      ],
+      "prerequisites": [
+        "Convergence",
+        "Suites arithmétiques et géométriques",
+        "Opérations algébriques"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["limites", "calcul", "opérations", "indéterminée"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente le calcul effectif des limites de suites. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de maîtriser les techniques en 13 minutes.",
+        "method_step_by_step": [
+          "Limites usuelles : lim(1/nᵖ) = 0, lim(nᵖ) = +∞, lim(qⁿ) selon |q|",
+          "Opérations : lim(uₙ+vₙ) = lim(uₙ) + lim(vₙ) si définies",
+          "Formes indéterminées : +∞ - ∞, 0×∞, ∞/∞ (factoriser terme dominant)",
+          "Suites géométriques : si |q| < 1, qⁿ → 0 ; si q > 1, qⁿ → +∞",
+          "Théorème sandwich : si vₙ ≤ uₙ ≤ wₙ et lim(vₙ) = lim(wₙ) = ℓ, alors lim(uₙ) = ℓ"
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(uₙ) pour uₙ = (3n² + 2n - 1)/(n² + 5).",
+          "solution_steps": [
+            "Forme ∞/∞ : factoriser par le terme dominant (n² au numérateur et dénominateur)",
+            "uₙ = n²(3 + 2/n - 1/n²) / n²(1 + 5/n²)",
+            "uₙ = (3 + 2/n - 1/n²) / (1 + 5/n²)",
+            "Quand n → +∞ : 2/n → 0, 1/n² → 0, 5/n² → 0",
+            "Limite : (3 + 0 - 0) / (1 + 0) = 3"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer lim(n³ - 2n)",
+          "Calculer lim((5n + 3)/(2n - 1))",
+          "Limite de vₙ = (0.8)ⁿ ?"
+        ],
+        "common_mistakes": [
+          "Ne pas identifier le terme dominant",
+          "Erreur dans les opérations sur +∞",
+          "Oublier de lever la forme indéterminée"
+        ],
+        "summary": {
+          "key_concept": "Pour calculer une limite, identifier le terme dominant et utiliser les opérations sur les limites",
+          "key_method": "Forme indéterminée → Factoriser terme dominant → Simplifier → Limite",
+          "next_step": "Utiliser les limites pour l'étude qualitative"
+        }
+      }
+    },
+    {
+      "id": "M1-38",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Suites et algorithmes - Seuils et itérations",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Programmer le calcul des termes d'une suite",
+        "Déterminer un seuil (plus petit n tel que uₙ > A)",
+        "Implémenter des algorithmes itératifs"
+      ],
+      "prerequisites": [
+        "Suites récurrentes",
+        "Structures algorithmiques",
+        "Boucles while"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["algorithme", "seuil", "programmation", "itération"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon relie les suites aux algorithmes. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de programmer des suites en 11 minutes.",
+        "method_step_by_step": [
+          "Calcul des termes : boucle for pour calculer u₀, u₁, ..., uₙ",
+          "Suite récurrente : u ← u₀, puis répéter u ← f(u)",
+          "Recherche de seuil : boucle while tant que uₙ < A, incrémenter n",
+          "Affichage : stocker dans une liste ou afficher directement",
+          "Exemple Python : u = u0; n = 0; while u < A: u = f(u); n += 1"
+        ],
+        "guided_example": {
+          "statement": "Suite uₙ₊₁ = 1.5uₙ avec u₀ = 1. Trouver le plus petit n tel que uₙ > 1000.",
+          "solution_steps": [
+            "Algorithme :",
+            "u ← 1",
+            "n ← 0",
+            "Tant que u ≤ 1000 :",
+            "    u ← 1.5 × u",
+            "    n ← n + 1",
+            "Retourner n",
+            "Exécution : u₀=1, u₁=1.5, u₂=2.25, ..., u₁₇=1319.48",
+            "Réponse : n = 17"
+          ]
+        },
+        "quick_exercises": [
+          "Programmer le calcul des 10 premiers termes de uₙ = 2n + 3",
+          "Suite vₙ₊₁ = vₙ² avec v₀ = 0.9. À partir de quel rang vₙ < 0.01 ?",
+          "Modifier l'algorithme pour stocker tous les termes dans une liste"
+        ],
+        "common_mistakes": [
+          "Oublier d'incrémenter n dans la boucle while",
+          "Condition stricte vs large (< vs ≤)",
+          "Initialisation incorrecte de u et n"
+        ],
+        "summary": {
+          "key_concept": "Les suites se programment naturellement avec des boucles for (termes) ou while (seuil)",
+          "key_method": "Initialiser u₀, n → Boucle itération/condition → Retourner résultat",
+          "next_step": "Appliquer les suites à la modélisation"
+        }
+      }
+    },
+    {
+      "id": "M1-39",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Modélisation avec les suites - Applications concrètes",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Modéliser des phénomènes discrets avec des suites",
+        "Choisir entre suite arithmétique et géométrique",
+        "Résoudre des problèmes d'évolution (démographie, finance)"
+      ],
+      "prerequisites": [
+        "Suites arithmétiques et géométriques",
+        "Limites",
+        "Interprétation"
+      ],
+      "content_types": ["video", "problem-solving", "quiz", "exercises"],
+      "tags": ["modélisation", "application", "évolution", "finance"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon applique les suites à des situations réelles. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de modéliser et résoudre des problèmes en 12 minutes.",
+        "method_step_by_step": [
+          "Évolution additive constante → suite arithmétique (ex: épargne mensuelle)",
+          "Évolution multiplicative constante → suite géométrique (ex: intérêts composés)",
+          "Identifier u₀ (état initial), r ou q (taux d'évolution)",
+          "Utiliser formules explicites pour prédictions",
+          "Interpréter les résultats dans le contexte"
+        ],
+        "guided_example": {
+          "statement": "Un capital de 1000€ placé à 5% par an (intérêts composés). a) Modéliser par une suite. b) Capital après 10 ans ? c) Quand dépasser 2000€ ?",
+          "solution_steps": [
+            "a) Uₙ = capital après n années. U₀ = 1000. Chaque année : Uₙ₊₁ = 1.05·Uₙ",
+            "Suite géométrique de raison q = 1.05",
+            "b) Uₙ = 1000 × (1.05)ⁿ. U₁₀ = 1000 × (1.05)¹⁰ ≈ 1628.89€",
+            "c) Résoudre 1000(1.05)ⁿ > 2000 ⇔ (1.05)ⁿ > 2",
+            "⇔ n·ln(1.05) > ln(2) ⇔ n > ln(2)/ln(1.05) ≈ 14.2",
+            "Réponse : après 15 ans"
+          ]
+        },
+        "quick_exercises": [
+          "Population croît de 300 habitants/an. u₀ = 10000. Population après 20 ans ?",
+          "Médicament : concentration divisée par 2 chaque 6h. C₀ = 100mg. Après 24h ?",
+          "Épargne : 100€/mois + intérêts 0.5%/mois. Suite récurrente ?"
+        ],
+        "common_mistakes": [
+          "Confondre taux d'intérêt (5%) et coefficient multiplicateur (1.05)",
+          "Mal choisir entre arithmétique et géométrique",
+          "Oublier l'unité de temps dans l'interprétation"
+        ],
+        "summary": {
+          "key_concept": "Les suites modélisent les évolutions discrètes : arithmétique (additif) ou géométrique (multiplicatif)",
+          "key_method": "Contexte → Type suite → u₀, r/q → Formule → Calcul → Interpréter",
+          "next_step": "Synthèse du chapitre suites"
+        }
+      }
+    },
+    {
+      "id": "M1-40",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Synthèse Suites Numériques - Révision complète",
+      "duration_min": 14,
+      "difficulty": 5,
+      "xp_reward": 150,
+      "objectives": [
+        "Maîtriser arithmétiques, géométriques et leurs sommes",
+        "Étudier variations, limites, modélisation",
+        "Résoudre un problème complet de synthèse"
+      ],
+      "prerequisites": [
+        "Toutes les leçons M1-28 à M1-39",
+        "Maîtrise globale des suites"
+      ],
+      "content_types": ["video", "synthesis", "quiz", "exercises"],
+      "tags": ["synthèse", "révision", "suites", "complet"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon synthétise l'intégralité du chapitre Suites Numériques. Elle clôt ce chapitre en Première. L'objectif est de consolider toutes les compétences en 14 minutes.",
+        "method_step_by_step": [
+          "Fiche récap : définitions, notations, types (arithmétique, géométrique, récurrente)",
+          "Tableau comparatif : arithmétique vs géométrique (relation, terme général, somme)",
+          "Méthodes : variations (uₙ₊₁ - uₙ ou uₙ₊₁/uₙ), limites (terme dominant)",
+          "Applications : modélisation, algorithmes, seuils",
+          "Exercice type BAC complet"
+        ],
+        "guided_example": {
+          "statement": "Suite (uₙ) : u₀ = 2, uₙ₊₁ = 0.5uₙ + 3. a) Nature ? b) Calculer u₁, u₂. c) Conjecturer limite. d) Suite (vₙ) : vₙ = uₙ - 6. Montrer que (vₙ) est géométrique. e) Limite de (uₙ).",
+          "solution_steps": [
+            "a) Ni arithmétique (pas + constante), ni géométrique (pas × constante). Récurrente affine.",
+            "b) u₁ = 0.5(2) + 3 = 4, u₂ = 0.5(4) + 3 = 5",
+            "c) Termes : 2, 4, 5, 5.5, 5.75, ... semble converger vers 6",
+            "d) vₙ₊₁ = uₙ₊₁ - 6 = (0.5uₙ + 3) - 6 = 0.5uₙ - 3 = 0.5(uₙ - 6) = 0.5vₙ",
+            "Géométrique de raison q = 0.5. v₀ = u₀ - 6 = -4",
+            "e) vₙ = -4(0.5)ⁿ → 0 car |q| < 1. uₙ = vₙ + 6 → 6",
+            "Réponse : lim(uₙ) = 6"
+          ]
+        },
+        "quick_exercises": [
+          "QCM : 12 questions flash sur tout le chapitre",
+          "Vrai/Faux : Une suite géométrique de raison négative diverge toujours (FAUX)",
+          "Problème ouvert : trouver tous les n tels que uₙ = vₙ pour deux suites données"
+        ],
+        "common_mistakes": [
+          "Confondre les formules arithmétique et géométrique",
+          "Erreur dans le calcul des sommes",
+          "Négliger le changement de variable pour simplifier une suite"
+        ],
+        "summary": {
+          "key_concept": "Les suites modélisent des phénomènes discrets. Les types arithmétique et géométrique ont des formules explicites.",
+          "key_method": "Identifier type → Appliquer formules → Variations/Limites → Interpréter",
+          "next_step": "Chapitre suivant : Fonction Exponentielle (M1-41)"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

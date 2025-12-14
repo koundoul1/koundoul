@@ -1,0 +1,1722 @@
+{
+  "bank_info": {
+    "title": "Banque QCM - Chimie Terminale",
+    "level": "Terminale",
+    "subject": "Chimie",
+    "type": "QCM",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Transformations acide-base",
+      "Transformations en solution aqueuse",
+      "Évolution temporelle des systèmes",
+      "Stratégies de synthèse organique"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "questions": [
+    {
+      "id": "CHIT-QCM-001",
+      "chapter": "Acide-base",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Un acide selon Brønsted est une espèce qui :",
+      "options": [
+        "Capte un proton H⁺",
+        "Cède un proton H⁺",
+        "Capte un électron",
+        "Cède un électron"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acide de Brønsted : donneur de proton H⁺.",
+      "related_lesson": "CHIT-01"
+    },
+    {
+      "id": "CHIT-QCM-002",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une base selon Brønsted est une espèce qui :",
+      "options": [
+        "Cède un proton H⁺",
+        "Capte un proton H⁺",
+        "Cède un électron",
+        "Capte un électron"
+      ],
+      "correct_answer": 1,
+      "explanation": "Base de Brønsted : accepteur de proton H⁺.",
+      "related_lesson": "CHIT-01"
+    },
+    {
+      "id": "CHIT-QCM-003",
+      "chapter": "Acide-base",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Le couple acide/base de l'eau est :",
+      "options": [
+        "H₃O⁺/H₂O",
+        "H₂O/OH⁻",
+        "Les deux",
+        "Aucun"
+      ],
+      "correct_answer": 2,
+      "explanation": "L'eau est amphotère : H₃O⁺/H₂O et H₂O/OH⁻.",
+      "related_lesson": "CHIT-02"
+    },
+    {
+      "id": "CHIT-QCM-004",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La relation entre pH et [H₃O⁺] est :",
+      "options": [
+        "pH = log[H₃O⁺]",
+        "pH = -log[H₃O⁺]",
+        "pH = [H₃O⁺]",
+        "pH = 1/[H₃O⁺]"
+      ],
+      "correct_answer": 1,
+      "explanation": "pH = -log[H₃O⁺] (définition).",
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-QCM-005",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "À 25°C, le produit ionique de l'eau Ke vaut :",
+      "options": [
+        "10⁻¹⁴",
+        "10⁻⁷",
+        "1",
+        "14"
+      ],
+      "correct_answer": 0,
+      "explanation": "Ke = [H₃O⁺][OH⁻] = 10⁻¹⁴ à 25°C.",
+      "related_lesson": "CHIT-02"
+    },
+    {
+      "id": "CHIT-QCM-006",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La constante d'acidité Ka est définie par :",
+      "options": [
+        "Ka = [A⁻]/[AH]",
+        "Ka = [H₃O⁺][A⁻]/[AH]",
+        "Ka = [AH]/[A⁻]",
+        "Ka = [OH⁻][AH]/[A⁻]"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ka = [H₃O⁺][A⁻]/[AH] pour le couple AH/A⁻.",
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-QCM-007",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un acide fort est un acide qui :",
+      "options": [
+        "Se dissocie partiellement",
+        "Se dissocie totalement",
+        "Ne se dissocie pas",
+        "A un pH élevé"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acide fort : dissociation totale dans l'eau.",
+      "related_lesson": "CHIT-05"
+    },
+    {
+      "id": "CHIT-QCM-008",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La relation entre pKa et Ka est :",
+      "options": [
+        "pKa = log Ka",
+        "pKa = -log Ka",
+        "pKa = Ka",
+        "pKa = 1/Ka"
+      ],
+      "correct_answer": 1,
+      "explanation": "pKa = -log Ka.",
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-QCM-009",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Au point d'équivalence d'un titrage acide fort/base forte :",
+      "options": [
+        "pH = 7",
+        "pH < 7",
+        "pH > 7",
+        "pH = 14"
+      ],
+      "correct_answer": 0,
+      "explanation": "Titrage acide fort/base forte : pH = 7 à l'équivalence.",
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-QCM-010",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une solution tampon résiste aux variations de :",
+      "options": [
+        "Température",
+        "pH",
+        "Volume",
+        "Pression"
+      ],
+      "correct_answer": 1,
+      "explanation": "Solution tampon : maintient pH quasi constant.",
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-QCM-011",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La formule de Henderson-Hasselbalch est :",
+      "options": [
+        "pH = pKa + log([A⁻]/[AH])",
+        "pH = pKa - log([A⁻]/[AH])",
+        "pH = pKa × [A⁻]/[AH]",
+        "pH = pKa / [A⁻]"
+      ],
+      "correct_answer": 0,
+      "explanation": "Henderson : pH = pKa + log([A⁻]/[AH]).",
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-QCM-012",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si pH = pKa, alors :",
+      "options": [
+        "[AH] = [A⁻]",
+        "[AH] > [A⁻]",
+        "[AH] < [A⁻]",
+        "[AH] = 0"
+      ],
+      "correct_answer": 0,
+      "explanation": "Si pH = pKa : [AH] = [A⁻] (demi-équivalence).",
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-QCM-013",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un indicateur coloré change de teinte dans la zone :",
+      "options": [
+        "pH = pKa",
+        "pKa - 1 < pH < pKa + 1",
+        "pH = 7",
+        "pH = 0"
+      ],
+      "correct_answer": 1,
+      "explanation": "Zone de virage : pKa ± 1.",
+      "related_lesson": "CHIT-08"
+    },
+    {
+      "id": "CHIT-QCM-014",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le pH d'une solution d'acide faible de concentration C est :",
+      "options": [
+        "pH = -log C",
+        "pH ≈ ½(pKa - log C)",
+        "pH = pKa",
+        "pH = 7"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acide faible : pH ≈ ½(pKa - log C).",
+      "related_lesson": "CHIT-09"
+    },
+    {
+      "id": "CHIT-QCM-015",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une base faible a un pKb :",
+      "options": [
+        "Petit",
+        "Grand",
+        "Négatif",
+        "Nul"
+      ],
+      "correct_answer": 1,
+      "explanation": "Base faible : pKb élevé (Kb faible).",
+      "related_lesson": "CHIT-05"
+    },
+    {
+      "id": "CHIT-QCM-016",
+      "chapter": "Transformations en solution",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une précipitation se produit quand :",
+      "options": [
+        "Ks > Q",
+        "Q > Ks",
+        "Q = Ks",
+        "Jamais"
+      ],
+      "correct_answer": 1,
+      "explanation": "Précipitation si produit ionique Q > Ks.",
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-QCM-017",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le produit de solubilité Ks de AgCl s'écrit :",
+      "options": [
+        "Ks = [Ag⁺][Cl⁻]",
+        "Ks = [AgCl]",
+        "Ks = [Ag⁺] + [Cl⁻]",
+        "Ks = [Ag⁺]/[Cl⁻]"
+      ],
+      "correct_answer": 0,
+      "explanation": "Ks = [Ag⁺][Cl⁻] pour AgCl.",
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-QCM-018",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La conductivité d'une solution augmente avec :",
+      "options": [
+        "La concentration des ions",
+        "La température",
+        "Les deux",
+        "Aucun"
+      ],
+      "correct_answer": 2,
+      "explanation": "Conductivité augmente avec [ions] et température.",
+      "related_lesson": "CHIT-12"
+    },
+    {
+      "id": "CHIT-QCM-019",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La conductivité molaire ionique λᵢ s'exprime en :",
+      "options": [
+        "S·m²·mol⁻¹",
+        "S·mol⁻¹",
+        "m·mol⁻¹",
+        "S·m⁻¹"
+      ],
+      "correct_answer": 0,
+      "explanation": "Unité de λᵢ : S·m²·mol⁻¹.",
+      "related_lesson": "CHIT-12"
+    },
+    {
+      "id": "CHIT-QCM-020",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La loi de Kohlrausch exprime :",
+      "options": [
+        "σ = Σ λᵢ [Xᵢ]",
+        "σ = λᵢ / [Xᵢ]",
+        "σ = [Xᵢ]",
+        "σ = constante"
+      ],
+      "correct_answer": 0,
+      "explanation": "Kohlrausch : σ = Σ λᵢ [Xᵢ].",
+      "related_lesson": "CHIT-12"
+    },
+    {
+      "id": "CHIT-QCM-021",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une complexation est la formation d'un :",
+      "options": [
+        "Précipité",
+        "Ion complexe",
+        "Gaz",
+        "Acide"
+      ],
+      "correct_answer": 1,
+      "explanation": "Complexation : formation d'un ion complexe.",
+      "related_lesson": "CHIT-13"
+    },
+    {
+      "id": "CHIT-QCM-022",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La constante de formation Kf d'un complexe est :",
+      "options": [
+        "Toujours < 1",
+        "Généralement >> 1",
+        "Toujours = 1",
+        "Négative"
+      ],
+      "correct_answer": 1,
+      "explanation": "Kf très élevée pour complexes stables.",
+      "related_lesson": "CHIT-13"
+    },
+    {
+      "id": "CHIT-QCM-023",
+      "chapter": "Cinétique chimique",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "La vitesse de réaction est définie par :",
+      "options": [
+        "v = d[A]/dt",
+        "v = -d[A]/dt",
+        "v = [A]",
+        "v = 1/[A]"
+      ],
+      "correct_answer": 1,
+      "explanation": "v = -d[réactif]/dt (ou +d[produit]/dt).",
+      "related_lesson": "CHIT-21"
+    },
+    {
+      "id": "CHIT-QCM-024",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un catalyseur modifie :",
+      "options": [
+        "L'état d'équilibre",
+        "La vitesse de réaction",
+        "Les produits formés",
+        "Rien"
+      ],
+      "correct_answer": 1,
+      "explanation": "Catalyseur : accélère v, pas d'effet sur équilibre.",
+      "related_lesson": "CHIT-22"
+    },
+    {
+      "id": "CHIT-QCM-025",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le temps de demi-réaction t₁/₂ est le temps pour que :",
+      "options": [
+        "[A] = 0",
+        "[A] = [A]₀/2",
+        "[A] = 2[A]₀",
+        "[A] = [A]₀"
+      ],
+      "correct_answer": 1,
+      "explanation": "t₁/₂ : temps pour [A]₀ → [A]₀/2.",
+      "related_lesson": "CHIT-23"
+    },
+    {
+      "id": "CHIT-QCM-026",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction d'ordre 1 par rapport à A a une vitesse :",
+      "options": [
+        "v = k",
+        "v = k[A]",
+        "v = k[A]²",
+        "v = k/[A]"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ordre 1 : v = k[A].",
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-QCM-027",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour une réaction d'ordre 1, t₁/₂ dépend de :",
+      "options": [
+        "[A]₀",
+        "k seulement",
+        "[A]₀ et k",
+        "Rien"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ordre 1 : t₁/₂ = ln2/k (indépendant de [A]₀).",
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-QCM-028",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La loi d'Arrhenius relie k à :",
+      "options": [
+        "La concentration",
+        "La température",
+        "Le pH",
+        "Le volume"
+      ],
+      "correct_answer": 1,
+      "explanation": "Arrhenius : k augmente avec T.",
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-QCM-029",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La loi d'Arrhenius s'écrit :",
+      "options": [
+        "k = A·e^(-Ea/RT)",
+        "k = A·e^(Ea/RT)",
+        "k = A + Ea/RT",
+        "k = A - Ea"
+      ],
+      "correct_answer": 0,
+      "explanation": "k = A·exp(-Ea/RT).",
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-QCM-030",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Ea dans la loi d'Arrhenius représente :",
+      "options": [
+        "L'énergie des produits",
+        "L'énergie d'activation",
+        "L'enthalpie",
+        "L'énergie cinétique"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ea = énergie d'activation.",
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-QCM-031",
+      "chapter": "Synthèse organique",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une protection de fonction sert à :",
+      "options": [
+        "Augmenter le rendement",
+        "Empêcher une fonction de réagir",
+        "Purifier le produit",
+        "Colorer le produit"
+      ],
+      "correct_answer": 1,
+      "explanation": "Protection : bloquer temporairement une fonction.",
+      "related_lesson": "CHIT-31"
+    },
+    {
+      "id": "CHIT-QCM-032",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un groupe protecteur doit être :",
+      "options": [
+        "Facile à poser et retirer",
+        "Impossible à retirer",
+        "Toujours présent",
+        "Invisible"
+      ],
+      "correct_answer": 0,
+      "explanation": "Groupe protecteur : facile à mettre et enlever.",
+      "related_lesson": "CHIT-31"
+    },
+    {
+      "id": "CHIT-QCM-033",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La sélectivité d'une réaction privilégie :",
+      "options": [
+        "La formation d'un seul produit",
+        "Plusieurs produits",
+        "Pas de produit",
+        "Les réactifs"
+      ],
+      "correct_answer": 0,
+      "explanation": "Sélectivité : formation préférentielle d'un produit.",
+      "related_lesson": "CHIT-32"
+    },
+    {
+      "id": "CHIT-QCM-034",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une synthèse convergente est :",
+      "options": [
+        "Linéaire",
+        "Avec plusieurs branches qui se rejoignent",
+        "Sans étapes",
+        "Impossible"
+      ],
+      "correct_answer": 1,
+      "explanation": "Convergente : plusieurs branches → produit final.",
+      "related_lesson": "CHIT-33"
+    },
+    {
+      "id": "CHIT-QCM-035",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le rendement global d'une synthèse en 3 étapes de rendements 80%, 70%, 60% est :",
+      "options": [
+        "210%",
+        "70%",
+        "33,6%",
+        "50%"
+      ],
+      "correct_answer": 2,
+      "explanation": "R_global = 0,8 × 0,7 × 0,6 = 0,336 = 33,6%.",
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-QCM-036",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La chimie verte vise à :",
+      "options": [
+        "Utiliser des colorants verts",
+        "Réduire l'impact environnemental",
+        "Augmenter les déchets",
+        "Ralentir les réactions"
+      ],
+      "correct_answer": 1,
+      "explanation": "Chimie verte : minimiser impact écologique.",
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-QCM-037",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'économie d'atomes favorise :",
+      "options": [
+        "Beaucoup de sous-produits",
+        "L'incorporation maximale des réactifs dans le produit",
+        "Les déchets",
+        "Les réactions lentes"
+      ],
+      "correct_answer": 1,
+      "explanation": "Économie d'atomes : minimiser les sous-produits.",
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-QCM-038",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction monotope se déroule :",
+      "options": [
+        "En plusieurs étapes séparées",
+        "En une seule étape sans isoler les intermédiaires",
+        "Sans produit",
+        "Lentement"
+      ],
+      "correct_answer": 1,
+      "explanation": "Monotope : tout dans un seul réacteur.",
+      "related_lesson": "CHIT-36"
+    },
+    {
+      "id": "CHIT-QCM-039",
+      "chapter": "Spectroscopie",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "La spectroscopie IR détecte :",
+      "options": [
+        "Les liaisons chimiques",
+        "Les atomes",
+        "Les électrons",
+        "Les protons"
+      ],
+      "correct_answer": 0,
+      "explanation": "IR : vibrations des liaisons.",
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-QCM-040",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "En IR, la liaison O-H donne une bande :",
+      "options": [
+        "Vers 3000-3500 cm⁻¹ large",
+        "Vers 1700 cm⁻¹",
+        "Vers 2200 cm⁻¹",
+        "Invisible"
+      ],
+      "correct_answer": 0,
+      "explanation": "O-H : bande large vers 3000-3500 cm⁻¹.",
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-QCM-041",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "En IR, la liaison C=O apparaît vers :",
+      "options": [
+        "3000 cm⁻¹",
+        "1700 cm⁻¹",
+        "2200 cm⁻¹",
+        "500 cm⁻¹"
+      ],
+      "correct_answer": 1,
+      "explanation": "C=O : pic intense vers 1700 cm⁻¹.",
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-QCM-042",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La RMN du proton détecte les noyaux :",
+      "options": [
+        "¹H",
+        "¹²C",
+        "¹⁶O",
+        "¹⁴N"
+      ],
+      "correct_answer": 0,
+      "explanation": "RMN ¹H : détecte hydrogènes.",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-043",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "En RMN, le déplacement chimique δ s'exprime en :",
+      "options": [
+        "Hz",
+        "ppm",
+        "nm",
+        "cm⁻¹"
+      ],
+      "correct_answer": 1,
+      "explanation": "δ en ppm (parties par million).",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-044",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "En RMN, un singulet indique :",
+      "options": [
+        "Pas de voisins",
+        "1 voisin",
+        "2 voisins",
+        "3 voisins"
+      ],
+      "correct_answer": 0,
+      "explanation": "Singulet : pas de H voisins.",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-045",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La règle des (n+1)-uplets en RMN stipule qu'un proton avec n voisins donne :",
+      "options": [
+        "n pics",
+        "n+1 pics",
+        "n-1 pics",
+        "1 pic"
+      ],
+      "correct_answer": 1,
+      "explanation": "Multiplet : n+1 pics pour n voisins.",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-046",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La spectrométrie de masse mesure :",
+      "options": [
+        "Le rapport m/z",
+        "L'absorbance",
+        "Le pH",
+        "La conductivité"
+      ],
+      "correct_answer": 0,
+      "explanation": "SM : rapport masse/charge m/z.",
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-QCM-047",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le pic moléculaire M⁺ correspond à :",
+      "options": [
+        "Un fragment",
+        "La molécule entière ionisée",
+        "Un dimère",
+        "Le solvant"
+      ],
+      "correct_answer": 1,
+      "explanation": "M⁺ : ion moléculaire (masse molaire).",
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-QCM-048",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le pKa du couple CH₃COOH/CH₃COO⁻ est 4,75. À pH=4,75 :",
+      "options": [
+        "[CH₃COOH] = [CH₃COO⁻]",
+        "[CH₃COOH] > [CH₃COO⁻]",
+        "[CH₃COOH] < [CH₃COO⁻]",
+        "[CH₃COOH] = 0"
+      ],
+      "correct_answer": 0,
+      "explanation": "pH = pKa : forme acide = forme basique.",
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-QCM-049",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si pKa = 9, à pH = 8 la forme prédominante est :",
+      "options": [
+        "La forme acide",
+        "La forme basique",
+        "Les deux également",
+        "Aucune"
+      ],
+      "correct_answer": 0,
+      "explanation": "pH < pKa : forme acide majoritaire.",
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-QCM-050",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La zone tampon optimale est autour de :",
+      "options": [
+        "pH = 0",
+        "pH = pKa",
+        "pH = 14",
+        "pH = 7"
+      ],
+      "correct_answer": 1,
+      "explanation": "Tampon efficace quand pH ≈ pKa.",
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-QCM-051",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le quotient de réaction Q compare :",
+      "options": [
+        "État actuel à l'équilibre",
+        "Réactifs et produits",
+        "pH et pKa",
+        "Température"
+      ],
+      "correct_answer": 0,
+      "explanation": "Q = état actuel, K = équilibre.",
+      "related_lesson": "CHIT-14"
+    },
+    {
+      "id": "CHIT-QCM-052",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si Q < K, la réaction évolue :",
+      "options": [
+        "Vers les réactifs",
+        "Vers les produits",
+        "Pas du tout",
+        "Dans les deux sens"
+      ],
+      "correct_answer": 1,
+      "explanation": "Q < K : sens direct (formation produits).",
+      "related_lesson": "CHIT-14"
+    },
+    {
+      "id": "CHIT-QCM-053",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un catalyseur enzymatique est :",
+      "options": [
+        "Inorganique",
+        "Biologique",
+        "Gazeux",
+        "Inexistant"
+      ],
+      "correct_answer": 1,
+      "explanation": "Enzyme = catalyseur biologique.",
+      "related_lesson": "CHIT-22"
+    },
+    {
+      "id": "CHIT-QCM-054",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour une réaction d'ordre 0, la vitesse est :",
+      "options": [
+        "v = k",
+        "v = k[A]",
+        "v = k[A]²",
+        "v = 0"
+      ],
+      "correct_answer": 0,
+      "explanation": "Ordre 0 : v = k (constante).",
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-QCM-055",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction est plus rapide si :",
+      "options": [
+        "T augmente",
+        "T diminue",
+        "T constante",
+        "Pas d'effet de T"
+      ],
+      "correct_answer": 0,
+      "explanation": "Vitesse augmente avec température.",
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-QCM-056",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un solvant vert typique est :",
+      "options": [
+        "Le benzène",
+        "L'eau",
+        "Le chloroforme",
+        "Le mercure"
+      ],
+      "correct_answer": 1,
+      "explanation": "Eau = solvant écologique.",
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-QCM-057",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'analyse rétrosynthétique consiste à :",
+      "options": [
+        "Partir du produit pour remonter aux réactifs",
+        "Partir des réactifs",
+        "Ne rien analyser",
+        "Détruire le produit"
+      ],
+      "correct_answer": 0,
+      "explanation": "Rétrosynthèse : produit → réactifs.",
+      "related_lesson": "CHIT-37"
+    },
+    {
+      "id": "CHIT-QCM-058",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un doublet en RMN indique :",
+      "options": [
+        "0 voisin",
+        "1 voisin",
+        "2 voisins",
+        "3 voisins"
+      ],
+      "correct_answer": 1,
+      "explanation": "Doublet : 1 H voisin (n+1 = 2).",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-059",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un triplet en RMN indique :",
+      "options": [
+        "1 voisin",
+        "2 voisins",
+        "3 voisins",
+        "4 voisins"
+      ],
+      "correct_answer": 1,
+      "explanation": "Triplet : 2 H voisins (n+1 = 3).",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-060",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une solution avec pH = 10 est :",
+      "options": [
+        "Acide",
+        "Neutre",
+        "Basique",
+        "Impossible"
+      ],
+      "correct_answer": 2,
+      "explanation": "pH > 7 : basique.",
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-QCM-061",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour un monoacide, le taux d'avancement final τ vaut :",
+      "options": [
+        "Toujours 100%",
+        "Entre 0 et 100%",
+        "0%",
+        "Plus de 100%"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acide faible : τ < 100%, acide fort : τ = 100%.",
+      "related_lesson": "CHIT-09"
+    },
+    {
+      "id": "CHIT-QCM-062",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La solubilité diminue si :",
+      "options": [
+        "T augmente (pour la plupart des solides)",
+        "On ajoute un ion commun",
+        "Le volume augmente",
+        "Jamais"
+      ],
+      "correct_answer": 1,
+      "explanation": "Effet d'ion commun : diminue solubilité.",
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-QCM-063",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'énergie d'activation Ea représente :",
+      "options": [
+        "L'énergie minimale pour réagir",
+        "L'énergie totale",
+        "L'enthalpie",
+        "La chaleur"
+      ],
+      "correct_answer": 0,
+      "explanation": "Ea : barrière énergétique à franchir.",
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-QCM-064",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un catalyseur homogène est :",
+      "options": [
+        "Dans la même phase que les réactifs",
+        "Dans une phase différente",
+        "Solide uniquement",
+        "Gazeux uniquement"
+      ],
+      "correct_answer": 0,
+      "explanation": "Homogène : même phase.",
+      "related_lesson": "CHIT-22"
+    },
+    {
+      "id": "CHIT-QCM-065",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le facteur E (Environmental factor) mesure :",
+      "options": [
+        "Le rendement",
+        "La masse de déchets / masse de produit",
+        "La température",
+        "Le pH"
+      ],
+      "correct_answer": 1,
+      "explanation": "Facteur E : kg déchets / kg produit.",
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-QCM-066",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'intégration en RMN donne :",
+      "options": [
+        "Le nombre de H équivalents",
+        "Le déplacement chimique",
+        "La constante de couplage",
+        "La température"
+      ],
+      "correct_answer": 0,
+      "explanation": "Intégration : nombre relatif de H.",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-067",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "En RMN, les protons d'un CH₃ voisin d'un CH₂ apparaissent comme :",
+      "options": [
+        "Singulet",
+        "Doublet",
+        "Triplet",
+        "Quadruplet"
+      ],
+      "correct_answer": 2,
+      "explanation": "CH₃ à côté de CH₂ : triplet (2 voisins).",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-068",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "À l'équivalence d'un titrage acide faible/base forte :",
+      "options": [
+        "pH = 7",
+        "pH > 7",
+        "pH < 7",
+        "pH = pKa"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acide faible/base forte : pH > 7 à l'équivalence.",
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-QCM-069",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le volume équivalent Véq lors d'un titrage permet de calculer :",
+      "options": [
+        "La concentration de l'espèce titrée",
+        "Le pH",
+        "La température",
+        "Le pKa"
+      ],
+      "correct_answer": 0,
+      "explanation": "À l'équivalence : n(acide) = n(base).",
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-QCM-070",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un ligand en complexation est :",
+      "options": [
+        "L'ion central",
+        "Une espèce qui se lie à l'ion central",
+        "Un solvant",
+        "Un catalyseur"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ligand : espèce coordinée à l'ion métallique.",
+      "related_lesson": "CHIT-13"
+    },
+    {
+      "id": "CHIT-QCM-071",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour une réaction d'ordre 2, si on double [A] :",
+      "options": [
+        "v double",
+        "v quadruple",
+        "v reste constante",
+        "v diminue"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ordre 2 : v ∝ [A]², donc v × 4.",
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-QCM-072",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un réactif en excès sert à :",
+      "options": [
+        "Augmenter le rendement",
+        "Ralentir la réaction",
+        "Diluer",
+        "Rien"
+      ],
+      "correct_answer": 0,
+      "explanation": "Excès : déplace équilibre, augmente rendement.",
+      "related_lesson": "CHIT-38"
+    },
+    {
+      "id": "CHIT-QCM-073",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "En spectrométrie de masse, le pic de base est :",
+      "options": [
+        "Le plus petit",
+        "Le plus intense",
+        "Absent",
+        "Toujours à m/z = 100"
+      ],
+      "correct_answer": 1,
+      "explanation": "Pic de base : intensité maximale (100%).",
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-QCM-074",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si [H₃O⁺] = 10⁻⁵ mol/L, le pH vaut :",
+      "options": [
+        "5",
+        "-5",
+        "9",
+        "10⁻⁵"
+      ],
+      "correct_answer": 0,
+      "explanation": "pH = -log(10⁻⁵) = 5.",
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-QCM-075",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Relation entre Ka et Kb d'un couple conjugué :",
+      "options": [
+        "Ka × Kb = Ke",
+        "Ka + Kb = Ke",
+        "Ka = Kb",
+        "Ka - Kb = Ke"
+      ],
+      "correct_answer": 0,
+      "explanation": "Ka × Kb = Ke = 10⁻¹⁴.",
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-QCM-076",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un électrolyte fort est :",
+      "options": [
+        "Totalement dissocié",
+        "Partiellement dissocié",
+        "Non dissocié",
+        "Gazeux"
+      ],
+      "correct_answer": 0,
+      "explanation": "Électrolyte fort : dissociation totale.",
+      "related_lesson": "CHIT-15"
+    },
+    {
+      "id": "CHIT-QCM-077",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La constante de vitesse k dépend de :",
+      "options": [
+        "La concentration",
+        "La température",
+        "Le volume",
+        "La pression (pour solides)"
+      ],
+      "correct_answer": 1,
+      "explanation": "k dépend de T (loi d'Arrhenius).",
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-QCM-078",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La recristallisation permet de :",
+      "options": [
+        "Purifier un solide",
+        "Chauffer",
+        "Mélanger",
+        "Détruire"
+      ],
+      "correct_answer": 0,
+      "explanation": "Recristallisation : purification par dissolution/cristallisation.",
+      "related_lesson": "CHIT-39"
+    },
+    {
+      "id": "CHIT-QCM-079",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un quadruplet en RMN correspond à :",
+      "options": [
+        "2 voisins",
+        "3 voisins",
+        "4 voisins",
+        "1 voisin"
+      ],
+      "correct_answer": 1,
+      "explanation": "Quadruplet : 3 H voisins (n+1 = 4).",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-080",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un acide polyprotique peut céder :",
+      "options": [
+        "Un seul H⁺",
+        "Plusieurs H⁺",
+        "Aucun H⁺",
+        "Des électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Polyprotique : plusieurs protons.",
+      "related_lesson": "CHIT-10"
+    },
+    {
+      "id": "CHIT-QCM-081",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La loi de Beer-Lambert relie :",
+      "options": [
+        "A = ε × l × c",
+        "A = c/l",
+        "A = ε + c",
+        "A = log c"
+      ],
+      "correct_answer": 0,
+      "explanation": "Beer-Lambert : A = ε·l·c.",
+      "related_lesson": "CHIT-16"
+    },
+    {
+      "id": "CHIT-QCM-082",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction exothermique :",
+      "options": [
+        "Libère de la chaleur",
+        "Absorbe de la chaleur",
+        "Ne change pas T",
+        "Est toujours rapide"
+      ],
+      "correct_answer": 0,
+      "explanation": "Exothermique : libération d'énergie.",
+      "related_lesson": "CHIT-26"
+    },
+    {
+      "id": "CHIT-QCM-083",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La chromatographie sur colonne sépare selon :",
+      "options": [
+        "L'affinité avec la phase stationnaire",
+        "La masse",
+        "Le pH",
+        "La température"
+      ],
+      "correct_answer": 0,
+      "explanation": "Chromatographie : séparation par affinités.",
+      "related_lesson": "CHIT-39"
+    },
+    {
+      "id": "CHIT-QCM-084",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le pic M+2 en spectrométrie de masse peut indiquer :",
+      "options": [
+        "Présence de Cl ou Br",
+        "Absence d'halogène",
+        "Un artefact",
+        "L'azote"
+      ],
+      "correct_answer": 0,
+      "explanation": "M+2 : isotopes ³⁵Cl/³⁷Cl ou ⁷⁹Br/⁸¹Br.",
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-QCM-085",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une base forte comme NaOH a un pKb :",
+      "options": [
+        "Très petit (négatif)",
+        "Très grand",
+        "Égal à 7",
+        "Égal à 14"
+      ],
+      "correct_answer": 0,
+      "explanation": "Base forte : pKb très petit.",
+      "related_lesson": "CHIT-05"
+    },
+    {
+      "id": "CHIT-QCM-086",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un milieu oxydant favorise :",
+      "options": [
+        "Les oxydations",
+        "Les réductions",
+        "Aucune réaction",
+        "Les précipitations"
+      ],
+      "correct_answer": 0,
+      "explanation": "Oxydant : accepte e⁻, provoque oxydation.",
+      "related_lesson": "CHIT-17"
+    },
+    {
+      "id": "CHIT-QCM-087",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dégénérescence de l'ordre se produit quand :",
+      "options": [
+        "Un réactif est en large excès",
+        "Tous réactifs équimolaires",
+        "Aucun réactif",
+        "T = 0 K"
+      ],
+      "correct_answer": 0,
+      "explanation": "Dégénérescence : excès rend [A] quasi constant.",
+      "related_lesson": "CHIT-27"
+    },
+    {
+      "id": "CHIT-QCM-088",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La distillation fractionnée sépare selon :",
+      "options": [
+        "Les températures d'ébullition",
+        "Les masses molaires",
+        "Les couleurs",
+        "Les pH"
+      ],
+      "correct_answer": 0,
+      "explanation": "Distillation : séparation par Téb.",
+      "related_lesson": "CHIT-40"
+    },
+    {
+      "id": "CHIT-QCM-089",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La constante de couplage J en RMN s'exprime en :",
+      "options": [
+        "Hz",
+        "ppm",
+        "cm⁻¹",
+        "eV"
+      ],
+      "correct_answer": 0,
+      "explanation": "J en Hz (indépendante du champ).",
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-QCM-090",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "À la demi-équivalence d'un titrage :",
+      "options": [
+        "pH = pKa",
+        "pH = 7",
+        "pH = 14",
+        "pH = 0"
+      ],
+      "correct_answer": 0,
+      "explanation": "Demi-équivalence : pH = pKa.",
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-QCM-091",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le potentiel standard E° mesure :",
+      "options": [
+        "Le pouvoir oxydant/réducteur",
+        "Le pH",
+        "La température",
+        "La concentration"
+      ],
+      "correct_answer": 0,
+      "explanation": "E° : pouvoir oxydant d'un couple redox.",
+      "related_lesson": "CHIT-17"
+    },
+    {
+      "id": "CHIT-QCM-092",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un mécanisme réactionnel décrit :",
+      "options": [
+        "Les étapes élémentaires",
+        "Le rendement",
+        "Le pH",
+        "La couleur"
+      ],
+      "correct_answer": 0,
+      "explanation": "Mécanisme : succession d'étapes élémentaires.",
+      "related_lesson": "CHIT-28"
+    },
+    {
+      "id": "CHIT-QCM-093",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un synthon en rétrosynthèse est :",
+      "options": [
+        "Un fragment idéalisé",
+        "Un réactif réel",
+        "Un produit",
+        "Un solvant"
+      ],
+      "correct_answer": 0,
+      "explanation": "Synthon : fragment théorique en rétrosynthèse.",
+      "related_lesson": "CHIT-37"
+    },
+    {
+      "id": "CHIT-QCM-094",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'UV-visible détecte :",
+      "options": [
+        "Les liaisons simples",
+        "Les systèmes conjugués",
+        "Les liaisons C-H",
+        "Les noyaux"
+      ],
+      "correct_answer": 1,
+      "explanation": "UV-visible : transitions π → π* (conjugaison).",
+      "related_lesson": "CHIT-44"
+    },
+    {
+      "id": "CHIT-QCM-095",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le coefficient de dissociation α d'un acide faible est :",
+      "options": [
+        "Toujours 1",
+        "Entre 0 et 1",
+        "Supérieur à 1",
+        "Négatif"
+      ],
+      "correct_answer": 1,
+      "explanation": "α = [dissocié]/[initial], entre 0 et 1.",
+      "related_lesson": "CHIT-09"
+    },
+    {
+      "id": "CHIT-QCM-096",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une pile électrochimique convertit :",
+      "options": [
+        "Énergie chimique en électrique",
+        "Énergie électrique en chimique",
+        "Chaleur en lumière",
+        "Rien"
+      ],
+      "correct_answer": 0,
+      "explanation": "Pile : chimique → électrique.",
+      "related_lesson": "CHIT-18"
+    },
+    {
+      "id": "CHIT-QCM-097",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'approximation de l'état quasi-stationnaire suppose que :",
+      "options": [
+        "[intermédiaire] ≈ constant",
+        "[réactif] = 0",
+        "v = 0",
+        "T = constante"
+      ],
+      "correct_answer": 0,
+      "explanation": "AEQS : d[intermédiaire]/dt ≈ 0.",
+      "related_lesson": "CHIT-28"
+    },
+    {
+      "id": "CHIT-QCM-098",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'extraction liquide-liquide utilise :",
+      "options": [
+        "Deux phases non miscibles",
+        "Une seule phase",
+        "Un solide",
+        "Un gaz"
+      ],
+      "correct_answer": 0,
+      "explanation": "Extraction : partage entre 2 liquides non miscibles.",
+      "related_lesson": "CHIT-39"
+    },
+    {
+      "id": "CHIT-QCM-099",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La RMN du carbone-13 détecte :",
+      "options": [
+        "Les protons",
+        "Les carbones",
+        "Les oxygènes",
+        "Les azotes"
+      ],
+      "correct_answer": 1,
+      "explanation": "RMN ¹³C : environnement des carbones.",
+      "related_lesson": "CHIT-45"
+    },
+    {
+      "id": "CHIT-QCM-100",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La capacité tampon d'une solution est maximale quand :",
+      "options": [
+        "pH = pKa",
+        "pH = 0",
+        "pH = 14",
+        "[acide] = 0"
+      ],
+      "correct_answer": 0,
+      "explanation": "Capacité max quand pH = pKa.",
+      "related_lesson": "CHIT-07"
+    }
+  ]
+}

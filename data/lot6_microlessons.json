@@ -1,0 +1,598 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-21 à M1-30",
+    "chapters": ["Dérivation (suite)", "Suites Numériques (début)"],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Suite du chapitre Dérivation (M1-21 à M1-27) + Début du chapitre Suites Numériques (M1-28 à M1-30)"
+  },
+  "lessons": [
+    
+    {
+      "id": "M1-21",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivée de fonctions composées - Introduction",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Comprendre la notion de fonction composée",
+        "Reconnaître une composition f(g(x))",
+        "Appliquer la formule (f∘g)' = g' × f'∘g de manière intuitive"
+      ],
+      "prerequisites": [
+        "Dérivées usuelles",
+        "Dérivée produit et quotient",
+        "Fonction composée"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["composée", "chaîne", "dérivation", "formule"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon introduit la dérivation des fonctions composées. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de comprendre cette règle puissante en 12 minutes.",
+        "method_step_by_step": [
+          "Fonction composée : f∘g (x) = f(g(x)) - on applique d'abord g, puis f",
+          "Exemple : h(x) = (2x+1)³ est une composée : u(x) = 2x+1 et f(u) = u³",
+          "Formule de dérivation : (f∘g)' = g' × (f'∘g)",
+          "En pratique : dériver 'l'intérieur' × dériver 'l'extérieur' évalué en l'intérieur",
+          "Application type : dériver (ax+b)^n → n(ax+b)^(n-1) × a"
+        ],
+        "guided_example": {
+          "statement": "Dériver h(x) = (3x - 2)⁴.",
+          "solution_steps": [
+            "Identifier : u(x) = 3x - 2 (intérieur), f(u) = u⁴ (extérieur)",
+            "Dériver l'intérieur : u'(x) = 3",
+            "Dériver l'extérieur : f'(u) = 4u³",
+            "Appliquer la formule : h'(x) = u'(x) × f'(u(x)) = 3 × 4(3x-2)³",
+            "Simplifier : h'(x) = 12(3x - 2)³"
+          ]
+        },
+        "quick_exercises": [
+          "Dériver g(x) = (x² + 1)⁵",
+          "Dériver f(x) = (2x - 5)³",
+          "Dériver h(x) = √(x + 3) (indice : √u avec u = x+3)"
+        ],
+        "common_mistakes": [
+          "Oublier de dériver l'intérieur (u')",
+          "Ne pas évaluer f' en u(x)",
+          "Confondre avec la dérivée d'un produit"
+        ],
+        "summary": {
+          "key_concept": "Pour dériver f(g(x)), on multiplie la dérivée de l'intérieur g'(x) par la dérivée de l'extérieur f' évaluée en g(x)",
+          "key_method": "Identifier u et f → u' et f' → h' = u' × f'(u)",
+          "next_step": "Appliquer à des cas plus complexes"
+        }
+      }
+    },
+    {
+      "id": "M1-22",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Applications de la dérivation - Sens de variation",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Utiliser le signe de f' pour déterminer les variations de f",
+        "Dresser un tableau de variations complet",
+        "Déterminer les extremums locaux"
+      ],
+      "prerequisites": [
+        "Fonction dérivée",
+        "Étude de signe",
+        "Tableau de variations"
+      ],
+      "content_types": ["video", "graphing", "quiz", "exercises"],
+      "tags": ["variations", "extremum", "tableau", "croissance"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon montre comment utiliser la dérivée pour étudier les variations d'une fonction. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de lier f' et variations en 11 minutes.",
+        "method_step_by_step": [
+          "Théorème fondamental : Si f'(x) > 0 sur I, alors f est croissante sur I",
+          "Si f'(x) < 0 sur I, alors f est décroissante sur I",
+          "Si f'(x) = 0, on a un point critique (potentiellement extremum)",
+          "Méthode : calculer f', étudier son signe, dresser le tableau de variations",
+          "Identifier les extremums : changement de signe de f'"
+        ],
+        "guided_example": {
+          "statement": "Étudier les variations de f(x) = x³ - 3x + 2.",
+          "solution_steps": [
+            "Calculer f'(x) = 3x² - 3 = 3(x² - 1) = 3(x-1)(x+1)",
+            "Étude du signe : f'(x) > 0 si x < -1 ou x > 1, f'(x) < 0 si -1 < x < 1",
+            "Points critiques : x = -1 (max local) et x = 1 (min local)",
+            "f(-1) = -1 + 3 + 2 = 4, f(1) = 1 - 3 + 2 = 0",
+            "Tableau : f croissante sur ]-∞;-1], décroissante sur [-1;1], croissante sur [1;+∞["
+          ]
+        },
+        "quick_exercises": [
+          "Étudier les variations de g(x) = x² - 4x + 1",
+          "Déterminer l'extremum de h(x) = -2x² + 8x - 5",
+          "Si f'(x) = (x-2)(x+3), où f admet-elle un maximum ?"
+        ],
+        "common_mistakes": [
+          "Confondre les points où f'(x) = 0 et les extremums",
+          "Inverser croissance/décroissance",
+          "Oublier de calculer f(x) aux points critiques"
+        ],
+        "summary": {
+          "key_concept": "Le signe de f' détermine le sens de variation de f : f' > 0 ⇒ f croissante, f' < 0 ⇒ f décroissante",
+          "key_method": "f' → Signe de f' → Tableau de variations → Extremums",
+          "next_step": "Appliquer aux problèmes d'optimisation"
+        }
+      }
+    },
+    {
+      "id": "M1-23",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Optimisation - Problèmes de maximum et minimum",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Modéliser un problème d'optimisation",
+        "Utiliser la dérivée pour trouver l'extremum",
+        "Interpréter le résultat dans le contexte"
+      ],
+      "prerequisites": [
+        "Variations et dérivée",
+        "Extremums",
+        "Modélisation"
+      ],
+      "content_types": ["video", "problem-solving", "quiz", "exercises"],
+      "tags": ["optimisation", "maximum", "minimum", "application"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon applique la dérivation aux problèmes d'optimisation. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de résoudre des problèmes concrets en 13 minutes.",
+        "method_step_by_step": [
+          "Lire le problème et identifier la grandeur à optimiser",
+          "Exprimer cette grandeur comme fonction d'une variable",
+          "Définir le domaine de validité",
+          "Calculer la dérivée et résoudre f'(x) = 0",
+          "Vérifier que c'est bien un maximum/minimum et interpréter"
+        ],
+        "guided_example": {
+          "statement": "Un rectangle a un périmètre de 20 cm. Quelle largeur maximise son aire ?",
+          "solution_steps": [
+            "Variables : largeur x, longueur L. Contrainte : 2x + 2L = 20 ⇒ L = 10 - x",
+            "Aire : A(x) = x·L = x(10-x) = 10x - x²",
+            "Domaine : 0 < x < 10 (dimensions positives)",
+            "A'(x) = 10 - 2x. A'(x) = 0 ⇒ x = 5",
+            "A''(x) = -2 < 0 : maximum. A(5) = 25 cm²",
+            "Conclusion : largeur optimale 5 cm, c'est un carré"
+          ]
+        },
+        "quick_exercises": [
+          "Maximiser le produit xy sachant x + y = 10",
+          "Une boîte sans couvercle, base carrée x×x, hauteur h. Volume 32 cm³. Minimiser surface totale",
+          "Un projectile suit h(t) = -5t² + 20t + 2. Hauteur maximale ?"
+        ],
+        "common_mistakes": [
+          "Ne pas définir le domaine de validité",
+          "Oublier de vérifier la nature de l'extremum (max ou min)",
+          "Confondre la valeur optimale de x et la valeur optimale de f(x)"
+        ],
+        "summary": {
+          "key_concept": "La dérivée permet de résoudre des problèmes d'optimisation en trouvant les points critiques",
+          "key_method": "Modéliser → f(x) → Domaine → f'(x) = 0 → Vérifier nature → Interpréter",
+          "next_step": "Étudier les applications physiques de la dérivée"
+        }
+      }
+    },
+    {
+      "id": "M1-24",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Applications en Physique - Vitesse et accélération",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Interpréter la dérivée comme vitesse instantanée",
+        "Comprendre l'accélération comme dérivée seconde",
+        "Résoudre des problèmes de cinématique"
+      ],
+      "prerequisites": [
+        "Dérivation",
+        "Notion physique de vitesse",
+        "Fonction du temps"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["physique", "vitesse", "accélération", "cinématique"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon relie la dérivation à la physique. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de comprendre les applications physiques en 11 minutes.",
+        "method_step_by_step": [
+          "Position x(t) → Vitesse v(t) = x'(t) → Accélération a(t) = v'(t) = x''(t)",
+          "Interprétation : dérivée = taux de variation instantané",
+          "Vitesse instantanée : pente de la tangente à la courbe position-temps",
+          "Accélération : variation de vitesse par unité de temps",
+          "Unités : position (m), vitesse (m/s), accélération (m/s²)"
+        ],
+        "guided_example": {
+          "statement": "Un mobile a pour position x(t) = 2t³ - 9t² + 12t (en m, t en s). Trouver vitesse et accélération à t = 2s.",
+          "solution_steps": [
+            "Vitesse : v(t) = x'(t) = 6t² - 18t + 12",
+            "v(2) = 6(4) - 18(2) + 12 = 24 - 36 + 12 = 0 m/s (arrêt instantané)",
+            "Accélération : a(t) = v'(t) = 12t - 18",
+            "a(2) = 12(2) - 18 = 6 m/s² (accélération positive)",
+            "Interprétation : à t=2s, le mobile est momentanément arrêté mais accélère"
+          ]
+        },
+        "quick_exercises": [
+          "Position x(t) = -5t² + 20t. Vitesse à t = 1s ?",
+          "Quand la vitesse est-elle nulle pour x(t) = t³ - 3t ?",
+          "Si v(t) = 10 - 2t, quelle est l'accélération ?"
+        ],
+        "common_mistakes": [
+          "Confondre position et vitesse",
+          "Oublier les unités",
+          "Ne pas interpréter le signe (vitesse négative = recul)"
+        ],
+        "summary": {
+          "key_concept": "La dérivée première donne la vitesse, la dérivée seconde donne l'accélération",
+          "key_method": "x(t) → v(t) = x'(t) → a(t) = v'(t) → Interpréter avec unités",
+          "next_step": "Synthèse du chapitre dérivation"
+        }
+      }
+    },
+    {
+      "id": "M1-25",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Équation de tangente - Applications",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Déterminer l'équation de tangente en un point quelconque",
+        "Résoudre des problèmes de tangentes communes",
+        "Utiliser les tangentes pour des approximations"
+      ],
+      "prerequisites": [
+        "Équation de tangente",
+        "Dérivée",
+        "Équations de droites"
+      ],
+      "content_types": ["video", "graphing", "quiz", "exercises"],
+      "tags": ["tangente", "équation", "approximation", "application"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon approfondit l'utilisation des tangentes. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de maîtriser les applications pratiques en 10 minutes.",
+        "method_step_by_step": [
+          "Rappel : équation y = f'(a)(x-a) + f(a)",
+          "Tangente passant par un point donné : résoudre pour a",
+          "Tangentes parallèles/perpendiculaires : utiliser les pentes",
+          "Approximation linéaire : f(x) ≈ f(a) + f'(a)(x-a) près de a",
+          "Applications : calculs approchés, estimations"
+        ],
+        "guided_example": {
+          "statement": "Trouver l'équation de la tangente à f(x) = 1/x parallèle à la droite y = -4x + 1.",
+          "solution_steps": [
+            "Pente recherchée : m = -4 (parallèle)",
+            "f'(x) = -1/x². On cherche a tel que f'(a) = -4",
+            "-1/a² = -4 ⇒ a² = 1/4 ⇒ a = ±1/2",
+            "Pour a = 1/2 : f(1/2) = 2, équation y = -4(x - 1/2) + 2 = -4x + 4",
+            "Pour a = -1/2 : f(-1/2) = -2, équation y = -4(x + 1/2) - 2 = -4x - 4"
+          ]
+        },
+        "quick_exercises": [
+          "Tangente à f(x) = x² perpendiculaire à y = -x/4",
+          "Approximer √26 avec f(x) = √x et tangente en x = 25",
+          "Tangente à g(x) = x³ passant par l'origine"
+        ],
+        "common_mistakes": [
+          "Confondre parallèle (même pente) et perpendiculaire (pentes opposées inverses)",
+          "Oublier de calculer f(a) dans l'équation",
+          "Ne pas vérifier toutes les solutions possibles"
+        ],
+        "summary": {
+          "key_concept": "L'équation de tangente permet de résoudre divers problèmes géométriques et d'effectuer des approximations",
+          "key_method": "Condition sur pente → Résoudre f'(a) = m → Équation tangente",
+          "next_step": "Étudier les algorithmes de dérivation"
+        }
+      }
+    },
+    {
+      "id": "M1-26",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Algorithmes et dérivation - Méthode de Newton",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Comprendre la méthode de Newton pour résoudre f(x) = 0",
+        "Implémenter l'algorithme itératif",
+        "Interpréter graphiquement la convergence"
+      ],
+      "prerequisites": [
+        "Tangente",
+        "Dérivée",
+        "Algorithmes (boucles)"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["algorithme", "Newton", "itération", "résolution"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la méthode de Newton, algorithme puissant de résolution. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de comprendre cet outil en 12 minutes.",
+        "method_step_by_step": [
+          "Principe : approcher une racine de f par itérations successives",
+          "Formule : x(n+1) = x(n) - f(x(n))/f'(x(n))",
+          "Interprétation : suivre les tangentes successives",
+          "Algorithme : choisir x₀, itérer jusqu'à convergence (|x(n+1) - x(n)| < ε)",
+          "Conditions : f dérivable, f' ≠ 0, bon choix de x₀"
+        ],
+        "guided_example": {
+          "statement": "Approximer √2 en résolvant f(x) = x² - 2 = 0 avec x₀ = 1.",
+          "solution_steps": [
+            "f(x) = x² - 2, f'(x) = 2x",
+            "Formule : x(n+1) = x(n) - (x(n)² - 2)/(2x(n))",
+            "x₀ = 1",
+            "x₁ = 1 - (1-2)/2 = 1 + 0.5 = 1.5",
+            "x₂ = 1.5 - (2.25-2)/3 = 1.5 - 0.0833 ≈ 1.4167",
+            "x₃ ≈ 1.4142 (convergence rapide vers √2 ≈ 1.4142)",
+            "Graphiquement : tangentes successives se rapprochent de la racine"
+          ]
+        },
+        "quick_exercises": [
+          "Programmer Newton pour résoudre x³ - 5 = 0",
+          "Combien d'itérations pour obtenir 10⁻⁶ de précision ?",
+          "Que se passe-t-il si f'(x₀) = 0 ?"
+        ],
+        "common_mistakes": [
+          "Diviser par f au lieu de f' dans la formule",
+          "Mauvais choix de x₀ (divergence)",
+          "Ne pas tester la convergence"
+        ],
+        "summary": {
+          "key_concept": "La méthode de Newton utilise les tangentes successives pour approximer rapidement une racine de f(x) = 0",
+          "key_method": "x₀ → x(n+1) = x(n) - f(x(n))/f'(x(n)) → Itérer → Convergence",
+          "next_step": "Synthèse finale du chapitre dérivation"
+        }
+      }
+    },
+    {
+      "id": "M1-27",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Synthèse Dérivation - Révision complète",
+      "duration_min": 14,
+      "difficulty": 5,
+      "xp_reward": 150,
+      "objectives": [
+        "Maîtriser toutes les règles de dérivation",
+        "Résoudre un problème complet mobilisant le chapitre",
+        "Préparer l'évaluation sur la dérivation"
+      ],
+      "prerequisites": [
+        "Toutes les leçons M1-13 à M1-26",
+        "Maîtrise globale de la dérivation"
+      ],
+      "content_types": ["video", "synthesis", "quiz", "exercises"],
+      "tags": ["synthèse", "révision", "dérivation", "complet"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon synthétise l'intégralité du chapitre Dérivation. Elle clôt ce chapitre en Première. L'objectif est de consolider toutes les compétences en 14 minutes.",
+        "method_step_by_step": [
+          "Fiche récapitulative : définitions, formules usuelles, opérations",
+          "Tableau : fonction → dérivée (usuelles, composées, produit, quotient)",
+          "Méthodologie : quel outil pour quel type de fonction ?",
+          "Applications : variations, optimisation, tangente, physique",
+          "Exercice type BAC complet avec étude de fonction"
+        ],
+        "guided_example": {
+          "statement": "Étude complète de f(x) = x/(x²+1) : dérivée, variations, tangente à l'origine, limites.",
+          "solution_steps": [
+            "a) Dérivée quotient : f'(x) = [(x²+1) - x(2x)]/(x²+1)² = (1-x²)/(x²+1)²",
+            "b) Signe de f' : 1-x² > 0 ⇔ -1 < x < 1. Max en x=1, min en x=-1",
+            "c) Tableau : f croissante sur [-1;1], décroissante ailleurs. f(1)=1/2, f(-1)=-1/2",
+            "d) Tangente en 0 : f(0)=0, f'(0)=1, équation y = x",
+            "e) Limites : lim(x→±∞) f(x) = 0 (asymptote horizontale y=0)"
+          ]
+        },
+        "quick_exercises": [
+          "QCM : 15 questions flash sur tout le chapitre",
+          "Vrai/Faux : Si f'(a) = 0, alors f admet un extremum en a (FAUX)",
+          "Problème ouvert : déterminer f sachant f'(x) = 2x+1 et f(0) = 3"
+        ],
+        "common_mistakes": [
+          "Confondre les formules produit et quotient",
+          "Oublier les domaines de dérivabilité",
+          "Manquer de rigueur dans l'étude complète"
+        ],
+        "summary": {
+          "key_concept": "La dérivation est l'outil central pour étudier les fonctions : variations, extremums, tangentes, optimisation",
+          "key_method": "Fonction → Dérivée → Signe → Variations → Applications",
+          "next_step": "Chapitre suivant : Suites Numériques (M1-28)"
+        }
+      }
+    },
+    {
+      "id": "M1-28",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Introduction aux suites - Définition et notation",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Comprendre la notion de suite numérique",
+        "Notation (uₙ) et u₀, u₁, u₂...",
+        "Distinction suite finie / suite infinie"
+      ],
+      "prerequisites": [
+        "Fonctions",
+        "Notation indicielle",
+        "Ensemble ℕ"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["suite", "introduction", "notation", "définition"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon introduit les suites numériques. Elle ouvre le chapitre Suites Numériques de Première. L'objectif est de comprendre ce nouvel objet mathématique en 9 minutes.",
+        "method_step_by_step": [
+          "Définition : suite = fonction de ℕ dans ℝ, n ↦ uₙ",
+          "Notation : (uₙ) désigne la suite, uₙ est le terme de rang n",
+          "Indices : u₀ (premier terme), u₁, u₂, ... uₙ (terme général)",
+          "Suite finie : nombre fini de termes (u₀ à uₙ)",
+          "Suite infinie : définie pour tout n ∈ ℕ"
+        ],
+        "guided_example": {
+          "statement": "Soit (uₙ) définie par uₙ = 2n + 1. Calculer u₀, u₁, u₂, u₅.",
+          "solution_steps": [
+            "u₀ = 2(0) + 1 = 1",
+            "u₁ = 2(1) + 1 = 3",
+            "u₂ = 2(2) + 1 = 5",
+            "u₅ = 2(5) + 1 = 11",
+            "La suite commence par : 1, 3, 5, 7, 9, 11, ... (nombres impairs)"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer les 4 premiers termes de vₙ = n²",
+          "Si uₙ = 3n - 2, que vaut u₁₀ ?",
+          "Décrire en français la suite wₙ = 1/n"
+        ],
+        "common_mistakes": [
+          "Confondre (uₙ) (la suite) et uₙ (un terme)",
+          "Oublier que n ∈ ℕ (entiers naturels)",
+          "Mélanger indice et valeur du terme"
+        ],
+        "summary": {
+          "key_concept": "Une suite (uₙ) est une fonction définie sur ℕ, où uₙ représente le terme de rang n",
+          "key_method": "Formule uₙ → Remplacer n par 0, 1, 2... → Calculer termes",
+          "next_step": "Étudier les différents modes de génération des suites"
+        }
+      }
+    },
+    {
+      "id": "M1-29",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Modes de génération - Explicite et récurrente",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Distinguer suite explicite et suite récurrente",
+        "Calculer des termes avec chaque mode",
+        "Passer de l'un à l'autre si possible"
+      ],
+      "prerequisites": [
+        "Définition de suite",
+        "Notation indicielle",
+        "Fonction"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["explicite", "récurrente", "génération", "formule"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les deux modes principaux de définition des suites. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de maîtriser ces notions en 11 minutes.",
+        "method_step_by_step": [
+          "Suite explicite : uₙ exprimé directement en fonction de n (ex: uₙ = 3n + 2)",
+          "Suite récurrente : uₙ₊₁ exprimé en fonction de uₙ (ex: uₙ₊₁ = 2uₙ + 1, u₀ = 1)",
+          "Calcul explicite : remplacer n par la valeur voulue",
+          "Calcul récurrent : partir de u₀, calculer u₁, puis u₂, etc.",
+          "Avantages : explicite (accès direct), récurrente (modélisation)"
+        ],
+        "guided_example": {
+          "statement": "Calculer les 4 premiers termes de : a) vₙ = n² - 1, b) wₙ₊₁ = wₙ + 3 avec w₀ = 2.",
+          "solution_steps": [
+            "a) Explicite : v₀ = -1, v₁ = 0, v₂ = 3, v₃ = 8",
+            "b) Récurrente : w₀ = 2",
+            "w₁ = w₀ + 3 = 2 + 3 = 5",
+            "w₂ = w₁ + 3 = 5 + 3 = 8",
+            "w₃ = w₂ + 3 = 8 + 3 = 11",
+            "Observation : (wₙ) semble être une suite arithmétique"
+          ]
+        },
+        "quick_exercises": [
+          "Suite uₙ = 2ⁿ : calculer u₀, u₁, u₂, u₃",
+          "Suite vₙ₊₁ = vₙ/2 avec v₀ = 16 : calculer v₄",
+          "Donner une formule explicite pour wₙ₊₁ = wₙ + 3, w₀ = 2"
+        ],
+        "common_mistakes": [
+          "Oublier la condition initiale dans une suite récurrente",
+          "Confondre uₙ₊₁ et uₙ dans la relation de récurrence",
+          "Croire que toute suite récurrente a une forme explicite simple"
+        ],
+        "summary": {
+          "key_concept": "Une suite peut être définie explicitement (uₙ = f(n)) ou récursivement (uₙ₊₁ = f(uₙ))",
+          "key_method": "Explicite : n → uₙ direct | Récurrente : u₀ → u₁ → u₂ → ...",
+          "next_step": "Étudier les suites arithmétiques"
+        }
+      }
+    },
+    {
+      "id": "M1-30",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Suites Numériques",
+      "title": "Suites arithmétiques - Définition et propriétés",
+      "duration_min": 11,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir une suite arithmétique : uₙ₊₁ = uₙ + r",
+        "Calculer le terme général : uₙ = u₀ + nr",
+        "Reconnaître une suite arithmétique"
+      ],
+      "prerequisites": [
+        "Suites",
+        "Modes de génération",
+        "Calcul algébrique"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["arithmétique", "raison", "terme général", "propriétés"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les suites arithmétiques, cas particulier fondamental. Elle s'inscrit dans le chapitre Suites Numériques de Première. L'objectif est de maîtriser ce type de suite en 11 minutes.",
+        "method_step_by_step": [
+          "Définition : (uₙ) arithmétique ⇔ uₙ₊₁ = uₙ + r (r = raison constante)",
+          "Forme explicite : uₙ = u₀ + nr",
+          "Reconnaissance : différence constante entre termes consécutifs",
+          "Propriété : uₙ = (uₙ₋₁ + uₙ₊₁)/2 (moyenne arithmétique)",
+          "Graphiquement : points alignés (fonction affine discrète)"
+        ],
+        "guided_example": {
+          "statement": "La suite (uₙ) définie par u₀ = 3 et uₙ₊₁ = uₙ + 4. a) Montrer que c'est arithmétique. b) Formule de uₙ. c) Calculer u₁₀.",
+          "solution_steps": [
+            "a) Relation uₙ₊₁ = uₙ + 4 : raison r = 4 constante → arithmétique",
+            "b) Formule : uₙ = u₀ + nr = 3 + 4n",
+            "c) u₁₀ = 3 + 4(10) = 43",
+            "Vérification : u₁ = 7, u₂ = 11, u₃ = 15, ... (écart de 4)",
+            "Graphe : droite discrète passant par (0,3) de pente 4"
+          ]
+        },
+        "quick_exercises": [
+          "Suite : 5, 8, 11, 14, ... Raison ? Formule de uₙ ?",
+          "Si u₀ = -2 et r = 3, calculer u₅",
+          "Est-ce arithmétique ? 1, 4, 9, 16, ... (Non, ce sont des carrés)"
+        ],
+        "common_mistakes": [
+          "Confondre raison r et premier terme u₀",
+          "Oublier le n dans uₙ = u₀ + nr",
+          "Penser que toute suite croissante est arithmétique"
+        ],
+        "summary": {
+          "key_concept": "Une suite arithmétique a une différence constante r entre termes consécutifs : uₙ = u₀ + nr",
+          "key_method": "Vérifier uₙ₊₁ - uₙ = r → Formule uₙ = u₀ + nr → Calculs",
+          "next_step": "Étudier la somme des termes d'une suite arithmétique"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

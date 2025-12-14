@@ -1,0 +1,543 @@
+{
+  "metadata": {
+    "lot_number": 33,
+    "lot_name": "Lot 33 - Cinétique & Thermodynamique",
+    "level": "Terminale",
+    "subject": "Chimie",
+    "prefix": "CT",
+    "chapter": "Cinétique & Thermodynamique",
+    "lesson_range": "CT-01 à CT-13",
+    "total_lessons": 13
+  },
+  "lessons": [
+    {
+      "id": "CT-01",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Vitesse de réaction - Définition",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 105,
+      "objectives": ["Définir la vitesse volumique de réaction", "Calculer v = 1/V × dx/dt", "Comprendre l'avancement de réaction x(t)", "Interpréter une courbe x = f(t)"],
+      "prerequisites": ["C1-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["vitesse", "réaction"],
+      "detailed_content": {
+        "introduction": "La cinétique chimique étudie la vitesse des réactions chimiques. Toutes les réactions ne se déroulent pas à la même vitesse : certaines sont quasi instantanées (combustion), d'autres très lentes (rouille du fer).",
+        "key_concepts": [
+          { "name": "Avancement", "explanation": "x (mol) mesure évolution au cours du temps. Plus x augmente vite, plus réaction rapide", "example": "x = f(t)" },
+          { "name": "Vitesse", "explanation": "v = (1/V) × (dx/dt). Unité : mol·L⁻¹·s⁻¹. Vitesse par unité de volume", "example": "Définition" },
+          { "name": "Graphique", "explanation": "Pente tangente à courbe x(t) proportionnelle à v. v diminue généralement dans le temps", "example": "Détermination" },
+          { "name": "Vitesses", "explanation": "v₀ maximale généralement. v → 0 à l'équilibre", "example": "Évolution" }
+        ],
+        "guided_example": {
+          "statement": "Volume 2L, x passe 0.1→0.3 mol entre 10s et 30s. v moyenne ?",
+          "solution_steps": ["dx/dt ≈ 0.01 mol/s", "v = (1/2)×0.01 = 0.005 mol·L⁻¹·s⁻¹"]
+        },
+        "quick_exercises": [
+          "Volume 500mL, tangente à 5min : pente 0.06 mol/min. v à cet instant ?",
+          "Vitesse volumique"
+        ],
+        "common_mistakes": [
+          "Oublier diviser par V",
+          "Erreurs unités"
+        ],
+        "summary": {
+          "key_concept": "v = (1/V) × (dx/dt). Unité : mol·L⁻¹·s⁻¹",
+          "key_method": "Tangente à x(t) pour détermination graphique",
+          "next_step": "Facteurs cinétiques"
+        }
+      }
+    },
+    {
+      "id": "CT-02",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Facteurs cinétiques - Concentration",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Comprendre l'influence de la concentration sur la vitesse", "Expliquer au niveau microscopique", "Identifier l'ordre de réaction", "Relier concentration et fréquence de collisions"],
+      "prerequisites": ["CT-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["concentration", "cinétique"],
+      "detailed_content": {
+        "introduction": "La vitesse d'une réaction chimique dépend de plusieurs facteurs appelés facteurs cinétiques. Le premier et le plus important est la concentration des réactifs.",
+        "key_concepts": [
+          { "name": "Influence", "explanation": "Plus concentration élevée, plus réaction rapide. Plus molécules, plus collisions", "example": "Principe" },
+          { "name": "Microscopique", "explanation": "Collisions nécessaires. Plus [A]×[B] grand, plus fréquentes. Collisions efficaces : orientation + énergie", "example": "Interprétation" },
+          { "name": "Loi", "explanation": "v = k [A]ᵅ[B]ᵝ. k constante, α,β ordres. α+β ordre global. Expérimentale, PAS stœchiométriques", "example": "Vitesse" },
+          { "name": "Ordres", "explanation": "Ordre 0 : v indépendante de [A]. Ordre 1 : v = k[A]. Ordre 2 : v = k[A]²", "example": "Exemples" }
+        ],
+        "guided_example": {
+          "statement": "A + B → C. [A] double, v double. Ordre de A ?",
+          "solution_steps": ["[A] ×2, v ×2", "v ∝ [A]", "Ordre 1 par rapport à A"]
+        },
+        "quick_exercises": [
+          "2A → produits. [A] 0.1→0.2, v 0.02→0.08. Ordre ?",
+          "Détermination ordre"
+        ],
+        "common_mistakes": [
+          "Confondre ordre et coefficients stœchiométriques",
+          "Croire ordre toujours égal au coefficient"
+        ],
+        "summary": {
+          "key_concept": "Concentration ↗ ⇒ vitesse ↗. v = k[A]ᵅ[B]ᵝ",
+          "key_method": "Ordre déterminé expérimentalement. Plus molécules, plus collisions",
+          "next_step": "Facteur température"
+        }
+      }
+    },
+    {
+      "id": "CT-03",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Facteurs cinétiques - Température",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Comprendre l'influence de la température sur la vitesse", "Expliquer par l'énergie d'activation", "Connaître la loi d'Arrhenius", "Relier température et constante de vitesse k"],
+      "prerequisites": ["CT-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["température", "Arrhenius"],
+      "detailed_content": {
+        "introduction": "La température est un facteur cinétique majeur. Une augmentation de température accélère généralement considérablement les réactions chimiques.",
+        "key_concepts": [
+          { "name": "Influence", "explanation": "T ↗ 10°C multiplie souvent v par 2-3. T ↗ ⇒ k ↗ ⇒ v ↗. Contrôlable de l'extérieur", "example": "Effet" },
+          { "name": "Énergie", "explanation": "Ea barrière énergétique. Seules molécules avec E ≥ Ea réagissent. T ↗ ⇒ plus molécules avec E ≥ Ea", "example": "Activation" },
+          { "name": "Arrhenius", "explanation": "k = A exp(-Ea/RT). k augmente exponentiellement avec T. Plus Ea grand, plus sensible à T", "example": "Loi" },
+          { "name": "Utilisation", "explanation": "ln(k) = ln(A) - Ea/(RT). Droite ln(k) vs 1/T. Pente = -Ea/R", "example": "Linéarisation" }
+        ],
+        "guided_example": {
+          "statement": "Ea = 50 kJ/mol. T : 20°C → 40°C. Évolution v ?",
+          "solution_steps": ["T ↗ augmente k exponentiellement", "v augmente significativement (×2-4)"]
+        },
+        "quick_exercises": [
+          "300K : k=0.01, 320K : k=0.04. Effet de T ?",
+          "Température"
+        ],
+        "common_mistakes": [
+          "Confondre °C et K",
+          "Oublier effet exponentiel"
+        ],
+        "summary": {
+          "key_concept": "T ↗ ⇒ k ↗ ⇒ v ↗ exponentiellement. Loi d'Arrhenius : k = A exp(-Ea/RT)",
+          "key_method": "Énergie d'activation Ea : barrière à franchir. Règle empirique : T+10°C ⇒ v×2-3",
+          "next_step": "Catalyse homogène"
+        }
+      }
+    },
+    {
+      "id": "CT-04",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Catalyse homogène",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 105,
+      "objectives": ["Définir la catalyse homogène", "Comprendre le rôle du catalyseur", "Expliquer l'abaissement de Ea", "Identifier des exemples de catalyse homogène"],
+      "prerequisites": ["CT-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["catalyse", "homogène"],
+      "detailed_content": {
+        "introduction": "Un catalyseur est une espèce chimique qui accélère une réaction sans être consommée. La catalyse homogène se produit lorsque le catalyseur est dans la même phase que les réactifs.",
+        "key_concepts": [
+          { "name": "Homogène", "explanation": "Catalyseur même phase que réactifs. Mélange moléculaire. Difficulté récupération", "example": "Définition" },
+          { "name": "Rôle", "explanation": "Chemin alternatif avec Ea plus faible. Forme intermédiaires, régénéré. Ea diminue ⇒ k ↗", "example": "Mécanisme" },
+          { "name": "Effet", "explanation": "Diminue Ea. N'affecte PAS équilibre thermodynamique (position équilibre)", "example": "Barrière" },
+          { "name": "Exemples", "explanation": "H⁺ ou OH⁻ en solution. Complexes métalliques. Enzymes", "example": "Cas" }
+        ],
+        "guided_example": {
+          "statement": "Hydrolyse saccharose lente pH neutre, rapide acide. Rôle de H⁺ ?",
+          "solution_steps": ["H⁺ catalyseur homogène", "Abaisse Ea, accélère", "Régénéré (catalyse acide)"]
+        },
+        "quick_exercises": [
+          "Décomposition H₂O₂ sans catalyseur : lente. Avec Fe³⁺ : rapide. Type catalyse ? Ea ?",
+          "Catalyse homogène"
+        ],
+        "common_mistakes": [
+          "Confondre homogène/hétérogène",
+          "Croire catalyseur consommé"
+        ],
+        "summary": {
+          "key_concept": "Catalyse homogène : même phase. Catalyseur non consommé, régénéré",
+          "key_method": "Ea diminue ⇒ k augmente ⇒ v augmente. Pas d'effet sur équilibre",
+          "next_step": "Catalyse hétérogène"
+        }
+      }
+    },
+    {
+      "id": "CT-05",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Catalyse hétérogène",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 105,
+      "objectives": ["Définir la catalyse hétérogène", "Comprendre le rôle de la surface", "Identifier les étapes (adsorption, réaction, désorption)", "Connaître des exemples industriels"],
+      "prerequisites": ["CT-04"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["catalyse", "hétérogène"],
+      "detailed_content": {
+        "introduction": "La catalyse hétérogène se produit lorsque le catalyseur est dans une phase différente des réactifs. C'est la forme de catalyse la plus utilisée dans l'industrie chimique.",
+        "key_concepts": [
+          { "name": "Hétérogène", "explanation": "Catalyseur phase différente. Souvent solide avec réactifs gaz/liquide. Séparation facile", "example": "Définition" },
+          { "name": "Mécanisme", "explanation": "1) Adsorption réactifs sur surface, 2) Réaction à la surface (Ea abaissée), 3) Désorption produits", "example": "3 étapes" },
+          { "name": "Surface", "explanation": "Vitesse dépend surface. Grands surfaces : catalyseurs divisés, poreux, nanoparticules", "example": "Importance" },
+          { "name": "Industriel", "explanation": "Pot catalytique (Pt, Pd, Rh). NH₃ (Fe divisé). Hydrogénation huiles (Ni). Craquage (zéolithes)", "example": "Applications" }
+        ],
+        "guided_example": {
+          "statement": "Pot catalytique : gaz sur Pt solide. Type catalyse ?",
+          "solution_steps": ["Phases différentes ⇒ hétérogène", "Adsorption, réaction, désorption à surface Pt"]
+        },
+        "quick_exercises": [
+          "Hydrogénation huile → margarine avec Ni divisé. Type ? Rôle surface ? Étapes ?",
+          "Catalyse hétérogène"
+        ],
+        "common_mistakes": [
+          "Confondre homogène/hétérogène",
+          "Oublier importance surface"
+        ],
+        "summary": {
+          "key_concept": "Catalyse hétérogène : phases différentes. Souvent solide + gaz/liquide",
+          "key_method": "3 étapes : adsorption - réaction - désorption. Grande surface ⇒ efficace",
+          "next_step": "Catalyse enzymatique"
+        }
+      }
+    },
+    {
+      "id": "CT-06",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Catalyse enzymatique",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Définir une enzyme et son rôle", "Comprendre la spécificité enzymatique", "Connaître le modèle clé-serrure", "Identifier les facteurs influençant l'activité enzymatique"],
+      "prerequisites": ["CT-04"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["enzyme", "catalyse"],
+      "detailed_content": {
+        "introduction": "Les enzymes sont les catalyseurs du vivant. Ce sont des protéines qui accélèrent les réactions biochimiques dans les cellules.",
+        "key_concepts": [
+          { "name": "Enzyme", "explanation": "Protéine catalyseur réaction biochimique. Très efficace (facteur 10⁶ à 10¹²). Non consommée", "example": "Définition" },
+          { "name": "Spécificité", "explanation": "1 enzyme, 1 substrat/réaction. Lien structure 3D, site actif forme complémentaire", "example": "Caractéristique" },
+          { "name": "Modèle", "explanation": "E+S ⇌ ES → E+P. Clé-serrure : substrat s'adapte site actif. Ajustement induit", "example": "Mécanisme" },
+          { "name": "Facteurs", "explanation": "T : activité optimale (≈37°C humains). pH optimal. [substrat] : saturant. Inhibiteurs", "example": "Influences" }
+        ],
+        "guided_example": {
+          "statement": "Catalase décompose H₂O₂ → H₂O+O₂. Rôle ?",
+          "solution_steps": ["Biocatalyseur", "Accélère, abaisse Ea", "Très spécifique, non consommée"]
+        },
+        "quick_exercises": [
+          "Amylase chauffée 80°C, refroidie. Teste amidon : aucune réaction. Pourquoi ?",
+          "Catalyse enzymatique"
+        ],
+        "common_mistakes": [
+          "Croire enzymes consommées",
+          "Confondre enzyme/substrat"
+        ],
+        "summary": {
+          "key_concept": "Enzyme = biocatalyseur (protéine). Très spécifique (1 enzyme, 1 substrat/réaction)",
+          "key_method": "Modèle clé-serrure (site actif). Sensible à T et pH (dénaturation)",
+          "next_step": "Transformation spontanée"
+        }
+      }
+    },
+    {
+      "id": "CT-07",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Transformations spontanées - Introduction",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 105,
+      "objectives": ["Définir une transformation spontanée", "Comprendre le sens d'évolution d'un système", "Distinguer spontané et rapide", "Introduire le critère d'évolution"],
+      "prerequisites": ["C1-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["spontané", "thermodynamique"],
+      "detailed_content": {
+        "introduction": "La thermodynamique chimique étudie l'évolution des systèmes chimiques et prédit le sens des transformations.",
+        "key_concepts": [
+          { "name": "Spontanée", "explanation": "Peut se produire sans intervention extérieure (sans travail, sans courant). Évolue vers équilibre", "example": "Définition" },
+          { "name": "Évolution", "explanation": "Hors équilibre évolue vers équilibre. Dépend composition initiale, conditions, propriétés. Équilibre dynamique", "example": "Sens" },
+          { "name": "Spontané ≠ rapide", "explanation": "Spontanéité : critère thermodynamique (peut avoir lieu ?). Vitesse : critère cinétique (combien temps ?)", "example": "Distinction" },
+          { "name": "Critère", "explanation": "ΔG < 0 : spontanée sens direct. ΔG > 0 : non spontanée. ΔG = 0 : équilibre", "example": "Introduction" }
+        ],
+        "guided_example": {
+          "statement": "Vinaigre + bicarbonate → CO₂. Spontané ? Rapide ?",
+          "solution_steps": ["Oui spontanée", "Oui rapide aussi"]
+        },
+        "quick_exercises": [
+          "Graphite → diamant à T,P ambiantes vs neutralisation acide/base. Spontanéité ? Vitesse ?",
+          "Transformations spontanées"
+        ],
+        "common_mistakes": [
+          "Confondre spontané et rapide",
+          "Croire spontané = toujours complet"
+        ],
+        "summary": {
+          "key_concept": "Spontané : peut se produire sans apport énergie. Spontané ≠ rapide",
+          "key_method": "Critère : ΔG < 0 (spontané). Système évolue vers équilibre",
+          "next_step": "Équilibre chimique"
+        }
+      }
+    },
+    {
+      "id": "CT-08",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Équilibre chimique - Définition",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Définir l'état d'équilibre chimique", "Comprendre l'équilibre dynamique", "Écrire la constante d'équilibre K", "Distinguer équilibre et état final"],
+      "prerequisites": ["CT-07"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["équilibre", "constante"],
+      "detailed_content": {
+        "introduction": "Un système chimique atteint l'état d'équilibre lorsque les réactions directe et inverse se produisent à la même vitesse. L'équilibre n'est pas un état figé mais un équilibre dynamique.",
+        "key_concepts": [
+          { "name": "Équilibre", "explanation": "Composition constante. v_directe = v_inverse. Réactions continuent (pas figé). Équilibre dynamique", "example": "Définition" },
+          { "name": "Constante", "explanation": "K = ([C]ᶜ[D]ᵈ) / ([A]ᵃ[B]ᵇ) à l'équilibre. K sans unité. K dépend UNIQUEMENT de T", "example": "Formulation" },
+          { "name": "Interprétation", "explanation": "K >> 1 : vers produits. K << 1 : vers réactifs. K ≈ 1 : coexistent", "example": "Signification" },
+          { "name": "État final", "explanation": "Équilibre ou réaction totale. Réaction totale : K >> 1, réactif épuisé", "example": "Cas" }
+        ],
+        "guided_example": {
+          "statement": "N₂+3H₂ ⇌ 2NH₃, K=0.5 à 400°C. Écrire K.",
+          "solution_steps": ["K = [NH₃]² / ([N₂][H₂]³) = 0.5", "K < 1 : peu déplacé vers NH₃"]
+        },
+        "quick_exercises": [
+          "2SO₂+O₂ ⇌ 2SO₃. [SO₂]=0.1, [O₂]=0.05, [SO₃]=0.4. K ?",
+          "Constante d'équilibre"
+        ],
+        "common_mistakes": [
+          "Croire équilibre figé",
+          "Oublier exposants"
+        ],
+        "summary": {
+          "key_concept": "Équilibre : v_directe = v_inverse. K = [produits]^coeff / [réactifs]^coeff",
+          "key_method": "K dépend uniquement de T. K >> 1 : vers produits, K << 1 : vers réactifs",
+          "next_step": "Loi de Le Chatelier"
+        }
+      }
+    },
+    {
+      "id": "CT-09",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Loi de Le Chatelier",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Énoncer la loi de Le Chatelier", "Prédire le sens de déplacement d'un équilibre", "Appliquer aux modifications de concentration, T, P", "Comprendre le principe de modération"],
+      "prerequisites": ["CT-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Le Chatelier", "équilibre"],
+      "detailed_content": {
+        "introduction": "La loi de Le Chatelier permet de prévoir comment un système à l'équilibre réagit à une perturbation extérieure.",
+        "key_concepts": [
+          { "name": "Loi", "explanation": "Système évolue sens opposant à perturbation. Principe modération. Compense partiellement", "example": "Énoncé" },
+          { "name": "Concentration", "explanation": "[Réactif] ↗ ⇒ équilibre → produits. [Produit] ↗ ⇒ équilibre → réactifs", "example": "Effet" },
+          { "name": "Température", "explanation": "T ↗ ⇒ sens endothermique. T ↘ ⇒ sens exothermique. K varie avec T", "example": "Effet" },
+          { "name": "Pression", "explanation": "P ↗ (gaz) ⇒ moins moles gaz. P ↘ ⇒ plus moles gaz", "example": "Effet" }
+        ],
+        "guided_example": {
+          "statement": "2SO₂+O₂ ⇌ 2SO₃ (exothermique). Favoriser SO₃ ?",
+          "solution_steps": ["[SO₂] ou [O₂] ↗", "Retirer SO₃", "T ↘", "P ↗"]
+        },
+        "quick_exercises": [
+          "A+B ⇌ C (endothermique). a) Ajouter A. b) Retirer C. c) T ↗. Sens ?",
+          "Loi de Le Chatelier"
+        ],
+        "common_mistakes": [
+          "Inverser sens déplacement",
+          "Oublier K varie avec T"
+        ],
+        "summary": {
+          "key_concept": "Le Chatelier : système s'oppose à perturbation. [Réactif] ↗ ⇒ produits",
+          "key_method": "T ↗ ⇒ sens endothermique. P ↗ ⇒ moins moles gaz",
+          "next_step": "Enthalpie de réaction"
+        }
+      }
+    },
+    {
+      "id": "CT-10",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Thermodynamique - Enthalpie de réaction",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 105,
+      "objectives": ["Définir l'enthalpie de réaction ΔH", "Distinguer réactions exothermiques et endothermiques", "Calculer ΔH avec les enthalpies de formation", "Interpréter le signe de ΔH"],
+      "prerequisites": ["CT-07"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["enthalpie", "thermodynamique"],
+      "detailed_content": {
+        "introduction": "L'enthalpie est une grandeur thermodynamique qui mesure l'énergie d'un système. L'enthalpie de réaction quantifie l'énergie échangée sous forme de chaleur.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "ΔH = H_produits - H_réactifs. Chaleur à pression constante. kJ/mol", "example": "Formulation" },
+          { "name": "Exothermique", "explanation": "ΔH < 0. Dégage chaleur. H_produits < H_réactifs. Milieu s'échauffe", "example": "Signe" },
+          { "name": "Endothermique", "explanation": "ΔH > 0. Absorbe chaleur. H_produits > H_réactifs. Milieu se refroidit", "example": "Signe" },
+          { "name": "Calcul", "explanation": "ΔH = ΣΔHf°(produits) - ΣΔHf°(réactifs). Loi de Hess", "example": "Formation" }
+        ],
+        "guided_example": {
+          "statement": "CH₄ + 2O₂ → CO₂ + 2H₂O, ΔH° = -890 kJ/mol. Interpréter.",
+          "solution_steps": ["ΔH° < 0 : exothermique", "Dégage 890 kJ/mol CH₄", "Milieu s'échauffe"]
+        },
+        "quick_exercises": [
+          "C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O. ΔHf° données. Calculer ΔH°.",
+          "Enthalpie"
+        ],
+        "common_mistakes": [
+          "Confondre signe ΔH",
+          "Oublier coefficients"
+        ],
+        "summary": {
+          "key_concept": "ΔH < 0 : exothermique (dégage). ΔH > 0 : endothermique (absorbe)",
+          "key_method": "Loi de Hess : ΔH = ΣΔHf°(produits) - ΣΔHf°(réactifs)",
+          "next_step": "Énergie d'activation"
+        }
+      }
+    },
+    {
+      "id": "CT-11",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Énergie d'activation - Diagramme énergétique",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Définir l'énergie d'activation Ea", "Interpréter un diagramme énergétique", "Distinguer Ea et ΔH", "Comprendre le rôle de Ea dans la cinétique"],
+      "prerequisites": ["CT-03", "CT-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["activation", "diagramme"],
+      "detailed_content": {
+        "introduction": "L'énergie d'activation est la barrière énergétique que les réactifs doivent franchir pour se transformer en produits.",
+        "key_concepts": [
+          { "name": "Ea", "explanation": "Énergie minimale réactifs. Ea = E_transition - E_réactifs. > 0. Plus Ea grande, plus lent", "example": "Définition" },
+          { "name": "Diagramme", "explanation": "Energie vs avancement. Maximum = complexe activé. Courbe vers produits", "example": "Représentation" },
+          { "name": "Exo/Endo", "explanation": "Exothermique : produits plus bas. Endothermique : produits plus haut. Ea dir - Ea inv = -ΔH", "example": "Types" },
+          { "name": "Ea ≠ ΔH", "explanation": "Ea : cinétique (vitesse). ΔH : thermodynamique (exo/endo). Exo peut avoir grande Ea (lent)", "example": "Distinction" }
+        ],
+        "guided_example": {
+          "statement": "Deux réactions : ΔH=-100, Ea=10 vs Ea=200. Laquelle plus rapide ?",
+          "solution_steps": ["Même ΔH", "Ea petit ⇒ k grand", "Réaction A plus rapide"]
+        },
+        "quick_exercises": [
+          "E_réactifs=50, E_transition=120, E_produits=20. Ea dir, ΔH, Ea inv ?",
+          "Diagramme énergétique"
+        ],
+        "common_mistakes": [
+          "Confondre Ea et ΔH",
+          "Croire exo = rapide"
+        ],
+        "summary": {
+          "key_concept": "Ea = barrière (cinétique). ΔH = bilan (thermodynamique). Ea = E_transition - E_initial",
+          "key_method": "Ea(inv) - Ea(dir) = -ΔH. Diagramme : courbe avec maximum",
+          "next_step": "Quotient réactionnel"
+        }
+      }
+    },
+    {
+      "id": "CT-12",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Évolution et équilibre - Quotient réactionnel",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Définir le quotient réactionnel Q", "Comparer Q et K pour prédire l'évolution", "Utiliser le critère d'évolution", "Calculer Q dans un état quelconque"],
+      "prerequisites": ["CT-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["quotient", "évolution"],
+      "detailed_content": {
+        "introduction": "Le quotient réactionnel Q permet de déterminer le sens d'évolution d'un système chimique à un instant donné en le comparant à la constante d'équilibre K.",
+        "key_concepts": [
+          { "name": "Q", "explanation": "Q = ([C]ᶜ[D]ᵈ) / ([A]ᵃ[B]ᵇ) à instant t. Même expression que K mais concentrations quelconques. Q varie, K constant", "example": "Définition" },
+          { "name": "Critère", "explanation": "Q < K : → produits. Q > K : ← réactifs. Q = K : équilibre", "example": "Évolution" },
+          { "name": "Évolution", "explanation": "Q initial, Q → K, Q = K constant. Graphique Q(t) → K asymptote", "example": "Temps" },
+          { "name": "Applications", "explanation": "Prédire sens, vérifier équilibre, calculer concentrations", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "N₂+3H₂ ⇌ 2NH₃, K=10. [N₂]=0.1, [H₂]=0.3, [NH₃]=0.05. Q ? Sens ?",
+          "solution_steps": ["Q ≈ 0.93", "Q < K", "→ NH₃"]
+        },
+        "quick_exercises": [
+          "2SO₂+O₂ ⇌ 2SO₃, K=100. [SO₂]₀=1, [O₂]₀=0.5, [SO₃]₀=0. Q₀ ? Sens ?",
+          "Quotient réactionnel"
+        ],
+        "common_mistakes": [
+          "Confondre Q et K",
+          "Inverser sens évolution"
+        ],
+        "summary": {
+          "key_concept": "Q = [produits]^coeff / [réactifs]^coeff (à instant t). Q < K : → produits",
+          "key_method": "Q > K : ← réactifs. Q = K : équilibre",
+          "next_step": "Synthèse finale"
+        }
+      }
+    },
+    {
+      "id": "CT-13",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Synthèse - Cinétique & Thermodynamique",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Synthétiser les notions de cinétique et thermodynamique", "Distinguer critères cinétiques et thermodynamiques", "Résoudre des problèmes de synthèse", "Relier tous les concepts étudiés"],
+      "prerequisites": ["CT-01", "CT-08", "CT-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "cinétique"],
+      "detailed_content": {
+        "introduction": "La cinétique et la thermodynamique sont deux aspects complémentaires de l'étude des réactions chimiques.",
+        "key_concepts": [
+          { "name": "Cinétique", "explanation": "Vitesse. v = (1/V)(dx/dt). Facteurs : [C], T, catalyse. Ea. Arrhenius", "example": "Aspect" },
+          { "name": "Thermodynamique", "explanation": "Évolution spontanée, équilibre. ΔH. K. Le Chatelier. Q. Critère d'évolution", "example": "Aspect" },
+          { "name": "Distinction", "explanation": "Thermodynamique : peut avoir lieu ? (ΔG<0). Cinétique : combien temps ? (Ea)", "example": "Vue d'ensemble" },
+          { "name": "Optimisation", "explanation": "1) Aspect thermodynamique (T,P,[C]), 2) Aspect cinétique (T, catalyseur). Exemple Haber-Bosch", "example": "Industrie" }
+        ],
+        "guided_example": {
+          "statement": "Glucose → éthanol+CO₂ (fermentation exothermique rapide). Optimiser ?",
+          "solution_steps": ["T ≈ 30-35°C (compromis)", "Retirer éthanol progressivement", "Levures performantes"]
+        },
+        "quick_exercises": [
+          "2A+B ⇌ 3C (exothermique, K=5). [A]=1, [B]=0.5, [C]=0. Q₀ ? v ? C ?",
+          "Optimisation réaction"
+        ],
+        "common_mistakes": [
+          "Confondre cinétique/thermodynamique",
+          "Croire ΔH<0 = rapide"
+        ],
+        "summary": {
+          "key_concept": "Cinétique : vitesse (Ea, catalyseurs). Thermodynamique : spontanéité (ΔH, K, Q)",
+          "key_method": "Spontané ≠ rapide. Optimisation : combiner les deux aspects ! 🧪",
+          "next_step": "Fin chapitre"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

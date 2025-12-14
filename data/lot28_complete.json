@@ -1,0 +1,425 @@
+{
+  "metadata": {
+    "lot_number": 25,
+    "lot_name": "Lot 25 - Fonction Logarithme",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Fonction Logarithme",
+    "lesson_range": "MT-28 à MT-37",
+    "total_lessons": 10
+  },
+  "lessons": [
+    {
+      "id": "MT-28",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Définition et propriété fondamentale du logarithme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir la fonction logarithme népérien", "Comprendre la relation ln et exp", "Connaître le domaine de définition", "Utiliser la propriété fondamentale ln(e^x) = x"],
+      "prerequisites": ["M1-41"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["logarithme", "ln"],
+      "detailed_content": {
+        "introduction": "Le logarithme népérien (noté ln) est la fonction réciproque de la fonction exponentielle. C'est une fonction fondamentale en mathématiques et en sciences.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "y = ln(x) ⇔ x = e^y. ln réciproque de exp", "example": "ln 'inverse' l'exponentielle" },
+          { "name": "Domaine", "explanation": "D_ln = ]0; +∞[. ln défini uniquement pour x > 0", "example": "ln(0) et ln(-5) n'existent pas" },
+          { "name": "Propriété fondamentale", "explanation": "e^(ln x) = x (x > 0) et ln(e^y) = y", "example": "ln et exp se neutralisent" },
+          { "name": "Valeurs particulières", "explanation": "ln(1) = 0, ln(e) = 1, ln(e²) = 2, ln(1/e) = -1", "example": "À connaître par cœur" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ln(e^5).",
+          "solution_steps": ["Par propriété fondamentale : ln(e^5) = 5"]
+        },
+        "quick_exercises": [
+          "Résoudre e^x = 7",
+          "Calculer ln(e) et ln(1)"
+        ],
+        "common_mistakes": [
+          "Penser que ln défini pour tout x",
+          "Confondre ln(x) et log₁₀(x)",
+          "Oublier que ln(0) n'existe pas"
+        ],
+        "summary": {
+          "key_concept": "ln défini sur ]0; +∞[. ln et exp réciproques",
+          "key_method": "ln(e^x) = x, e^(ln x) = x",
+          "next_step": "Apprendre les propriétés algébriques"
+        }
+      }
+    },
+    {
+      "id": "MT-29",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Propriétés algébriques du logarithme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Connaître les propriétés algébriques de ln", "Transformer des expressions avec ln", "Appliquer ln(ab), ln(a/b), ln(a^n)", "Simplifier des expressions logarithmiques"],
+      "prerequisites": ["MT-28"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["propriétés", "algèbre"],
+      "detailed_content": {
+        "introduction": "Le logarithme possède des propriétés algébriques remarquables qui transforment produits en sommes, quotients en différences et puissances en produits.",
+        "key_concepts": [
+          { "name": "Logarithme d'un produit", "explanation": "ln(ab) = ln(a) + ln(b). Produit → somme", "example": "ln(6) = ln(2×3) = ln(2) + ln(3)" },
+          { "name": "Logarithme d'un quotient", "explanation": "ln(a/b) = ln(a) - ln(b). Quotient → différence", "example": "ln(5/2) = ln(5) - ln(2)" },
+          { "name": "Logarithme d'une puissance", "explanation": "ln(a^n) = n ln(a). Puissance → produit", "example": "ln(a²) = 2 ln(a), ln(√a) = (1/2) ln(a)" },
+          { "name": "Cas particuliers", "explanation": "ln(1/a) = -ln(a)", "example": "Application de ln(a/b)" }
+        ],
+        "guided_example": {
+          "statement": "Simplifier ln(8) sachant ln(2) = 0.693.",
+          "solution_steps": ["ln(8) = ln(2³) = 3 ln(2)", "= 3 × 0.693 = 2.079"]
+        },
+        "quick_exercises": [
+          "Exprimer ln(18) en fonction de ln(2) et ln(3)",
+          "Simplifier ln(√x) et ln(1/x²)"
+        ],
+        "common_mistakes": [
+          "Penser que ln(a + b) = ln(a) + ln(b)",
+          "Confondre ln(ab) et ln(a) × ln(b)"
+        ],
+        "summary": {
+          "key_concept": "Produit → somme, quotient → différence, puissance → produit",
+          "key_method": "Attention : ln(a + b) ≠ ln(a) + ln(b)",
+          "next_step": "Résoudre des équations avec logarithmes"
+        }
+      }
+    },
+    {
+      "id": "MT-30",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Équations avec logarithmes",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Résoudre des équations de type ln(x) = k", "Résoudre des équations avec plusieurs ln", "Utiliser les propriétés algébriques", "Vérifier les conditions d'existence"],
+      "prerequisites": ["MT-29"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["équations", "résolution"],
+      "detailed_content": {
+        "introduction": "La résolution d'équations logarithmiques nécessite d'utiliser les propriétés algébriques de ln et la relation réciproque avec exp. La vérification des conditions d'existence est cruciale.",
+        "key_concepts": [
+          { "name": "Équation de base", "explanation": "ln(x) = k ⇒ x = e^k. Exponentier les deux membres", "example": "ln(x) = 3 ⇒ x = e³" },
+          { "name": "Conditions d'existence", "explanation": "Pour ln(f(x)) : f(x) > 0", "example": "ln(x - 2) existe ssi x > 2" },
+          { "name": "Méthode générale", "explanation": "1) Conditions d'existence, 2) Simplifier, 3) ln(expression) = k, 4) Exponentier, 5) Résoudre, 6) Vérifier", "example": "Étape par étape" },
+          { "name": "Vérification", "explanation": "Rejeter solutions qui ne respectent pas les conditions", "example": "Solution négative : rejetée" }
+        ],
+        "guided_example": {
+          "statement": "Résoudre ln(x - 1) = 2.",
+          "solution_steps": ["Condition : x > 1", "ln(x - 1) = 2 ⇒ x - 1 = e²", "x = e² + 1", "Vérification : e² + 1 > 1 ✓"]
+        },
+        "quick_exercises": [
+          "Résoudre ln(x) + ln(x + 1) = ln(6)",
+          "Résoudre 2 ln(x) = ln(8)"
+        ],
+        "common_mistakes": [
+          "Oublier les conditions d'existence",
+          "Ne pas vérifier les solutions obtenues"
+        ],
+        "summary": {
+          "key_concept": "ln(x) = k ⇒ x = e^k",
+          "key_method": "TOUJOURS vérifier conditions d'existence",
+          "next_step": "Résoudre des inéquations avec logarithmes"
+        }
+      }
+    },
+    {
+      "id": "MT-31",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Inéquations avec logarithmes",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Résoudre des inéquations de type ln(x) < k", "Utiliser la croissance de ln", "Combiner avec les conditions d'existence", "Résoudre des inéquations complexes"],
+      "prerequisites": ["MT-30"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["inéquations"],
+      "detailed_content": {
+        "introduction": "La résolution d'inéquations logarithmiques s'appuie sur le fait que ln est strictement croissante. Cette propriété permet de 'retirer' le logarithme en conservant le sens de l'inégalité.",
+        "key_concepts": [
+          { "name": "Croissance", "explanation": "ln strictement croissante : ln(a) < ln(b) ⇔ a < b (a, b > 0)", "example": "Sens conservé" },
+          { "name": "Inéquation de base", "explanation": "ln(x) < k ⇒ x < e^k. Solution : 0 < x < e^k", "example": "Intersection avec domaine" },
+          { "name": "Inéquations avec deux ln", "explanation": "ln(f(x)) < ln(g(x)) ⇒ f(x) < g(x) avec f, g > 0", "example": "Conditions + croissance" },
+          { "name": "Méthode", "explanation": "1) Conditions d'existence, 2) Simplifier, 3) Exponentier ou utiliser croissance, 4) Résoudre, 5) Intersection", "example": "Étape par étape" }
+        ],
+        "guided_example": {
+          "statement": "Résoudre ln(x) < 1.",
+          "solution_steps": ["Condition : x > 0", "ln(x) < 1 ⇒ ln(x) < ln(e)", "Par croissance : x < e", "Intersection : 0 < x < e"]
+        },
+        "quick_exercises": [
+          "Résoudre ln(x + 2) ≥ ln(5)",
+          "Résoudre ln(x²) < ln(9)"
+        ],
+        "common_mistakes": [
+          "Inverser le sens de l'inégalité",
+          "Oublier les conditions d'existence"
+        ],
+        "summary": {
+          "key_concept": "ln croissante : conserve sens des inégalités",
+          "key_method": "Conditions d'existence puis intersection",
+          "next_step": "Calculer la dérivée de ln"
+        }
+      }
+    },
+    {
+      "id": "MT-32",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Dérivée de la fonction logarithme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Connaître la dérivée de ln(x)", "Calculer la dérivée de ln(u(x))", "Appliquer dans l'étude de fonctions", "Utiliser pour des équations de tangentes"],
+      "prerequisites": ["MT-20", "MT-28"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["dérivée"],
+      "detailed_content": {
+        "introduction": "La fonction logarithme est dérivable sur son domaine ]0; +∞[. Sa dérivée est une fonction simple mais essentielle pour l'étude de nombreuses fonctions.",
+        "key_concepts": [
+          { "name": "Dérivée de ln", "explanation": "(ln x)' = 1/x pour x > 0", "example": "Dérivée simple" },
+          { "name": "Dérivée de ln(u)", "explanation": "(ln u)' = u'/u. Formule à connaître", "example": "Ne pas oublier u'" },
+          { "name": "Domaine", "explanation": "ln(u) dérivable sur {x : u(x) > 0}", "example": "Vérifier argument > 0" },
+          { "name": "Signe", "explanation": "(ln x)' = 1/x > 0, ln strictement croissante", "example": "Croissance garantie" }
+        ],
+        "guided_example": {
+          "statement": "Calculer dérivée de f(x) = ln(3x + 1).",
+          "solution_steps": ["u(x) = 3x + 1, u'(x) = 3", "f'(x) = u'/u = 3/(3x + 1)", "Domaine : x > -1/3"]
+        },
+        "quick_exercises": [
+          "Dérivée de g(x) = ln(x² + 2x + 5)",
+          "Dérivée de h(x) = ln(ln(x))"
+        ],
+        "common_mistakes": [
+          "Oublier u' dans (ln u)' = u'/u",
+          "Confondre (ln x)' et 1/ln(x)"
+        ],
+        "summary": {
+          "key_concept": "(ln x)' = 1/x, (ln u)' = u'/u",
+          "key_method": "NE PAS OUBLIER u'",
+          "next_step": "Étudier les variations de ln"
+        }
+      }
+    },
+    {
+      "id": "MT-33",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Variations de la fonction logarithme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Étudier les variations de ln", "Dresser le tableau de variation", "Tracer la courbe représentative", "Étudier des fonctions contenant ln"],
+      "prerequisites": ["MT-32"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["variations", "courbe"],
+      "detailed_content": {
+        "introduction": "L'étude des variations de la fonction logarithme permet de comprendre son comportement global et de tracer sa courbe représentative.",
+        "key_concepts": [
+          { "name": "Variations", "explanation": "ln strictement croissante sur ]0; +∞[. Limites : -∞ en 0⁺, +∞ en +∞", "example": "Monotonie + limites" },
+          { "name": "Tableau", "explanation": "x | 0⁺ ... +∞ ; ln' | + ; ln | -∞ ↗ +∞", "example": "Synthèse visuelle" },
+          { "name": "Concavité", "explanation": "(ln x)'' = -1/x² < 0, ln strictement concave", "example": "Courbe au-dessus des tangentes" },
+          { "name": "Points remarquables", "explanation": "(1, 0), (e, 1). AV : x = 0", "example": "Courbe caractéristique" }
+        ],
+        "guided_example": {
+          "statement": "Étudier f(x) = x - ln(x) sur ]0; +∞[.",
+          "solution_steps": ["f'(x) = 1 - 1/x = (x - 1)/x", "Signe : f' > 0 si x > 1", "Minimum en x = 1 : f(1) = 1"]
+        },
+        "quick_exercises": [
+          "Équation tangente à ln au point d'abscisse e",
+          "Étudier f(x) = ln(x)/x"
+        ],
+        "common_mistakes": [
+          "Penser que ln définie en 0",
+          "Oublier que ln est concave"
+        ],
+        "summary": {
+          "key_concept": "ln croissante, concave, lim(x→0⁺) = -∞",
+          "key_method": "Points clés : (1, 0) et (e, 1)",
+          "next_step": "Calculer des limites avec ln"
+        }
+      }
+    },
+    {
+      "id": "MT-34",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Limites avec logarithmes",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Calculer les limites de référence avec ln", "Utiliser les croissances comparées", "Lever des formes indéterminées", "Appliquer dans l'étude de fonctions"],
+      "prerequisites": ["MT-13", "MT-28"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limites"],
+      "detailed_content": {
+        "introduction": "Les limites impliquant le logarithme nécessitent de connaître les limites de référence et les croissances comparées. Le logarithme croît lentement à l'infini.",
+        "key_concepts": [
+          { "name": "Limites de référence", "explanation": "lim(x→0⁺) ln(x) = -∞, lim(x→+∞) ln(x) = +∞", "example": "À connaître" },
+          { "name": "Croissances comparées", "explanation": "ln(x) << x^α pour tout α > 0. lim ln(x)/x^α = 0", "example": "ln croît lentement" },
+          { "name": "Limite en 0⁺", "explanation": "lim(x→0⁺) x ln(x) = 0. Changement de variable", "example": "Forme 0×(-∞)" },
+          { "name": "Techniques", "explanation": "∞/∞ : diviser par puissance dominante. 0×∞ : quotient. Composée : lim ln(f) = ln(lim f)", "example": "Méthodes adaptées" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→+∞) (ln(x) - x).",
+          "solution_steps": ["Factoriser : x(ln(x)/x - 1)", "lim ln(x)/x = 0", "Donc limite = +∞ × (-1) = -∞"]
+        },
+        "quick_exercises": [
+          "Calculer lim(x→+∞) ln(x)/x²",
+          "Calculer lim(x→0⁺) x ln(x)"
+        ],
+        "common_mistakes": [
+          "Penser que ln croît vite",
+          "Oublier les croissances comparées"
+        ],
+        "summary": {
+          "key_concept": "ln croît lentement : ln << x^α",
+          "key_method": "Limites de référence + croissances comparées",
+          "next_step": "Étude complète de fonctions avec ln"
+        }
+      }
+    },
+    {
+      "id": "MT-35",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Étude complète de fonctions avec ln",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Mener une étude complète de fonction avec ln", "Déterminer domaine, limites, variations", "Calculer les dérivées", "Tracer la courbe représentative"],
+      "prerequisites": ["MT-33", "MT-34"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["étude", "fonction"],
+      "detailed_content": {
+        "introduction": "L'étude de fonctions contenant ln nécessite de combiner toutes les techniques vues : domaine, limites, dérivées, croissances comparées.",
+        "key_concepts": [
+          { "name": "Méthodologie", "explanation": "1) Domaine (arguments ln > 0), 2) Limites, 3) Dérivée, 4) Variations, 5) Tableau, 6) Courbe", "example": "Plan d'étude" },
+          { "name": "Domaine", "explanation": "ln(f(x)) défini ⇔ f(x) > 0", "example": "Toujours vérifier" },
+          { "name": "Limites", "explanation": "Référence + croissances comparées. Composée si besoin", "example": "Techniques adaptées" },
+          { "name": "Asymptotes", "explanation": "AV si argument ln → 0⁺. AH si limite finie", "example": "Identifier" }
+        ],
+        "guided_example": {
+          "statement": "Étude simplifiée de f(x) = ln(x)/x sur ]0; +∞[.",
+          "solution_steps": ["Limites : -∞ en 0⁺, 0 en +∞", "f'(x) = (1 - ln(x))/x²", "Maximum en e : f(e) = 1/e"]
+        },
+        "quick_exercises": [
+          "Étude de g(x) = x + ln(x)",
+          "Étude de h(x) = ln(x)/√x"
+        ],
+        "common_mistakes": [
+          "Oublier le domaine de définition",
+          "Erreurs dans dérivée de ln"
+        ],
+        "summary": {
+          "key_concept": "Plan : domaine, limites, dérivée, variations, courbe",
+          "key_method": "Argument de ln > 0, croissances comparées",
+          "next_step": "Applications du logarithme"
+        }
+      }
+    },
+    {
+      "id": "MT-36",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Applications du logarithme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Utiliser ln dans des problèmes concrets", "Modéliser avec des fonctions logarithmiques", "Résoudre des problèmes d'optimisation", "Appliquer ln en sciences"],
+      "prerequisites": ["MT-35"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["applications", "sciences"],
+      "detailed_content": {
+        "introduction": "Le logarithme a de nombreuses applications en sciences, économie, et dans la vie quotidienne. Il permet de modéliser des phénomènes de croissance, de mesurer des intensités sur des échelles très larges.",
+        "key_concepts": [
+          { "name": "Échelles logarithmiques", "explanation": "Richter : M = log₁₀(A/A₀). Décibels : L = 10 log₁₀(I/I₀). pH = -log₁₀[H⁺]", "example": "Mesures sur échelles larges" },
+          { "name": "Croissance", "explanation": "N(t) = N₀ e^(kt). ln(N) = ln(N₀) + kt. Relation linéaire", "example": "Modèles" },
+          { "name": "Demi-vie", "explanation": "t₁/₂ = ln(2)/λ. Temps de demi-vie radioactive", "example": "Application pratique" },
+          { "name": "Changement de base", "explanation": "log_a(b) = ln(b)/ln(a). Résoudre a^x = b", "example": "Formule" }
+        ],
+        "guided_example": {
+          "statement": "Calculer t₁/₂ pour λ = 0.1 an⁻¹.",
+          "solution_steps": ["t₁/₂ = ln(2)/λ", "= ln(2)/0.1 ≈ 6.93 ans"]
+        },
+        "quick_exercises": [
+          "Magnitude séisme si amplitude ×100",
+          "Calculer le pH d'une solution"
+        ],
+        "common_mistakes": [
+          "Confondre ln et log₁₀",
+          "Oublier les propriétés algébriques"
+        ],
+        "summary": {
+          "key_concept": "Échelles logarithmiques : grandes variations sur échelle réduite",
+          "key_method": "t₁/₂ = ln(2)/λ, log_a(b) = ln(b)/ln(a)",
+          "next_step": "Synthèse finale du chapitre"
+        }
+      }
+    },
+    {
+      "id": "MT-37",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Logarithme",
+      "title": "Synthèse - Fonction Logarithme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 140,
+      "objectives": ["Synthétiser toutes les propriétés de ln", "Résoudre des problèmes complexes", "Relier ln avec exp", "Maîtriser l'étude complète de fonctions"],
+      "prerequisites": ["MT-28", "MT-29", "MT-30", "MT-31", "MT-32", "MT-33", "MT-34", "MT-35", "MT-36"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "logarithme"],
+      "detailed_content": {
+        "introduction": "Cette leçon de synthèse récapitule toutes les propriétés du logarithme népérien et montre comment les utiliser dans des problèmes complexes nécessitant plusieurs techniques.",
+        "key_concepts": [
+          { "name": "Propriétés algébriques", "explanation": "ln(ab) = ln(a) + ln(b), ln(a/b) = ln(a) - ln(b), ln(a^n) = n ln(a)", "example": "À connaître" },
+          { "name": "Équations/inéquations", "explanation": "ln(x) = k ⇒ x = e^k. ln croissante : sens conservé", "example": "Méthodes" },
+          { "name": "Dérivée et variations", "explanation": "(ln x)' = 1/x, (ln u)' = u'/u. ln croissante, concave", "example": "Comportement" },
+          { "name": "Limites", "explanation": "Référence + croissances comparées. ln << x^α", "example": "Techniques" },
+          { "name": "Liens ln/exp", "explanation": "Courbes symétriques par rapport y = x. Propriétés duales", "example": "Correspondances" }
+        ],
+        "guided_example": {
+          "statement": "Résoudre ln(x + 1) + ln(x - 1) = ln(8).",
+          "solution_steps": ["Conditions : x > 1", "ln[(x+1)(x-1)] = ln(8)", "x² - 1 = 8, x = 3"]
+        },
+        "quick_exercises": [
+          "Étude complète de f(x) = ln(x) - x + 1",
+          "Problèmes de synthèse complexes"
+        ],
+        "common_mistakes": [
+          "Toutes les erreurs des leçons précédentes",
+          "Oublier la méthodologie"
+        ],
+        "summary": {
+          "key_concept": "Plan complet : domaine, limites, dérivée, variations, courbe",
+          "key_method": "Propriétés algébriques, dérivée, croissances comparées",
+          "next_step": "Vers autres chapitres de Terminale"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

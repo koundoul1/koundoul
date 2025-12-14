@@ -1,0 +1,591 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Chimie",
+    "lesson_range": "C1-11 à C1-20",
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Leçons 11 à 20 de Chimie Première - Chimie Organique"
+  },
+  "lessons": [
+    
+    {
+      "id": "C1-11",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Introduction à la chimie organique - Atome de carbone",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Définir la chimie organique et son domaine",
+        "Comprendre la tétravalence du carbone",
+        "Identifier les différents types d'hybridation (sp³, sp², sp)"
+      ],
+      "prerequisites": [
+        "Configuration électronique",
+        "Liaisons covalentes",
+        "Géométrie des molécules"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["organique", "carbone", "tétravalence", "hybridation"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon introduit la chimie organique, la chimie des composés du carbone. Elle s'inscrit dans le chapitre Chimie Organique de la Première. L'objectif est de comprendre les propriétés uniques de l'atome de carbone en 9 minutes.",
+        "method_step_by_step": [
+          "Rappeler la configuration électronique du carbone : 1s² 2s² 2p²",
+          "Identifier les 4 électrons de valence (tétravalence)",
+          "Reconnaître les types de liaisons : simple (sp³), double (sp²), triple (sp)",
+          "Déterminer la géométrie selon l'hybridation",
+          "Appliquer à des exemples simples (méthane, éthylène, acétylène)"
+        ],
+        "guided_example": {
+          "statement": "Analyser l'hybridation et la géométrie du carbone dans le méthane CH₄, l'éthylène C₂H₄ et l'acétylène C₂H₂.",
+          "solution_steps": [
+            "CH₄ : 4 liaisons simples C-H → hybridation sp³ → géométrie tétraédrique (109.5°)",
+            "C₂H₄ : liaison double C=C → hybridation sp² → géométrie plane (120°)",
+            "C₂H₂ : liaison triple C≡C → hybridation sp → géométrie linéaire (180°)",
+            "Dans tous les cas : carbone tétravalent (4 liaisons)",
+            "Conclusion : L'hybridation détermine la géométrie locale autour du carbone"
+          ]
+        },
+        "quick_exercises": [
+          "Identifier l'hybridation du carbone dans CH₃-CH₂-OH",
+          "Dessiner la géométrie du propène CH₃-CH=CH₂",
+          "Compter les liaisons σ et π dans l'acétylène"
+        ],
+        "common_mistakes": [
+          "Confondre hybridation et liaison",
+          "Oublier que sp³ = 4 liaisons simples",
+          "Ne pas tenir compte de la géométrie 3D"
+        ],
+        "summary": {
+          "key_concept": "Le carbone est tétravalent et peut former des chaînes infinies grâce à ses 4 électrons de valence",
+          "key_method": "Type de liaison → Hybridation → Géométrie",
+          "next_step": "Étudier les hydrocarbures saturés (alcanes)"
+        }
+      }
+    },
+    {
+      "id": "C1-12",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Hydrocarbures saturés - Alcanes",
+      "duration_min": 11,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Définir les alcanes et leur formule brute CₙH₂ₙ₊₂",
+        "Représenter les alcanes linéaires et ramifiés",
+        "Appliquer les règles de nomenclature IUPAC"
+      ],
+      "prerequisites": [
+        "Formules développées",
+        "Hybridation sp³"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["alcanes", "hydrocarbures", "nomenclature", "saturés"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les alcanes, hydrocarbures saturés formant la base de la chimie organique. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de maîtriser leur nomenclature en 11 minutes.",
+        "method_step_by_step": [
+          "Identifier la chaîne carbonée la plus longue (chaîne principale)",
+          "Numéroter pour donner les plus petits indices aux ramifications",
+          "Nommer les substituants (méthyl-, éthyl-, propyl-...)",
+          "Indiquer la position des substituants par des chiffres",
+          "Construire le nom : position-substituant-chaîne principale + -ane"
+        ],
+        "guided_example": {
+          "statement": "Nommer le composé : CH₃-CH(CH₃)-CH₂-CH(CH₃)-CH₃",
+          "solution_steps": [
+            "Chaîne principale : 5 carbones → pentane",
+            "Numérotation de gauche à droite : C1-C2-C3-C4-C5",
+            "Substituants : méthyl en C2 et méthyl en C4",
+            "Vérification : numérotation de droite donne aussi 2,4 (OK)",
+            "Nom IUPAC : 2,4-diméthylpentane"
+          ]
+        },
+        "quick_exercises": [
+          "Nommer : CH₃-CH₂-CH(CH₃)-CH₃",
+          "Dessiner le 3-éthylhexane",
+          "Donner la formule brute du décane"
+        ],
+        "common_mistakes": [
+          "Oublier de chercher la chaîne la plus longue",
+          "Numéroter dans le mauvais sens",
+          "Oublier les préfixes di-, tri- pour plusieurs substituants identiques"
+        ],
+        "summary": {
+          "key_concept": "Les alcanes sont des hydrocarbures saturés (liaisons simples C-C) de formule CₙH₂ₙ₊₂",
+          "key_method": "Chaîne principale → Numérotation → Substituants → Nom IUPAC",
+          "next_step": "Étudier les hydrocarbures insaturés (alcènes)"
+        }
+      }
+    },
+    {
+      "id": "C1-13",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Hydrocarbures insaturés - Alcènes",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir les alcènes et leur formule brute CₙH₂ₙ",
+        "Localiser la double liaison dans la nomenclature",
+        "Identifier les isomères Z/E (géométriques)"
+      ],
+      "prerequisites": [
+        "Nomenclature des alcanes",
+        "Hybridation sp²",
+        "Double liaison"
+      ],
+      "content_types": ["video", "3D-model", "quiz", "exercises"],
+      "tags": ["alcènes", "double liaison", "insaturés", "Z/E"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les alcènes, hydrocarbures avec une double liaison C=C. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de maîtriser leur nomenclature et l'isomérie Z/E en 11 minutes.",
+        "method_step_by_step": [
+          "Identifier la chaîne la plus longue contenant la double liaison",
+          "Numéroter pour donner le plus petit indice à la double liaison",
+          "Indiquer la position de la double liaison avant le suffixe -ène",
+          "Nommer les substituants comme pour les alcanes",
+          "Si isomérie Z/E possible : déterminer la configuration (priorités Cahn-Ingold-Prelog)"
+        ],
+        "guided_example": {
+          "statement": "Nommer le composé : CH₃-CH=CH-CH₂-CH₃ et déterminer s'il existe une isomérie Z/E.",
+          "solution_steps": [
+            "Chaîne principale : 5 carbones avec double liaison → pentène",
+            "Numérotation : double liaison entre C2 et C3",
+            "Nom : pent-2-ène",
+            "Isomérie Z/E : possible car chaque carbone sp² a 2 substituants différents",
+            "Isomère Z : CH₃ et H du même côté | Isomère E : CH₃ de part et d'autre"
+          ]
+        },
+        "quick_exercises": [
+          "Nommer : CH₂=CH-CH₂-CH₃",
+          "Dessiner le (Z)-but-2-ène",
+          "Le pent-1-ène peut-il avoir une isomérie Z/E ?"
+        ],
+        "common_mistakes": [
+          "Oublier d'indiquer la position de la double liaison",
+          "Numéroter en ignorant la double liaison",
+          "Confondre Z (zusammen = ensemble) et E (entgegen = opposé)"
+        ],
+        "summary": {
+          "key_concept": "Les alcènes contiennent une double liaison C=C (sp²) et peuvent présenter une isomérie géométrique Z/E",
+          "key_method": "Chaîne + C=C → Numérotation → Position-ène → Z/E si besoin",
+          "next_step": "Étudier les alcynes (triple liaison)"
+        }
+      }
+    },
+    {
+      "id": "C1-14",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Groupes fonctionnels - Alcools",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Identifier le groupe hydroxyle -OH",
+        "Classer les alcools (primaire, secondaire, tertiaire)",
+        "Nommer les alcools selon la nomenclature IUPAC"
+      ],
+      "prerequisites": [
+        "Nomenclature des alcanes",
+        "Formules développées"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["alcools", "hydroxyle", "groupes fonctionnels", "nomenclature"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les alcools, première famille de composés oxygénés. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de maîtriser leur classification et nomenclature en 10 minutes.",
+        "method_step_by_step": [
+          "Identifier le groupe fonctionnel -OH (hydroxyle)",
+          "Déterminer la chaîne principale contenant le -OH",
+          "Numéroter pour donner le plus petit indice au -OH",
+          "Remplacer le -e final de l'alcane par -ol",
+          "Classer selon le carbone porteur : primaire (1°), secondaire (2°), tertiaire (3°)"
+        ],
+        "guided_example": {
+          "statement": "Nommer CH₃-CH₂-CH(OH)-CH₃ et le classer.",
+          "solution_steps": [
+            "Chaîne principale : 4 carbones → butane",
+            "Position du -OH : C2",
+            "Nom : butan-2-ol",
+            "Classification : le carbone portant -OH est lié à 2 autres carbones",
+            "Conclusion : alcool secondaire (2°)"
+          ]
+        },
+        "quick_exercises": [
+          "Nommer : CH₃-CH₂-OH",
+          "Classer : (CH₃)₃C-OH",
+          "Dessiner le 2-méthylpropan-1-ol"
+        ],
+        "common_mistakes": [
+          "Confondre alcool primaire et carbone primaire",
+          "Oublier d'indiquer la position du -OH",
+          "Utiliser -anol au lieu de -ol"
+        ],
+        "summary": {
+          "key_concept": "Les alcools contiennent un groupe hydroxyle -OH et se classent selon le degré du carbone porteur",
+          "key_method": "Chaîne + OH → Numérotation → Position + -ol → Classification 1°/2°/3°",
+          "next_step": "Étudier les aldéhydes et cétones (groupe carbonyle)"
+        }
+      }
+    },
+    {
+      "id": "C1-15",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Groupes fonctionnels - Aldéhydes et cétones",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Identifier le groupe carbonyle C=O",
+        "Distinguer aldéhyde (terminal) et cétone (interne)",
+        "Nommer les aldéhydes et cétones"
+      ],
+      "prerequisites": [
+        "Nomenclature des alcanes",
+        "Double liaison C=O"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["aldéhyde", "cétone", "carbonyle", "oxygénés"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les aldéhydes et cétones, composés avec un groupe carbonyle C=O. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de les distinguer et les nommer en 11 minutes.",
+        "method_step_by_step": [
+          "Identifier le groupe carbonyle C=O",
+          "Si C=O en bout de chaîne (avec H) → aldéhyde (suffixe -al)",
+          "Si C=O à l'intérieur (entre 2 C) → cétone (suffixe -one)",
+          "Pour aldéhyde : le C=O est toujours C1, pas besoin d'indiquer position",
+          "Pour cétone : numéroter et indiquer la position du C=O"
+        ],
+        "guided_example": {
+          "statement": "Nommer CH₃-CO-CH₂-CH₃ et CH₃-CH₂-CHO.",
+          "solution_steps": [
+            "Premier composé : C=O entre deux carbones → cétone",
+            "Chaîne : 4 carbones → butane, C=O en position 2",
+            "Nom : butan-2-one",
+            "Deuxième composé : C=O en bout avec H → aldéhyde",
+            "Chaîne : 3 carbones → propanal (pas de numéro, toujours C1)",
+            "Conclusion : une cétone et un aldéhyde"
+          ]
+        },
+        "quick_exercises": [
+          "Nommer : CH₃-CHO",
+          "Identifier si CH₃-CO-CH₃ est un aldéhyde ou une cétone",
+          "Dessiner le pentanal"
+        ],
+        "common_mistakes": [
+          "Confondre aldéhyde et cétone",
+          "Mettre un numéro pour les aldéhydes (inutile)",
+          "Oublier que le H de CHO fait partie du groupe fonctionnel"
+        ],
+        "summary": {
+          "key_concept": "Aldéhydes (C=O terminal avec H) et cétones (C=O interne) contiennent un groupe carbonyle",
+          "key_method": "C=O terminal → -al | C=O interne → position + -one",
+          "next_step": "Étudier les acides carboxyliques"
+        }
+      }
+    },
+    {
+      "id": "C1-16",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Groupes fonctionnels - Acides carboxyliques",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Identifier le groupe carboxyle -COOH",
+        "Nommer les acides carboxyliques",
+        "Comprendre le caractère acide du groupe COOH"
+      ],
+      "prerequisites": [
+        "Nomenclature organique",
+        "Notion d'acidité"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["acide carboxylique", "COOH", "acide", "nomenclature"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les acides carboxyliques, famille importante de composés organiques. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de maîtriser leur identification et nomenclature en 10 minutes.",
+        "method_step_by_step": [
+          "Identifier le groupe -COOH (carboxyle = carbonyle + hydroxyle)",
+          "Le carbone du COOH est toujours C1 (comme les aldéhydes)",
+          "Nomenclature : acide + nom de l'alcane correspondant + -oïque",
+          "Exemple : 3 carbones → acide propanoïque",
+          "Reconnaître le caractère acide : COOH ⇌ COO⁻ + H⁺"
+        ],
+        "guided_example": {
+          "statement": "Nommer CH₃-CH₂-COOH et expliquer pourquoi c'est un acide.",
+          "solution_steps": [
+            "Identification : groupe -COOH présent → acide carboxylique",
+            "Comptage : 3 carbones (incluant celui du COOH) → propane",
+            "Nom : acide propanoïque",
+            "Caractère acide : le H du -COOH peut se dissocier",
+            "Équilibre : CH₃-CH₂-COOH ⇌ CH₃-CH₂-COO⁻ + H⁺"
+          ]
+        },
+        "quick_exercises": [
+          "Nommer : HCOOH (acide formique/méthanoïque)",
+          "Dessiner l'acide butanoïque",
+          "Écrire l'équation de dissociation de CH₃-COOH dans l'eau"
+        ],
+        "common_mistakes": [
+          "Oublier le mot 'acide' dans le nom",
+          "Confondre -oïque (acide) et -ol (alcool)",
+          "Ne pas compter le carbone du COOH dans la chaîne"
+        ],
+        "summary": {
+          "key_concept": "Les acides carboxyliques contiennent le groupe -COOH et peuvent libérer un proton H⁺",
+          "key_method": "Identifier -COOH → Compter carbones → acide + nom + -oïque",
+          "next_step": "Étudier les esters (dérivés des acides)"
+        }
+      }
+    },
+    {
+      "id": "C1-17",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Groupes fonctionnels - Esters",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Identifier le groupe ester -COO-",
+        "Nommer les esters selon la nomenclature",
+        "Relier ester, acide et alcool (origine)"
+      ],
+      "prerequisites": [
+        "Acides carboxyliques",
+        "Alcools"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["ester", "COO", "estérification", "nomenclature"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les esters, dérivés des acides carboxyliques. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de maîtriser leur nomenclature et origine en 11 minutes.",
+        "method_step_by_step": [
+          "Identifier le groupe -COO- (pas de H comme dans COOH)",
+          "Repérer la partie acide (R-COO-) et la partie alcool (-O-R')",
+          "Nom : nom de l'alcane R' + -oate + de + nom de l'acide R",
+          "Exemple : CH₃-COO-CH₂-CH₃ = éthanoate d'éthyle",
+          "Mémoriser : ester = acide - H + alcool - H"
+        ],
+        "guided_example": {
+          "statement": "Nommer CH₃-CH₂-COO-CH₃ et identifier l'acide et l'alcool d'origine.",
+          "solution_steps": [
+            "Groupe fonctionnel : -COO- → ester",
+            "Partie acide : CH₃-CH₂-CO- → provient de l'acide propanoïque",
+            "Partie alcool : -O-CH₃ → provient du méthanol",
+            "Nom : méthanoate de propyle (ou propanoate de méthyle selon convention)",
+            "Réaction : CH₃-CH₂-COOH + CH₃-OH → CH₃-CH₂-COO-CH₃ + H₂O"
+          ]
+        },
+        "quick_exercises": [
+          "Nommer : CH₃-COO-CH₃",
+          "Dessiner l'éthanoate d'éthyle",
+          "Quels acide et alcool donnent le butanoate de méthyle ?"
+        ],
+        "common_mistakes": [
+          "Confondre l'ordre : c'est R'-oate de R (pas l'inverse)",
+          "Oublier 'de' entre les deux parties",
+          "Confondre ester -COO- et cétone -CO-"
+        ],
+        "summary": {
+          "key_concept": "Les esters résultent de la condensation d'un acide carboxylique et d'un alcool (avec élimination d'eau)",
+          "key_method": "Identifier -COO- → Partie alcool + -oate de + partie acide",
+          "next_step": "Étudier les amines et amides"
+        }
+      }
+    },
+    {
+      "id": "C1-18",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Réactivité - Oxydation des alcools",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Prévoir les produits d'oxydation selon le type d'alcool",
+        "Identifier les oxydants courants (ion dichromate)",
+        "Écrire les équations d'oxydoréduction"
+      ],
+      "prerequisites": [
+        "Classification des alcools",
+        "Aldéhydes et cétones",
+        "Acides carboxyliques"
+      ],
+      "content_types": ["video", "experiment", "quiz", "exercises"],
+      "tags": ["oxydation", "alcools", "aldéhyde", "cétone", "redox"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'oxydation des alcools, réaction fondamentale en chimie organique. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de prévoir les produits d'oxydation en 12 minutes.",
+        "method_step_by_step": [
+          "Identifier le type d'alcool : primaire (1°), secondaire (2°) ou tertiaire (3°)",
+          "Alcool 1° + oxydant doux → aldéhyde (puis acide si excès d'oxydant)",
+          "Alcool 2° + oxydant → cétone (fin de réaction)",
+          "Alcool 3° → pas d'oxydation (aucun H sur le carbone porteur)",
+          "Utiliser les demi-équations redox pour équilibrer"
+        ],
+        "guided_example": {
+          "statement": "Prévoir les produits d'oxydation du propan-1-ol et du propan-2-ol par l'ion dichromate Cr₂O₇²⁻.",
+          "solution_steps": [
+            "Propan-1-ol : CH₃-CH₂-CH₂-OH → alcool primaire",
+            "Oxydation ménagée : CH₃-CH₂-CHO (propanal, aldéhyde)",
+            "Oxydation poussée : CH₃-CH₂-COOH (acide propanoïque)",
+            "Propan-2-ol : CH₃-CH(OH)-CH₃ → alcool secondaire",
+            "Oxydation : CH₃-CO-CH₃ (propanone, cétone) - fin de réaction"
+          ]
+        },
+        "quick_exercises": [
+          "Quel produit obtient-on en oxydant le butan-2-ol ?",
+          "Le 2-méthylpropan-2-ol peut-il être oxydé ?",
+          "Compléter : éthanol + [O] → ?"
+        ],
+        "common_mistakes": [
+          "Croire que tous les alcools s'oxydent de la même façon",
+          "Oublier que l'aldéhyde peut s'oxyder en acide",
+          "Confondre oxydation et déshydratation"
+        ],
+        "summary": {
+          "key_concept": "Les alcools 1° donnent aldéhydes puis acides, les alcools 2° donnent cétones, les alcools 3° ne s'oxydent pas",
+          "key_method": "Type alcool → Retirer 2H du carbone porteur → Produit d'oxydation",
+          "next_step": "Étudier la réduction (inverse de l'oxydation)"
+        }
+      }
+    },
+    {
+      "id": "C1-19",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Réactivité - Addition sur les alcènes",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Comprendre le mécanisme d'addition électrophile",
+        "Appliquer la règle de Markovnikov",
+        "Prévoir les produits d'addition (H₂, H₂O, HX)"
+      ],
+      "prerequisites": [
+        "Structure des alcènes",
+        "Double liaison",
+        "Électronégativité"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["addition", "alcènes", "Markovnikov", "électrophile"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les réactions d'addition sur les alcènes, transformations majeures des doubles liaisons. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de maîtriser la règle de Markovnikov en 11 minutes.",
+        "method_step_by_step": [
+          "Identifier la double liaison C=C (site réactif)",
+          "Reconnaître le type d'addition : H₂ (hydrogénation), H₂O (hydratation), HX (halogénation)",
+          "Appliquer la règle de Markovnikov pour alcènes asymétriques",
+          "Règle : l'atome d'hydrogène se fixe sur le carbone le plus hydrogéné",
+          "Ou : l'atome X (plus électronégatif) va sur le carbone le plus substitué"
+        ],
+        "guided_example": {
+          "statement": "Prévoir le produit d'addition de HBr sur le propène CH₃-CH=CH₂.",
+          "solution_steps": [
+            "Réactifs : CH₃-CH=CH₂ + HBr",
+            "Double liaison asymétrique → appliquer Markovnikov",
+            "C1 (=CH₂) a 2 hydrogènes, C2 (=CH-) a 1 hydrogène",
+            "Le H de HBr va sur C1 (plus hydrogéné)",
+            "Le Br va sur C2 (plus substitué) → CH₃-CHBr-CH₃ (2-bromopropane)"
+          ]
+        },
+        "quick_exercises": [
+          "Prévoir le produit : but-2-ène + H₂O",
+          "Appliquer Markovnikov : CH₂=CH-CH₂-CH₃ + HCl",
+          "Pourquoi l'hydrogénation catalytique ne suit pas Markovnikov ?"
+        ],
+        "common_mistakes": [
+          "Inverser la règle de Markovnikov",
+          "Oublier que la règle ne s'applique qu'aux alcènes asymétriques",
+          "Confondre addition et substitution"
+        ],
+        "summary": {
+          "key_concept": "Les alcènes subissent des additions électrophiles sur la double liaison selon la règle de Markovnikov",
+          "key_method": "C=C → Identifier asymétrie → Markovnikov → Produit majeur",
+          "next_step": "Étudier la polymérisation des alcènes"
+        }
+      }
+    },
+    {
+      "id": "C1-20",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Réactivité - Estérification et hydrolyse",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Écrire l'équation d'estérification entre un acide et un alcool",
+        "Comprendre le caractère équilibré de la réaction",
+        "Décrire l'hydrolyse d'un ester (réaction inverse)"
+      ],
+      "prerequisites": [
+        "Acides carboxyliques",
+        "Alcools",
+        "Esters",
+        "Équilibres chimiques"
+      ],
+      "content_types": ["video", "experiment", "quiz", "exercises"],
+      "tags": ["estérification", "hydrolyse", "équilibre", "catalyse"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'estérification et son inverse, l'hydrolyse. Elle s'inscrit dans le chapitre Chimie Organique de Première. L'objectif est de comprendre cet équilibre fondamental en 12 minutes.",
+        "method_step_by_step": [
+          "Estérification : acide (R-COOH) + alcool (R'-OH) ⇌ ester (R-COO-R') + eau",
+          "Réaction lente et limitée (équilibre)",
+          "Catalyse acide (H⁺ ou H₂SO₄) pour accélérer",
+          "Hydrolyse : inverse de l'estérification (ester + eau → acide + alcool)",
+          "Déplacer l'équilibre : excès de réactif ou élimination de produit"
+        ],
+        "guided_example": {
+          "statement": "Écrire l'équation d'estérification entre l'acide éthanoïque et l'éthanol. Comment favoriser la formation de l'ester ?",
+          "solution_steps": [
+            "Réactifs : CH₃-COOH + CH₃-CH₂-OH",
+            "Équation : CH₃-COOH + CH₃-CH₂-OH ⇌ CH₃-COO-CH₂-CH₃ + H₂O",
+            "Produit : éthanoate d'éthyle (odeur de pomme)",
+            "Pour favoriser l'ester : (1) excès d'alcool ou d'acide",
+            "(2) éliminer l'eau au fur et à mesure, (3) catalyseur acide H⁺"
+          ]
+        },
+        "quick_exercises": [
+          "Écrire l'équation : acide propanoïque + méthanol",
+          "Quel ester donne l'acide butanoïque et le propan-1-ol ?",
+          "Comment hydrolyser l'éthanoate de méthyle ?"
+        ],
+        "common_mistakes": [
+          "Oublier que la réaction est équilibrée (⇌ et non →)",
+          "Ne pas tenir compte de la formation d'eau",
+          "Confondre estérification et saponification (hydrolyse basique)"
+        ],
+        "summary": {
+          "key_concept": "L'estérification est une réaction équilibrée et lente entre un acide et un alcool, catalysée par H⁺",
+          "key_method": "Acide + Alcool ⇌ Ester + H₂O (catalyse H⁺, déplacer équilibre)",
+          "next_step": "Étudier les macromolécules et polymères"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

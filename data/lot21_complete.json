@@ -1,0 +1,289 @@
+{
+  "metadata": {
+    "lot_number": 7,
+    "lot_name": "Lot 7 - Énergie",
+    "level": "Seconde",
+    "subject": "Physique",
+    "prefix": "P2",
+    "chapter": "Énergie",
+    "lesson_range": "P2-15 à P2-20",
+    "total_lessons": 6
+  },
+  "lessons": [
+    {
+      "id": "P2-15",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Énergie",
+      "title": "Énergie cinétique",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir l'énergie cinétique", "Utiliser la formule Ec = ½mv²", "Calculer l'énergie cinétique d'un système", "Comprendre que Ec dépend de la masse et de la vitesse"],
+      "prerequisites": ["P2-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["énergie", "cinétique"],
+      "detailed_content": {
+        "introduction": "L'énergie cinétique est l'énergie que possède un corps du fait de son mouvement. Plus un objet est massif et rapide, plus son énergie cinétique est grande.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "L'énergie cinétique (Ec) est l'énergie que possède un système en raison de son mouvement", "example": "Elle dépend de la masse m et de la vitesse v" },
+          { "name": "Formule", "explanation": "Ec = ½ × m × v² avec m en kg, v en m/s, Ec en joules (J)", "example": "Le joule est l'unité d'énergie : 1 J = 1 kg·m²/s²" },
+          { "name": "Propriétés", "explanation": "Ec est toujours positive (car v² ≥ 0), nulle si v = 0, dépend de v²", "example": "Doubler la vitesse multiplie Ec par 4" }
+        ],
+        "guided_example": {
+          "statement": "Une voiture de masse 1200 kg roule à 90 km/h. Calculer son énergie cinétique.",
+          "solution_steps": [
+            "Conversion : 90 km/h = 90/3,6 = 25 m/s",
+            "Ec = ½ × 1200 × 25² = 0,5 × 1200 × 625 = 375 000 J",
+            "Ec = 375 kJ"
+          ]
+        },
+        "quick_exercises": [
+          "Deux objets de même Ec : A (m=2 kg, v=10 m/s) et B (m=8 kg). Vitesse de B ?",
+          "Calculer Ec pour différents systèmes"
+        ],
+        "common_mistakes": [
+          "Oublier le facteur ½ dans la formule",
+          "Ne pas mettre v au carré",
+          "Oublier de convertir km/h en m/s",
+          "Obtenir une énergie négative"
+        ],
+        "summary": {
+          "key_concept": "Ec = ½mv² : énergie cinétique toujours positive",
+          "key_method": "Toujours convertir v en m/s avant de calculer",
+          "next_step": "Étudier l'énergie potentielle de pesanteur"
+        }
+      }
+    },
+    {
+      "id": "P2-16",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Énergie",
+      "title": "Énergie potentielle de pesanteur",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir l'énergie potentielle de pesanteur", "Utiliser la formule Epp = mgh", "Comprendre que Epp dépend de l'altitude", "Choisir une altitude de référence"],
+      "prerequisites": ["P2-07"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["énergie", "potentielle"],
+      "detailed_content": {
+        "introduction": "L'énergie potentielle de pesanteur est l'énergie qu'un objet possède du fait de sa position dans un champ de pesanteur (son altitude).",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Epp est l'énergie due à la position en altitude dans le champ de pesanteur", "example": "Dépend de la masse m, g (≈ 10 m/s²) et h (altitude)" },
+          { "name": "Formule", "explanation": "Epp = m × g × h avec m en kg, g ≈ 10 m/s², h en m, Epp en J", "example": "g est l'intensité de la pesanteur" },
+          { "name": "Niveau de référence", "explanation": "Le niveau h = 0 est choisi arbitrairement (sol, niveau de mer, etc.)", "example": "Seules les variations ΔEpp ont un sens absolu" }
+        ],
+        "guided_example": {
+          "statement": "Un livre de 500 g est sur une étagère à 2 m du sol. Calculer son Epp (g = 10 m/s²).",
+          "solution_steps": [
+            "m = 500 g = 0,5 kg",
+            "Epp = m × g × h = 0,5 × 10 × 2 = 10 J",
+            "Epp = 10 J"
+          ]
+        },
+        "quick_exercises": [
+          "Bille de 20 g lâchée de h = 5 m. Calculer ΔEpp entre départ et sol",
+          "Calculer Epp pour différents systèmes à différentes altitudes"
+        ],
+        "common_mistakes": [
+          "Oublier de convertir g en kg",
+          "Confondre g (pesanteur) et m (masse)",
+          "Ne pas définir le niveau de référence"
+        ],
+        "summary": {
+          "key_concept": "Epp = mgh : énergie potentielle à une altitude donnée",
+          "key_method": "Définissez toujours le niveau de référence (h = 0)",
+          "next_step": "Étudier la conservation de l'énergie mécanique"
+        }
+      }
+    },
+    {
+      "id": "P2-17",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Énergie",
+      "title": "Conservation de l'énergie mécanique",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir l'énergie mécanique Em = Ec + Epp", "Comprendre le principe de conservation de l'énergie mécanique", "Identifier les conditions de conservation", "Résoudre des problèmes de conversion d'énergie"],
+      "prerequisites": ["P2-15", "P2-16"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["énergie", "conservation"],
+      "detailed_content": {
+        "introduction": "L'énergie mécanique est la somme de l'énergie cinétique et de l'énergie potentielle. Dans certaines conditions, elle se conserve.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Em = Ec + Epp = ½mv² + mgh", "example": "Somme des deux énergies" },
+          { "name": "Conservation", "explanation": "En l'absence de frottements : Em = constante, ΔEm = 0", "example": "Ec et Epp varient mais leur somme reste constante" },
+          { "name": "Conversions", "explanation": "Chute : Epp diminue et Ec augmente. Montée : Ec diminue et Epp augmente", "example": "Comme un pendule qui échange continuellement Ec et Epp" }
+        ],
+        "guided_example": {
+          "statement": "On lâche une bille de 100 g de h = 5 m sans vitesse initiale. Vitesse juste avant le sol ? (g = 10 m/s², sans frottements)",
+          "solution_steps": [
+            "Conservation : Em(haut) = Em(bas)",
+            "En haut : Ec = 0, Epp = mgh. En bas : Ec = ½mv², Epp = 0",
+            "mgh = ½mv² ⇒ gh = ½v² ⇒ v² = 2gh",
+            "v² = 2×10×5 = 100 ⇒ v = 10 m/s"
+          ]
+        },
+        "quick_exercises": [
+          "Skieur de 80 kg part de h = 100 m sans vitesse. Vitesse en bas ? (sans frottements)",
+          "Problèmes de conservation Em"
+        ],
+        "common_mistakes": [
+          "Oublier qu'Em se conserve sans frottements",
+          "Mal identifier les états initial et final",
+          "Penser que Ec et Epp sont séparément constantes"
+        ],
+        "summary": {
+          "key_concept": "Em = Ec + Epp se conserve sans frottements",
+          "key_method": "Sans frottements : Em constante. Avec frottements : Em diminue",
+          "next_step": "Étudier les transferts d'énergie"
+        }
+      }
+    },
+    {
+      "id": "P2-18",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Énergie",
+      "title": "Transferts d'énergie",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Identifier les différents modes de transfert d'énergie", "Comprendre le travail d'une force", "Comprendre le transfert thermique", "Distinguer transfert et transformation d'énergie"],
+      "prerequisites": ["P2-17"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["travail", "transfert"],
+      "detailed_content": {
+        "introduction": "L'énergie peut être transférée d'un système à un autre de différentes manières : travail, chaleur, rayonnement.",
+        "key_concepts": [
+          { "name": "Travail", "explanation": "Transfert d'énergie par action d'une force", "example": "W = F × d (force constante, déplacement rectiligne)" },
+          { "name": "Transfert thermique", "explanation": "Chaleur Q : transfert d'énergie dû à une différence de température", "example": "Du corps chaud vers le corps froid" },
+          { "name": "Rayonnement", "explanation": "Transfert d'énergie par ondes électromagnétiques", "example": "Le Soleil chauffe la Terre par rayonnement" }
+        ],
+        "guided_example": {
+          "statement": "Une force F = 50 N tire un chariot sur d = 10 m dans la direction de la force. Calculer le travail.",
+          "solution_steps": [
+            "W = F × d",
+            "W = 50 × 10 = 500 J",
+            "Travail moteur positif : transfère 500 J au chariot"
+          ]
+        },
+        "quick_exercises": [
+          "Force de 100 N, frottements de 30 N sur 5 m. Calculer travaux de F et des frottements",
+          "Identifier différents modes de transfert d'énergie"
+        ],
+        "common_mistakes": [
+          "Confondre force et énergie",
+          "Oublier le signe négatif du travail résistant",
+          "Confondre transfert et transformation"
+        ],
+        "summary": {
+          "key_concept": "Travail W, chaleur Q, rayonnement : modes de transfert d'énergie",
+          "key_method": "Travail moteur : W > 0. Travail résistant : W < 0",
+          "next_step": "Étudier la puissance"
+        }
+      }
+    },
+    {
+      "id": "P2-19",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Énergie",
+      "title": "Puissance",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir la puissance", "Utiliser la formule P = E/Δt", "Convertir les unités de puissance", "Calculer énergie ou durée à partir de la puissance"],
+      "prerequisites": ["P2-18"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["puissance"],
+      "detailed_content": {
+        "introduction": "La puissance caractérise la rapidité avec laquelle l'énergie est transférée ou transformée.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "P = E / Δt : énergie transférée par durée", "example": "Unité : watt (W) = 1 J/s" },
+          { "name": "Unités", "explanation": "1 W = 1 J/s. Multiples : kW, MW. kWh = 3600 kJ", "example": "1 kWh = 1000 W × 3600 s = 3,6 × 10⁶ J" },
+          { "name": "Relations", "explanation": "P = E/Δt, donc E = P×Δt et Δt = E/P", "example": "Plus P est grande, plus E est transférée rapidement" }
+        ],
+        "guided_example": {
+          "statement": "Une ampoule de 60 W fonctionne pendant 2 h. Énergie consommée (en J et kWh) ?",
+          "solution_steps": [
+            "Δt = 2 h = 7200 s",
+            "E = P × Δt = 60 × 7200 = 432 000 J = 432 kJ",
+            "En kWh : E = 0,06 kW × 2 h = 0,12 kWh"
+          ]
+        },
+        "quick_exercises": [
+          "Radiateur 2000 W pendant 3 h. Calculer énergie en kWh et coût (0,15 €/kWh)",
+          "Calculer E ou Δt à partir de P"
+        ],
+        "common_mistakes": [
+          "Confondre puissance et énergie",
+          "Oublier de convertir unités (W/kW, s/h)",
+          "Mal utiliser P = E/Δt"
+        ],
+        "summary": {
+          "key_concept": "P = E/Δt : puissance = vitesse de transfert d'énergie",
+          "key_method": "Formule clé : P = E/Δt (donc E = P×Δt)",
+          "next_step": "Étudier le rendement énergétique"
+        }
+      }
+    },
+    {
+      "id": "P2-20",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Énergie",
+      "title": "Rendement énergétique",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 70,
+      "objectives": ["Définir le rendement d'un système", "Utiliser la formule η = E_utile / E_consommée", "Calculer un rendement", "Comprendre qu'aucun système n'a un rendement de 100%"],
+      "prerequisites": ["P2-18", "P2-19"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["rendement"],
+      "detailed_content": {
+        "introduction": "Aucun système n'est parfait : le rendement mesure l'efficacité d'un système à convertir l'énergie reçue en énergie utile.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "η = E_utile / E_consommée (rapport sans unité)", "example": "On l'exprime aussi en % : η(%) = (E_utile / E_consommée) × 100" },
+          { "name": "Propriétés", "explanation": "0 ≤ η ≤ 1 (ou 0% ≤ η ≤ 100%). Plus η est proche de 1, plus le système est efficace", "example": "Un rendement de 100% est impossible en pratique" },
+          { "name": "Énergie perdue", "explanation": "E_perdue = E_consommée - E_utile", "example": "Généralement transformée en chaleur par frottements" }
+        ],
+        "guided_example": {
+          "statement": "Un moteur consomme 1000 J et fournit 750 J utiles. Calculer le rendement.",
+          "solution_steps": [
+            "η = E_utile / E_consommée = 750 / 1000 = 0,75",
+            "η = 75%",
+            "E_perdue = 1000 - 750 = 250 J"
+          ]
+        },
+        "quick_exercises": [
+          "Centrale électrique : rendement 40%, consomme 2500 MW thermiques. Puissance électrique utile ?",
+          "Calculer rendements de différents systèmes"
+        ],
+        "common_mistakes": [
+          "Confondre rendement et puissance",
+          "Obtenir η > 1 (impossible)",
+          "Inverser E_utile et E_consommée"
+        ],
+        "summary": {
+          "key_concept": "η = E_utile / E_consommée : rendement toujours ≤ 1",
+          "key_method": "Aucun système réel n'a η = 100%",
+          "next_step": "Révisions et synthèse du chapitre"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

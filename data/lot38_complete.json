@@ -1,0 +1,423 @@
+{
+  "metadata": {
+    "lot_number": 30,
+    "lot_name": "Lot 38 - Mécanique Avancée",
+    "level": "Terminale",
+    "subject": "Physique",
+    "prefix": "PT",
+    "chapter": "Mécanique Avancée",
+    "lesson_range": "PT-01 à PT-10",
+    "total_lessons": 10
+  },
+  "lessons": [
+    {
+      "id": "PT-01",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Champ de pesanteur terrestre",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Définir le champ de pesanteur", "Calculer l'intensité g", "Comprendre les variations de g", "Appliquer à différentes situations"],
+      "prerequisites": ["P1-01", "P1-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["gravitation", "pesanteur"],
+      "detailed_content": {
+        "introduction": "Le champ de pesanteur caractérise l'interaction gravitationnelle en un point de l'espace. À la surface de la Terre, il détermine le poids des objets et leur mouvement en chute libre.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "g⃗ = P⃗/m, force par unité de masse. Direction verticale bas, g ≈ 9.81 m/s²", "example": "Champ vectoriel" },
+          { "name": "Gravitation", "explanation": "F = G(Mm)/d². g = GM_T/R_T². G = 6.67×10⁻¹¹ N·m²/kg²", "example": "Loi universelle" },
+          { "name": "Variations", "explanation": "g(h) = g₀[R_T/(R_T+h)]². g diminue altitude, latitude", "example": "Altitude et latitude" },
+          { "name": "Applications", "explanation": "P = mg. Chute libre a⃗ = g⃗. Satellites. Autres planètes", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "M_Lune = 7.35×10²² kg, R_Lune = 1.74×10⁶ m. Calculer g Lune.",
+          "solution_steps": ["g = GM/R²", "= (6.67×10⁻¹¹)(7.35×10²²)/(1.74×10⁶)²", "≈ 1.62 m/s²"]
+        },
+        "quick_exercises": [
+          "R_T = 6400 km, g₀ = 9.81. g(h) = 9.0 m/s². h ?",
+          "Champ pesanteur"
+        ],
+        "common_mistakes": [
+          "Confondre g et g⃗",
+          "Oublier variations altitude"
+        ],
+        "summary": {
+          "key_concept": "g = GM/R² (surface planète). g diminue quand on s'éloigne",
+          "key_method": "N/kg = m/s² (équivalence). Poids P = mg",
+          "next_step": "Mouvement projectile"
+        }
+      }
+    },
+    {
+      "id": "PT-02",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Mouvement d'un projectile",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Établir les équations du mouvement", "Calculer la trajectoire parabolique", "Déterminer portée et flèche", "Résoudre des problèmes de tir"],
+      "prerequisites": ["PT-01", "P1-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["projectile", "trajectoire"],
+      "detailed_content": {
+        "introduction": "Le mouvement d'un projectile lancé avec une vitesse initiale dans le champ de pesanteur uniforme est un mouvement parabolique.",
+        "key_concepts": [
+          { "name": "Conditions", "explanation": "Position (x₀,y₀), v₀, angle α. v₀ₓ = v₀cosα, v₀ᵧ = v₀sinα", "example": "Initiales" },
+          { "name": "Équations", "explanation": "vₓ = v₀cosα (constant). vᵧ = v₀sinα - gt. x = v₀cosα·t, y = v₀sinα·t - ½gt²", "example": "Horaires" },
+          { "name": "Trajectoire", "explanation": "y = x tanα - (gx²)/(2v₀²cos²α). Parabole y = ax - bx²", "example": "Équation" },
+          { "name": "Grandeurs", "explanation": "Portée x_P = (v₀²sin2α)/g (max α=45°). Flèche y_max = (v₀²sin²α)/(2g). T = (2v₀sinα)/g", "example": "Caractéristiques" }
+        ],
+        "guided_example": {
+          "statement": "v₀=20 m/s, α=30°. Portée ?",
+          "solution_steps": ["x_P = (v₀² sin 2α)/g", "= (400×sin60°)/10", "≈ 34.6 m"]
+        },
+        "quick_exercises": [
+          "v₀=25 m/s, α=40°. Hauteur max, portée ?",
+          "Mouvement projectile"
+        ],
+        "common_mistakes": [
+          "Confondre α et 2α",
+          "Oublier le ½ dans y(t)"
+        ],
+        "summary": {
+          "key_concept": "Décomposer selon x et y. x : MRU, y : MRUA",
+          "key_method": "Portée : x_P = (v₀²sin2α)/g. Flèche : y_max pour vᵧ=0",
+          "next_step": "Mouvement circulaire"
+        }
+      }
+    },
+    {
+      "id": "PT-03",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Mouvement circulaire uniforme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Caractériser le MCU", "Calculer la vitesse angulaire ω", "Définir l'accélération centripète", "Appliquer aux situations concrètes"],
+      "prerequisites": ["P1-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["circulaire", "MCU"],
+      "detailed_content": {
+        "introduction": "Le mouvement circulaire uniforme (MCU) est un mouvement sur une trajectoire circulaire avec une vitesse de module constant. L'accélération est dirigée vers le centre.",
+        "key_concepts": [
+          { "name": "Caractéristiques", "explanation": "Trajectoire cercle rayon r. v constant. T période, f fréquence, ω = 2π/T = 2πf. v = ωr", "example": "Définition" },
+          { "name": "Vitesse", "explanation": "Direction tangente, sens mouvement. Module constant. v⃗ variable direction", "example": "Vecteur" },
+          { "name": "Accélération", "explanation": "a⃗_c vers centre. a_c = v²/r = ω²r. Ne change pas module v⃗", "example": "Centripète" },
+          { "name": "Force", "explanation": "F_c = ma_c = m(v²/r) = mω²r. Nécessaire maintenir MCU", "example": "Centripète" }
+        ],
+        "guided_example": {
+          "statement": "Virage rayon 50 m, 72 km/h. a_c ?",
+          "solution_steps": ["v = 20 m/s", "a_c = v²/r = 400/50 = 8 m/s²"]
+        },
+        "quick_exercises": [
+          "Satellite T=90 min, r=6800 km. ω, v, a_c ?",
+          "Mouvement circulaire"
+        ],
+        "common_mistakes": [
+          "Confondre v linéaire et ω",
+          "Penser a = 0 car v constant"
+        ],
+        "summary": {
+          "key_concept": "MCU : v constant mais v⃗ variable. a_c toujours vers centre",
+          "key_method": "v = ωr, a_c = v²/r = ω²r. F_c fournie par force réelle",
+          "next_step": "Lois de Kepler"
+        }
+      }
+    },
+    {
+      "id": "PT-04",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Satellites et lois de Kepler",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Énoncer les trois lois de Kepler", "Établir la loi des périodes (3ème loi)", "Calculer la période d'un satellite", "Comprendre les orbites géostationnaires"],
+      "prerequisites": ["PT-01", "PT-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Kepler", "satellites"],
+      "detailed_content": {
+        "introduction": "Les lois de Kepler décrivent le mouvement des planètes autour du Soleil et, par extension, celui des satellites autour des planètes.",
+        "key_concepts": [
+          { "name": "1ère loi", "explanation": "Planètes décrivent ellipses, Soleil à un foyer. Cas particulier orbite circulaire", "example": "Orbites" },
+          { "name": "2ème loi", "explanation": "Rayon balaie aires égales en durées égales. Vitesse variable ellipse", "example": "Aires" },
+          { "name": "3ème loi", "explanation": "T² ∝ a³. T² = (4π²/GM)×a³. Cas circulaire a = r", "example": "Période" },
+          { "name": "Géostationnaire", "explanation": "T = 24h, orbite équatoriale circulaire. r ≈ 42200 km (h ≈ 35800 km)", "example": "Application" }
+        ],
+        "guided_example": {
+          "statement": "Satellite h=400 km. R_T=6400 km, g=10. T ?",
+          "solution_steps": ["r=6800 km", "GM = gR_T² = 4.1×10¹⁴", "T² = (4π²/GM)r³", "T ≈ 91 min"]
+        },
+        "quick_exercises": [
+          "S₁ : r₁=7000 km, T₁=100 min. S₂ : r₂=14000 km. T₂ ?",
+          "Lois de Kepler"
+        ],
+        "common_mistakes": [
+          "Confondre rayon et altitude",
+          "Oublier le cube dans 3ème loi"
+        ],
+        "summary": {
+          "key_concept": "3ème loi : T² ∝ r³. T²/r³ = 4π²/(GM) = cte",
+          "key_method": "Géostationnaire : T = 24h, équatorial. Plus loin = période plus longue",
+          "next_step": "Oscillateurs"
+        }
+      }
+    },
+    {
+      "id": "PT-05",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Oscillateurs mécaniques - Introduction",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir un oscillateur mécanique", "Reconnaître un mouvement périodique", "Caractériser période et amplitude", "Identifier différents types d'oscillateurs"],
+      "prerequisites": ["P1-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["oscillateurs", "périodique"],
+      "detailed_content": {
+        "introduction": "Un oscillateur mécanique est un système qui effectue des mouvements périodiques autour d'une position d'équilibre.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Système mouvement va-et-vient équilibre. Pendule, masse-ressort, diapason", "example": "Exemples" },
+          { "name": "Périodique", "explanation": "x(t+T) = x(t). T période durée cycle, f = 1/T fréquence", "example": "Caractéristique" },
+          { "name": "Équilibre", "explanation": "Position x=0 repos si non perturbé. Élongation x(t). Amplitude A |x|_max", "example": "Position" },
+          { "name": "Types", "explanation": "Libres sans apport énergie, entretenues avec apport, forcées avec excitation", "example": "Oscillations" }
+        ],
+        "guided_example": {
+          "statement": "20 oscillations en 40 s. T, f ?",
+          "solution_steps": ["T = 40/20 = 2 s", "f = 1/T = 0.5 Hz"]
+        },
+        "quick_exercises": [
+          "f = 2.5 Hz, A = 8 cm. T ? Positions extrêmes ?",
+          "Oscillateurs"
+        ],
+        "common_mistakes": [
+          "Confondre période et fréquence",
+          "Confondre amplitude et élongation"
+        ],
+        "summary": {
+          "key_concept": "T : durée cycle complet. f = 1/T (inverse). A : élongation maximale",
+          "key_method": "Position équilibre = référence",
+          "next_step": "Pendule simple"
+        }
+      }
+    },
+    {
+      "id": "PT-06",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Pendule simple",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Décrire le pendule simple", "Établir l'équation du mouvement", "Calculer la période T = 2π√(l/g)", "Étudier l'influence des paramètres"],
+      "prerequisites": ["PT-05"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["pendule", "oscillations"],
+      "detailed_content": {
+        "introduction": "Le pendule simple est un oscillateur harmonique pour les petites oscillations.",
+        "key_concepts": [
+          { "name": "Description", "explanation": "Masse m fil longueur l. Pas frottements, petits angles θ<10°. Variable θ(t)", "example": "Système" },
+          { "name": "Équation", "explanation": "F_t = -mg sinθ ≈ -mgθ. θ'' + (g/l)θ = 0. Oscillateur harmonique", "example": "Mouvement" },
+          { "name": "Période", "explanation": "ω = √(g/l). T = 2π/ω = 2π√(l/g). f = (1/2π)√(g/l). T indépendant m et amplitude", "example": "Caractéristiques" },
+          { "name": "Énergie", "explanation": "E_c = ½m(lθ')². E_p = mgh. E_m = cte conservation", "example": "Mécanique" }
+        ],
+        "guided_example": {
+          "statement": "Pendule l=1 m. T ?",
+          "solution_steps": ["T = 2π√(l/g)", "= 2π√(1/10)", "≈ 2 s"]
+        },
+        "quick_exercises": [
+          "l₁=25 cm, l₂=100 cm. T₂/T₁ ?",
+          "Pendule simple"
+        ],
+        "common_mistakes": [
+          "Penser T dépend de m (FAUX)",
+          "Oublier approximation petits angles"
+        ],
+        "summary": {
+          "key_concept": "T = 2π√(l/g). T indépendant de m et θ_max",
+          "key_method": "Petits angles : sinθ ≈ θ. Plus long = période plus grande",
+          "next_step": "Masse-ressort"
+        }
+      }
+    },
+    {
+      "id": "PT-07",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Système masse-ressort",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 125,
+      "objectives": ["Étudier l'oscillateur masse-ressort", "Établir l'équation différentielle", "Calculer la période T = 2π√(m/k)", "Analyser l'énergie mécanique"],
+      "prerequisites": ["PT-05"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["masse", "ressort"],
+      "detailed_content": {
+        "introduction": "Le système masse-ressort est un oscillateur harmonique fondamental en physique.",
+        "key_concepts": [
+          { "name": "Système", "explanation": "Masse m ressort raideur k. Position équilibre x=0. Élongation x", "example": "Description" },
+          { "name": "Force", "explanation": "Loi Hooke F = -kx. Force rappel. mx'' = -kx. x'' + (k/m)x = 0", "example": "Mouvement" },
+          { "name": "Solution", "explanation": "ω₀ = √(k/m). x(t) = A cos(ω₀t+φ). T = 2π√(m/k). f = (1/2π)√(k/m)", "example": "Période" },
+          { "name": "Énergie", "explanation": "E_c = ½mv². E_p = ½kx². E_m = ½kA² = cte. Conservation", "example": "Mécanique" }
+        ],
+        "guided_example": {
+          "statement": "k=100 N/m, m=250 g. T ?",
+          "solution_steps": ["m = 0.25 kg", "T = 2π√(m/k)", "= 2π√(0.25/100) ≈ 0.314 s"]
+        },
+        "quick_exercises": [
+          "Masse doublée. Variation T ?",
+          "Masse-ressort"
+        ],
+        "common_mistakes": [
+          "Confondre k et m dans formule",
+          "Penser T ∝ m (FAUX)"
+        ],
+        "summary": {
+          "key_concept": "T = 2π√(m/k). Force : F = -kx (rappel)",
+          "key_method": "Plus m grand → T grand. Plus k grand → T petit. E_m = ½kA² conservée",
+          "next_step": "Amortissement"
+        }
+      }
+    },
+    {
+      "id": "PT-08",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Amortissement des oscillations",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre l'origine de l'amortissement", "Distinguer les trois régimes", "Analyser la décroissance de l'amplitude", "Calculer le facteur de qualité"],
+      "prerequisites": ["PT-07"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["amortissement", "oscillations"],
+      "detailed_content": {
+        "introduction": "Dans la réalité, les oscillations s'amortissent à cause des frottements. L'énergie mécanique diminue progressivement.",
+        "key_concepts": [
+          { "name": "Amortissement", "explanation": "Frottements fluides f = -hv. h coefficient. Force opposition mouvement", "example": "Origine" },
+          { "name": "Équation", "explanation": "ẍ + 2λẋ + ω₀²x = 0. λ = h/(2m), ω₀ = √(k/m)", "example": "Mouvement" },
+          { "name": "Régimes", "explanation": "Pseudo-périodique λ<ω₀ oscillations amorties. Critique λ=ω₀. Apériodique λ>ω₀", "example": "Types" },
+          { "name": "Qualité", "explanation": "Q = ω₀/(2λ). Q grand faible amortissement. Q = π×oscillations arrêt", "example": "Facteur" }
+        ],
+        "guided_example": {
+          "statement": "ω₀=10 rad/s, λ=0.5 s⁻¹. Régime ? Q ?",
+          "solution_steps": ["λ < ω₀ : pseudo-périodique", "Q = 10/(2×0.5) = 10"]
+        },
+        "quick_exercises": [
+          "T₀=2 s, T=2.01 s. Q estimé ?",
+          "Amortissement"
+        ],
+        "common_mistakes": [
+          "Confondre ω et ω₀",
+          "Penser T diminue (FAUX)"
+        ],
+        "summary": {
+          "key_concept": "λ < ω₀ : oscillations amorties. A(t) décroît exponentiellement",
+          "key_method": "T > T₀ (période augmente légèrement). Q grand = faible amortissement",
+          "next_step": "Résonance"
+        }
+      }
+    },
+    {
+      "id": "PT-09",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Résonance mécanique",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Définir la résonance", "Comprendre l'excitation forcée", "Identifier la fréquence de résonance", "Analyser l'amplitude en fonction de f"],
+      "prerequisites": ["PT-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["résonance", "forcé"],
+      "detailed_content": {
+        "introduction": "La résonance se produit lorsqu'un oscillateur est soumis à une excitation périodique dont la fréquence est proche de sa fréquence propre.",
+        "key_concepts": [
+          { "name": "Forcé", "explanation": "Force extérieure F(t) = F₀cos(ωt). mẍ + hẋ + kx = F₀cos(ωt). Régime permanent f imposée", "example": "Excitation" },
+          { "name": "Amplitude", "explanation": "A(ω) = (F₀/m)/√[(ω₀²-ω²)²+(2λω)²]. Dépend fortement ω", "example": "Fréquence" },
+          { "name": "Résonance", "explanation": "Amplitude max quand ω ≈ ω₀. f_r ≈ f₀. A_max = QF₀/(mω₀²)", "example": "Pic" },
+          { "name": "Amortissement", "explanation": "Q grand résonance marquée (pic étroit élevé). Q petit résonance faible. Applications ponts bâtiments", "example": "Rôle" }
+        ],
+        "guided_example": {
+          "statement": "f₀=5 Hz, Q=20. f=5 vs f=10 Hz. Amplitude ?",
+          "solution_steps": ["f = f₀ : résonance A_max", "f = 10 Hz : A << A_max"]
+        },
+        "quick_exercises": [
+          "Pont f₀=2 Hz. Soldats 2 pas/s. Risque ? Solution ?",
+          "Résonance"
+        ],
+        "common_mistakes": [
+          "Confondre f₀ et f",
+          "Oublier rôle de Q"
+        ],
+        "summary": {
+          "key_concept": "Résonance : f ≈ f₀. A_max proportionnel à Q",
+          "key_method": "Q grand = résonance marquée. Applications : ponts, bâtiments, musique",
+          "next_step": "Synthèse"
+        }
+      }
+    },
+    {
+      "id": "PT-10",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Synthèse - Mécanique Avancée",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 140,
+      "objectives": ["Maîtriser tous les concepts de mécanique avancée", "Relier les différents types de mouvements", "Résoudre des problèmes de synthèse", "Appliquer à des situations complexes"],
+      "prerequisites": ["PT-01", "PT-04", "PT-07", "PT-09"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "mécanique"],
+      "detailed_content": {
+        "introduction": "La mécanique avancée combine gravitation, mouvements complexes et oscillations.",
+        "key_concepts": [
+          { "name": "Champs", "explanation": "g⃗ = P⃗/m, g = GM/R². Projectile parabole. MCU a_c = v²/r. Satellites T² ∝ r³", "example": "Mouvements" },
+          { "name": "Oscillateurs", "explanation": "Pendule T = 2π√(l/g). Masse-ressort T = 2π√(m/k). Amortissement A(t) décroît. Résonance f ≈ f₀", "example": "Types" },
+          { "name": "Stratégie", "explanation": "1) Identifier mouvement 2) Référentiel 3) Bilan forces 4) Newton 5) Résoudre 6) Calculer 7) Vérifier 8) Interpréter", "example": "Méthode" },
+          { "name": "Énergie", "explanation": "E_m = E_c + E_p = cte si pas frottements. TEC ΔE_c = W. P = F⃗·v⃗", "example": "Méthodes" }
+        ],
+        "guided_example": {
+          "statement": "Satellite 500 kg, h=300 km. v, T ?",
+          "solution_steps": ["Force = GMm/r²", "v = √(GM/r)", "T = 2πr/v"]
+        },
+        "quick_exercises": [
+          "Pendule l=1 m, m=200 g, θ₀=20°. T ? v_max ?",
+          "Problèmes synthèse"
+        ],
+        "common_mistakes": [
+          "Mélanger formules",
+          "Oublier conditions"
+        ],
+        "summary": {
+          "key_concept": "Gravitation : g = GM/R², F_c = mv²/r. Projectile : parabole. Oscillateurs : T ∝ √l ou √m",
+          "key_method": "Résonance : f = f₀. Conservation énergie = méthode puissante. La mécanique : rigueur et méthode ! 🚀",
+          "next_step": "Fin Mécanique Avancée"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

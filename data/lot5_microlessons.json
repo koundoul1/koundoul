@@ -1,0 +1,599 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-11 à M1-20",
+    "chapters": ["Second Degré (fin)", "Dérivation (début)"],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Fin du chapitre Second Degré (M1-11 à M1-12) + Début du chapitre Dérivation (M1-13 à M1-20)"
+  },
+  "lessons": [
+    
+    {
+      "id": "M1-11",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Systèmes avec équations du second degré",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Résoudre un système avec une équation du 2nd degré",
+        "Utiliser substitution et combinaison",
+        "Interpréter graphiquement les solutions"
+      ],
+      "prerequisites": [
+        "Résolution d'équations du 2nd degré",
+        "Systèmes d'équations linéaires",
+        "Discriminant"
+      ],
+      "content_types": ["video", "problem-solving", "quiz", "exercises"],
+      "tags": ["système", "second degré", "substitution", "graphique"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la résolution de systèmes incluant des équations du second degré. Elle clôt le chapitre Second Degré de Première. L'objectif est de combiner méthodes algébriques et interprétations graphiques en 12 minutes.",
+        "method_step_by_step": [
+          "Identifier le type de système : linéaire + 2nd degré, ou deux 2nd degré",
+          "Méthode par substitution : exprimer une variable en fonction de l'autre",
+          "Remplacer dans l'autre équation pour obtenir équation du 2nd degré",
+          "Résoudre avec le discriminant",
+          "Retrouver les couples solutions et vérifier"
+        ],
+        "guided_example": {
+          "statement": "Résoudre le système : y = x + 1 et x² + y² = 5.",
+          "solution_steps": [
+            "Substitution : remplacer y par x+1 dans la 2ème équation",
+            "x² + (x+1)² = 5 ⇔ x² + x² + 2x + 1 = 5",
+            "2x² + 2x - 4 = 0 ⇔ x² + x - 2 = 0",
+            "Δ = 1 + 8 = 9 > 0 : deux solutions x₁ = 1, x₂ = -2",
+            "y₁ = 2, y₂ = -1. Solutions : S = {(1,2) ; (-2,-1)}",
+            "Interprétation : intersection droite et cercle"
+          ]
+        },
+        "quick_exercises": [
+          "Résoudre : y = 2x et x² + y² = 20",
+          "Résoudre : x + y = 4 et xy = 3",
+          "Combien de points d'intersection entre y = x² et y = -x + 2 ?"
+        ],
+        "common_mistakes": [
+          "Oublier de remplacer dans les deux sens",
+          "Négliger une solution lors de la substitution",
+          "Ne pas vérifier que les solutions satisfont les deux équations"
+        ],
+        "summary": {
+          "key_concept": "Un système avec équation du 2nd degré se résout par substitution, conduisant à une équation du 2nd degré à résoudre",
+          "key_method": "Isoler variable → Substituer → Équation 2nd degré → Discriminant → Couples solutions",
+          "next_step": "Aborder la dérivation et les variations"
+        }
+      }
+    },
+    {
+      "id": "M1-12",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Synthèse complète du second degré - Révision",
+      "duration_min": 15,
+      "difficulty": 5,
+      "xp_reward": 150,
+      "objectives": [
+        "Réviser toutes les formes : développée, canonique, factorisée",
+        "Maîtriser discriminant, racines, signe, variations",
+        "Résoudre un problème complet mobilisant tout le chapitre"
+      ],
+      "prerequisites": [
+        "Toutes les leçons M1-01 à M1-11",
+        "Maîtrise globale du second degré"
+      ],
+      "content_types": ["video", "synthesis", "quiz", "exercises"],
+      "tags": ["synthèse", "révision", "second degré", "complet"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon de synthèse révise l'intégralité du chapitre Second Degré. Elle s'inscrit comme conclusion du chapitre en Première. L'objectif est de consolider toutes les compétences en 15 minutes avant d'aborder la dérivation.",
+        "method_step_by_step": [
+          "Fiche récapitulative : ax² + bx + c → 3 formes, discriminant, somme/produit",
+          "Tableau de correspondance : forme ↔ information (sommet, racines, signe)",
+          "Méthodologie : quel outil pour quel problème ?",
+          "Exercice type BAC complet avec justifications",
+          "Auto-évaluation : checklist des compétences maîtrisées"
+        ],
+        "guided_example": {
+          "statement": "Soit f(x) = -x² + 4x + 5. a) Forme canonique et sommet. b) Tableau variations. c) Résoudre f(x) ≥ 5. d) Aire entre courbe et axe des x.",
+          "solution_steps": [
+            "a) α = 2, β = f(2) = 9. Forme : f(x) = -(x-2)² + 9. Sommet S(2,9)",
+            "b) a < 0 : max en x=2. Tableau : ↗ jusqu'à 2, puis ↘. f(2) = 9",
+            "c) f(x) ≥ 5 ⇔ -(x-2)² + 9 ≥ 5 ⇔ (x-2)² ≤ 4 ⇔ -2 ≤ x-2 ≤ 2. Solution : [0;4]",
+            "d) Racines : Δ = 36, x₁ = -1, x₂ = 5. Aire = ∫₋₁⁵ f(x)dx (hors programme, réponse approximative géométrique)",
+            "Synthèse : mobilisation forme canonique, variations, inéquations, racines"
+          ]
+        },
+        "quick_exercises": [
+          "QCM : 10 questions flash sur tout le chapitre",
+          "Vrai/Faux : Si Δ < 0, le trinôme est toujours négatif (FAUX)",
+          "Problème ouvert : trouver a,b,c sachant racines 1 et 3 et f(0) = -6"
+        ],
+        "common_mistakes": [
+          "Confondre les trois formes",
+          "Oublier le domaine dans un problème concret",
+          "Manquer de rigueur dans la rédaction finale"
+        ],
+        "summary": {
+          "key_concept": "Le second degré se maîtrise par la connaissance des 3 formes et l'utilisation stratégique du discriminant",
+          "key_method": "Analyser problème → Choisir forme/outil → Résoudre → Interpréter → Conclure",
+          "next_step": "Chapitre suivant : Dérivation (M1-13)"
+        }
+      }
+    },
+    {
+      "id": "M1-13",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Taux de variation et introduction à la dérivée",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": [
+        "Comprendre la notion de taux de variation",
+        "Calculer un taux moyen entre deux points",
+        "Interpréter graphiquement le taux de variation"
+      ],
+      "prerequisites": [
+        "Fonctions",
+        "Pente d'une droite",
+        "Lecture graphique"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["taux variation", "introduction", "dérivée", "pente"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon introduit le concept de taux de variation, fondamental pour la dérivation. Elle ouvre le chapitre Dérivation de Première. L'objectif est de comprendre cette notion intuitive en 10 minutes.",
+        "method_step_by_step": [
+          "Définition : taux de variation de f entre a et b = [f(b) - f(a)] / (b - a)",
+          "Interprétation : pente de la droite passant par A(a,f(a)) et B(b,f(b))",
+          "Exemple concret : vitesse moyenne = distance parcourue / temps",
+          "Graphiquement : visualiser la corde [AB]",
+          "Lien avec la suite : que se passe-t-il quand b → a ?"
+        ],
+        "guided_example": {
+          "statement": "Soit f(x) = x². Calculer le taux de variation de f entre 2 et 5.",
+          "solution_steps": [
+            "f(2) = 4, f(5) = 25",
+            "Taux = (25 - 4) / (5 - 2) = 21 / 3 = 7",
+            "Interprétation : pente de la droite passant par (2,4) et (5,25) est 7",
+            "Graphiquement : tracer les points A(2,4) et B(5,25) sur la parabole",
+            "Observation : ce taux donne une idée de la 'rapidité' de croissance moyenne entre 2 et 5"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer le taux de variation de g(x) = x³ entre 1 et 3",
+          "Pour f(x) = 1/x, taux entre 2 et 4 ?",
+          "Interpréter un taux négatif"
+        ],
+        "common_mistakes": [
+          "Inverser numérateur et dénominateur",
+          "Oublier de calculer f(a) et f(b) séparément",
+          "Confondre taux de variation et valeur de la fonction"
+        ],
+        "summary": {
+          "key_concept": "Le taux de variation mesure la pente moyenne d'une fonction entre deux points",
+          "key_method": "[f(b) - f(a)] / (b - a) → Pente de la corde AB",
+          "next_step": "Étudier le nombre dérivé (limite du taux quand b → a)"
+        }
+      }
+    },
+    {
+      "id": "M1-14",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Nombre dérivé - Définition et calcul",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir le nombre dérivé comme limite du taux de variation",
+        "Calculer f'(a) à partir de la définition",
+        "Comprendre l'interprétation comme coefficient directeur de la tangente"
+      ],
+      "prerequisites": [
+        "Taux de variation",
+        "Notion de limite (intuitive)",
+        "Fonctions usuelles"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["nombre dérivé", "limite", "tangente", "définition"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la définition formelle du nombre dérivé. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de maîtriser cette notion clé en 11 minutes.",
+        "method_step_by_step": [
+          "Définition : f'(a) = lim[h→0] [f(a+h) - f(a)] / h (si la limite existe)",
+          "Interprétation : pente de la tangente à la courbe en x = a",
+          "Méthode de calcul : remplacer a+h, développer, simplifier, faire h → 0",
+          "Cas où f n'est pas dérivable : limite infinie ou n'existe pas",
+          "Notation : f'(a) se lit 'f prime de a'"
+        ],
+        "guided_example": {
+          "statement": "Calculer le nombre dérivé de f(x) = x² en a = 3.",
+          "solution_steps": [
+            "f'(3) = lim[h→0] [f(3+h) - f(3)] / h",
+            "f(3+h) = (3+h)² = 9 + 6h + h², f(3) = 9",
+            "f'(3) = lim[h→0] [(9 + 6h + h²) - 9] / h = lim[h→0] (6h + h²) / h",
+            "f'(3) = lim[h→0] (6 + h) = 6",
+            "Interprétation : la tangente à la parabole y = x² au point (3,9) a pour pente 6"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer f'(2) pour f(x) = x³",
+          "Calculer f'(1) pour f(x) = 1/x",
+          "Pourquoi f(x) = |x| n'est pas dérivable en x = 0 ?"
+        ],
+        "common_mistakes": [
+          "Oublier de développer (a+h)²",
+          "Ne pas simplifier par h avant de faire h → 0",
+          "Confondre f'(a) (un nombre) et f'(x) (une fonction)"
+        ],
+        "summary": {
+          "key_concept": "Le nombre dérivé f'(a) est la limite du taux de variation quand h → 0, soit le coefficient directeur de la tangente",
+          "key_method": "f'(a) = lim[h→0] [f(a+h) - f(a)] / h → Développer → Simplifier → Limite",
+          "next_step": "Interpréter graphiquement et tracer la tangente"
+        }
+      }
+    },
+    {
+      "id": "M1-15",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Interprétation graphique - Tangente à la courbe",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": [
+        "Tracer la tangente à une courbe en un point",
+        "Déterminer l'équation de la tangente : y = f'(a)(x-a) + f(a)",
+        "Utiliser la tangente pour des approximations locales"
+      ],
+      "prerequisites": [
+        "Nombre dérivé",
+        "Équation de droite",
+        "Pente"
+      ],
+      "content_types": ["video", "graphing", "quiz", "exercises"],
+      "tags": ["tangente", "graphique", "équation", "approximation"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'interprétation graphique du nombre dérivé. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de relier calcul et visualisation en 10 minutes.",
+        "method_step_by_step": [
+          "La tangente en A(a, f(a)) est la droite de pente f'(a) passant par A",
+          "Équation de la tangente : y - f(a) = f'(a)(x - a), soit y = f'(a)(x-a) + f(a)",
+          "Tracer : placer A, tracer une droite de pente f'(a)",
+          "Si f'(a) > 0 : tangente montante ; f'(a) < 0 : tangente descendante",
+          "Approximation affine : f(x) ≈ f(a) + f'(a)(x-a) au voisinage de a"
+        ],
+        "guided_example": {
+          "statement": "Déterminer l'équation de la tangente à f(x) = x² en x = 2.",
+          "solution_steps": [
+            "Calculer f(2) = 4",
+            "Calculer f'(2) = 2×2 = 4 (formule dérivée de x², vue prochainement)",
+            "Équation : y = 4(x - 2) + 4 = 4x - 8 + 4 = 4x - 4",
+            "Vérification : en x = 2, y = 8 - 4 = 4 ✓",
+            "Tracer : droite passant par (2,4) de pente 4"
+          ]
+        },
+        "quick_exercises": [
+          "Tracer la tangente à g(x) = x³ en x = 1 (sachant g'(1) = 3)",
+          "Équation de la tangente à f(x) = 1/x en x = 2",
+          "Approximer √5 en utilisant la tangente à f(x) = √x en x = 4"
+        ],
+        "common_mistakes": [
+          "Oublier f(a) dans l'équation de la tangente",
+          "Confondre équation de tangente et fonction dérivée",
+          "Mal tracer la pente (confondre montée et descente)"
+        ],
+        "summary": {
+          "key_concept": "La tangente en A(a, f(a)) a pour équation y = f'(a)(x-a) + f(a) et permet d'approximer f localement",
+          "key_method": "f(a) → f'(a) → Équation y = f'(a)(x-a) + f(a) → Tracer",
+          "next_step": "Définir la fonction dérivée sur tout un intervalle"
+        }
+      }
+    },
+    {
+      "id": "M1-16",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Fonction dérivée - Définition et notation",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Passer du nombre dérivé à la fonction dérivée",
+        "Notation f' et domaine de dérivabilité",
+        "Comprendre que f'(x) donne la pente en chaque point"
+      ],
+      "prerequisites": [
+        "Nombre dérivé en un point",
+        "Fonctions",
+        "Domaine de définition"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["fonction dérivée", "notation", "domaine", "dérivabilité"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon généralise le nombre dérivé à toute une fonction. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de définir f' en 9 minutes.",
+        "method_step_by_step": [
+          "Si f est dérivable en tout point x d'un intervalle I, on définit la fonction dérivée f'",
+          "f' : I → ℝ, x ↦ f'(x) (pente de la tangente en x)",
+          "Notation : f'(x), df/dx, ou (d/dx)f(x)",
+          "Domaine de dérivabilité ⊆ domaine de définition",
+          "Lien avec variations : signe de f'(x) détermine croissance/décroissance"
+        ],
+        "guided_example": {
+          "statement": "Si f(x) = x², on a montré que f'(3) = 6. Généraliser pour tout x.",
+          "solution_steps": [
+            "Calculer f'(x) = lim[h→0] [(x+h)² - x²] / h",
+            "f'(x) = lim[h→0] [x² + 2xh + h² - x²] / h",
+            "f'(x) = lim[h→0] (2xh + h²) / h = lim[h→0] (2x + h) = 2x",
+            "Fonction dérivée : f'(x) = 2x, définie sur ℝ",
+            "Vérification : f'(3) = 6 ✓"
+          ]
+        },
+        "quick_exercises": [
+          "Si f(x) = x³, calculer f'(x) (réponse : 3x²)",
+          "Pour g(x) = 1/x, quel est le domaine de dérivabilité ?",
+          "Interpréter f'(5) = -2"
+        ],
+        "common_mistakes": [
+          "Confondre f'(a) (nombre) et f'(x) (fonction)",
+          "Oublier de vérifier le domaine de dérivabilité",
+          "Penser que f'(x) = f(x+1) - f(x)"
+        ],
+        "summary": {
+          "key_concept": "La fonction dérivée f' associe à chaque x la pente de la tangente à la courbe en ce point",
+          "key_method": "Calculer f'(a) pour tout a → Fonction f'(x) → Domaine de dérivabilité",
+          "next_step": "Apprendre les dérivées des fonctions usuelles"
+        }
+      }
+    },
+    {
+      "id": "M1-17",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivées des fonctions usuelles",
+      "duration_min": 11,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": [
+        "Connaître les dérivées de x^n, √x, 1/x",
+        "Dériver des fonctions constantes et affines",
+        "Appliquer directement les formules"
+      ],
+      "prerequisites": [
+        "Fonction dérivée",
+        "Puissances",
+        "Fonctions de référence"
+      ],
+      "content_types": ["video", "table", "quiz", "exercises"],
+      "tags": ["dérivées usuelles", "formules", "tableau", "puissances"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les dérivées des fonctions de référence. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de mémoriser les formules clés en 11 minutes.",
+        "method_step_by_step": [
+          "Tableau des dérivées usuelles à connaître par cœur",
+          "f(x) = k (constante) → f'(x) = 0",
+          "f(x) = x → f'(x) = 1",
+          "f(x) = x^n → f'(x) = n·x^(n-1) (n ∈ ℕ*)",
+          "f(x) = 1/x → f'(x) = -1/x² (x ≠ 0)",
+          "f(x) = √x → f'(x) = 1/(2√x) (x > 0)"
+        ],
+        "guided_example": {
+          "statement": "Dériver f(x) = x⁵, g(x) = 1/x³, h(x) = √x.",
+          "solution_steps": [
+            "f(x) = x⁵ : formule x^n avec n=5 → f'(x) = 5x⁴",
+            "g(x) = 1/x³ = x⁻³ : formule x^n avec n=-3 → g'(x) = -3x⁻⁴ = -3/x⁴",
+            "h(x) = √x = x^(1/2) : formule directe → h'(x) = 1/(2√x)",
+            "Vérifications des domaines : f' sur ℝ, g' sur ℝ*, h' sur ℝ*₊",
+            "Conseil : apprendre le tableau et s'entraîner"
+          ]
+        },
+        "quick_exercises": [
+          "Dériver f(x) = x⁷",
+          "Dériver g(x) = 1/x²",
+          "Dériver h(x) = x (réponse : h'(x) = 1)",
+          "QCM : La dérivée de x³ est... a) 3x  b) 3x²  c) x²"
+        ],
+        "common_mistakes": [
+          "Oublier le coefficient n dans x^n → nx^(n-1)",
+          "Confondre 1/x² et -1/x² pour la dérivée de 1/x",
+          "Ne pas vérifier les domaines de dérivabilité"
+        ],
+        "summary": {
+          "key_concept": "Les dérivées usuelles sont des formules à connaître par cœur : x^n → nx^(n-1), 1/x → -1/x², √x → 1/(2√x)",
+          "key_method": "Identifier la fonction → Appliquer formule → Simplifier",
+          "next_step": "Apprendre les règles de dérivation (somme, produit, quotient)"
+        }
+      }
+    },
+    {
+      "id": "M1-18",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Opérations sur les dérivées - Somme et produit par constante",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Dériver une somme : (u + v)' = u' + v'",
+        "Dériver un produit par constante : (k·u)' = k·u'",
+        "Appliquer à des polynômes"
+      ],
+      "prerequisites": [
+        "Dérivées usuelles",
+        "Fonction dérivée",
+        "Calcul algébrique"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["opérations", "somme", "linéarité", "polynômes"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les premières règles d'opérations sur les dérivées. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de dériver des sommes et combinaisons en 10 minutes.",
+        "method_step_by_step": [
+          "Règle 1 : (u + v)' = u' + v' (linéarité)",
+          "Règle 2 : (k·u)' = k·u' où k est une constante",
+          "Application : pour dériver un polynôme, dériver terme à terme",
+          "Exemple : (3x² + 5x - 7)' = 3·(x²)' + 5·(x)' - (7)' = 6x + 5",
+          "Astuce : la dérivée est une opération linéaire"
+        ],
+        "guided_example": {
+          "statement": "Dériver f(x) = 2x⁴ - 3x² + 5x - 1.",
+          "solution_steps": [
+            "Décomposer : f = 2x⁴ + (-3x²) + 5x + (-1)",
+            "Dériver terme à terme : (2x⁴)' = 2·4x³ = 8x³",
+            "(-3x²)' = -3·2x = -6x",
+            "(5x)' = 5·1 = 5",
+            "(-1)' = 0",
+            "f'(x) = 8x³ - 6x + 5"
+          ]
+        },
+        "quick_exercises": [
+          "Dériver g(x) = x³ + 2x² - 4",
+          "Dériver h(x) = 5x⁶ - x + 7",
+          "Si (u+v)'(2) = 5 et u'(2) = 3, que vaut v'(2) ?"
+        ],
+        "common_mistakes": [
+          "Oublier de multiplier par la constante devant",
+          "Penser que (uv)' = u'v' (faux, voir prochaine leçon)",
+          "Mal gérer les signes moins"
+        ],
+        "summary": {
+          "key_concept": "La dérivée d'une somme est la somme des dérivées, et on peut factoriser les constantes",
+          "key_method": "(u+v)' = u'+v', (ku)' = ku' → Dériver terme à terme",
+          "next_step": "Apprendre les règles produit et quotient"
+        }
+      }
+    },
+    {
+      "id": "M1-19",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivée d'un produit - Formule (uv)' = u'v + uv'",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Connaître la formule (uv)' = u'v + uv'",
+        "Appliquer à des exemples concrets",
+        "Éviter l'erreur (uv)' ≠ u'v'"
+      ],
+      "prerequisites": [
+        "Dérivées usuelles",
+        "Opérations sur dérivées",
+        "Produit de fonctions"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["produit", "dérivée", "formule", "u'v+uv'"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la règle de dérivation d'un produit. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de maîtriser cette formule essentielle en 12 minutes.",
+        "method_step_by_step": [
+          "Formule : (u·v)' = u'·v + u·v'",
+          "Méthode : identifier u et v, calculer u' et v', appliquer la formule",
+          "Attention : (uv)' ≠ u'v' (erreur fréquente !)",
+          "Cas particulier : (x^n · x^m)' peut se traiter par x^(n+m) ou par la formule",
+          "Entraînement : s'exercer sur des exemples variés"
+        ],
+        "guided_example": {
+          "statement": "Dériver f(x) = (2x + 1)(x² - 3).",
+          "solution_steps": [
+            "Identifier : u(x) = 2x + 1, v(x) = x² - 3",
+            "Calculer : u'(x) = 2, v'(x) = 2x",
+            "Appliquer : f'(x) = u'v + uv' = 2(x² - 3) + (2x + 1)(2x)",
+            "Développer : f'(x) = 2x² - 6 + 4x² + 2x = 6x² + 2x - 6",
+            "Vérification possible : développer f puis dériver directement"
+          ]
+        },
+        "quick_exercises": [
+          "Dériver g(x) = x(x² + 1)",
+          "Dériver h(x) = (3x - 2)(x + 4)",
+          "Vrai ou Faux : (x²·x³)' = 2x·3x² (Faux)"
+        ],
+        "common_mistakes": [
+          "Penser que (uv)' = u'v'",
+          "Oublier l'un des deux termes u'v ou uv'",
+          "Ne pas développer le résultat final"
+        ],
+        "summary": {
+          "key_concept": "La dérivée d'un produit suit la règle (uv)' = u'v + uv', et non u'v'",
+          "key_method": "u, v → u', v' → u'v + uv' → Développer",
+          "next_step": "Apprendre la dérivée d'un quotient"
+        }
+      }
+    },
+    {
+      "id": "M1-20",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivée d'un quotient - Formule (u/v)' = (u'v - uv')/v²",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Connaître la formule (u/v)' = (u'v - uv')/v²",
+        "Appliquer avec rigueur (attention au signe)",
+        "Gérer le domaine de dérivabilité (v ≠ 0)"
+      ],
+      "prerequisites": [
+        "Dérivée d'un produit",
+        "Dérivées usuelles",
+        "Fractions algébriques"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["quotient", "dérivée", "formule", "u'v-uv'"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la règle de dérivation d'un quotient. Elle s'inscrit dans le chapitre Dérivation de Première. L'objectif est de maîtriser cette formule délicate en 13 minutes.",
+        "method_step_by_step": [
+          "Formule : (u/v)' = (u'v - uv') / v² avec v ≠ 0",
+          "Méthode : identifier u et v, calculer u' et v', appliquer la formule",
+          "Attention : l'ordre est crucial (u'v - uv', pas l'inverse)",
+          "Domaine : la fonction u/v est dérivable là où v ≠ 0",
+          "Cas particulier : (1/v)' = -v'/v² (prendre u = 1, u' = 0)"
+        ],
+        "guided_example": {
+          "statement": "Dériver f(x) = (x² + 1) / (x - 2).",
+          "solution_steps": [
+            "Identifier : u(x) = x² + 1, v(x) = x - 2",
+            "Calculer : u'(x) = 2x, v'(x) = 1",
+            "Appliquer : f'(x) = [2x(x-2) - (x²+1)·1] / (x-2)²",
+            "Numérateur : 2x² - 4x - x² - 1 = x² - 4x - 1",
+            "f'(x) = (x² - 4x - 1) / (x - 2)², définie pour x ≠ 2"
+          ]
+        },
+        "quick_exercises": [
+          "Dériver g(x) = x / (x + 1)",
+          "Dériver h(x) = 1 / x² en utilisant la formule quotient",
+          "Vrai ou Faux : (u/v)' = u'/v' (Faux)"
+        ],
+        "common_mistakes": [
+          "Inverser u'v et uv' (signe moins crucial)",
+          "Oublier de mettre v² au dénominateur",
+          "Ne pas simplifier le numérateur",
+          "Oublier le domaine de dérivabilité"
+        ],
+        "summary": {
+          "key_concept": "La dérivée d'un quotient suit la règle (u/v)' = (u'v - uv')/v² avec v ≠ 0",
+          "key_method": "u, v → u', v' → (u'v - uv')/v² → Développer numérateur → Simplifier",
+          "next_step": "Appliquer toutes les règles à des fonctions complexes"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

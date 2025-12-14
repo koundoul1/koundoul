@@ -1,0 +1,142 @@
+[
+  {
+    "id": "M2-31",
+    "content_sections": [
+      { "title": "Introduction", "content": "Les statistiques permettent d'analyser des données pour en extraire des informations. La moyenne est le premier indicateur de tendance centrale." },
+      { "title": "Objectifs", "items": ["Définir la notion de série statistique", "Calculer la moyenne d'une série statistique", "Comprendre la notion d'effectif et de fréquence", "Interpréter une moyenne dans un contexte"] },
+      { "title": "Prérequis", "items": ["M2-01 - Ensembles de nombres"] },
+      { "title": "Concepts clés", "items": ["Série statistique : ensemble de valeurs observées", "Effectif : nombre d'occurrences d'une valeur", "Fréquence : f = n/N (effectif sur total)", "Moyenne arithmétique : x̄ = (x₁ + x₂ + ... + xₙ)/n", "Population et échantillon"] },
+      { "title": "Formules importantes", "items": ["Moyenne : x̄ = (x₁ + x₂ + ... + xₙ)/n", "Moyenne pondérée : x̄ = Σ(xᵢ × nᵢ)/N", "Fréquence : f = n/N (en pourcentage ou décimal)"] },
+      { "title": "Exemple guidé", "content": "Problème : Les notes d'un élève sont : 12, 15, 14, 12, 16. Calculer la moyenne. Solution : Moyenne = (12 + 15 + 14 + 12 + 16)/5 = 69/5 = 13,8. Explication : On additionne toutes les notes et on divise par le nombre de notes (5)." },
+      { "title": "Exercices", "items": ["Dans une classe de 30 élèves, les notes sont : note 10 (3 élèves), note 12 (8 élèves), note 14 (12 élèves), note 16 (5 élèves), note 18 (2 élèves). Calculer la moyenne de la classe.", "Calculer la moyenne des salaires suivants : 2000€, 2200€, 2000€, 2500€, 2000€, 2300€"] },
+      { "title": "Erreurs fréquentes", "items": ["Oublier de multiplier chaque valeur par son effectif", "Se tromper dans l'effectif total", "Confondre moyenne et médiane", "Ne pas arrondir le résultat de façon appropriée"] },
+      { "title": "Astuces", "items": ["Vérifiez toujours que la somme des effectifs égale l'effectif total", "Organisez les données dans un tableau pour plus de clarté", "La moyenne n'est pas forcément une valeur observée dans la série"] }
+    ]
+  },
+  {
+    "id": "M2-32",
+    "content_sections": [
+      { "title": "Introduction", "content": "La médiane et les quartiles sont des indicateurs de position qui permettent de mieux comprendre la répartition des données qu'avec la seule moyenne." },
+      { "title": "Objectifs", "items": ["Définir et calculer la médiane d'une série statistique", "Comprendre la notion de quartile", "Déterminer Q1, Q2 (médiane) et Q3", "Interpréter médiane et quartiles"] },
+      { "title": "Prérequis", "items": ["M2-31 - Statistiques - Moyenne et effectifs"] },
+      { "title": "Concepts clés", "items": ["Médiane : valeur qui partage une série ordonnée en deux parties d'effectifs égaux", "50% des valeurs sont inférieures ou égales à la médiane", "Q1 (premier quartile) : 25% des valeurs ≤ Q1", "Q2 = médiane : 50% des valeurs ≤ Q2", "Q3 (troisième quartile) : 75% des valeurs ≤ Q3"] },
+      { "title": "Formules importantes", "items": ["Médiane si n impair : Me = valeur centrale", "Médiane si n pair : Me = moyenne des 2 valeurs centrales", "Position de la médiane : (n+1)/2 pour n impair"] },
+      { "title": "Exemple guidé", "content": "Problème : Série : 3, 5, 7, 8, 10, 12, 15. Déterminer la médiane. Solution : 7 valeurs (impair), la médiane est la 4ème valeur : Me = 8. Explication : On ordonne les valeurs et on prend celle du milieu." },
+      { "title": "Exercices", "items": ["Les âges de 8 personnes sont : 18, 22, 25, 27, 30, 32, 35, 40. Déterminer la médiane, Q1 et Q3.", "Calculer la médiane de : 5, 7, 9, 11, 13, 15, 17"] },
+      { "title": "Erreurs fréquentes", "items": ["Oublier d'ordonner la série", "Se tromper dans le comptage des positions", "Confondre Q1 et Q3", "Ne pas faire la moyenne pour les effectifs pairs"] },
+      { "title": "Astuces", "items": ["Toujours ordonner la série avant de chercher médiane et quartiles", "Utilisez la règle : position de la médiane = (n+1)/2 pour n impair", "Représentez les données sur une droite pour mieux visualiser"] }
+    ]
+  },
+  {
+    "id": "M2-33",
+    "content_sections": [
+      { "title": "Introduction", "content": "L'étendue et l'écart-type sont des indicateurs de dispersion qui mesurent à quel point les valeurs d'une série sont dispersées autour de la moyenne." },
+      { "title": "Objectifs", "items": ["Définir l'étendue d'une série statistique", "Comprendre la notion d'écart-type", "Calculer l'écart-type", "Interpréter étendue et écart-type comme indicateurs de dispersion"] },
+      { "title": "Prérequis", "items": ["M2-31 - Statistiques", "M2-32 - Médiane et quartiles"] },
+      { "title": "Concepts clés", "items": ["Étendue : e = max - min (différence entre valeur max et min)", "Écart-type σ : mesure la dispersion autour de la moyenne", "Variance V = moyenne des écarts au carré", "σ = √V où V = Σ(xᵢ - x̄)²/n", "Plus σ est grand, plus les valeurs sont dispersées"] },
+      { "title": "Formules importantes", "items": ["Étendue : e = max - min", "Variance : V = Σ(xᵢ - x̄)²/n", "Écart-type : σ = √V", "Un écart-type faible = série homogène", "Un écart-type élevé = série hétérogène"] },
+      { "title": "Exemple guidé", "content": "Problème : Série : 10, 12, 10, 14, 12. Calculer étendue et écart-type. Solution : e = 14 - 10 = 4. Moyenne = 11,6. V = [(10-11,6)² + (12-11,6)² + (10-11,6)² + (14-11,6)² + (12-11,6)²]/5 = 2,64. σ ≈ 1,62." },
+      { "title": "Exercices", "items": ["Les salaires mensuels sont : 1500, 1600, 1500, 1800, 2000, 1700, 1600. Calculer l'étendue et l'écart-type.", "Comparer l'écart-type de deux séries différentes"] },
+      { "title": "Erreurs fréquentes", "items": ["Confondre étendue et écart-type", "Oublier de diviser par n dans le calcul de la variance", "Oublier de prendre la racine carrée de la variance", "Se tromper dans les calculs d'écarts"] },
+      { "title": "Astuces", "items": ["L'étendue est simple : max - min", "Pour l'écart-type : 1) moyenne, 2) écarts au carré, 3) moyenne des carrés, 4) racine", "Utilisez la calculatrice pour les calculs d'écart-type"] }
+    ]
+  },
+  {
+    "id": "M2-34",
+    "content_sections": [
+      { "title": "Introduction", "content": "Les diagrammes permettent de visualiser les données statistiques de manière claire et synthétique. Chaque type de diagramme a ses avantages selon les données à représenter." },
+      { "title": "Objectifs", "items": ["Connaître les différents types de diagrammes", "Construire un diagramme en bâtons", "Construire un diagramme circulaire", "Interpréter un diagramme statistique"] },
+      { "title": "Prérequis", "items": ["M2-31 - Statistiques"] },
+      { "title": "Concepts clés", "items": ["Diagramme en bâtons : chaque valeur représentée par un rectangle vertical", "Hauteur proportionnelle à l'effectif ou fréquence", "Adapté pour variables discrètes", "Diagramme circulaire : secteurs angulaires dans un cercle", "Angle = fréquence × 360°"] },
+      { "title": "Formules importantes", "items": ["Angle secteur : angle = fréquence × 360°", "Fréquence : f = effectif/total", "Hauteur bâton proportionnelle à l'effectif"] },
+      { "title": "Exemple guidé", "content": "Problème : Construire un diagramme circulaire pour : A (30%), B (45%), C (25%). Solution : Angle A = 0,30 × 360° = 108°. Angle B = 0,45 × 360° = 162°. Angle C = 0,25 × 360° = 90°." },
+      { "title": "Exercices", "items": ["Dans un sondage sur 200 personnes : Oui (80), Non (100), Sans avis (20). Calculer fréquences et angles.", "Construire un diagramme en bâtons pour les notes"] },
+      { "title": "Erreurs fréquentes", "items": ["Confondre effectif et fréquence", "Oublier de multiplier par 360° pour les angles", "Ne pas vérifier que le total fait 100% ou 360°", "Mal choisir le type de diagramme selon les données"] },
+      { "title": "Astuces", "items": ["Vérifiez toujours que vos fréquences totalisent 100%", "Pour un diagramme circulaire, vos angles doivent totaliser 360°", "Choisissez le diagramme le plus adapté à vos données"] }
+    ]
+  },
+  {
+    "id": "M2-35",
+    "content_sections": [
+      { "title": "Introduction", "content": "L'histogramme est utilisé pour représenter des données continues regroupées en classes. Contrairement au diagramme en bâtons, les rectangles sont contigus." },
+      { "title": "Objectifs", "items": ["Comprendre la notion de classe", "Construire un histogramme", "Interpréter un histogramme", "Calculer des effectifs à partir d'un histogramme"] },
+      { "title": "Prérequis", "items": ["M2-31 - Statistiques", "M2-34 - Diagrammes"] },
+      { "title": "Concepts clés", "items": ["Classe : intervalle de valeurs (ex: [a ; b[)", "Amplitude : largeur de la classe", "Rectangle contigu (pas d'espace entre les rectangles)", "L'AIRE du rectangle représente l'effectif", "Hauteur proportionnelle à l'effectif si amplitudes égales"] },
+      { "title": "Formules importantes", "items": ["Amplitude = borne supérieure - borne inférieure", "Densité = effectif/amplitude", "Aire rectangle = effectif de la classe"] },
+      { "title": "Exemple guidé", "content": "Problème : [0;5[ : 10 personnes, [5;10[ : 20 personnes, [10;15[ : 15 personnes. Représenter par un histogramme. Solution : Classes d'amplitude 5. Hauteurs proportionnelles aux effectifs : 10, 20, 15." },
+      { "title": "Exercices", "items": ["Les tailles de 100 élèves : [150;160[ : 15, [160;170[ : 40, [170;180[ : 30, [180;190[ : 15. Calculer fréquences.", "Interpréter les effectifs depuis un histogramme"] },
+      { "title": "Erreurs fréquentes", "items": ["Confondre histogramme et diagramme en bâtons", "Oublier que les rectangles doivent être contigus", "Ne pas tenir compte de l'amplitude pour la hauteur", "Confondre effectif et fréquence"] },
+      { "title": "Astuces", "items": ["Dans un histogramme, l'AIRE du rectangle représente l'effectif", "Si toutes les amplitudes sont égales, utilisez directement les effectifs en hauteur", "Vérifiez que vos effectifs de classes totalisent l'effectif total"] }
+    ]
+  },
+  {
+    "id": "M2-36",
+    "content_sections": [
+      { "title": "Introduction", "content": "Les probabilités permettent de modéliser le hasard et de quantifier les chances qu'un événement se produise lors d'une expérience aléatoire." },
+      { "title": "Objectifs", "items": ["Définir une expérience aléatoire", "Identifier l'univers d'une expérience", "Distinguer issue et événement", "Comprendre les notions d'événement certain, impossible, élémentaire"] },
+      { "title": "Prérequis", "items": ["M2-01 - Ensembles"] },
+      { "title": "Concepts clés", "items": ["Expérience aléatoire : résultat dépend du hasard", "Univers Ω : ensemble de tous les résultats possibles", "Issue : résultat possible (élément de Ω)", "Événement : ensemble d'issues", "Événement élémentaire : contient 1 issue, certain : Ω, impossible : ∅"] },
+      { "title": "Formules importantes", "items": ["Univers noté Ω", "Événement = sous-ensemble de Ω", "Ex: pour un dé : Ω = {1,2,3,4,5,6}"] },
+      { "title": "Exemple guidé", "content": "Problème : On lance un dé. Quel est l'univers ? Décrire 'obtenir un nombre pair'. Solution : Ω = {1,2,3,4,5,6}. Événement A = 'nombre pair' = {2,4,6}." },
+      { "title": "Exercices", "items": ["On tire une carte dans un jeu de 52. Définir Ω. Décrire A='tirer un cœur', B='tirer un roi'.", "Lancer deux pièces. Définir Ω."] },
+      { "title": "Erreurs fréquentes", "items": ["Confondre issue et événement", "Oublier des issues dans l'univers", "Penser qu'un événement ne peut contenir qu'une issue", "Confondre événement certain et événement très probable"] },
+      { "title": "Astuces", "items": ["L'univers Ω contient TOUS les résultats possibles", "Un événement peut contenir une ou plusieurs issues", "Listez systématiquement toutes les issues pour être sûr de n'en oublier aucune"] }
+    ]
+  },
+  {
+    "id": "M2-37",
+    "content_sections": [
+      { "title": "Introduction", "content": "La probabilité quantifie la chance qu'un événement se produise. Elle se mesure par un nombre entre 0 et 1 (ou en pourcentage entre 0% et 100%)." },
+      { "title": "Objectifs", "items": ["Définir la probabilité d'un événement", "Calculer une probabilité en situation d'équiprobabilité", "Utiliser la formule P(A) = cas favorables / cas possibles", "Vérifier qu'une probabilité est entre 0 et 1"] },
+      { "title": "Prérequis", "items": ["M2-36 - Expérience aléatoire"] },
+      { "title": "Concepts clés", "items": ["Probabilité P(A) : nombre entre 0 et 1", "P(A) = 0 : événement impossible", "P(A) = 1 : événement certain", "Équiprobabilité : toutes les issues ont même probabilité", "P(A) = n(A) / n(Ω)"] },
+      { "title": "Formules importantes", "items": ["P(A) ∈ [0;1] toujours", "P(Ω) = 1 (certain)", "P(∅) = 0 (impossible)", "Équiprobabilité : P(A) = n(A) / n(Ω)", "A et B incompatibles : P(A ∪ B) = P(A) + P(B)"] },
+      { "title": "Exemple guidé", "content": "Problème : On lance un dé équilibré. Probabilité d'obtenir un nombre pair ? Solution : Ω = {1,2,3,4,5,6}. A = {2,4,6}. P(A) = 3/6 = 1/2 = 50%." },
+      { "title": "Exercices", "items": ["Urne : 5 rouges, 3 vertes, 2 bleues. Proba de tirer rouge ? Proba de tirer non bleue ?", "Calculer P(pair) et P(multiple de 3) sur un dé"] },
+      { "title": "Erreurs fréquentes", "items": ["Confondre nombre d'issues et probabilité", "Oublier de compter toutes les issues possibles", "Ne pas simplifier la fraction", "Obtenir une probabilité > 1 ou < 0"] },
+      { "title": "Astuces", "items": ["Vérifiez toujours que votre probabilité est entre 0 et 1", "En équiprobabilité : comptez bien tous les cas possibles et favorables", "Simplifiez les fractions pour plus de clarté"] }
+    ]
+  },
+  {
+    "id": "M2-38",
+    "content_sections": [
+      { "title": "Introduction", "content": "Une loi de probabilité associe à chaque issue de l'univers sa probabilité. Elle permet de décrire complètement la répartition des chances dans une expérience aléatoire." },
+      { "title": "Objectifs", "items": ["Définir une loi de probabilité sur un univers fini", "Construire un tableau de loi de probabilité", "Vérifier qu'une loi de probabilité est valide", "Calculer des probabilités à partir d'une loi"] },
+      { "title": "Prérequis", "items": ["M2-37 - Probabilité d'un événement"] },
+      { "title": "Concepts clés", "items": ["Loi de probabilité : associe à chaque issue sa probabilité P(xᵢ)", "Conditions : 0 ≤ P(xᵢ) ≤ 1 et ΣP(xᵢ) = 1", "Tableau : issues en ligne 1, probas en ligne 2", "P(A) = Σ P(xᵢ) pour xᵢ ∈ A"] },
+      { "title": "Formules importantes", "items": ["Loi valide si : chaque P ∈ [0;1] ET ΣP = 1", "P(A) = somme des probas des issues de A", "Exemple : P({x₁, x₂}) = P(x₁) + P(x₂)"] },
+      { "title": "Exemple guidé", "content": "Problème : Dé truqué : P(1)=0,1, P(2)=0,15, P(3)=0,2, P(4)=0,2, P(5)=0,15, P(6)=0,2. Loi valide ? Solution : Somme = 1. Toutes probas ∈ [0;1]. OUI, loi valide." },
+      { "title": "Exercices", "items": ["Lancer 2 pièces équilibrées : Ω = {PP, PF, FP, FF}. Donner la loi. Calculer P('au moins un pile').", "Dé équilibré, construire le tableau"] },
+      { "title": "Erreurs fréquentes", "items": ["Oublier de vérifier que la somme est 1", "Attribuer des probabilités négatives ou > 1", "Confondre loi de probabilité et statistiques", "Ne pas lister toutes les issues"] },
+      { "title": "Astuces", "items": ["Vérifiez TOUJOURS que la somme des probabilités est égale à 1", "En équiprobabilité : P(chaque issue) = 1/(nombre d'issues)", "Utilisez un tableau pour organiser clairement la loi"] }
+    ]
+  },
+  {
+    "id": "M2-39",
+    "content_sections": [
+      { "title": "Introduction", "content": "L'espérance d'une variable aléatoire représente sa valeur moyenne sur un grand nombre de répétitions de l'expérience. C'est un indicateur clé en probabilité." },
+      { "title": "Objectifs", "items": ["Définir une variable aléatoire", "Comprendre la notion d'espérance", "Calculer l'espérance d'une variable aléatoire", "Interpréter l'espérance comme gain moyen"] },
+      { "title": "Prérequis", "items": ["M2-38 - Loi de probabilité"] },
+      { "title": "Concepts clés", "items": ["Variable aléatoire X : associe à chaque issue un nombre", "Espérance E(X) : moyenne pondérée par les probabilités", "E(X) = Σ xᵢ·P(X=xᵢ)", "Interprétation : valeur moyenne sur grand nombre de répétitions", "E(X) > 0 : favorable, E(X) < 0 : défavorable"] },
+      { "title": "Formules importantes", "items": ["E(X) = Σ xᵢ·P(X=xᵢ)", "E(X) = x₁·P(x₁) + x₂·P(x₂) + ...", "Gain moyen = espérance", "E(X) ∈ ℝ (peut être négatif)"] },
+      { "title": "Exemple guidé", "content": "Problème : Jeu : dé lancé. Si 6, gagne 10€, sinon perte 2€. Calculer espérance. Solution : E(X) = 10·(1/6) + (-2)·(5/6) = 10/6 - 10/6 = 0€. Jeu équitable." },
+      { "title": "Exercices", "items": ["Urne : 2 rouges (+5€), 3 vertes (+2€), 5 bleues (-1€). Calculer E(gain).", "Jeu avec espérance positive ou négative"] },
+      { "title": "Erreurs fréquentes", "items": ["Confondre espérance et probabilité", "Oublier de multiplier chaque valeur par sa probabilité", "Ne pas tenir compte des valeurs négatives", "Mal interpréter le signe de l'espérance"] },
+      { "title": "Astuces", "items": ["L'espérance est une SOMME de produits : valeur × probabilité", "Une espérance positive signifie un gain moyen positif", "Vérifiez que vos probabilités totalisent 1 avant de calculer"] }
+    ]
+  },
+  {
+    "id": "M2-40",
+    "content_sections": [
+      { "title": "Introduction", "content": "Ce chapitre fait la synthèse entre statistiques descriptives (analyser des données observées) et probabilités (modéliser le hasard et prédire). Ces deux domaines sont complémentaires." },
+      { "title": "Objectifs", "items": ["Synthétiser les notions de statistiques descriptives", "Synthétiser les notions de probabilités", "Faire le lien entre statistiques et probabilités", "Résoudre des problèmes complets"] },
+      { "title": "Prérequis", "items": ["M2-31 à M2-39 - Tout le chapitre"] },
+      { "title": "Concepts clés", "items": ["Statistiques : indicateurs (moyenne, médiane, écart-type)", "Représentations graphiques (diagrammes, histogrammes)", "Probabilités : expérience aléatoire, événements, P(A)", "Loi de probabilité et espérance", "Lien : loi des grands nombres"] },
+      { "title": "Formules importantes", "items": ["Moyenne : x̄ = Σ(xᵢ × nᵢ)/N", "Écart-type : σ = √V", "Probabilité : P(A) = n(A)/n(Ω)", "Espérance : E(X) = Σ xᵢ·P(xᵢ)", "Loi des grands nombres : fréquence → probabilité"] },
+      { "title": "Exemple guidé", "content": "Problème : On lance 1000 fois un dé. Face 6 apparaît 167 fois. Comparer fréquence observée et probabilité théorique. Solution : Fréquence = 167/1000 = 16,7%. Probabilité = 1/6 ≈ 16,7%. Très proches (loi des grands nombres)." },
+      { "title": "Exercices", "items": ["Classe 30 élèves : calculer moyenne, médiane, représenter, calculer probabilités", "Synthèse complète avec toutes les notions"] },
+      { "title": "Erreurs fréquentes", "items": ["Confondre statistiques et probabilités", "Oublier de lier fréquence observée et probabilité", "Ne pas organiser les données avant de calculer", "Mal interpréter les résultats"] },
+      { "title": "Astuces", "items": ["Statistiques = analyse de données observées", "Probabilités = modélisation du hasard", "Vérifiez la cohérence entre vos calculs statistiques et probabilistes", "Utilisez des tableaux et graphiques pour clarifier"] }
+    ]
+  }
+]

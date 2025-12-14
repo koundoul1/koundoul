@@ -1,0 +1,1722 @@
+{
+  "bank_info": {
+    "title": "Banque QCM - Chimie Seconde",
+    "level": "Seconde",
+    "subject": "Chimie",
+    "type": "QCM",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Constitution de la matière",
+      "Transformations chimiques",
+      "Solutions aqueuses",
+      "Synthèse & Extraction"
+    ],
+    "difficulty_distribution": {
+      "facile": 35,
+      "moyen": 45,
+      "difficile": 20
+    }
+  },
+  "questions": [
+    {
+      "id": "C2-QCM-001",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Combien d'atomes y a-t-il dans une molécule d'eau H₂O ?",
+      "options": [
+        "1 atome",
+        "2 atomes",
+        "3 atomes",
+        "4 atomes"
+      ],
+      "correct_answer": 2,
+      "explanation": "H₂O contient 2 atomes d'hydrogène + 1 atome d'oxygène = 3 atomes au total.",
+      "related_lesson": "C2-01"
+    },
+    {
+      "id": "C2-QCM-002",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quel est le symbole chimique du carbone ?",
+      "options": [
+        "Ca",
+        "C",
+        "Co",
+        "Cr"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le symbole du carbone est C. Ca = calcium, Co = cobalt, Cr = chrome.",
+      "related_lesson": "C2-01"
+    },
+    {
+      "id": "C2-QCM-003",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Quelle est la charge d'un proton ?",
+      "options": [
+        "Négative (-e)",
+        "Positive (+e)",
+        "Nulle",
+        "Variable"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le proton porte une charge électrique élémentaire positive (+e ≈ +1.6×10⁻¹⁹ C).",
+      "related_lesson": "C2-02"
+    },
+    {
+      "id": "C2-QCM-004",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Où se trouve la quasi-totalité de la masse d'un atome ?",
+      "options": [
+        "Dans le nuage électronique",
+        "Dans le noyau",
+        "Répartie uniformément",
+        "Dans les électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le noyau (protons + neutrons) concentre plus de 99.9% de la masse de l'atome.",
+      "related_lesson": "C2-02"
+    },
+    {
+      "id": "C2-QCM-005",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Combien d'électrons possède un atome neutre de carbone (Z=6) ?",
+      "options": [
+        "3 électrons",
+        "6 électrons",
+        "12 électrons",
+        "18 électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Un atome neutre a autant d'électrons que de protons. Z=6 → 6 électrons.",
+      "related_lesson": "C2-03"
+    },
+    {
+      "id": "C2-QCM-006",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Quel est le nombre de neutrons dans l'atome ¹²C (Z=6, A=12) ?",
+      "options": [
+        "6 neutrons",
+        "12 neutrons",
+        "18 neutrons",
+        "Aucun neutron"
+      ],
+      "correct_answer": 0,
+      "explanation": "Nombre de neutrons = A − Z = 12 − 6 = 6 neutrons.",
+      "related_lesson": "C2-04"
+    },
+    {
+      "id": "C2-QCM-007",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Quelle est la masse approximative d'un électron comparée à celle d'un proton ?",
+      "options": [
+        "Égale",
+        "Environ 2000 fois plus faible",
+        "Environ 2000 fois plus forte",
+        "Nulle"
+      ],
+      "correct_answer": 1,
+      "explanation": "La masse de l'électron est environ 1836 fois plus petite que celle du proton.",
+      "related_lesson": "C2-02"
+    },
+    {
+      "id": "C2-QCM-008",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Que représente le nombre atomique Z ?",
+      "options": [
+        "Le nombre de neutrons",
+        "Le nombre de protons",
+        "Le nombre de nucléons",
+        "La masse de l'atome"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le nombre atomique Z représente le nombre de protons dans le noyau.",
+      "related_lesson": "C2-03"
+    },
+    {
+      "id": "C2-QCM-009",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Les isotopes d'un élément diffèrent par leur nombre de :",
+      "options": [
+        "Protons",
+        "Électrons",
+        "Neutrons",
+        "Charges"
+      ],
+      "correct_answer": 2,
+      "explanation": "Les isotopes ont le même Z (protons) mais des nombres de neutrons différents.",
+      "related_lesson": "C2-04"
+    },
+    {
+      "id": "C2-QCM-010",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quelle est la formule chimique du dioxyde de carbone ?",
+      "options": [
+        "CO",
+        "CO₂",
+        "C₂O",
+        "CO₃"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le dioxyde de carbone a pour formule CO₂ (1 carbone + 2 oxygènes).",
+      "related_lesson": "C2-05"
+    },
+    {
+      "id": "C2-QCM-011",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un ion est un atome ou un groupe d'atomes qui a :",
+      "options": [
+        "Perdu ou gagné des protons",
+        "Perdu ou gagné des neutrons",
+        "Perdu ou gagné des électrons",
+        "Changé de masse"
+      ],
+      "correct_answer": 2,
+      "explanation": "Un ion résulte de la perte ou du gain d'électrons par un atome.",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-012",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'ion sodium Na⁺ a perdu combien d'électrons ?",
+      "options": [
+        "0 électron",
+        "1 électron",
+        "2 électrons",
+        "11 électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Na⁺ indique une charge +1, donc perte de 1 électron par rapport à l'atome neutre.",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-013",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quelle est la formule de l'ion chlorure ?",
+      "options": [
+        "Cl",
+        "Cl⁺",
+        "Cl⁻",
+        "Cl₂"
+      ],
+      "correct_answer": 2,
+      "explanation": "L'ion chlorure est Cl⁻, il a gagné 1 électron (charge négative).",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-014",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Combien y a-t-il d'électrons dans l'ion O²⁻ (Z_oxygène = 8) ?",
+      "options": [
+        "6 électrons",
+        "8 électrons",
+        "10 électrons",
+        "16 électrons"
+      ],
+      "correct_answer": 2,
+      "explanation": "Atome neutre: 8 électrons. L'ion O²⁻ a gagné 2 électrons: 8 + 2 = 10 électrons.",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-015",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Quelle est la formule de la molécule de diazote ?",
+      "options": [
+        "N",
+        "N₂",
+        "N₃",
+        "NO₂"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le diazote est une molécule diatomique: N₂ (2 atomes d'azote).",
+      "related_lesson": "C2-05"
+    },
+    {
+      "id": "C2-QCM-016",
+      "chapter": "Transformations chimiques",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Dans une transformation chimique, il y a :",
+      "options": [
+        "Conservation des atomes",
+        "Apparition de nouveaux atomes",
+        "Disparition d'atomes",
+        "Transformation d'atomes"
+      ],
+      "correct_answer": 0,
+      "explanation": "Loi de Lavoisier: dans une réaction chimique, les atomes se conservent (réorganisation seulement).",
+      "related_lesson": "C2-11"
+    },
+    {
+      "id": "C2-QCM-017",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Que représente cette équation: 2H₂ + O₂ → 2H₂O ?",
+      "options": [
+        "Décomposition de l'eau",
+        "Synthèse de l'eau",
+        "Électrolyse de l'eau",
+        "Dissolution de l'eau"
+      ],
+      "correct_answer": 1,
+      "explanation": "Cette équation représente la synthèse (formation) de l'eau à partir de dihydrogène et dioxygène.",
+      "related_lesson": "C2-12"
+    },
+    {
+      "id": "C2-QCM-018",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans l'équation CH₄ + 2O₂ → CO₂ + 2H₂O, le méthane CH₄ est :",
+      "options": [
+        "Un produit",
+        "Un réactif",
+        "Un catalyseur",
+        "Un solvant"
+      ],
+      "correct_answer": 1,
+      "explanation": "CH₄ est à gauche de la flèche, c'est donc un réactif (espèce consommée).",
+      "related_lesson": "C2-12"
+    },
+    {
+      "id": "C2-QCM-019",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Équilibrer: ... Fe + ... O₂ → ... Fe₂O₃",
+      "options": [
+        "Fe + O₂ → Fe₂O₃",
+        "2Fe + 3O₂ → 2Fe₂O₃",
+        "4Fe + 3O₂ → 2Fe₂O₃",
+        "3Fe + 2O₂ → Fe₂O₃"
+      ],
+      "correct_answer": 2,
+      "explanation": "4Fe + 3O₂ → 2Fe₂O₃ est l'équation équilibrée (4 Fe des deux côtés, 6 O des deux côtés).",
+      "related_lesson": "C2-13"
+    },
+    {
+      "id": "C2-QCM-020",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une combustion complète produit toujours :",
+      "options": [
+        "Du carbone solide",
+        "Du monoxyde de carbone CO",
+        "Du dioxyde de carbone CO₂ et de l'eau",
+        "De l'hydrogène"
+      ],
+      "correct_answer": 2,
+      "explanation": "Une combustion complète de composés organiques produit CO₂ et H₂O.",
+      "related_lesson": "C2-14"
+    },
+    {
+      "id": "C2-QCM-021",
+      "chapter": "Transformations chimiques",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quel gaz est nécessaire pour une combustion ?",
+      "options": [
+        "Azote N₂",
+        "Dioxyde de carbone CO₂",
+        "Dioxygène O₂",
+        "Hydrogène H₂"
+      ],
+      "correct_answer": 2,
+      "explanation": "Le dioxygène O₂ (comburant) est indispensable pour qu'une combustion ait lieu.",
+      "related_lesson": "C2-14"
+    },
+    {
+      "id": "C2-QCM-022",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans la combustion complète du méthane (CH₄ + 2O₂ → CO₂ + 2H₂O), combien de moles d'O₂ faut-il pour 3 moles de CH₄ ?",
+      "options": [
+        "2 moles",
+        "3 moles",
+        "6 moles",
+        "12 moles"
+      ],
+      "correct_answer": 2,
+      "explanation": "Rapport stœchiométrique: 1 CH₄ nécessite 2 O₂. Donc 3 CH₄ nécessitent 3×2 = 6 O₂.",
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-QCM-023",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Que signifie (aq) après une formule chimique ?",
+      "options": [
+        "État gazeux",
+        "État aqueux (en solution)",
+        "État solide",
+        "État liquide pur"
+      ],
+      "correct_answer": 1,
+      "explanation": "(aq) signifie \"aqueux\", c'est-à-dire dissous dans l'eau.",
+      "related_lesson": "C2-16"
+    },
+    {
+      "id": "C2-QCM-024",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction exothermique :",
+      "options": [
+        "Absorbe de l'énergie",
+        "Libère de l'énergie",
+        "Ne modifie pas l'énergie",
+        "Refroidit le milieu"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une réaction exothermique libère de l'énergie (généralement sous forme de chaleur).",
+      "related_lesson": "C2-17"
+    },
+    {
+      "id": "C2-QCM-025",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La masse totale après une réaction chimique est :",
+      "options": [
+        "Toujours supérieure à la masse initiale",
+        "Toujours inférieure à la masse initiale",
+        "Égale à la masse initiale (conservation)",
+        "Variable selon la réaction"
+      ],
+      "correct_answer": 2,
+      "explanation": "Loi de conservation de la masse de Lavoisier: la masse totale se conserve.",
+      "related_lesson": "C2-11"
+    },
+    {
+      "id": "C2-QCM-026",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Dans une solution, le solvant est :",
+      "options": [
+        "L'espèce dissoute",
+        "L'espèce majoritaire qui dissout",
+        "Le mélange final",
+        "Le récipient"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le solvant est l'espèce majoritaire qui dissout le soluté. Dans l'eau salée, l'eau est le solvant.",
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-QCM-027",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une solution aqueuse contient comme solvant :",
+      "options": [
+        "De l'alcool",
+        "De l'huile",
+        "De l'eau",
+        "De l'éther"
+      ],
+      "correct_answer": 2,
+      "explanation": "Une solution aqueuse a pour solvant l'eau (H₂O).",
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-QCM-028",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La concentration molaire s'exprime en :",
+      "options": [
+        "g/L",
+        "mol/L",
+        "kg/m³",
+        "%"
+      ],
+      "correct_answer": 1,
+      "explanation": "La concentration molaire (molarité) s'exprime en mol/L (ou M).",
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-QCM-029",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si on dissout 2 moles de NaCl dans 1 L d'eau, la concentration est :",
+      "options": [
+        "1 mol/L",
+        "2 mol/L",
+        "0.5 mol/L",
+        "4 mol/L"
+      ],
+      "correct_answer": 1,
+      "explanation": "C = n/V = 2 mol / 1 L = 2 mol/L.",
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-QCM-030",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour préparer 500 mL d'une solution à 0.1 mol/L, combien faut-il de moles de soluté ?",
+      "options": [
+        "0.05 mol",
+        "0.1 mol",
+        "0.5 mol",
+        "5 mol"
+      ],
+      "correct_answer": 0,
+      "explanation": "n = C × V = 0.1 × 0.5 = 0.05 mol (attention: V en litres).",
+      "related_lesson": "C2-23"
+    },
+    {
+      "id": "C2-QCM-031",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Diluer une solution signifie :",
+      "options": [
+        "Augmenter sa concentration",
+        "Diminuer sa concentration en ajoutant du solvant",
+        "Enlever du soluté",
+        "Chauffer la solution"
+      ],
+      "correct_answer": 1,
+      "explanation": "Diluer = ajouter du solvant pour diminuer la concentration.",
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-QCM-032",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "On dilue 10 mL d'une solution à 1 mol/L avec 90 mL d'eau. Quelle est la nouvelle concentration ?",
+      "options": [
+        "0.01 mol/L",
+        "0.1 mol/L",
+        "1 mol/L",
+        "10 mol/L"
+      ],
+      "correct_answer": 1,
+      "explanation": "C₁V₁ = C₂V₂ → 1×10 = C₂×100 → C₂ = 10/100 = 0.1 mol/L.",
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-QCM-033",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le pH de l'eau pure à 25°C est :",
+      "options": [
+        "0",
+        "7",
+        "14",
+        "Variable"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'eau pure est neutre avec un pH = 7 à 25°C.",
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-QCM-034",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une solution acide a un pH :",
+      "options": [
+        "< 7",
+        "= 7",
+        "> 7",
+        "= 14"
+      ],
+      "correct_answer": 0,
+      "explanation": "Une solution acide a un pH inférieur à 7.",
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-QCM-035",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une solution basique (ou alcaline) a un pH :",
+      "options": [
+        "< 7",
+        "= 7",
+        "> 7",
+        "Négatif"
+      ],
+      "correct_answer": 2,
+      "explanation": "Une solution basique a un pH supérieur à 7.",
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-QCM-036",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Lors d'une dilution, quelle grandeur reste constante ?",
+      "options": [
+        "Le volume",
+        "La concentration",
+        "La quantité de matière de soluté",
+        "La masse de solvant"
+      ],
+      "correct_answer": 2,
+      "explanation": "Lors d'une dilution, la quantité de matière (n) de soluté reste constante: n = C₁V₁ = C₂V₂.",
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-QCM-037",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quel est le symbole de la concentration molaire ?",
+      "options": [
+        "m",
+        "C ou [X]",
+        "V",
+        "n"
+      ],
+      "correct_answer": 1,
+      "explanation": "La concentration molaire se note C ou [X] pour l'espèce X, et s'exprime en mol/L.",
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-QCM-038",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une solution contient 0.2 mol de NaOH dans 500 mL. Sa concentration est :",
+      "options": [
+        "0.1 mol/L",
+        "0.2 mol/L",
+        "0.4 mol/L",
+        "1 mol/L"
+      ],
+      "correct_answer": 2,
+      "explanation": "C = n/V = 0.2 mol / 0.5 L = 0.4 mol/L.",
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-QCM-039",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Pour mesurer précisément un volume de solution, on utilise :",
+      "options": [
+        "Un bécher",
+        "Un erlenmeyer",
+        "Une pipette jaugée ou une fiole jaugée",
+        "Un tube à essai"
+      ],
+      "correct_answer": 2,
+      "explanation": "La verrerie jaugée (pipette, burette, fiole jaugée) permet des mesures précises de volume.",
+      "related_lesson": "C2-23"
+    },
+    {
+      "id": "C2-QCM-040",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le pH d'une solution varie entre :",
+      "options": [
+        "0 et 7",
+        "0 et 14",
+        "7 et 14",
+        "−∞ et +∞"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'échelle de pH usuelle va de 0 (très acide) à 14 (très basique).",
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-QCM-041",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une synthèse chimique consiste à :",
+      "options": [
+        "Décomposer une molécule",
+        "Fabriquer une espèce chimique",
+        "Mesurer une concentration",
+        "Chauffer une solution"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une synthèse est la fabrication d'une espèce chimique à partir de réactifs.",
+      "related_lesson": "C2-31"
+    },
+    {
+      "id": "C2-QCM-042",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'extraction consiste à :",
+      "options": [
+        "Créer une nouvelle molécule",
+        "Séparer une espèce d'un mélange",
+        "Mesurer un pH",
+        "Équilibrer une équation"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'extraction permet d'isoler une espèce chimique d'un mélange.",
+      "related_lesson": "C2-32"
+    },
+    {
+      "id": "C2-QCM-043",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La distillation permet de séparer des liquides selon leur :",
+      "options": [
+        "Couleur",
+        "Densité",
+        "Température d'ébullition",
+        "Solubilité"
+      ],
+      "correct_answer": 2,
+      "explanation": "La distillation sépare des liquides miscibles selon leurs températures d'ébullition différentes.",
+      "related_lesson": "C2-33"
+    },
+    {
+      "id": "C2-QCM-044",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour extraire une espèce organique d'une solution aqueuse, on utilise :",
+      "options": [
+        "Filtration",
+        "Distillation",
+        "Extraction liquide-liquide",
+        "Cristallisation"
+      ],
+      "correct_answer": 2,
+      "explanation": "L'extraction liquide-liquide utilise un solvant non miscible à l'eau pour extraire des espèces organiques.",
+      "related_lesson": "C2-34"
+    },
+    {
+      "id": "C2-QCM-045",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La filtration permet de séparer :",
+      "options": [
+        "Deux liquides miscibles",
+        "Un solide d'un liquide",
+        "Deux gaz",
+        "Deux solides"
+      ],
+      "correct_answer": 1,
+      "explanation": "La filtration sépare les particules solides d'un liquide à l'aide d'un filtre.",
+      "related_lesson": "C2-35"
+    },
+    {
+      "id": "C2-QCM-046",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le rendement d'une synthèse est :",
+      "options": [
+        "Toujours égal à 100%",
+        "Le rapport masse obtenue / masse théorique",
+        "La masse de réactifs utilisés",
+        "La température de réaction"
+      ],
+      "correct_answer": 1,
+      "explanation": "Rendement (%) = (masse réelle / masse théorique) × 100. Il est généralement < 100%.",
+      "related_lesson": "C2-36"
+    },
+    {
+      "id": "C2-QCM-047",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un chauffage à reflux permet de :",
+      "options": [
+        "Éviter les pertes de réactifs volatils",
+        "Refroidir la réaction",
+        "Mesurer la température",
+        "Filtrer le mélange"
+      ],
+      "correct_answer": 0,
+      "explanation": "Le reflux condense les vapeurs pour les renvoyer dans le milieu réactionnel, évitant les pertes.",
+      "related_lesson": "C2-37"
+    },
+    {
+      "id": "C2-QCM-048",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La recristallisation permet de :",
+      "options": [
+        "Dissoudre un solide",
+        "Purifier un solide",
+        "Mélanger deux liquides",
+        "Chauffer une solution"
+      ],
+      "correct_answer": 1,
+      "explanation": "La recristallisation purifie un solide par dissolution à chaud puis cristallisation à froid.",
+      "related_lesson": "C2-38"
+    },
+    {
+      "id": "C2-QCM-049",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans une ampoule à décanter, la phase la moins dense se trouve :",
+      "options": [
+        "En bas",
+        "En haut",
+        "Au milieu",
+        "Dispersée uniformément"
+      ],
+      "correct_answer": 1,
+      "explanation": "La phase la moins dense (souvent organique) se place au-dessus de la phase la plus dense (aqueuse).",
+      "related_lesson": "C2-34"
+    },
+    {
+      "id": "C2-QCM-050",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Quel équipement utilise-t-on pour séparer deux liquides non miscibles ?",
+      "options": [
+        "Entonnoir",
+        "Ampoule à décanter",
+        "Ballon",
+        "Bécher"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'ampoule à décanter permet de séparer deux liquides non miscibles par décantation.",
+      "related_lesson": "C2-34"
+    },
+    {
+      "id": "C2-QCM-051",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La formule brute d'une molécule indique :",
+      "options": [
+        "La structure spatiale",
+        "Le nombre et la nature des atomes",
+        "La température d'ébullition",
+        "La solubilité"
+      ],
+      "correct_answer": 1,
+      "explanation": "La formule brute indique combien d'atomes de chaque élément composent la molécule (ex: C₆H₁₂O₆).",
+      "related_lesson": "C2-05"
+    },
+    {
+      "id": "C2-QCM-052",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'isotope ¹⁴C (Z=6, A=14) contient :",
+      "options": [
+        "6 protons, 6 neutrons",
+        "6 protons, 8 neutrons",
+        "8 protons, 6 neutrons",
+        "14 protons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Z=6 protons, N = A−Z = 14−6 = 8 neutrons.",
+      "related_lesson": "C2-04"
+    },
+    {
+      "id": "C2-QCM-053",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quel est le symbole du fer ?",
+      "options": [
+        "F",
+        "Fr",
+        "Fe",
+        "Fi"
+      ],
+      "correct_answer": 2,
+      "explanation": "Le symbole du fer est Fe (du latin ferrum).",
+      "related_lesson": "C2-01"
+    },
+    {
+      "id": "C2-QCM-054",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'ion Ca²⁺ a une charge :",
+      "options": [
+        "+1",
+        "+2",
+        "−1",
+        "−2"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ca²⁺ indique une charge +2 (perte de 2 électrons).",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-055",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Combien y a-t-il d'atomes dans une mole ?",
+      "options": [
+        "6.02 × 10²⁰",
+        "6.02 × 10²³",
+        "6.02 × 10²⁶",
+        "10²⁴"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une mole contient le nombre d'Avogadro: Nₐ ≈ 6.02 × 10²³ entités.",
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-QCM-056",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Les coefficients stœchiométriques dans une équation indiquent :",
+      "options": [
+        "Les masses",
+        "Les proportions en moles",
+        "Les volumes",
+        "Les températures"
+      ],
+      "correct_answer": 1,
+      "explanation": "Les coefficients donnent les proportions en quantités de matière (moles) entre les espèces.",
+      "related_lesson": "C2-13"
+    },
+    {
+      "id": "C2-QCM-057",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans la réaction N₂ + 3H₂ → 2NH₃, combien de moles de H₂ faut-il pour former 4 moles de NH₃ ?",
+      "options": [
+        "2 moles",
+        "4 moles",
+        "6 moles",
+        "12 moles"
+      ],
+      "correct_answer": 2,
+      "explanation": "Rapport: 3 H₂ pour 2 NH₃. Pour 4 NH₃: (4×3)/2 = 6 moles de H₂.",
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-QCM-058",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction endothermique :",
+      "options": [
+        "Libère de la chaleur",
+        "Absorbe de la chaleur",
+        "N'échange pas de chaleur",
+        "Produit de la lumière"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une réaction endothermique absorbe de l'énergie thermique du milieu extérieur.",
+      "related_lesson": "C2-17"
+    },
+    {
+      "id": "C2-QCM-059",
+      "chapter": "Transformations chimiques",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Le test à l'eau de chaux permet de détecter :",
+      "options": [
+        "Le dioxygène O₂",
+        "Le dihydrogène H₂",
+        "Le dioxyde de carbone CO₂",
+        "L'eau H₂O"
+      ],
+      "correct_answer": 2,
+      "explanation": "L'eau de chaux se trouble en présence de CO₂ (formation de carbonate de calcium).",
+      "related_lesson": "C2-18"
+    },
+    {
+      "id": "C2-QCM-060",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La combustion du carbone donne principalement :",
+      "options": [
+        "C + H₂O",
+        "CO₂",
+        "CH₄",
+        "C₂H₆"
+      ],
+      "correct_answer": 1,
+      "explanation": "C + O₂ → CO₂ (combustion complète du carbone).",
+      "related_lesson": "C2-14"
+    },
+    {
+      "id": "C2-QCM-061",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La masse molaire de l'eau H₂O est environ :",
+      "options": [
+        "16 g/mol",
+        "18 g/mol",
+        "20 g/mol",
+        "32 g/mol"
+      ],
+      "correct_answer": 1,
+      "explanation": "M(H₂O) = 2×1 + 16 = 18 g/mol.",
+      "related_lesson": "C2-27"
+    },
+    {
+      "id": "C2-QCM-062",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour préparer 250 mL d'une solution à 0.2 mol/L à partir d'une solution mère à 1 mol/L, quel volume faut-il prélever ?",
+      "options": [
+        "25 mL",
+        "50 mL",
+        "100 mL",
+        "200 mL"
+      ],
+      "correct_answer": 1,
+      "explanation": "C₁V₁ = C₂V₂ → 1×V₁ = 0.2×250 → V₁ = 50 mL.",
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-QCM-063",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Un acide libère en solution des ions :",
+      "options": [
+        "OH⁻",
+        "H₃O⁺ (ou H⁺)",
+        "Cl⁻",
+        "Na⁺"
+      ],
+      "correct_answer": 1,
+      "explanation": "Un acide libère des ions hydronium H₃O⁺ (ou protons H⁺) en solution aqueuse.",
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-QCM-064",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une base libère en solution des ions :",
+      "options": [
+        "H⁺",
+        "OH⁻",
+        "O²⁻",
+        "H₂O"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une base libère des ions hydroxyde OH⁻ en solution aqueuse.",
+      "related_lesson": "C2-25"
+    },
+    {
+      "id": "C2-QCM-065",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Quelle est la concentration massique d'une solution contenant 20 g de NaCl dans 500 mL ?",
+      "options": [
+        "10 g/L",
+        "20 g/L",
+        "40 g/L",
+        "100 g/L"
+      ],
+      "correct_answer": 2,
+      "explanation": "Cm = m/V = 20 g / 0.5 L = 40 g/L.",
+      "related_lesson": "C2-26"
+    },
+    {
+      "id": "C2-QCM-066",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'indicateur coloré le plus courant pour mesurer le pH est :",
+      "options": [
+        "Le bleu de bromothymol (BBT)",
+        "Le permanganate",
+        "Le sulfate de cuivre",
+        "L'iode"
+      ],
+      "correct_answer": 0,
+      "explanation": "Le BBT (bleu de bromothymol) change de couleur selon le pH: jaune (acide), vert (neutre), bleu (basique).",
+      "related_lesson": "C2-28"
+    },
+    {
+      "id": "C2-QCM-067",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La formule reliant concentration molaire, quantité de matière et volume est :",
+      "options": [
+        "C = n × V",
+        "C = n / V",
+        "C = V / n",
+        "C = m / V"
+      ],
+      "correct_answer": 1,
+      "explanation": "C = n/V où C est en mol/L, n en mol, V en L.",
+      "related_lesson": "C2-22"
+    },
+    {
+      "id": "C2-QCM-068",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un catalyseur :",
+      "options": [
+        "Est consommé dans la réaction",
+        "Accélère la réaction sans être consommé",
+        "Ralentit la réaction",
+        "Augmente le rendement"
+      ],
+      "correct_answer": 1,
+      "explanation": "Un catalyseur accélère une réaction chimique sans être consommé ni modifier l'équilibre.",
+      "related_lesson": "C2-39"
+    },
+    {
+      "id": "C2-QCM-069",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si on obtient 8 g de produit alors que la masse théorique est 10 g, le rendement est :",
+      "options": [
+        "20%",
+        "50%",
+        "80%",
+        "125%"
+      ],
+      "correct_answer": 2,
+      "explanation": "Rendement = (8/10) × 100 = 80%.",
+      "related_lesson": "C2-36"
+    },
+    {
+      "id": "C2-QCM-070",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La chromatographie permet de :",
+      "options": [
+        "Mesurer la masse",
+        "Séparer et identifier des espèces",
+        "Chauffer un mélange",
+        "Mesurer le pH"
+      ],
+      "correct_answer": 1,
+      "explanation": "La chromatographie sépare les composants d'un mélange et permet de les identifier.",
+      "related_lesson": "C2-40"
+    },
+    {
+      "id": "C2-QCM-071",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quel est le symbole de l'azote ?",
+      "options": [
+        "Az",
+        "A",
+        "N",
+        "Na"
+      ],
+      "correct_answer": 2,
+      "explanation": "L'azote a pour symbole N (nitrogen en anglais).",
+      "related_lesson": "C2-01"
+    },
+    {
+      "id": "C2-QCM-072",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un anion est un ion de charge :",
+      "options": [
+        "Positive",
+        "Négative",
+        "Nulle",
+        "Variable"
+      ],
+      "correct_answer": 1,
+      "explanation": "Un anion est un ion négatif (a gagné des électrons). Ex: Cl⁻, O²⁻.",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-073",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un cation est un ion de charge :",
+      "options": [
+        "Positive",
+        "Négative",
+        "Nulle",
+        "Double"
+      ],
+      "correct_answer": 0,
+      "explanation": "Un cation est un ion positif (a perdu des électrons). Ex: Na⁺, Ca²⁺.",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-074",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans l'équation C + O₂ → CO₂, le réactif limitant est celui qui :",
+      "options": [
+        "Est en excès",
+        "Est entièrement consommé en premier",
+        "N'est pas consommé",
+        "A la plus grande masse"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le réactif limitant est celui qui est entièrement consommé, limitant ainsi l'avancement de la réaction.",
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-QCM-075",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour la réaction 2H₂ + O₂ → 2H₂O, si on a 4 moles de H₂ et 1 mole de O₂, le réactif limitant est :",
+      "options": [
+        "H₂",
+        "O₂",
+        "H₂O",
+        "Les deux à égalité"
+      ],
+      "correct_answer": 1,
+      "explanation": "Il faut 2 H₂ pour 1 O₂. Avec 4 H₂, on peut consommer 2 O₂. On n'a que 1 O₂ → O₂ est limitant.",
+      "related_lesson": "C2-15"
+    },
+    {
+      "id": "C2-QCM-076",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La dissolution du chlorure de sodium NaCl dans l'eau produit :",
+      "options": [
+        "Na et Cl₂",
+        "NaCl(aq)",
+        "Na⁺(aq) + Cl⁻(aq)",
+        "NaOH + HCl"
+      ],
+      "correct_answer": 2,
+      "explanation": "NaCl se dissocie en ions: NaCl(s) → Na⁺(aq) + Cl⁻(aq).",
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-QCM-077",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Quelle masse de NaCl (M=58.5 g/mol) faut-il pour préparer 1 L de solution à 0.5 mol/L ?",
+      "options": [
+        "29.25 g",
+        "58.5 g",
+        "117 g",
+        "0.5 g"
+      ],
+      "correct_answer": 0,
+      "explanation": "n = C×V = 0.5×1 = 0.5 mol. m = n×M = 0.5×58.5 = 29.25 g.",
+      "related_lesson": "C2-23"
+    },
+    {
+      "id": "C2-QCM-078",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le papier pH permet de :",
+      "options": [
+        "Mesurer la température",
+        "Estimer le pH par changement de couleur",
+        "Mesurer la concentration",
+        "Filtrer une solution"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le papier pH change de couleur selon le pH de la solution (échelle colorée).",
+      "related_lesson": "C2-28"
+    },
+    {
+      "id": "C2-QCM-079",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un montage à reflux nécessite :",
+      "options": [
+        "Un réfrigérant à boules",
+        "Une ampoule à décanter",
+        "Un pH-mètre",
+        "Une pipette"
+      ],
+      "correct_answer": 0,
+      "explanation": "Le réfrigérant (ou condenseur) à boules ou droit condense les vapeurs pour éviter les pertes.",
+      "related_lesson": "C2-37"
+    },
+    {
+      "id": "C2-QCM-080",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le dichlorométhane (d=1.33) et l'eau (d=1.00) forment deux phases. Laquelle est en haut ?",
+      "options": [
+        "Le dichlorométhane",
+        "L'eau",
+        "Elles se mélangent",
+        "Dépend de la température"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'eau (d=1.00) est moins dense que le dichlorométhane (d=1.33), donc l'eau est en haut.",
+      "related_lesson": "C2-34"
+    },
+    {
+      "id": "C2-QCM-081",
+      "chapter": "Constitution de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "La formule de l'ion sulfate est :",
+      "options": [
+        "SO₃²⁻",
+        "SO₄²⁻",
+        "S²⁻",
+        "SO₂"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'ion sulfate est SO₄²⁻.",
+      "related_lesson": "C2-06"
+    },
+    {
+      "id": "C2-QCM-082",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Combien de liaisons covalentes possède généralement l'atome de carbone ?",
+      "options": [
+        "2 liaisons",
+        "3 liaisons",
+        "4 liaisons",
+        "6 liaisons"
+      ],
+      "correct_answer": 2,
+      "explanation": "Le carbone forme généralement 4 liaisons covalentes (tétravalent).",
+      "related_lesson": "C2-08"
+    },
+    {
+      "id": "C2-QCM-083",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction de précipitation forme :",
+      "options": [
+        "Un gaz",
+        "Un liquide",
+        "Un solide insoluble",
+        "Une solution"
+      ],
+      "correct_answer": 2,
+      "explanation": "Une précipitation forme un solide insoluble (précipité) à partir d'ions en solution.",
+      "related_lesson": "C2-19"
+    },
+    {
+      "id": "C2-QCM-084",
+      "chapter": "Transformations chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La masse d'une mole de CO₂ (C=12, O=16 g/mol) est :",
+      "options": [
+        "28 g",
+        "32 g",
+        "44 g",
+        "48 g"
+      ],
+      "correct_answer": 2,
+      "explanation": "M(CO₂) = 12 + 2×16 = 12 + 32 = 44 g/mol.",
+      "related_lesson": "C2-20"
+    },
+    {
+      "id": "C2-QCM-085",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une solution saturée est une solution qui :",
+      "options": [
+        "Ne contient pas de soluté",
+        "Ne peut plus dissoudre de soluté",
+        "Est très diluée",
+        "A un pH de 7"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une solution saturée contient la quantité maximale de soluté dissous à une température donnée.",
+      "related_lesson": "C2-29"
+    },
+    {
+      "id": "C2-QCM-086",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "On mélange 100 mL de solution à 0.3 mol/L et 200 mL de solution à 0.6 mol/L de même soluté. La concentration finale est :",
+      "options": [
+        "0.3 mol/L",
+        "0.45 mol/L",
+        "0.5 mol/L",
+        "0.9 mol/L"
+      ],
+      "correct_answer": 2,
+      "explanation": "n_total = 0.1×0.3 + 0.2×0.6 = 0.03 + 0.12 = 0.15 mol. V_total = 0.3 L. C = 0.15/0.3 = 0.5 mol/L.",
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-QCM-087",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le séchage d'un produit extrait se fait souvent avec :",
+      "options": [
+        "De l'eau",
+        "Un agent desséchant (sulfate de magnésium)",
+        "De l'acide",
+        "Une base"
+      ],
+      "correct_answer": 1,
+      "explanation": "Des agents desséchants comme MgSO₄ anhydre absorbent l'eau résiduelle.",
+      "related_lesson": "C2-38"
+    },
+    {
+      "id": "C2-QCM-088",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans une chromatographie, le rapport frontal Rf est :",
+      "options": [
+        "distance parcourue par le soluté / distance parcourue par le solvant",
+        "distance parcourue par le solvant / distance parcourue par le soluté",
+        "masse du soluté / masse du solvant",
+        "temps de migration"
+      ],
+      "correct_answer": 0,
+      "explanation": "Rf = (distance parcourue par la substance) / (distance parcourue par le front de solvant). 0 < Rf < 1.",
+      "related_lesson": "C2-40"
+    },
+    {
+      "id": "C2-QCM-089",
+      "chapter": "Constitution de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'électronégativité mesure :",
+      "options": [
+        "La charge de l'atome",
+        "La tendance à attirer les électrons",
+        "Le nombre d'électrons",
+        "La masse de l'atome"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'électronégativité est la capacité d'un atome à attirer les électrons de liaison vers lui.",
+      "related_lesson": "C2-09"
+    },
+    {
+      "id": "C2-QCM-090",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le test à la flamme permet d'identifier :",
+      "options": [
+        "Des anions",
+        "Des cations métalliques",
+        "Des gaz",
+        "Des pH"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le test à la flamme identifie certains cations métalliques par la couleur de flamme (Na⁺=jaune, Cu²⁺=vert, K⁺=violet).",
+      "related_lesson": "C2-19"
+    },
+    {
+      "id": "C2-QCM-091",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'eau distillée est :",
+      "options": [
+        "De l'eau du robinet",
+        "De l'eau purifiée par distillation",
+        "De l'eau salée",
+        "De l'eau gazeuse"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'eau distillée est purifiée par distillation, elle ne contient pratiquement pas d'ions dissous.",
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-QCM-092",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Quel volume d'eau faut-il ajouter à 50 mL d'une solution à 2 mol/L pour obtenir une concentration de 0.5 mol/L ?",
+      "options": [
+        "50 mL",
+        "100 mL",
+        "150 mL",
+        "200 mL"
+      ],
+      "correct_answer": 2,
+      "explanation": "C₁V₁ = C₂V₂ → 2×50 = 0.5×V₂ → V₂ = 200 mL. Volume à ajouter = 200 − 50 = 150 mL.",
+      "related_lesson": "C2-24"
+    },
+    {
+      "id": "C2-QCM-093",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La formule de l'acide chlorhydrique est :",
+      "options": [
+        "HCl",
+        "H₂SO₄",
+        "HNO₃",
+        "CH₃COOH"
+      ],
+      "correct_answer": 0,
+      "explanation": "L'acide chlorhydrique est HCl (en solution aqueuse: H⁺ + Cl⁻).",
+      "related_lesson": "C2-16"
+    },
+    {
+      "id": "C2-QCM-094",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'hydrodistillation permet d'extraire :",
+      "options": [
+        "Des ions",
+        "Des huiles essentielles",
+        "Des métaux",
+        "Des gaz rares"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'hydrodistillation (ou entraînement à la vapeur) extrait les huiles essentielles des plantes.",
+      "related_lesson": "C2-33"
+    },
+    {
+      "id": "C2-QCM-095",
+      "chapter": "Constitution de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Combien de moles y a-t-il dans 88 g de CO₂ (M=44 g/mol) ?",
+      "options": [
+        "1 mole",
+        "2 moles",
+        "4 moles",
+        "88 moles"
+      ],
+      "correct_answer": 1,
+      "explanation": "n = m/M = 88/44 = 2 moles.",
+      "related_lesson": "C2-07"
+    },
+    {
+      "id": "C2-QCM-096",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le symbole (s) après une formule indique l'état :",
+      "options": [
+        "Solide",
+        "Solution",
+        "Gazeux",
+        "Liquide"
+      ],
+      "correct_answer": 0,
+      "explanation": "(s) = solide, (l) = liquide, (g) = gaz, (aq) = aqueux.",
+      "related_lesson": "C2-12"
+    },
+    {
+      "id": "C2-QCM-097",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un mélange homogène :",
+      "options": [
+        "A une composition uniforme",
+        "A des phases distinctes visibles",
+        "Est toujours solide",
+        "Ne contient qu'un composé"
+      ],
+      "correct_answer": 0,
+      "explanation": "Un mélange homogène a une composition uniforme en tout point (ex: solution, alliage).",
+      "related_lesson": "C2-21"
+    },
+    {
+      "id": "C2-QCM-098",
+      "chapter": "Synthèse & Extraction",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour augmenter le rendement d'une synthèse, on peut :",
+      "options": [
+        "Diminuer la température",
+        "Utiliser un excès de réactif",
+        "Diluer les produits",
+        "Arrêter la réaction rapidement"
+      ],
+      "correct_answer": 1,
+      "explanation": "Un excès de réactif permet de consommer totalement le réactif limitant et d'augmenter le rendement.",
+      "related_lesson": "C2-36"
+    },
+    {
+      "id": "C2-QCM-099",
+      "chapter": "Transformations chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une transformation physique :",
+      "options": [
+        "Modifie la nature chimique",
+        "Conserve la nature chimique",
+        "Crée de nouveaux atomes",
+        "Détruit des atomes"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une transformation physique ne modifie que l'état ou l'aspect, pas la nature chimique (ex: fusion, dissolution).",
+      "related_lesson": "C2-10"
+    },
+    {
+      "id": "C2-QCM-100",
+      "chapter": "Solutions aqueuses",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La concentration d'une solution diminue de moitié si on :",
+      "options": [
+        "Enlève la moitié du soluté",
+        "Double le volume par ajout de solvant",
+        "Chauffe la solution",
+        "Ajoute un autre soluté"
+      ],
+      "correct_answer": 1,
+      "explanation": "Doubler le volume (en ajoutant du solvant) divise la concentration par 2: C₂ = C₁/2.",
+      "related_lesson": "C2-24"
+    }
+  ]
+}

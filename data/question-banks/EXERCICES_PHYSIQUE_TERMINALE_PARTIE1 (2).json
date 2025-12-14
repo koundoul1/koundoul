@@ -1,0 +1,1266 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Physique Terminale (Partie 1/2)",
+    "level": "Terminale",
+    "subject": "Physique",
+    "type": "Exercices",
+    "part": "1/2",
+    "questions_range": "1-50",
+    "total_questions": 50,
+    "chapters_covered": [
+      "Mécanique",
+      "Ondes et signaux",
+      "Énergie"
+    ],
+    "difficulty_distribution": {
+      "facile": 15,
+      "moyen": 25,
+      "difficile": 10
+    }
+  },
+  "exercises": [
+    {
+      "id": "PT-EX-001",
+      "chapter": "Mécanique",
+      "topic": "Cinématique et dynamique newtoniennes",
+      "difficulty": "facile",
+      "statement": "Une voiture de masse m = 1200 kg roule à vitesse constante v = 90 km/h sur une route horizontale. Calculer son énergie cinétique.",
+      "data": {
+        "masse": "1200 kg",
+        "vitesse": "90 km/h = 25 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Convertir la vitesse : v = 90 km/h = 90/3.6 = 25 m/s",
+          "Appliquer la formule : Ec = (1/2) × m × v²",
+          "Ec = 0.5 × 1200 × 25²",
+          "Ec = 0.5 × 1200 × 625 = 375 000 J",
+          "Ec = 375 kJ"
+        ],
+        "answer": "375 kJ",
+        "formula_used": "Ec = (1/2)mv²"
+      },
+      "hint": "N'oubliez pas de convertir la vitesse en m/s",
+      "related_lesson": "L-T-P-001"
+    },
+    {
+      "id": "PT-EX-002",
+      "chapter": "Mécanique",
+      "topic": "Mouvements dans un champ uniforme",
+      "difficulty": "moyen",
+      "statement": "Un projectile est lancé avec une vitesse initiale v₀ = 20 m/s faisant un angle α = 30° avec l'horizontale. Calculer la portée du tir (g = 10 m/s²).",
+      "data": {
+        "v0": "20 m/s",
+        "angle": "30°",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Portée : x = (v₀² × sin(2α)) / g",
+          "sin(2 × 30°) = sin(60°) = √3/2 ≈ 0.866",
+          "x = (20² × 0.866) / 10",
+          "x = (400 × 0.866) / 10",
+          "x = 34.64 m ≈ 34.6 m"
+        ],
+        "answer": "34.6 m",
+        "formula_used": "x = (v₀²sin(2α))/g"
+      },
+      "hint": "Utilisez la formule de la portée maximale",
+      "related_lesson": "L-T-P-002"
+    },
+    {
+      "id": "PT-EX-003",
+      "chapter": "Mécanique",
+      "topic": "Lois de Newton",
+      "difficulty": "moyen",
+      "statement": "Un bloc de masse m = 5 kg glisse sur un plan incliné à 30° avec frottement (μ = 0.2). Calculer l'accélération du bloc.",
+      "data": {
+        "masse": "5 kg",
+        "angle": "30°",
+        "coefficient_frottement": "0.2",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Forces : P = mg, N = mg×cos(30°), f = μN",
+          "Selon l'axe du plan : ma = mg×sin(30°) - f",
+          "ma = mg×sin(30°) - μ×mg×cos(30°)",
+          "a = g(sin(30°) - μ×cos(30°))",
+          "a = 10(0.5 - 0.2×0.866) = 10(0.5 - 0.173)",
+          "a = 10 × 0.327 = 3.27 m/s²"
+        ],
+        "answer": "3.27 m/s²",
+        "formula_used": "a = g(sinα - μcosα)"
+      },
+      "hint": "Projetez les forces selon l'axe du plan incliné",
+      "related_lesson": "L-T-P-003"
+    },
+    {
+      "id": "PT-EX-004",
+      "chapter": "Mécanique",
+      "topic": "Mouvement circulaire",
+      "difficulty": "difficile",
+      "statement": "Une particule décrit un cercle de rayon R = 2 m avec une vitesse angulaire ω = 3 rad/s. Calculer l'accélération centripète et la vitesse linéaire.",
+      "data": {
+        "rayon": "2 m",
+        "vitesse_angulaire": "3 rad/s"
+      },
+      "solution": {
+        "steps": [
+          "Vitesse linéaire : v = ω × R",
+          "v = 3 × 2 = 6 m/s",
+          "Accélération centripète : ac = v²/R = ω²R",
+          "ac = 3² × 2 = 9 × 2 = 18 m/s²",
+          "Ou : ac = v²/R = 36/2 = 18 m/s²"
+        ],
+        "answer": "v = 6 m/s ; ac = 18 m/s²",
+        "formula_used": "v = ωR ; ac = ω²R"
+      },
+      "hint": "Relations entre vitesse linéaire et angulaire",
+      "related_lesson": "L-T-P-004"
+    },
+    {
+      "id": "PT-EX-005",
+      "chapter": "Mécanique",
+      "topic": "Quantité de mouvement",
+      "difficulty": "moyen",
+      "statement": "Deux chariots de masses m₁ = 2 kg et m₂ = 3 kg se déplacent avec v₁ = 4 m/s et v₂ = -2 m/s. Après collision, ils restent solidaires. Calculer leur vitesse finale.",
+      "data": {
+        "m1": "2 kg",
+        "m2": "3 kg",
+        "v1": "4 m/s",
+        "v2": "-2 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Conservation de la quantité de mouvement",
+          "m₁v₁ + m₂v₂ = (m₁ + m₂)vf",
+          "2×4 + 3×(-2) = (2+3)vf",
+          "8 - 6 = 5vf",
+          "vf = 2/5 = 0.4 m/s"
+        ],
+        "answer": "0.4 m/s",
+        "formula_used": "Σpᵢ = Σpf"
+      },
+      "hint": "Conservation de la quantité de mouvement totale",
+      "related_lesson": "L-T-P-005"
+    },
+    {
+      "id": "PT-EX-006",
+      "chapter": "Énergie",
+      "topic": "Travail et puissance",
+      "difficulty": "facile",
+      "statement": "Une grue soulève une charge de masse m = 500 kg à une hauteur h = 10 m en 20 s. Calculer le travail fourni et la puissance moyenne.",
+      "data": {
+        "masse": "500 kg",
+        "hauteur": "10 m",
+        "temps": "20 s",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Travail : W = F × d = mg × h",
+          "W = 500 × 10 × 10 = 50 000 J = 50 kJ",
+          "Puissance : P = W/t",
+          "P = 50000/20 = 2500 W = 2.5 kW"
+        ],
+        "answer": "W = 50 kJ ; P = 2.5 kW",
+        "formula_used": "W = mgh ; P = W/t"
+      },
+      "hint": "Le travail de la force de pesanteur",
+      "related_lesson": "L-T-P-006"
+    },
+    {
+      "id": "PT-EX-007",
+      "chapter": "Énergie",
+      "topic": "Énergie mécanique",
+      "difficulty": "moyen",
+      "statement": "Un pendule simple de longueur L = 1 m est lâché d'un angle θ₀ = 60°. Calculer sa vitesse maximale (g = 10 m/s²).",
+      "data": {
+        "longueur": "1 m",
+        "angle_initial": "60°",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Conservation de l'énergie : Ep = Ec",
+          "Hauteur initiale : h = L(1 - cos(60°)) = 1(1 - 0.5) = 0.5 m",
+          "mgh = (1/2)mv²",
+          "v² = 2gh = 2 × 10 × 0.5 = 10",
+          "v = √10 ≈ 3.16 m/s"
+        ],
+        "answer": "3.16 m/s",
+        "formula_used": "mgh = (1/2)mv²"
+      },
+      "hint": "Conservation de l'énergie mécanique",
+      "related_lesson": "L-T-P-007"
+    },
+    {
+      "id": "PT-EX-008",
+      "chapter": "Énergie",
+      "topic": "Énergie potentielle élastique",
+      "difficulty": "moyen",
+      "statement": "Un ressort de constante k = 200 N/m est comprimé de x = 10 cm. Calculer l'énergie potentielle stockée.",
+      "data": {
+        "constante_ressort": "200 N/m",
+        "compression": "10 cm = 0.1 m"
+      },
+      "solution": {
+        "steps": [
+          "Énergie potentielle élastique : Ep = (1/2)kx²",
+          "Ep = 0.5 × 200 × (0.1)²",
+          "Ep = 100 × 0.01",
+          "Ep = 1 J"
+        ],
+        "answer": "1 J",
+        "formula_used": "Ep = (1/2)kx²"
+      },
+      "hint": "Formule de l'énergie élastique",
+      "related_lesson": "L-T-P-008"
+    },
+    {
+      "id": "PT-EX-009",
+      "chapter": "Ondes et signaux",
+      "topic": "Ondes mécaniques",
+      "difficulty": "facile",
+      "statement": "Une onde se propage à v = 340 m/s avec une fréquence f = 680 Hz. Calculer sa longueur d'onde.",
+      "data": {
+        "vitesse": "340 m/s",
+        "frequence": "680 Hz"
+      },
+      "solution": {
+        "steps": [
+          "Relation onde : λ = v/f",
+          "λ = 340/680",
+          "λ = 0.5 m"
+        ],
+        "answer": "0.5 m",
+        "formula_used": "λ = v/f"
+      },
+      "hint": "Relation entre vitesse, fréquence et longueur d'onde",
+      "related_lesson": "L-T-P-009"
+    },
+    {
+      "id": "PT-EX-010",
+      "chapter": "Ondes et signaux",
+      "topic": "Ondes lumineuses",
+      "difficulty": "moyen",
+      "statement": "La lumière jaune a une longueur d'onde λ = 580 nm dans le vide. Calculer sa fréquence (c = 3×10⁸ m/s).",
+      "data": {
+        "longueur_onde": "580 nm = 580×10⁻⁹ m",
+        "vitesse_lumiere": "3×10⁸ m/s"
+      },
+      "solution": {
+        "steps": [
+          "Relation : f = c/λ",
+          "f = (3×10⁸)/(580×10⁻⁹)",
+          "f = (3×10⁸)/(5.8×10⁻⁷)",
+          "f = 5.17×10¹⁴ Hz"
+        ],
+        "answer": "5.17×10¹⁴ Hz",
+        "formula_used": "f = c/λ"
+      },
+      "hint": "La vitesse de la lumière dans le vide",
+      "related_lesson": "L-T-P-010"
+    },
+    {
+      "id": "PT-EX-011",
+      "chapter": "Ondes et signaux",
+      "topic": "Diffraction",
+      "difficulty": "difficile",
+      "statement": "Un faisceau laser (λ = 650 nm) traverse une fente de largeur a = 0.2 mm. À quelle distance L la largeur de la tache centrale est-elle de 1.3 cm ?",
+      "data": {
+        "longueur_onde": "650 nm = 650×10⁻⁹ m",
+        "largeur_fente": "0.2 mm = 0.2×10⁻³ m",
+        "largeur_tache": "1.3 cm = 0.013 m"
+      },
+      "solution": {
+        "steps": [
+          "Largeur de la tache centrale : l = 2λL/a",
+          "0.013 = 2 × 650×10⁻⁹ × L / (0.2×10⁻³)",
+          "0.013 = (1300×10⁻⁹ × L) / (0.2×10⁻³)",
+          "L = (0.013 × 0.2×10⁻³) / (1300×10⁻⁹)",
+          "L = 2.6×10⁻⁶ / 1.3×10⁻⁶ = 2 m"
+        ],
+        "answer": "2 m",
+        "formula_used": "l = 2λL/a"
+      },
+      "hint": "Relation de diffraction par une fente",
+      "related_lesson": "L-T-P-011"
+    },
+    {
+      "id": "PT-EX-012",
+      "chapter": "Ondes et signaux",
+      "topic": "Interférences",
+      "difficulty": "moyen",
+      "statement": "Deux sources cohérentes S₁ et S₂ distantes de d = 2 mm émettent en phase (λ = 500 nm). À quelle distance x du centre observe-t-on la 3ème frange brillante sur un écran à D = 1 m ?",
+      "data": {
+        "distance_sources": "2 mm = 2×10⁻³ m",
+        "longueur_onde": "500 nm = 500×10⁻⁹ m",
+        "distance_ecran": "1 m",
+        "ordre": "k = 3"
+      },
+      "solution": {
+        "steps": [
+          "Position frange brillante : x = kλD/d",
+          "x = 3 × 500×10⁻⁹ × 1 / (2×10⁻³)",
+          "x = 1500×10⁻⁹ / 2×10⁻³",
+          "x = 0.75×10⁻³ m = 0.75 mm"
+        ],
+        "answer": "0.75 mm",
+        "formula_used": "x = kλD/d"
+      },
+      "hint": "Formule des interférences à deux ondes",
+      "related_lesson": "L-T-P-012"
+    },
+    {
+      "id": "PT-EX-013",
+      "chapter": "Mécanique",
+      "topic": "Satellite et gravitation",
+      "difficulty": "difficile",
+      "statement": "Un satellite de masse m = 500 kg orbite autour de la Terre à h = 400 km d'altitude. Calculer sa vitesse (RT = 6400 km, g₀ = 10 m/s²).",
+      "data": {
+        "masse_satellite": "500 kg",
+        "altitude": "400 km",
+        "rayon_terre": "6400 km",
+        "g0": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Rayon orbital : r = RT + h = 6400 + 400 = 6800 km = 6.8×10⁶ m",
+          "Force gravitationnelle = Force centripète",
+          "GMm/r² = mv²/r",
+          "v² = GM/r avec g₀ = GM/RT²",
+          "v = √(g₀RT²/r) = √(10 × (6.4×10⁶)² / 6.8×10⁶)",
+          "v = √(409.6×10¹² / 6.8×10⁶) = √(6.02×10⁷)",
+          "v ≈ 7760 m/s ≈ 7.76 km/s"
+        ],
+        "answer": "7.76 km/s",
+        "formula_used": "v = √(GM/r)"
+      },
+      "hint": "Égalité force gravitationnelle et force centripète",
+      "related_lesson": "L-T-P-013"
+    },
+    {
+      "id": "PT-EX-014",
+      "chapter": "Mécanique",
+      "topic": "Lois de Kepler",
+      "difficulty": "moyen",
+      "statement": "La Terre met T₁ = 365 jours pour tourner autour du Soleil à r₁ = 150 millions de km. Mars est à r₂ = 228 millions de km. Calculer sa période de révolution.",
+      "data": {
+        "T1_terre": "365 jours",
+        "r1_terre": "150×10⁶ km",
+        "r2_mars": "228×10⁶ km"
+      },
+      "solution": {
+        "steps": [
+          "3ème loi de Kepler : T²/r³ = constante",
+          "T₁²/r₁³ = T₂²/r₂³",
+          "T₂² = T₁² × (r₂/r₁)³",
+          "T₂² = 365² × (228/150)³",
+          "T₂² = 133225 × (1.52)³ = 133225 × 3.51",
+          "T₂² ≈ 467600",
+          "T₂ ≈ 684 jours"
+        ],
+        "answer": "684 jours (≈ 1.87 ans)",
+        "formula_used": "T²/r³ = cte"
+      },
+      "hint": "Troisième loi de Kepler",
+      "related_lesson": "L-T-P-014"
+    },
+    {
+      "id": "PT-EX-015",
+      "chapter": "Énergie",
+      "topic": "Transferts thermiques",
+      "difficulty": "facile",
+      "statement": "On chauffe 2 L d'eau de 20°C à 80°C. Calculer l'énergie thermique nécessaire (c_eau = 4180 J/(kg·°C)).",
+      "data": {
+        "volume": "2 L = 2 kg",
+        "T_initiale": "20°C",
+        "T_finale": "80°C",
+        "capacite_thermique": "4180 J/(kg·°C)"
+      },
+      "solution": {
+        "steps": [
+          "Énergie thermique : Q = m × c × ΔT",
+          "ΔT = 80 - 20 = 60°C",
+          "Q = 2 × 4180 × 60",
+          "Q = 501 600 J ≈ 502 kJ"
+        ],
+        "answer": "502 kJ",
+        "formula_used": "Q = mcΔT"
+      },
+      "hint": "Formule de la chaleur sensible",
+      "related_lesson": "L-T-P-015"
+    },
+    {
+      "id": "PT-EX-016",
+      "chapter": "Énergie",
+      "topic": "Premier principe thermodynamique",
+      "difficulty": "moyen",
+      "statement": "Un gaz reçoit Q = 200 J de chaleur et fournit un travail W = 150 J. Calculer la variation d'énergie interne ΔU.",
+      "data": {
+        "chaleur_recue": "200 J",
+        "travail_fourni": "150 J"
+      },
+      "solution": {
+        "steps": [
+          "Premier principe : ΔU = Q - W",
+          "ΔU = 200 - 150",
+          "ΔU = 50 J"
+        ],
+        "answer": "50 J",
+        "formula_used": "ΔU = Q - W"
+      },
+      "hint": "Convention : Q > 0 si reçu, W > 0 si fourni par le système",
+      "related_lesson": "L-T-P-016"
+    },
+    {
+      "id": "PT-EX-017",
+      "chapter": "Ondes et signaux",
+      "topic": "Effet Doppler",
+      "difficulty": "difficile",
+      "statement": "Une ambulance émet un son à f₀ = 800 Hz et se déplace à v_s = 30 m/s vers un observateur fixe. Quelle fréquence perçoit-il ? (v_son = 340 m/s)",
+      "data": {
+        "frequence_emise": "800 Hz",
+        "vitesse_source": "30 m/s",
+        "vitesse_son": "340 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Effet Doppler (source se rapproche) : f = f₀ × v/(v - v_s)",
+          "f = 800 × 340/(340 - 30)",
+          "f = 800 × 340/310",
+          "f = 800 × 1.097",
+          "f ≈ 878 Hz"
+        ],
+        "answer": "878 Hz",
+        "formula_used": "f = f₀v/(v - v_s)"
+      },
+      "hint": "Source qui se rapproche : fréquence augmente",
+      "related_lesson": "L-T-P-017"
+    },
+    {
+      "id": "PT-EX-018",
+      "chapter": "Ondes et signaux",
+      "topic": "Ondes sonores",
+      "difficulty": "facile",
+      "statement": "Un son d'intensité sonore I = 10⁻⁶ W/m² est perçu. Calculer le niveau sonore en dB (I₀ = 10⁻¹² W/m²).",
+      "data": {
+        "intensite": "10⁻⁶ W/m²",
+        "intensite_reference": "10⁻¹² W/m²"
+      },
+      "solution": {
+        "steps": [
+          "Niveau sonore : L = 10 × log(I/I₀)",
+          "L = 10 × log(10⁻⁶/10⁻¹²)",
+          "L = 10 × log(10⁶)",
+          "L = 10 × 6 = 60 dB"
+        ],
+        "answer": "60 dB",
+        "formula_used": "L = 10log(I/I₀)"
+      },
+      "hint": "Échelle logarithmique des décibels",
+      "related_lesson": "L-T-P-018"
+    },
+    {
+      "id": "PT-EX-019",
+      "chapter": "Mécanique",
+      "topic": "Chute libre",
+      "difficulty": "moyen",
+      "statement": "Un objet est lâché d'une hauteur h = 20 m sans vitesse initiale. Calculer sa vitesse juste avant l'impact (g = 10 m/s²).",
+      "data": {
+        "hauteur": "20 m",
+        "vitesse_initiale": "0 m/s",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Conservation de l'énergie : mgh = (1/2)mv²",
+          "v² = 2gh",
+          "v² = 2 × 10 × 20 = 400",
+          "v = √400 = 20 m/s"
+        ],
+        "answer": "20 m/s",
+        "formula_used": "v = √(2gh)"
+      },
+      "hint": "Énergie potentielle convertie en énergie cinétique",
+      "related_lesson": "L-T-P-019"
+    },
+    {
+      "id": "PT-EX-020",
+      "chapter": "Mécanique",
+      "topic": "Collisions",
+      "difficulty": "difficile",
+      "statement": "Une balle (m₁ = 0.2 kg, v₁ = 10 m/s) heurte une balle immobile (m₂ = 0.3 kg). Après choc élastique frontal, quelles sont les vitesses finales ?",
+      "data": {
+        "m1": "0.2 kg",
+        "v1": "10 m/s",
+        "m2": "0.3 kg",
+        "v2": "0 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Conservation quantité de mouvement : m₁v₁ = m₁v₁' + m₂v₂'",
+          "Conservation énergie cinétique : m₁v₁² = m₁v₁'² + m₂v₂'²",
+          "Formules choc élastique :",
+          "v₁' = ((m₁-m₂)/(m₁+m₂))v₁ = ((0.2-0.3)/(0.5))×10 = -2 m/s",
+          "v₂' = (2m₁/(m₁+m₂))v₁ = (0.4/0.5)×10 = 8 m/s"
+        ],
+        "answer": "v₁' = -2 m/s (recul) ; v₂' = 8 m/s",
+        "formula_used": "Formules collision élastique"
+      },
+      "hint": "Conservation de p et Ec pour choc élastique",
+      "related_lesson": "L-T-P-020"
+    },
+    {
+      "id": "PT-EX-021",
+      "chapter": "Énergie",
+      "topic": "Rendement énergétique",
+      "difficulty": "facile",
+      "statement": "Un moteur électrique consomme P = 1000 W et fournit une puissance mécanique utile de 750 W. Calculer son rendement.",
+      "data": {
+        "puissance_consommee": "1000 W",
+        "puissance_utile": "750 W"
+      },
+      "solution": {
+        "steps": [
+          "Rendement : η = P_utile / P_consommée",
+          "η = 750 / 1000",
+          "η = 0.75 = 75%"
+        ],
+        "answer": "75%",
+        "formula_used": "η = P_utile/P_totale"
+      },
+      "hint": "Rapport entre puissance utile et totale",
+      "related_lesson": "L-T-P-021"
+    },
+    {
+      "id": "PT-EX-022",
+      "chapter": "Énergie",
+      "topic": "Machines thermiques",
+      "difficulty": "moyen",
+      "statement": "Un réfrigérateur prélève Q_f = 300 J à la source froide et reçoit un travail W = 100 J. Quelle chaleur cède-t-il à la source chaude ?",
+      "data": {
+        "Qf": "300 J",
+        "W": "100 J"
+      },
+      "solution": {
+        "steps": [
+          "Premier principe : Q_c = Q_f + W",
+          "Q_c = 300 + 100",
+          "Q_c = 400 J"
+        ],
+        "answer": "400 J",
+        "formula_used": "Q_c = Q_f + W"
+      },
+      "hint": "Conservation de l'énergie pour une machine frigorifique",
+      "related_lesson": "L-T-P-022"
+    },
+    {
+      "id": "PT-EX-023",
+      "chapter": "Ondes et signaux",
+      "topic": "Spectre électromagnétique",
+      "difficulty": "facile",
+      "statement": "Un rayonnement UV a une longueur d'onde λ = 300 nm. Calculer son énergie photonique (h = 6.63×10⁻³⁴ J·s, c = 3×10⁸ m/s).",
+      "data": {
+        "longueur_onde": "300 nm = 3×10⁻⁷ m",
+        "constante_planck": "6.63×10⁻³⁴ J·s",
+        "vitesse_lumiere": "3×10⁸ m/s"
+      },
+      "solution": {
+        "steps": [
+          "Énergie photon : E = hf = hc/λ",
+          "E = (6.63×10⁻³⁴ × 3×10⁸) / (3×10⁻⁷)",
+          "E = 19.89×10⁻²⁶ / 3×10⁻⁷",
+          "E = 6.63×10⁻¹⁹ J"
+        ],
+        "answer": "6.63×10⁻¹⁹ J",
+        "formula_used": "E = hc/λ"
+      },
+      "hint": "Relation de Planck-Einstein",
+      "related_lesson": "L-T-P-023"
+    },
+    {
+      "id": "PT-EX-024",
+      "chapter": "Ondes et signaux",
+      "topic": "Optique géométrique",
+      "difficulty": "moyen",
+      "statement": "Une lentille convergente de distance focale f' = 20 cm forme l'image d'un objet situé à 30 cm. Calculer la position et le grandissement de l'image.",
+      "data": {
+        "distance_focale": "20 cm = 0.2 m",
+        "position_objet": "30 cm = 0.3 m"
+      },
+      "solution": {
+        "steps": [
+          "Formule de conjugaison : 1/f' = 1/OA' - 1/OA",
+          "Avec OA = -30 cm (objet à gauche)",
+          "1/20 = 1/OA' - 1/(-30)",
+          "1/OA' = 1/20 - 1/30 = (3-2)/60 = 1/60",
+          "OA' = 60 cm (image à droite, réelle)",
+          "Grandissement : γ = OA'/OA = 60/(-30) = -2"
+        ],
+        "answer": "OA' = 60 cm ; γ = -2 (image inversée, 2× plus grande)",
+        "formula_used": "1/f' = 1/OA' - 1/OA"
+      },
+      "hint": "Relation de conjugaison avec origine au centre optique",
+      "related_lesson": "L-T-P-024"
+    },
+    {
+      "id": "PT-EX-025",
+      "chapter": "Mécanique",
+      "topic": "Oscillateur harmonique",
+      "difficulty": "difficile",
+      "statement": "Un oscillateur masse-ressort (m = 0.5 kg, k = 50 N/m) oscille avec amplitude A = 10 cm. Calculer l'énergie mécanique totale et la vitesse maximale.",
+      "data": {
+        "masse": "0.5 kg",
+        "constante_ressort": "50 N/m",
+        "amplitude": "10 cm = 0.1 m"
+      },
+      "solution": {
+        "steps": [
+          "Énergie mécanique : E = (1/2)kA²",
+          "E = 0.5 × 50 × (0.1)² = 25 × 0.01 = 0.25 J",
+          "À l'équilibre : E = (1/2)mv_max²",
+          "v_max² = 2E/m = 2×0.25/0.5 = 1",
+          "v_max = 1 m/s",
+          "Ou : v_max = A×ω avec ω = √(k/m) = √100 = 10 rad/s",
+          "v_max = 0.1 × 10 = 1 m/s"
+        ],
+        "answer": "E = 0.25 J ; v_max = 1 m/s",
+        "formula_used": "E = (1/2)kA² ; v_max = Aω"
+      },
+      "hint": "Conservation de l'énergie mécanique",
+      "related_lesson": "L-T-P-025"
+    },
+    {
+      "id": "PT-EX-026",
+      "chapter": "Mécanique",
+      "topic": "Moment cinétique",
+      "difficulty": "difficile",
+      "statement": "Un disque de masse M = 2 kg et rayon R = 0.5 m tourne à ω = 10 rad/s. Calculer son moment cinétique (I_disque = (1/2)MR²).",
+      "data": {
+        "masse": "2 kg",
+        "rayon": "0.5 m",
+        "vitesse_angulaire": "10 rad/s"
+      },
+      "solution": {
+        "steps": [
+          "Moment d'inertie : I = (1/2)MR²",
+          "I = 0.5 × 2 × (0.5)² = 1 × 0.25 = 0.25 kg·m²",
+          "Moment cinétique : L = Iω",
+          "L = 0.25 × 10 = 2.5 kg·m²/s"
+        ],
+        "answer": "2.5 kg·m²/s",
+        "formula_used": "L = Iω avec I = (1/2)MR²"
+      },
+      "hint": "Moment d'inertie d'un disque",
+      "related_lesson": "L-T-P-026"
+    },
+    {
+      "id": "PT-EX-027",
+      "chapter": "Énergie",
+      "topic": "Puissance électrique",
+      "difficulty": "facile",
+      "statement": "Un appareil de résistance R = 50 Ω est alimenté sous U = 220 V. Calculer la puissance dissipée et l'intensité du courant.",
+      "data": {
+        "resistance": "50 Ω",
+        "tension": "220 V"
+      },
+      "solution": {
+        "steps": [
+          "Loi d'Ohm : I = U/R = 220/50 = 4.4 A",
+          "Puissance : P = UI = 220 × 4.4 = 968 W",
+          "Ou : P = U²/R = 220²/50 = 48400/50 = 968 W"
+        ],
+        "answer": "P = 968 W ; I = 4.4 A",
+        "formula_used": "P = UI = U²/R"
+      },
+      "hint": "Relation puissance-tension-résistance",
+      "related_lesson": "L-T-P-027"
+    },
+    {
+      "id": "PT-EX-028",
+      "chapter": "Ondes et signaux",
+      "topic": "Circuit RC",
+      "difficulty": "moyen",
+      "statement": "Un condensateur C = 10 μF est chargé sous U = 12 V. Calculer la charge stockée et l'énergie emmagasinée.",
+      "data": {
+        "capacite": "10 μF = 10×10⁻⁶ F",
+        "tension": "12 V"
+      },
+      "solution": {
+        "steps": [
+          "Charge : Q = CU",
+          "Q = 10×10⁻⁶ × 12 = 1.2×10⁻⁴ C = 120 μC",
+          "Énergie : E = (1/2)CU²",
+          "E = 0.5 × 10×10⁻⁶ × 12² = 5×10⁻⁶ × 144",
+          "E = 7.2×10⁻⁴ J = 0.72 mJ"
+        ],
+        "answer": "Q = 120 μC ; E = 0.72 mJ",
+        "formula_used": "Q = CU ; E = (1/2)CU²"
+      },
+      "hint": "Capacité et énergie d'un condensateur",
+      "related_lesson": "L-T-P-028"
+    },
+    {
+      "id": "PT-EX-029",
+      "chapter": "Ondes et signaux",
+      "topic": "Circuit RL",
+      "difficulty": "moyen",
+      "statement": "Une bobine d'inductance L = 0.5 H et résistance r = 10 Ω est alimentée par E = 12 V. Calculer le courant en régime permanent et la constante de temps.",
+      "data": {
+        "inductance": "0.5 H",
+        "resistance": "10 Ω",
+        "tension": "12 V"
+      },
+      "solution": {
+        "steps": [
+          "Régime permanent : I = E/r = 12/10 = 1.2 A",
+          "Constante de temps : τ = L/r",
+          "τ = 0.5/10 = 0.05 s = 50 ms"
+        ],
+        "answer": "I = 1.2 A ; τ = 50 ms",
+        "formula_used": "I = E/r ; τ = L/r"
+      },
+      "hint": "En régime permanent, la bobine se comporte comme un fil",
+      "related_lesson": "L-T-P-029"
+    },
+    {
+      "id": "PT-EX-030",
+      "chapter": "Mécanique",
+      "topic": "Poussée d'Archimède",
+      "difficulty": "moyen",
+      "statement": "Un cube de côté a = 10 cm et masse volumique ρ = 800 kg/m³ flotte dans l'eau (ρ_eau = 1000 kg/m³). Quelle fraction du volume est immergée ?",
+      "data": {
+        "cote": "10 cm = 0.1 m",
+        "masse_volumique_cube": "800 kg/m³",
+        "masse_volumique_eau": "1000 kg/m³"
+      },
+      "solution": {
+        "steps": [
+          "À l'équilibre : Poids = Poussée d'Archimède",
+          "ρ_cube × V × g = ρ_eau × V_immergé × g",
+          "V_immergé/V = ρ_cube/ρ_eau",
+          "V_immergé/V = 800/1000 = 0.8 = 80%"
+        ],
+        "answer": "80% du volume est immergé",
+        "formula_used": "V_immergé/V = ρ_objet/ρ_fluide"
+      },
+      "hint": "Principe d'Archimède à l'équilibre",
+      "related_lesson": "L-T-P-030"
+    },
+    {
+      "id": "PT-EX-031",
+      "chapter": "Énergie",
+      "topic": "Effet Joule",
+      "difficulty": "facile",
+      "statement": "Un fil de résistance R = 20 Ω est parcouru par un courant I = 5 A pendant t = 2 minutes. Calculer l'énergie dissipée par effet Joule.",
+      "data": {
+        "resistance": "20 Ω",
+        "intensite": "5 A",
+        "duree": "2 min = 120 s"
+      },
+      "solution": {
+        "steps": [
+          "Puissance dissipée : P = RI²",
+          "P = 20 × 5² = 20 × 25 = 500 W",
+          "Énergie : E = Pt",
+          "E = 500 × 120 = 60 000 J = 60 kJ"
+        ],
+        "answer": "60 kJ",
+        "formula_used": "E = RI²t"
+      },
+      "hint": "Énergie dissipée par effet Joule",
+      "related_lesson": "L-T-P-031"
+    },
+    {
+      "id": "PT-EX-032",
+      "chapter": "Ondes et signaux",
+      "topic": "Loi de Beer-Lambert",
+      "difficulty": "moyen",
+      "statement": "Une solution a une absorbance A = 0.5 pour une longueur d'onde donnée (ε = 1000 L/(mol·cm), l = 1 cm). Calculer la concentration.",
+      "data": {
+        "absorbance": "0.5",
+        "coefficient_extinction": "1000 L/(mol·cm)",
+        "longueur_cuve": "1 cm"
+      },
+      "solution": {
+        "steps": [
+          "Loi de Beer-Lambert : A = ε × l × c",
+          "c = A / (ε × l)",
+          "c = 0.5 / (1000 × 1)",
+          "c = 0.5 / 1000 = 5×10⁻⁴ mol/L",
+          "c = 0.5 mmol/L"
+        ],
+        "answer": "5×10⁻⁴ mol/L = 0.5 mmol/L",
+        "formula_used": "A = εlc"
+      },
+      "hint": "Loi de Beer-Lambert pour spectrophotométrie",
+      "related_lesson": "L-T-P-032"
+    },
+    {
+      "id": "PT-EX-033",
+      "chapter": "Mécanique",
+      "topic": "Équilibre d'un solide",
+      "difficulty": "moyen",
+      "statement": "Une barre homogène de longueur L = 2 m et masse M = 10 kg est en équilibre horizontal sur un pivot à L/4 du bout gauche. Quelle force F faut-il appliquer à l'extrémité gauche ?",
+      "data": {
+        "longueur": "2 m",
+        "masse": "10 kg",
+        "position_pivot": "L/4 = 0.5 m du bout gauche",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Moment du poids par rapport au pivot :",
+          "M_poids = Mg × (L/2 - L/4) = Mg × L/4",
+          "M_poids = 10 × 10 × 0.5 = 50 N·m (sens horaire)",
+          "Moment de F : M_F = F × L/4 (sens antihoraire)",
+          "Équilibre : F × L/4 = Mg × L/4",
+          "F = Mg = 10 × 10 = 100 N"
+        ],
+        "answer": "100 N",
+        "formula_used": "ΣM = 0"
+      },
+      "hint": "Somme des moments nulle à l'équilibre",
+      "related_lesson": "L-T-P-033"
+    },
+    {
+      "id": "PT-EX-034",
+      "chapter": "Ondes et signaux",
+      "topic": "Modulation d'amplitude",
+      "difficulty": "difficile",
+      "statement": "Un signal porteur de 100 kHz et amplitude 10 V est modulé par un signal à 1 kHz d'amplitude 3 V. Calculer le taux de modulation et les fréquences latérales.",
+      "data": {
+        "frequence_porteuse": "100 kHz",
+        "amplitude_porteuse": "10 V",
+        "frequence_modulante": "1 kHz",
+        "amplitude_modulante": "3 V"
+      },
+      "solution": {
+        "steps": [
+          "Taux de modulation : m = A_m / A_p",
+          "m = 3/10 = 0.3 = 30%",
+          "Fréquences latérales :",
+          "f_sup = f_p + f_m = 100 + 1 = 101 kHz",
+          "f_inf = f_p - f_m = 100 - 1 = 99 kHz"
+        ],
+        "answer": "m = 30% ; f = 99 kHz et 101 kHz",
+        "formula_used": "m = A_m/A_p ; f_lat = f_p ± f_m"
+      },
+      "hint": "Modulation d'amplitude : bandes latérales",
+      "related_lesson": "L-T-P-034"
+    },
+    {
+      "id": "PT-EX-035",
+      "chapter": "Énergie",
+      "topic": "Énergie nucléaire",
+      "difficulty": "moyen",
+      "statement": "La fission d'un noyau d'uranium-235 libère E = 200 MeV. Quelle masse d'U-235 faut-il fissionner pour produire 1 kWh ? (1 MeV = 1.6×10⁻¹³ J, N_A = 6.02×10²³ mol⁻¹)",
+      "data": {
+        "energie_par_fission": "200 MeV = 3.2×10⁻¹¹ J",
+        "energie_cible": "1 kWh = 3.6×10⁶ J",
+        "masse_molaire": "235 g/mol"
+      },
+      "solution": {
+        "steps": [
+          "Nombre de fissions : N = E_totale / E_fission",
+          "N = 3.6×10⁶ / 3.2×10⁻¹¹ = 1.125×10¹⁷ fissions",
+          "Nombre de moles : n = N / N_A",
+          "n = 1.125×10¹⁷ / 6.02×10²³ = 1.87×10⁻⁷ mol",
+          "Masse : m = n × M = 1.87×10⁻⁷ × 235",
+          "m = 4.4×10⁻⁵ g = 0.044 mg = 44 μg"
+        ],
+        "answer": "44 μg",
+        "formula_used": "E = Nm ; N = nN_A"
+      },
+      "hint": "Énergie de fission et nombre d'Avogadro",
+      "related_lesson": "L-T-P-035"
+    },
+    {
+      "id": "PT-EX-036",
+      "chapter": "Mécanique",
+      "topic": "Fluides en mouvement",
+      "difficulty": "difficile",
+      "statement": "L'eau s'écoule dans un tuyau de section S₁ = 10 cm² à v₁ = 2 m/s. Le tuyau se rétrécit à S₂ = 5 cm². Calculer v₂ et la différence de pression (ρ = 1000 kg/m³).",
+      "data": {
+        "S1": "10 cm² = 10⁻³ m²",
+        "v1": "2 m/s",
+        "S2": "5 cm² = 5×10⁻⁴ m²",
+        "masse_volumique": "1000 kg/m³"
+      },
+      "solution": {
+        "steps": [
+          "Équation de continuité : S₁v₁ = S₂v₂",
+          "v₂ = S₁v₁/S₂ = (10⁻³ × 2) / 5×10⁻⁴ = 4 m/s",
+          "Bernoulli : P₁ + (1/2)ρv₁² = P₂ + (1/2)ρv₂²",
+          "ΔP = P₁ - P₂ = (1/2)ρ(v₂² - v₁²)",
+          "ΔP = 0.5 × 1000 × (16 - 4) = 500 × 12",
+          "ΔP = 6000 Pa = 6 kPa"
+        ],
+        "answer": "v₂ = 4 m/s ; ΔP = 6 kPa",
+        "formula_used": "S₁v₁ = S₂v₂ ; Bernoulli"
+      },
+      "hint": "Conservation du débit et théorème de Bernoulli",
+      "related_lesson": "L-T-P-036"
+    },
+    {
+      "id": "PT-EX-037",
+      "chapter": "Ondes et signaux",
+      "topic": "Résonance mécanique",
+      "difficulty": "moyen",
+      "statement": "Un oscillateur harmonique (m = 0.2 kg, k = 80 N/m) est soumis à une force sinusoïdale. Calculer la fréquence propre et la pulsation de résonance.",
+      "data": {
+        "masse": "0.2 kg",
+        "constante_ressort": "80 N/m"
+      },
+      "solution": {
+        "steps": [
+          "Pulsation propre : ω₀ = √(k/m)",
+          "ω₀ = √(80/0.2) = √400 = 20 rad/s",
+          "Fréquence propre : f₀ = ω₀/(2π)",
+          "f₀ = 20/(2π) = 10/π ≈ 3.18 Hz"
+        ],
+        "answer": "f₀ = 3.18 Hz ; ω₀ = 20 rad/s",
+        "formula_used": "ω₀ = √(k/m)"
+      },
+      "hint": "Pulsation propre d'un oscillateur masse-ressort",
+      "related_lesson": "L-T-P-037"
+    },
+    {
+      "id": "PT-EX-038",
+      "chapter": "Énergie",
+      "topic": "Diagramme énergétique",
+      "difficulty": "moyen",
+      "statement": "Un atome passe du niveau E₂ = -3.4 eV au niveau E₁ = -13.6 eV. Calculer la longueur d'onde du photon émis (h = 6.63×10⁻³⁴ J·s, c = 3×10⁸ m/s, 1 eV = 1.6×10⁻¹⁹ J).",
+      "data": {
+        "E2": "-3.4 eV",
+        "E1": "-13.6 eV",
+        "h": "6.63×10⁻³⁴ J·s",
+        "c": "3×10⁸ m/s"
+      },
+      "solution": {
+        "steps": [
+          "Énergie du photon : ΔE = E₂ - E₁",
+          "ΔE = -3.4 - (-13.6) = 10.2 eV",
+          "ΔE = 10.2 × 1.6×10⁻¹⁹ = 1.632×10⁻¹⁸ J",
+          "λ = hc/ΔE",
+          "λ = (6.63×10⁻³⁴ × 3×10⁸) / 1.632×10⁻¹⁸",
+          "λ = 1.989×10⁻²⁵ / 1.632×10⁻¹⁸ = 1.22×10⁻⁷ m",
+          "λ = 122 nm (UV)"
+        ],
+        "answer": "122 nm (ultraviolet)",
+        "formula_used": "ΔE = hc/λ"
+      },
+      "hint": "Transition électronique et émission de photon",
+      "related_lesson": "L-T-P-038"
+    },
+    {
+      "id": "PT-EX-039",
+      "chapter": "Mécanique",
+      "topic": "Force centripète",
+      "difficulty": "moyen",
+      "statement": "Une voiture de masse m = 1500 kg prend un virage de rayon R = 50 m à v = 72 km/h. Calculer la force centripète nécessaire.",
+      "data": {
+        "masse": "1500 kg",
+        "rayon": "50 m",
+        "vitesse": "72 km/h = 20 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Convertir : v = 72/3.6 = 20 m/s",
+          "Force centripète : Fc = mv²/R",
+          "Fc = 1500 × 20² / 50",
+          "Fc = 1500 × 400 / 50",
+          "Fc = 12000 N = 12 kN"
+        ],
+        "answer": "12 kN",
+        "formula_used": "Fc = mv²/R"
+      },
+      "hint": "Force nécessaire au mouvement circulaire",
+      "related_lesson": "L-T-P-039"
+    },
+    {
+      "id": "PT-EX-040",
+      "chapter": "Ondes et signaux",
+      "topic": "Interférences lumineuses",
+      "difficulty": "difficile",
+      "statement": "Dans une expérience de Young, deux fentes distantes de a = 0.5 mm produisent des franges sur un écran à D = 2 m. L'interfrange est i = 2.4 mm. Calculer la longueur d'onde.",
+      "data": {
+        "distance_fentes": "0.5 mm = 5×10⁻⁴ m",
+        "distance_ecran": "2 m",
+        "interfrange": "2.4 mm = 2.4×10⁻³ m"
+      },
+      "solution": {
+        "steps": [
+          "Interfrange : i = λD/a",
+          "λ = ia/D",
+          "λ = (2.4×10⁻³ × 5×10⁻⁴) / 2",
+          "λ = 1.2×10⁻⁶ / 2",
+          "λ = 6×10⁻⁷ m = 600 nm (orange)"
+        ],
+        "answer": "600 nm (lumière orange)",
+        "formula_used": "i = λD/a"
+      },
+      "hint": "Formule de l'interfrange dans l'expérience de Young",
+      "related_lesson": "L-T-P-040"
+    },
+    {
+      "id": "PT-EX-041",
+      "chapter": "Énergie",
+      "topic": "Cycle de Carnot",
+      "difficulty": "difficile",
+      "statement": "Une machine thermique fonctionne entre T_c = 600 K et T_f = 300 K. Calculer le rendement maximal théorique (Carnot).",
+      "data": {
+        "temperature_chaude": "600 K",
+        "temperature_froide": "300 K"
+      },
+      "solution": {
+        "steps": [
+          "Rendement de Carnot : η_c = 1 - T_f/T_c",
+          "η_c = 1 - 300/600",
+          "η_c = 1 - 0.5 = 0.5",
+          "η_c = 50%"
+        ],
+        "answer": "50%",
+        "formula_used": "η_c = 1 - T_f/T_c"
+      },
+      "hint": "Rendement maximal théorique d'une machine thermique",
+      "related_lesson": "L-T-P-041"
+    },
+    {
+      "id": "PT-EX-042",
+      "chapter": "Ondes et signaux",
+      "topic": "Radioactivité",
+      "difficulty": "moyen",
+      "statement": "Un échantillon radioactif a une demi-vie t₁/₂ = 8 jours. Quelle fraction reste après 24 jours ?",
+      "data": {
+        "demi_vie": "8 jours",
+        "duree": "24 jours"
+      },
+      "solution": {
+        "steps": [
+          "Nombre de demi-vies : n = t/t₁/₂ = 24/8 = 3",
+          "Fraction restante : f = (1/2)ⁿ",
+          "f = (1/2)³ = 1/8",
+          "f = 0.125 = 12.5%"
+        ],
+        "answer": "12.5% (1/8)",
+        "formula_used": "N(t) = N₀(1/2)^(t/t₁/₂)"
+      },
+      "hint": "Décroissance radioactive exponentielle",
+      "related_lesson": "L-T-P-042"
+    },
+    {
+      "id": "PT-EX-043",
+      "chapter": "Mécanique",
+      "topic": "Énergie potentielle gravitationnelle",
+      "difficulty": "moyen",
+      "statement": "Calculer l'énergie potentielle gravitationnelle d'un satellite de masse m = 1000 kg en orbite à h = 300 km d'altitude (M_T = 6×10²⁴ kg, R_T = 6400 km, G = 6.67×10⁻¹¹ SI).",
+      "data": {
+        "masse_satellite": "1000 kg",
+        "altitude": "300 km = 3×10⁵ m",
+        "masse_terre": "6×10²⁴ kg",
+        "rayon_terre": "6.4×10⁶ m",
+        "G": "6.67×10⁻¹¹ N·m²/kg²"
+      },
+      "solution": {
+        "steps": [
+          "Rayon orbital : r = R_T + h = 6.7×10⁶ m",
+          "Énergie potentielle : Ep = -GMm/r",
+          "Ep = -(6.67×10⁻¹¹ × 6×10²⁴ × 1000) / 6.7×10⁶",
+          "Ep = -4×10¹⁴ / 6.7×10⁶",
+          "Ep ≈ -5.97×10¹⁰ J ≈ -59.7 GJ"
+        ],
+        "answer": "-59.7 GJ",
+        "formula_used": "Ep = -GMm/r"
+      },
+      "hint": "Énergie potentielle gravitationnelle négative",
+      "related_lesson": "L-T-P-043"
+    },
+    {
+      "id": "PT-EX-044",
+      "chapter": "Ondes et signaux",
+      "topic": "Loi de Snell-Descartes",
+      "difficulty": "moyen",
+      "statement": "Un rayon lumineux passe de l'air (n₁ = 1) au verre (n₂ = 1.5) avec un angle d'incidence θ₁ = 30°. Calculer l'angle de réfraction.",
+      "data": {
+        "n1": "1",
+        "n2": "1.5",
+        "angle_incidence": "30°"
+      },
+      "solution": {
+        "steps": [
+          "Loi de Snell-Descartes : n₁sinθ₁ = n₂sinθ₂",
+          "1 × sin(30°) = 1.5 × sinθ₂",
+          "0.5 = 1.5 × sinθ₂",
+          "sinθ₂ = 0.5/1.5 = 1/3 ≈ 0.333",
+          "θ₂ = arcsin(0.333) ≈ 19.5°"
+        ],
+        "answer": "19.5°",
+        "formula_used": "n₁sinθ₁ = n₂sinθ₂"
+      },
+      "hint": "Loi de la réfraction",
+      "related_lesson": "L-T-P-044"
+    },
+    {
+      "id": "PT-EX-045",
+      "chapter": "Énergie",
+      "topic": "Capacité thermique",
+      "difficulty": "facile",
+      "statement": "Un calorimètre de capacité C = 200 J/°C contient 500 g d'eau à 20°C. On ajoute 100 g d'eau à 80°C. Calculer la température finale (c_eau = 4180 J/(kg·°C)).",
+      "data": {
+        "capacite_calorimetere": "200 J/°C",
+        "m1": "500 g = 0.5 kg",
+        "T1": "20°C",
+        "m2": "100 g = 0.1 kg",
+        "T2": "80°C",
+        "c_eau": "4180 J/(kg·°C)"
+      },
+      "solution": {
+        "steps": [
+          "Chaleur cédée par eau chaude = chaleur reçue",
+          "(m₂c + C)(T_f - T₁) = m₂c(T₂ - T_f)",
+          "(0.5×4180 + 200)(T_f - 20) = 0.1×4180×(80 - T_f)",
+          "2290(T_f - 20) = 418(80 - T_f)",
+          "2290T_f - 45800 = 33440 - 418T_f",
+          "2708T_f = 79240",
+          "T_f ≈ 29.3°C"
+        ],
+        "answer": "29.3°C",
+        "formula_used": "Q_cédée = Q_reçue"
+      },
+      "hint": "Conservation de l'énergie thermique",
+      "related_lesson": "L-T-P-045"
+    },
+    {
+      "id": "PT-EX-046",
+      "chapter": "Mécanique",
+      "topic": "Frottements dynamiques",
+      "difficulty": "moyen",
+      "statement": "Un bloc (m = 5 kg) glisse sur un plan horizontal avec v₀ = 10 m/s. Le coefficient de frottement est μ = 0.3. Calculer la distance d'arrêt (g = 10 m/s²).",
+      "data": {
+        "masse": "5 kg",
+        "vitesse_initiale": "10 m/s",
+        "coefficient_frottement": "0.3",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Force de frottement : f = μmg = 0.3 × 5 × 10 = 15 N",
+          "Accélération : a = -f/m = -15/5 = -3 m/s²",
+          "Équation : v² = v₀² + 2ad avec v = 0",
+          "0 = 100 + 2×(-3)×d",
+          "6d = 100",
+          "d = 16.67 m"
+        ],
+        "answer": "16.67 m",
+        "formula_used": "v² = v₀² + 2ad"
+      },
+      "hint": "Travail de la force de frottement",
+      "related_lesson": "L-T-P-046"
+    },
+    {
+      "id": "PT-EX-047",
+      "chapter": "Ondes et signaux",
+      "topic": "Circuit RLC série",
+      "difficulty": "difficile",
+      "statement": "Un circuit RLC série (R = 100 Ω, L = 0.1 H, C = 10 μF) est alimenté en régime sinusoïdal. Calculer la fréquence de résonance et l'impédance à la résonance.",
+      "data": {
+        "resistance": "100 Ω",
+        "inductance": "0.1 H",
+        "capacite": "10 μF = 10⁻⁵ F"
+      },
+      "solution": {
+        "steps": [
+          "Fréquence de résonance : f₀ = 1/(2π√(LC))",
+          "f₀ = 1/(2π√(0.1 × 10⁻⁵))",
+          "f₀ = 1/(2π√(10⁻⁶)) = 1/(2π × 10⁻³)",
+          "f₀ = 159.15 Hz ≈ 159 Hz",
+          "À la résonance : Z = R = 100 Ω"
+        ],
+        "answer": "f₀ = 159 Hz ; Z = 100 Ω",
+        "formula_used": "f₀ = 1/(2π√(LC))"
+      },
+      "hint": "À la résonance, X_L = X_C donc Z = R",
+      "related_lesson": "L-T-P-047"
+    },
+    {
+      "id": "PT-EX-048",
+      "chapter": "Énergie",
+      "topic": "Rendement photovoltaïque",
+      "difficulty": "moyen",
+      "statement": "Un panneau solaire de surface S = 2 m² reçoit un rayonnement de 1000 W/m² et produit P = 300 W. Calculer son rendement.",
+      "data": {
+        "surface": "2 m²",
+        "irradiance": "1000 W/m²",
+        "puissance_electrique": "300 W"
+      },
+      "solution": {
+        "steps": [
+          "Puissance reçue : P_reçue = I × S",
+          "P_reçue = 1000 × 2 = 2000 W",
+          "Rendement : η = P_électrique / P_reçue",
+          "η = 300 / 2000 = 0.15 = 15%"
+        ],
+        "answer": "15%",
+        "formula_used": "η = P_utile/P_reçue"
+      },
+      "hint": "Rapport puissance électrique sur puissance solaire",
+      "related_lesson": "L-T-P-048"
+    },
+    {
+      "id": "PT-EX-049",
+      "chapter": "Ondes et signaux",
+      "topic": "Doppler acoustique",
+      "difficulty": "moyen",
+      "statement": "Un observateur en mouvement à v_o = 20 m/s s'approche d'une source fixe émettant à f₀ = 500 Hz. Quelle fréquence perçoit-il ? (v_son = 340 m/s)",
+      "data": {
+        "vitesse_observateur": "20 m/s",
+        "frequence_source": "500 Hz",
+        "vitesse_son": "340 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Effet Doppler (observateur se rapproche) :",
+          "f = f₀ × (v + v_o) / v",
+          "f = 500 × (340 + 20) / 340",
+          "f = 500 × 360/340",
+          "f = 500 × 1.0588 ≈ 529 Hz"
+        ],
+        "answer": "529 Hz",
+        "formula_used": "f = f₀(v + v_o)/v"
+      },
+      "hint": "Observateur mobile : fréquence augmente si approche",
+      "related_lesson": "L-T-P-049"
+    },
+    {
+      "id": "PT-EX-050",
+      "chapter": "Mécanique",
+      "topic": "Impulsion et quantité de mouvement",
+      "difficulty": "moyen",
+      "statement": "Une balle de tennis (m = 60 g) arrive à v₁ = 30 m/s et repart à v₂ = -25 m/s après rebond. La durée du choc est Δt = 0.01 s. Calculer la force moyenne.",
+      "data": {
+        "masse": "60 g = 0.06 kg",
+        "v1": "30 m/s",
+        "v2": "-25 m/s",
+        "duree_choc": "0.01 s"
+      },
+      "solution": {
+        "steps": [
+          "Variation de quantité de mouvement :",
+          "Δp = m(v₂ - v₁) = 0.06 × (-25 - 30)",
+          "Δp = 0.06 × (-55) = -3.3 kg·m/s",
+          "Force moyenne : F = Δp/Δt",
+          "F = -3.3 / 0.01 = -330 N",
+          "|F| = 330 N (force de la raquette sur la balle)"
+        ],
+        "answer": "330 N",
+        "formula_used": "F = Δp/Δt"
+      },
+      "hint": "Théorème de l'impulsion",
+      "related_lesson": "L-T-P-050"
+    }
+  ]
+}

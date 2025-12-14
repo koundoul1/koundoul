@@ -1,0 +1,561 @@
+{
+  "metadata": {
+    "lot_number": 24,
+    "lot_name": "Lot 24 - Continuité & Dérivabilité",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Continuité & Dérivabilité",
+    "lesson_range": "MT-16 à MT-27",
+    "total_lessons": 12
+  },
+  "lessons": [
+    {
+      "id": "MT-16",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Fonction continue sur un intervalle",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir la continuité sur un intervalle", "Identifier les fonctions continues", "Utiliser les propriétés des fonctions continues", "Reconnaître les discontinuités"],
+      "prerequisites": ["MT-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["continuité", "intervalle"],
+      "detailed_content": {
+        "introduction": "Une fonction continue sur un intervalle est une fonction qui ne présente aucune rupture (saut, trou, asymptote) sur cet intervalle. Cette propriété est fondamentale en analyse.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "f continue sur I si continue en tout point de I, i.e. pour tout a ∈ I : lim(x→a) f(x) = f(a)", "example": "Graphiquement : tracer sans lever le crayon" },
+          { "name": "Fonctions continues usuelles", "explanation": "Polynômes : ℝ. Rationnelles : domaine. e^x : ℝ. ln(x) : ]0; +∞[. sin, cos, tan : domaine. √x : [0; +∞[. |x| : ℝ", "example": "Toutes continues sur leur domaine" },
+          { "name": "Opérations", "explanation": "f + g, f × g, λf, f/g (si g ≠ 0), f ∘ g : toutes continues si opérandes continues", "example": "Opérations préservent la continuité" },
+          { "name": "Propriété fondamentale", "explanation": "L'image d'un intervalle par une fonction continue est un intervalle", "example": "f([a; b]) est un intervalle" }
+        ],
+        "guided_example": {
+          "statement": "Montrer que f(x) = x³ - 2x + 1 est continue sur ℝ.",
+          "solution_steps": [
+            "f est une fonction polynomiale",
+            "Toute fonction polynomiale est continue sur ℝ",
+            "Donc f est continue sur ℝ"
+          ]
+        },
+        "quick_exercises": [
+          "g(x) = (x² + 1)/(x - 2) continue sur ℝ ? Domaine de continuité ?",
+          "Identifier fonctions continues et discontinuités"
+        ],
+        "common_mistakes": [
+          "Confondre continue en un point et sur un intervalle",
+          "Oublier valeurs interdites pour rationnelles",
+          "Penser que toute fonction est continue"
+        ],
+        "summary": {
+          "key_concept": "Polynômes : ℝ. Rationnelles : sauf dénominateur nul. Composition de continues = continue",
+          "key_method": "Image d'un intervalle = intervalle (si f continue)",
+          "next_step": "Étudier le Théorème des Valeurs Intermédiaires"
+        }
+      }
+    },
+    {
+      "id": "MT-17",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Théorème des Valeurs Intermédiaires (TVI)",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Énoncer et comprendre le TVI", "Appliquer le TVI pour montrer l'existence de solutions", "Utiliser le TVI pour encadrer des solutions", "Distinguer existence et unicité"],
+      "prerequisites": ["MT-16"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["TVI", "valeurs intermédiaires"],
+      "detailed_content": {
+        "introduction": "Le Théorème des Valeurs Intermédiaires est un résultat fondamental sur les fonctions continues. Il garantit qu'une fonction continue prend toutes les valeurs intermédiaires.",
+        "key_concepts": [
+          { "name": "Énoncé TVI", "explanation": "Si f continue sur [a; b], alors pour tout k entre f(a) et f(b), ∃ c ∈ [a; b] tel que f(c) = k", "example": "f prend toutes les valeurs intermédiaires" },
+          { "name": "Corollaire", "explanation": "Si f continue sur [a; b] et f(a) × f(b) < 0, alors ∃ c ∈ ]a; b[ tel que f(c) = 0", "example": "Changement de signe → existence d'une racine" },
+          { "name": "Méthode", "explanation": "1) Continuité sur [a; b], 2) Calculer f(a) et f(b), 3) Vérifier k entre f(a) et f(b), 4) Conclure ∃ c", "example": "Vérifier hypothèses" },
+          { "name": "Unicité", "explanation": "TVI garantit existence, pas unicité. Pour l'unicité : utiliser stricte monotonie", "example": "Existence vs unicité" }
+        ],
+        "guided_example": {
+          "statement": "Montrer que x³ - 3x + 1 = 0 admet au moins une solution dans [0; 1].",
+          "solution_steps": [
+            "f(x) = x³ - 3x + 1, polynômiale donc continue sur [0; 1]",
+            "f(0) = 1 > 0, f(1) = -1 < 0, signes contraires",
+            "TVI : ∃ c ∈ ]0; 1[, f(c) = 0",
+            "Au moins une solution dans [0; 1]"
+          ]
+        },
+        "quick_exercises": [
+          "Montrer que e^x = x + 2 admet au moins une solution dans [0; 2]",
+          "Appliquer le TVI"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier continuité",
+          "Ne pas calculer f(a) et f(b)",
+          "Confondre existence et unicité"
+        ],
+        "summary": {
+          "key_concept": "TVI : existence garantie si f continue et changement de signe",
+          "key_method": "Ne donne pas l'unicité ni la valeur de c (seulement existence)",
+          "next_step": "Étudier le prolongement par continuité"
+        }
+      }
+    },
+    {
+      "id": "MT-18",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Prolongement par continuité",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir le prolongement par continuité", "Déterminer si une fonction est prolongeable", "Calculer la valeur du prolongement", "Construire la fonction prolongée"],
+      "prerequisites": ["MT-10", "MT-16"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["prolongement", "continuité"],
+      "detailed_content": {
+        "introduction": "Certaines fonctions non définies en un point peuvent être 'complétées' pour devenir continues en ce point. On parle alors de prolongement par continuité.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "f prolongeable en a si lim(x→a) f(x) = L (fini). Prolongement : g(x) = f(x) si x ≠ a, g(a) = L", "example": "g alors continue en a" },
+          { "name": "Méthode", "explanation": "1) f non définie en a, 2) Calculer lim(x→a) f(x), 3) Si finie (= L) : prolongeable, 4) Définir g(a) = L", "example": "Simplifier puis limiter" },
+          { "name": "Cas typiques", "explanation": "Forme 0/0 : simplifier. Limites trigo : sin(x)/x → 1", "example": "Factoriser puis simplifier" },
+          { "name": "Non-prolongeable", "explanation": "Si limite n'existe pas ou infinie : non prolongeable", "example": "1/x en 0" }
+        ],
+        "guided_example": {
+          "statement": "f(x) = (x³ - 8)/(x - 2) prolongeable en 2 ?",
+          "solution_steps": [
+            "f non définie en 2",
+            "Factoriser x³ - 8 = (x - 2)(x² + 2x + 4)",
+            "f(x) = x² + 2x + 4 pour x ≠ 2",
+            "lim(x→2) = 12, prolongement : g(2) = 12"
+          ]
+        },
+        "quick_exercises": [
+          "Prolonger h(x) = (sin(3x))/x en 0",
+          "Déterminer prolongements possibles"
+        ],
+        "common_mistakes": [
+          "Oublier que limite doit être finie",
+          "Confondre prolongement et limite",
+          "Erreurs de simplification"
+        ],
+        "summary": {
+          "key_concept": "Prolongeable ⇔ limite finie en a. Valeur = limite",
+          "key_method": "Souvent factoriser puis simplifier",
+          "next_step": "Introduire le nombre dérivé"
+        }
+      }
+    },
+    {
+      "id": "MT-19",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Nombre dérivé et dérivabilité",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir le nombre dérivé", "Calculer un nombre dérivé", "Interpréter géométriquement", "Distinguer dérivabilité et continuité"],
+      "prerequisites": ["M1-14"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["dérivée", "nombre dérivé"],
+      "detailed_content": {
+        "introduction": "Le nombre dérivé en un point mesure le taux de variation instantané de la fonction en ce point. C'est un concept fondamental du calcul différentiel.",
+        "key_concepts": [
+          { "name": "Taux d'accroissement", "explanation": "τ(h) = [f(a+h) - f(a)] / h mesure la variation moyenne sur [a; a+h]", "example": "Pente de la corde" },
+          { "name": "Nombre dérivé", "explanation": "f'(a) = lim(h→0) [f(a+h) - f(a)] / h (limite finie)", "example": "Taux de variation instantané" },
+          { "name": "Interprétation géométrique", "explanation": "f'(a) = coefficient directeur de la tangente en a", "example": "Tangente : y = f'(a)(x - a) + f(a)" },
+          { "name": "Lien continuité", "explanation": "Dérivable en a ⇒ continue en a. Réciproque fausse", "example": "|x| continue mais non dérivable en 0" }
+        ],
+        "guided_example": {
+          "statement": "Calculer f'(2) pour f(x) = x².",
+          "solution_steps": [
+            "f'(2) = lim(h→0) [(2+h)² - 4] / h",
+            "lim(h→0) (4 + 4h + h² - 4) / h = lim(h→0) (4 + h)",
+            "f'(2) = 4"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer g'(1) pour g(x) = 1/x",
+          "Utiliser la définition du nombre dérivé"
+        ],
+        "common_mistakes": [
+          "Confondre taux d'accroissement et nombre dérivé",
+          "Erreurs de simplification",
+          "Penser que continue ⇒ dérivable"
+        ],
+        "summary": {
+          "key_concept": "f'(a) = lim(h→0) [f(a+h) - f(a)] / h. Coefficient directeur tangente",
+          "key_method": "Simplifier avant de calculer la limite",
+          "next_step": "Étudier la fonction dérivée"
+        }
+      }
+    },
+    {
+      "id": "MT-20",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Fonction dérivée et dérivabilité sur un intervalle",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir la fonction dérivée", "Déterminer le domaine de dérivabilité", "Calculer des dérivées", "Relier dérivée et variations"],
+      "prerequisites": ["MT-19", "M1-15"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["fonction dérivée", "variations"],
+      "detailed_content": {
+        "introduction": "La fonction dérivée associe à chaque point x de son domaine le nombre dérivé f'(x). Elle décrit le comportement local de la fonction.",
+        "key_concepts": [
+          { "name": "Fonction dérivée", "explanation": "f'(x) = lim(h→0) [f(x+h) - f(x)] / h pour tout x ∈ I", "example": "f dérivable sur I si dérivable en tout point" },
+          { "name": "Dérivées usuelles", "explanation": "(xⁿ)' = n xⁿ⁻¹, (e^x)' = e^x, (ln(x))' = 1/x, (sin(x))' = cos(x), (cos(x))' = -sin(x)", "example": "Formules à connaître" },
+          { "name": "Opérations", "explanation": "(u + v)' = u' + v', (uv)' = u'v + uv', (u/v)' = (u'v - uv')/v², (ln(u))' = u'/u", "example": "Règles de dérivation" },
+          { "name": "Lien variations", "explanation": "f' ≥ 0 ⇒ f croissante, f' ≤ 0 ⇒ f décroissante", "example": "Théorème fondamental" }
+        ],
+        "guided_example": {
+          "statement": "Calculer la dérivée de f(x) = (x² + 1)e^x.",
+          "solution_steps": [
+            "(uv)' = u'v + uv'",
+            "u = x² + 1, u' = 2x. v = e^x, v' = e^x",
+            "f'(x) = 2x × e^x + (x² + 1) × e^x = e^x(x + 1)²"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer dérivée de g(x) = ln(x² + 3x + 2)",
+          "Utiliser les formules de dérivation"
+        ],
+        "common_mistakes": [
+          "Oublier u' dans ln(u) ou e^u",
+          "Confondre produit et quotient",
+          "Erreurs de signe"
+        ],
+        "summary": {
+          "key_concept": "Identifier forme. f' > 0 ⇒ croissante, f' < 0 ⇒ décroissante",
+          "key_method": "Simplifier systématiquement le résultat",
+          "next_step": "Déterminer l'équation de la tangente"
+        }
+      }
+    },
+    {
+      "id": "MT-21",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Équation de la tangente",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Déterminer l'équation de la tangente", "Interpréter géométriquement", "Étudier la position relative", "Résoudre problèmes de tangentes"],
+      "prerequisites": ["MT-19"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["tangente", "équation"],
+      "detailed_content": {
+        "introduction": "La tangente à une courbe en un point est la droite qui 'épouse' au mieux la courbe en ce point. Son équation fait intervenir le nombre dérivé.",
+        "key_concepts": [
+          { "name": "Équation", "explanation": "y = f'(a)(x - a) + f(a) tangente en a", "example": "Passe par (a, f(a)) de coefficient f'(a)" },
+          { "name": "Méthode", "explanation": "1) Calculer f'(a), 2) Calculer f(a), 3) Écrire l'équation, 4) Développer si demandé", "example": "Trois étapes" },
+          { "name": "Cas particuliers", "explanation": "Horizontale si f'(a) = 0. Verticale si lim f'(x) = ±∞", "example": "Tangente passant par origine : résoudre f'(a)(-a) + f(a) = 0" },
+          { "name": "Position relative", "explanation": "Étudier signe de f(x) - [f'(a)(x - a) + f(a)]", "example": "Dépend de la convexité" }
+        ],
+        "guided_example": {
+          "statement": "Équation tangente à f(x) = x³ en a = 1.",
+          "solution_steps": [
+            "f(1) = 1, f'(x) = 3x², f'(1) = 3",
+            "y = 3(x - 1) + 1 = 3x - 2",
+            "Tangente : y = 3x - 2"
+          ]
+        },
+        "quick_exercises": [
+          "Équation tangente à g(x) = e^x en 0",
+          "Déterminer tangentes"
+        ],
+        "common_mistakes": [
+          "Confondre f(a) et f'(a)",
+          "Oublier le terme + f(a)",
+          "Erreurs de développement"
+        ],
+        "summary": {
+          "key_concept": "Formule : y = f'(a)(x - a) + f(a)",
+          "key_method": "Tangente horizontale ⇔ f'(a) = 0",
+          "next_step": "Étudier le Théorème de Rolle"
+        }
+      }
+    },
+    {
+      "id": "MT-22",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Théorème de Rolle",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Énoncer et comprendre Rolle", "Appliquer Rolle pour existence d'extremum", "Utiliser Rolle pour solutions d'équations", "Distinguer hypothèses et conclusion"],
+      "prerequisites": ["MT-16", "MT-19"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Rolle", "théorème"],
+      "detailed_content": {
+        "introduction": "Le théorème de Rolle est un résultat fondamental sur les fonctions dérivables. Il garantit l'existence d'un point où la dérivée s'annule sous certaines conditions.",
+        "key_concepts": [
+          { "name": "Énoncé", "explanation": "Si f continue sur [a; b], dérivable sur ]a; b[, f(a) = f(b), alors ∃ c ∈ ]a; b[ tel que f'(c) = 0", "example": "Tangente horizontale garantie" },
+          { "name": "Interprétation", "explanation": "Si courbe part de A et revient à même hauteur en B, existe tangente horizontale entre A et B", "example": "Extremum garanti" },
+          { "name": "Conditions", "explanation": "3 hypothèses nécessaires : continuité, dérivabilité, f(a) = f(b)", "example": "Toutes doivent être vérifiées" },
+          { "name": "Applications", "explanation": "Prouver existence solution f'(x) = 0, encadrer racines, montrer au plus n solutions", "example": "Étude de f'" }
+        ],
+        "guided_example": {
+          "statement": "f(x) = x² - 1 sur [-1; 1] : ∃ c ∈ ]-1; 1[ tel que f'(c) = 0 ?",
+          "solution_steps": [
+            "f polynômiale : continue sur [-1; 1], dérivable sur ]-1; 1[",
+            "f(-1) = 0, f(1) = 0, f(a) = f(b)",
+            "Rolle : ∃ c ∈ ]-1; 1[, f'(c) = 0",
+            "f'(0) = 0"
+          ]
+        },
+        "quick_exercises": [
+          "Montrer que h(x) = sin(x) sur [0; π] vérifie Rolle",
+          "Appliquer le théorème de Rolle"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier les 3 hypothèses",
+          "Confondre Rolle et TVI",
+          "Appliquer sans f(a) = f(b)"
+        ],
+        "summary": {
+          "key_concept": "3 hypothèses : continue, dérivable, f(a) = f(b). Conclusion : ∃ c, f'(c) = 0",
+          "key_method": "Ne donne pas valeur de c (seulement existence)",
+          "next_step": "Étudier le TAF"
+        }
+      }
+    },
+    {
+      "id": "MT-23",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Théorème des Accroissements Finis (TAF)",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 130,
+      "objectives": ["Énoncer et comprendre le TAF", "Appliquer le TAF pour encadrer", "Utiliser TAF pour inégalités", "Relier TAF et taux d'accroissement"],
+      "prerequisites": ["MT-22"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["TAF", "accroissements finis"],
+      "detailed_content": {
+        "introduction": "Le Théorème des Accroissements Finis (TAF) est une généralisation du théorème de Rolle. Il relie la variation d'une fonction à sa dérivée.",
+        "key_concepts": [
+          { "name": "Énoncé TAF", "explanation": "Si f continue sur [a; b] et dérivable sur ]a; b[, alors ∃ c ∈ ]a; b[ tel que f'(c) = [f(b) - f(a)] / (b - a)", "example": "Taux instantané = taux moyen" },
+          { "name": "Interprétation", "explanation": "Existe point où tangente parallèle à corde [AB]", "example": "Pente corde = f'(c)" },
+          { "name": "Inégalité", "explanation": "Si |f'(x)| ≤ M alors |f(b) - f(a)| ≤ M |b - a|", "example": "Encadrer f(b)" },
+          { "name": "Applications", "explanation": "Prouver inégalités, encadrer valeurs, montrer fonction constante si f' = 0", "example": "Fonction lipschitzienne" }
+        ],
+        "guided_example": {
+          "statement": "Montrer que ln(1 + x) ≤ x pour x > 0.",
+          "solution_steps": [
+            "Soit f(t) = ln(1 + t) sur [0; x]",
+            "TAF : ∃ c ∈ ]0; x[, f'(c) = [f(x) - f(0)] / x",
+            "f'(c) = 1/(1+c) < 1, donc ln(1+x)/x < 1",
+            "ln(1+x) < x"
+          ]
+        },
+        "quick_exercises": [
+          "Montrer que |sin(b) - sin(a)| ≤ |b - a|",
+          "Utiliser l'inégalité des accroissements finis"
+        ],
+        "common_mistakes": [
+          "Confondre TAF et Rolle",
+          "Oublier hypothèses",
+          "Mal appliquer l'inégalité"
+        ],
+        "summary": {
+          "key_concept": "TAF : f'(c) = [f(b) - f(a)] / (b - a). Inégalité : |f'| ≤ M ⇒ |f(b) - f(a)| ≤ M|b - a|",
+          "key_method": "Utile pour encadrer et prouver inégalités",
+          "next_step": "Étudier la convexité"
+        }
+      }
+    },
+    {
+      "id": "MT-24",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Convexité - Définition et propriétés",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir fonction convexe et concave", "Utiliser f'' pour convexité", "Interpréter graphiquement", "Appliquer les propriétés"],
+      "prerequisites": ["MT-20"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["convexité", "concavité"],
+      "detailed_content": {
+        "introduction": "La convexité décrit la courbure d'une fonction. Une fonction convexe a une courbe 'tournée vers le haut', tandis qu'une fonction concave est 'tournée vers le bas'.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Convexe : courbe sous les cordes. Concave : au-dessus des cordes", "example": "Convexe = U, concave = ∩" },
+          { "name": "Inégalité", "explanation": "f(tx + (1-t)y) ≤ tf(x) + (1-t)f(y)", "example": "Inégalité de Jensen" },
+          { "name": "Critère f''", "explanation": "f convexe ⇔ f'' ≥ 0, f concave ⇔ f'' ≤ 0", "example": "Plus pratique" },
+          { "name": "Position tangentes", "explanation": "Convexe : courbe au-dessus des tangentes. Concave : en-dessous", "example": "Caractérisation" }
+        ],
+        "guided_example": {
+          "statement": "Étudier convexité de f(x) = e^x.",
+          "solution_steps": [
+            "f'(x) = e^x, f''(x) = e^x > 0 sur ℝ",
+            "Donc f strictement convexe sur ℝ",
+            "Courbe au-dessus des tangentes"
+          ]
+        },
+        "quick_exercises": [
+          "Étudier convexité de g(x) = -x² + 2x",
+          "Utiliser f'' pour déterminer convexité"
+        ],
+        "common_mistakes": [
+          "Confondre convexe et concave",
+          "Oublier de calculer f''",
+          "Mal interpréter le signe"
+        ],
+        "summary": {
+          "key_concept": "f'' > 0 ⇒ convexe (U). f'' < 0 ⇒ concave (∩)",
+          "key_method": "Calculer f'' et étudier son signe",
+          "next_step": "Étudier les points d'inflexion"
+        }
+      }
+    },
+    {
+      "id": "MT-25",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Points d'inflexion",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir un point d'inflexion", "Déterminer les points d'inflexion", "Interpréter graphiquement", "Relier à changement de convexité"],
+      "prerequisites": ["MT-24"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["inflexion", "point"],
+      "detailed_content": {
+        "introduction": "Un point d'inflexion est un point où la courbe change de courbure : elle passe de convexe à concave ou inversement. C'est un concept important pour l'étude graphique.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Point où f'' change de signe, changement de convexité", "example": "Tangente traverse la courbe" },
+          { "name": "Condition nécessaire", "explanation": "Si point d'inflexion et f dérivable : f''(a) = 0 (mais pas suffisant)", "example": "Il faut changement de signe" },
+          { "name": "Méthode", "explanation": "1) Calculer f'', 2) Résoudre f''(x) = 0, 3) Étudier signe de f'' autour, 4) Si changement : point d'inflexion", "example": "Changement de signe essentiel" },
+          { "name": "Interprétation", "explanation": "Tangente traverse la courbe, courbure change", "example": "Retournement" }
+        ],
+        "guided_example": {
+          "statement": "Points d'inflexion de f(x) = x³.",
+          "solution_steps": [
+            "f'(x) = 3x², f''(x) = 6x",
+            "f''(0) = 0",
+            "f'' < 0 pour x < 0, f'' > 0 pour x > 0",
+            "Changement : point d'inflexion en 0"
+          ]
+        },
+        "quick_exercises": [
+          "Points d'inflexion de g(x) = x⁴ - 6x²",
+          "Étudier changements de convexité"
+        ],
+        "common_mistakes": [
+          "Penser que f''(a) = 0 suffit",
+          "Oublier de calculer l'ordonnée",
+          "Ne pas vérifier changement de signe"
+        ],
+        "summary": {
+          "key_concept": "Point d'inflexion ⇔ f'' change de signe",
+          "key_method": "Vérifier changement de signe",
+          "next_step": "Mener étude complète de fonction"
+        }
+      }
+    },
+    {
+      "id": "MT-26",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Étude complète de fonction",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 130,
+      "objectives": ["Mener une étude complète", "Organiser méthodiquement", "Synthétiser informations", "Tracer courbe représentative"],
+      "prerequisites": ["MT-16", "MT-20", "MT-21", "MT-24", "MT-25"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["étude", "fonction"],
+      "detailed_content": {
+        "introduction": "L'étude complète d'une fonction consiste à déterminer toutes ses propriétés : domaine, limites, variations, convexité, points remarquables. C'est une synthèse de toutes les notions vues.",
+        "key_concepts": [
+          { "name": "Plan d'étude", "explanation": "1) Domaine, 2) Limites/asymptotes, 3) Dérivée/variations, 4) Convexité/inflexion, 5) Points remarquables, 6) Tableau complet, 7) Courbe", "example": "Méthodologie" },
+          { "name": "Domaine", "explanation": "Chercher restrictions : dénominateur, ln, racine, domaine composées", "example": "Ensemble de définition" },
+          { "name": "Tableau", "explanation": "x, limites, signe f', f, signe f'', convexité", "example": "Synthèse visuelle" },
+          { "name": "Courbe", "explanation": "Utiliser asymptotes, points remarquables, variation, convexité", "example": "Tracer précisément" }
+        ],
+        "guided_example": {
+          "statement": "Étude f(x) = x² - 4x + 3.",
+          "solution_steps": [
+            "Df = ℝ. lim(x→±∞) = +∞",
+            "f'(x) = 2x - 4, f'(2) = 0, minimum en x = 2",
+            "Tableau de variation, courbe parabolique"
+          ]
+        },
+        "quick_exercises": [
+          "Étude complète de g(x) = e^x / x",
+          "Mener une étude méthodique"
+        ],
+        "common_mistakes": [
+          "Oublier restrictions sur domaine",
+          "Ne pas étudier toutes limites",
+          "Tableau incomplet",
+          "Courbe contradictoire"
+        ],
+        "summary": {
+          "key_concept": "Plan : domaine, limites, dérivée, variations, convexité",
+          "key_method": "Tableau de variation = synthèse visuelle",
+          "next_step": "Synthèse finale du chapitre"
+        }
+      }
+    },
+    {
+      "id": "MT-27",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Continuité & Dérivabilité",
+      "title": "Synthèse - Continuité et Dérivabilité",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 130,
+      "objectives": ["Récapituler concepts", "Établir liens entre notions", "Résoudre problèmes de synthèse", "Appliquer théorèmes"],
+      "prerequisites": ["MT-16", "MT-17", "MT-18", "MT-19", "MT-20", "MT-21", "MT-22", "MT-23", "MT-24", "MT-25", "MT-26"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "continuité", "dérivabilité"],
+      "detailed_content": {
+        "introduction": "Cette leçon de synthèse récapitule toutes les notions de continuité et dérivabilité, et montre comment elles s'articulent dans la résolution de problèmes complexes.",
+        "key_concepts": [
+          { "name": "Hiérarchie", "explanation": "Dérivable ⇒ continue. TVI (continuité). Rolle (dérivabilité). TAF (variation/dérivée)", "example": "Liens entre notions" },
+          { "name": "Récapitulatif", "explanation": "TVI : existence solutions. Rolle : ∃ c, f'(c) = 0. TAF : variation/dérivée. Convexité : f''", "example": "Panorama théorèmes" },
+          { "name": "Méthodologie", "explanation": "Existence : TVI. Unicité : monotonie. Encadrer : TAF. Variations : f'. Convexité : f''", "example": "Approche méthodique" },
+          { "name": "Erreurs", "explanation": "Confondre continuité/dérivabilité, oublier hypothèses, penser TVI donne unicité, courbe contradictoire", "example": "À éviter" }
+        ],
+        "guided_example": {
+          "statement": "f(x) = x³ - 3x + 1 : montrer f(x) = 0 admet exactement 3 solutions.",
+          "solution_steps": [
+            "Existence par TVI : 3 changements de signe",
+            "Unicité par monotonie stricte sur intervalles",
+            "Total : exactement 3 solutions"
+          ]
+        },
+        "quick_exercises": [
+          "Étude complète f(x) = x + 1/x",
+          "Problèmes de synthèse complexes"
+        ],
+        "common_mistakes": [
+          "Toutes les erreurs des leçons précédentes",
+          "Manquer de rigueur",
+          "Ne pas vérifier cohérence"
+        ],
+        "summary": {
+          "key_concept": "Plan : domaine, limites, asymptotes, dérivée, variations, convexité",
+          "key_method": "Rigueur et méthode essentielles",
+          "next_step": "Vers autres chapitres de Terminale"
+        }
+      }
+    }
+  ]
+}
+

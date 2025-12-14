@@ -1,0 +1,342 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-51 à M1-60",
+    "chapters": [
+      "Géométrie Plane"
+    ],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Chapitre complet Géométrie Plane (M1-51 à M1-60)"
+  },
+  "lessons": [
+    {
+      "id": "M1-51",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Produit scalaire - Définition géométrique",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir le produit scalaire avec la projection",
+        "Calculer u·v = ||u|| × ||v|| × cos(θ)",
+        "Interpréter géométriquement"
+      ],
+      "prerequisites": [
+        "Vecteurs",
+        "Norme",
+        "Angle",
+        "Projection"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "produit scalaire",
+        "géométrie",
+        "projection",
+        "angle"
+      ]
+    },
+    {
+      "id": "M1-52",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Produit scalaire - Expression analytique",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Calculer u·v = xx' + yy' dans un repère orthonormé",
+        "Lien entre définitions géométrique et analytique",
+        "Applications aux calculs"
+      ],
+      "prerequisites": [
+        "Coordonnées de vecteurs",
+        "Repère orthonormé",
+        "Produit scalaire géométrique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "produit scalaire",
+        "coordonnées",
+        "analytique",
+        "calcul"
+      ]
+    },
+    {
+      "id": "M1-53",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Propriétés du produit scalaire",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Utiliser la bilinéarité et la symétrie",
+        "Formules de polarisation et de la médiane",
+        "Développer (u+v)·(u+v)"
+      ],
+      "prerequisites": [
+        "Produit scalaire",
+        "Calcul vectoriel",
+        "Identités"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "propriétés",
+        "bilinéarité",
+        "polarisation",
+        "calcul"
+      ]
+    },
+    {
+      "id": "M1-54",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Orthogonalité et produit scalaire",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": [
+        "Caractériser l'orthogonalité : u⊥v ⟺ u·v = 0",
+        "Vecteurs perpendiculaires dans un repère",
+        "Applications géométriques"
+      ],
+      "prerequisites": [
+        "Produit scalaire",
+        "Orthogonalité",
+        "Vecteurs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "orthogonalité",
+        "perpendiculaire",
+        "produit nul",
+        "géométrie"
+      ]
+    },
+    {
+      "id": "M1-55",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Calculs de distances avec le produit scalaire",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Calculer ||u|| = √(u·u)",
+        "Distance AB = ||AB||",
+        "Applications aux problèmes métriques"
+      ],
+      "prerequisites": [
+        "Produit scalaire",
+        "Norme",
+        "Distance"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "distance",
+        "norme",
+        "métrique",
+        "calcul"
+      ]
+    },
+    {
+      "id": "M1-56",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Équation de cercle",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Établir l'équation (x-a)² + (y-b)² = R²",
+        "Reconnaître un cercle à partir de son équation",
+        "Déterminer centre et rayon"
+      ],
+      "prerequisites": [
+        "Coordonnées",
+        "Distance",
+        "Équations"
+      ],
+      "content_types": [
+        "video",
+        "graphing",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "cercle",
+        "équation",
+        "centre",
+        "rayon"
+      ]
+    },
+    {
+      "id": "M1-57",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Vecteurs directeurs et normaux",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir vecteur directeur et vecteur normal à une droite",
+        "Lien avec l'orthogonalité",
+        "Applications aux équations de droites"
+      ],
+      "prerequisites": [
+        "Vecteurs",
+        "Orthogonalité",
+        "Droites"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "vecteur directeur",
+        "vecteur normal",
+        "droite",
+        "orthogonalité"
+      ]
+    },
+    {
+      "id": "M1-58",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Équations de droites - Forme cartésienne",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Établir l'équation ax + by + c = 0",
+        "Déterminer équation à partir d'un vecteur normal",
+        "Reconnaître parallélisme et perpendicularité"
+      ],
+      "prerequisites": [
+        "Vecteur normal",
+        "Coordonnées",
+        "Équations"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "équation droite",
+        "cartésien",
+        "vecteur normal",
+        "géométrie"
+      ]
+    },
+    {
+      "id": "M1-59",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Problèmes de géométrie plane",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Résoudre des problèmes complets avec produit scalaire",
+        "Combiner distances, angles, orthogonalité",
+        "Démonstrations géométriques"
+      ],
+      "prerequisites": [
+        "Tout le chapitre géométrie plane",
+        "Démonstration"
+      ],
+      "content_types": [
+        "video",
+        "problem-solving",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "problèmes",
+        "géométrie",
+        "synthèse",
+        "démonstration"
+      ]
+    },
+    {
+      "id": "M1-60",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Géométrie Plane",
+      "title": "Synthèse Géométrie Plane - Révision",
+      "duration_min": 14,
+      "difficulty": 5,
+      "xp_reward": 150,
+      "objectives": [
+        "Maîtriser produit scalaire sous toutes ses formes",
+        "Résoudre problèmes complets (droites, cercles, orthogonalité)",
+        "Préparer l'évaluation"
+      ],
+      "prerequisites": [
+        "Toutes les leçons M1-51 à M1-59"
+      ],
+      "content_types": [
+        "video",
+        "synthesis",
+        "quiz",
+        "exercises"
+      ],
+      "tags": [
+        "synthèse",
+        "révision",
+        "géométrie",
+        "complet"
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+

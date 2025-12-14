@@ -1,0 +1,1424 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Mathématiques Première COMPLET",
+    "level": "Première",
+    "subject": "Mathématiques",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Second degré",
+      "Dérivation",
+      "Suites numériques",
+      "Fonction exponentielle",
+      "Géométrie dans l'espace",
+      "Probabilités"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "MATH1-EX-001",
+      "chapter": "Second degré",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Résoudre x² - 5x + 6 = 0",
+      "solution": {
+        "steps": ["Δ = b² - 4ac = 25 - 24 = 1", "x₁ = (5+1)/2 = 3", "x₂ = (5-1)/2 = 2"],
+        "final_answer": "S = {2 ; 3}"
+      },
+      "hints": ["Utiliser le discriminant Δ"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-002",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre x² + 4x + 4 = 0",
+      "solution": {
+        "steps": ["Δ = 16 - 16 = 0", "x₀ = -4/2 = -2"],
+        "final_answer": "S = {-2} (racine double)"
+      },
+      "hints": ["Δ = 0 → racine double"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-003",
+      "chapter": "Second degré",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre x² + x + 1 = 0",
+      "solution": {
+        "steps": ["Δ = 1 - 4 = -3 < 0"],
+        "final_answer": "S = ∅ (pas de solution réelle)"
+      },
+      "hints": ["Si Δ < 0 : pas de solution"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-004",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer la forme canonique de f(x) = x² - 6x + 5",
+      "solution": {
+        "steps": ["α = -b/(2a) = 3", "β = f(3) = 9 - 18 + 5 = -4", "f(x) = (x-3)² - 4"],
+        "final_answer": "f(x) = (x-3)² - 4"
+      },
+      "hints": ["Forme canonique : a(x-α)² + β"],
+      "related_lesson": "MATH1-02"
+    },
+    {
+      "id": "MATH1-EX-005",
+      "chapter": "Second degré",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Étudier le signe de x² - 4x + 3",
+      "solution": {
+        "steps": ["Racines : x₁=1, x₂=3", "a=1>0 : parabole vers le haut", "f(x)>0 si x∈]-∞;1[∪]3;+∞[", "f(x)<0 si x∈]1;3["],
+        "final_answer": ">0 sur ]-∞;1[∪]3;+∞[, <0 sur ]1;3["
+      },
+      "hints": ["Signe de ax²+bx+c dépend de a et des racines"],
+      "related_lesson": "MATH1-03"
+    },
+    {
+      "id": "MATH1-EX-006",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre l'inéquation x² - 9 < 0",
+      "solution": {
+        "steps": ["x² - 9 = (x-3)(x+3)", "Racines : -3 et 3", "a>0 : négatif entre les racines"],
+        "final_answer": "S = ]-3 ; 3["
+      },
+      "hints": ["Factoriser puis tableau de signes"],
+      "related_lesson": "MATH1-03"
+    },
+    {
+      "id": "MATH1-EX-007",
+      "chapter": "Second degré",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Trouver le sommet de la parabole y = -2x² + 8x - 3",
+      "solution": {
+        "steps": ["α = -b/(2a) = -8/(-4) = 2", "β = -2(4) + 16 - 3 = 5", "Sommet : S(2 ; 5)"],
+        "final_answer": "Sommet S(2 ; 5)"
+      },
+      "hints": ["α = -b/(2a), β = f(α)"],
+      "related_lesson": "MATH1-02"
+    },
+    {
+      "id": "MATH1-EX-008",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre 2x² - 8 = 0",
+      "solution": {
+        "steps": ["2x² = 8", "x² = 4", "x = ±2"],
+        "final_answer": "S = {-2 ; 2}"
+      },
+      "hints": ["Équation incomplète"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-009",
+      "chapter": "Second degré",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre x² - 2x - 8 = 0 par factorisation",
+      "solution": {
+        "steps": ["Chercher deux nombres : somme=2, produit=-8", "4 et -2", "(x-4)(x+2) = 0"],
+        "final_answer": "S = {-2 ; 4}"
+      },
+      "hints": ["Factoriser"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-010",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Pour quelle(s) valeur(s) de x, x² + 6x + 9 = 0 ?",
+      "solution": {
+        "steps": ["Reconnaître (x+3)²", "(x+3)² = 0", "x = -3"],
+        "final_answer": "x = -3"
+      },
+      "hints": ["Identité remarquable"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-011",
+      "chapter": "Dérivation",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer la dérivée de f(x) = 3x² + 5x - 2",
+      "solution": {
+        "steps": ["f'(x) = 6x + 5"],
+        "final_answer": "f'(x) = 6x + 5"
+      },
+      "hints": ["(ax^n)' = nax^(n-1)"],
+      "related_lesson": "MATH1-11"
+    },
+    {
+      "id": "MATH1-EX-012",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer f'(x) si f(x) = (2x+1)(x-3)",
+      "solution": {
+        "steps": ["f'(x) = u'v + uv'", "u'=2, v'=1", "f'(x) = 2(x-3) + (2x+1)·1", "f'(x) = 4x - 5"],
+        "final_answer": "f'(x) = 4x - 5"
+      },
+      "hints": ["Formule (uv)' = u'v + uv'"],
+      "related_lesson": "MATH1-12"
+    },
+    {
+      "id": "MATH1-EX-013",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer f'(x) si f(x) = (x²+1)/(x+2)",
+      "solution": {
+        "steps": ["(u/v)' = (u'v-uv')/v²", "u'=2x, v'=1", "f'(x) = [2x(x+2)-(x²+1)]/(x+2)²", "f'(x) = (x²+4x-1)/(x+2)²"],
+        "final_answer": "f'(x) = (x²+4x-1)/(x+2)²"
+      },
+      "hints": ["Formule (u/v)'"],
+      "related_lesson": "MATH1-12"
+    },
+    {
+      "id": "MATH1-EX-014",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Déterminer l'équation de la tangente à f(x)=x² au point d'abscisse 2",
+      "solution": {
+        "steps": ["f(2) = 4", "f'(x) = 2x, f'(2) = 4", "y = f'(a)(x-a) + f(a)", "y = 4(x-2) + 4 = 4x - 4"],
+        "final_answer": "y = 4x - 4"
+      },
+      "hints": ["y = f'(a)(x-a) + f(a)"],
+      "related_lesson": "MATH1-13"
+    },
+    {
+      "id": "MATH1-EX-015",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Étudier les variations de f(x) = x³ - 3x + 1",
+      "solution": {
+        "steps": ["f'(x) = 3x² - 3 = 3(x²-1)", "f'(x) = 0 ⟺ x = ±1", "f'(x)>0 si x<-1 ou x>1", "f décroissante sur [-1;1], croissante ailleurs"],
+        "final_answer": "Croissante sur ]-∞;-1]∪[1;+∞[, décroissante sur [-1;1]"
+      },
+      "hints": ["Signe de f'(x)"],
+      "related_lesson": "MATH1-14"
+    },
+    {
+      "id": "MATH1-EX-016",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = √x",
+      "solution": {
+        "steps": ["f(x) = x^(1/2)", "f'(x) = (1/2)x^(-1/2)", "f'(x) = 1/(2√x)"],
+        "final_answer": "f'(x) = 1/(2√x)"
+      },
+      "hints": ["(x^n)' = nx^(n-1)"],
+      "related_lesson": "MATH1-11"
+    },
+    {
+      "id": "MATH1-EX-017",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dériver f(x) = (3x-1)⁵",
+      "solution": {
+        "steps": ["f(x) = u⁵ avec u=3x-1", "f'(x) = 5u⁴·u'", "u'=3", "f'(x) = 15(3x-1)⁴"],
+        "final_answer": "f'(x) = 15(3x-1)⁴"
+      },
+      "hints": ["Dérivée composée"],
+      "related_lesson": "MATH1-12"
+    },
+    {
+      "id": "MATH1-EX-018",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer f'(1) si f(x) = x³ - 2x² + x",
+      "solution": {
+        "steps": ["f'(x) = 3x² - 4x + 1", "f'(1) = 3 - 4 + 1 = 0"],
+        "final_answer": "f'(1) = 0"
+      },
+      "hints": ["Dériver puis évaluer"],
+      "related_lesson": "MATH1-11"
+    },
+    {
+      "id": "MATH1-EX-019",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Trouver les extremums de f(x) = -x² + 4x + 1",
+      "solution": {
+        "steps": ["f'(x) = -2x + 4", "f'(x) = 0 ⟺ x = 2", "f(2) = -4 + 8 + 1 = 5", "Maximum en (2;5)"],
+        "final_answer": "Maximum : (2 ; 5)"
+      },
+      "hints": ["f'(x)=0"],
+      "related_lesson": "MATH1-14"
+    },
+    {
+      "id": "MATH1-EX-020",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = 1/x²",
+      "solution": {
+        "steps": ["f(x) = x^(-2)", "f'(x) = -2x^(-3)", "f'(x) = -2/x³"],
+        "final_answer": "f'(x) = -2/x³"
+      },
+      "hints": ["(x^n)' = nx^(n-1)"],
+      "related_lesson": "MATH1-11"
+    },
+    {
+      "id": "MATH1-EX-021",
+      "chapter": "Suites",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer u₃ si uₙ = 2n + 3",
+      "solution": {
+        "steps": ["u₃ = 2×3 + 3 = 9"],
+        "final_answer": "u₃ = 9"
+      },
+      "hints": ["Remplacer n par 3"],
+      "related_lesson": "MATH1-21"
+    },
+    {
+      "id": "MATH1-EX-022",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite arithmétique : u₀=5, r=3. Calculer u₁₀",
+      "solution": {
+        "steps": ["uₙ = u₀ + nr", "u₁₀ = 5 + 10×3 = 35"],
+        "final_answer": "u₁₀ = 35"
+      },
+      "hints": ["uₙ = u₀ + nr"],
+      "related_lesson": "MATH1-22"
+    },
+    {
+      "id": "MATH1-EX-023",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Suite géométrique : u₀=2, q=3. Calculer u₅",
+      "solution": {
+        "steps": ["uₙ = u₀ × qⁿ", "u₅ = 2 × 3⁵", "u₅ = 2 × 243 = 486"],
+        "final_answer": "u₅ = 486"
+      },
+      "hints": ["uₙ = u₀ × qⁿ"],
+      "related_lesson": "MATH1-23"
+    },
+    {
+      "id": "MATH1-EX-024",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Somme des 10 premiers termes de la suite arithmétique u₀=1, r=2",
+      "solution": {
+        "steps": ["S = n(u₀+uₙ₋₁)/2", "u₉ = 1 + 9×2 = 19", "S₁₀ = 10(1+19)/2 = 100"],
+        "final_answer": "S₁₀ = 100"
+      },
+      "hints": ["Formule somme arithmétique"],
+      "related_lesson": "MATH1-22"
+    },
+    {
+      "id": "MATH1-EX-025",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Somme S = 1 + 2 + 4 + 8 + ... + 512",
+      "solution": {
+        "steps": ["Suite géométrique : u₀=1, q=2", "512 = 2⁹ donc 10 termes", "S = u₀(1-qⁿ)/(1-q)", "S = 1(1-2¹⁰)/(1-2) = 1023"],
+        "final_answer": "S = 1023"
+      },
+      "hints": ["Somme géométrique"],
+      "related_lesson": "MATH1-23"
+    },
+    {
+      "id": "MATH1-EX-026",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite définie par uₙ₊₁ = 2uₙ + 1, u₀=1. Calculer u₃",
+      "solution": {
+        "steps": ["u₁ = 2×1+1 = 3", "u₂ = 2×3+1 = 7", "u₃ = 2×7+1 = 15"],
+        "final_answer": "u₃ = 15"
+      },
+      "hints": ["Récurrence"],
+      "related_lesson": "MATH1-21"
+    },
+    {
+      "id": "MATH1-EX-027",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Montrer par récurrence que uₙ = 3n pour tout n si u₀=0 et uₙ₊₁=uₙ+3",
+      "solution": {
+        "steps": ["Initialisation : u₀=0=3×0 ✓", "Hérédité : si uₙ=3n alors uₙ₊₁=3n+3=3(n+1) ✓", "Conclusion : vrai pour tout n"],
+        "final_answer": "Démontré par récurrence"
+      },
+      "hints": ["Initialisation puis hérédité"],
+      "related_lesson": "MATH1-24"
+    },
+    {
+      "id": "MATH1-EX-028",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite arithmétique : u₂=7, u₅=16. Trouver u₀ et r",
+      "solution": {
+        "steps": ["u₅-u₂ = 3r", "16-7 = 3r donc r=3", "u₂ = u₀+2r donc 7=u₀+6", "u₀=1"],
+        "final_answer": "u₀=1, r=3"
+      },
+      "hints": ["Différence pour trouver r"],
+      "related_lesson": "MATH1-22"
+    },
+    {
+      "id": "MATH1-EX-029",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Suite géométrique : u₁=6, u₃=54. Trouver q et u₀",
+      "solution": {
+        "steps": ["u₃/u₁ = q²", "54/6 = q² donc q²=9", "q=3 ou q=-3", "Si q=3 : u₀=2"],
+        "final_answer": "q=3, u₀=2 (ou q=-3, u₀=-2)"
+      },
+      "hints": ["Rapport pour trouver q"],
+      "related_lesson": "MATH1-23"
+    },
+    {
+      "id": "MATH1-EX-030",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la limite de uₙ = (2n+1)/(n+3)",
+      "solution": {
+        "steps": ["Diviser par n : uₙ = (2+1/n)/(1+3/n)", "Quand n→+∞ : 1/n→0", "lim uₙ = 2"],
+        "final_answer": "lim uₙ = 2"
+      },
+      "hints": ["Diviser par le plus haut degré"],
+      "related_lesson": "MATH1-25"
+    },
+    {
+      "id": "MATH1-EX-031",
+      "chapter": "Exponentielle",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer e⁰",
+      "solution": {
+        "steps": ["e⁰ = 1"],
+        "final_answer": "e⁰ = 1"
+      },
+      "hints": ["a⁰ = 1"],
+      "related_lesson": "MATH1-31"
+    },
+    {
+      "id": "MATH1-EX-032",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier e³ × e⁵",
+      "solution": {
+        "steps": ["e³ × e⁵ = e³⁺⁵ = e⁸"],
+        "final_answer": "e⁸"
+      },
+      "hints": ["eᵃ × eᵇ = eᵃ⁺ᵇ"],
+      "related_lesson": "MATH1-31"
+    },
+    {
+      "id": "MATH1-EX-033",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre e²ˣ = e⁶",
+      "solution": {
+        "steps": ["Même base : 2x = 6", "x = 3"],
+        "final_answer": "x = 3"
+      },
+      "hints": ["eᵃ = eᵇ ⟺ a = b"],
+      "related_lesson": "MATH1-32"
+    },
+    {
+      "id": "MATH1-EX-034",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = e³ˣ",
+      "solution": {
+        "steps": ["f'(x) = 3e³ˣ"],
+        "final_answer": "f'(x) = 3e³ˣ"
+      },
+      "hints": ["(eᵘ)' = u'eᵘ"],
+      "related_lesson": "MATH1-33"
+    },
+    {
+      "id": "MATH1-EX-035",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre eˣ > 10",
+      "solution": {
+        "steps": ["Prendre ln : x > ln(10)", "x > 2,3"],
+        "final_answer": "x > ln(10) ≈ 2,3"
+      },
+      "hints": ["Utiliser ln"],
+      "related_lesson": "MATH1-32"
+    },
+    {
+      "id": "MATH1-EX-036",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la limite de eˣ quand x→+∞",
+      "solution": {
+        "steps": ["lim(x→+∞) eˣ = +∞"],
+        "final_answer": "+∞"
+      },
+      "hints": ["Croissance exponentielle"],
+      "related_lesson": "MATH1-34"
+    },
+    {
+      "id": "MATH1-EX-037",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dériver f(x) = x²eˣ",
+      "solution": {
+        "steps": ["(uv)' = u'v + uv'", "f'(x) = 2xeˣ + x²eˣ", "f'(x) = (2x+x²)eˣ"],
+        "final_answer": "f'(x) = x(2+x)eˣ"
+      },
+      "hints": ["Produit"],
+      "related_lesson": "MATH1-33"
+    },
+    {
+      "id": "MATH1-EX-038",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier (e²)³",
+      "solution": {
+        "steps": ["(e²)³ = e²ˣ³ = e⁶"],
+        "final_answer": "e⁶"
+      },
+      "hints": ["(eᵃ)ᵇ = eᵃᵇ"],
+      "related_lesson": "MATH1-31"
+    },
+    {
+      "id": "MATH1-EX-039",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre e²ˣ - 5eˣ + 6 = 0",
+      "solution": {
+        "steps": ["Poser X = eˣ", "X² - 5X + 6 = 0", "X=2 ou X=3", "eˣ=2 → x=ln2", "eˣ=3 → x=ln3"],
+        "final_answer": "x = ln2 ou x = ln3"
+      },
+      "hints": ["Changement de variable"],
+      "related_lesson": "MATH1-32"
+    },
+    {
+      "id": "MATH1-EX-040",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer e^(ln5)",
+      "solution": {
+        "steps": ["e^(ln a) = a", "e^(ln5) = 5"],
+        "final_answer": "5"
+      },
+      "hints": ["e et ln réciproques"],
+      "related_lesson": "MATH1-31"
+    },
+    {
+      "id": "MATH1-EX-041",
+      "chapter": "Géométrie",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer le produit scalaire de u⃗(2,3) et v⃗(1,4)",
+      "solution": {
+        "steps": ["u⃗·v⃗ = 2×1 + 3×4", "= 2 + 12 = 14"],
+        "final_answer": "u⃗·v⃗ = 14"
+      },
+      "hints": ["u⃗·v⃗ = x₁x₂ + y₁y₂"],
+      "related_lesson": "MATH1-41"
+    },
+    {
+      "id": "MATH1-EX-042",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Vérifier si u⃗(3,2) et v⃗(-4,6) sont orthogonaux",
+      "solution": {
+        "steps": ["u⃗·v⃗ = 3×(-4) + 2×6", "= -12 + 12 = 0", "Orthogonaux"],
+        "final_answer": "Oui, orthogonaux"
+      },
+      "hints": ["Orthogonaux si u⃗·v⃗ = 0"],
+      "related_lesson": "MATH1-41"
+    },
+    {
+      "id": "MATH1-EX-043",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Trouver l'équation de la droite passant par A(1,2) et B(3,6)",
+      "solution": {
+        "steps": ["Coefficient directeur : m = (6-2)/(3-1) = 2", "y = 2x + b", "2 = 2×1 + b donc b=0", "y = 2x"],
+        "final_answer": "y = 2x"
+      },
+      "hints": ["y = mx + b"],
+      "related_lesson": "MATH1-42"
+    },
+    {
+      "id": "MATH1-EX-044",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la distance AB avec A(1,2) et B(4,6)",
+      "solution": {
+        "steps": ["AB = √[(4-1)² + (6-2)²]", "= √(9+16) = √25 = 5"],
+        "final_answer": "AB = 5"
+      },
+      "hints": ["d = √[(x₂-x₁)² + (y₂-y₁)²]"],
+      "related_lesson": "MATH1-43"
+    },
+    {
+      "id": "MATH1-EX-045",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer si les droites y=2x+1 et y=-½x+3 sont perpendiculaires",
+      "solution": {
+        "steps": ["m₁ = 2, m₂ = -½", "m₁ × m₂ = 2 × (-½) = -1", "Perpendiculaires"],
+        "final_answer": "Oui, perpendiculaires"
+      },
+      "hints": ["Perpendiculaires si m₁m₂ = -1"],
+      "related_lesson": "MATH1-42"
+    },
+    {
+      "id": "MATH1-EX-046",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Trouver le milieu du segment [AB] avec A(2,3) et B(6,7)",
+      "solution": {
+        "steps": ["I((x₁+x₂)/2, (y₁+y₂)/2)", "I((2+6)/2, (3+7)/2)", "I(4, 5)"],
+        "final_answer": "I(4 ; 5)"
+      },
+      "hints": ["Milieu = moyenne des coordonnées"],
+      "related_lesson": "MATH1-43"
+    },
+    {
+      "id": "MATH1-EX-047",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la norme du vecteur u⃗(3,-4)",
+      "solution": {
+        "steps": ["||u⃗|| = √(x² + y²)", "||u⃗|| = √(9+16) = √25 = 5"],
+        "final_answer": "||u⃗|| = 5"
+      },
+      "hints": ["||u⃗|| = √(x²+y²)"],
+      "related_lesson": "MATH1-43"
+    },
+    {
+      "id": "MATH1-EX-048",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Les points A(1,2), B(3,4), C(5,6) sont-ils alignés ?",
+      "solution": {
+        "steps": ["AB⃗(2,2), AC⃗(4,4)", "AC⃗ = 2AB⃗", "Colinéaires donc alignés"],
+        "final_answer": "Oui, alignés"
+      },
+      "hints": ["Alignés si vecteurs colinéaires"],
+      "related_lesson": "MATH1-44"
+    },
+    {
+      "id": "MATH1-EX-049",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équation du cercle de centre O(0,0) et rayon 5",
+      "solution": {
+        "steps": ["(x-a)² + (y-b)² = r²", "x² + y² = 25"],
+        "final_answer": "x² + y² = 25"
+      },
+      "hints": ["Équation cercle"],
+      "related_lesson": "MATH1-45"
+    },
+    {
+      "id": "MATH1-EX-050",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Vecteur directeur de y = 3x - 2",
+      "solution": {
+        "steps": ["Pente m = 3", "Vecteur directeur : u⃗(1,3)"],
+        "final_answer": "u⃗(1 ; 3)"
+      },
+      "hints": ["u⃗(1, m)"],
+      "related_lesson": "MATH1-42"
+    },
+    {
+      "id": "MATH1-EX-051",
+      "chapter": "Probabilités",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Lancer d'un dé : probabilité d'obtenir un 4",
+      "solution": {
+        "steps": ["P(4) = 1/6"],
+        "final_answer": "P = 1/6"
+      },
+      "hints": ["P = cas favorables / cas possibles"],
+      "related_lesson": "MATH1-51"
+    },
+    {
+      "id": "MATH1-EX-052",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Deux dés : probabilité d'obtenir une somme de 7",
+      "solution": {
+        "steps": ["Cas favorables : (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = 6", "Total : 36", "P = 6/36 = 1/6"],
+        "final_answer": "P = 1/6"
+      },
+      "hints": ["Compter les couples"],
+      "related_lesson": "MATH1-51"
+    },
+    {
+      "id": "MATH1-EX-053",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une urne contient 5 boules rouges et 3 vertes. Tirer 2 boules successivement sans remise. P(2 rouges) ?",
+      "solution": {
+        "steps": ["P(R₁) = 5/8", "P(R₂|R₁) = 4/7", "P(R₁∩R₂) = 5/8 × 4/7 = 20/56 = 5/14"],
+        "final_answer": "P = 5/14"
+      },
+      "hints": ["Sans remise : probabilités conditionnelles"],
+      "related_lesson": "MATH1-52"
+    },
+    {
+      "id": "MATH1-EX-054",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(A) = 0,6 et P(B) = 0,4. Si A et B indépendants, P(A∩B) ?",
+      "solution": {
+        "steps": ["P(A∩B) = P(A) × P(B)", "= 0,6 × 0,4 = 0,24"],
+        "final_answer": "P(A∩B) = 0,24"
+      },
+      "hints": ["Indépendants : P(A∩B) = P(A)×P(B)"],
+      "related_lesson": "MATH1-53"
+    },
+    {
+      "id": "MATH1-EX-055",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Variable aléatoire X : P(X=0)=0,3, P(X=1)=0,5, P(X=2)=0,2. Calculer E(X)",
+      "solution": {
+        "steps": ["E(X) = 0×0,3 + 1×0,5 + 2×0,2", "= 0 + 0,5 + 0,4 = 0,9"],
+        "final_answer": "E(X) = 0,9"
+      },
+      "hints": ["E(X) = Σ xᵢP(X=xᵢ)"],
+      "related_lesson": "MATH1-54"
+    },
+    {
+      "id": "MATH1-EX-056",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(A∪B) si P(A)=0,5, P(B)=0,3, P(A∩B)=0,1",
+      "solution": {
+        "steps": ["P(A∪B) = P(A) + P(B) - P(A∩B)", "= 0,5 + 0,3 - 0,1 = 0,7"],
+        "final_answer": "P(A∪B) = 0,7"
+      },
+      "hints": ["Formule de Poincaré"],
+      "related_lesson": "MATH1-55"
+    },
+    {
+      "id": "MATH1-EX-057",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Loi binomiale B(10, 0,3). Calculer P(X=2)",
+      "solution": {
+        "steps": ["P(X=k) = C(n,k) × p^k × (1-p)^(n-k)", "P(X=2) = C(10,2) × 0,3² × 0,7⁸", "= 45 × 0,09 × 0,0576 ≈ 0,233"],
+        "final_answer": "P(X=2) ≈ 0,233"
+      },
+      "hints": ["Loi binomiale"],
+      "related_lesson": "MATH1-56"
+    },
+    {
+      "id": "MATH1-EX-058",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(Ā) si P(A) = 0,35",
+      "solution": {
+        "steps": ["P(Ā) = 1 - P(A)", "= 1 - 0,35 = 0,65"],
+        "final_answer": "P(Ā) = 0,65"
+      },
+      "hints": ["Événement contraire"],
+      "related_lesson": "MATH1-51"
+    },
+    {
+      "id": "MATH1-EX-059",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Arbre : P(A)=0,4, P(B|A)=0,7, P(B|Ā)=0,3. Calculer P(B)",
+      "solution": {
+        "steps": ["P(B) = P(A)×P(B|A) + P(Ā)×P(B|Ā)", "= 0,4×0,7 + 0,6×0,3", "= 0,28 + 0,18 = 0,46"],
+        "final_answer": "P(B) = 0,46"
+      },
+      "hints": ["Formule des probabilités totales"],
+      "related_lesson": "MATH1-52"
+    },
+    {
+      "id": "MATH1-EX-060",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Tirage de 2 cartes parmi 52. Combien de possibilités ?",
+      "solution": {
+        "steps": ["Combinaisons : C(52,2)", "= 52!/(2!×50!) = 52×51/2", "= 1326"],
+        "final_answer": "1326 possibilités"
+      },
+      "hints": ["C(n,k) = n!/(k!(n-k)!)"],
+      "related_lesson": "MATH1-57"
+    },
+    {
+      "id": "MATH1-EX-061",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre -x² + 6x - 5 = 0",
+      "solution": {
+        "steps": ["Δ = 36 - 20 = 16", "x₁ = (6+4)/2 = 5", "x₂ = (6-4)/2 = 1"],
+        "final_answer": "S = {1 ; 5}"
+      },
+      "hints": ["Attention au signe de a"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-062",
+      "chapter": "Second degré",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Pour quelles valeurs de m l'équation x² - 2x + m = 0 a-t-elle deux solutions ?",
+      "solution": {
+        "steps": ["Δ = 4 - 4m", "Deux solutions si Δ > 0", "4 - 4m > 0", "m < 1"],
+        "final_answer": "m < 1"
+      },
+      "hints": ["Δ > 0"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-063",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = x⁴ - 3x² + 2",
+      "solution": {
+        "steps": ["f'(x) = 4x³ - 6x"],
+        "final_answer": "f'(x) = 4x³ - 6x"
+      },
+      "hints": ["Dériver terme à terme"],
+      "related_lesson": "MATH1-11"
+    },
+    {
+      "id": "MATH1-EX-064",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dériver f(x) = √(2x+1)",
+      "solution": {
+        "steps": ["f(x) = (2x+1)^(1/2)", "f'(x) = (1/2)(2x+1)^(-1/2) × 2", "f'(x) = 1/√(2x+1)"],
+        "final_answer": "f'(x) = 1/√(2x+1)"
+      },
+      "hints": ["Dérivée composée"],
+      "related_lesson": "MATH1-12"
+    },
+    {
+      "id": "MATH1-EX-065",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite arithmétique : u₁=3, u₅=11. Trouver r et u₀",
+      "solution": {
+        "steps": ["u₅ = u₁ + 4r", "11 = 3 + 4r donc r=2", "u₀ = u₁ - r = 3 - 2 = 1"],
+        "final_answer": "r=2, u₀=1"
+      },
+      "hints": ["uₙ = u₀ + nr"],
+      "related_lesson": "MATH1-22"
+    },
+    {
+      "id": "MATH1-EX-066",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer Σ(k=1 à 100) k",
+      "solution": {
+        "steps": ["Somme = n(n+1)/2", "= 100×101/2", "= 5050"],
+        "final_answer": "5050"
+      },
+      "hints": ["Formule de Gauss"],
+      "related_lesson": "MATH1-22"
+    },
+    {
+      "id": "MATH1-EX-067",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier e⁷/e³",
+      "solution": {
+        "steps": ["e⁷/e³ = e⁷⁻³ = e⁴"],
+        "final_answer": "e⁴"
+      },
+      "hints": ["eᵃ/eᵇ = eᵃ⁻ᵇ"],
+      "related_lesson": "MATH1-31"
+    },
+    {
+      "id": "MATH1-EX-068",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dériver f(x) = eˣ/x",
+      "solution": {
+        "steps": ["(u/v)' = (u'v-uv')/v²", "f'(x) = (eˣ×x - eˣ×1)/x²", "f'(x) = eˣ(x-1)/x²"],
+        "final_answer": "f'(x) = eˣ(x-1)/x²"
+      },
+      "hints": ["Quotient"],
+      "related_lesson": "MATH1-33"
+    },
+    {
+      "id": "MATH1-EX-069",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "u⃗(2,1) et v⃗(3,k) sont orthogonaux. Trouver k",
+      "solution": {
+        "steps": ["u⃗·v⃗ = 0", "2×3 + 1×k = 0", "6 + k = 0", "k = -6"],
+        "final_answer": "k = -6"
+      },
+      "hints": ["u⃗·v⃗ = 0"],
+      "related_lesson": "MATH1-41"
+    },
+    {
+      "id": "MATH1-EX-070",
+      "chapter": "Géométrie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Déterminer si le point M(3,5) appartient au cercle x²+y²=34",
+      "solution": {
+        "steps": ["3² + 5² = 9 + 25 = 34", "Vérifié"],
+        "final_answer": "Oui, M appartient au cercle"
+      },
+      "hints": ["Substituer les coordonnées"],
+      "related_lesson": "MATH1-45"
+    },
+    {
+      "id": "MATH1-EX-071",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un dé truqué : P(pair) = 2/3. Calculer P(impair)",
+      "solution": {
+        "steps": ["P(impair) = 1 - P(pair)", "= 1 - 2/3 = 1/3"],
+        "final_answer": "P(impair) = 1/3"
+      },
+      "hints": ["Événements complémentaires"],
+      "related_lesson": "MATH1-51"
+    },
+    {
+      "id": "MATH1-EX-072",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "X suit B(20, 0,4). Calculer E(X) et σ(X)",
+      "solution": {
+        "steps": ["E(X) = np = 20×0,4 = 8", "V(X) = np(1-p) = 20×0,4×0,6 = 4,8", "σ(X) = √4,8 ≈ 2,19"],
+        "final_answer": "E(X)=8, σ≈2,19"
+      },
+      "hints": ["Formules loi binomiale"],
+      "related_lesson": "MATH1-56"
+    },
+    {
+      "id": "MATH1-EX-073",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Somme et produit des racines de 3x² - 12x + 9 = 0",
+      "solution": {
+        "steps": ["S = -b/a = 12/3 = 4", "P = c/a = 9/3 = 3"],
+        "final_answer": "S=4, P=3"
+      },
+      "hints": ["Formules de Viète"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-074",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Trouver les points où la tangente à f(x)=x³-3x est horizontale",
+      "solution": {
+        "steps": ["f'(x) = 3x² - 3", "f'(x) = 0 ⟺ x = ±1", "Points : (-1,2) et (1,-2)"],
+        "final_answer": "x = -1 et x = 1"
+      },
+      "hints": ["Tangente horizontale si f'=0"],
+      "related_lesson": "MATH1-13"
+    },
+    {
+      "id": "MATH1-EX-075",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "uₙ = (-0,5)ⁿ. Calculer lim uₙ",
+      "solution": {
+        "steps": ["|-0,5| < 1", "lim qⁿ = 0 si |q| < 1"],
+        "final_answer": "lim uₙ = 0"
+      },
+      "hints": ["|q| < 1 → limite 0"],
+      "related_lesson": "MATH1-25"
+    },
+    {
+      "id": "MATH1-EX-076",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre e^(2x-1) = e³",
+      "solution": {
+        "steps": ["2x - 1 = 3", "2x = 4", "x = 2"],
+        "final_answer": "x = 2"
+      },
+      "hints": ["Égalité des exposants"],
+      "related_lesson": "MATH1-32"
+    },
+    {
+      "id": "MATH1-EX-077",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Équation de la droite perpendiculaire à y=2x+1 passant par (0,3)",
+      "solution": {
+        "steps": ["m₁ = 2, m₂ = -1/2", "y = -½x + b", "3 = 0 + b", "y = -½x + 3"],
+        "final_answer": "y = -½x + 3"
+      },
+      "hints": ["m₁m₂ = -1"],
+      "related_lesson": "MATH1-42"
+    },
+    {
+      "id": "MATH1-EX-078",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Test médical : P(M)=0,01, P(+|M)=0,95, P(+|M̄)=0,05. Calculer P(M|+)",
+      "solution": {
+        "steps": ["P(+) = 0,01×0,95 + 0,99×0,05 = 0,059", "P(M|+) = P(M∩+)/P(+)", "= (0,01×0,95)/0,059 ≈ 0,161"],
+        "final_answer": "P(M|+) ≈ 0,161"
+      },
+      "hints": ["Formule de Bayes"],
+      "related_lesson": "MATH1-52"
+    },
+    {
+      "id": "MATH1-EX-079",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre graphiquement x² - 2x - 3 < 0",
+      "solution": {
+        "steps": ["Racines : -1 et 3", "Parabole vers le haut", "Négatif entre les racines"],
+        "final_answer": "S = ]-1 ; 3["
+      },
+      "hints": ["Tableau de signes"],
+      "related_lesson": "MATH1-03"
+    },
+    {
+      "id": "MATH1-EX-080",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dériver f(x) = (x²+1)⁴",
+      "solution": {
+        "steps": ["f'(x) = 4(x²+1)³ × 2x", "f'(x) = 8x(x²+1)³"],
+        "final_answer": "f'(x) = 8x(x²+1)³"
+      },
+      "hints": ["Composée"],
+      "related_lesson": "MATH1-12"
+    },
+    {
+      "id": "MATH1-EX-081",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Raison d'une suite géométrique : u₀=5, u₃=40",
+      "solution": {
+        "steps": ["u₃ = u₀q³", "40 = 5q³", "q³ = 8", "q = 2"],
+        "final_answer": "q = 2"
+      },
+      "hints": ["uₙ = u₀qⁿ"],
+      "related_lesson": "MATH1-23"
+    },
+    {
+      "id": "MATH1-EX-082",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre l'inéquation e^(x-2) < 1",
+      "solution": {
+        "steps": ["e^(x-2) < e⁰", "x - 2 < 0", "x < 2"],
+        "final_answer": "x < 2"
+      },
+      "hints": ["eˣ croissante"],
+      "related_lesson": "MATH1-32"
+    },
+    {
+      "id": "MATH1-EX-083",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Coordonnées du vecteur AB⃗ avec A(2,5) et B(7,8)",
+      "solution": {
+        "steps": ["AB⃗(xB-xA, yB-yA)", "AB⃗(5, 3)"],
+        "final_answer": "AB⃗(5 ; 3)"
+      },
+      "hints": ["AB⃗ = B - A"],
+      "related_lesson": "MATH1-43"
+    },
+    {
+      "id": "MATH1-EX-084",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Permutations de 5 objets : combien ?",
+      "solution": {
+        "steps": ["P(5) = 5!", "= 5×4×3×2×1 = 120"],
+        "final_answer": "120 permutations"
+      },
+      "hints": ["n! arrangements"],
+      "related_lesson": "MATH1-57"
+    },
+    {
+      "id": "MATH1-EX-085",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Minimum de f(x) = 2x² - 8x + 10",
+      "solution": {
+        "steps": ["α = 8/4 = 2", "f(2) = 8 - 16 + 10 = 2", "Minimum en (2,2)"],
+        "final_answer": "Min = 2 en x=2"
+      },
+      "hints": ["Sommet si a>0"],
+      "related_lesson": "MATH1-02"
+    },
+    {
+      "id": "MATH1-EX-086",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Position relative de f(x)=x² et sa tangente en x=1",
+      "solution": {
+        "steps": ["T: y=2x-1", "f(x)-T(x) = x²-2x+1 = (x-1)²", "(x-1)² ≥ 0", "f au-dessus de T"],
+        "final_answer": "Courbe au-dessus de la tangente"
+      },
+      "hints": ["Étudier f(x)-T(x)"],
+      "related_lesson": "MATH1-13"
+    },
+    {
+      "id": "MATH1-EX-087",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "uₙ = 3 + 1/n. Calculer lim uₙ",
+      "solution": {
+        "steps": ["lim 1/n = 0", "lim uₙ = 3"],
+        "final_answer": "lim uₙ = 3"
+      },
+      "hints": ["1/n → 0"],
+      "related_lesson": "MATH1-25"
+    },
+    {
+      "id": "MATH1-EX-088",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Limite de (eˣ-1)/x quand x→0",
+      "solution": {
+        "steps": ["Nombre dérivé de eˣ en 0", "lim = (eˣ)'(0) = 1"],
+        "final_answer": "lim = 1"
+      },
+      "hints": ["Taux d'accroissement"],
+      "related_lesson": "MATH1-34"
+    },
+    {
+      "id": "MATH1-EX-089",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "u⃗(4,3) et v⃗(2,k) colinéaires. Trouver k",
+      "solution": {
+        "steps": ["Colinéaires : 4k = 3×2", "4k = 6", "k = 1,5"],
+        "final_answer": "k = 1,5"
+      },
+      "hints": ["xy' = yx'"],
+      "related_lesson": "MATH1-44"
+    },
+    {
+      "id": "MATH1-EX-090",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Espérance d'une loi binomiale B(100, 0,02)",
+      "solution": {
+        "steps": ["E(X) = np", "= 100 × 0,02 = 2"],
+        "final_answer": "E(X) = 2"
+      },
+      "hints": ["E = np"],
+      "related_lesson": "MATH1-56"
+    },
+    {
+      "id": "MATH1-EX-091",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Factoriser x² - 16",
+      "solution": {
+        "steps": ["a² - b² = (a-b)(a+b)", "x² - 16 = (x-4)(x+4)"],
+        "final_answer": "(x-4)(x+4)"
+      },
+      "hints": ["Différence de carrés"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-092",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Convexité de f(x) = x² sur R",
+      "solution": {
+        "steps": ["f''(x) = 2", "f''(x) > 0 sur R", "f convexe"],
+        "final_answer": "Convexe sur R"
+      },
+      "hints": ["f''>0 → convexe"],
+      "related_lesson": "MATH1-15"
+    },
+    {
+      "id": "MATH1-EX-093",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite uₙ = 2ⁿ. Calculer u₅",
+      "solution": {
+        "steps": ["u₅ = 2⁵ = 32"],
+        "final_answer": "u₅ = 32"
+      },
+      "hints": ["Puissance de 2"],
+      "related_lesson": "MATH1-23"
+    },
+    {
+      "id": "MATH1-EX-094",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Simplifier ln(e⁵)",
+      "solution": {
+        "steps": ["ln(eˣ) = x", "ln(e⁵) = 5"],
+        "final_answer": "5"
+      },
+      "hints": ["ln et e inverses"],
+      "related_lesson": "MATH1-31"
+    },
+    {
+      "id": "MATH1-EX-095",
+      "chapter": "Géométrie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Distance du point A(3,4) à l'origine",
+      "solution": {
+        "steps": ["d = √(3²+4²) = √25 = 5"],
+        "final_answer": "d = 5"
+      },
+      "hints": ["Distance à O"],
+      "related_lesson": "MATH1-43"
+    },
+    {
+      "id": "MATH1-EX-096",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Variance de X : P(X=1)=0,5, P(X=3)=0,5",
+      "solution": {
+        "steps": ["E(X) = 1×0,5 + 3×0,5 = 2", "E(X²) = 1×0,5 + 9×0,5 = 5", "V(X) = 5 - 4 = 1"],
+        "final_answer": "V(X) = 1"
+      },
+      "hints": ["V = E(X²) - [E(X)]²"],
+      "related_lesson": "MATH1-54"
+    },
+    {
+      "id": "MATH1-EX-097",
+      "chapter": "Second degré",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Développer (x-5)²",
+      "solution": {
+        "steps": ["(a-b)² = a² - 2ab + b²", "(x-5)² = x² - 10x + 25"],
+        "final_answer": "x² - 10x + 25"
+      },
+      "hints": ["Identité remarquable"],
+      "related_lesson": "MATH1-01"
+    },
+    {
+      "id": "MATH1-EX-098",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Point d'inflexion de f(x) = x³",
+      "solution": {
+        "steps": ["f''(x) = 6x", "f''(x) = 0 ⟺ x = 0", "Point d'inflexion : (0,0)"],
+        "final_answer": "Point d'inflexion en (0,0)"
+      },
+      "hints": ["f''(x) = 0"],
+      "related_lesson": "MATH1-15"
+    },
+    {
+      "id": "MATH1-EX-099",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Série géométrique infinie : Σ(n=0 à ∞) (1/2)ⁿ",
+      "solution": {
+        "steps": ["S = 1/(1-q) si |q|<1", "S = 1/(1-1/2) = 2"],
+        "final_answer": "S = 2"
+      },
+      "hints": ["Somme infinie géométrique"],
+      "related_lesson": "MATH1-23"
+    },
+    {
+      "id": "MATH1-EX-100",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Coefficient binomial C(7,3)",
+      "solution": {
+        "steps": ["C(7,3) = 7!/(3!×4!)", "= (7×6×5)/(3×2×1)", "= 35"],
+        "final_answer": "C(7,3) = 35"
+      },
+      "hints": ["Formule combinaison"],
+      "related_lesson": "MATH1-57"
+    }
+  ]
+}

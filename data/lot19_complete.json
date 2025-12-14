@@ -1,0 +1,320 @@
+{
+  "metadata": {
+    "lot_number": 5,
+    "lot_name": "Lot 5 - Mouvement & Vitesse",
+    "level": "Seconde",
+    "subject": "Physique",
+    "prefix": "P2",
+    "chapter": "Mouvement & Vitesse",
+    "lesson_range": "P2-01 à P2-07",
+    "total_lessons": 7
+  },
+  "lessons": [
+    {
+      "id": "P2-01",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Mouvement & Vitesse",
+      "title": "Référentiel et système",
+      "duration_min": 8,
+      "difficulty": 2,
+      "xp_reward": 70,
+      "objectives": ["Définir la notion de référentiel", "Comprendre qu'un mouvement est relatif", "Identifier le système étudié", "Choisir un référentiel adapté à l'étude"],
+      "prerequisites": [],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["mécanique", "mouvement", "référentiel"],
+      "detailed_content": {
+        "introduction": "L'étude du mouvement nécessite de définir précisément par rapport à quoi on observe ce mouvement. C'est le rôle du référentiel.",
+        "key_concepts": [
+          { "name": "Système", "explanation": "Le système est l'objet dont on étudie le mouvement", "example": "Un vélo, une voiture, un satellite" },
+          { "name": "Référentiel", "explanation": "Solide de référence avec repère et horloge", "example": "Référentiel terrestre, du laboratoire, géocentrique" },
+          { "name": "Relativité du mouvement", "explanation": "Le mouvement dépend du référentiel choisi", "example": "Un passager dans un train : immobile dans le train, en mouvement dans le référentiel terrestre" }
+        ],
+        "method_step_by_step": [
+          "1. Identifier le système étudié",
+          "2. Choisir un référentiel adapté",
+          "3. Décrire le mouvement dans ce référentiel"
+        ],
+        "guided_example": {
+          "statement": "Un passager est assis dans un train qui roule à 100 km/h. Décrire son mouvement dans deux référentiels différents.",
+          "solution_steps": [
+            "Dans le référentiel du train : le passager est immobile (v = 0)",
+            "Dans le référentiel terrestre : le passager se déplace à 100 km/h",
+            "Le mouvement dépend du référentiel : c'est la relativité du mouvement"
+          ]
+        },
+        "quick_exercises": [
+          "Un avion vole à 800 km/h. Un passager marche à 5 km/h dans l'avion. Quelle est la vitesse du passager dans le référentiel terrestre ?",
+          "Identifier système et référentiel pour différents cas"
+        ],
+        "common_mistakes": [
+          "Confondre système et référentiel",
+          "Oublier de préciser le référentiel d'étude",
+          "Penser qu'un mouvement a une description unique"
+        ],
+        "summary": {
+          "key_concept": "Mouvement = relatif au référentiel choisi",
+          "key_method": "Toujours définir système et référentiel",
+          "next_step": "Étudier la trajectoire dans un référentiel donné"
+        }
+      }
+    },
+    {
+      "id": "P2-02",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Mouvement & Vitesse",
+      "title": "Trajectoire d'un point",
+      "duration_min": 8,
+      "difficulty": 2,
+      "xp_reward": 70,
+      "objectives": ["Définir la trajectoire d'un point", "Distinguer les différents types de trajectoires", "Représenter graphiquement une trajectoire", "Comprendre que la trajectoire dépend du référentiel"],
+      "prerequisites": ["P2-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["trajectoire", "mouvement"],
+      "detailed_content": {
+        "introduction": "La trajectoire décrit le chemin suivi par un point mobile dans un référentiel donné.",
+        "key_concepts": [
+          { "name": "Trajectoire", "explanation": "Ensemble des positions successives du point", "example": "Chemin suivi par le mobile" },
+          { "name": "Mouvement rectiligne", "explanation": "Trajectoire = droite", "example": "Une voiture sur une route droite" },
+          { "name": "Mouvement circulaire", "explanation": "Trajectoire = cercle", "example": "Un point sur une roue qui tourne" }
+        ],
+        "method_step_by_step": [
+          "1. Choisir un référentiel",
+          "2. Marquer les positions successives",
+          "3. Relier les points pour tracer la trajectoire"
+        ],
+        "guided_example": {
+          "statement": "Décrire la trajectoire d'un point situé sur le bord d'une roue de vélo qui avance.",
+          "solution_steps": [
+            "Dans le référentiel du vélo : trajectoire circulaire",
+            "Dans le référentiel terrestre : trajectoire cycloïdale (succession d'arches)",
+            "La trajectoire dépend du référentiel"
+          ]
+        },
+        "quick_exercises": [
+          "Un satellite tourne autour de la Terre. Quelle est sa trajectoire dans le référentiel géocentrique ?",
+          "Identifier le type de trajectoire dans différents cas"
+        ],
+        "summary": {
+          "key_concept": "Trajectoire = aspect géométrique du mouvement",
+          "key_method": "Toujours préciser le référentiel",
+          "next_step": "Calculer la vitesse moyenne sur une trajectoire"
+        }
+      }
+    },
+    {
+      "id": "P2-03",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Mouvement & Vitesse",
+      "title": "Vitesse moyenne",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir la vitesse moyenne", "Calculer une vitesse moyenne", "Convertir des unités de vitesse", "Interpréter une vitesse moyenne"],
+      "prerequisites": ["P2-01", "P2-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["vitesse", "calcul"],
+      "detailed_content": {
+        "introduction": "La vitesse moyenne caractérise la rapidité du déplacement d'un mobile sur une portion de trajectoire.",
+        "key_concepts": [
+          { "name": "Vitesse moyenne", "explanation": "v_moy = distance / durée", "example": "Si d = 180 km en Δt = 2 h, v = 90 km/h" },
+          { "name": "Conversion d'unités", "explanation": "1 m/s = 3,6 km/h", "example": "25 m/s = 90 km/h" }
+        ],
+        "method_step_by_step": [
+          "1. Mesurer la distance parcourue d",
+          "2. Mesurer la durée Δt",
+          "3. Calculer v_moy = d/Δt",
+          "4. Convertir les unités si nécessaire"
+        ],
+        "guided_example": {
+          "statement": "Une voiture parcourt 180 km en 2 heures. Calculer sa vitesse moyenne en km/h puis en m/s.",
+          "solution_steps": [
+            "v_moy = 180/2 = 90 km/h",
+            "Conversion : 90 km/h = 90/3,6 = 25 m/s",
+            "La voiture roule à 90 km/h ou 25 m/s en moyenne"
+          ]
+        },
+        "quick_exercises": [
+          "Un cycliste parcourt 15 km en 30 minutes. Vitesse moyenne en km/h et m/s ?",
+          "Convertir différentes vitesses"
+        ],
+        "summary": {
+          "key_concept": "v_moy = d/Δt",
+          "key_method": "Vérifier toujours la cohérence des unités",
+          "next_step": "Distinguer vitesse moyenne et vitesse instantanée"
+        }
+      }
+    },
+    {
+      "id": "P2-04",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Mouvement & Vitesse",
+      "title": "Vitesse instantanée et vecteur vitesse",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir la vitesse instantanée", "Comprendre la notion de vecteur vitesse", "Représenter le vecteur vitesse", "Distinguer vitesse instantanée et vitesse moyenne"],
+      "prerequisites": ["P2-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["vitesse", "vecteur"],
+      "detailed_content": {
+        "introduction": "La vitesse instantanée décrit l'état de mouvement à un instant précis. C'est une grandeur vectorielle.",
+        "key_concepts": [
+          { "name": "Vitesse instantanée", "explanation": "Vitesse à un instant donné", "example": "v(t) à l'instant t" },
+          { "name": "Vecteur vitesse", "explanation": "Grandeur vectorielle : direction, sens, norme", "example": "Direction tangente à la trajectoire" }
+        ],
+        "method_step_by_step": [
+          "1. Choisir un instant t",
+          "2. Tracer la tangente à la trajectoire",
+          "3. Dessiner le vecteur vitesse tangent à la trajectoire",
+          "4. Respecter l'échelle de longueur"
+        ],
+        "guided_example": {
+          "statement": "Un mobile suit une trajectoire circulaire à vitesse constante de 5 m/s. Représenter le vecteur vitesse en deux points.",
+          "solution_steps": [
+            "En chaque point, le vecteur vitesse est tangent au cercle",
+            "Orienté dans le sens du mouvement",
+            "Longueur proportionnelle à 5 m/s (même longueur aux deux points)"
+          ]
+        },
+        "summary": {
+          "key_concept": "Vecteur vitesse toujours tangent à la trajectoire",
+          "key_method": "Sa norme = valeur de la vitesse instantanée",
+          "next_step": "Étudier un MRU (mouvement rectiligne uniforme)"
+        }
+      }
+    },
+    {
+      "id": "P2-05",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Mouvement & Vitesse",
+      "title": "Mouvement rectiligne uniforme (MRU)",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir un mouvement rectiligne uniforme", "Utiliser l'équation horaire d'un MRU", "Représenter graphiquement position et vitesse en fonction du temps", "Résoudre des problèmes de MRU"],
+      "prerequisites": ["P2-02", "P2-04"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["MRU", "mouvement"],
+      "detailed_content": {
+        "introduction": "Le mouvement rectiligne uniforme est le mouvement le plus simple : trajectoire rectiligne et vitesse constante.",
+        "key_concepts": [
+          { "name": "MRU", "explanation": "Mouvement Rectiligne Uniforme", "example": "Trajectoire droite + vitesse constante" },
+          { "name": "Équation horaire", "explanation": "x(t) = x₀ + v·t", "example": "Si x₀ = 5 m et v = 2 m/s, x(t) = 5 + 2t" }
+        ],
+        "method_step_by_step": [
+          "1. Vérifier que la trajectoire est rectiligne",
+          "2. Vérifier que la vitesse est constante",
+          "3. Appliquer x(t) = x₀ + v·t",
+          "4. Résoudre le problème"
+        ],
+        "guided_example": {
+          "statement": "Un mobile part de x₀ = 5 m avec une vitesse v = 2 m/s. Position à t = 10 s ?",
+          "solution_steps": [
+            "x(t) = 5 + 2t",
+            "x(10) = 5 + 2×10 = 25 m",
+            "À t = 10 s, le mobile est en x = 25 m"
+          ]
+        },
+        "summary": {
+          "key_concept": "MRU : x(t) = x₀ + vt",
+          "key_method": "Graphique x(t) = droite de pente v",
+          "next_step": "Étudier un MRUA (mouvement rectiligne uniformément varié)"
+        }
+      }
+    },
+    {
+      "id": "P2-06",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Mouvement & Vitesse",
+      "title": "Mouvement rectiligne uniformément varié (MRUA)",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir un mouvement rectiligne uniformément accéléré ou décéléré", "Comprendre la notion d'accélération", "Utiliser les équations du MRUA", "Analyser des graphiques de MRUA"],
+      "prerequisites": ["P2-05"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["MRUA", "accélération"],
+      "detailed_content": {
+        "introduction": "Le MRUA est un mouvement rectiligne dont la vitesse varie de façon constante (accélération constante).",
+        "key_concepts": [
+          { "name": "MRUA", "explanation": "Mouvement Rectiligne Uniformément Varié", "example": "Accélération constante" },
+          { "name": "Équations horaires", "explanation": "v(t) = v₀ + at et x(t) = x₀ + v₀t + (1/2)at²", "example": "Mobile au repos : v(t) = at" }
+        ],
+        "method_step_by_step": [
+          "1. Identifier que l'accélération est constante",
+          "2. Appliquer v(t) = v₀ + at",
+          "3. Appliquer x(t) = x₀ + v₀t + (1/2)at²",
+          "4. Résoudre le problème"
+        ],
+        "guided_example": {
+          "statement": "Un mobile part du repos avec a = 2 m/s². v(t) et x(t) ?",
+          "solution_steps": [
+            "v(t) = 0 + 2t = 2t m/s",
+            "x(t) = 0 + 0·t + (1/2)×2×t² = t² m",
+            "Vitesse augmente linéairement, position augmente quadratiquement"
+          ]
+        },
+        "summary": {
+          "key_concept": "MRUA : accélération constante",
+          "key_method": "Apprendre : v(t) = v₀ + at et x(t) = x₀ + v₀t + (1/2)at²",
+          "next_step": "Étudier la chute libre (cas particulier de MRUA)"
+        }
+      }
+    },
+    {
+      "id": "P2-07",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Mouvement & Vitesse",
+      "title": "Chute libre",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir la chute libre", "Comprendre le rôle de l'accélération de pesanteur g", "Appliquer les équations du MRUA à la chute libre", "Résoudre des problèmes de chute libre"],
+      "prerequisites": ["P2-06"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["chute libre", "pesanteur"],
+      "detailed_content": {
+        "introduction": "La chute libre est un cas particulier de MRUA : objet soumis uniquement à son poids (frottements négligés).",
+        "key_concepts": [
+          { "name": "Chute libre", "explanation": "Objet soumis uniquement à son poids", "example": "Objet en chute (air négligé)" },
+          { "name": "Accélération g", "explanation": "g ≈ 9,81 m/s² (ou 10 m/s²)", "example": "Tous les corps ont la même accélération" }
+        ],
+        "method_step_by_step": [
+          "1. Identifier la chute libre (frottements négligés)",
+          "2. Utiliser a = g ≈ 10 m/s²",
+          "3. Appliquer les équations MRUA avec a = ±g",
+          "4. Attention au signe selon l'orientation de l'axe"
+        ],
+        "guided_example": {
+          "statement": "On lâche une bille d'une tour de 45 m. Durée de chute et vitesse d'arrivée (g = 10 m/s²) ?",
+          "solution_steps": [
+            "z(t) = (1/2)×10×t² = 5t²",
+            "Arrivée : 5t² = 45 ⇒ t = 3 s",
+            "v(3) = 10×3 = 30 m/s"
+          ]
+        },
+        "summary": {
+          "key_concept": "Chute libre : a = g ≈ 10 m/s²",
+          "key_method": "Attention au signe de g selon l'orientation",
+          "next_step": "Étudier les forces et lois de Newton"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

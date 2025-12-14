@@ -1,0 +1,239 @@
+{
+  "metadata": {
+    "lot_number": 10,
+    "lot_name": "Lot 10 - Solutions Aqueuses",
+    "level": "Seconde",
+    "subject": "Chimie",
+    "prefix": "C2",
+    "chapter": "Solutions Aqueuses",
+    "lesson_range": "C2-16 à C2-20",
+    "total_lessons": 5
+  },
+  "lessons": [
+    {
+      "id": "C2-16",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Solutions Aqueuses",
+      "title": "Concentration massique et molaire",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir une solution aqueuse", "Calculer la concentration massique Cm", "Calculer la concentration molaire C", "Convertir entre Cm et C"],
+      "prerequisites": ["C2-07"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["concentration", "solution"],
+      "detailed_content": {
+        "introduction": "Une solution aqueuse est un mélange homogène d'un soluté dissous dans de l'eau (le solvant). La concentration permet de quantifier la quantité de soluté dans un volume de solution.",
+        "key_concepts": [
+          { "name": "Solution aqueuse", "explanation": "Solvant : eau (H₂O). Soluté : espèce dissoute (solide, liquide, gaz)", "example": "Eau salée : sel (soluté) + eau (solvant)" },
+          { "name": "Concentration massique", "explanation": "Cm = m(soluté) / V(solution), unité : g/L", "example": "20 g sucre dans 1 L → Cm = 20 g/L" },
+          { "name": "Concentration molaire", "explanation": "C = n(soluté) / V(solution), unité : mol/L", "example": "0,5 mol NaCl dans 1 L → C = 0,5 mol/L" },
+          { "name": "Relation Cm et C", "explanation": "Cm = C × M où M est la masse molaire", "example": "Reliées par la masse molaire" }
+        ],
+        "guided_example": {
+          "statement": "5,85 g de NaCl dans 500 mL d'eau. Calculer Cm. M(NaCl) = 58,5 g/mol.",
+          "solution_steps": [
+            "V = 500 mL = 0,5 L",
+            "Cm = m/V = 5,85 / 0,5 = 11,7 g/L",
+            "Conversion en litres essentielle"
+          ]
+        },
+        "quick_exercises": [
+          "Solution glucose C = 0,2 mol/L (M=180 g/mol) : Cm ? Masse dans 250 mL ?",
+          "Convertir entre Cm et C"
+        ],
+        "common_mistakes": [
+          "Oublier de convertir mL en L",
+          "Confondre Cm et C",
+          "Inverser la relation Cm = C × M"
+        ],
+        "summary": {
+          "key_concept": "Cm = m/V (g/L), C = n/V (mol/L), relation : Cm = C × M",
+          "key_method": "Toujours convertir mL → L (diviser par 1000)",
+          "next_step": "Étudier la dilution"
+        }
+      }
+    },
+    {
+      "id": "C2-17",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Solutions Aqueuses",
+      "title": "Dilution d'une solution",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir une dilution", "Utiliser la relation de dilution C₁V₁ = C₂V₂", "Calculer les grandeurs d'une dilution", "Préparer une solution diluée"],
+      "prerequisites": ["C2-16"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["dilution", "mère", "fille"],
+      "detailed_content": {
+        "introduction": "Diluer une solution consiste à y ajouter du solvant (de l'eau) pour diminuer sa concentration. La quantité de soluté reste constante.",
+        "key_concepts": [
+          { "name": "Dilution", "explanation": "Ajout de solvant pour diminuer concentration. Mère (C₁) → Fille (C₂)", "example": "Solution plus diluée : C₂ < C₁" },
+          { "name": "Principe", "explanation": "Quantité de matière conservée : n₁ = n₂", "example": "On n'ajoute que du solvant" },
+          { "name": "Relation de dilution", "explanation": "C₁V₁ = C₂V₂", "example": "Formule fondamentale de la dilution" },
+          { "name": "Facteur de dilution", "explanation": "F = C₁/C₂ = V₂/V₁", "example": "Factor par lequel la concentration diminue" }
+        ],
+        "guided_example": {
+          "statement": "V₂ = 100 mL à C₂ = 0,1 mol/L à partir de C₁ = 1 mol/L. V₁ à prélever ?",
+          "solution_steps": [
+            "C₁V₁ = C₂V₂",
+            "V₁ = C₂V₂/C₁ = (0,1 × 100) / 1 = 10 mL",
+            "Facteur de dilution F = 10"
+          ]
+        },
+        "quick_exercises": [
+          "20 mL à 0,5 mol/L + 80 mL eau : V₂ ? C₂ ?",
+          "Calculer dilutions et facteurs de dilution"
+        ],
+        "common_mistakes": [
+          "Confondre V₁ et V₂",
+          "Oublier que V₂ = V₁ + V(eau)",
+          "Inverser C₁ et C₂"
+        ],
+        "summary": {
+          "key_concept": "Dilution = ajout solvant. Formule : C₁V₁ = C₂V₂. F = V₂/V₁ = C₁/C₂",
+          "key_method": "Toujours : C₂ < C₁ et V₂ > V₁",
+          "next_step": "Introduire le pH"
+        }
+      }
+    },
+    {
+      "id": "C2-18",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Solutions Aqueuses",
+      "title": "pH et échelle de pH",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir le pH", "Utiliser l'échelle de pH (0 à 14)", "Distinguer solution acide, neutre et basique", "Mesurer le pH avec papier pH ou pH-mètre"],
+      "prerequisites": ["C2-16"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["pH", "acidité"],
+      "detailed_content": {
+        "introduction": "Le pH est une grandeur qui mesure l'acidité ou la basicité d'une solution aqueuse. C'est un outil fondamental pour caractériser les solutions.",
+        "key_concepts": [
+          { "name": "pH", "explanation": "Potentiel hydrogène, grandeur sans unité, caractérise l'acidité", "example": "Plus [H⁺] élevée → pH faible (acide)" },
+          { "name": "Échelle pH", "explanation": "pH de 0 à 14 : acide (< 7), neutre (= 7), basique (> 7)", "example": "Plus éloigné de 7 = plus acide ou plus basique" },
+          { "name": "Mesure", "explanation": "Papier pH : précision ± 1. pH-mètre : précision ± 0,1", "example": "Changement de couleur ou valeur numérique" },
+          { "name": "Exemples", "explanation": "Vinaigre (pH ≈ 3), eau pure (pH = 7), savon (pH ≈ 9-10)", "example": "Produits courants" }
+        ],
+        "guided_example": {
+          "statement": "Solution pH = 4. Acide, neutre ou basique ?",
+          "solution_steps": [
+            "pH = 4 < 7",
+            "Solution acide",
+            "Plus le pH est faible, plus c'est acide"
+          ]
+        },
+        "quick_exercises": [
+          "Classer solutions pH = 2, 7, 11, 5 : ordre acidité à basicité ? Plus acide ? Neutre ?",
+          "Utiliser l'échelle de pH"
+        ],
+        "common_mistakes": [
+          "Confondre acide et basique",
+          "Penser que pH = 0 est neutre",
+          "Oublier que pH diminue quand acidité augmente"
+        ],
+        "summary": {
+          "key_concept": "pH < 7 : acide, pH = 7 : neutre, pH > 7 : basique",
+          "key_method": "Échelle : 0 (très acide) → 7 (neutre) → 14 (très basique)",
+          "next_step": "Étudier les acides et bases"
+        }
+      }
+    },
+    {
+      "id": "C2-19",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Solutions Aqueuses",
+      "title": "Acides et bases",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir un acide et une base", "Reconnaître des acides et bases courants", "Comprendre la neutralisation", "Identifier les dangers des acides et bases concentrés"],
+      "prerequisites": ["C2-18"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["acide", "base"],
+      "detailed_content": {
+        "introduction": "Les acides et les bases sont deux grandes familles de composés aux propriétés opposées. Ils sont omniprésents dans la vie quotidienne et en industrie.",
+        "key_concepts": [
+          { "name": "Acide", "explanation": "Substance libérant H⁺ (ou H₃O⁺), fait diminuer le pH (< 7)", "example": "HCl, H₂SO₄, CH₃COOH (vinaigre)" },
+          { "name": "Base", "explanation": "Substance libérant OH⁻, fait augmenter le pH (> 7)", "example": "NaOH, NH₃, Ca(OH)₂" },
+          { "name": "Indicateurs colorés", "explanation": "Changent de couleur selon pH. BBT : jaune (acide), vert (neutre), bleu (basique)", "example": "Phénolphtaléine : incolore → rose (basique)" },
+          { "name": "Neutralisation", "explanation": "Acide + Base → Sel + Eau. pH → 7", "example": "HCl + NaOH → NaCl + H₂O" }
+        ],
+        "guided_example": {
+          "statement": "On ajoute BBT à une solution de soude. Couleur ?",
+          "solution_steps": [
+            "Soude = base, pH > 7",
+            "BBT en milieu basique = bleu",
+            "Couleur bleue"
+          ]
+        },
+        "quick_exercises": [
+          "HCl + NaOH, pH final = 7. Réaction ? Quantités ? Produits ?",
+          "Reconnaître acides, bases et neutralisation"
+        ],
+        "common_mistakes": [
+          "Confondre acide et base",
+          "Oublier la règle de sécurité (acide dans l'eau)",
+          "Ne pas reconnaître les produits de neutralisation"
+        ],
+        "summary": {
+          "key_concept": "Acide : H⁺, pH < 7. Base : OH⁻, pH > 7. Neutralisation : acide + base → sel + eau",
+          "key_method": "Sécurité : toujours l'acide dans l'eau !",
+          "next_step": "Introduire les dosages"
+        }
+      }
+    },
+    {
+      "id": "C2-20",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Solutions Aqueuses",
+      "title": "Dosage - Introduction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 70,
+      "objectives": ["Comprendre le principe d'un dosage", "Identifier l'équivalence d'un dosage", "Utiliser un dosage pour déterminer une concentration", "Connaître le matériel de dosage"],
+      "prerequisites": ["C2-17", "C2-19"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["dosage", "équivalence"],
+      "detailed_content": {
+        "introduction": "Un dosage (ou titrage) est une technique expérimentale qui permet de déterminer la concentration d'une solution inconnue en la faisant réagir avec une solution de concentration connue.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Faire réagir solution à titrer (C₁ inconnue) avec solution titrante (C₂ connue) jusqu'à l'équivalence", "example": "À l'équivalence : proportions stœchiométriques exactes" },
+          { "name": "Matériel", "explanation": "Burette : solution titrante. Erlenmeyer : solution à titrer. Indicateur : signale équivalence", "example": "Changement de couleur" },
+          { "name": "Relation équivalence", "explanation": "n₁/a = n₂/b. Avec n = C × V : C₁V₁/a = C₂V₂/b", "example": "Coefficients stœchiométriques" }
+        ],
+        "guided_example": {
+          "statement": "10 mL solution acide (C₁ inconnue) dosée par base C₂ = 0,1 mol/L. À équivalence : V₂ = 12 mL. Coefficients 1:1. C₁ ?",
+          "solution_steps": [
+            "À l'équivalence : C₁V₁ = C₂V₂",
+            "C₁ = C₂V₂/V₁ = (0,1 × 12) / 10 = 0,12 mol/L",
+            "On utilise la conservation à l'équivalence"
+          ]
+        },
+        "quick_exercises": [
+          "20 mL soude (C₁ inconnue) dosée par HCl 0,2 mol/L, V₂ = 15 mL à équivalence. C₁ ?",
+          "Calculer concentrations via dosages"
+        ],
+        "common_mistakes": [
+          "Confondre solution titrante et à titrer",
+          "Ne pas tenir compte des coefficients stœchiométriques",
+          "Oublier de convertir mL en L"
+        ],
+        "summary": {
+          "key_concept": "Dosage = déterminer concentration inconnue. Équivalence : proportions stœchiométriques",
+          "key_method": "À l'équivalence : n₁/a = n₂/b",
+          "next_step": "Vers la chimie organique en Première"
+        }
+      }
+    }
+  ]
+}
+

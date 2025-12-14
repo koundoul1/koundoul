@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Physique",
+    "lesson_range": "P1-21 à P1-30",
+    "chapters": [
+      "Ondes & Signaux (fin)",
+      "Électricité"
+    ],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Fin du chapitre Ondes & Signaux (P1-21, P1-22) et chapitre complet Électricité (P1-23 à P1-30)"
+  },
+  "lessons": [
+    {
+      "id": "P1-21",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Réfraction de la lumière",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": ["Comprendre le phénomène de réfraction", "Définir l'indice de réfraction n", "Observer le changement de direction de la lumière"],
+      "prerequisites": ["Lumière", "Milieux transparents", "Célérité"],
+      "content_types": ["video", "simulation", "quiz", "exercises"],
+      "tags": ["réfraction", "indice", "lumière", "changement de milieu"]
+    },
+    {
+      "id": "P1-22",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Lois de Snell-Descartes",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Énoncer les lois de la réfraction", "Appliquer n₁·sin(i₁) = n₂·sin(i₂)", "Calculer des angles de réfraction"],
+      "prerequisites": ["Réfraction", "Trigonométrie", "Indices de réfraction"],
+      "content_types": ["video", "simulation", "quiz", "exercises"],
+      "tags": ["Snell-Descartes", "loi de réfraction", "angle d'incidence", "angle de réfraction"]
+    },
+    {
+      "id": "P1-23",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Courant électrique - Introduction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": ["Définir le courant électrique", "Comprendre le sens conventionnel du courant", "Unité : l'ampère (A)"],
+      "prerequisites": ["Charges électriques", "Circuit électrique", "Dipôles"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["courant électrique", "intensité", "ampère", "circuit"]
+    },
+    {
+      "id": "P1-24",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Tension électrique",
+      "duration_min": 11,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": ["Définir la tension électrique U", "Mesurer avec un voltmètre", "Comprendre la différence de potentiel"],
+      "prerequisites": ["Circuit électrique", "Courant", "Instruments de mesure"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["tension", "volt", "voltmètre", "potentiel"]
+    },
+    {
+      "id": "P1-25",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Loi des nœuds (1ère loi de Kirchhoff)",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Énoncer la loi des nœuds", "Appliquer : Σ I(entrantes) = Σ I(sortantes)", "Résoudre des problèmes de circuits"],
+      "prerequisites": ["Courant électrique", "Circuit en dérivation", "Nœud"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["loi des nœuds", "Kirchhoff", "conservation du courant", "dérivation"]
+    },
+    {
+      "id": "P1-26",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Loi des mailles (2ème loi de Kirchhoff)",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": ["Énoncer la loi des mailles", "Appliquer : Σ U = 0 dans une maille", "Orienter et résoudre un circuit"],
+      "prerequisites": ["Tension électrique", "Circuit en série", "Maille"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["loi des mailles", "Kirchhoff", "conservation de l'énergie", "série"]
+    },
+    {
+      "id": "P1-27",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Loi d'Ohm et résistance",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Énoncer la loi d'Ohm U = R·I", "Calculer R, U ou I", "Caractéristique d'une résistance"],
+      "prerequisites": ["Tension", "Courant", "Dipôles passifs"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["loi d'Ohm", "résistance", "ohm", "U=RI"]
+    },
+    {
+      "id": "P1-28",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Dipôles actifs et passifs",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Distinguer générateurs et récepteurs", "Caractéristiques U-I", "Conventions récepteur/générateur"],
+      "prerequisites": ["Circuit électrique", "Tension", "Courant"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["dipôle", "générateur", "récepteur", "caractéristique"]
+    },
+    {
+      "id": "P1-29",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Résistance équivalente - Associations",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Req série : Req = R₁ + R₂ + ...", "Req parallèle : 1/Req = 1/R₁ + 1/R₂ + ...", "Simplifier des circuits"],
+      "prerequisites": ["Loi d'Ohm", "Série et parallèle", "Circuits"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["résistance équivalente", "série", "parallèle", "simplification"]
+    },
+    {
+      "id": "P1-30",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Pont diviseur de tension et de courant",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Appliquer le diviseur de tension", "Appliquer le diviseur de courant", "Résoudre rapidement des circuits simples"],
+      "prerequisites": ["Loi d'Ohm", "Lois de Kirchhoff", "Résistances"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["diviseur de tension", "diviseur de courant", "pont diviseur", "formules"]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

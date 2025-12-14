@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "total_lessons": 15,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-13 à M1-27",
+    "chapters": [
+      "Dérivation"
+    ],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Chapitre complet Dérivation en Mathématiques Première (M1-13 à M1-27)"
+  },
+  "lessons": [
+    {
+      "id": "M1-13",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Taux de variation - Introduction",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Calculer un taux de variation entre deux points",
+        "Interpréter géométriquement comme la pente d'une sécante",
+        "Comprendre le lien avec la vitesse moyenne"
+      ],
+      "prerequisites": [
+        "Fonctions",
+        "Pente d'une droite",
+        "Calcul algébrique"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["taux de variation", "sécante", "pente", "vitesse moyenne"]
+    },
+    {
+      "id": "M1-14",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Nombre dérivé en un point",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Définir le nombre dérivé f'(a) comme limite du taux",
+        "Calculer f'(a) = lim[h→0] (f(a+h) - f(a))/h",
+        "Comprendre l'interprétation comme vitesse instantanée"
+      ],
+      "prerequisites": ["Taux de variation", "Limites (notion intuitive)", "Fonctions"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["nombre dérivé", "limite", "dérivée", "point"]
+    },
+    {
+      "id": "M1-15",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Tangente à une courbe",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Définir la tangente en un point A", "Établir l'équation y = f(a) + f'(a)(x - a)", "Tracer une tangente graphiquement"],
+      "prerequisites": ["Nombre dérivé", "Équation de droite", "Point-pente"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["tangente", "équation", "géométrie", "courbe"]
+    },
+    {
+      "id": "M1-16",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Fonction dérivée",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Passer du nombre dérivé à la fonction dérivée f'", "Comprendre que f' associe à x le nombre f'(x)", "Notation f'(x) ou df/dx"],
+      "prerequisites": ["Nombre dérivé", "Fonctions", "Notation mathématique"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["fonction dérivée", "notation", "f'(x)", "dérivée"]
+    },
+    {
+      "id": "M1-17",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivées des fonctions usuelles",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": ["Connaître les dérivées : k, x, x², x³, xⁿ", "Connaître : √x, 1/x, 1/x²", "Mémoriser le tableau des dérivées usuelles"],
+      "prerequisites": ["Fonction dérivée", "Fonctions de référence", "Puissances"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["dérivées usuelles", "formules", "tableau", "mémorisation"]
+    },
+    {
+      "id": "M1-18",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Opérations sur les dérivées - Somme et produit par un scalaire",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Appliquer (u + v)' = u' + v'", "Appliquer (ku)' = k·u'", "Combiner ces règles"],
+      "prerequisites": ["Dérivées usuelles", "Calcul algébrique", "Linéarité"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["opérations", "somme", "produit scalaire", "linéarité"]
+    },
+    {
+      "id": "M1-19",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivée d'un produit",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Appliquer la formule (uv)' = u'v + uv'", "Dériver des produits de fonctions", "Éviter les erreurs classiques"],
+      "prerequisites": ["Opérations sur les dérivées", "Dérivées usuelles", "Calcul"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["produit", "formule", "u'v + uv'", "dérivation"]
+    },
+    {
+      "id": "M1-20",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivée d'un quotient",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Appliquer (u/v)' = (u'v - uv')/v²", "Dériver des fonctions rationnelles", "Identifier le domaine de dérivabilité"],
+      "prerequisites": ["Dérivée d'un produit", "Fractions", "Dérivées usuelles"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["quotient", "formule", "u'v - uv'", "fraction"]
+    },
+    {
+      "id": "M1-21",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Dérivée d'une fonction composée",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Comprendre la composition de fonctions", "Appliquer (u∘v)' = v' × (u'∘v)", "Dériver des fonctions de la forme u(ax+b)"],
+      "prerequisites": ["Composition", "Dérivées usuelles", "Opérations"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["composée", "composition", "chaîne", "u∘v"]
+    },
+    {
+      "id": "M1-22",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Signe de la dérivée et variations",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": ["Lien entre signe de f' et variations de f", "Si f' > 0 alors f croissante", "Si f' < 0 alors f décroissante"],
+      "prerequisites": ["Fonction dérivée", "Variations", "Tableau de signes"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["signe", "variations", "croissance", "décroissance"]
+    },
+    {
+      "id": "M1-23",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Tableau de variations",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Construire le tableau de variations à partir de f'", "Identifier les extremums locaux", "Représenter graphiquement les variations"],
+      "prerequisites": ["Signe de la dérivée", "Variations", "Extremums"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["tableau de variations", "extremums", "maximum", "minimum"]
+    },
+    {
+      "id": "M1-24",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Extremums d'une fonction",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Identifier les extremums locaux : f'(a) = 0 et changement de signe", "Distinguer maximum et minimum", "Résoudre des problèmes d'optimisation"],
+      "prerequisites": ["Tableau de variations", "Dérivée", "Résolution d'équations"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["extremums", "optimisation", "maximum", "minimum"]
+    },
+    {
+      "id": "M1-25",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Théorème de la bijection (introduction)",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Comprendre qu'une fonction strictement monotone est injective", "Notion d'équation f(x) = k ayant une unique solution", "Application à la résolution graphique"],
+      "prerequisites": ["Variations", "Stricte monotonie", "Résolution d'équations"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["bijection", "monotonie", "unique solution", "théorème"]
+    },
+    {
+      "id": "M1-26",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Applications physiques de la dérivée",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Vitesse instantanée v(t) = x'(t)", "Accélération a(t) = v'(t) = x''(t)", "Lien entre position, vitesse et accélération"],
+      "prerequisites": ["Dérivation", "Cinématique (notion)", "Fonctions du temps"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["physique", "vitesse", "accélération", "cinématique"]
+    },
+    {
+      "id": "M1-27",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Dérivation",
+      "title": "Synthèse et problèmes de dérivation",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Mobiliser toutes les techniques de dérivation", "Résoudre des problèmes complexes", "Étude complète de fonctions"],
+      "prerequisites": ["Toutes les notions de dérivation", "Résolution de problèmes", "Analyse"],
+      "content_types": ["video", "exercises", "quiz", "problems"],
+      "tags": ["synthèse", "problèmes", "étude de fonctions", "applications"]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

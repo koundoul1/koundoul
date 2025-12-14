@@ -1,0 +1,423 @@
+{
+  "metadata": {
+    "lot_number": 18,
+    "lot_name": "Lot 18 - Ondes & Signaux",
+    "level": "Première",
+    "subject": "Physique",
+    "prefix": "P1",
+    "chapter": "Ondes & Signaux",
+    "lesson_range": "P1-13 à P1-22",
+    "total_lessons": 10
+  },
+  "lessons": [
+    {
+      "id": "P1-13",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes progressives - Définition",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 95,
+      "objectives": ["Définir une onde progressive", "Distinguer ondes mécaniques et électromagnétiques", "Comprendre le transport d'énergie sans transport de matière", "Identifier les caractéristiques d'une onde"],
+      "prerequisites": ["P2-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["ondes", "progressives"],
+      "detailed_content": {
+        "introduction": "Une onde est une perturbation qui se propage dans l'espace et le temps. Les ondes sont omniprésentes : ondes sonores, lumière, ondes à la surface de l'eau, ondes sismiques... Elles transportent de l'énergie sans transport de matière.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Propagation d'une perturbation sans transport de matière. Milieu oscille sans se déplacer", "example": "Vague eau" },
+          { "name": "Mécaniques", "explanation": "Besoin d'un milieu matériel. Ne se propagent pas dans vide. Son, vagues, sismiques", "example": "Types" },
+          { "name": "Électromagnétiques", "explanation": "Peuvent se propager dans vide. Champ électrique + magnétique. Lumière, radio, X", "example": "Types" },
+          { "name": "Transport", "explanation": "Transport d'énergie sans transport de matière. Atténuation avec distance", "example": "Caractéristique" }
+        ],
+        "guided_example": {
+          "statement": "Pierre tombe dans étang. Rides circulaires. Onde ? Type ?",
+          "solution_steps": ["Oui, onde progressive", "Type : mécanique (nécessite milieu eau)", "Perturbation se propage radialement"]
+        },
+        "quick_exercises": [
+          "Classer : Lumière Soleil, Son guitare, Ondes radio, Vague plage",
+          "Identifier types d'ondes"
+        ],
+        "common_mistakes": [
+          "Penser ondes transportent matière",
+          "Confondre mécaniques/électromagnétiques"
+        ],
+        "summary": {
+          "key_concept": "Onde = propagation perturbation sans transport matière",
+          "key_method": "Mécaniques : besoin milieu. Électromagnétiques : vide OK",
+          "next_step": "Célérité d'une onde"
+        }
+      }
+    },
+    {
+      "id": "P1-14",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Célérité d'une onde",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Définir la célérité d'une onde", "Calculer c = d/Δt", "Connaître des ordres de grandeur de célérité", "Comprendre les facteurs influençant la célérité"],
+      "prerequisites": ["P1-13"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["célérité", "vitesse"],
+      "detailed_content": {
+        "introduction": "La célérité d'une onde est la vitesse à laquelle la perturbation se propage dans le milieu. Elle ne doit pas être confondue avec la vitesse des particules du milieu qui oscillent autour de leur position d'équilibre.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "c = d/Δt. Distance parcourue pendant durée. Unité : m/s", "example": "Formule" },
+          { "name": "Facteurs", "explanation": "Dépend du milieu et du type d'onde. T°C affecte généralement", "example": "Influences" },
+          { "name": "Ordres grandeur", "explanation": "Son air : 340 m/s. Son eau : 1500 m/s. Lumière vide : 3×10⁸ m/s", "example": "Valeurs" },
+          { "name": "Mesure", "explanation": "Capteur à distance d connue, mesurer temps Δt, calculer c = d/Δt", "example": "Méthode" }
+        ],
+        "guided_example": {
+          "statement": "Éclair vu instantanément, tonnerre 3s plus tard. Distance orage ? (c_son = 340 m/s)",
+          "solution_steps": ["Lumière instantanée", "d = c × Δt = 340 × 3", "= 1020 m ≈ 1 km"]
+        },
+        "quick_exercises": [
+          "Micro à 170 m, son 0,5s. Célérité ?",
+          "Calculer célérité"
+        ],
+        "common_mistakes": [
+          "Confondre célérité et vitesse particules",
+          "Inverser d et Δt"
+        ],
+        "summary": {
+          "key_concept": "c = d/Δt. Unité m/s",
+          "key_method": "Son air ≈ 340 m/s. Lumière vide ≈ 3×10⁸ m/s",
+          "next_step": "Ondes sinusoïdales"
+        }
+      }
+    },
+    {
+      "id": "P1-15",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes sinusoïdales - Période et fréquence",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Définir une onde sinusoïdale", "Comprendre la période T et la fréquence f", "Relier T et f par f = 1/T", "Mesurer T et f sur un oscillogramme"],
+      "prerequisites": ["P1-14", "P2-09"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["sinusoïdale", "période"],
+      "detailed_content": {
+        "introduction": "Une onde sinusoïdale est une onde dont la perturbation varie de manière sinusoïdale au cours du temps en un point donné, ou dans l'espace à un instant donné. C'est le type d'onde le plus simple et le plus fondamental.",
+        "key_concepts": [
+          { "name": "Onde sinusoïdale", "explanation": "Perturbation sinusoïdale, onde périodique. Motif se répète identiquement", "example": "Type" },
+          { "name": "Période T", "explanation": "Durée d'un motif complet. Unité : seconde (s). Oscillation complète", "example": "Définition" },
+          { "name": "Fréquence f", "explanation": "Nombre d'oscillations par seconde. f = 1/T. Unité : hertz (Hz)", "example": "Définition" },
+          { "name": "Mesure", "explanation": "Oscillogramme : repérer motif, mesurer durée T, calculer f = 1/T", "example": "Méthode" }
+        ],
+        "guided_example": {
+          "statement": "Diapason 440 Hz. Période ?",
+          "solution_steps": ["T = 1/f = 1/440", "≈ 2,27 ms"]
+        },
+        "quick_exercises": [
+          "5 oscillations 20 ms. T et f ?",
+          "Mesurer période et fréquence"
+        ],
+        "common_mistakes": [
+          "Confondre période et fréquence",
+          "Oublier convertir ms en s"
+        ],
+        "summary": {
+          "key_concept": "T = période (durée d'une oscillation). f = fréquence (nombre/s). f = 1/T",
+          "key_method": "Sur oscillogramme : compter motifs",
+          "next_step": "Longueur d'onde"
+        }
+      }
+    },
+    {
+      "id": "P1-16",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Longueur d'onde",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Définir la longueur d'onde λ", "Relier λ, c et T (ou f) par λ = cT = c/f", "Mesurer λ sur une représentation spatiale", "Calculer λ à partir de c et f"],
+      "prerequisites": ["P1-15"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["longueur", "onde"],
+      "detailed_content": {
+        "introduction": "Une onde sinusoïdale est périodique dans le temps (période T) mais aussi dans l'espace (longueur d'onde λ). La longueur d'onde est la distance parcourue par l'onde pendant une période.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "λ = distance parcourue pendant T. Distance entre deux crêtes successives. Unité : m", "example": "Caractéristique" },
+          { "name": "Relation", "explanation": "λ = cT = c/f. Liée célérité et période (fréquence)", "example": "Formules" },
+          { "name": "Périodicité", "explanation": "Double périodicité : temporelle (T) et spatiale (λ). Liées par c", "example": "Caractéristique" },
+          { "name": "Applications", "explanation": "Son grave grande λ, aigu petite λ. Lumière λ très petite (nm)", "example": "Exemples" }
+        ],
+        "guided_example": {
+          "statement": "Onde sonore 500 Hz, c = 340 m/s. λ ?",
+          "solution_steps": ["λ = c/f = 340/500", "= 0,68 m = 68 cm"]
+        },
+        "quick_exercises": [
+          "Onde eau T = 2s, c = 1,5 m/s. λ ?",
+          "Calculer longueur d'onde"
+        ],
+        "common_mistakes": [
+          "Confondre λ et T",
+          "Inverser c et f"
+        ],
+        "summary": {
+          "key_concept": "λ = cT = c/f. Distance entre 2 crêtes",
+          "key_method": "Dépend de c, T, f",
+          "next_step": "Interférences"
+        }
+      }
+    },
+    {
+      "id": "P1-17",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Interférences d'ondes",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Comprendre le phénomène d'interférence", "Distinguer interférences constructives et destructives", "Identifier les conditions d'interférence", "Observer des figures d'interférence"],
+      "prerequisites": ["P1-13"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["interférences"],
+      "detailed_content": {
+        "introduction": "Lorsque deux ondes se rencontrent, elles se superposent : leurs effets s'additionnent. Selon leur déphasage, cette addition peut amplifier ou diminuer l'amplitude résultante. C'est le phénomène d'interférence.",
+        "key_concepts": [
+          { "name": "Superposition", "explanation": "Somme algébrique des perturbations. Chaque onde se propage indépendamment", "example": "Principe" },
+          { "name": "Constructives", "explanation": "En phase (crêtes ensemble) : amplitudes additionnent, amplification", "example": "Type" },
+          { "name": "Destructives", "explanation": "Opposition phase (crête/creux) : amplitudes soustraient, annulation", "example": "Type" },
+          { "name": "Conditions", "explanation": "Sources cohérentes : même fréquence, phase constante. Sinon interférences instables", "example": "Requis" }
+        ],
+        "guided_example": {
+          "statement": "2HP, λ = 0,34 m. M : HP1 1,70 m, HP2 2,04 m. Interférence ?",
+          "solution_steps": ["Différence marche : δ = 2,04 - 1,70 = 0,34 = λ", "En phase ⟹ constructive"]
+        },
+        "quick_exercises": [
+          "Sources λ = 2 cm, S₁M = 10 cm, S₂M = 11 cm. Type interférence ?",
+          "Déterminer type interférence"
+        ],
+        "common_mistakes": [
+          "Confondre constructive/destructive",
+          "Ne pas calculer différence marche"
+        ],
+        "summary": {
+          "key_concept": "Superposition : somme amplitudes. δ=kλ : constructive, δ=(k+½)λ : destructive",
+          "key_method": "Sources cohérentes nécessaires",
+          "next_step": "Diffraction"
+        }
+      }
+    },
+    {
+      "id": "P1-18",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Diffraction d'une onde",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 95,
+      "objectives": ["Définir la diffraction", "Identifier les conditions de diffraction", "Relier l'ouverture angulaire à λ et a", "Comprendre les applications de la diffraction"],
+      "prerequisites": ["P1-13"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["diffraction"],
+      "detailed_content": {
+        "introduction": "La diffraction est le phénomène par lequel une onde est déviée de sa direction de propagation rectiligne lorsqu'elle rencontre un obstacle ou une ouverture dont la taille est de l'ordre de grandeur de la longueur d'onde.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Écartement de l'onde par obstacle/ouverture. Contourne l'obstacle", "example": "Phénomène" },
+          { "name": "Conditions", "explanation": "Diffraction marquée si taille a ≈ λ. Si a >> λ : négligeable. Si a << λ : totale", "example": "Critères" },
+          { "name": "Ouverture", "explanation": "Angle diffraction θ ≈ λ/a. Plus λ/a grand, plus diffraction marquée", "example": "Formule" },
+          { "name": "Applications", "explanation": "Limite résolution optique, dimensionnement antennes", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Lumière rouge 650 nm par fente 0,1 mm. Angle diffraction ?",
+          "solution_steps": ["θ ≈ λ/a = (650×10⁻⁹)/(0,1×10⁻³)", "= 6,5×10⁻³ rad ≈ 0,37°"]
+        },
+        "quick_exercises": [
+          "Son 850 Hz, c = 340 m/s, porte 0,80 m. λ et θ ?",
+          "Diffraction d'une onde"
+        ],
+        "common_mistakes": [
+          "Confondre diffraction/reflexion",
+          "Oublier calculer λ avant θ"
+        ],
+        "summary": {
+          "key_concept": "Diffraction si a ≈ λ. θ ≈ λ/a (angle diffraction)",
+          "key_method": "Plus λ/a grand, plus marquée",
+          "next_step": "Effet Doppler"
+        }
+      }
+    },
+    {
+      "id": "P1-19",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Effet Doppler",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Comprendre l'effet Doppler", "Expliquer le changement de fréquence perçue", "Distinguer source/récepteur en mouvement", "Identifier des applications (radar, astronomie)"],
+      "prerequisites": ["P1-15"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Doppler"],
+      "detailed_content": {
+        "introduction": "L'effet Doppler est le changement de fréquence (ou de longueur d'onde) d'une onde perçue par un observateur, dû au mouvement relatif entre la source et l'observateur. C'est un phénomène courant avec les ondes sonores et lumineuses.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Mouvement relatif source-récepteur ⟹ fréquence perçue f' ≠ f émise", "example": "Phénomène" },
+          { "name": "Rapprochement", "explanation": "f' > f (son plus aigu, lumière vers bleu). Fréquence augmente", "example": "Cas" },
+          { "name": "Éloignement", "explanation": "f' < f (son plus grave, lumière vers rouge). Fréquence diminue", "example": "Cas" },
+          { "name": "Applications", "explanation": "Radars vitesse, échographie, astronomie (vitesse étoiles, expansion univers)", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Voiture s'approche, son plus aigu. Expliquer.",
+          "solution_steps": ["Rapprochement ⟹ f' > f", "Son plus aigu"]
+        },
+        "quick_exercises": [
+          "Spectre étoile décalé vers rouge. Mouvement ?",
+          "Effet Doppler"
+        ],
+        "common_mistakes": [
+          "Inverser rapprochement/éloignement",
+          "Confondre Doppler/autres phénomènes"
+        ],
+        "summary": {
+          "key_concept": "f' > f si rapprochement (aigu/bleu). f' < f si éloignement (grave/rouge)",
+          "key_method": "Applications : radar, astronomie, médecine",
+          "next_step": "Nature ondulatoire lumière"
+        }
+      }
+    },
+    {
+      "id": "P1-20",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "La lumière - Nature ondulatoire",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Comprendre la nature ondulatoire de la lumière", "Connaître le spectre électromagnétique", "Identifier les domaines (UV, visible, IR...)", "Relier couleur et longueur d'onde"],
+      "prerequisites": ["P1-13", "P2-12"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["lumière", "ondulatoire"],
+      "detailed_content": {
+        "introduction": "La lumière est une onde électromagnétique qui se propage dans le vide et dans certains milieux matériels. Elle fait partie d'un vaste spectre électromagnétique qui comprend les ondes radio, les micro-ondes, les infrarouges, les ultraviolets, les rayons X et les rayons gamma.",
+        "key_concepts": [
+          { "name": "Nature", "explanation": "Onde électromagnétique : champ électrique + magnétique. Se propage vide et milieux", "example": "Caractère" },
+          { "name": "Spectre", "explanation": "γ, X, UV, visible, IR, micro-ondes, radio. Ordre λ croissant", "example": "Classification" },
+          { "name": "Visible", "explanation": "400-800 nm. Violet 400-450, rouge 620-800. Lumière blanche = toutes couleurs", "example": "Domaine" },
+          { "name": "Propriétés", "explanation": "Toutes EM : c dans vide, transversales, transportent énergie. Diffèrent par λ, E", "example": "Caractéristiques" }
+        ],
+        "guided_example": {
+          "statement": "Laser rouge 650 nm. Domaine ? Fréquence ?",
+          "solution_steps": ["Visible rouge (620-800 nm)", "f = c/λ ≈ 4,6×10¹⁴ Hz"]
+        },
+        "quick_exercises": [
+          "Ordre λ croissante : X, vert, radio, IR",
+          "Spectre électromagnétique"
+        ],
+        "common_mistakes": [
+          "Confondre domaines spectre",
+          "Inverser ordre longueurs d'onde"
+        ],
+        "summary": {
+          "key_concept": "Lumière = onde électromagnétique. Spectre : radio → ... → gamma",
+          "key_method": "Visible : 400-800 nm. c = 3×10⁸ m/s dans vide",
+          "next_step": "Réfraction"
+        }
+      }
+    },
+    {
+      "id": "P1-21",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Réfraction de la lumière",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Définir la réfraction", "Comprendre le changement de direction", "Connaître les lois de Snell-Descartes", "Appliquer n₁ sin(i₁) = n₂ sin(i₂)"],
+      "prerequisites": ["P1-20"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["réfraction"],
+      "detailed_content": {
+        "introduction": "La réfraction est le changement de direction de propagation de la lumière lorsqu'elle passe d'un milieu transparent à un autre. Ce phénomène est dû à la variation de la célérité de la lumière selon le milieu.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Changement direction au passage dioptre entre deux milieux. Vitesse change, f constant", "example": "Phénomène" },
+          { "name": "Indice", "explanation": "n = c₀/c. Vide n=1, air n≈1, eau n≈1,33, verre n≈1,5-1,9. Plus n grand, plus lent", "example": "Paramètre" },
+          { "name": "Lois", "explanation": "1) Rayon incident, réfracté, normale dans même plan. 2) n₁ sin(i₁) = n₂ sin(i₂)", "example": "Snell-Descartes" },
+          { "name": "Conséquences", "explanation": "n₂ > n₁ ⟹ s'approche normale. n₂ < n₁ ⟹ s'éloigne normale", "example": "Comportement" }
+        ],
+        "guided_example": {
+          "statement": "Air (n=1) → eau (n=1,33), i₁ = 30°. i₂ ?",
+          "solution_steps": ["n₁ sin(i₁) = n₂ sin(i₂)", "1×sin30° = 1,33×sin(i₂)", "i₂ ≈ 22,1° (se rapproche normale)"]
+        },
+        "quick_exercises": [
+          "Verre (n=1,5) → air, i₁ = 40°. i₂ ?",
+          "Réfraction de la lumière"
+        ],
+        "common_mistakes": [
+          "Confondre angles incidence/réfraction",
+          "Inverser n₁ et n₂"
+        ],
+        "summary": {
+          "key_concept": "Réfraction : changement direction. n = c₀/c",
+          "key_method": "Loi : n₁ sin(i₁) = n₂ sin(i₂). Angles depuis normale",
+          "next_step": "Synthèse chapitre"
+        }
+      }
+    },
+    {
+      "id": "P1-22",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Synthèse - Ondes et Signaux",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Synthétiser les connaissances sur les ondes", "Distinguer les différents types d'ondes et phénomènes", "Appliquer les formules clés", "Résoudre des problèmes de synthèse"],
+      "prerequisites": ["P1-13", "P1-17", "P1-21"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "ondes"],
+      "detailed_content": {
+        "introduction": "Les ondes sont des phénomènes de propagation de perturbations transportant de l'énergie sans transport de matière. Elles présentent des caractéristiques et des comportements variés selon leur nature et le milieu de propagation.",
+        "key_concepts": [
+          { "name": "Types", "explanation": "Mécaniques (besoin milieu) vs électromagnétiques (vide OK). Transversales vs longitudinales", "example": "Classification" },
+          { "name": "Grandeurs", "explanation": "c = d/Δt, f = 1/T, λ = cT = c/f. Relations fondamentales", "example": "Caractéristiques" },
+          { "name": "Phénomènes", "explanation": "Interférences, diffraction θ≈λ/a, Doppler, réfraction n₁sin(i₁)=n₂sin(i₂)", "example": "Comportements" },
+          { "name": "Stratégie", "explanation": "Identifier type, repérer grandeurs, choisir formule, vérifier unités, interpréter", "example": "Méthode" }
+        ],
+        "guided_example": {
+          "statement": "Son 680 Hz, c = 340 m/s. λ ? Diffraction ouverture 0,5 m ?",
+          "solution_steps": ["λ = c/f = 340/680 = 0,5 m", "a = λ ⟹ diffraction marquée"]
+        },
+        "quick_exercises": [
+          "Lumière verte 550 nm. f ? λ verre (n=1,5) ? i₂ si i₁=30° ?",
+          "Problèmes de synthèse"
+        ],
+        "common_mistakes": [
+          "Confondre formules",
+          "Oublier que f constant lors réfraction"
+        ],
+        "summary": {
+          "key_concept": "c = d/Δt, f = 1/T, λ = c/f. Interférences, diffraction, Doppler, réfraction",
+          "key_method": "Identifier phénomène, appliquer bonne formule. Les ondes partout ! 🌊",
+          "next_step": "Fin chapitre Ondes"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

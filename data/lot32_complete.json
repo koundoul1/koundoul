@@ -1,0 +1,423 @@
+{
+  "metadata": {
+    "lot_number": 28,
+    "lot_name": "Lot 28 - Suites Avancées",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Suites Avancées",
+    "lesson_range": "MT-68 à MT-77",
+    "total_lessons": 10
+  },
+  "lessons": [
+    {
+      "id": "MT-68",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Limites de suites - Définitions",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir la limite d'une suite", "Distinguer convergence et divergence", "Comprendre la limite infinie", "Utiliser la notation lim"],
+      "prerequisites": ["M1-28", "MT-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limite", "convergence"],
+      "detailed_content": {
+        "introduction": "La notion de limite pour les suites généralise celle vue en Première. Elle permet de décrire le comportement asymptotique d'une suite quand n tend vers l'infini.",
+        "key_concepts": [
+          { "name": "Limite finie", "explanation": "lim uₙ = ℓ. Suite convergente vers ℓ. Distance devient petite", "example": "1/n → 0" },
+          { "name": "Limite infinie", "explanation": "lim uₙ = +∞ (ou -∞). Suite diverge vers l'infini", "example": "n² → +∞" },
+          { "name": "Divergence", "explanation": "Pas de limite finie ni infinie. Oscillation possible", "example": "(-1)ⁿ" },
+          { "name": "Unicité", "explanation": "Si limite existe, elle est unique. Suite convergente bornée", "example": "Propriété fondamentale" }
+        ],
+        "guided_example": {
+          "statement": "Déterminer la limite de uₙ = 1/n.",
+          "solution_steps": ["Pour tout ε > 0, il existe N = 1/ε tel que pour n > N", "|1/n - 0| = 1/n < ε", "lim(n→+∞) 1/n = 0"]
+        },
+        "quick_exercises": [
+          "La suite uₙ = n² a-t-elle une limite ? Si oui, laquelle ?",
+          "Étudier limites de suites simples"
+        ],
+        "common_mistakes": [
+          "Confondre convergence et divergence",
+          "Dire qu'une suite qui tend vers l'infini 'converge'"
+        ],
+        "summary": {
+          "key_concept": "Convergente = limite finie. Divergente = pas de limite ou limite infinie",
+          "key_method": "1/n → 0, n → +∞. Limite unique si elle existe",
+          "next_step": "Opérations sur les limites"
+        }
+      }
+    },
+    {
+      "id": "MT-69",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Opérations sur les limites de suites",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Utiliser les théorèmes sur les limites", "Calculer des limites par opérations", "Identifier les formes indéterminées", "Lever les indéterminations"],
+      "prerequisites": ["MT-68"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["opérations", "indéterminées"],
+      "detailed_content": {
+        "introduction": "Comme pour les fonctions, on peut calculer la limite d'une suite obtenue par opérations à partir des limites des suites de départ, sauf dans certains cas indéterminés.",
+        "key_concepts": [
+          { "name": "Somme", "explanation": "lim(uₙ + vₙ) = ℓ + ℓ'. FI : +∞ - ∞", "example": "Formes indéterminées" },
+          { "name": "Produit", "explanation": "lim(uₙ × vₙ) = ℓ × ℓ'. FI : 0 × ∞", "example": "Multiplication" },
+          { "name": "Quotient", "explanation": "lim(uₙ/vₙ) = ℓ/ℓ'. FI : ∞/∞ et 0/0", "example": "Division" },
+          { "name": "Levée FI", "explanation": "+∞-∞ : factoriser. 0×∞ : quotient. ∞/∞ : diviser. 0/0 : simplifier", "example": "Techniques" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(n→+∞) (n² + 3n) / (2n² - 5).",
+          "solution_steps": ["FI ∞/∞. Diviser par n²", "lim (1 + 3/n) / (2 - 5/n²) = (1 + 0) / (2 - 0)", "= 1/2"]
+        },
+        "quick_exercises": [
+          "Calculer lim(n→+∞) (2n² - n + 1) / (n + 3)",
+          "Opérations sur les limites"
+        ],
+        "common_mistakes": [
+          "Oublier de lever les indéterminations",
+          "Diviser par la mauvaise puissance"
+        ],
+        "summary": {
+          "key_concept": "FI classiques : +∞-∞, 0×∞, ∞/∞, 0/0",
+          "key_method": "∞/∞ : diviser par plus haute puissance. +∞-∞ : factoriser",
+          "next_step": "Théorèmes de comparaison"
+        }
+      }
+    },
+    {
+      "id": "MT-70",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Théorèmes de comparaison et d'encadrement",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Utiliser le théorème des gendarmes", "Appliquer les théorèmes de comparaison", "Démontrer des limites par encadrement", "Exploiter les inégalités"],
+      "prerequisites": ["MT-68", "MT-69"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["comparaison", "gendarmes"],
+      "detailed_content": {
+        "introduction": "Les théorèmes de comparaison permettent de déterminer la limite d'une suite en la comparant à d'autres suites dont on connaît déjà les limites.",
+        "key_concepts": [
+          { "name": "Gendarmes", "explanation": "uₙ ≤ vₙ ≤ wₙ et lim u = lim w = ℓ ⇒ lim v = ℓ", "example": "Encadrement" },
+          { "name": "Comparaison", "explanation": "uₙ ≤ vₙ et lim u = +∞ ⇒ lim v = +∞", "example": "Minorations" },
+          { "name": "Limite inégalités", "explanation": "uₙ ≤ vₙ et convergents ⇒ lim u ≤ lim v. < peut devenir ≤", "example": "Passage limite" },
+          { "name": "Applications", "explanation": "Sin, cos : -1 ≤ sin(n) ≤ 1. Utiliser bornes", "example": "Bornées" }
+        ],
+        "guided_example": {
+          "statement": "Montrer que lim(n→+∞) sin(n)/n = 0.",
+          "solution_steps": ["-1 ≤ sin(n) ≤ 1", "⇒ -1/n ≤ sin(n)/n ≤ 1/n", "lim(-1/n) = lim(1/n) = 0", "Par gendarmes, lim sin(n)/n = 0"]
+        },
+        "quick_exercises": [
+          "Montrer que lim(n→+∞) (n + cos(n))/n = 1",
+          "Utiliser encadrement"
+        ],
+        "common_mistakes": [
+          "Oublier que les bornes doivent avoir même limite",
+          "Passage à la limite incorrect"
+        ],
+        "summary": {
+          "key_concept": "Gendarmes : u ≤ v ≤ w et lim u = lim w = ℓ ⇒ lim v = ℓ",
+          "key_method": "Très utile pour sin, cos. Passer à la limite : < peut devenir ≤",
+          "next_step": "Suites monotones"
+        }
+      }
+    },
+    {
+      "id": "MT-71",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Suites monotones et convergence",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Lier monotonie et convergence", "Utiliser le théorème de convergence monotone", "Démontrer la convergence sans calculer la limite", "Appliquer aux suites majorées/minorées"],
+      "prerequisites": ["M1-30", "MT-68"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["monotone", "convergence"],
+      "detailed_content": {
+        "introduction": "La monotonie d'une suite, combinée à une condition de bornitude, permet de garantir l'existence d'une limite, même si on ne peut pas la calculer explicitement.",
+        "key_concepts": [
+          { "name": "Théorème", "explanation": "Croissante majorée ⇒ converge. Décroissante minorée ⇒ converge", "example": "Existence limite" },
+          { "name": "Divergence", "explanation": "Croissante non majorée ⇒ +∞. Décroissante non minorée ⇒ -∞", "example": "Vers infini" },
+          { "name": "Méthode", "explanation": "1) Monotonie, 2) Majorant/minorant, 3) Convergence, 4) Limite éventuelle", "example": "Étude" },
+          { "name": "Limite", "explanation": "Croissante vers ℓ : uₙ ≤ ℓ. Décroissante vers ℓ : uₙ ≥ ℓ", "example": "Bornes" }
+        ],
+        "guided_example": {
+          "statement": "uₙ₊₁ = √(1 + uₙ), u₀ = 0. Montrer que (uₙ) converge.",
+          "solution_steps": ["Montrer uₙ ≤ 2 par récurrence", "Montrer croissance", "Croissante majorée ⇒ converge"]
+        },
+        "quick_exercises": [
+          "Soit uₙ = 1 + 1/2 + ... + 1/n. Montrer que (uₙ) diverge",
+          "Étudier monotonie et convergence"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier la monotonie",
+          "Ne pas chercher majorant/minorant"
+        ],
+        "summary": {
+          "key_concept": "Croissante + majorée ⇒ converge. Existence ≠ valeur de la limite",
+          "key_method": "Croissante + non majorée ⇒ +∞",
+          "next_step": "Suites adjacentes"
+        }
+      }
+    },
+    {
+      "id": "MT-72",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Suites adjacentes",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Définir deux suites adjacentes", "Démontrer l'adjacence", "Utiliser le théorème des suites adjacentes", "Appliquer aux approximations"],
+      "prerequisites": ["MT-71"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["adjacentes"],
+      "detailed_content": {
+        "introduction": "Deux suites adjacentes convergent vers la même limite. Cette propriété est utile pour démontrer la convergence de suites ou pour encadrer une limite.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "u croissante, v décroissante, lim(v-u) = 0", "example": "3 conditions" },
+          { "name": "Théorème", "explanation": "Adjacentes ⇒ convergent et même limite ℓ. uₙ ≤ ℓ ≤ vₙ", "example": "Limite" },
+          { "name": "Démonstration", "explanation": "1) u croissante, 2) v décroissante, 3) lim(v-u) = 0", "example": "Méthode" },
+          { "name": "Applications", "explanation": "Encadrement de limite. Approximation π, e, √2", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "uₙ = 1 + 1/2² + ... + 1/n², vₙ = uₙ + 1/n. Adjacentes ?",
+          "solution_steps": ["uₙ croissante", "vₙ décroissante (à vérifier)", "lim(vₙ - uₙ) = lim 1/n = 0", "Adjacentes"]
+        },
+        "quick_exercises": [
+          "uₙ = (1 + 1/n)ⁿ et vₙ = uₙ × (1 + 1/n). Adjacentes ?",
+          "Démontrer adjacence"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier les 3 conditions",
+          "Inverser croissante et décroissante"
+        ],
+        "summary": {
+          "key_concept": "3 conditions : croissante, décroissante, lim(v-u)=0. Adjacentes ⇒ même limite",
+          "key_method": "uₙ ≤ ℓ ≤ vₙ (encadrement). Utile pour approximations",
+          "next_step": "Suites récurrentes"
+        }
+      }
+    },
+    {
+      "id": "MT-73",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Suites récurrentes uₙ₊₁ = f(uₙ)",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Étudier les suites définies par récurrence", "Utiliser les variations de f", "Déterminer les points fixes", "Étudier la convergence"],
+      "prerequisites": ["MT-71", "MT-20"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["récurrente", "point fixe"],
+      "detailed_content": {
+        "introduction": "Les suites récurrentes de la forme uₙ₊₁ = f(uₙ) se prêtent bien à une étude graphique et analytique. Leur comportement est lié aux propriétés de la fonction f.",
+        "key_concepts": [
+          { "name": "Point fixe", "explanation": "f(ℓ) = ℓ. Si converge vers ℓ et f continue, ℓ point fixe", "example": "Limite" },
+          { "name": "Monotonie", "explanation": "f croissante ⇒ suite monotone. f décroissante ⇒ sous-suites monotones", "example": "Variations" },
+          { "name": "Convergence", "explanation": "1) Point fixe f(x)=x, 2) Variations f, 3) Monotonie, 4) Bornée, 5) Limite", "example": "Méthode" },
+          { "name": "Contractante", "explanation": "|f'(x)| < 1 au voisinage du point fixe ⇒ convergence", "example": "Théorème" }
+        ],
+        "guided_example": {
+          "statement": "uₙ₊₁ = √(1 + uₙ), u₀ = 0. Trouver la limite.",
+          "solution_steps": ["Point fixe : ℓ = √(1 + ℓ)", "ℓ² = 1 + ℓ", "ℓ² - ℓ - 1 = 0", "ℓ = (1 + √5)/2 (φ)"]
+        },
+        "quick_exercises": [
+          "uₙ₊₁ = 1/2 (uₙ + 2/uₙ), u₀ = 1. Points fixes ?",
+          "Étudier suites récurrentes"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier la convergence avant limite",
+          "Ne pas résoudre f(x) = x"
+        ],
+        "summary": {
+          "key_concept": "Point fixe : f(ℓ) = ℓ. Si converge vers ℓ, alors f(ℓ) = ℓ",
+          "key_method": "f croissante ⇒ suite monotone. Graphique : escalier vers point fixe",
+          "next_step": "Convergence avec fonctions"
+        }
+      }
+    },
+    {
+      "id": "MT-74",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Convergence et limite avec fonctions",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Lier limite de suite et limite de fonction", "Utiliser lim f(n) pour trouver lim uₙ", "Appliquer aux suites de la forme f(n)", "Utiliser les théorèmes de composition"],
+      "prerequisites": ["MT-68", "MT-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["fonction", "composition"],
+      "detailed_content": {
+        "introduction": "Lorsqu'une suite est définie par uₙ = f(n) où f est une fonction, on peut utiliser les techniques de limites de fonctions pour déterminer la limite de la suite.",
+        "key_concepts": [
+          { "name": "Théorème", "explanation": "uₙ = f(n). lim f(x) = ℓ (x→+∞) ⇒ lim uₙ = ℓ", "example": "Passage suite-fonction" },
+          { "name": "Applications", "explanation": "Suites polynomiales, exponentielles, logarithmes", "example": "Types" },
+          { "name": "Composition", "explanation": "uₙ → ℓ et lim g(x) = L ⇒ lim g(uₙ) = L", "example": "Composée" },
+          { "name": "Croissances", "explanation": "e^n ≫ nᵏ ≫ ln n. Limites de référence", "example": "Comparées" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(n→+∞) n² / e^n.",
+          "solution_steps": ["Croissance comparée", "lim n² / e^n = 0"]
+        },
+        "quick_exercises": [
+          "Calculer lim(n→+∞) (ln n) / n",
+          "Utiliser croissances comparées"
+        ],
+        "common_mistakes": [
+          "Oublier les croissances comparées",
+          "Confondre comportement à l'infini et au voisinage de 0"
+        ],
+        "summary": {
+          "key_concept": "uₙ = f(n) ⇒ lim uₙ = lim f(x) (x→+∞)",
+          "key_method": "e^n ≫ nᵏ ≫ ln n. Croissances comparées essentielles",
+          "next_step": "Récurrence avancée"
+        }
+      }
+    },
+    {
+      "id": "MT-75",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Démonstration par récurrence avancée",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 125,
+      "objectives": ["Maîtriser la récurrence forte", "Démontrer des inégalités par récurrence", "Utiliser la récurrence pour montrer la convergence", "Combiner récurrence et autres méthodes"],
+      "prerequisites": ["M1-38"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["récurrence", "démonstration"],
+      "detailed_content": {
+        "introduction": "La démonstration par récurrence est un outil essentiel pour prouver des propriétés sur les suites. La récurrence forte permet de traiter des cas plus complexes.",
+        "key_concepts": [
+          { "name": "Simple", "explanation": "1) Init P(n₀), 2) Héré P(n)⇒P(n+1), 3) Conclu", "example": "Base" },
+          { "name": "Forte", "explanation": "P(k) pour k ≤ n ⇒ P(n+1). Utile suites uₙ₊₂", "example": "Renforcée" },
+          { "name": "Inégalités", "explanation": "Prouver uₙ ≤ M. Init + Héré", "example": "Majorations" },
+          { "name": "Applications", "explanation": "Convergence, encadrements, formules explicites", "example": "Prouver" }
+        ],
+        "guided_example": {
+          "statement": "uₙ₊₁ = √(1 + uₙ), u₀ = 0. Montrer uₙ ≤ 2 par récurrence.",
+          "solution_steps": ["Init : u₀ = 0 ≤ 2", "Héré : uₙ ≤ 2 ⇒ uₙ₊₁ = √(1 + uₙ) ≤ √3 < 2", "Conclusion"]
+        },
+        "quick_exercises": [
+          "Fibonacci uₙ₊₂ = uₙ₊₁ + uₙ. Montrer uₙ ≤ 2ⁿ par récurrence forte",
+          "Récurrence avancée"
+        ],
+        "common_mistakes": [
+          "Oublier l'initialisation",
+          "Ne pas utiliser l'hypothèse"
+        ],
+        "summary": {
+          "key_concept": "Récurrence = preuve. Init + Héré + Conclu",
+          "key_method": "Forte : supposer P(k) pour k ≤ n. Utile inégalités",
+          "next_step": "Comportement asymptotique"
+        }
+      }
+    },
+    {
+      "id": "MT-76",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Comportement asymptotique des suites",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Étudier le comportement asymptotique", "Déterminer des équivalents de suites", "Utiliser la notation ~", "Simplifier l'étude des limites"],
+      "prerequisites": ["MT-68", "MT-74"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["asymptotique", "équivalents"],
+      "detailed_content": {
+        "introduction": "L'étude du comportement asymptotique permet de déterminer le 'terme dominant' d'une suite et de simplifier les calculs de limites.",
+        "key_concepts": [
+          { "name": "Équivalent", "explanation": "uₙ ~ vₙ ⟺ lim uₙ/vₙ = 1. Même comportement à l'infini", "example": "2n² + 3n ~ 2n²" },
+          { "name": "Propriétés", "explanation": "uₙ × wₙ ~ vₙ × tₙ, uₙ/wₙ ~ vₙ/tₙ. Somme : attention !", "example": "Opérations" },
+          { "name": "Prépondérant", "explanation": "Terme tendant le plus vite vers l'infini. n³ + 5n² ~ n³", "example": "Domination" },
+          { "name": "Applications", "explanation": "Simplifier calculs limites. FI ∞/∞", "example": "Technique" }
+        ],
+        "guided_example": {
+          "statement": "Trouver équivalent simple de uₙ = 3n³ + 2n² - 5n + 7.",
+          "solution_steps": ["Terme dominant : 3n³", "uₙ/(3n³) → 1", "uₙ ~ 3n³"]
+        },
+        "quick_exercises": [
+          "Calculer lim(n→+∞) (n³ + 2n) / (2n³ - n²) avec équivalents",
+          "Utiliser équivalents"
+        ],
+        "common_mistakes": [
+          "Appliquer équivalents aux sommes sans précaution",
+          "Confondre ~ et ="
+        ],
+        "summary": {
+          "key_concept": "uₙ ~ vₙ ⟺ lim uₙ/vₙ = 1",
+          "key_method": "Terme prépondérant = plus haut degré. Produit/quotient OK, somme attention",
+          "next_step": "Synthèse finale"
+        }
+      }
+    },
+    {
+      "id": "MT-77",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Suites Avancées",
+      "title": "Synthèse - Suites Avancées",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 140,
+      "objectives": ["Maîtriser tous les outils d'étude de suites", "Résoudre des problèmes de synthèse", "Combiner plusieurs techniques", "Appliquer à des cas complexes"],
+      "prerequisites": ["MT-68", "MT-71", "MT-72", "MT-73"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "suites"],
+      "detailed_content": {
+        "introduction": "L'étude complète d'une suite nécessite de combiner plusieurs outils : définition, monotonie, convergence, limite, récurrence. Cette synthèse regroupe toutes les méthodes.",
+        "key_concepts": [
+          { "name": "Limites", "explanation": "Convergence vers ℓ. Divergence ±∞. Opérations. Comparaisons", "example": "Base" },
+          { "name": "Convergence", "explanation": "Monotone bornée. Adjacentes. Gendarmes. Point fixe", "example": "Théorèmes" },
+          { "name": "Techniques", "explanation": "Monotonie, bornitude, convergence, limite, récurrence", "example": "Étude" },
+          { "name": "Stratégie", "explanation": "1) Quelques termes, 2) Conjecture, 3) Monotonie/bornitude, 4) Convergence, 5) Limite, 6) Vérif", "example": "Approche" }
+        ],
+        "guided_example": {
+          "statement": "Étude complète : uₙ₊₁ = (uₙ + 3)/(uₙ + 1), u₀ = 0.",
+          "solution_steps": ["Point fixe : ℓ = √3", "Monotonie et bornitude", "Convergence : croissante majorée", "Limite : √3"]
+        },
+        "quick_exercises": [
+          "vₙ = 1 + 1/2 + 1/4 + ... + 1/2ⁿ. Montrer convergence et limite",
+          "Problèmes de synthèse"
+        ],
+        "common_mistakes": [
+          "Ne pas utiliser toutes les techniques",
+          "Oublier de vérifier la convergence avant la limite"
+        ],
+        "summary": {
+          "key_concept": "Combiner monotonie + bornitude. Point fixe pour récurrente. Récurrence pour prouver",
+          "key_method": "Gendarmes pour encadrer. Rigueur et méthode essentielles",
+          "next_step": "Vers autres chapitres"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

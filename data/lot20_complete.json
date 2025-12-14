@@ -1,0 +1,297 @@
+{
+  "metadata": {
+    "lot_number": 6,
+    "lot_name": "Lot 6 - Ondes & Signaux",
+    "level": "Seconde",
+    "subject": "Physique",
+    "prefix": "P2",
+    "chapter": "Ondes & Signaux",
+    "lesson_range": "P2-08 à P2-14",
+    "total_lessons": 7
+  },
+  "lessons": [
+    {
+      "id": "P2-08",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes mécaniques - Introduction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir ce qu'est une onde mécanique", "Distinguer onde transversale et onde longitudinale", "Comprendre la propagation d'une perturbation", "Identifier des exemples d'ondes mécaniques"],
+      "prerequisites": [],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["ondes", "mécanique"],
+      "detailed_content": {
+        "introduction": "Les ondes sont partout autour de nous : vagues sur l'eau, sons, ondes sismiques. Comprendre leur nature et leur propagation est essentiel en physique.",
+        "key_concepts": [
+          { "name": "Onde mécanique", "explanation": "Propagation d'une perturbation dans un milieu matériel, sans transport de matière mais avec transport d'énergie", "example": "Vagues sur l'eau, corde vibrante, son dans l'air" },
+          { "name": "Onde transversale", "explanation": "Perturbation perpendiculaire à la direction de propagation", "example": "Onde sur une corde, vagues à la surface de l'eau" },
+          { "name": "Onde longitudinale", "explanation": "Perturbation parallèle à la direction de propagation", "example": "Onde sonore, ressort comprimé-étiré" }
+        ],
+        "method_step_by_step": [
+          "1. Identifier le phénomène ondulatoire",
+          "2. Déterminer le milieu de propagation",
+          "3. Classer l'onde (transversale ou longitudinale)"
+        ],
+        "guided_example": {
+          "statement": "On agite l'extrémité d'une corde horizontale. Quel type d'onde se propage ?",
+          "solution_steps": [
+            "Onde transversale : la main agite la corde verticalement",
+            "Mais l'onde se propage horizontalement le long de la corde",
+            "Le mouvement (vertical) est perpendiculaire à la propagation (horizontale)"
+          ]
+        },
+        "quick_exercises": [
+          "Classer en transversales/longitudinales : son dans l'air, vague océan, ressort comprimé, onde sismique S",
+          "Identifier des exemples d'ondes mécaniques"
+        ],
+        "common_mistakes": [
+          "Penser qu'une onde transporte de la matière",
+          "Confondre direction de perturbation et direction de propagation",
+          "Oublier qu'une onde mécanique nécessite un milieu matériel"
+        ],
+        "summary": {
+          "key_concept": "Onde mécanique = propagation d'une perturbation avec transport d'énergie",
+          "key_method": "Transversale : perturbation ⊥ propagation. Longitudinale : perturbation // propagation",
+          "next_step": "Étudier les ondes sonores"
+        }
+      }
+    },
+    {
+      "id": "P2-09",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes sonores",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 85,
+      "objectives": ["Définir une onde sonore", "Comprendre la propagation du son dans différents milieux", "Connaître l'ordre de grandeur de la vitesse du son", "Distinguer infrason, son audible et ultrason"],
+      "prerequisites": ["P2-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["son", "ultrasons"],
+      "detailed_content": {
+        "introduction": "Le son est une onde mécanique longitudinale qui se propage dans l'air, l'eau ou les solides.",
+        "key_concepts": [
+          { "name": "Nature du son", "explanation": "Onde mécanique longitudinale : propagation de compressions et dilatations", "example": "Dans l'air, les molécules oscillent autour de leur position d'équilibre" },
+          { "name": "Vitesse du son", "explanation": "Air à 20°C : v ≈ 340 m/s. Eau : v ≈ 1500 m/s. Solides : v ≈ 5000 m/s", "example": "Plus le milieu est rigide, plus le son se propage vite" },
+          { "name": "Domaines de fréquence", "explanation": "Infrasons < 20 Hz, sons audibles 20 Hz - 20 kHz, ultrasons > 20 kHz", "example": "La fréquence détermine la hauteur du son" }
+        ],
+        "guided_example": {
+          "statement": "Un éclair se produit à 1700 m. Combien de temps après voit-on l'éclair entend-on le tonnerre ? (v = 340 m/s)",
+          "solution_steps": [
+            "On voit l'éclair instantanément (vitesse de la lumière très grande)",
+            "Le son met : t = d/v = 1700/340 = 5 s",
+            "Délai de 5 secondes entre éclair et tonnerre"
+          ]
+        },
+        "quick_exercises": [
+          "Un sonar émet un ultrason qui revient en 0,4 s. Distance de l'obstacle ? (v dans eau = 1500 m/s)",
+          "Calculer la distance d'un orage avec le délai éclair-tonnerre"
+        ],
+        "summary": {
+          "key_concept": "Son = onde mécanique longitudinale nécessitant un milieu",
+          "key_method": "Vitesse du son ≈ 340 m/s dans l'air (à retenir)",
+          "next_step": "Étudier la période et la fréquence d'une onde"
+        }
+      }
+    },
+    {
+      "id": "P2-10",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Période et fréquence d'une onde",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 85,
+      "objectives": ["Définir la période T d'une onde périodique", "Définir la fréquence f d'une onde", "Utiliser la relation f = 1/T", "Interpréter un signal périodique"],
+      "prerequisites": ["P2-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["période", "fréquence"],
+      "detailed_content": {
+        "introduction": "De nombreuses ondes sont périodiques : elles se répètent à intervalles réguliers. La période et la fréquence caractérisent cette répétition.",
+        "key_concepts": [
+          { "name": "Période T", "explanation": "Durée d'un motif complet, durée entre deux positions identiques", "example": "T en secondes (s)" },
+          { "name": "Fréquence f", "explanation": "Nombre de répétitions par seconde", "example": "f en hertz (Hz), 1 Hz = 1 oscillation/s" },
+          { "name": "Relation fondamentale", "explanation": "f = 1/T ou T = 1/f", "example": "Si f = 500 Hz, alors T = 1/500 = 0,002 s = 2 ms" }
+        ],
+        "guided_example": {
+          "statement": "Une onde sonore a une fréquence de 500 Hz. Quelle est sa période ?",
+          "solution_steps": [
+            "T = 1/f",
+            "T = 1/500 = 0,002 s = 2 ms"
+          ]
+        },
+        "quick_exercises": [
+          "5 périodes = 20 ms. Calculer T et f",
+          "Convertir différentes fréquences en périodes"
+        ],
+        "summary": {
+          "key_concept": "Période T = durée d'une répétition. Fréquence f = nombre de répétitions/s",
+          "key_method": "Relation essentielle : f = 1/T",
+          "next_step": "Étudier la longueur d'onde"
+        }
+      }
+    },
+    {
+      "id": "P2-11",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Longueur d'onde",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 85,
+      "objectives": ["Définir la longueur d'onde λ", "Utiliser la relation λ = v × T = v/f", "Calculer la longueur d'onde d'une onde", "Comprendre la relation entre λ, v et f"],
+      "prerequisites": ["P2-08", "P2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["longueur d'onde"],
+      "detailed_content": {
+        "introduction": "La longueur d'onde caractérise l'aspect spatial d'une onde périodique.",
+        "key_concepts": [
+          { "name": "Longueur d'onde λ", "explanation": "Distance parcourue pendant une période T", "example": "Distance entre deux crêtes successives" },
+          { "name": "Relation fondamentale", "explanation": "λ = v × T = v/f où v est la célérité", "example": "Si f = 340 Hz et v = 340 m/s, alors λ = 1 m" }
+        ],
+        "guided_example": {
+          "statement": "Une onde sonore de fréquence 340 Hz se propage dans l'air à v = 340 m/s. Calculer sa longueur d'onde.",
+          "solution_steps": [
+            "λ = v/f",
+            "λ = 340/340 = 1 m",
+            "Cette onde a une longueur d'onde d'un mètre"
+          ]
+        },
+        "quick_exercises": [
+          "Radio FM f = 100 MHz. Calculer λ (c = 3 × 10⁸ m/s)",
+          "WiFi f = 2,4 GHz. Calculer λ"
+        ],
+        "summary": {
+          "key_concept": "Longueur d'onde λ = distance entre 2 crêtes successives",
+          "key_method": "Formule essentielle : λ = v/f",
+          "next_step": "Étudier la nature de la lumière"
+        }
+      }
+    },
+    {
+      "id": "P2-12",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "La lumière - Nature ondulatoire",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Comprendre que la lumière est une onde électromagnétique", "Connaître la vitesse de la lumière dans le vide", "Distinguer lumière visible et autres ondes EM", "Comprendre que la lumière ne nécessite pas de milieu matériel"],
+      "prerequisites": ["P2-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["lumière", "électromagnétique"],
+      "detailed_content": {
+        "introduction": "La lumière est une forme d'énergie qui se propage sous forme d'onde électromagnétique. Contrairement aux ondes mécaniques, elle peut se propager dans le vide.",
+        "key_concepts": [
+          { "name": "Nature de la lumière", "explanation": "Onde électromagnétique : propagation couplée d'un champ E et d'un champ B", "example": "Pas besoin de milieu matériel pour se propager" },
+          { "name": "Vitesse de la lumière", "explanation": "Dans le vide : c ≈ 3,00 × 10⁸ m/s = 300 000 km/s", "example": "Vitesse la plus élevée dans l'Univers, rien ne peut aller plus vite" },
+          { "name": "Lumière visible", "explanation": "Longueurs d'onde entre environ 400 nm (violet) et 800 nm (rouge)", "example": "La lumière blanche est un mélange de toutes les couleurs" }
+        ],
+        "guided_example": {
+          "statement": "Le Soleil est à 150 millions de km de la Terre. Temps de trajet de la lumière ?",
+          "solution_steps": [
+            "t = d/c = (150 × 10⁶ km)/(300 000 km/s) = 500 s",
+            "500 s ≈ 8 min 20 s",
+            "La lumière du Soleil met environ 8 minutes pour nous parvenir"
+          ]
+        },
+        "quick_exercises": [
+          "Lune à 384 000 km. Vérifier que délai communication (aller-retour) ≈ 2,56 s",
+          "Calculer temps de propagation sur différentes distances"
+        ],
+        "summary": {
+          "key_concept": "Lumière = onde électromagnétique qui se propage dans le vide",
+          "key_method": "c ≈ 3 × 10⁸ m/s = 300 000 km/s (à retenir !)",
+          "next_step": "Étudier le spectre électromagnétique complet"
+        }
+      }
+    },
+    {
+      "id": "P2-13",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Spectre électromagnétique",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 80,
+      "objectives": ["Connaître les différentes régions du spectre électromagnétique", "Classer les ondes EM par longueur d'onde ou fréquence", "Connaître quelques ordres de grandeur", "Comprendre les applications de chaque domaine"],
+      "prerequisites": ["P2-11", "P2-12"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["spectre", "électromagnétique"],
+      "detailed_content": {
+        "introduction": "Le spectre électromagnétique englobe toutes les ondes électromagnétiques, de longueur d'onde très différente.",
+        "key_concepts": [
+          { "name": "Classification", "explanation": "Radio (> 1 mm) → Micro-ondes → IR → Visible → UV → X → Gamma (< 0,01 nm)", "example": "La lumière visible n'est qu'une infime partie du spectre" },
+          { "name": "Propriétés communes", "explanation": "Toutes se propagent à c dans le vide, vérifient v = λ × f, transportent de l'énergie", "example": "Ce sont toutes des ondes électromagnétiques" },
+          { "name": "Ordre d'énergie", "explanation": "Plus λ est petit (f grand), plus l'onde transporte d'énergie par photon", "example": "Rayons gamma très énergétiques, ondes radio peu énergétiques" }
+        ],
+        "guided_example": {
+          "statement": "Le WiFi fonctionne à f = 2,4 GHz. À quelle catégorie appartient-il ? Calculer λ.",
+          "solution_steps": [
+            "f = 2,4 × 10⁹ Hz",
+            "λ = c/f = (3 × 10⁸)/(2,4 × 10⁹) = 0,125 m = 12,5 cm",
+            "Catégorie : micro-ondes"
+          ]
+        },
+        "quick_exercises": [
+          "Classer par λ croissant : lumière verte (550 nm), rayons X (1 nm), FM (100 MHz), IR (10 μm)",
+          "Associer fréquences aux différentes régions du spectre"
+        ],
+        "summary": {
+          "key_concept": "Spectre EM de λ croissant : Radio > Micro-ondes > IR > Visible > UV > X > Gamma",
+          "key_method": "Plus λ est petit, plus f est grand, plus l'onde est énergétique",
+          "next_step": "Étudier les applications des ondes"
+        }
+      }
+    },
+    {
+      "id": "P2-14",
+      "level": "Seconde",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Applications des ondes",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Connaître les principales applications des ondes mécaniques", "Connaître les principales applications des ondes électromagnétiques", "Comprendre le principe de quelques technologies basées sur les ondes", "Faire le lien entre propriétés physiques et applications"],
+      "prerequisites": ["P2-08", "P2-09", "P2-12", "P2-13"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["applications", "technologie"],
+      "detailed_content": {
+        "introduction": "Les ondes, mécaniques ou électromagnétiques, sont au cœur de nombreuses technologies modernes.",
+        "key_concepts": [
+          { "name": "Ondes sonores (ultrasons)", "explanation": "Sonar : détection sous l'eau. Échographie : imagerie médicale", "example": "Haute fréquence = bonne résolution d'image" },
+          { "name": "Ondes radio et micro-ondes", "explanation": "Radio/TV, téléphonie, WiFi, radar, GPS, four micro-ondes", "example": "Transmission de données sur longue distance" },
+          { "name": "Lumière et ondes EM haute énergie", "explanation": "Fibre optique, radiographie, radiothérapie", "example": "Imagerie médicale et communication" }
+        ],
+        "guided_example": {
+          "statement": "Un radar routier mesure qu'une voiture s'approche. Expliquer le principe.",
+          "solution_steps": [
+            "Le radar émet des micro-ondes",
+            "Elles sont réfléchies par la voiture et reviennent",
+            "Par effet Doppler, la fréquence change si la voiture bouge",
+            "Le radar en déduit la vitesse"
+          ]
+        },
+        "quick_exercises": [
+          "Expliquer le principe de l'échographie et citer un autre domaine utilisant les ultrasons",
+          "Associer différentes technologies aux types d'ondes utilisées"
+        ],
+        "summary": {
+          "key_concept": "Chaque type d'onde a des applications spécifiques selon ses propriétés",
+          "key_method": "Ultrasons pour imagerie, ondes radio pour communications, rayons X pour visualisation",
+          "next_step": "Synthèse et révisions du chapitre"
+        }
+      }
+    }
+  ]
+}
+

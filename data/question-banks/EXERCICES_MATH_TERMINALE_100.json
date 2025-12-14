@@ -1,0 +1,1426 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Mathématiques Terminale",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Suites numériques",
+      "Limites et continuité",
+      "Dérivation",
+      "Fonctions exponentielles et logarithmes",
+      "Primitives et intégrales",
+      "Équations différentielles",
+      "Probabilités",
+      "Géométrie dans l'espace"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "TERM-MATH-EX-001",
+      "chapter": "Suites",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Suite arithmétique : u₀=5, r=3. Calculer u₅.",
+      "solution": {
+        "steps": ["uₙ = u₀ + nr", "u₅ = 5 + 5×3", "u₅ = 5 + 15 = 20"],
+        "final_answer": "u₅ = 20"
+      },
+      "hints": ["uₙ = u₀ + nr"],
+      "related_lesson": "TERM-01"
+    },
+    {
+      "id": "TERM-MATH-EX-002",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite géométrique : u₀=2, q=3. Calculer u₄.",
+      "solution": {
+        "steps": ["uₙ = u₀ × qⁿ", "u₄ = 2 × 3⁴", "u₄ = 2 × 81 = 162"],
+        "final_answer": "u₄ = 162"
+      },
+      "hints": ["uₙ = u₀ × qⁿ"],
+      "related_lesson": "TERM-02"
+    },
+    {
+      "id": "TERM-MATH-EX-003",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la somme S = 1 + 2 + 3 + ... + 100.",
+      "solution": {
+        "steps": ["Suite arithmétique : u₀=1, r=1, n=100", "S = n(premier + dernier)/2", "S = 100(1 + 100)/2", "S = 100×101/2 = 5050"],
+        "final_answer": "S = 5050"
+      },
+      "hints": ["Formule somme arithmétique"],
+      "related_lesson": "TERM-01"
+    },
+    {
+      "id": "TERM-MATH-EX-004",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite géométrique de raison q=0,5. Calculer lim(n→∞) uₙ si u₀=10.",
+      "solution": {
+        "steps": ["|q| = 0,5 < 1", "Donc lim uₙ = 0"],
+        "final_answer": "lim uₙ = 0"
+      },
+      "hints": ["|q| < 1 ⇒ lim = 0"],
+      "related_lesson": "TERM-02"
+    },
+    {
+      "id": "TERM-MATH-EX-005",
+      "chapter": "Limites",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer lim(x→+∞) (3x + 5).",
+      "solution": {
+        "steps": ["3x → +∞ quand x → +∞", "3x + 5 → +∞"],
+        "final_answer": "+∞"
+      },
+      "hints": ["Terme dominant"],
+      "related_lesson": "TERM-11"
+    },
+    {
+      "id": "TERM-MATH-EX-006",
+      "chapter": "Limites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer lim(x→+∞) (2x² - 3x + 1)/x².",
+      "solution": {
+        "steps": ["Diviser par x²", "lim (2 - 3/x + 1/x²)", "= 2 - 0 + 0 = 2"],
+        "final_answer": "2"
+      },
+      "hints": ["Diviser par le plus haut degré"],
+      "related_lesson": "TERM-13"
+    },
+    {
+      "id": "TERM-MATH-EX-007",
+      "chapter": "Limites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer lim(x→0) (sin(2x))/x.",
+      "solution": {
+        "steps": ["= lim 2×(sin(2x))/(2x)", "= 2×lim(sin(2x))/(2x)", "= 2×1 = 2"],
+        "final_answer": "2"
+      },
+      "hints": ["Limite remarquable sin(u)/u → 1"],
+      "related_lesson": "TERM-12"
+    },
+    {
+      "id": "TERM-MATH-EX-008",
+      "chapter": "Dérivation",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Dériver f(x) = 5x⁴.",
+      "solution": {
+        "steps": ["f'(x) = 5×4x³", "f'(x) = 20x³"],
+        "final_answer": "f'(x) = 20x³"
+      },
+      "hints": ["(xⁿ)' = n·xⁿ⁻¹"],
+      "related_lesson": "TERM-21"
+    },
+    {
+      "id": "TERM-MATH-EX-009",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = (2x + 1)³.",
+      "solution": {
+        "steps": ["u = 2x + 1, u' = 2", "f'(x) = 3u²·u'", "= 3(2x+1)²×2 = 6(2x+1)²"],
+        "final_answer": "f'(x) = 6(2x+1)²"
+      },
+      "hints": ["Formule (uⁿ)' = n·u'·uⁿ⁻¹"],
+      "related_lesson": "TERM-23"
+    },
+    {
+      "id": "TERM-MATH-EX-010",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dériver f(x) = x²·e^x.",
+      "solution": {
+        "steps": ["f'(x) = (x²)'·e^x + x²·(e^x)'", "= 2x·e^x + x²·e^x", "= e^x(2x + x²) = x·e^x(2+x)"],
+        "final_answer": "f'(x) = x·e^x(x+2)"
+      },
+      "hints": ["Formule (uv)' = u'v + uv'"],
+      "related_lesson": "TERM-26"
+    },
+    {
+      "id": "TERM-MATH-EX-011",
+      "chapter": "Exponentielle",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Simplifier e²×e³.",
+      "solution": {
+        "steps": ["e²×e³ = e^(2+3)", "= e⁵"],
+        "final_answer": "e⁵"
+      },
+      "hints": ["e^a × e^b = e^(a+b)"],
+      "related_lesson": "TERM-31"
+    },
+    {
+      "id": "TERM-MATH-EX-012",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre e^x = 7.",
+      "solution": {
+        "steps": ["ln(e^x) = ln(7)", "x = ln(7)"],
+        "final_answer": "x = ln(7)"
+      },
+      "hints": ["Appliquer ln des deux côtés"],
+      "related_lesson": "TERM-31"
+    },
+    {
+      "id": "TERM-MATH-EX-013",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre e^(2x) - 3e^x + 2 = 0.",
+      "solution": {
+        "steps": ["Poser X = e^x", "X² - 3X + 2 = 0", "(X-1)(X-2) = 0", "X = 1 ou X = 2", "e^x = 1 ⇒ x = 0", "e^x = 2 ⇒ x = ln(2)"],
+        "final_answer": "x = 0 ou x = ln(2)"
+      },
+      "hints": ["Substitution X = e^x"],
+      "related_lesson": "TERM-31"
+    },
+    {
+      "id": "TERM-MATH-EX-014",
+      "chapter": "Logarithme",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer ln(e³).",
+      "solution": {
+        "steps": ["ln(e³) = 3×ln(e)", "= 3×1 = 3"],
+        "final_answer": "3"
+      },
+      "hints": ["ln(e) = 1"],
+      "related_lesson": "TERM-32"
+    },
+    {
+      "id": "TERM-MATH-EX-015",
+      "chapter": "Logarithme",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier ln(8) - ln(2).",
+      "solution": {
+        "steps": ["ln(8) - ln(2) = ln(8/2)", "= ln(4)"],
+        "final_answer": "ln(4) = 2ln(2)"
+      },
+      "hints": ["ln(a) - ln(b) = ln(a/b)"],
+      "related_lesson": "TERM-32"
+    },
+    {
+      "id": "TERM-MATH-EX-016",
+      "chapter": "Logarithme",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre ln(x) + ln(x-1) = ln(6).",
+      "solution": {
+        "steps": ["ln(x(x-1)) = ln(6)", "x(x-1) = 6", "x² - x - 6 = 0", "(x-3)(x+2) = 0", "x = 3 (car x > 1)"],
+        "final_answer": "x = 3"
+      },
+      "hints": ["ln(a) + ln(b) = ln(ab)", "x > 1 pour existence"],
+      "related_lesson": "TERM-32"
+    },
+    {
+      "id": "TERM-MATH-EX-017",
+      "chapter": "Primitives",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer ∫3x² dx.",
+      "solution": {
+        "steps": ["∫3x² dx = 3×(x³/3)", "= x³ + C"],
+        "final_answer": "x³ + C"
+      },
+      "hints": ["∫xⁿ dx = x^(n+1)/(n+1)"],
+      "related_lesson": "TERM-41"
+    },
+    {
+      "id": "TERM-MATH-EX-018",
+      "chapter": "Primitives",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫(2x + 3) dx.",
+      "solution": {
+        "steps": ["∫2x dx + ∫3 dx", "= x² + 3x + C"],
+        "final_answer": "x² + 3x + C"
+      },
+      "hints": ["Linéarité de l'intégrale"],
+      "related_lesson": "TERM-41"
+    },
+    {
+      "id": "TERM-MATH-EX-019",
+      "chapter": "Primitives",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer ∫(2x)/(x²+1) dx.",
+      "solution": {
+        "steps": ["Poser u = x²+1, u' = 2x", "∫u'/u du = ln|u| + C", "= ln(x²+1) + C"],
+        "final_answer": "ln(x²+1) + C"
+      },
+      "hints": ["Reconnaître u'/u"],
+      "related_lesson": "TERM-42"
+    },
+    {
+      "id": "TERM-MATH-EX-020",
+      "chapter": "Intégrales",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer ∫₀³ 4 dx.",
+      "solution": {
+        "steps": ["∫₀³ 4 dx = [4x]₀³", "= 4×3 - 4×0 = 12"],
+        "final_answer": "12"
+      },
+      "hints": ["Primitive de constante"],
+      "related_lesson": "TERM-43"
+    },
+    {
+      "id": "TERM-MATH-EX-021",
+      "chapter": "Intégrales",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫₁⁴ 2x dx.",
+      "solution": {
+        "steps": ["∫₁⁴ 2x dx = [x²]₁⁴", "= 16 - 1 = 15"],
+        "final_answer": "15"
+      },
+      "hints": ["Primitive de 2x est x²"],
+      "related_lesson": "TERM-43"
+    },
+    {
+      "id": "TERM-MATH-EX-022",
+      "chapter": "Intégrales",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer ∫₀¹ x·e^x dx.",
+      "solution": {
+        "steps": ["Intégration par parties : u=x, v'=e^x", "u'=1, v=e^x", "∫xe^x = xe^x - ∫e^x dx", "= xe^x - e^x", "[xe^x - e^x]₀¹ = (e-e) - (0-1) = 1"],
+        "final_answer": "1"
+      },
+      "hints": ["Intégration par parties"],
+      "related_lesson": "TERM-44"
+    },
+    {
+      "id": "TERM-MATH-EX-023",
+      "chapter": "Équations différentielles",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Résoudre y' = 5.",
+      "solution": {
+        "steps": ["∫y' dx = ∫5 dx", "y = 5x + C"],
+        "final_answer": "y = 5x + C"
+      },
+      "hints": ["Primitive"],
+      "related_lesson": "TERM-51"
+    },
+    {
+      "id": "TERM-MATH-EX-024",
+      "chapter": "Équations différentielles",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre y' = 3y.",
+      "solution": {
+        "steps": ["Équation y' = ay", "Solution : y = C·e^(ax)", "y = C·e^(3x)"],
+        "final_answer": "y = C·e^(3x)"
+      },
+      "hints": ["y' = ay ⇒ y = Ce^(ax)"],
+      "related_lesson": "TERM-52"
+    },
+    {
+      "id": "TERM-MATH-EX-025",
+      "chapter": "Équations différentielles",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre y' + 2y = 0 avec y(0) = 5.",
+      "solution": {
+        "steps": ["y' = -2y", "Solution générale : y = C·e^(-2x)", "y(0) = 5 : C = 5", "y = 5·e^(-2x)"],
+        "final_answer": "y = 5e^(-2x)"
+      },
+      "hints": ["Condition initiale"],
+      "related_lesson": "TERM-52"
+    },
+    {
+      "id": "TERM-MATH-EX-026",
+      "chapter": "Probabilités",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Un dé équilibré : P(obtenir 4) = ?",
+      "solution": {
+        "steps": ["6 issues équiprobables", "P(4) = 1/6"],
+        "final_answer": "P = 1/6"
+      },
+      "hints": ["Équiprobabilité"],
+      "related_lesson": "TERM-61"
+    },
+    {
+      "id": "TERM-MATH-EX-027",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(A) = 0.3, P(B) = 0.5, A et B incompatibles. Calculer P(A∪B).",
+      "solution": {
+        "steps": ["Incompatibles : P(A∩B) = 0", "P(A∪B) = P(A) + P(B)", "= 0.3 + 0.5 = 0.8"],
+        "final_answer": "P(A∪B) = 0.8"
+      },
+      "hints": ["Incompatibles ⇒ additionner"],
+      "related_lesson": "TERM-62"
+    },
+    {
+      "id": "TERM-MATH-EX-028",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "P(A) = 0.6, P(B) = 0.4, P(A∩B) = 0.2. Calculer P(A|B).",
+      "solution": {
+        "steps": ["P(A|B) = P(A∩B)/P(B)", "= 0.2/0.4", "= 0.5"],
+        "final_answer": "P(A|B) = 0.5"
+      },
+      "hints": ["P(A|B) = P(A∩B)/P(B)"],
+      "related_lesson": "TERM-63"
+    },
+    {
+      "id": "TERM-MATH-EX-029",
+      "chapter": "Loi binomiale",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "X ~ B(10, 0.5). Calculer E(X).",
+      "solution": {
+        "steps": ["E(X) = n×p", "= 10×0.5 = 5"],
+        "final_answer": "E(X) = 5"
+      },
+      "hints": ["E(X) = np"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-030",
+      "chapter": "Loi binomiale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ B(20, 0.3). Calculer V(X).",
+      "solution": {
+        "steps": ["V(X) = n×p×(1-p)", "= 20×0.3×0.7", "= 4.2"],
+        "final_answer": "V(X) = 4.2"
+      },
+      "hints": ["V(X) = np(1-p)"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-031",
+      "chapter": "Loi binomiale",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On lance 4 fois une pièce équilibrée. Calculer P(exactement 2 faces).",
+      "solution": {
+        "steps": ["X ~ B(4, 0.5)", "P(X=2) = C(4,2)×(0.5)²×(0.5)²", "= 6×(0.5)⁴", "= 6/16 = 3/8 = 0.375"],
+        "final_answer": "P = 3/8 = 0.375"
+      },
+      "hints": ["P(X=k) = C(n,k)×p^k×(1-p)^(n-k)"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-032",
+      "chapter": "Loi normale",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "X ~ N(100, 25). Quelle est E(X) ?",
+      "solution": {
+        "steps": ["N(μ, σ²)", "E(X) = μ = 100"],
+        "final_answer": "E(X) = 100"
+      },
+      "hints": ["E(X) = μ"],
+      "related_lesson": "TERM-67"
+    },
+    {
+      "id": "TERM-MATH-EX-033",
+      "chapter": "Loi normale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ N(50, 16). Calculer σ(X).",
+      "solution": {
+        "steps": ["σ² = 16", "σ = √16 = 4"],
+        "final_answer": "σ = 4"
+      },
+      "hints": ["σ = √(σ²)"],
+      "related_lesson": "TERM-67"
+    },
+    {
+      "id": "TERM-MATH-EX-034",
+      "chapter": "Loi normale",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Z ~ N(0,1). Sachant P(Z ≤ 1.96) ≈ 0.975, calculer P(-1.96 ≤ Z ≤ 1.96).",
+      "solution": {
+        "steps": ["Par symétrie : P(Z ≤ -1.96) = P(Z ≥ 1.96)", "P(Z ≥ 1.96) = 1 - 0.975 = 0.025", "P(-1.96 ≤ Z ≤ 1.96) = 1 - 2×0.025", "= 0.95"],
+        "final_answer": "P = 0.95 (95%)"
+      },
+      "hints": ["Symétrie de la loi normale"],
+      "related_lesson": "TERM-67"
+    },
+    {
+      "id": "TERM-MATH-EX-035",
+      "chapter": "Géométrie espace",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer la norme de u⃗(3, 4, 0).",
+      "solution": {
+        "steps": ["||u⃗|| = √(x²+y²+z²)", "= √(9+16+0)", "= √25 = 5"],
+        "final_answer": "||u⃗|| = 5"
+      },
+      "hints": ["||u⃗|| = √(x²+y²+z²)"],
+      "related_lesson": "TERM-71"
+    },
+    {
+      "id": "TERM-MATH-EX-036",
+      "chapter": "Géométrie espace",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "u⃗(1, 2, 3) et v⃗(2, -1, 0). Calculer u⃗·v⃗.",
+      "solution": {
+        "steps": ["u⃗·v⃗ = x₁x₂ + y₁y₂ + z₁z₂", "= 1×2 + 2×(-1) + 3×0", "= 2 - 2 + 0 = 0"],
+        "final_answer": "u⃗·v⃗ = 0 (orthogonaux)"
+      },
+      "hints": ["Produit scalaire"],
+      "related_lesson": "TERM-72"
+    },
+    {
+      "id": "TERM-MATH-EX-037",
+      "chapter": "Géométrie espace",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Distance entre A(1,2,3) et B(4,6,3).",
+      "solution": {
+        "steps": ["AB = √((x₂-x₁)²+(y₂-y₁)²+(z₂-z₁)²)", "= √((4-1)²+(6-2)²+(3-3)²)", "= √(9+16+0)", "= √25 = 5"],
+        "final_answer": "AB = 5"
+      },
+      "hints": ["Distance euclidienne"],
+      "related_lesson": "TERM-71"
+    },
+    {
+      "id": "TERM-MATH-EX-038",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite définie par uₙ₊₁ = 0.5uₙ + 3, u₀=2. Calculer u₁ et u₂.",
+      "solution": {
+        "steps": ["u₁ = 0.5×2 + 3 = 4", "u₂ = 0.5×4 + 3 = 5"],
+        "final_answer": "u₁=4, u₂=5"
+      },
+      "hints": ["Récurrence"],
+      "related_lesson": "TERM-03"
+    },
+    {
+      "id": "TERM-MATH-EX-039",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer S = 1 + 1/2 + 1/4 + 1/8 + ... (somme infinie).",
+      "solution": {
+        "steps": ["Suite géométrique : u₀=1, q=1/2", "S = u₀/(1-q) si |q|<1", "S = 1/(1-0.5) = 1/0.5 = 2"],
+        "final_answer": "S = 2"
+      },
+      "hints": ["Somme géométrique infinie"],
+      "related_lesson": "TERM-02"
+    },
+    {
+      "id": "TERM-MATH-EX-040",
+      "chapter": "Limites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer lim(x→+∞) (x+1)/(2x-3).",
+      "solution": {
+        "steps": ["Diviser par x", "lim (1 + 1/x)/(2 - 3/x)", "= 1/2"],
+        "final_answer": "1/2"
+      },
+      "hints": ["Diviser par x"],
+      "related_lesson": "TERM-13"
+    },
+    {
+      "id": "TERM-MATH-EX-041",
+      "chapter": "Limites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer lim(x→1) (x²-1)/(x-1).",
+      "solution": {
+        "steps": ["Factoriser : (x-1)(x+1)/(x-1)", "Simplifier : x+1", "lim(x→1) (x+1) = 2"],
+        "final_answer": "2"
+      },
+      "hints": ["Factoriser puis simplifier"],
+      "related_lesson": "TERM-13"
+    },
+    {
+      "id": "TERM-MATH-EX-042",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = ln(3x+1).",
+      "solution": {
+        "steps": ["u = 3x+1, u'=3", "f'(x) = u'/u", "= 3/(3x+1)"],
+        "final_answer": "f'(x) = 3/(3x+1)"
+      },
+      "hints": ["(ln u)' = u'/u"],
+      "related_lesson": "TERM-22"
+    },
+    {
+      "id": "TERM-MATH-EX-043",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Étudier les variations de f(x) = x³ - 3x + 2.",
+      "solution": {
+        "steps": ["f'(x) = 3x² - 3 = 3(x²-1)", "= 3(x-1)(x+1)", "f'(x) > 0 si x < -1 ou x > 1", "f croissante sur ]-∞,-1[ et ]1,+∞[", "f décroissante sur ]-1,1["],
+        "final_answer": "Croissante sur ]-∞,-1[∪]1,+∞[, décroissante sur ]-1,1["
+      },
+      "hints": ["Signe de f'"],
+      "related_lesson": "TERM-24"
+    },
+    {
+      "id": "TERM-MATH-EX-044",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = e^(x²).",
+      "solution": {
+        "steps": ["u = x², u' = 2x", "f'(x) = u'·e^u", "= 2x·e^(x²)"],
+        "final_answer": "f'(x) = 2x·e^(x²)"
+      },
+      "hints": ["(e^u)' = u'·e^u"],
+      "related_lesson": "TERM-23"
+    },
+    {
+      "id": "TERM-MATH-EX-045",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre e^(2x) = 5e^x.",
+      "solution": {
+        "steps": ["e^(2x) = 5e^x", "e^x(e^x - 5) = 0", "e^x ≠ 0 donc e^x = 5", "x = ln(5)"],
+        "final_answer": "x = ln(5)"
+      },
+      "hints": ["Factoriser par e^x"],
+      "related_lesson": "TERM-31"
+    },
+    {
+      "id": "TERM-MATH-EX-046",
+      "chapter": "Logarithme",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = x·ln(x).",
+      "solution": {
+        "steps": ["f'(x) = 1·ln(x) + x·(1/x)", "= ln(x) + 1"],
+        "final_answer": "f'(x) = ln(x) + 1"
+      },
+      "hints": ["(uv)' = u'v + uv'"],
+      "related_lesson": "TERM-26"
+    },
+    {
+      "id": "TERM-MATH-EX-047",
+      "chapter": "Logarithme",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre ln(x+1) + ln(x-1) = ln(8).",
+      "solution": {
+        "steps": ["ln((x+1)(x-1)) = ln(8)", "x²-1 = 8", "x² = 9", "x = 3 (car x > 1)"],
+        "final_answer": "x = 3"
+      },
+      "hints": ["Condition x > 1"],
+      "related_lesson": "TERM-32"
+    },
+    {
+      "id": "TERM-MATH-EX-048",
+      "chapter": "Primitives",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫e^(3x) dx.",
+      "solution": {
+        "steps": ["∫e^(ax) dx = (1/a)·e^(ax) + C", "= (1/3)·e^(3x) + C"],
+        "final_answer": "(1/3)e^(3x) + C"
+      },
+      "hints": ["∫e^(ax) = (1/a)e^(ax)"],
+      "related_lesson": "TERM-41"
+    },
+    {
+      "id": "TERM-MATH-EX-049",
+      "chapter": "Primitives",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer ∫x/(x²+1) dx.",
+      "solution": {
+        "steps": ["u = x²+1, u' = 2x", "= (1/2)∫u'/u du", "= (1/2)ln|u| + C", "= (1/2)ln(x²+1) + C"],
+        "final_answer": "(1/2)ln(x²+1) + C"
+      },
+      "hints": ["Reconnaître u'/u"],
+      "related_lesson": "TERM-42"
+    },
+    {
+      "id": "TERM-MATH-EX-050",
+      "chapter": "Intégrales",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫₀² (x² + 1) dx.",
+      "solution": {
+        "steps": ["= [x³/3 + x]₀²", "= (8/3 + 2) - 0", "= 8/3 + 6/3 = 14/3"],
+        "final_answer": "14/3"
+      },
+      "hints": ["Primitive puis bornes"],
+      "related_lesson": "TERM-43"
+    },
+    {
+      "id": "TERM-MATH-EX-051",
+      "chapter": "Intégrales",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer l'aire sous f(x)=x entre x=0 et x=3.",
+      "solution": {
+        "steps": ["Aire = ∫₀³ x dx", "= [x²/2]₀³", "= 9/2 - 0 = 4.5"],
+        "final_answer": "Aire = 4.5"
+      },
+      "hints": ["Aire = intégrale"],
+      "related_lesson": "TERM-43"
+    },
+    {
+      "id": "TERM-MATH-EX-052",
+      "chapter": "Équations différentielles",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre y' - 4y = 0.",
+      "solution": {
+        "steps": ["y' = 4y", "Solution : y = C·e^(4x)"],
+        "final_answer": "y = C·e^(4x)"
+      },
+      "hints": ["y' = ay ⇒ y = Ce^(ax)"],
+      "related_lesson": "TERM-52"
+    },
+    {
+      "id": "TERM-MATH-EX-053",
+      "chapter": "Équations différentielles",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Résoudre y' = -y avec y(0) = 10.",
+      "solution": {
+        "steps": ["Solution générale : y = C·e^(-x)", "y(0) = 10 : C = 10", "y = 10e^(-x)"],
+        "final_answer": "y = 10e^(-x)"
+      },
+      "hints": ["Condition initiale"],
+      "related_lesson": "TERM-52"
+    },
+    {
+      "id": "TERM-MATH-EX-054",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(A) = 0.7. Calculer P(Ā).",
+      "solution": {
+        "steps": ["P(Ā) = 1 - P(A)", "= 1 - 0.7 = 0.3"],
+        "final_answer": "P(Ā) = 0.3"
+      },
+      "hints": ["P(Ā) = 1 - P(A)"],
+      "related_lesson": "TERM-61"
+    },
+    {
+      "id": "TERM-MATH-EX-055",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "P(A)=0.5, P(B)=0.6, P(A∪B)=0.8. Calculer P(A∩B).",
+      "solution": {
+        "steps": ["P(A∪B) = P(A) + P(B) - P(A∩B)", "0.8 = 0.5 + 0.6 - P(A∩B)", "P(A∩B) = 1.1 - 0.8 = 0.3"],
+        "final_answer": "P(A∩B) = 0.3"
+      },
+      "hints": ["Formule de Poincaré"],
+      "related_lesson": "TERM-62"
+    },
+    {
+      "id": "TERM-MATH-EX-056",
+      "chapter": "Probabilités conditionnelles",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(B)=0.4, P(A∩B)=0.12. Calculer P(A|B).",
+      "solution": {
+        "steps": ["P(A|B) = P(A∩B)/P(B)", "= 0.12/0.4 = 0.3"],
+        "final_answer": "P(A|B) = 0.3"
+      },
+      "hints": ["P(A|B) = P(A∩B)/P(B)"],
+      "related_lesson": "TERM-63"
+    },
+    {
+      "id": "TERM-MATH-EX-057",
+      "chapter": "Probabilités conditionnelles",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "P(A)=0.3, P(B|A)=0.4, P(B|Ā)=0.2. Calculer P(B).",
+      "solution": {
+        "steps": ["Formule des probabilités totales", "P(B) = P(B|A)·P(A) + P(B|Ā)·P(Ā)", "= 0.4×0.3 + 0.2×0.7", "= 0.12 + 0.14 = 0.26"],
+        "final_answer": "P(B) = 0.26"
+      },
+      "hints": ["Probabilités totales"],
+      "related_lesson": "TERM-63"
+    },
+    {
+      "id": "TERM-MATH-EX-058",
+      "chapter": "Loi binomiale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ B(15, 0.4). Calculer E(X) et σ(X).",
+      "solution": {
+        "steps": ["E(X) = np = 15×0.4 = 6", "V(X) = np(1-p) = 15×0.4×0.6 = 3.6", "σ(X) = √3.6 ≈ 1.9"],
+        "final_answer": "E(X)=6, σ≈1.9"
+      },
+      "hints": ["E=np, σ=√(np(1-p))"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-059",
+      "chapter": "Loi binomiale",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On lance 3 dés. X = nombre de 6 obtenus. Calculer P(X≥1).",
+      "solution": {
+        "steps": ["X ~ B(3, 1/6)", "P(X≥1) = 1 - P(X=0)", "P(X=0) = (5/6)³ = 125/216", "P(X≥1) = 1 - 125/216 = 91/216 ≈ 0.42"],
+        "final_answer": "P(X≥1) ≈ 0.42"
+      },
+      "hints": ["Complémentaire"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-060",
+      "chapter": "Loi normale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ N(60, 100). Entre quelles valeurs se trouvent environ 95% des données ?",
+      "solution": {
+        "steps": ["σ = √100 = 10", "95% dans [μ-2σ, μ+2σ]", "= [60-20, 60+20]", "= [40, 80]"],
+        "final_answer": "[40, 80]"
+      },
+      "hints": ["95% dans [μ-2σ, μ+2σ]"],
+      "related_lesson": "TERM-67"
+    },
+    {
+      "id": "TERM-MATH-EX-061",
+      "chapter": "Géométrie espace",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Vecteurs u⃗(1,0,1) et v⃗(0,1,1). Sont-ils orthogonaux ?",
+      "solution": {
+        "steps": ["u⃗·v⃗ = 1×0 + 0×1 + 1×1", "= 0 + 0 + 1 = 1 ≠ 0", "Non orthogonaux"],
+        "final_answer": "Non orthogonaux"
+      },
+      "hints": ["u⃗·v⃗ = 0 ?"],
+      "related_lesson": "TERM-72"
+    },
+    {
+      "id": "TERM-MATH-EX-062",
+      "chapter": "Géométrie espace",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Équation du plan passant par A(1,0,0) de vecteur normal n⃗(2,1,-1).",
+      "solution": {
+        "steps": ["Équation : a(x-x₀) + b(y-y₀) + c(z-z₀) = 0", "2(x-1) + 1(y-0) + (-1)(z-0) = 0", "2x - 2 + y - z = 0", "2x + y - z - 2 = 0"],
+        "final_answer": "2x + y - z - 2 = 0"
+      },
+      "hints": ["n⃗(a,b,c), point A"],
+      "related_lesson": "TERM-73"
+    },
+    {
+      "id": "TERM-MATH-EX-063",
+      "chapter": "Suites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Suite uₙ = 1/(n+1). Montrer qu'elle converge vers 0.",
+      "solution": {
+        "steps": ["lim(n→∞) 1/(n+1)", "= lim 1/n = 0", "Donc lim uₙ = 0"],
+        "final_answer": "Converge vers 0"
+      },
+      "hints": ["1/n → 0"],
+      "related_lesson": "TERM-03"
+    },
+    {
+      "id": "TERM-MATH-EX-064",
+      "chapter": "Limites",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer lim(x→0) (1-cos(x))/x².",
+      "solution": {
+        "steps": ["Limite remarquable : lim(x→0) (1-cos(x))/x² = 1/2"],
+        "final_answer": "1/2"
+      },
+      "hints": ["Limite remarquable"],
+      "related_lesson": "TERM-12"
+    },
+    {
+      "id": "TERM-MATH-EX-065",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Dériver f(x) = sin(x)·e^x.",
+      "solution": {
+        "steps": ["f'(x) = cos(x)·e^x + sin(x)·e^x", "= e^x(cos(x) + sin(x))"],
+        "final_answer": "f'(x) = e^x(sin(x)+cos(x))"
+      },
+      "hints": ["(uv)' = u'v + uv'"],
+      "related_lesson": "TERM-26"
+    },
+    {
+      "id": "TERM-MATH-EX-066",
+      "chapter": "Exponentielle",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer lim(x→-∞) x·e^x.",
+      "solution": {
+        "steps": ["Forme ∞×0", "= lim x/e^(-x)", "= lim(x→-∞) -1/(-e^(-x)) par L'Hôpital", "e^x l'emporte : = 0"],
+        "final_answer": "0"
+      },
+      "hints": ["e^x décroît plus vite"],
+      "related_lesson": "TERM-31"
+    },
+    {
+      "id": "TERM-MATH-EX-067",
+      "chapter": "Logarithme",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer lim(x→+∞) ln(x)/x.",
+      "solution": {
+        "steps": ["Par croissances comparées", "ln(x) négligeable devant x", "lim ln(x)/x = 0"],
+        "final_answer": "0"
+      },
+      "hints": ["Croissances comparées"],
+      "related_lesson": "TERM-32"
+    },
+    {
+      "id": "TERM-MATH-EX-068",
+      "chapter": "Primitives",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer ∫sin(x)·cos(x) dx.",
+      "solution": {
+        "steps": ["u = sin(x), u' = cos(x)", "∫u·u' dx = u²/2 + C", "= (sin²(x))/2 + C"],
+        "final_answer": "(sin²(x))/2 + C"
+      },
+      "hints": ["Reconnaître u·u'"],
+      "related_lesson": "TERM-42"
+    },
+    {
+      "id": "TERM-MATH-EX-069",
+      "chapter": "Intégrales",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer ∫₀^(π/2) cos(x) dx.",
+      "solution": {
+        "steps": ["= [sin(x)]₀^(π/2)", "= sin(π/2) - sin(0)", "= 1 - 0 = 1"],
+        "final_answer": "1"
+      },
+      "hints": ["Primitive de cos"],
+      "related_lesson": "TERM-43"
+    },
+    {
+      "id": "TERM-MATH-EX-070",
+      "chapter": "Équations différentielles",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Population N(t) vérifie N'(t) = 0.05N(t) avec N(0)=1000. Calculer N(10).",
+      "solution": {
+        "steps": ["N' = 0.05N", "N(t) = N₀·e^(0.05t)", "N(0) = 1000 donc N₀=1000", "N(10) = 1000·e^(0.5)", "≈ 1000×1.649 ≈ 1649"],
+        "final_answer": "N(10) ≈ 1649"
+      },
+      "hints": ["Croissance exponentielle"],
+      "related_lesson": "TERM-52"
+    },
+    {
+      "id": "TERM-MATH-EX-071",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Urne : 5 boules rouges, 3 vertes. On tire 2 boules sans remise. P(2 rouges) ?",
+      "solution": {
+        "steps": ["P(R₁) = 5/8", "P(R₂|R₁) = 4/7", "P(R₁∩R₂) = (5/8)×(4/7)", "= 20/56 = 5/14"],
+        "final_answer": "P = 5/14"
+      },
+      "hints": ["Probabilités conditionnelles"],
+      "related_lesson": "TERM-63"
+    },
+    {
+      "id": "TERM-MATH-EX-072",
+      "chapter": "Loi binomiale",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Test QCM : 10 questions, 4 choix. En répondant au hasard, P(avoir au moins 5 bonnes) ?",
+      "solution": {
+        "steps": ["X ~ B(10, 0.25)", "P(X≥5) = 1 - P(X≤4)", "Calcul numérique : ≈ 0.078"],
+        "final_answer": "P ≈ 0.078 (7.8%)"
+      },
+      "hints": ["Loi binomiale"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-073",
+      "chapter": "Loi normale",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "X ~ N(170, 64). P(X > 178) sachant P(Z ≤ 1) ≈ 0.84 pour Z~N(0,1).",
+      "solution": {
+        "steps": ["σ = 8", "Z = (178-170)/8 = 1", "P(X > 178) = P(Z > 1)", "= 1 - P(Z ≤ 1)", "= 1 - 0.84 = 0.16"],
+        "final_answer": "P ≈ 0.16 (16%)"
+      },
+      "hints": ["Centrer et réduire"],
+      "related_lesson": "TERM-67"
+    },
+    {
+      "id": "TERM-MATH-EX-074",
+      "chapter": "Géométrie espace",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Plans P₁: x+y+z=1 et P₂: 2x+2y+2z=4. Sont-ils parallèles ?",
+      "solution": {
+        "steps": ["n⃗₁(1,1,1), n⃗₂(2,2,2)", "n⃗₂ = 2·n⃗₁ : colinéaires", "P₂: x+y+z=2", "Plans différents donc parallèles"],
+        "final_answer": "Oui, parallèles"
+      },
+      "hints": ["Vecteurs normaux colinéaires"],
+      "related_lesson": "TERM-73"
+    },
+    {
+      "id": "TERM-MATH-EX-075",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "uₙ = n/(n+1). Calculer lim uₙ.",
+      "solution": {
+        "steps": ["= lim n/(n+1) = lim 1/(1+1/n)", "= 1/(1+0) = 1"],
+        "final_answer": "lim uₙ = 1"
+      },
+      "hints": ["Diviser par n"],
+      "related_lesson": "TERM-03"
+    },
+    {
+      "id": "TERM-MATH-EX-076",
+      "chapter": "Limites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "f(x) = (x²-4)/(x-2). Calculer lim(x→2) f(x).",
+      "solution": {
+        "steps": ["= (x-2)(x+2)/(x-2)", "= x+2", "lim(x→2) = 4"],
+        "final_answer": "4"
+      },
+      "hints": ["Factoriser"],
+      "related_lesson": "TERM-13"
+    },
+    {
+      "id": "TERM-MATH-EX-077",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = √x = x^(1/2).",
+      "solution": {
+        "steps": ["f'(x) = (1/2)·x^(-1/2)", "= 1/(2√x)"],
+        "final_answer": "f'(x) = 1/(2√x)"
+      },
+      "hints": ["(xⁿ)' = n·xⁿ⁻¹"],
+      "related_lesson": "TERM-21"
+    },
+    {
+      "id": "TERM-MATH-EX-078",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier (e³)²/e⁴.",
+      "solution": {
+        "steps": ["= e⁶/e⁴", "= e^(6-4) = e²"],
+        "final_answer": "e²"
+      },
+      "hints": ["(e^a)^b = e^(ab)", "e^a/e^b = e^(a-b)"],
+      "related_lesson": "TERM-31"
+    },
+    {
+      "id": "TERM-MATH-EX-079",
+      "chapter": "Logarithme",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Simplifier 2ln(3) + ln(4).",
+      "solution": {
+        "steps": ["= ln(3²) + ln(4)", "= ln(9) + ln(4)", "= ln(36)"],
+        "final_answer": "ln(36)"
+      },
+      "hints": ["n·ln(a) = ln(aⁿ)", "ln(a)+ln(b)=ln(ab)"],
+      "related_lesson": "TERM-32"
+    },
+    {
+      "id": "TERM-MATH-EX-080",
+      "chapter": "Primitives",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫(3x² - 2x + 1) dx.",
+      "solution": {
+        "steps": ["= x³ - x² + x + C"],
+        "final_answer": "x³ - x² + x + C"
+      },
+      "hints": ["Terme par terme"],
+      "related_lesson": "TERM-41"
+    },
+    {
+      "id": "TERM-MATH-EX-081",
+      "chapter": "Intégrales",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫₁² (1/x) dx.",
+      "solution": {
+        "steps": ["= [ln(x)]₁²", "= ln(2) - ln(1)", "= ln(2) - 0 = ln(2)"],
+        "final_answer": "ln(2)"
+      },
+      "hints": ["∫(1/x) = ln|x|"],
+      "related_lesson": "TERM-43"
+    },
+    {
+      "id": "TERM-MATH-EX-082",
+      "chapter": "Équations différentielles",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre y' = x.",
+      "solution": {
+        "steps": ["∫y' dx = ∫x dx", "y = x²/2 + C"],
+        "final_answer": "y = x²/2 + C"
+      },
+      "hints": ["Intégrer"],
+      "related_lesson": "TERM-51"
+    },
+    {
+      "id": "TERM-MATH-EX-083",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dé équilibré : P(pair) ?",
+      "solution": {
+        "steps": ["Issues paires : 2, 4, 6", "P = 3/6 = 1/2"],
+        "final_answer": "P = 1/2"
+      },
+      "hints": ["3 cas favorables sur 6"],
+      "related_lesson": "TERM-61"
+    },
+    {
+      "id": "TERM-MATH-EX-084",
+      "chapter": "Probabilités conditionnelles",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(A)=0.6, P(A|B)=0.8. Si P(B)=0.5, calculer P(A∩B).",
+      "solution": {
+        "steps": ["P(A|B) = P(A∩B)/P(B)", "0.8 = P(A∩B)/0.5", "P(A∩B) = 0.4"],
+        "final_answer": "P(A∩B) = 0.4"
+      },
+      "hints": ["P(A∩B) = P(A|B)×P(B)"],
+      "related_lesson": "TERM-63"
+    },
+    {
+      "id": "TERM-MATH-EX-085",
+      "chapter": "Loi binomiale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ B(8, 0.25). Calculer E(X).",
+      "solution": {
+        "steps": ["E(X) = n×p", "= 8×0.25 = 2"],
+        "final_answer": "E(X) = 2"
+      },
+      "hints": ["E = np"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-086",
+      "chapter": "Loi normale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ N(150, 225). Quelle est la variance ?",
+      "solution": {
+        "steps": ["N(μ, σ²)", "σ² = 225"],
+        "final_answer": "V(X) = 225"
+      },
+      "hints": ["σ² dans la notation"],
+      "related_lesson": "TERM-67"
+    },
+    {
+      "id": "TERM-MATH-EX-087",
+      "chapter": "Géométrie espace",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la norme de v⃗(0, 3, 4).",
+      "solution": {
+        "steps": ["||v⃗|| = √(0²+3²+4²)", "= √(0+9+16)", "= √25 = 5"],
+        "final_answer": "||v⃗|| = 5"
+      },
+      "hints": ["||v⃗|| = √(x²+y²+z²)"],
+      "related_lesson": "TERM-71"
+    },
+    {
+      "id": "TERM-MATH-EX-088",
+      "chapter": "Suites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Suite géométrique : u₀=5, q=1/2. Calculer u₃.",
+      "solution": {
+        "steps": ["u₃ = u₀×q³", "= 5×(1/8)", "= 5/8"],
+        "final_answer": "u₃ = 5/8"
+      },
+      "hints": ["uₙ = u₀×qⁿ"],
+      "related_lesson": "TERM-02"
+    },
+    {
+      "id": "TERM-MATH-EX-089",
+      "chapter": "Limites",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer lim(x→0⁺) 1/x.",
+      "solution": {
+        "steps": ["x→0⁺ : x > 0 et tend vers 0", "1/x → +∞"],
+        "final_answer": "+∞"
+      },
+      "hints": ["x petit positif"],
+      "related_lesson": "TERM-11"
+    },
+    {
+      "id": "TERM-MATH-EX-090",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dériver f(x) = 1/x.",
+      "solution": {
+        "steps": ["f(x) = x⁻¹", "f'(x) = -1·x⁻²", "= -1/x²"],
+        "final_answer": "f'(x) = -1/x²"
+      },
+      "hints": ["x⁻¹"],
+      "related_lesson": "TERM-21"
+    },
+    {
+      "id": "TERM-MATH-EX-091",
+      "chapter": "Exponentielle",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre 2e^x = 10.",
+      "solution": {
+        "steps": ["e^x = 5", "x = ln(5)"],
+        "final_answer": "x = ln(5)"
+      },
+      "hints": ["Isoler e^x"],
+      "related_lesson": "TERM-31"
+    },
+    {
+      "id": "TERM-MATH-EX-092",
+      "chapter": "Logarithme",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre ln(x) = 2.",
+      "solution": {
+        "steps": ["x = e²"],
+        "final_answer": "x = e²"
+      },
+      "hints": ["Exponentielle des deux côtés"],
+      "related_lesson": "TERM-32"
+    },
+    {
+      "id": "TERM-MATH-EX-093",
+      "chapter": "Primitives",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫5 dx.",
+      "solution": {
+        "steps": ["∫5 dx = 5x + C"],
+        "final_answer": "5x + C"
+      },
+      "hints": ["Primitive de constante"],
+      "related_lesson": "TERM-41"
+    },
+    {
+      "id": "TERM-MATH-EX-094",
+      "chapter": "Intégrales",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer ∫₀¹ e^x dx.",
+      "solution": {
+        "steps": ["= [e^x]₀¹", "= e¹ - e⁰", "= e - 1"],
+        "final_answer": "e - 1"
+      },
+      "hints": ["Primitive de e^x"],
+      "related_lesson": "TERM-43"
+    },
+    {
+      "id": "TERM-MATH-EX-095",
+      "chapter": "Équations différentielles",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Résoudre y' + y = 0.",
+      "solution": {
+        "steps": ["y' = -y", "y = C·e^(-x)"],
+        "final_answer": "y = C·e^(-x)"
+      },
+      "hints": ["y' = -y"],
+      "related_lesson": "TERM-52"
+    },
+    {
+      "id": "TERM-MATH-EX-096",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "P(A)=0.4, A et B indépendants, P(B)=0.5. Calculer P(A∩B).",
+      "solution": {
+        "steps": ["Indépendants : P(A∩B) = P(A)×P(B)", "= 0.4×0.5 = 0.2"],
+        "final_answer": "P(A∩B) = 0.2"
+      },
+      "hints": ["Indépendance"],
+      "related_lesson": "TERM-64"
+    },
+    {
+      "id": "TERM-MATH-EX-097",
+      "chapter": "Loi binomiale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ B(12, 1/3). Calculer V(X).",
+      "solution": {
+        "steps": ["V(X) = n×p×(1-p)", "= 12×(1/3)×(2/3)", "= 12×(2/9) = 8/3"],
+        "final_answer": "V(X) = 8/3"
+      },
+      "hints": ["V = np(1-p)"],
+      "related_lesson": "TERM-66"
+    },
+    {
+      "id": "TERM-MATH-EX-098",
+      "chapter": "Loi normale",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "X ~ N(80, 16). Calculer σ.",
+      "solution": {
+        "steps": ["σ² = 16", "σ = 4"],
+        "final_answer": "σ = 4"
+      },
+      "hints": ["σ = √(σ²)"],
+      "related_lesson": "TERM-67"
+    },
+    {
+      "id": "TERM-MATH-EX-099",
+      "chapter": "Géométrie espace",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "u⃗(2,1,0) et v⃗(-1,2,3). Calculer u⃗·v⃗.",
+      "solution": {
+        "steps": ["u⃗·v⃗ = 2×(-1) + 1×2 + 0×3", "= -2 + 2 + 0 = 0"],
+        "final_answer": "u⃗·v⃗ = 0 (orthogonaux)"
+      },
+      "hints": ["Produit scalaire"],
+      "related_lesson": "TERM-72"
+    },
+    {
+      "id": "TERM-MATH-EX-100",
+      "chapter": "Géométrie espace",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Distance entre O(0,0,0) et A(3,4,12).",
+      "solution": {
+        "steps": ["OA = √(3²+4²+12²)", "= √(9+16+144)", "= √169 = 13"],
+        "final_answer": "OA = 13"
+      },
+      "hints": ["Distance euclidienne"],
+      "related_lesson": "TERM-71"
+    }
+  ]
+}

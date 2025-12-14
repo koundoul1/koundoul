@@ -1,0 +1,601 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-01 à M1-10",
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Premières leçons de Mathématiques Première - Second degré"
+  },
+  "lessons": [
+    
+    {
+      "id": "M1-01",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Fonctions polynômes du second degré - Forme développée",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Reconnaître une fonction du second degré",
+        "Identifier les coefficients a, b, c",
+        "Déterminer le sens de variation selon le signe de a"
+      ],
+      "prerequisites": [
+        "Fonctions affines",
+        "Calcul algébrique",
+        "Développement"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["second degré", "polynôme", "parabole", "coefficients"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon introduit les fonctions du second degré, essentielles en Première. Elle s'inscrit dans le chapitre Second Degré. L'objectif est de reconnaître et analyser ces fonctions en 10 minutes.",
+        "method_step_by_step": [
+          "Identifier la forme f(x) = ax² + bx + c avec a ≠ 0",
+          "Repérer le coefficient a (terme en x²)",
+          "Si a > 0 : parabole tournée vers le haut (minimum)",
+          "Si a < 0 : parabole tournée vers le bas (maximum)",
+          "Le coefficient c représente l'ordonnée à l'origine f(0)"
+        ],
+        "guided_example": {
+          "statement": "Analyser f(x) = -2x² + 3x + 5 : coefficients, sens de variation, ordonnée à l'origine.",
+          "solution_steps": [
+            "Identification : forme ax² + bx + c avec a=-2, b=3, c=5",
+            "Signe de a : a = -2 < 0 → parabole tournée vers le bas",
+            "Conséquence : fonction admet un maximum",
+            "Ordonnée à l'origine : f(0) = 5",
+            "Conclusion : Courbe décroissante puis croissante, sommet en haut"
+          ]
+        },
+        "quick_exercises": [
+          "Identifier a, b, c dans g(x) = 3x² - 4x + 1",
+          "f(x) = -x² + 2x admet un maximum ou minimum ?",
+          "Calculer f(0) pour f(x) = 5x² - 3"
+        ],
+        "common_mistakes": [
+          "Oublier que a ≠ 0 (sinon fonction affine)",
+          "Confondre le sens de la parabole selon a",
+          "Oublier les signes dans l'identification des coefficients"
+        ],
+        "summary": {
+          "key_concept": "Une fonction du second degré f(x) = ax² + bx + c (a≠0) représente une parabole dont le sens dépend du signe de a",
+          "key_method": "Identifier a, b, c → Signe de a → Sens parabole → Extremum",
+          "next_step": "Étudier la forme canonique"
+        }
+      }
+    },
+    {
+      "id": "M1-02",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Forme canonique et sommet de la parabole",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Mettre une fonction sous forme canonique a(x-α)² + β",
+        "Déterminer les coordonnées du sommet S(α, β)",
+        "Utiliser la forme canonique pour tracer la courbe"
+      ],
+      "prerequisites": [
+        "Identités remarquables",
+        "Forme développée du second degré",
+        "Factorisation"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["forme canonique", "sommet", "complétion du carré", "parabole"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la forme canonique, essentielle pour étudier les fonctions du second degré. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de maîtriser cette transformation en 12 minutes.",
+        "method_step_by_step": [
+          "Partir de f(x) = ax² + bx + c",
+          "Factoriser par a : f(x) = a[x² + (b/a)x] + c",
+          "Compléter le carré : x² + (b/a)x = (x + b/2a)² - (b/2a)²",
+          "Simplifier : f(x) = a(x - α)² + β avec α = -b/2a",
+          "Le sommet S a pour coordonnées (α, β)"
+        ],
+        "guided_example": {
+          "statement": "Mettre f(x) = 2x² - 8x + 5 sous forme canonique et déterminer le sommet.",
+          "solution_steps": [
+            "Coefficients : a=2, b=-8, c=5",
+            "Factoriser : f(x) = 2[x² - 4x] + 5",
+            "Compléter : x² - 4x = (x-2)² - 4",
+            "Remplacer : f(x) = 2[(x-2)² - 4] + 5 = 2(x-2)² - 8 + 5",
+            "Forme canonique : f(x) = 2(x-2)² - 3, sommet S(2, -3)"
+          ]
+        },
+        "quick_exercises": [
+          "Mettre sous forme canonique : f(x) = x² + 6x + 1",
+          "Déterminer le sommet de g(x) = -x² + 4x - 3",
+          "Pour f(x) = 3(x-1)² + 5, quelles sont les coordonnées du sommet ?"
+        ],
+        "common_mistakes": [
+          "Oublier de factoriser par a avant de compléter le carré",
+          "Erreur de signe dans α = -b/2a",
+          "Confondre α et β dans les coordonnées du sommet"
+        ],
+        "summary": {
+          "key_concept": "La forme canonique a(x-α)² + β révèle directement le sommet S(α, β) de la parabole",
+          "key_method": "ax² + bx + c → Factoriser a → Compléter carré → a(x-α)² + β",
+          "next_step": "Utiliser la forme canonique pour résoudre des équations"
+        }
+      }
+    },
+    {
+      "id": "M1-03",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Équations du second degré - Discriminant",
+      "duration_min": 13,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Calculer le discriminant Δ = b² - 4ac",
+        "Déterminer le nombre de solutions selon Δ",
+        "Résoudre une équation ax² + bx + c = 0"
+      ],
+      "prerequisites": [
+        "Résolution d'équations",
+        "Racine carrée",
+        "Second degré"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["discriminant", "équation", "racines", "solutions"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la méthode du discriminant pour résoudre les équations du second degré. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de maîtriser cette technique en 13 minutes.",
+        "method_step_by_step": [
+          "Mettre l'équation sous forme ax² + bx + c = 0",
+          "Calculer Δ = b² - 4ac",
+          "Si Δ > 0 : 2 solutions x₁ = (-b-√Δ)/2a et x₂ = (-b+√Δ)/2a",
+          "Si Δ = 0 : 1 solution double x₀ = -b/2a",
+          "Si Δ < 0 : aucune solution réelle"
+        ],
+        "guided_example": {
+          "statement": "Résoudre 2x² - 5x + 2 = 0.",
+          "solution_steps": [
+            "Coefficients : a=2, b=-5, c=2",
+            "Discriminant : Δ = (-5)² - 4(2)(2) = 25 - 16 = 9",
+            "Δ > 0 : deux solutions distinctes",
+            "x₁ = (5 - 3)/4 = 1/2",
+            "x₂ = (5 + 3)/4 = 2",
+            "S = {1/2 ; 2}"
+          ]
+        },
+        "quick_exercises": [
+          "Résoudre : x² - 4x + 4 = 0",
+          "Calculer Δ pour 3x² + 2x + 1 = 0. Combien de solutions ?",
+          "Résoudre : -x² + 6x - 5 = 0"
+        ],
+        "common_mistakes": [
+          "Erreur de signe dans le calcul de Δ",
+          "Oublier de diviser par 2a",
+          "Confondre les formules x₁ et x₂ (± √Δ)"
+        ],
+        "summary": {
+          "key_concept": "Le discriminant Δ = b² - 4ac détermine le nombre de solutions d'une équation du second degré",
+          "key_method": "ax² + bx + c = 0 → Δ = b² - 4ac → Formules selon signe de Δ",
+          "next_step": "Factoriser avec les racines"
+        }
+      }
+    },
+    {
+      "id": "M1-04",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Forme factorisée et racines",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Passer de la forme développée à la forme factorisée",
+        "Utiliser les racines pour factoriser : a(x-x₁)(x-x₂)",
+        "Résoudre des équations par factorisation"
+      ],
+      "prerequisites": [
+        "Discriminant et résolution",
+        "Factorisation",
+        "Identité (a-b)(c-d)"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["factorisation", "racines", "forme factorisée", "produit nul"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la forme factorisée des trinômes du second degré. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de relier racines et factorisation en 11 minutes.",
+        "method_step_by_step": [
+          "Résoudre ax² + bx + c = 0 pour trouver les racines x₁ et x₂",
+          "Si Δ > 0 : f(x) = a(x - x₁)(x - x₂)",
+          "Si Δ = 0 : f(x) = a(x - x₀)²",
+          "Si Δ < 0 : pas de factorisation avec nombres réels",
+          "Utiliser la forme factorisée pour résoudre équations et inéquations"
+        ],
+        "guided_example": {
+          "statement": "Factoriser f(x) = x² - 5x + 6 et résoudre f(x) = 0.",
+          "solution_steps": [
+            "Chercher les racines : Δ = 25 - 24 = 1 > 0",
+            "x₁ = (5-1)/2 = 2 et x₂ = (5+1)/2 = 3",
+            "Forme factorisée : f(x) = (x-2)(x-3)",
+            "Résolution : f(x) = 0 ⇔ (x-2)(x-3) = 0",
+            "Solutions : x = 2 ou x = 3 (produit nul)"
+          ]
+        },
+        "quick_exercises": [
+          "Factoriser : g(x) = 2x² - 8x + 6",
+          "Résoudre par factorisation : x² - 9 = 0",
+          "Vérifier : (x-1)(x+3) développé donne x² + 2x - 3"
+        ],
+        "common_mistakes": [
+          "Oublier le coefficient a dans la factorisation",
+          "Confondre signe des racines dans (x-x₁)(x-x₂)",
+          "Ne pas utiliser le produit nul pour résoudre"
+        ],
+        "summary": {
+          "key_concept": "Si x₁ et x₂ sont les racines, alors f(x) = a(x-x₁)(x-x₂) (forme factorisée)",
+          "key_method": "Trouver racines → Écrire a(x-x₁)(x-x₂) → Utiliser pour résoudre",
+          "next_step": "Étudier le signe du trinôme"
+        }
+      }
+    },
+    {
+      "id": "M1-05",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Signe du trinôme du second degré",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Déterminer le signe d'un trinôme selon x",
+        "Construire un tableau de signes",
+        "Résoudre des inéquations du second degré"
+      ],
+      "prerequisites": [
+        "Discriminant",
+        "Racines",
+        "Forme factorisée",
+        "Inéquations"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["signe", "trinôme", "inéquation", "tableau de signes"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'étude du signe des trinômes, essentielle pour les inéquations. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de maîtriser les tableaux de signes en 12 minutes.",
+        "method_step_by_step": [
+          "Calculer Δ et déterminer les racines (si elles existent)",
+          "Tracer l'axe des x et placer les racines",
+          "Déterminer le signe de a (coefficient de x²)",
+          "Règle : à l'extérieur des racines, même signe que a",
+          "Entre les racines (si Δ>0) : signe opposé à a"
+        ],
+        "guided_example": {
+          "statement": "Étudier le signe de f(x) = -2x² + 4x + 6.",
+          "solution_steps": [
+            "a = -2 < 0, Δ = 16 + 48 = 64 > 0",
+            "Racines : x₁ = (4-8)/(-4) = -1 et x₂ = (4+8)/(-4) = 3",
+            "Tableau : x → -∞  -1   3  +∞",
+            "         f(x) →  -  0 + 0  -",
+            "f(x) ≥ 0 sur [-1 ; 3]"
+          ]
+        },
+        "quick_exercises": [
+          "Résoudre : x² - 4 ≤ 0",
+          "Étudier le signe de g(x) = x² + 2x + 1",
+          "Résoudre : -x² + 5x - 6 > 0"
+        ],
+        "common_mistakes": [
+          "Inverser les signes (oublier que a<0 inverse tout)",
+          "Ne pas inclure les racines dans les solutions de ≤ ou ≥",
+          "Oublier les crochets/intervalles dans la réponse"
+        ],
+        "summary": {
+          "key_concept": "Le signe d'un trinôme dépend du signe de a et de la position par rapport aux racines",
+          "key_method": "Racines + signe de a → Tableau de signes → Résoudre inéquation",
+          "next_step": "Appliquer à des problèmes de modélisation"
+        }
+      }
+    },
+    {
+      "id": "M1-06",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Somme et produit des racines",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Calculer S = x₁ + x₂ = -b/a",
+        "Calculer P = x₁ × x₂ = c/a",
+        "Utiliser S et P pour résoudre des problèmes"
+      ],
+      "prerequisites": [
+        "Racines du trinôme",
+        "Discriminant",
+        "Calcul algébrique"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["somme", "produit", "racines", "relations"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les relations entre coefficients et racines. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de maîtriser ces formules en 10 minutes.",
+        "method_step_by_step": [
+          "Pour ax² + bx + c = 0 avec racines x₁ et x₂",
+          "Somme : S = x₁ + x₂ = -b/a",
+          "Produit : P = x₁ × x₂ = c/a",
+          "Vérification : ces formules découlent de la forme factorisée",
+          "Application : trouver une équation connaissant S et P"
+        ],
+        "guided_example": {
+          "statement": "Les racines de x² - 7x + 12 = 0 vérifient S=7 et P=12. Retrouver les racines.",
+          "solution_steps": [
+            "Vérification : S = -(-7)/1 = 7 ✓ et P = 12/1 = 12 ✓",
+            "Chercher x₁ et x₂ tels que x₁ + x₂ = 7 et x₁ × x₂ = 12",
+            "Essai : 3 + 4 = 7 et 3 × 4 = 12",
+            "Racines : x₁ = 3 et x₂ = 4",
+            "Vérification par discriminant : Δ = 49-48 = 1, racines (7±1)/2 = 3 et 4 ✓"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer S et P pour 2x² - 6x + 4 = 0",
+          "Trouver une équation de racines 2 et 5",
+          "Si S=3 et P=-10, quelles sont les racines ?"
+        ],
+        "common_mistakes": [
+          "Oublier le signe moins dans S = -b/a",
+          "Confondre somme et produit",
+          "Ne pas vérifier que a≠1 (diviser par a)"
+        ],
+        "summary": {
+          "key_concept": "Les racines vérifient toujours S = -b/a et P = c/a, permettant de retrouver une équation ou vérifier des calculs",
+          "key_method": "Coefficients a,b,c → S=-b/a, P=c/a → Utiliser pour problème",
+          "next_step": "Résoudre des systèmes avec S et P"
+        }
+      }
+    },
+    {
+      "id": "M1-07",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Parabole et variations - Tableau complet",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Dresser le tableau de variations d'une fonction du second degré",
+        "Déterminer l'extremum (minimum ou maximum)",
+        "Tracer l'allure de la parabole"
+      ],
+      "prerequisites": [
+        "Forme canonique",
+        "Sommet",
+        "Sens de variation"
+      ],
+      "content_types": ["video", "graphing", "quiz", "exercises"],
+      "tags": ["variations", "extremum", "parabole", "tableau"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'étude complète des variations d'une fonction du second degré. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de construire tableaux et graphes en 11 minutes.",
+        "method_step_by_step": [
+          "Identifier a, b, c et calculer α = -b/2a",
+          "Calculer β = f(α) (ordonnée du sommet)",
+          "Si a > 0 : fonction décroissante puis croissante, minimum en α",
+          "Si a < 0 : fonction croissante puis décroissante, maximum en α",
+          "Tracer : parabole passant par (0,c), sommet S(α,β), racines si Δ≥0"
+        ],
+        "guided_example": {
+          "statement": "Étudier les variations de f(x) = x² - 4x + 3 et tracer l'allure.",
+          "solution_steps": [
+            "a=1>0 : parabole vers le haut, minimum",
+            "α = -(-4)/2 = 2, β = f(2) = 4-8+3 = -1",
+            "Tableau : x → -∞  2  +∞",
+            "         f → +∞ ↘ -1 ↗ +∞",
+            "Minimum : f(2) = -1",
+            "Racines (Δ=4) : x=1 et x=3",
+            "Allure : parabole coupant l'axe en 1 et 3, sommet (2,-1)"
+          ]
+        },
+        "quick_exercises": [
+          "Dresser le tableau de variations de g(x) = -2x² + 8x - 6",
+          "Déterminer l'extremum de h(x) = 3x² + 6x + 5",
+          "Tracer l'allure de f(x) = x² - 1"
+        ],
+        "common_mistakes": [
+          "Confondre minimum et maximum selon a",
+          "Oublier de calculer β = f(α)",
+          "Inverser les flèches de variation"
+        ],
+        "summary": {
+          "key_concept": "Une fonction du second degré admet un extremum au sommet d'abscisse α=-b/2a, minimum si a>0, maximum si a<0",
+          "key_method": "Calculer α, β → Signe de a → Tableau variations → Tracer",
+          "next_step": "Résoudre des problèmes d'optimisation"
+        }
+      }
+    },
+    {
+      "id": "M1-08",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Applications - Problèmes d'optimisation",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Modéliser un problème par une fonction du second degré",
+        "Déterminer le maximum ou minimum dans un contexte",
+        "Interpréter le résultat mathématique"
+      ],
+      "prerequisites": [
+        "Variations du second degré",
+        "Extremum",
+        "Modélisation"
+      ],
+      "content_types": ["video", "problem-solving", "quiz", "exercises"],
+      "tags": ["optimisation", "maximum", "minimum", "problème"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'application du second degré aux problèmes d'optimisation. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de modéliser et résoudre des problèmes concrets en 13 minutes.",
+        "method_step_by_step": [
+          "Lire le problème et identifier la grandeur à optimiser",
+          "Exprimer cette grandeur comme fonction f(x) d'une variable x",
+          "Déterminer le domaine de définition pertinent",
+          "Calculer l'extremum (sommet de la parabole)",
+          "Vérifier que l'extremum est dans le domaine et interpréter"
+        ],
+        "guided_example": {
+          "statement": "Un fermier a 100m de clôture pour un enclos rectangulaire contre un mur. Quelle largeur maximise l'aire ?",
+          "solution_steps": [
+            "Variables : largeur x, longueur L = 100-2x (3 côtés clôturés)",
+            "Aire : A(x) = x(100-2x) = -2x² + 100x",
+            "Domaine : 0 < x < 50 (longueur positive)",
+            "Extremum : α = -100/(-4) = 25m",
+            "A(25) = 25×50 = 1250 m²",
+            "Conclusion : largeur optimale 25m, aire maximale 1250m²"
+          ]
+        },
+        "quick_exercises": [
+          "Maximiser le produit de deux nombres dont la somme est 20",
+          "Un projectile suit h(t) = -5t² + 20t. Hauteur maximale ?",
+          "Enclos carré vs rectangulaire : quelle forme pour aire max avec périmètre fixé ?"
+        ],
+        "common_mistakes": [
+          "Ne pas définir le domaine de validité",
+          "Confondre maximum de f(x) et valeur de x correspondante",
+          "Oublier de vérifier que l'extremum est dans le domaine"
+        ],
+        "summary": {
+          "key_concept": "Le second degré permet de résoudre des problèmes d'optimisation en trouvant le maximum ou minimum d'une fonction",
+          "key_method": "Modéliser → f(x) second degré → Extremum → Vérifier domaine → Interpréter",
+          "next_step": "Étudier des problèmes plus complexes"
+        }
+      }
+    },
+    {
+      "id": "M1-09",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Position relative de deux courbes",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Étudier la position de deux courbes (parabole/droite)",
+        "Résoudre f(x) = g(x) graphiquement et algébriquement",
+        "Interpréter les solutions comme points d'intersection"
+      ],
+      "prerequisites": [
+        "Second degré complet",
+        "Fonctions affines",
+        "Résolution d'équations"
+      ],
+      "content_types": ["video", "graphing", "quiz", "exercises"],
+      "tags": ["intersection", "courbes", "position relative", "système"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'étude de position relative entre courbes. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de résoudre f(x)=g(x) et interpréter graphiquement en 12 minutes.",
+        "method_step_by_step": [
+          "Résoudre l'équation f(x) = g(x) (souvent du second degré)",
+          "Calculer Δ pour déterminer le nombre d'intersections",
+          "Δ > 0 : 2 points d'intersection",
+          "Δ = 0 : 1 point (tangence)",
+          "Δ < 0 : aucune intersection",
+          "Étudier le signe de f(x)-g(x) pour position relative complète"
+        ],
+        "guided_example": {
+          "statement": "Étudier la position de la parabole f(x)=x²-4x+3 et de la droite d: y=x-1.",
+          "solution_steps": [
+            "Intersections : x²-4x+3 = x-1 ⇔ x²-5x+4 = 0",
+            "Δ = 25-16 = 9 > 0 : deux points d'intersection",
+            "x₁ = (5-3)/2 = 1, x₂ = (5+3)/2 = 4",
+            "Points : A(1,0) et B(4,3)",
+            "Signe de f(x)-(x-1) = x²-5x+4 : négatif entre 1 et 4",
+            "Conclusion : parabole sous la droite sur [1;4], au-dessus ailleurs"
+          ]
+        },
+        "quick_exercises": [
+          "Trouver les intersections de y=x² et y=4",
+          "Une parabole et une droite peuvent-elles avoir 3 points communs ?",
+          "Déterminer m pour que y=x²+2x+m touche y=1 (tangence)"
+        ],
+        "common_mistakes": [
+          "Confondre nombre de solutions et position relative",
+          "Oublier de vérifier le signe pour la position complète",
+          "Ne pas interpréter graphiquement les solutions"
+        ],
+        "summary": {
+          "key_concept": "Le nombre de points d'intersection de deux courbes est donné par le discriminant de f(x)=g(x)",
+          "key_method": "f(x)=g(x) → Équation 2nd degré → Δ → Nombre intersections → Signe → Position",
+          "next_step": "Généraliser à d'autres types de fonctions"
+        }
+      }
+    },
+    {
+      "id": "M1-10",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Second Degré",
+      "title": "Synthèse - Résolution de problèmes complexes",
+      "duration_min": 14,
+      "difficulty": 5,
+      "xp_reward": 150,
+      "objectives": [
+        "Mobiliser toutes les techniques du second degré",
+        "Résoudre un problème complet multi-étapes",
+        "Justifier rigoureusement chaque étape"
+      ],
+      "prerequisites": [
+        "Toutes les leçons du second degré",
+        "Raisonnement mathématique",
+        "Rédaction"
+      ],
+      "content_types": ["video", "problem-solving", "quiz", "exercises"],
+      "tags": ["synthèse", "problème", "complexe", "raisonnement"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon synthétise le chapitre du second degré à travers un problème complet. Elle s'inscrit dans le chapitre Second Degré de Première. L'objectif est de mobiliser toutes les compétences en 14 minutes.",
+        "method_step_by_step": [
+          "Analyser le problème : quelles sont les données et l'objectif ?",
+          "Choisir les outils adaptés : forme canonique, discriminant, variations...",
+          "Résoudre étape par étape en justifiant chaque calcul",
+          "Vérifier la cohérence des résultats",
+          "Rédiger une conclusion claire répondant à la question"
+        ],
+        "guided_example": {
+          "statement": "Une entreprise vend x milliers d'objets. Bénéfice B(x)=-2x²+12x-10 (en k€). a) Domaine ? b) Bénéfice max ? c) Seuil rentabilité ? d) Nombre d'objets pour B≥8k€ ?",
+          "solution_steps": [
+            "a) x≥0 (quantité positive), forme -2x²+12x-10 définie sur ℝ, donc D=[0;+∞[",
+            "b) a=-2<0 : maximum en α=12/4=3. B(3)=-18+36-10=8k€. Max à 3000 objets.",
+            "c) B(x)=0 ⇔ -2x²+12x-10=0 ⇔ x²-6x+5=0. Δ=16, x₁=1, x₂=5. Rentable sur [1;5].",
+            "d) B(x)≥8 ⇔ -2x²+12x-10≥8 ⇔ -2x²+12x-18≥0 ⇔ x²-6x+9≤0 ⇔ (x-3)²≤0.",
+            "Seule solution : x=3. Donc exactement 3000 objets pour B=8k€."
+          ]
+        },
+        "quick_exercises": [
+          "Problème complet avec trajectoire de projectile",
+          "Optimisation d'un packaging (boîte)",
+          "Étude complète d'une fonction rationnelle liée au 2nd degré"
+        ],
+        "common_mistakes": [
+          "Négliger le domaine de définition",
+          "Répondre partiellement sans traiter toutes les questions",
+          "Manquer de rigueur dans la rédaction"
+        ],
+        "summary": {
+          "key_concept": "La maîtrise du second degré permet de résoudre des problèmes complexes en combinant plusieurs techniques",
+          "key_method": "Analyser → Choisir outils → Résoudre étape par étape → Vérifier → Conclure",
+          "next_step": "Aborder la dérivation pour étudier des fonctions plus générales"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

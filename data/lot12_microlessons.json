@@ -1,0 +1,179 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Physique",
+    "lesson_range": "P1-11 à P1-20",
+    "chapters": [
+      "Mécanique (fin)",
+      "Ondes & Signaux (début)"
+    ],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Fin du chapitre Mécanique (P1-11, P1-12) et début du chapitre Ondes & Signaux (P1-13 à P1-20)"
+  },
+  "lessons": [
+    {
+      "id": "P1-11",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie mécanique et conservation",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Définir l'énergie mécanique Em = Ec + Ep",
+        "Appliquer le principe de conservation de l'énergie mécanique",
+        "Identifier les cas où Em se conserve ou ne se conserve pas"
+      ],
+      "prerequisites": [
+        "Énergie cinétique",
+        "Énergie potentielle",
+        "Travail"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["énergie mécanique", "conservation", "système isolé", "Em"]
+    },
+    {
+      "id": "P1-12",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Frottements et dissipation d'énergie",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Modéliser les forces de frottement",
+        "Comprendre la dissipation d'énergie par frottement",
+        "Calculer le travail des forces de frottement"
+      ],
+      "prerequisites": ["Forces", "Travail", "Énergie mécanique"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["frottements", "dissipation", "chaleur", "non-conservation"]
+    },
+    {
+      "id": "P1-13",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes progressives - Introduction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": ["Définir une onde progressive", "Distinguer onde mécanique et onde électromagnétique", "Comprendre la propagation d'une perturbation"],
+      "prerequisites": ["Notion de perturbation", "Milieu de propagation"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["onde progressive", "propagation", "perturbation", "milieu"]
+    },
+    {
+      "id": "P1-14",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Célérité d'une onde",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Définir la célérité v = d/t", "Calculer la vitesse de propagation", "Comprendre les facteurs influençant la célérité"],
+      "prerequisites": ["Onde progressive", "Vitesse", "Distance"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["célérité", "vitesse", "propagation", "milieu"]
+    },
+    {
+      "id": "P1-15",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes sinusoïdales - Période et fréquence",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Caractériser une onde sinusoïdale", "Définir T et f = 1/T", "Identifier ces grandeurs sur un signal"],
+      "prerequisites": ["Onde progressive", "Fonctions périodiques"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["onde sinusoïdale", "période", "fréquence", "Hertz"]
+    },
+    {
+      "id": "P1-16",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Longueur d'onde et relation λ = v·T",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": ["Définir la longueur d'onde λ", "Appliquer λ = v·T = v/f", "Résoudre des problèmes d'ondes"],
+      "prerequisites": ["Célérité", "Période", "Fréquence"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["longueur d'onde", "lambda", "relation fondamentale", "onde"]
+    },
+    {
+      "id": "P1-17",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Interférences d'ondes",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Comprendre les interférences", "Distinguer constructive/destructive", "Conditions d'observation"],
+      "prerequisites": ["Ondes sinusoïdales", "Superposition", "Phase"],
+      "content_types": ["video", "simulation", "quiz", "exercises"],
+      "tags": ["interférences", "superposition", "constructive", "destructive"]
+    },
+    {
+      "id": "P1-18",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Diffraction des ondes",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Décrire la diffraction", "Influence de la taille de l'ouverture", "Lien entre λ et largeur d'ouverture"],
+      "prerequisites": ["Ondes progressives", "Longueur d'onde", "Obstacle"],
+      "content_types": ["video", "simulation", "quiz", "exercises"],
+      "tags": ["diffraction", "obstacle", "ouverture", "étalement"]
+    },
+    {
+      "id": "P1-19",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Effet Doppler",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Comprendre l'effet Doppler", "Changement de fréquence perçue", "Applications (sirène, radar)"],
+      "prerequisites": ["Fréquence", "Vitesse relative", "Ondes"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["effet Doppler", "fréquence", "mouvement relatif", "radar"]
+    },
+    {
+      "id": "P1-20",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "La lumière comme onde électromagnétique",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Caractériser la lumière comme onde EM", "Connaître c=3×10^8 m/s", "Introduire le spectre visible"],
+      "prerequisites": ["Ondes", "Fréquence", "Longueur d'onde"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["lumière", "onde électromagnétique", "spectre", "célérité"]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

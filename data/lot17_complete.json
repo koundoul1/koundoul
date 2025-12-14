@@ -1,0 +1,503 @@
+{
+  "metadata": {
+    "lot_number": 17,
+    "lot_name": "Lot 17 - Mécanique",
+    "level": "Première",
+    "subject": "Physique",
+    "prefix": "P1",
+    "chapter": "Mécanique",
+    "lesson_range": "P1-01 à P1-12",
+    "total_lessons": 12
+  },
+  "lessons": [
+    {
+      "id": "P1-01",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Forces et interactions fondamentales",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Identifier les quatre interactions fondamentales", "Distinguer forces de contact et forces à distance", "Représenter une force par un vecteur", "Comprendre la notion d'interaction"],
+      "prerequisites": ["P2-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["forces", "interactions"],
+      "detailed_content": {
+        "introduction": "Les forces sont des interactions entre objets qui modifient leur mouvement. Il existe quatre interactions fondamentales dans l'univers, à l'origine de tous les phénomènes physiques.",
+        "key_concepts": [
+          { "name": "Quatre interactions", "explanation": "Gravitationnelle, électromagnétique, nucléaire forte, nucléaire faible", "example": "Univers physique" },
+          { "name": "Force", "explanation": "Vecteur : point d'application, direction, sens, intensité (N)", "example": "Action mécanique" },
+          { "name": "Contact vs distance", "explanation": "Contact direct ou sans contact. Toutes résultent d'interactions microscopiques", "example": "Types" },
+          { "name": "Action-réaction", "explanation": "3ème loi Newton : F⃗ₐ→ᵦ = -F⃗ᵦ→ₐ. Même intensité, sens opposés, objets différents", "example": "Réciprocité" }
+        ],
+        "guided_example": {
+          "statement": "Livre 500g posé sur table. Identifier et représenter les forces.",
+          "solution_steps": ["P⃗ : poids, vertical bas, 5N", "R⃗ₙ : réaction table, vertical haut, 5N", "Immobile ⟹ forces compensées"]
+        },
+        "quick_exercises": [
+          "Deux aimants s'attirent 0,2N. Forces exercées ? Se compensent-elles ?",
+          "Identifier et représenter forces"
+        ],
+        "common_mistakes": [
+          "Confondre les 4 interactions",
+          "Penser que action et réaction se compensent"
+        ],
+        "summary": {
+          "key_concept": "4 interactions : gravitation, électromagnétisme, forte, faible. Force = vecteur avec 4 caractéristiques",
+          "key_method": "Unité : newton (N). Action/réaction : même intensité, sens opposés, objets différents",
+          "next_step": "Principe d'inertie"
+        }
+      }
+    },
+    {
+      "id": "P1-02",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Principe d'inertie (1ère loi de Newton)",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Énoncer le principe d'inertie", "Identifier un référentiel galiléen", "Appliquer le principe d'inertie à des situations simples", "Distinguer mouvement rectiligne uniforme et équilibre"],
+      "prerequisites": ["P1-01", "P2-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["inertie", "Newton"],
+      "detailed_content": {
+        "introduction": "Le principe d'inertie, énoncé par Newton, décrit le comportement d'un objet lorsqu'aucune force ne s'exerce sur lui ou lorsque les forces se compensent. C'est la première des trois lois fondamentales de la mécanique.",
+        "key_concepts": [
+          { "name": "Principe d'inertie", "explanation": "Si ΣF⃗ = 0⃗, alors repos ou MRU (mouvement rectiligne uniforme)", "example": "1ère loi Newton" },
+          { "name": "Référentiel galiléen", "explanation": "Référentiel où le principe d'inertie est vérifié. Terrestre, géocentrique, héliocentrique", "example": "Cadres" },
+          { "name": "Systèmes", "explanation": "Isolé (aucune force) vs pseudo-isolé (ΣF⃗ = 0⃗). Même comportement", "example": "Conditions" },
+          { "name": "Conséquences", "explanation": "Pas besoin de force pour maintenir MRU. Force nécessaire pour MODIFIER le mouvement", "example": "Principe" }
+        ],
+        "guided_example": {
+          "statement": "Palet hockey glisse 5 m/s constant sur glace (frottements négligés). Forces ?",
+          "solution_steps": ["MRU ⟹ ΣF⃗ = 0⃗", "P⃗ et R⃗ₙ se compensent verticalement", "Aucune force horizontale"]
+        },
+        "quick_exercises": [
+          "Astronaute lance balle 10 m/s dans l'espace. Mouvement ultérieur ?",
+          "Principle d'inertie"
+        ],
+        "common_mistakes": [
+          "Penser qu'il faut une force pour maintenir mouvement",
+          "Confondre force et vitesse"
+        ],
+        "summary": {
+          "key_concept": "ΣF⃗ = 0⃗ ⟹ v⃗ constante ou repos. MRU sans force",
+          "key_method": "Référentiel galiléen nécessaire. Pseudo-isolé ⇔ forces compensées",
+          "next_step": "Deuxième loi de Newton"
+        }
+      }
+    },
+    {
+      "id": "P1-03",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Deuxième loi de Newton",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Énoncer la 2ème loi de Newton", "Appliquer ΣF⃗ = ma⃗", "Relier force et accélération", "Résoudre des problèmes de dynamique"],
+      "prerequisites": ["P1-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Newton", "dynamique"],
+      "detailed_content": {
+        "introduction": "La deuxième loi de Newton, ou principe fondamental de la dynamique, établit la relation quantitative entre les forces appliquées à un système et son accélération. C'est l'équation fondamentale de la mécanique classique.",
+        "key_concepts": [
+          { "name": "2ème loi", "explanation": "ΣF⃗ = ma⃗. Force résultante proportionnelle à accélération", "example": "PFD" },
+          { "name": "Conséquences", "explanation": "ΣF⃗ = 0⃗ ⟹ a⃗ = 0⃗ (inertie). ΣF⃗ ≠ 0⃗ ⟹ a⃗ ≠ 0⃗", "example": "Mouvement" },
+          { "name": "Méthode", "explanation": "1) Référentiel galiléen, 2) Bilan forces, 3) Projeter, 4) Résoudre, 5) Intégrer si besoin", "example": "Approche" },
+          { "name": "Cas particuliers", "explanation": "Chute libre : a⃗ = g⃗. Plan horizontal : ΣF⃗ horizontale = ma⃗", "example": "Applications" }
+        ],
+        "guided_example": {
+          "statement": "Caisse 20 kg tirée F = 60 N horizontal (frottements négligeables). Accélération ?",
+          "solution_steps": ["Bilan : P⃗, R⃗ₙ compensés verticalement", "Horizontal : ΣFₓ = F = 60N", "a = F/m = 60/20 = 3 m/s²"]
+        },
+        "quick_exercises": [
+          "Wagonnet 500 kg poussé 200 N, frottements 50 N. Accélération ?",
+          "Application 2ème loi"
+        ],
+        "common_mistakes": [
+          "Oublier une force dans le bilan",
+          "Ne pas projeter sur les axes"
+        ],
+        "summary": {
+          "key_concept": "2ème loi : ΣF⃗ = ma⃗. Bilan complet des forces, projeter sur axes",
+          "key_method": "Unités : N, kg, m/s²",
+          "next_step": "Troisième loi de Newton"
+        }
+      }
+    },
+    {
+      "id": "P1-04",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Troisième loi de Newton et applications",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Appliquer le principe des actions réciproques", "Résoudre des problèmes à plusieurs objets", "Comprendre la propulsion et la réaction", "Distinguer forces intérieures et extérieures"],
+      "prerequisites": ["P1-01", "P1-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["réaction", "propulsion"],
+      "detailed_content": {
+        "introduction": "La troisième loi de Newton complète les deux premières en décrivant comment les forces apparaissent toujours par paires. C'est la clé pour comprendre la propulsion, les systèmes à plusieurs corps, et de nombreux phénomènes mécaniques.",
+        "key_concepts": [
+          { "name": "3ème loi", "explanation": "F⃗ₐ→ᵦ = -F⃗ᵦ→ₐ. Même intensité, sens opposés, objets différents", "example": "Actions réciproques" },
+          { "name": "Forces", "explanation": "Intérieures : entre objets du système, somme nulle. Extérieures : avec l'extérieur", "example": "Classification" },
+          { "name": "Propulsion", "explanation": "Éjection matière dans un sens ⟹ réaction sens opposé. Fusée, hélice, nage", "example": "Réaction" },
+          { "name": "Applications", "explanation": "Traction, marche, collision. Forces égales mais accélérations différentes", "example": "Phénomènes" }
+        ],
+        "guided_example": {
+          "statement": "Patineur 70 kg pousse mur 100 N. Force mur sur patineur ? Que se passe ?",
+          "solution_steps": ["3ème loi : F⃗ₘᵤᵣ→ₚₐₜ = -100N", "Accélération : a = 100/70 ≈ 1,4 m/s²", "Patineur recule"]
+        },
+        "quick_exercises": [
+          "Fusée 5000 kg éjecte gaz 60 000 N vers bas. Force sur fusée ? Accélération ?",
+          "Propulsion par réaction"
+        ],
+        "common_mistakes": [
+          "Penser action/réaction se compensent",
+          "Oublier forces simultanées"
+        ],
+        "summary": {
+          "key_concept": "3ème loi : F⃗ₐ→ᵦ = -F⃗ᵦ→ₐ. Même intensité, sens opposés, objets différents",
+          "key_method": "Propulsion = réaction à éjection. Forces intérieures : somme nulle",
+          "next_step": "Mouvement dans champ pesanteur"
+        }
+      }
+    },
+    {
+      "id": "P1-05",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Mouvement dans un champ de pesanteur uniforme",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Étudier le mouvement d'un projectile", "Établir les équations horaires", "Déterminer la trajectoire (parabole)", "Calculer portée et hauteur maximale"],
+      "prerequisites": ["P1-03", "P2-07"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["projectile", "parabole"],
+      "detailed_content": {
+        "introduction": "Un objet lancé dans le champ de pesanteur terrestre (en négligeant les frottements de l'air) suit une trajectoire parabolique. L'étude de ce mouvement est fondamentale en balistique, en sport, et pour comprendre le mouvement des satellites.",
+        "key_concepts": [
+          { "name": "Hypothèses", "explanation": "Champ uniforme g⃗, frottements négligés, seul poids. Chute libre", "example": "Conditions" },
+          { "name": "Équations", "explanation": "aₓ = 0, aᵧ = -g. vₓ = v₀ cos α, vᵧ = v₀ sin α - gt", "example": "Horaires" },
+          { "name": "Trajectoire", "explanation": "Parabole : y = x tan α - (g/(2v₀² cos²α)) x²", "example": "Forme" },
+          { "name": "Grandeurs", "explanation": "Portée P = v₀² sin(2α)/g. Hauteur H = v₀² sin²α/(2g). Portée max : α = 45°", "example": "Caractéristiques" }
+        ],
+        "guided_example": {
+          "statement": "Ballon lancé v₀ = 20 m/s, α = 30°. Calculer portée (g = 10).",
+          "solution_steps": ["P = (v₀² sin(2α))/g", "= (400 sin60°)/10", "≈ 34,6 m"]
+        },
+        "quick_exercises": [
+          "Balle lancée horizontalement h = 20 m, v₀ = 15 m/s. Temps et distance ?",
+          "Mouvement projectile"
+        ],
+        "common_mistakes": [
+          "Oublier aₓ = 0",
+          "Confondre vitesse initiale et composantes"
+        ],
+        "summary": {
+          "key_concept": "Chute libre : a⃗ = g⃗. Trajectoire parabole. Portée max : α = 45°",
+          "key_method": "vₓ constant, vᵧ varie linéairement",
+          "next_step": "Travail d'une force"
+        }
+      }
+    },
+    {
+      "id": "P1-06",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Travail d'une force",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 110,
+      "objectives": ["Définir le travail d'une force", "Calculer W = F⃗·AB⃗ = F × AB × cos(α)", "Interpréter le signe du travail", "Distinguer travail moteur, résistant, nul"],
+      "prerequisites": ["P1-01", "P2-15"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["travail", "énergie"],
+      "detailed_content": {
+        "introduction": "Le travail d'une force mesure l'énergie transférée par cette force lors d'un déplacement. C'est un scalaire (pas un vecteur) qui peut être positif, négatif ou nul selon l'orientation de la force par rapport au déplacement.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "W = F⃗·AB⃗ = F × AB × cos(α). Produit scalaire. Unité : joule (J)", "example": "Formule" },
+          { "name": "Signe", "explanation": "Moteur W>0 si α<90°. Résistant W<0 si α>90°. Nul W=0 si α=90°", "example": "Types" },
+          { "name": "Cas particuliers", "explanation": "α=0° W=Fd max, α=180° W=-Fd, α=90° W=0", "example": "Angles" },
+          { "name": "Poids", "explanation": "W_P = mg(zA - zB) = -mgΔz. Ne dépend QUE du dénivelé", "example": "Force conservative" }
+        ],
+        "guided_example": {
+          "statement": "Traîneau tiré 50m, F = 100 N, α = 30°. Travail ?",
+          "solution_steps": ["W = F d cos(α)", "= 100 × 50 × cos30°", "≈ 4330 J (moteur)"]
+        },
+        "quick_exercises": [
+          "Élève 60 kg monte escalier 5m. Travail poids ? (g=10)",
+          "Travail d'une force"
+        ],
+        "common_mistakes": [
+          "Confondre travail et force",
+          "Oublier l'angle"
+        ],
+        "summary": {
+          "key_concept": "W = F d cos(α) (force constante). Unité : joule (J)",
+          "key_method": "W>0 : moteur, W<0 : résistant, W=0 : perpendiculaire. W_P = -mgΔz",
+          "next_step": "Puissance d'une force"
+        }
+      }
+    },
+    {
+      "id": "P1-07",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Puissance d'une force",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Définir la puissance", "Calculer P = W/Δt et P = F⃗·v⃗", "Relier puissance et vitesse", "Convertir les unités (W, kW, ch)"],
+      "prerequisites": ["P1-06", "P2-16"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["puissance", "énergie"],
+      "detailed_content": {
+        "introduction": "La puissance caractérise la rapidité avec laquelle un travail est effectué ou l'énergie est transférée. C'est une grandeur essentielle pour comparer l'efficacité des moteurs, des machines, ou des efforts physiques.",
+        "key_concepts": [
+          { "name": "Puissance moyenne", "explanation": "P = W/Δt. Travail divisé par durée. Unité : watt (W)", "example": "Définition" },
+          { "name": "Puissance instantanée", "explanation": "P = F⃗·v⃗ = F v cos(α). Force × vitesse. Si colinéaires : P = F v", "example": "Formule" },
+          { "name": "Interprétation", "explanation": "P>0 : fournit énergie. P<0 : absorbe énergie. P=0 : force perpendiculaire ou nulle", "example": "Signe" },
+          { "name": "Unités", "explanation": "W = J/s, 1 kW = 1000 W, 1 ch ≈ 735 W", "example": "Conversions" }
+        ],
+        "guided_example": {
+          "statement": "Moteur 2 kW soulève charge 10s. Travail ?",
+          "solution_steps": ["P = 2 kW = 2000 W", "W = P × Δt = 2000 × 10", "= 20 000 J = 20 kJ"]
+        },
+        "quick_exercises": [
+          "Voiture 90 km/h (25 m/s), traction F = 400 N. Puissance ?",
+          "Puissance d'une force"
+        ],
+        "common_mistakes": [
+          "Confondre puissance et énergie",
+          "Ne pas convertir unités"
+        ],
+        "summary": {
+          "key_concept": "P = W/Δt (puissance moyenne). P = F v cos(α) (instantanée)",
+          "key_method": "Unité : watt (W). 1 kW = 1000 W, 1 ch ≈ 735 W",
+          "next_step": "Énergie cinétique"
+        }
+      }
+    },
+    {
+      "id": "P1-08",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie cinétique",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Définir l'énergie cinétique", "Calculer Ec = ½mv²", "Comprendre la dépendance en v²", "Relier Ec et vitesse"],
+      "prerequisites": ["P2-15"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["cinétique", "énergie"],
+      "detailed_content": {
+        "introduction": "L'énergie cinétique est l'énergie que possède un objet du fait de son mouvement. Elle dépend de la masse et de la vitesse de l'objet. C'est une grandeur scalaire toujours positive ou nulle.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Ec = ½mv². Masse m, vitesse v (module). Unité : joule (J)", "example": "Formule" },
+          { "name": "v²", "explanation": "Proportionnel au carré de la vitesse. Doubler v ⟹ Ec × 4", "example": "Dépendance" },
+          { "name": "m", "explanation": "Proportionnel à la masse. À vitesse égale, masse × 2 ⟹ Ec × 2", "example": "Proportionnalité" },
+          { "name": "Référentiel", "explanation": "Ec dépend du référentiel choisi. Vitesse relative", "example": "Relativité" }
+        ],
+        "guided_example": {
+          "statement": "Voiture 1200 kg à 90 km/h (25 m/s). Ec ?",
+          "solution_steps": ["Ec = ½mv²", "= ½ × 1200 × 25²", "= 375 000 J = 375 kJ"]
+        },
+        "quick_exercises": [
+          "Ballon 450 g à 72 km/h. Ec ?",
+          "Énergie cinétique"
+        ],
+        "common_mistakes": [
+          "Oublier facteur ½",
+          "Ne pas convertir vitesse"
+        ],
+        "summary": {
+          "key_concept": "Ec = ½mv² (toujours positif). Unité : joule (J)",
+          "key_method": "Ec ∝ v² : doubler v ⟹ Ec × 4. Dépend du référentiel",
+          "next_step": "Théorème énergie cinétique"
+        }
+      }
+    },
+    {
+      "id": "P1-09",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Théorème de l'énergie cinétique",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Énoncer le théorème de l'énergie cinétique", "Appliquer ΔEc = ΣW", "Relier travail et variation d'énergie", "Résoudre des problèmes de dynamique"],
+      "prerequisites": ["P1-06", "P1-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["théorème", "énergie"],
+      "detailed_content": {
+        "introduction": "Le théorème de l'énergie cinétique établit un lien direct entre la variation d'énergie cinétique d'un système et le travail des forces qui s'exercent sur lui. C'est un outil puissant pour résoudre des problèmes de mécanique sans passer par les accélérations.",
+        "key_concepts": [
+          { "name": "Théorème", "explanation": "ΔEc = Ec_B - Ec_A = ΣW. Variation égale somme des travaux", "example": "TEC" },
+          { "name": "Interprétation", "explanation": "ΣW>0 ⟹ vitesse augmente. ΣW<0 ⟹ vitesse diminue. ΣW=0 ⟹ vitesse constante", "example": "Signification" },
+          { "name": "Méthode", "explanation": "1) Identifier système, 2) Positions A et B, 3) Ec_A et Ec_B, 4) Bilan forces et travaux, 5) TEC, 6) Résoudre", "example": "Approche" },
+          { "name": "Avantages", "explanation": "Pas besoin durée ni accélération. Relation directe vitesse ↔ travail", "example": "Intérêt" }
+        ],
+        "guided_example": {
+          "statement": "Voiture 1000 kg : 90 → 50 km/h. Travail freinage -200 kJ. Cohérent ?",
+          "solution_steps": ["Ec_A = 312,5 kJ, Ec_B ≈ 96,6 kJ", "ΔEc = -216 kJ", "≈ -200 kJ cohérent"]
+        },
+        "quick_exercises": [
+          "Skieur 70 kg : repos → vitesse 30 m/s après 100m dénivelé. Travail frottements ?",
+          "Théorème énergie cinétique"
+        ],
+        "common_mistakes": [
+          "Oublier une force",
+          "Se tromper sur le signe"
+        ],
+        "summary": {
+          "key_concept": "TEC : ΔEc = ΣW. ΔEc = ½mv²_B - ½mv²_A",
+          "key_method": "Sommer TOUS les travaux. Attention aux signes !",
+          "next_step": "Énergie potentielle"
+        }
+      }
+    },
+    {
+      "id": "P1-10",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie potentielle de pesanteur",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Définir l'énergie potentielle de pesanteur", "Calculer Epp = mgz", "Comprendre la notion de référence", "Relier Epp et altitude"],
+      "prerequisites": ["P1-06", "P2-15"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["potentielle", "pesanteur"],
+      "detailed_content": {
+        "introduction": "L'énergie potentielle de pesanteur est l'énergie qu'un objet possède du fait de sa position dans le champ de pesanteur terrestre. Elle dépend de l'altitude et peut être convertie en énergie cinétique (et vice versa).",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Epp = mgz. Masse m, altitude z (référence au choix). Unité : joule (J)", "example": "Formule" },
+          { "name": "Référence", "explanation": "Choix libre de référence (Epp = 0). Sol, niveau mer, etc.", "example": "Arbitraire" },
+          { "name": "Variation", "explanation": "ΔEpp = mg Δz. Indépendant de la référence. Montée : ΔEpp>0, descente : ΔEpp<0", "example": "Changement" },
+          { "name": "Relation", "explanation": "W_P = -ΔEpp. Poids force conservative. ΔEpp indépendant de référence", "example": "Travail" }
+        ],
+        "guided_example": {
+          "statement": "Livre 2 kg à 1,5 m du sol. Epp ? (réf: sol, g=10)",
+          "solution_steps": ["Epp = mgz", "= 2 × 10 × 1,5", "= 30 J"]
+        },
+        "quick_exercises": [
+          "Skieur 80 kg : 2000 → 1500 m. ΔEpp ?",
+          "Énergie potentielle"
+        ],
+        "common_mistakes": [
+          "Oublier choix référence",
+          "Confondre Epp et ΔEpp"
+        ],
+        "summary": {
+          "key_concept": "Epp = mgz (référence au choix). ΔEpp = mgΔz (indépendant référence)",
+          "key_method": "W_P = -ΔEpp. Montée : ΔEpp>0, descente : ΔEpp<0",
+          "next_step": "Énergie mécanique"
+        }
+      }
+    },
+    {
+      "id": "P1-11",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie mécanique et conservation",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Définir l'énergie mécanique Em = Ec + Epp", "Appliquer la conservation de l'énergie mécanique", "Comprendre les forces conservatives et non conservatives", "Résoudre des problèmes avec Em"],
+      "prerequisites": ["P1-08", "P1-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["mécanique", "conservation"],
+      "detailed_content": {
+        "introduction": "L'énergie mécanique est la somme de l'énergie cinétique et de l'énergie potentielle. Dans certaines conditions (forces conservatives uniquement), elle se conserve : c'est un principe fondamental de la physique qui simplifie grandement la résolution de problèmes.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Em = Ec + Epp = ½mv² + mgz. Somme énergies", "example": "Formule" },
+          { "name": "Conservation", "explanation": "Si forces conservatives seulement : Em(A) = Em(B) ou ΔEm = 0", "example": "Principe" },
+          { "name": "Forces", "explanation": "Conservatives : poids (travail indépendant chemin). Non conservatives : frottements", "example": "Types" },
+          { "name": "Non-conservation", "explanation": "ΔEm = W_forces non conservatives. Frottements ⟹ dissipation en chaleur", "example": "Dissipation" }
+        ],
+        "guided_example": {
+          "statement": "Bille lâchée h = 10 m sans vitesse. Vitesse en bas ? (g=10, sans frottements)",
+          "solution_steps": ["Em(haut) = Em(bas)", "mgh = ½mv²", "v = √(2gh) = √200 ≈ 14,1 m/s"]
+        },
+        "quick_exercises": [
+          "Pendule 500 g lâché 2 m. Vitesse point bas ?",
+          "Conservation énergie"
+        ],
+        "common_mistakes": [
+          "Oublier vérifier forces conservatives",
+          "Appliquer conservation avec frottements"
+        ],
+        "summary": {
+          "key_concept": "Em = Ec + Epp. Conservation : Em_A = Em_B (si forces conservatives)",
+          "key_method": "Frottements : ΔEm = W_frottements < 0. v = √(2gh) (chute libre)",
+          "next_step": "Frottements"
+        }
+      }
+    },
+    {
+      "id": "P1-12",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Frottements et dissipation d'énergie",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 115,
+      "objectives": ["Comprendre les forces de frottement", "Calculer le travail des frottements", "Analyser la dissipation d'énergie", "Appliquer ΔEm = W_frottements"],
+      "prerequisites": ["P1-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["frottements", "dissipation"],
+      "detailed_content": {
+        "introduction": "Les frottements sont des forces qui s'opposent au mouvement relatif entre deux surfaces ou entre un objet et un fluide. Ils dissipent de l'énergie mécanique sous forme de chaleur. Comprendre les frottements est essentiel pour analyser les mouvements réels.",
+        "key_concepts": [
+          { "name": "Types", "explanation": "Solide sec : F_f = μ N. Fluide : F_f = k v ou k v² selon régime", "example": "Forces" },
+          { "name": "Travail", "explanation": "Toujours résistant W_f < 0. Pour déplacement d : W_f = -F_f × d", "example": "Dissipation" },
+          { "name": "Dissipation", "explanation": "Énergie mécanique convertie en chaleur. ΔEm = W_frottements < 0", "example": "Énergie" },
+          { "name": "Conséquences", "explanation": "Freinage, usure, limitation vitesse limite. Distance freinage ∝ v²", "example": "Applications" }
+        ],
+        "guided_example": {
+          "statement": "Palet 200g : 10 m/s → arrêt 50 m. F_f moyenne ?",
+          "solution_steps": ["ΔEc = -10 J", "ΔEm = -10 J = W_f = -F_f × d", "F_f = 0,2 N"]
+        },
+        "quick_exercises": [
+          "Voiture 1200 kg : 90 km/h (25 m/s) → arrêt 50 m. Force freinage ?",
+          "Frottements et dissipation"
+        ],
+        "common_mistakes": [
+          "Oublier signe négatif",
+          "Confondre force et coefficient"
+        ],
+        "summary": {
+          "key_concept": "Frottements : toujours résistants (W < 0). ΔEm = W_frottements < 0",
+          "key_method": "Dissipation en chaleur. F_f dépend de μ, N, ou v",
+          "next_step": "Fin chapitre Mécanique"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

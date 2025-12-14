@@ -1,0 +1,1721 @@
+{
+  "bank_info": {
+    "title": "Banque QCM - Physique Première",
+    "level": "Première",
+    "subject": "Physique",
+    "type": "QCM",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Mouvement et interactions",
+      "L'énergie : conversions et transferts",
+      "Ondes et signaux"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "questions": [
+    {
+      "id": "PHY1-QCM-001",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Dans le référentiel terrestre, un livre posé sur une table est :",
+      "options": [
+        "En mouvement",
+        "Immobile",
+        "En rotation",
+        "En chute libre"
+      ],
+      "correct_answer": 1,
+      "explanation": "Dans le référentiel terrestre, un objet posé sur une table est immobile (vitesse nulle).",
+      "related_lesson": "PHY1-01"
+    },
+    {
+      "id": "PHY1-QCM-002",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La vitesse moyenne v d'un mobile est donnée par :",
+      "options": [
+        "v = d × t",
+        "v = d / t",
+        "v = t / d",
+        "v = d + t"
+      ],
+      "correct_answer": 1,
+      "explanation": "Vitesse moyenne : v = distance / temps = d / t.",
+      "related_lesson": "PHY1-02"
+    },
+    {
+      "id": "PHY1-QCM-003",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'unité SI de la vitesse est :",
+      "options": [
+        "km/h",
+        "m/s",
+        "m/h",
+        "km/s"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'unité du Système International pour la vitesse est le mètre par seconde (m/s).",
+      "related_lesson": "PHY1-02"
+    },
+    {
+      "id": "PHY1-QCM-004",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un vecteur vitesse est caractérisé par :",
+      "options": [
+        "Sa direction uniquement",
+        "Son sens uniquement",
+        "Sa norme (valeur) uniquement",
+        "Direction, sens et norme"
+      ],
+      "correct_answer": 3,
+      "explanation": "Un vecteur possède trois caractéristiques : direction, sens et norme (intensité).",
+      "related_lesson": "PHY1-03"
+    },
+    {
+      "id": "PHY1-QCM-005",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La première loi de Newton (principe d'inertie) stipule que :",
+      "options": [
+        "Un corps reste au repos ou en MRU si la somme des forces est nulle",
+        "F = ma",
+        "Action = Réaction",
+        "Tout corps chute verticalement"
+      ],
+      "correct_answer": 0,
+      "explanation": "Principe d'inertie : si ΣF⃗ = 0⃗, le corps est au repos ou en mouvement rectiligne uniforme.",
+      "related_lesson": "PHY1-05"
+    },
+    {
+      "id": "PHY1-QCM-006",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La deuxième loi de Newton s'écrit :",
+      "options": [
+        "F = m + a",
+        "ΣF⃗ = m·a⃗",
+        "F = m / a",
+        "F = a / m"
+      ],
+      "correct_answer": 1,
+      "explanation": "Principe fondamental de la dynamique : ΣF⃗ = m·a⃗.",
+      "related_lesson": "PHY1-06"
+    },
+    {
+      "id": "PHY1-QCM-007",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La troisième loi de Newton (action-réaction) affirme que :",
+      "options": [
+        "Les forces s'annulent toujours",
+        "F⃗A/B = -F⃗B/A",
+        "Toute force est nulle",
+        "F = ma"
+      ],
+      "correct_answer": 1,
+      "explanation": "Si A exerce une force sur B, alors B exerce sur A une force opposée : F⃗A/B = -F⃗B/A.",
+      "related_lesson": "PHY1-07"
+    },
+    {
+      "id": "PHY1-QCM-008",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le poids P d'un objet de masse m vaut :",
+      "options": [
+        "P = m",
+        "P = mg",
+        "P = m/g",
+        "P = g/m"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le poids est P⃗ = m·g⃗ où g ≈ 9,81 m/s² sur Terre.",
+      "related_lesson": "PHY1-08"
+    },
+    {
+      "id": "PHY1-QCM-009",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'unité SI de la force est :",
+      "options": [
+        "Joule (J)",
+        "Newton (N)",
+        "Watt (W)",
+        "Pascal (Pa)"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'unité SI de la force est le newton (N), avec 1 N = 1 kg·m/s².",
+      "related_lesson": "PHY1-06"
+    },
+    {
+      "id": "PHY1-QCM-010",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Sur la Lune où g = 1,6 m/s², le poids d'un objet de 50 kg est :",
+      "options": [
+        "50 N",
+        "80 N",
+        "490 N",
+        "500 N"
+      ],
+      "correct_answer": 1,
+      "explanation": "P = mg = 50 × 1,6 = 80 N sur la Lune.",
+      "related_lesson": "PHY1-08"
+    },
+    {
+      "id": "PHY1-QCM-011",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un mouvement rectiligne uniforme (MRU) se caractérise par :",
+      "options": [
+        "Une trajectoire courbe",
+        "Une vitesse constante sur trajectoire droite",
+        "Une accélération constante",
+        "Une vitesse qui augmente"
+      ],
+      "correct_answer": 1,
+      "explanation": "MRU = trajectoire rectiligne + vitesse constante (a = 0).",
+      "related_lesson": "PHY1-04"
+    },
+    {
+      "id": "PHY1-QCM-012",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un mouvement rectiligne uniformément varié (MRUV) a :",
+      "options": [
+        "Accélération nulle",
+        "Accélération constante non nulle",
+        "Accélération variable",
+        "Vitesse constante"
+      ],
+      "correct_answer": 1,
+      "explanation": "MRUV : trajectoire rectiligne + accélération constante ≠ 0.",
+      "related_lesson": "PHY1-04"
+    },
+    {
+      "id": "PHY1-QCM-013",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "En chute libre (sans frottement), l'accélération vaut :",
+      "options": [
+        "0",
+        "g (environ 9,81 m/s²)",
+        "v/t",
+        "Variable"
+      ],
+      "correct_answer": 1,
+      "explanation": "En chute libre, seul le poids agit : a⃗ = g⃗ ≈ 9,81 m/s² (vers le bas).",
+      "related_lesson": "PHY1-09"
+    },
+    {
+      "id": "PHY1-QCM-014",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La force de frottement s'oppose :",
+      "options": [
+        "Au poids",
+        "Au mouvement",
+        "À la force normale",
+        "À rien"
+      ],
+      "correct_answer": 1,
+      "explanation": "Les frottements s'opposent toujours au mouvement (direction opposée à v⃗).",
+      "related_lesson": "PHY1-09"
+    },
+    {
+      "id": "PHY1-QCM-015",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La quantité de mouvement p⃗ d'un objet est définie par :",
+      "options": [
+        "p⃗ = m + v⃗",
+        "p⃗ = m·v⃗",
+        "p⃗ = m/v⃗",
+        "p⃗ = v⃗/m"
+      ],
+      "correct_answer": 1,
+      "explanation": "Quantité de mouvement : p⃗ = m·v⃗ (unité : kg·m/s).",
+      "related_lesson": "PHY1-10"
+    },
+    {
+      "id": "PHY1-QCM-016",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans un système isolé, la quantité de mouvement totale :",
+      "options": [
+        "Augmente",
+        "Diminue",
+        "Se conserve",
+        "Devient nulle"
+      ],
+      "correct_answer": 2,
+      "explanation": "Principe de conservation : si ΣF⃗ext = 0⃗, alors Σp⃗ = constante.",
+      "related_lesson": "PHY1-10"
+    },
+    {
+      "id": "PHY1-QCM-017",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un référentiel galiléen est un référentiel dans lequel :",
+      "options": [
+        "Tout objet est immobile",
+        "Le principe d'inertie s'applique",
+        "Les forces n'existent pas",
+        "La vitesse est nulle"
+      ],
+      "correct_answer": 1,
+      "explanation": "Un référentiel galiléen vérifie le principe d'inertie (1ère loi de Newton).",
+      "related_lesson": "PHY1-05"
+    },
+    {
+      "id": "PHY1-QCM-018",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La force normale (réaction du support) est :",
+      "options": [
+        "Parallèle au support",
+        "Perpendiculaire au support",
+        "Toujours verticale",
+        "Toujours nulle"
+      ],
+      "correct_answer": 1,
+      "explanation": "La réaction normale R⃗ est perpendiculaire à la surface de contact.",
+      "related_lesson": "PHY1-09"
+    },
+    {
+      "id": "PHY1-QCM-019",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'accélération est la dérivée de :",
+      "options": [
+        "La position",
+        "La vitesse",
+        "La force",
+        "La masse"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'accélération est la dérivée du vecteur vitesse : a⃗ = dv⃗/dt.",
+      "related_lesson": "PHY1-03"
+    },
+    {
+      "id": "PHY1-QCM-020",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans un mouvement circulaire uniforme, l'accélération est :",
+      "options": [
+        "Nulle",
+        "Tangentielle",
+        "Centripète (dirigée vers le centre)",
+        "Variable en direction et norme"
+      ],
+      "correct_answer": 2,
+      "explanation": "MCU : accélération centripète (perpendiculaire à v⃗, vers le centre).",
+      "related_lesson": "PHY1-04"
+    },
+    {
+      "id": "PHY1-QCM-021",
+      "chapter": "L'énergie",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'unité SI de l'énergie est :",
+      "options": [
+        "Watt (W)",
+        "Joule (J)",
+        "Newton (N)",
+        "Volt (V)"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'unité SI de l'énergie est le joule (J).",
+      "related_lesson": "PHY1-21"
+    },
+    {
+      "id": "PHY1-QCM-022",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'énergie cinétique Ec d'un objet de masse m et vitesse v est :",
+      "options": [
+        "Ec = mv",
+        "Ec = ½mv²",
+        "Ec = mv²",
+        "Ec = ½m²v"
+      ],
+      "correct_answer": 1,
+      "explanation": "Énergie cinétique : Ec = ½mv².",
+      "related_lesson": "PHY1-22"
+    },
+    {
+      "id": "PHY1-QCM-023",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'énergie potentielle de pesanteur à l'altitude h est :",
+      "options": [
+        "Ep = mh",
+        "Ep = mgh",
+        "Ep = gh",
+        "Ep = m/gh"
+      ],
+      "correct_answer": 1,
+      "explanation": "Énergie potentielle de pesanteur : Ep = mgh (référence au sol).",
+      "related_lesson": "PHY1-23"
+    },
+    {
+      "id": "PHY1-QCM-024",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'énergie mécanique Em est :",
+      "options": [
+        "Em = Ec - Ep",
+        "Em = Ec + Ep",
+        "Em = Ec × Ep",
+        "Em = Ec / Ep"
+      ],
+      "correct_answer": 1,
+      "explanation": "Énergie mécanique : Em = Ec + Ep.",
+      "related_lesson": "PHY1-24"
+    },
+    {
+      "id": "PHY1-QCM-025",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "En l'absence de frottements, l'énergie mécanique :",
+      "options": [
+        "Augmente",
+        "Diminue",
+        "Se conserve",
+        "Devient nulle"
+      ],
+      "correct_answer": 2,
+      "explanation": "Conservation de Em si pas de frottements : Em = constante.",
+      "related_lesson": "PHY1-25"
+    },
+    {
+      "id": "PHY1-QCM-026",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Quand un objet tombe (sans frottement), son Ep :",
+      "options": [
+        "Augmente",
+        "Diminue et se transforme en Ec",
+        "Reste constante",
+        "Disparaît"
+      ],
+      "correct_answer": 1,
+      "explanation": "En tombant : Ep diminue, Ec augmente (conversion d'énergie).",
+      "related_lesson": "PHY1-25"
+    },
+    {
+      "id": "PHY1-QCM-027",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La puissance P est définie par :",
+      "options": [
+        "P = E × t",
+        "P = E / t",
+        "P = t / E",
+        "P = E - t"
+      ],
+      "correct_answer": 1,
+      "explanation": "Puissance : P = E/t (énergie transférée par unité de temps).",
+      "related_lesson": "PHY1-26"
+    },
+    {
+      "id": "PHY1-QCM-028",
+      "chapter": "L'énergie",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'unité SI de la puissance est :",
+      "options": [
+        "Joule (J)",
+        "Watt (W)",
+        "Newton (N)",
+        "Ampère (A)"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'unité SI de puissance est le watt (W), avec 1 W = 1 J/s.",
+      "related_lesson": "PHY1-26"
+    },
+    {
+      "id": "PHY1-QCM-029",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "1 kWh équivaut à :",
+      "options": [
+        "1000 J",
+        "3600 J",
+        "3,6 × 10⁶ J",
+        "1 J"
+      ],
+      "correct_answer": 2,
+      "explanation": "1 kWh = 1000 W × 3600 s = 3,6 × 10⁶ J = 3,6 MJ.",
+      "related_lesson": "PHY1-27"
+    },
+    {
+      "id": "PHY1-QCM-030",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le travail W d'une force constante F⃗ sur un déplacement AB⃗ est :",
+      "options": [
+        "W = F × AB",
+        "W = F⃗ · AB⃗",
+        "W = F / AB",
+        "W = F + AB"
+      ],
+      "correct_answer": 1,
+      "explanation": "Travail : W = F⃗ · AB⃗ = F × AB × cos(θ) (produit scalaire).",
+      "related_lesson": "PHY1-28"
+    },
+    {
+      "id": "PHY1-QCM-031",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le travail du poids est moteur quand l'objet :",
+      "options": [
+        "Monte",
+        "Descend",
+        "Est immobile",
+        "Tourne"
+      ],
+      "correct_answer": 1,
+      "explanation": "W(poids) > 0 (moteur) quand déplacement dans le sens du poids (descente).",
+      "related_lesson": "PHY1-28"
+    },
+    {
+      "id": "PHY1-QCM-032",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le théorème de l'énergie cinétique établit que :",
+      "options": [
+        "ΔEc = ΣW",
+        "Ec = W",
+        "ΔEc = 0",
+        "W = 0"
+      ],
+      "correct_answer": 0,
+      "explanation": "Théorème Ec : ΔEc = somme des travaux des forces.",
+      "related_lesson": "PHY1-29"
+    },
+    {
+      "id": "PHY1-QCM-033",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si les frottements dissipent de l'énergie, Em :",
+      "options": [
+        "Augmente",
+        "Diminue",
+        "Reste constante",
+        "Devient infinie"
+      ],
+      "correct_answer": 1,
+      "explanation": "Les frottements dissipent Em en chaleur : Em diminue.",
+      "related_lesson": "PHY1-25"
+    },
+    {
+      "id": "PHY1-QCM-034",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le rendement η d'un système est :",
+      "options": [
+        "η = Eutile / Efournie",
+        "η = Efournie / Eutile",
+        "η = Eutile × Efournie",
+        "η = Eutile + Efournie"
+      ],
+      "correct_answer": 0,
+      "explanation": "Rendement : η = Eutile / Efournie (toujours ≤ 1 ou ≤ 100%).",
+      "related_lesson": "PHY1-30"
+    },
+    {
+      "id": "PHY1-QCM-035",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un rendement de 75% signifie que :",
+      "options": [
+        "75% de l'énergie est perdue",
+        "25% de l'énergie est utile",
+        "75% de l'énergie est utile",
+        "Le système est parfait"
+      ],
+      "correct_answer": 2,
+      "explanation": "η = 75% : 75% convertis en énergie utile, 25% perdus.",
+      "related_lesson": "PHY1-30"
+    },
+    {
+      "id": "PHY1-QCM-036",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'énergie potentielle élastique d'un ressort de constante k et allongement x est :",
+      "options": [
+        "Ep = kx",
+        "Ep = ½kx²",
+        "Ep = kx²",
+        "Ep = ½kx"
+      ],
+      "correct_answer": 1,
+      "explanation": "Énergie potentielle élastique : Ep = ½kx².",
+      "related_lesson": "PHY1-23"
+    },
+    {
+      "id": "PHY1-QCM-037",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans une collision élastique :",
+      "options": [
+        "Ec se conserve",
+        "Ec diminue",
+        "Ep augmente",
+        "Tout disparaît"
+      ],
+      "correct_answer": 0,
+      "explanation": "Collision élastique : conservation de Ec totale (et de p⃗).",
+      "related_lesson": "PHY1-29"
+    },
+    {
+      "id": "PHY1-QCM-038",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'énergie thermique dissipée par frottements provient de :",
+      "options": [
+        "L'énergie nucléaire",
+        "L'énergie mécanique",
+        "L'énergie lumineuse",
+        "Rien"
+      ],
+      "correct_answer": 1,
+      "explanation": "Frottements : Em → chaleur (énergie thermique).",
+      "related_lesson": "PHY1-25"
+    },
+    {
+      "id": "PHY1-QCM-039",
+      "chapter": "Ondes et signaux",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une onde transporte :",
+      "options": [
+        "De la matière",
+        "De l'énergie",
+        "De la masse",
+        "Des particules"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une onde transporte de l'énergie sans transport de matière.",
+      "related_lesson": "PHY1-41"
+    },
+    {
+      "id": "PHY1-QCM-040",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La vitesse de la lumière dans le vide est environ :",
+      "options": [
+        "300 m/s",
+        "3000 km/s",
+        "3 × 10⁸ m/s",
+        "3 × 10⁶ m/s"
+      ],
+      "correct_answer": 2,
+      "explanation": "c = 3 × 10⁸ m/s = 300 000 km/s.",
+      "related_lesson": "PHY1-42"
+    },
+    {
+      "id": "PHY1-QCM-041",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La période T d'un signal périodique est :",
+      "options": [
+        "Le nombre de répétitions par seconde",
+        "La durée d'un motif élémentaire",
+        "L'inverse de l'amplitude",
+        "La distance parcourue"
+      ],
+      "correct_answer": 1,
+      "explanation": "T = durée d'un motif qui se répète (en secondes).",
+      "related_lesson": "PHY1-43"
+    },
+    {
+      "id": "PHY1-QCM-042",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La fréquence f et la période T sont liées par :",
+      "options": [
+        "f = T",
+        "f = 1/T",
+        "f = 2T",
+        "f = T²"
+      ],
+      "correct_answer": 1,
+      "explanation": "Relation : f = 1/T (ou T = 1/f).",
+      "related_lesson": "PHY1-44"
+    },
+    {
+      "id": "PHY1-QCM-043",
+      "chapter": "Ondes et signaux",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'unité de la fréquence est :",
+      "options": [
+        "Seconde (s)",
+        "Hertz (Hz)",
+        "Mètre (m)",
+        "Joule (J)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Unité de fréquence : hertz (Hz), avec 1 Hz = 1 s⁻¹.",
+      "related_lesson": "PHY1-44"
+    },
+    {
+      "id": "PHY1-QCM-044",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La relation entre vitesse v, fréquence f et longueur d'onde λ est :",
+      "options": [
+        "v = f + λ",
+        "v = f × λ",
+        "v = f / λ",
+        "v = λ / f"
+      ],
+      "correct_answer": 1,
+      "explanation": "Relation fondamentale : v = f × λ = λ/T.",
+      "related_lesson": "PHY1-45"
+    },
+    {
+      "id": "PHY1-QCM-045",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La longueur d'onde λ représente :",
+      "options": [
+        "La durée d'une oscillation",
+        "La distance parcourue pendant une période",
+        "La vitesse de l'onde",
+        "L'amplitude"
+      ],
+      "correct_answer": 1,
+      "explanation": "λ = distance parcourue par l'onde pendant T.",
+      "related_lesson": "PHY1-45"
+    },
+    {
+      "id": "PHY1-QCM-046",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un signal sonore est :",
+      "options": [
+        "Une onde électromagnétique",
+        "Une onde mécanique",
+        "Une onde lumineuse",
+        "Une particule"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le son = onde mécanique (nécessite un milieu matériel).",
+      "related_lesson": "PHY1-46"
+    },
+    {
+      "id": "PHY1-QCM-047",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une onde électromagnétique peut se propager :",
+      "options": [
+        "Uniquement dans l'air",
+        "Uniquement dans l'eau",
+        "Dans le vide",
+        "Uniquement dans les solides"
+      ],
+      "correct_answer": 2,
+      "explanation": "Les ondes EM (lumière, radio...) se propagent dans le vide.",
+      "related_lesson": "PHY1-47"
+    },
+    {
+      "id": "PHY1-QCM-048",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le spectre visible s'étend approximativement de :",
+      "options": [
+        "400 nm à 800 nm",
+        "1 m à 10 m",
+        "1 nm à 10 nm",
+        "1 km à 10 km"
+      ],
+      "correct_answer": 0,
+      "explanation": "Visible : ~400 nm (violet) à ~800 nm (rouge).",
+      "related_lesson": "PHY1-48"
+    },
+    {
+      "id": "PHY1-QCM-049",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Les ultrasons ont une fréquence :",
+      "options": [
+        "< 20 Hz",
+        "> 20 kHz",
+        "Entre 20 Hz et 20 kHz",
+        "Nulle"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ultrasons : f > 20 kHz (inaudibles pour l'humain).",
+      "related_lesson": "PHY1-46"
+    },
+    {
+      "id": "PHY1-QCM-050",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'effet Doppler se manifeste par une variation de :",
+      "options": [
+        "L'amplitude",
+        "La fréquence perçue",
+        "La vitesse de l'onde",
+        "La direction"
+      ],
+      "correct_answer": 1,
+      "explanation": "Effet Doppler : changement de fréquence perçue (mouvement relatif).",
+      "related_lesson": "PHY1-50"
+    },
+    {
+      "id": "PHY1-QCM-051",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'indice de réfraction n d'un milieu est :",
+      "options": [
+        "n = c × v",
+        "n = c / v",
+        "n = v / c",
+        "n = c + v"
+      ],
+      "correct_answer": 1,
+      "explanation": "Indice : n = c/v où c = vitesse lumière dans vide, v = dans le milieu.",
+      "related_lesson": "PHY1-52"
+    },
+    {
+      "id": "PHY1-QCM-052",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La réflexion d'une onde lumineuse obéit aux lois de :",
+      "options": [
+        "Newton",
+        "Snell-Descartes",
+        "Ohm",
+        "Faraday"
+      ],
+      "correct_answer": 1,
+      "explanation": "Lois de Snell-Descartes : réflexion et réfraction.",
+      "related_lesson": "PHY1-51"
+    },
+    {
+      "id": "PHY1-QCM-053",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dispersion de la lumière blanche par un prisme est due à :",
+      "options": [
+        "L'absorption",
+        "La variation de n avec λ",
+        "La réflexion",
+        "L'effet Doppler"
+      ],
+      "correct_answer": 1,
+      "explanation": "Dispersion : n dépend de λ (différentes couleurs déviées différemment).",
+      "related_lesson": "PHY1-53"
+    },
+    {
+      "id": "PHY1-QCM-054",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un signal analogique varie de façon :",
+      "options": [
+        "Discrète",
+        "Continue",
+        "Par paliers",
+        "Binaire"
+      ],
+      "correct_answer": 1,
+      "explanation": "Signal analogique : variation continue dans le temps.",
+      "related_lesson": "PHY1-49"
+    },
+    {
+      "id": "PHY1-QCM-055",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un signal numérique prend des valeurs :",
+      "options": [
+        "Continues",
+        "Discrètes",
+        "Infinies",
+        "Négatives"
+      ],
+      "correct_answer": 1,
+      "explanation": "Signal numérique : valeurs discrètes (souvent 0 et 1).",
+      "related_lesson": "PHY1-49"
+    },
+    {
+      "id": "PHY1-QCM-056",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La trajectoire d'un point est :",
+      "options": [
+        "Sa vitesse",
+        "Son accélération",
+        "L'ensemble des positions au cours du temps",
+        "Sa masse"
+      ],
+      "correct_answer": 2,
+      "explanation": "Trajectoire = ligne formée par les positions successives.",
+      "related_lesson": "PHY1-01"
+    },
+    {
+      "id": "PHY1-QCM-057",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si ΣF⃗ = 0⃗, le centre d'inertie :",
+      "options": [
+        "Accélère",
+        "Est en MRU ou au repos",
+        "Tombe",
+        "S'arrête"
+      ],
+      "correct_answer": 1,
+      "explanation": "1ère loi Newton : ΣF⃗ = 0⃗ ⇒ MRU ou repos.",
+      "related_lesson": "PHY1-05"
+    },
+    {
+      "id": "PHY1-QCM-058",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Les coordonnées du vecteur vitesse sont :",
+      "options": [
+        "Les dérivées des coordonnées de position",
+        "Les intégrales des coordonnées",
+        "Les coordonnées de position",
+        "Les coordonnées d'accélération"
+      ],
+      "correct_answer": 0,
+      "explanation": "v⃗(vx, vy) où vx = dx/dt et vy = dy/dt.",
+      "related_lesson": "PHY1-03"
+    },
+    {
+      "id": "PHY1-QCM-059",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le travail d'une force perpendiculaire au déplacement est :",
+      "options": [
+        "Maximal",
+        "Nul",
+        "Négatif",
+        "Infini"
+      ],
+      "correct_answer": 1,
+      "explanation": "W = F·d·cos(90°) = 0 (force ⊥ déplacement).",
+      "related_lesson": "PHY1-28"
+    },
+    {
+      "id": "PHY1-QCM-060",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le travail résistant est :",
+      "options": [
+        "W > 0",
+        "W < 0",
+        "W = 0",
+        "W = ∞"
+      ],
+      "correct_answer": 1,
+      "explanation": "Travail résistant : W < 0 (force opposée au mouvement).",
+      "related_lesson": "PHY1-28"
+    },
+    {
+      "id": "PHY1-QCM-061",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le domaine des ondes radio correspond approximativement à :",
+      "options": [
+        "400-800 nm",
+        "1 mm - 100 km",
+        "0,01 nm - 10 nm",
+        "Seulement 1 m"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ondes radio : λ de l'ordre du mm au km.",
+      "related_lesson": "PHY1-48"
+    },
+    {
+      "id": "PHY1-QCM-062",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La force gravitationnelle entre deux masses m₁ et m₂ séparées de d est :",
+      "options": [
+        "F = G·m₁m₂/d",
+        "F = G·m₁m₂/d²",
+        "F = G·(m₁+m₂)/d²",
+        "F = m₁m₂/d"
+      ],
+      "correct_answer": 1,
+      "explanation": "Loi gravitation universelle : F = G·m₁m₂/d².",
+      "related_lesson": "PHY1-11"
+    },
+    {
+      "id": "PHY1-QCM-063",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'énergie se mesure également en :",
+      "options": [
+        "Watt-heure (Wh)",
+        "Newton-mètre (N·m)",
+        "Les deux",
+        "Aucun"
+      ],
+      "correct_answer": 2,
+      "explanation": "1 J = 1 N·m = 1 W·s. Le Wh est aussi une unité d'énergie.",
+      "related_lesson": "PHY1-21"
+    },
+    {
+      "id": "PHY1-QCM-064",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un objet de 5 kg subit une force de 20 N. Son accélération est :",
+      "options": [
+        "4 m/s²",
+        "25 m/s²",
+        "100 m/s²",
+        "0,25 m/s²"
+      ],
+      "correct_answer": 0,
+      "explanation": "a = F/m = 20/5 = 4 m/s².",
+      "related_lesson": "PHY1-06"
+    },
+    {
+      "id": "PHY1-QCM-065",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Lors d'une chute libre, l'énergie :",
+      "options": [
+        "Potentielle se conserve",
+        "Cinétique diminue",
+        "Mécanique se conserve (sans frottement)",
+        "Totale augmente"
+      ],
+      "correct_answer": 2,
+      "explanation": "Chute libre sans frottement : Em = Ec + Ep = constante.",
+      "related_lesson": "PHY1-25"
+    },
+    {
+      "id": "PHY1-QCM-066",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Les infrasons ont une fréquence :",
+      "options": [
+        "< 20 Hz",
+        "> 20 kHz",
+        "Entre 20 Hz et 20 kHz",
+        "Infinie"
+      ],
+      "correct_answer": 0,
+      "explanation": "Infrasons : f < 20 Hz (inaudibles).",
+      "related_lesson": "PHY1-46"
+    },
+    {
+      "id": "PHY1-QCM-067",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un satellite en orbite circulaire a une accélération :",
+      "options": [
+        "Nulle",
+        "Tangentielle",
+        "Centripète",
+        "Vers l'extérieur"
+      ],
+      "correct_answer": 2,
+      "explanation": "Orbite circulaire : accélération centripète (vers le centre Terre).",
+      "related_lesson": "PHY1-04"
+    },
+    {
+      "id": "PHY1-QCM-068",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un moteur électrique de 500 W fonctionne pendant 10 min. L'énergie consommée est :",
+      "options": [
+        "5000 J",
+        "300 000 J",
+        "50 000 J",
+        "5 kWh"
+      ],
+      "correct_answer": 1,
+      "explanation": "E = P·t = 500 × 600 s = 300 000 J = 300 kJ.",
+      "related_lesson": "PHY1-26"
+    },
+    {
+      "id": "PHY1-QCM-069",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une onde de fréquence 50 Hz et de longueur d'onde 6,8 m se propage à :",
+      "options": [
+        "340 m/s",
+        "50 m/s",
+        "6,8 m/s",
+        "7,35 m/s"
+      ],
+      "correct_answer": 0,
+      "explanation": "v = f·λ = 50 × 6,8 = 340 m/s (vitesse du son).",
+      "related_lesson": "PHY1-45"
+    },
+    {
+      "id": "PHY1-QCM-070",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "72 km/h = :",
+      "options": [
+        "20 m/s",
+        "72 m/s",
+        "7,2 m/s",
+        "200 m/s"
+      ],
+      "correct_answer": 0,
+      "explanation": "72 km/h = 72/3,6 = 20 m/s.",
+      "related_lesson": "PHY1-02"
+    },
+    {
+      "id": "PHY1-QCM-071",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un objet de masse m chute de hauteur h. Sa vitesse au sol (sans frottement) est :",
+      "options": [
+        "v = gh",
+        "v = √(2gh)",
+        "v = 2gh",
+        "v = mgh"
+      ],
+      "correct_answer": 1,
+      "explanation": "Conservation : mgh = ½mv² ⇒ v = √(2gh).",
+      "related_lesson": "PHY1-25"
+    },
+    {
+      "id": "PHY1-QCM-072",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'indice de réfraction du vide vaut :",
+      "options": [
+        "0",
+        "1",
+        "1,33",
+        "1,5"
+      ],
+      "correct_answer": 1,
+      "explanation": "Par définition : n(vide) = 1.",
+      "related_lesson": "PHY1-52"
+    },
+    {
+      "id": "PHY1-QCM-073",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La masse est une grandeur :",
+      "options": [
+        "Qui varie avec le lieu",
+        "Invariante",
+        "Qui dépend de g",
+        "Vectorielle"
+      ],
+      "correct_answer": 1,
+      "explanation": "La masse est invariante (ne change pas avec le lieu), contrairement au poids.",
+      "related_lesson": "PHY1-08"
+    },
+    {
+      "id": "PHY1-QCM-074",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une voiture de 1200 kg passe de 0 à 100 km/h. La variation d'Ec est :",
+      "options": [
+        "463 kJ",
+        "6000 kJ",
+        "120 kJ",
+        "100 kJ"
+      ],
+      "correct_answer": 0,
+      "explanation": "v = 100/3,6 ≈ 27,8 m/s. ΔEc = ½mv² = ½×1200×772 ≈ 463 kJ.",
+      "related_lesson": "PHY1-22"
+    },
+    {
+      "id": "PHY1-QCM-075",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La lumière visible est une onde :",
+      "options": [
+        "Mécanique",
+        "Électromagnétique",
+        "Sonore",
+        "Stationnaire"
+      ],
+      "correct_answer": 1,
+      "explanation": "La lumière est une onde électromagnétique.",
+      "related_lesson": "PHY1-47"
+    },
+    {
+      "id": "PHY1-QCM-076",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un projectile lancé horizontalement a un mouvement :",
+      "options": [
+        "Rectiligne uniforme",
+        "Circulaire",
+        "Parabolique",
+        "Vertical"
+      ],
+      "correct_answer": 2,
+      "explanation": "Trajectoire parabolique (MRU horizontal + chute verticale).",
+      "related_lesson": "PHY1-09"
+    },
+    {
+      "id": "PHY1-QCM-077",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'unité du travail est :",
+      "options": [
+        "Watt",
+        "Joule",
+        "Newton",
+        "Mètre"
+      ],
+      "correct_answer": 1,
+      "explanation": "Travail en joules (J), comme l'énergie.",
+      "related_lesson": "PHY1-28"
+    },
+    {
+      "id": "PHY1-QCM-078",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le phénomène de diffraction est caractéristique :",
+      "options": [
+        "Des particules",
+        "Des ondes",
+        "Des forces",
+        "De l'énergie"
+      ],
+      "correct_answer": 1,
+      "explanation": "La diffraction est un phénomène ondulatoire.",
+      "related_lesson": "PHY1-54"
+    },
+    {
+      "id": "PHY1-QCM-079",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans un référentiel terrestre, un passager assis dans un train en mouvement est :",
+      "options": [
+        "Immobile",
+        "En mouvement",
+        "Les deux selon le référentiel",
+        "Ni l'un ni l'autre"
+      ],
+      "correct_answer": 2,
+      "explanation": "Immobile dans le référentiel du train, en mouvement dans le référentiel terrestre.",
+      "related_lesson": "PHY1-01"
+    },
+    {
+      "id": "PHY1-QCM-080",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le joule peut s'écrire :",
+      "options": [
+        "kg·m²/s²",
+        "kg·m/s²",
+        "kg·m/s",
+        "kg/m·s²"
+      ],
+      "correct_answer": 0,
+      "explanation": "1 J = 1 N·m = 1 kg·m/s² · m = 1 kg·m²/s².",
+      "related_lesson": "PHY1-21"
+    },
+    {
+      "id": "PHY1-QCM-081",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La période s'exprime en :",
+      "options": [
+        "Hertz",
+        "Secondes",
+        "Mètres",
+        "Joules"
+      ],
+      "correct_answer": 1,
+      "explanation": "T en secondes (s).",
+      "related_lesson": "PHY1-43"
+    },
+    {
+      "id": "PHY1-QCM-082",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Sur Terre, un objet de 10 kg a un poids d'environ :",
+      "options": [
+        "10 N",
+        "98 N",
+        "980 N",
+        "9,8 N"
+      ],
+      "correct_answer": 1,
+      "explanation": "P = mg = 10 × 9,8 ≈ 98 N.",
+      "related_lesson": "PHY1-08"
+    },
+    {
+      "id": "PHY1-QCM-083",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Doubler la vitesse multiplie l'énergie cinétique par :",
+      "options": [
+        "2",
+        "4",
+        "8",
+        "16"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ec ∝ v² donc doubler v multiplie Ec par 4.",
+      "related_lesson": "PHY1-22"
+    },
+    {
+      "id": "PHY1-QCM-084",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une onde transversale vibre :",
+      "options": [
+        "Dans la direction de propagation",
+        "Perpendiculairement à la direction",
+        "Circulairement",
+        "Pas du tout"
+      ],
+      "correct_answer": 1,
+      "explanation": "Onde transversale : vibration ⊥ direction de propagation (ex : lumière).",
+      "related_lesson": "PHY1-41"
+    },
+    {
+      "id": "PHY1-QCM-085",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'accélération de la pesanteur g vaut environ sur Terre :",
+      "options": [
+        "1,6 m/s²",
+        "9,81 m/s²",
+        "10 m/s",
+        "9,81 m/s"
+      ],
+      "correct_answer": 1,
+      "explanation": "g ≈ 9,81 m/s² (souvent arrondi à 10 m/s² dans les exercices).",
+      "related_lesson": "PHY1-08"
+    },
+    {
+      "id": "PHY1-QCM-086",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un ressort comprimé stocke de l'énergie :",
+      "options": [
+        "Cinétique",
+        "Potentielle élastique",
+        "Thermique",
+        "Lumineuse"
+      ],
+      "correct_answer": 1,
+      "explanation": "Ep élastique = ½kx².",
+      "related_lesson": "PHY1-23"
+    },
+    {
+      "id": "PHY1-QCM-087",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "1 MHz = :",
+      "options": [
+        "1000 Hz",
+        "1 000 000 Hz",
+        "0,001 Hz",
+        "100 Hz"
+      ],
+      "correct_answer": 1,
+      "explanation": "M (méga) = 10⁶, donc 1 MHz = 10⁶ Hz.",
+      "related_lesson": "PHY1-44"
+    },
+    {
+      "id": "PHY1-QCM-088",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La tension d'un fil est une force :",
+      "options": [
+        "Toujours verticale",
+        "Dirigée le long du fil",
+        "Toujours horizontale",
+        "Nulle"
+      ],
+      "correct_answer": 1,
+      "explanation": "La tension T⃗ est dirigée le long du fil (vers le point d'attache).",
+      "related_lesson": "PHY1-09"
+    },
+    {
+      "id": "PHY1-QCM-089",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'énergie ne peut être :",
+      "options": [
+        "Transférée",
+        "Convertie",
+        "Créée ou détruite",
+        "Mesurée"
+      ],
+      "correct_answer": 2,
+      "explanation": "Principe de conservation : l'énergie ne se crée ni ne se détruit, elle se transforme.",
+      "related_lesson": "PHY1-21"
+    },
+    {
+      "id": "PHY1-QCM-090",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans l'eau (n=1,33), la lumière se propage à environ :",
+      "options": [
+        "3 × 10⁸ m/s",
+        "2,25 × 10⁸ m/s",
+        "4 × 10⁸ m/s",
+        "1,33 × 10⁸ m/s"
+      ],
+      "correct_answer": 1,
+      "explanation": "v = c/n = (3×10⁸)/1,33 ≈ 2,25 × 10⁸ m/s.",
+      "related_lesson": "PHY1-52"
+    },
+    {
+      "id": "PHY1-QCM-091",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un corps en équilibre vérifie :",
+      "options": [
+        "ΣF⃗ = 0⃗",
+        "ΣF⃗ = ma⃗",
+        "F⃗ = 0⃗",
+        "v⃗ = 0⃗"
+      ],
+      "correct_answer": 0,
+      "explanation": "Équilibre : ΣF⃗ = 0⃗ (forces se compensent).",
+      "related_lesson": "PHY1-05"
+    },
+    {
+      "id": "PHY1-QCM-092",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Monter un objet de 5 kg à 10 m nécessite au minimum (g=10 m/s²) :",
+      "options": [
+        "50 J",
+        "500 J",
+        "5000 J",
+        "5 J"
+      ],
+      "correct_answer": 1,
+      "explanation": "W = mgh = 5 × 10 × 10 = 500 J.",
+      "related_lesson": "PHY1-28"
+    },
+    {
+      "id": "PHY1-QCM-093",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une onde longitudinale vibre :",
+      "options": [
+        "Perpendiculairement à la propagation",
+        "Dans la direction de propagation",
+        "Circulairement",
+        "Pas du tout"
+      ],
+      "correct_answer": 1,
+      "explanation": "Onde longitudinale : vibration // direction (ex : son).",
+      "related_lesson": "PHY1-41"
+    },
+    {
+      "id": "PHY1-QCM-094",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un mobile parcourt 100 m en 5 s à vitesse constante. Sa vitesse est :",
+      "options": [
+        "20 m/s",
+        "500 m/s",
+        "5 m/s",
+        "0,05 m/s"
+      ],
+      "correct_answer": 0,
+      "explanation": "v = d/t = 100/5 = 20 m/s.",
+      "related_lesson": "PHY1-02"
+    },
+    {
+      "id": "PHY1-QCM-095",
+      "chapter": "L'énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "1 Watt = :",
+      "options": [
+        "1 J/s",
+        "1 J·s",
+        "1 N/s",
+        "1 N·s"
+      ],
+      "correct_answer": 0,
+      "explanation": "1 W = 1 J/s (puissance = énergie par seconde).",
+      "related_lesson": "PHY1-26"
+    },
+    {
+      "id": "PHY1-QCM-096",
+      "chapter": "Ondes et signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'amplitude d'une onde représente :",
+      "options": [
+        "Sa fréquence",
+        "Sa longueur d'onde",
+        "Son écart maximal par rapport à l'équilibre",
+        "Sa vitesse"
+      ],
+      "correct_answer": 2,
+      "explanation": "Amplitude = écart maximal de la perturbation.",
+      "related_lesson": "PHY1-43"
+    },
+    {
+      "id": "PHY1-QCM-097",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Newton est l'unité de :",
+      "options": [
+        "Masse",
+        "Force",
+        "Énergie",
+        "Puissance"
+      ],
+      "correct_answer": 1,
+      "explanation": "Newton (N) = unité de force.",
+      "related_lesson": "PHY1-06"
+    },
+    {
+      "id": "PHY1-QCM-098",
+      "chapter": "L'énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une lampe de 100 W allumée 10h consomme :",
+      "options": [
+        "1 kWh",
+        "10 kWh",
+        "100 kWh",
+        "0,1 kWh"
+      ],
+      "correct_answer": 0,
+      "explanation": "E = P·t = 0,1 kW × 10 h = 1 kWh.",
+      "related_lesson": "PHY1-27"
+    },
+    {
+      "id": "PHY1-QCM-099",
+      "chapter": "Ondes et signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le son ne se propage pas dans :",
+      "options": [
+        "L'air",
+        "L'eau",
+        "Le vide",
+        "Les solides"
+      ],
+      "correct_answer": 2,
+      "explanation": "Le son est une onde mécanique : besoin d'un milieu matériel (pas le vide).",
+      "related_lesson": "PHY1-46"
+    },
+    {
+      "id": "PHY1-QCM-100",
+      "chapter": "Mouvement et interactions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un corps lancé vers le haut ralentit car :",
+      "options": [
+        "Sa masse augmente",
+        "Le poids s'oppose au mouvement",
+        "Il n'y a plus de force",
+        "La Terre recule"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le poids (vers le bas) s'oppose au mouvement ascendant, créant une décélération.",
+      "related_lesson": "PHY1-09"
+    }
+  ]
+}

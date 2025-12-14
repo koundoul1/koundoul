@@ -1,0 +1,324 @@
+{
+  "metadata": {
+    "lot_number": 9,
+    "lot_name": "Lot 9 - Transformations Chimiques",
+    "level": "Seconde",
+    "subject": "Chimie",
+    "prefix": "C2",
+    "chapter": "Transformations Chimiques",
+    "lesson_range": "C2-09 à C2-15",
+    "total_lessons": 7
+  },
+  "lessons": [
+    {
+      "id": "C2-09",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Transformations Chimiques",
+      "title": "Réactions chimiques - Introduction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir une réaction chimique", "Distinguer transformation physique et chimique", "Identifier réactifs et produits", "Reconnaître les signes d'une réaction chimique"],
+      "prerequisites": ["C2-01", "C2-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["réaction", "chimie"],
+      "detailed_content": {
+        "introduction": "Une réaction chimique est une transformation au cours de laquelle des substances (réactifs) disparaissent pour former de nouvelles substances (produits) aux propriétés différentes.",
+        "key_concepts": [
+          { "name": "Réaction chimique", "explanation": "Transformation de la matière : espèces (réactifs) disparaissent, nouvelles espèces (produits) se forment", "example": "Liaisons rompues et créées, atomes réarrangés" },
+          { "name": "Transformation physique vs chimique", "explanation": "Physique : changement d'état (eau → glace). Chimique : nouvelles substances (combustion, rouille)", "example": "Eau → glace : physique. Fer → rouille : chimique" },
+          { "name": "Signes de réaction", "explanation": "Dégagement/absorption de chaleur, changement de couleur, précipité, gaz, lumière, disparition/apparition de substances", "example": "Plusieurs signes peuvent être présents simultanément" }
+        ],
+        "guided_example": {
+          "statement": "Combustion CH₄ + O₂ → CO₂ + H₂O. Identifier réactifs et produits.",
+          "solution_steps": [
+            "Réactifs : CH₄ et O₂ (disparaissent)",
+            "Produits : CO₂ et H₂O (se forment)",
+            "Écriture symbolique : Réactifs → Produits"
+          ]
+        },
+        "quick_exercises": [
+          "Vinaigre + bicarbonate : dégagement bulles et température diminue. Réaction chimique ? Signes ?",
+          "Identifier transformations physiques et chimiques"
+        ],
+        "common_mistakes": [
+          "Confondre transformation physique et chimique",
+          "Ne pas identifier correctement réactifs et produits",
+          "Oublier que les atomes se conservent"
+        ],
+        "summary": {
+          "key_concept": "Réaction chimique = nouvelles substances formées. Réactifs → Produits",
+          "key_method": "Signes observables : chaleur, couleur, gaz, précipité...",
+          "next_step": "Écrire les équations chimiques"
+        }
+      }
+    },
+    {
+      "id": "C2-10",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Transformations Chimiques",
+      "title": "Équations chimiques",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 85,
+      "objectives": ["Écrire une équation chimique", "Comprendre la signification des coefficients stœchiométriques", "Distinguer équation non ajustée et ajustée", "Lire une équation chimique"],
+      "prerequisites": ["C2-09"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["équation", "coefficients"],
+      "detailed_content": {
+        "introduction": "Une équation chimique est l'écriture symbolique d'une réaction chimique. Elle indique quels réactifs réagissent et quels produits se forment, ainsi que dans quelles proportions.",
+        "key_concepts": [
+          { "name": "Écriture générale", "explanation": "aA + bB → cC + dD avec coefficients stœchiométriques (a, b, c, d)", "example": "États physiques : (s) solide, (l) liquide, (g) gaz, (aq) aqueux" },
+          { "name": "Coefficients stœchiométriques", "explanation": "Indiquent les proportions en molécules ou en moles", "example": "2H₂ + O₂ → 2H₂O : 2 mol H₂ + 1 mol O₂ → 2 mol H₂O" },
+          { "name": "Ajustement (équilibrage)", "explanation": "Le nombre d'atomes de chaque élément doit être identique à gauche et à droite", "example": "Modifier les coefficients, jamais les formules chimiques" }
+        ],
+        "guided_example": {
+          "statement": "Interpréter : CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l).",
+          "solution_steps": [
+            "1 mol de méthane gazeux + 2 mol de dioxygène gazeux",
+            "Produit : 1 mol CO₂ gazeux + 2 mol eau liquide",
+            "Les coefficients indiquent les proportions"
+          ]
+        },
+        "quick_exercises": [
+          "H₂ + O₂ → H₂O : équation ajustée ? Si non, ajuster",
+          "Lire et écrire des équations chimiques"
+        ],
+        "common_mistakes": [
+          "Modifier les formules au lieu des coefficients",
+          "Ne pas vérifier tous les éléments",
+          "Confondre coefficient et indice"
+        ],
+        "summary": {
+          "key_concept": "Coefficients = proportions (en moles). Ne jamais modifier les formules",
+          "key_method": "Conservation : même nb d'atomes de chaque côté",
+          "next_step": "Étudier la conservation de la masse"
+        }
+      }
+    },
+    {
+      "id": "C2-11",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Transformations Chimiques",
+      "title": "Conservation de la masse",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Énoncer la loi de conservation de la masse", "Appliquer cette loi à une réaction chimique", "Comprendre que les atomes se conservent", "Calculer une masse manquante"],
+      "prerequisites": ["C2-09", "C2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Lavoisier", "conservation"],
+      "detailed_content": {
+        "introduction": "Lors d'une réaction chimique, la masse totale du système reste constante : c'est la loi de conservation de la masse, également appelée loi de Lavoisier.",
+        "key_concepts": [
+          { "name": "Loi de Lavoisier", "explanation": "Σ m(réactifs) = Σ m(produits) : rien ne se perd, rien ne se crée, tout se transforme", "example": "10 g de réactifs = 10 g de produits" },
+          { "name": "Explication microscopique", "explanation": "Les atomes se conservent : ni créés ni détruits, seulement réarrangés", "example": "Même nb et nature d'atomes → même masse totale" },
+          { "name": "Application", "explanation": "En système fermé, si on connaît toutes les masses sauf une, on peut la calculer", "example": "Masme manquante = somme des autres" }
+        ],
+        "guided_example": {
+          "statement": "4 g de Mg + 3 g de O₂ → oxyde de Mg. Masse d'oxyde formé ?",
+          "solution_steps": [
+            "Conservation : m(réactifs) = m(produits)",
+            "4 + 3 = 7 g",
+            "Masse d'oxyde = 7 g"
+          ]
+        },
+        "quick_exercises": [
+          "12 g C + 32 g O₂, reste 2 g C non consommé. Masse de CO₂ formé ?",
+          "Calculer masses manquantes dans différentes réactions"
+        ],
+        "common_mistakes": [
+          "Oublier qu'il faut un système fermé",
+          "Ne pas tenir compte d'un réactif en excès",
+          "Penser que la masse peut changer"
+        ],
+        "summary": {
+          "key_concept": "Loi de Lavoisier : masse réactifs = masse produits",
+          "key_method": "Les atomes se conservent, donc la masse aussi (système fermé)",
+          "next_step": "Étudier les réactifs limitants"
+        }
+      }
+    },
+    {
+      "id": "C2-12",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Transformations Chimiques",
+      "title": "Réactifs et produits - Limites",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 85,
+      "objectives": ["Définir réactif limitant et réactif en excès", "Identifier le réactif limitant", "Comprendre que la réaction s'arrête quand le limitant est épuisé", "Calculer les quantités de produits formés"],
+      "prerequisites": ["C2-10", "C2-11"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limitant", "excès"],
+      "detailed_content": {
+        "introduction": "Dans une réaction chimique, les réactifs ne sont pas toujours introduits dans les proportions exactes. L'un d'eux peut être entièrement consommé avant les autres : c'est le réactif limitant.",
+        "key_concepts": [
+          { "name": "Réactif limitant", "explanation": "Réactif épuisé en premier, détermine la quantité max de produits", "example": "La réaction s'arrête quand ce réactif est épuisé" },
+          { "name": "Réactif en excès", "explanation": "Réactif non entièrement consommé, il en reste à la fin", "example": "Partie non utilisée à la fin de la réaction" },
+          { "name": "Proportions stœchiométriques", "explanation": "Réactifs dans les proportions exactes de l'équation ajustée", "example": "2H₂ + O₂ → 2H₂O : proportions exactes si 2 mol H₂ / 1 mol O₂" }
+        ],
+        "guided_example": {
+          "statement": "2H₂ + O₂ → 2H₂O avec 3 mol H₂ et 1 mol O₂. Réactif limitant ?",
+          "solution_steps": [
+            "Rapport stœchiométrique : 2 mol H₂ / 1 mol O₂",
+            "Ici : 3 mol H₂ et 1 mol O₂",
+            "Pour 1 mol O₂, il faut 2 mol H₂. On a 3 mol H₂ : H₂ en excès",
+            "O₂ est limitant"
+          ]
+        },
+        "quick_exercises": [
+          "N₂ + 3H₂ → 2NH₃ avec 2 mol N₂ et 3 mol H₂ : limitant ? Max NH₃ ?",
+          "Identifier limitants et quantités de produits"
+        ],
+        "common_mistakes": [
+          "Confondre limitant et en excès",
+          "Ne pas utiliser les coefficients de l'équation",
+          "Baser les calculs sur le réactif en excès"
+        ],
+        "summary": {
+          "key_concept": "Limitant = épuisé en premier. En excès = il en reste",
+          "key_method": "Calculs de produits : toujours à partir du limitant",
+          "next_step": "Effectuer des calculs stœchiométriques"
+        }
+      }
+    },
+    {
+      "id": "C2-13",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Transformations Chimiques",
+      "title": "Stœchiométrie - Calculs de quantités",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 90,
+      "objectives": ["Effectuer des calculs stœchiométriques", "Utiliser les coefficients de l'équation", "Calculer des quantités de matière de produits", "Relier quantités de matière et masses"],
+      "prerequisites": ["C2-07", "C2-10", "C2-12"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["stœchiométrie", "calculs"],
+      "detailed_content": {
+        "introduction": "La stœchiométrie est l'étude des proportions dans lesquelles les réactifs réagissent et les produits se forment. Elle permet de calculer les quantités de substances.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Coefficients donnent proportions en moles. 2A + B → 3C : rapports n(A)/2 = n(B)/1 = n(C)/3", "example": "Rapports molaires constants" },
+          { "name": "Méthode", "explanation": "1) Équation ajustée. 2) Identifier quantité donnée. 3) Utiliser rapports stœchiométriques. 4) Convertir en masses si besoin", "example": "Passer par les moles (n)" },
+          { "name": "Relations", "explanation": "n₁/coeff₁ = n₂/coeff₂, n = m/M", "example": "Toujours utiliser les coefficients" }
+        ],
+        "guided_example": {
+          "statement": "2H₂ + O₂ → 2H₂O. 1 mol de O₂. Combien de moles H₂O ?",
+          "solution_steps": [
+            "D'après l'équation : 1 mol O₂ donne 2 mol H₂O",
+            "n(H₂O) = 2 × n(O₂) = 2 mol",
+            "2 moles de H₂O formées"
+          ]
+        },
+        "quick_exercises": [
+          "C + O₂ → CO₂. 12 g de C (M=12 g/mol) : nb mol C ? nb mol CO₂ ? masse CO₂ (M=44 g/mol) ?",
+          "Calculs stœchiométriques complets"
+        ],
+        "common_mistakes": [
+          "Oublier d'ajuster l'équation",
+          "Ne pas utiliser les coefficients",
+          "Confondre masse et quantité de matière"
+        ],
+        "summary": {
+          "key_concept": "Stœchiométrie = calculs de proportions via coefficients → rapports en moles",
+          "key_method": "Toujours passer par n (moles), utiliser les coefficients",
+          "next_step": "Introduire l'avancement d'une réaction"
+        }
+      }
+    },
+    {
+      "id": "C2-14",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Transformations Chimiques",
+      "title": "Avancement d'une réaction",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 85,
+      "objectives": ["Définir l'avancement x d'une réaction", "Utiliser un tableau d'avancement", "Calculer l'avancement maximal xmax", "Déterminer les quantités finales"],
+      "prerequisites": ["C2-13"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["avancement", "tableau"],
+      "detailed_content": {
+        "introduction": "L'avancement (noté x) est une grandeur qui permet de suivre l'évolution d'une réaction chimique. Il quantifie à quel point la réaction a progressé.",
+        "key_concepts": [
+          { "name": "Avancement x", "explanation": "Mesure l'état d'avancement, en mol. Initial : x = 0. Final : x = xmax", "example": "Pendant réaction : 0 ≤ x ≤ xmax" },
+          { "name": "Tableau d'avancement", "explanation": "Évolution des quantités : n(t) = n₀ ± coeff×x", "example": "Réactifs diminuent (-), produits augmentent (+)" },
+          { "name": "Avancement maximal", "explanation": "xmax atteint quand limitant épuisé. xmax = n₀(limitant) / coeff(limitant)", "example": "Prendre le plus petit des xmax calculés" }
+        ],
+        "guided_example": {
+          "statement": "2H₂ + O₂ → 2H₂O. Initial : 3 mol H₂, 2 mol O₂. Calculer xmax.",
+          "solution_steps": [
+            "Pour H₂ : xmax = 3/2 = 1,5 mol",
+            "Pour O₂ : xmax = 2/1 = 2 mol",
+            "Plus petit : xmax = 1,5 mol (H₂ limitant)"
+          ]
+        },
+        "quick_exercises": [
+          "N₂ + 3H₂ → 2NH₃. Initial : 4 mol N₂, 6 mol H₂. xmax ? limitant ? quantités finales ?",
+          "Construire tableaux d'avancement"
+        ],
+        "common_mistakes": [
+          "Confondre x et xmax",
+          "Ne pas diviser par le coefficient",
+          "Oublier de prendre le plus petit xmax"
+        ],
+        "summary": {
+          "key_concept": "x = avancement (mol). xmax = limitant épuisé",
+          "key_method": "Tableau : réactifs -, produits +",
+          "next_step": "Effectuer des bilans de matière complets"
+        }
+      }
+    },
+    {
+      "id": "C2-15",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Transformations Chimiques",
+      "title": "Bilan de matière",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 70,
+      "objectives": ["Effectuer un bilan de matière complet", "Vérifier la conservation des éléments", "Calculer les masses finales", "Interpréter les résultats d'une réaction"],
+      "prerequisites": ["C2-13", "C2-14"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["bilan", "matière"],
+      "detailed_content": {
+        "introduction": "Un bilan de matière consiste à dresser l'inventaire complet des quantités (ou masses) de toutes les espèces chimiques présentes avant et après une réaction.",
+        "key_concepts": [
+          { "name": "Méthode", "explanation": "1) Équation ajustée. 2) Quantités initiales. 3) Limitant et xmax. 4) Quantités finales (tableau). 5) Convertir en masses. 6) Vérifier conservation", "example": "Bilan complet" },
+          { "name": "Interprétation", "explanation": "Quelles espèces en fin, quantités de produits, réactifs en excès restants, vérifier calculs", "example": "Vérification de la conservation" },
+          { "name": "Conservation", "explanation": "Nombre d'atomes de chaque élément conservé, masse totale conservée", "example": "Σ masses initiales = Σ masses finales" }
+        ],
+        "guided_example": {
+          "statement": "2Mg + O₂ → 2MgO. Initial : 2 mol Mg, 1 mol O₂. Bilan final ?",
+          "solution_steps": [
+            "Proportions stœchiométriques : xmax = 1 mol",
+            "Final : 0 mol Mg, 0 mol O₂, 2 mol MgO",
+            "Tout consommé, pas de réactif en excès"
+          ]
+        },
+        "quick_exercises": [
+          "C + O₂ → CO₂. 6 g de C (M=12) et 24 g O₂ (M=32). Limitant ? Masse CO₂ ? Masse restante ?",
+          "Effectuer des bilans de matière complets"
+        ],
+        "common_mistakes": [
+          "Ne pas convertir en moles avant de comparer",
+          "Oublier le réactif en excès dans le bilan",
+          "Ne pas vérifier la conservation de masse"
+        ],
+        "summary": {
+          "key_concept": "Bilan = inventaire complet initial/final",
+          "key_method": "Toujours passer par les moles, vérifier conservation",
+          "next_step": "Étudier les solutions aqueuses"
+        }
+      }
+    }
+  ]
+}
+

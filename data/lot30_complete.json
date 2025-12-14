@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "lot_number": 26,
+    "lot_name": "Lot 26 - Calcul Intégral (Partie 2/2)",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Calcul Intégral",
+    "lesson_range": "MT-47 à MT-55",
+    "total_lessons": 9
+  },
+  "lessons": [
+    {
+      "id": "MT-47",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Changement de variable",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre le principe du changement de variable", "Appliquer la méthode du changement de variable", "Transformer les bornes d'intégration", "Résoudre des intégrales complexes"],
+      "prerequisites": ["MT-42", "MT-41"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["changement", "variable"],
+      "detailed_content": {
+        "introduction": "Le changement de variable est une technique puissante pour transformer une intégrale difficile en une intégrale plus simple. C'est la version intégrale de la dérivation des fonctions composées.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Poser t = φ(x), dt = φ'(x)dx, transformer bornes α = φ(a), β = φ(b)", "example": "Transformer l'intégrale" },
+          { "name": "Méthode", "explanation": "1) Identifier t = φ(x), 2) Calculer dt, 3) Exprimer dx, 4) Transformer bornes, 5) Remplacer, 6) Calculer nouvelle intégrale", "example": "Étapes" },
+          { "name": "Choix", "explanation": "Stratégies : √(a²-x²) → x = a sin(t), √(x²+a²) → x = a tan(t), forme u'f(u) → t = u", "example": "Simplifier" },
+          { "name": "Cas particuliers", "explanation": "Avec ln : t = ln(x) ou t = e^x. Avec trigo : t = tan(x/2). Circulaires : x = a sin(θ)", "example": "Substitutions courantes" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫₀² x√(x² + 1) dx.",
+          "solution_steps": ["Poser t = x² + 1, dt = 2x dx, x dx = dt/2", "Bornes : t = 1 et t = 5", "∫₁⁵ √t (dt/2) = (1/2)×[t^(3/2)/(3/2)]₁⁵", "= (1/3)(5√5 - 1)"]
+        },
+        "quick_exercises": [
+          "∫₀^(π/2) sin(x) cos²(x) dx avec t = cos(x)",
+          "Appliquer changement de variable"
+        ],
+        "common_mistakes": [
+          "Oublier de transformer les bornes",
+          "Erreurs de signe dans dt"
+        ],
+        "summary": {
+          "key_concept": "Toujours transformer les bornes. dt = φ'(x)dx",
+          "key_method": "Choix de t crucial pour simplifier",
+          "next_step": "IPP avancée"
+        }
+      }
+    },
+    {
+      "id": "MT-48",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Intégration par parties avancée",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Maîtriser l'IPP à plusieurs niveaux", "Résoudre les IPP cycliques", "Appliquer l'IPP aux fonctions transcendantes", "Combiner IPP et autres techniques"],
+      "prerequisites": ["MT-46"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["IPP", "avancée"],
+      "detailed_content": {
+        "introduction": "L'intégration par parties peut nécessiter plusieurs applications successives, voire conduire à des équations où l'intégrale cherchée réapparaît (IPP cyclique).",
+        "key_concepts": [
+          { "name": "IPP multiple", "explanation": "Appliquer IPP plusieurs fois. Degré polynôme diminue", "example": "∫ x² e^x dx" },
+          { "name": "IPP cyclique", "explanation": "Intégrale I réapparaît : I = ... + kI, résoudre I = .../(1-k)", "example": "∫ e^x sin(x) dx" },
+          { "name": "Fonctions transcendantes", "explanation": "∫ ln(x) dx = x ln(x) - x + C. ∫ arctan(x) dx = x arctan(x) - (1/2)ln(1+x²) + C", "example": "Classiques" },
+          { "name": "Combinaison", "explanation": "IPP puis changement de variable si nécessaire", "example": "Combiner techniques" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫ e^x cos(x) dx.",
+          "solution_steps": ["Poser I = ∫ e^x cos(x) dx", "IPP 1 : I = e^x cos(x) + ∫ e^x sin(x) dx", "IPP 2 : ∫ e^x sin(x) = e^x sin(x) - I", "I = e^x cos(x) + e^x sin(x) - I", "2I = e^x(cos + sin), I = e^x(cos + sin)/2"]
+        },
+        "quick_exercises": [
+          "Calculer ∫ x² sin(x) dx par IPP itérée",
+          "Résoudre IPP cycliques"
+        ],
+        "common_mistakes": [
+          "Oublier une IPP intermédiaire",
+          "Ne pas résoudre l'équation dans IPP cyclique"
+        ],
+        "summary": {
+          "key_concept": "IPP multiple : diminuer degré. IPP cyclique : résoudre I = ... + kI",
+          "key_method": "ln et arctan toujours en u",
+          "next_step": "Parité et intégration"
+        }
+      }
+    },
+    {
+      "id": "MT-49",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Intégrales et fonctions paires/impaires",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Exploiter la parité pour simplifier les calculs", "Utiliser les symétries des fonctions", "Appliquer aux fonctions trigonométriques", "Réduire le domaine d'intégration"],
+      "prerequisites": ["MT-43"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["parité", "pair", "impair"],
+      "detailed_content": {
+        "introduction": "Les propriétés de parité permettent de simplifier considérablement certaines intégrales, en exploitant la symétrie des fonctions par rapport à l'origine.",
+        "key_concepts": [
+          { "name": "Rappels", "explanation": "Paire : f(-x) = f(x). Impaire : f(-x) = -f(x)", "example": "Symétrie" },
+          { "name": "Intégrale paire", "explanation": "Si f paire sur [-a,a], ∫₋ₐᵃ f = 2∫₀ᵃ f", "example": "Doubler" },
+          { "name": "Intégrale impaire", "explanation": "Si f impaire sur [-a,a], ∫₋ₐᵃ f = 0", "example": "Annulation" },
+          { "name": "Décomposition", "explanation": "f = f_p + f_i. ∫₋ₐᵃ f = 2∫₀ᵃ f_p", "example": "Partie paire seulement" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫₋π^π (x³ + cos(x)) dx.",
+          "solution_steps": ["x³ impaire : ∫₋π^π x³ = 0", "cos paire : ∫₋π^π cos = 2∫₀^π cos = 0", "Total = 0"]
+        },
+        "quick_exercises": [
+          "Calculer ∫₋₂² (x⁴ - 3x² + 1) dx",
+          "Utiliser parité"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier la parité",
+          "Appliquer formule paire à impaire"
+        ],
+        "summary": {
+          "key_concept": "Toujours vérifier parité sur [-a,a]",
+          "key_method": "f paire : ∫₋ₐᵃ f = 2∫₀ᵃ f. f impaire : 0",
+          "next_step": "Intégrales impropres"
+        }
+      }
+    },
+    {
+      "id": "MT-50",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Intégrales impropres - Introduction",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Définir une intégrale impropre", "Calculer des intégrales sur [a, +∞[", "Étudier la convergence", "Distinguer convergence et divergence"],
+      "prerequisites": ["MT-42", "MT-09"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["impropres", "convergence"],
+      "detailed_content": {
+        "introduction": "Les intégrales impropres généralisent la notion d'intégrale définie aux cas où l'intervalle d'intégration est infini ou où la fonction présente une asymptote verticale.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "∫ₐ^(+∞) f = lim_{b→+∞} ∫ₐᵇ f. Limite existe et finie → converge", "example": "Limite" },
+          { "name": "Méthode", "explanation": "1) Calculer ∫ₐᵇ f = F(b) - F(a), 2) lim_{b→+∞} [F(b) - F(a)], 3) Convergence ou divergence", "example": "Étapes" },
+          { "name": "Intégrale sur ℝ", "explanation": "∫_{-∞}^(+∞) f = lim_{a→-∞} ∫ₐ⁰ f + lim_{b→+∞} ∫₀ᵇ f", "example": "Deux limites" },
+          { "name": "Applications", "explanation": "Intervalles infinis ou asymptotes verticales", "example": "Domaine étendu" }
+        ],
+        "guided_example": {
+          "statement": "Étudier ∫₁^(+∞) 1/x dx.",
+          "solution_steps": ["∫₁ᵇ 1/x dx = ln(b)", "lim_{b→+∞} ln(b) = +∞", "Diverge"]
+        },
+        "quick_exercises": [
+          "Étudier ∫₀^(+∞) e^(-x) dx",
+          "Calculer intégrales impropres"
+        ],
+        "common_mistakes": [
+          "Oublier de passer par la limite",
+          "Écrire +∞ directement dans primitive"
+        ],
+        "summary": {
+          "key_concept": "Toujours passer par lim_{b→+∞}",
+          "key_method": "∫ 1/x^α converge si α > 1, diverge si α ≤ 1",
+          "next_step": "Comparaison d'intégrales"
+        }
+      }
+    },
+    {
+      "id": "MT-51",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Comparaison d'intégrales impropres",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 125,
+      "objectives": ["Utiliser la comparaison pour étudier la convergence", "Appliquer les théorèmes de comparaison", "Utiliser les équivalents", "Déterminer la nature sans calcul explicite"],
+      "prerequisites": ["MT-50"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["comparaison", "convergence"],
+      "detailed_content": {
+        "introduction": "Plutôt que de calculer explicitement une intégrale impropre, on peut souvent conclure sur sa convergence par comparaison avec une intégrale de référence.",
+        "key_concepts": [
+          { "name": "Théorème", "explanation": "Si 0 ≤ f ≤ g, ∫ g converge ⇒ ∫ f converge. ∫ f diverge ⇒ ∫ g diverge", "example": "Comparaison" },
+          { "name": "Référence Riemann", "explanation": "∫ₐ^(+∞) 1/x^α dx converge ⟺ α > 1", "example": "Référence" },
+          { "name": "Équivalent", "explanation": "f ~ g ⇒ même nature. Chercher équivalent simple", "example": "Comportement limite" },
+          { "name": "Méthode", "explanation": "1) Équivalent de f, 2) Comparer avec 1/x^α, 3) Conclure sur nature", "example": "Approche" }
+        ],
+        "guided_example": {
+          "statement": "Étudier ∫₁^(+∞) 1/(x² + x) dx.",
+          "solution_steps": ["Pour x grand : 1/(x²+x) ~ 1/x²", "∫ 1/x² converge (α = 2 > 1)", "Par comparaison, ∫ 1/(x²+x) converge"]
+        },
+        "quick_exercises": [
+          "Étudier ∫₂^(+∞) 1/√(x³ + 1) dx",
+          "Utiliser comparaison"
+        ],
+        "common_mistakes": [
+          "Inverser le sens du théorème",
+          "Comparer avec mauvaise référence"
+        ],
+        "summary": {
+          "key_concept": "∫ 1/x^α converge ⟺ α > 1",
+          "key_method": "f ~ g ⇒ même nature",
+          "next_step": "Équations différentielles"
+        }
+      }
+    },
+    {
+      "id": "MT-52",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Équations différentielles linéaires du 1er ordre",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Résoudre une équation différentielle y' = ay", "Résoudre y' = ay + b", "Déterminer la solution particulière", "Appliquer aux problèmes de croissance/décroissance"],
+      "prerequisites": ["MT-38", "MT-42"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["différentielle", "équation"],
+      "detailed_content": {
+        "introduction": "Les équations différentielles linéaires du premier ordre apparaissent dans de nombreux problèmes de sciences. Elles se résolvent à l'aide de primitives.",
+        "key_concepts": [
+          { "name": "y' = ay", "explanation": "Solution : y = C e^(ax). Homogène", "example": "Croissance/décroissance" },
+          { "name": "Condition initiale", "explanation": "y(x₀) = y₀ détermine C. y(x) = y₀ e^(a(x-x₀))", "example": "Solution particulière" },
+          { "name": "y' = ay + b", "explanation": "Solution particulière y_p = -b/a. Générale : y = Ce^(ax) - b/a", "example": "Avec second membre" },
+          { "name": "Méthode", "explanation": "1) Identifier a, b, 2) y_p = -b/a, 3) y = Ce^(ax) - b/a, 4) C par condition initiale", "example": "Approche" }
+        ],
+        "guided_example": {
+          "statement": "Résoudre y' = 2y avec y(0) = 3.",
+          "solution_steps": ["Forme y' = ay, a = 2", "Solution générale : y = Ce^(2x)", "y(0) = 3 ⇒ C = 3", "y(x) = 3e^(2x)"]
+        },
+        "quick_exercises": [
+          "Résoudre y' = -y + 2 avec y(0) = 5",
+          "Résoudre équations différentielles"
+        ],
+        "common_mistakes": [
+          "Oublier solution particulière dans y' = ay + b",
+          "Erreurs de signe dans C"
+        ],
+        "summary": {
+          "key_concept": "y' = ay ⇒ y = Ce^(ax). y' = ay + b ⇒ y = Ce^(ax) - b/a",
+          "key_method": "Toujours vérifier avec condition initiale",
+          "next_step": "Applications physiques"
+        }
+      }
+    },
+    {
+      "id": "MT-53",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Applications physiques des intégrales",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Calculer un travail d'une force", "Déterminer une quantité accumulée", "Modéliser avec des intégrales", "Interpréter physiquement"],
+      "prerequisites": ["MT-42", "MT-45"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["physique", "applications"],
+      "detailed_content": {
+        "introduction": "Les intégrales permettent de calculer des grandeurs physiques cumulées : travail, distance parcourue, quantité de matière, etc.",
+        "key_concepts": [
+          { "name": "Travail", "explanation": "W = ∫ₐᵇ F(x) dx. Force variable", "example": "Joules" },
+          { "name": "Distance", "explanation": "d = ∫_{t₁}^{t₂} v(t) dt. Intégrale de vitesse", "example": "Mètres" },
+          { "name": "Volume", "explanation": "V = ∫_{t₁}^{t₂} D(t) dt. Débit variable", "example": "Litres" },
+          { "name": "Masse", "explanation": "m = ∫₀^L C(x) dx. Concentration", "example": "Grammes" }
+        ],
+        "guided_example": {
+          "statement": "Force F(x) = 10x N, déplacement 0 à 5 m.",
+          "solution_steps": ["W = ∫₀⁵ 10x dx = [5x²]₀⁵", "= 125 J"]
+        },
+        "quick_exercises": [
+          "Vitesse v(t) = 2t + 3 m/s, distance entre t = 0 et 4 s",
+          "Applications physiques"
+        ],
+        "common_mistakes": [
+          "Oublier les unités",
+          "Confondre vitesse et accélération"
+        ],
+        "summary": {
+          "key_concept": "W = ∫ F, d = ∫ v, V = ∫ D",
+          "key_method": "Toujours préciser les unités",
+          "next_step": "Volumes par intégration"
+        }
+      }
+    },
+    {
+      "id": "MT-54",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Calcul de volumes par intégration",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Calculer le volume d'un solide de révolution", "Utiliser la formule V = π∫ R²(x) dx", "Appliquer aux cônes, sphères, etc.", "Visualiser le solide en 3D"],
+      "prerequisites": ["MT-44"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["volume", "révolution"],
+      "detailed_content": {
+        "introduction": "En faisant tourner une courbe autour d'un axe, on engendre un solide de révolution. Son volume peut se calculer par intégration en découpant le solide en tranches infinitésimales.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "dV = π R² dx. V = ∫ π R²(x) dx", "example": "Disques" },
+          { "name": "Rotation autour Ox", "explanation": "Rotation de y = f(x), R(x) = f(x). V = π∫ [f(x)]² dx", "example": "Attention au carré" },
+          { "name": "Exemples", "explanation": "Cône : V = πr²h/3. Sphère : V = 4πR³/3", "example": "Classiques" },
+          { "name": "Rotation autour Oy", "explanation": "x = g(y). V = π∫ [g(y)]² dy", "example": "Intégration en y" }
+        ],
+        "guided_example": {
+          "statement": "Rotation de y = x de 0 à 3 autour Ox.",
+          "solution_steps": ["R(x) = x", "V = π∫₀³ x² dx = π[x³/3]₀³", "= 9π"]
+        },
+        "quick_exercises": [
+          "Volume rotation de y = √x de 0 à 4 autour Ox",
+          "Calculer volumes"
+        ],
+        "common_mistakes": [
+          "Oublier f(x)²",
+          "Oublier le facteur π"
+        ],
+        "summary": {
+          "key_concept": "V = π∫ [f(x)]² dx. Toujours élever au carré",
+          "key_method": "Ne pas oublier π. Visualiser aide",
+          "next_step": "Synthèse finale"
+        }
+      }
+    },
+    {
+      "id": "MT-55",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Synthèse - Calcul Intégral",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 140,
+      "objectives": ["Maîtriser toutes les techniques d'intégration", "Choisir la bonne méthode selon le problème", "Résoudre des problèmes de synthèse", "Appliquer le calcul intégral à divers contextes"],
+      "prerequisites": ["MT-38", "MT-42", "MT-46", "MT-47", "MT-52"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "intégral"],
+      "detailed_content": {
+        "introduction": "Le calcul intégral est un outil fondamental en mathématiques et en sciences. Cette synthèse regroupe toutes les notions clés du chapitre et propose une méthodologie générale.",
+        "key_concepts": [
+          { "name": "Primitives", "explanation": "Usuelles, linéarité, u'×f(u). Reconnaissance de formes", "example": "Base" },
+          { "name": "Intégrale définie", "explanation": "∫ₐᵇ f = F(b) - F(a). Propriétés, valeur moyenne, parité", "example": "Aire" },
+          { "name": "Techniques", "explanation": "IPP, changement variable, impropres, comparaison", "example": "Avancées" },
+          { "name": "Stratégie", "explanation": "1) Identifier type, 2) Simplifier, 3) Forme connue, 4) Techniques avancées, 5) Vérifier", "example": "Méthodologie" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫₀¹ x e^(x²) dx.",
+          "solution_steps": ["Forme u'×e^u : t = x²", "∫ x e^(x²) = (1/2)e^(x²)", "[(1/2)e^(x²)]₀¹ = (e-1)/2"]
+        },
+        "quick_exercises": [
+          "Population P'(t) = 0.03 P(t), P(0) = 1000, puis moyenne",
+          "Problèmes de synthèse"
+        ],
+        "common_mistakes": [
+          "Choisir mauvaise technique",
+          "Oublier C dans primitives"
+        ],
+        "summary": {
+          "key_concept": "Identifier type de problème, simplifier, reconnaître formes",
+          "key_method": "Maîtriser les techniques et vérifier",
+          "next_step": "Vers autres chapitres"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

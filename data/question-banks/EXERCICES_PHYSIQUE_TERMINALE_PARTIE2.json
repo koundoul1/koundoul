@@ -1,0 +1,1276 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Physique Terminale (Partie 2/2)",
+    "level": "Terminale",
+    "subject": "Physique",
+    "type": "Exercices",
+    "part": "2/2",
+    "questions_range": "51-100",
+    "total_questions": 50,
+    "chapters_covered": [
+      "Mécanique",
+      "Ondes et signaux",
+      "Énergie"
+    ],
+    "difficulty_distribution": {
+      "facile": 15,
+      "moyen": 25,
+      "difficile": 10
+    }
+  },
+  "exercises": [
+    {
+      "id": "PT-EX-051",
+      "chapter": "Énergie",
+      "topic": "Énergie de liaison nucléaire",
+      "difficulty": "difficile",
+      "statement": "Le noyau d'hélium-4 (2 protons, 2 neutrons) a une masse m = 4.0015 u. Calculer son énergie de liaison par nucléon (m_p = 1.0073 u, m_n = 1.0087 u, 1 u = 931.5 MeV/c²).",
+      "data": {
+        "masse_helium": "4.0015 u",
+        "masse_proton": "1.0073 u",
+        "masse_neutron": "1.0087 u",
+        "conversion": "1 u = 931.5 MeV/c²"
+      },
+      "solution": {
+        "steps": [
+          "Masse des nucléons séparés : M = 2m_p + 2m_n",
+          "M = 2×1.0073 + 2×1.0087 = 2.0146 + 2.0174 = 4.032 u",
+          "Défaut de masse : Δm = M - m = 4.032 - 4.0015 = 0.0305 u",
+          "Énergie de liaison : E_l = Δm × c² = 0.0305 × 931.5",
+          "E_l = 28.41 MeV",
+          "Par nucléon : E_l/A = 28.41/4 = 7.10 MeV/nucléon"
+        ],
+        "answer": "7.10 MeV/nucléon",
+        "formula_used": "E_l = Δmc²"
+      },
+      "hint": "Défaut de masse et équivalence masse-énergie",
+      "related_lesson": "L-T-P-051"
+    },
+    {
+      "id": "PT-EX-052",
+      "chapter": "Ondes et signaux",
+      "topic": "Filtrage RC",
+      "difficulty": "moyen",
+      "statement": "Un filtre RC passe-bas a R = 1 kΩ et C = 1 μF. Calculer sa fréquence de coupure et le déphasage à f = 500 Hz.",
+      "data": {
+        "resistance": "1 kΩ = 1000 Ω",
+        "capacite": "1 μF = 10⁻⁶ F",
+        "frequence": "500 Hz"
+      },
+      "solution": {
+        "steps": [
+          "Fréquence de coupure : f_c = 1/(2πRC)",
+          "f_c = 1/(2π × 1000 × 10⁻⁶)",
+          "f_c = 1/(2π × 10⁻³) = 159.15 Hz",
+          "Déphasage : φ = -arctan(f/f_c)",
+          "φ = -arctan(500/159.15) = -arctan(3.14)",
+          "φ ≈ -72.3°"
+        ],
+        "answer": "f_c = 159 Hz ; φ = -72.3°",
+        "formula_used": "f_c = 1/(2πRC)"
+      },
+      "hint": "Filtre passe-bas : déphasage négatif",
+      "related_lesson": "L-T-P-052"
+    },
+    {
+      "id": "PT-EX-053",
+      "chapter": "Mécanique",
+      "topic": "Pendule simple",
+      "difficulty": "moyen",
+      "statement": "Un pendule simple de longueur L = 2 m oscille avec une amplitude angulaire θ_max = 10°. Calculer sa période et sa vitesse maximale (g = 10 m/s²).",
+      "data": {
+        "longueur": "2 m",
+        "amplitude_angulaire": "10° = 0.174 rad",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Période : T = 2π√(L/g)",
+          "T = 2π√(2/10) = 2π√0.2 = 2π × 0.447",
+          "T ≈ 2.83 s",
+          "Conservation énergie : v_max = √(2gL(1-cos(θ_max)))",
+          "1-cos(10°) ≈ 1-0.985 = 0.015",
+          "v_max = √(2×10×2×0.015) = √0.6 ≈ 0.77 m/s"
+        ],
+        "answer": "T = 2.83 s ; v_max = 0.77 m/s",
+        "formula_used": "T = 2π√(L/g)"
+      },
+      "hint": "Période indépendante de l'amplitude (petits angles)",
+      "related_lesson": "L-T-P-053"
+    },
+    {
+      "id": "PT-EX-054",
+      "chapter": "Énergie",
+      "topic": "Loi de Stefan-Boltzmann",
+      "difficulty": "difficile",
+      "statement": "Une étoile de rayon R = 7×10⁸ m a une température de surface T = 6000 K. Calculer sa puissance rayonnée (σ = 5.67×10⁻⁸ W/(m²·K⁴)).",
+      "data": {
+        "rayon": "7×10⁸ m",
+        "temperature": "6000 K",
+        "constante_stefan": "5.67×10⁻⁸ W/(m²·K⁴)"
+      },
+      "solution": {
+        "steps": [
+          "Surface : S = 4πR² = 4π × (7×10⁸)²",
+          "S = 4π × 49×10¹⁶ = 6.16×10¹⁸ m²",
+          "Loi de Stefan : P = σST⁴",
+          "P = 5.67×10⁻⁸ × 6.16×10¹⁸ × (6000)⁴",
+          "P = 5.67×10⁻⁸ × 6.16×10¹⁸ × 1.296×10¹⁵",
+          "P ≈ 4.53×10²⁶ W"
+        ],
+        "answer": "4.53×10²⁶ W",
+        "formula_used": "P = σST⁴"
+      },
+      "hint": "Puissance rayonnée par un corps noir",
+      "related_lesson": "L-T-P-054"
+    },
+    {
+      "id": "PT-EX-055",
+      "chapter": "Ondes et signaux",
+      "topic": "Polarisation de la lumière",
+      "difficulty": "moyen",
+      "statement": "Une onde lumineuse d'intensité I₀ = 100 W/m² traverse un polariseur puis un analyseur orienté à 30° du polariseur. Calculer l'intensité finale.",
+      "data": {
+        "intensite_initiale": "100 W/m²",
+        "angle": "30°"
+      },
+      "solution": {
+        "steps": [
+          "Après 1er polariseur : I₁ = I₀/2 = 100/2 = 50 W/m²",
+          "Loi de Malus : I₂ = I₁ × cos²(θ)",
+          "I₂ = 50 × cos²(30°)",
+          "cos(30°) = √3/2 ≈ 0.866",
+          "I₂ = 50 × (0.866)² = 50 × 0.75 = 37.5 W/m²"
+        ],
+        "answer": "37.5 W/m²",
+        "formula_used": "I = I₀cos²θ (loi de Malus)"
+      },
+      "hint": "Loi de Malus pour la polarisation",
+      "related_lesson": "L-T-P-055"
+    },
+    {
+      "id": "PT-EX-056",
+      "chapter": "Mécanique",
+      "topic": "Vitesse de libération",
+      "difficulty": "difficile",
+      "statement": "Calculer la vitesse de libération à la surface de la Terre (M_T = 6×10²⁴ kg, R_T = 6400 km, G = 6.67×10⁻¹¹ SI).",
+      "data": {
+        "masse_terre": "6×10²⁴ kg",
+        "rayon_terre": "6.4×10⁶ m",
+        "G": "6.67×10⁻¹¹ N·m²/kg²"
+      },
+      "solution": {
+        "steps": [
+          "Énergie totale nulle : (1/2)mv² - GMm/R = 0",
+          "v² = 2GM/R",
+          "v = √(2GM/R)",
+          "v = √(2 × 6.67×10⁻¹¹ × 6×10²⁴ / 6.4×10⁶)",
+          "v = √(8×10¹⁴ / 6.4×10⁶) = √(1.25×10⁸)",
+          "v ≈ 11 180 m/s ≈ 11.2 km/s"
+        ],
+        "answer": "11.2 km/s",
+        "formula_used": "v_lib = √(2GM/R)"
+      },
+      "hint": "Vitesse pour échapper à l'attraction terrestre",
+      "related_lesson": "L-T-P-056"
+    },
+    {
+      "id": "PT-EX-057",
+      "chapter": "Énergie",
+      "topic": "Coefficient de dilatation",
+      "difficulty": "facile",
+      "statement": "Une barre d'acier de longueur L₀ = 10 m à T₀ = 20°C est chauffée à T = 100°C. Calculer sa nouvelle longueur (α = 12×10⁻⁶ K⁻¹).",
+      "data": {
+        "longueur_initiale": "10 m",
+        "T0": "20°C",
+        "T": "100°C",
+        "coefficient_dilatation": "12×10⁻⁶ K⁻¹"
+      },
+      "solution": {
+        "steps": [
+          "Variation de température : ΔT = 100 - 20 = 80 K",
+          "Dilatation linéaire : ΔL = αL₀ΔT",
+          "ΔL = 12×10⁻⁶ × 10 × 80",
+          "ΔL = 9.6×10⁻³ m = 9.6 mm",
+          "Longueur finale : L = L₀ + ΔL = 10.0096 m"
+        ],
+        "answer": "10.0096 m (augmentation de 9.6 mm)",
+        "formula_used": "ΔL = αL₀ΔT"
+      },
+      "hint": "Dilatation thermique linéaire",
+      "related_lesson": "L-T-P-057"
+    },
+    {
+      "id": "PT-EX-058",
+      "chapter": "Ondes et signaux",
+      "topic": "Diffraction par un réseau",
+      "difficulty": "difficile",
+      "statement": "Un réseau de pas a = 2 μm diffracte une lumière rouge (λ = 650 nm). À quel angle observe-t-on l'ordre 2 ?",
+      "data": {
+        "pas_reseau": "2 μm = 2×10⁻⁶ m",
+        "longueur_onde": "650 nm = 6.5×10⁻⁷ m",
+        "ordre": "k = 2"
+      },
+      "solution": {
+        "steps": [
+          "Formule du réseau : a×sin(θ) = kλ",
+          "sin(θ) = kλ/a = 2 × 6.5×10⁻⁷ / 2×10⁻⁶",
+          "sin(θ) = 1.3×10⁻⁶ / 2×10⁻⁶ = 0.65",
+          "θ = arcsin(0.65) ≈ 40.5°"
+        ],
+        "answer": "40.5°",
+        "formula_used": "a×sin(θ) = kλ"
+      },
+      "hint": "Formule des réseaux de diffraction",
+      "related_lesson": "L-T-P-058"
+    },
+    {
+      "id": "PT-EX-059",
+      "chapter": "Mécanique",
+      "topic": "Loi de Hooke",
+      "difficulty": "facile",
+      "statement": "Un ressort s'allonge de Δx = 5 cm sous l'effet d'une masse m = 200 g. Calculer la constante de raideur k (g = 10 m/s²).",
+      "data": {
+        "allongement": "5 cm = 0.05 m",
+        "masse": "200 g = 0.2 kg",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "À l'équilibre : F = mg = kΔx",
+          "k = mg/Δx",
+          "k = 0.2 × 10 / 0.05",
+          "k = 2 / 0.05 = 40 N/m"
+        ],
+        "answer": "40 N/m",
+        "formula_used": "F = kx (loi de Hooke)"
+      },
+      "hint": "Force de rappel élastique",
+      "related_lesson": "L-T-P-059"
+    },
+    {
+      "id": "PT-EX-060",
+      "chapter": "Énergie",
+      "topic": "Conversion d'énergie",
+      "difficulty": "moyen",
+      "statement": "Une centrale hydroélectrique a une chute d'eau de h = 100 m avec un débit Q = 50 m³/s. Calculer la puissance maximale théorique (ρ = 1000 kg/m³, g = 10 m/s²).",
+      "data": {
+        "hauteur": "100 m",
+        "debit": "50 m³/s",
+        "masse_volumique": "1000 kg/m³",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Masse par seconde : dm/dt = ρQ = 1000 × 50 = 50000 kg/s",
+          "Puissance : P = (dm/dt) × gh",
+          "P = 50000 × 10 × 100",
+          "P = 50 000 000 W = 50 MW"
+        ],
+        "answer": "50 MW",
+        "formula_used": "P = ρQgh"
+      },
+      "hint": "Puissance hydraulique théorique",
+      "related_lesson": "L-T-P-060"
+    },
+    {
+      "id": "PT-EX-061",
+      "chapter": "Ondes et signaux",
+      "topic": "Télécommunications",
+      "difficulty": "moyen",
+      "statement": "Un signal de 1 kHz module une porteuse de 100 MHz avec un indice de modulation m = 0.8. Quelle est la bande passante nécessaire ?",
+      "data": {
+        "frequence_signal": "1 kHz",
+        "frequence_porteuse": "100 MHz",
+        "indice_modulation": "0.8"
+      },
+      "solution": {
+        "steps": [
+          "Modulation AM : bande passante = 2 × f_signal",
+          "BP = 2 × 1 kHz = 2 kHz",
+          "Fréquences latérales :",
+          "f_sup = 100 MHz + 1 kHz = 100.001 MHz",
+          "f_inf = 100 MHz - 1 kHz = 99.999 MHz"
+        ],
+        "answer": "Bande passante = 2 kHz",
+        "formula_used": "BP = 2f_max"
+      },
+      "hint": "Bande passante en modulation d'amplitude",
+      "related_lesson": "L-T-P-061"
+    },
+    {
+      "id": "PT-EX-062",
+      "chapter": "Mécanique",
+      "topic": "Centre de masse",
+      "difficulty": "moyen",
+      "statement": "Deux masses m₁ = 2 kg et m₂ = 3 kg sont placées en x₁ = 0 m et x₂ = 5 m. Calculer la position du centre de masse.",
+      "data": {
+        "m1": "2 kg",
+        "m2": "3 kg",
+        "x1": "0 m",
+        "x2": "5 m"
+      },
+      "solution": {
+        "steps": [
+          "Position du centre de masse : x_G = (m₁x₁ + m₂x₂)/(m₁ + m₂)",
+          "x_G = (2×0 + 3×5)/(2 + 3)",
+          "x_G = 15/5 = 3 m"
+        ],
+        "answer": "3 m",
+        "formula_used": "x_G = Σ(m_i×x_i)/Σm_i"
+      },
+      "hint": "Barycentre de deux masses",
+      "related_lesson": "L-T-P-062"
+    },
+    {
+      "id": "PT-EX-063",
+      "chapter": "Énergie",
+      "topic": "Gaz parfait - Loi des gaz",
+      "difficulty": "moyen",
+      "statement": "Un gaz parfait occupe V₁ = 2 L à P₁ = 1 atm et T₁ = 300 K. Il est comprimé à V₂ = 1 L à température constante. Calculer P₂.",
+      "data": {
+        "V1": "2 L",
+        "P1": "1 atm",
+        "T1": "300 K",
+        "V2": "1 L"
+      },
+      "solution": {
+        "steps": [
+          "Transformation isotherme : P₁V₁ = P₂V₂",
+          "P₂ = P₁V₁/V₂",
+          "P₂ = 1 × 2 / 1",
+          "P₂ = 2 atm"
+        ],
+        "answer": "2 atm",
+        "formula_used": "PV = cte (isotherme)"
+      },
+      "hint": "Loi de Boyle-Mariotte",
+      "related_lesson": "L-T-P-063"
+    },
+    {
+      "id": "PT-EX-064",
+      "chapter": "Ondes et signaux",
+      "topic": "Fibre optique",
+      "difficulty": "difficile",
+      "statement": "Une fibre optique a un cœur d'indice n₁ = 1.5 et une gaine d'indice n₂ = 1.48. Calculer l'angle de réflexion totale.",
+      "data": {
+        "indice_coeur": "1.5",
+        "indice_gaine": "1.48"
+      },
+      "solution": {
+        "steps": [
+          "Angle critique : sin(θ_c) = n₂/n₁",
+          "sin(θ_c) = 1.48/1.5 = 0.9867",
+          "θ_c = arcsin(0.9867) ≈ 80.6°",
+          "Pour réflexion totale : θ > 80.6°"
+        ],
+        "answer": "θ_c = 80.6°",
+        "formula_used": "sin(θ_c) = n₂/n₁"
+      },
+      "hint": "Condition de réflexion totale interne",
+      "related_lesson": "L-T-P-064"
+    },
+    {
+      "id": "PT-EX-065",
+      "chapter": "Mécanique",
+      "topic": "Théorème de l'énergie cinétique",
+      "difficulty": "moyen",
+      "statement": "Une voiture de masse m = 1000 kg accélère de v₁ = 10 m/s à v₂ = 20 m/s sur une distance d = 50 m. Calculer la force motrice moyenne.",
+      "data": {
+        "masse": "1000 kg",
+        "v1": "10 m/s",
+        "v2": "20 m/s",
+        "distance": "50 m"
+      },
+      "solution": {
+        "steps": [
+          "Variation d'énergie cinétique :",
+          "ΔEc = (1/2)m(v₂² - v₁²)",
+          "ΔEc = 0.5 × 1000 × (400 - 100) = 500 × 300 = 150000 J",
+          "Théorème Ec : W = F×d = ΔEc",
+          "F = ΔEc/d = 150000/50 = 3000 N"
+        ],
+        "answer": "3000 N",
+        "formula_used": "W = ΔEc"
+      },
+      "hint": "Théorème de l'énergie cinétique",
+      "related_lesson": "L-T-P-065"
+    },
+    {
+      "id": "PT-EX-066",
+      "chapter": "Énergie",
+      "topic": "Chaleur latente",
+      "difficulty": "moyen",
+      "statement": "Calculer l'énergie nécessaire pour faire fondre 500 g de glace à 0°C (L_f = 334 kJ/kg).",
+      "data": {
+        "masse": "500 g = 0.5 kg",
+        "temperature": "0°C",
+        "chaleur_latente_fusion": "334 kJ/kg"
+      },
+      "solution": {
+        "steps": [
+          "Énergie de fusion : Q = mL_f",
+          "Q = 0.5 × 334",
+          "Q = 167 kJ"
+        ],
+        "answer": "167 kJ",
+        "formula_used": "Q = mL_f"
+      },
+      "hint": "Changement d'état à température constante",
+      "related_lesson": "L-T-P-066"
+    },
+    {
+      "id": "PT-EX-067",
+      "chapter": "Ondes et signaux",
+      "topic": "Débit numérique",
+      "difficulty": "facile",
+      "statement": "Un fichier de 100 Mo est transmis en 20 secondes. Calculer le débit en Mb/s (1 octet = 8 bits).",
+      "data": {
+        "taille_fichier": "100 Mo = 100×10⁶ octets",
+        "duree": "20 s"
+      },
+      "solution": {
+        "steps": [
+          "Taille en bits : 100×10⁶ × 8 = 800×10⁶ bits",
+          "Débit : D = 800×10⁶ / 20",
+          "D = 40×10⁶ bits/s = 40 Mb/s"
+        ],
+        "answer": "40 Mb/s",
+        "formula_used": "D = Taille/temps"
+      },
+      "hint": "Conversion octets vers bits",
+      "related_lesson": "L-T-P-067"
+    },
+    {
+      "id": "PT-EX-068",
+      "chapter": "Mécanique",
+      "topic": "Principe d'inertie",
+      "difficulty": "facile",
+      "statement": "Un palet de hockey de masse m = 200 g glisse sur la glace avec frottement négligeable à v = 5 m/s. Quelle distance parcourt-il avant de s'arrêter si μ = 0.02 (g = 10 m/s²) ?",
+      "data": {
+        "masse": "200 g = 0.2 kg",
+        "vitesse": "5 m/s",
+        "coefficient_frottement": "0.02",
+        "g": "10 m/s²"
+      },
+      "solution": {
+        "steps": [
+          "Force de frottement : f = μmg = 0.02 × 0.2 × 10 = 0.04 N",
+          "Accélération : a = -f/m = -0.04/0.2 = -0.2 m/s²",
+          "v² = v₀² + 2ad avec v = 0",
+          "0 = 25 + 2×(-0.2)×d",
+          "0.4d = 25",
+          "d = 62.5 m"
+        ],
+        "answer": "62.5 m",
+        "formula_used": "v² = v₀² + 2ad"
+      },
+      "hint": "Mouvement uniformément décéléré",
+      "related_lesson": "L-T-P-068"
+    },
+    {
+      "id": "PT-EX-069",
+      "chapter": "Énergie",
+      "topic": "Pression des gaz",
+      "difficulty": "moyen",
+      "statement": "Un gaz parfait contient n = 2 moles à T = 300 K dans V = 10 L. Calculer la pression (R = 8.314 J/(mol·K)).",
+      "data": {
+        "quantite_matiere": "2 mol",
+        "temperature": "300 K",
+        "volume": "10 L = 0.01 m³",
+        "constante_gaz": "8.314 J/(mol·K)"
+      },
+      "solution": {
+        "steps": [
+          "Équation des gaz parfaits : PV = nRT",
+          "P = nRT/V",
+          "P = 2 × 8.314 × 300 / 0.01",
+          "P = 4988.4 / 0.01 = 498 840 Pa",
+          "P ≈ 499 kPa ≈ 4.99 atm"
+        ],
+        "answer": "499 kPa (≈ 5 atm)",
+        "formula_used": "PV = nRT"
+      },
+      "hint": "Équation d'état des gaz parfaits",
+      "related_lesson": "L-T-P-069"
+    },
+    {
+      "id": "PT-EX-070",
+      "chapter": "Ondes et signaux",
+      "topic": "Oscilloscope",
+      "difficulty": "facile",
+      "statement": "Sur un oscilloscope, un signal sinusoïdal occupe 4 divisions horizontalement (balayage: 2 ms/div) et 3 divisions verticalement (sensibilité: 5 V/div). Calculer la période et l'amplitude.",
+      "data": {
+        "divisions_horizontales": "4 div",
+        "balayage": "2 ms/div",
+        "divisions_verticales": "3 div",
+        "sensibilite": "5 V/div"
+      },
+      "solution": {
+        "steps": [
+          "Période : T = 4 div × 2 ms/div = 8 ms",
+          "Fréquence : f = 1/T = 1/0.008 = 125 Hz",
+          "Amplitude crête : U_max = 3 div × 5 V/div = 15 V",
+          "Tension crête-crête : U_pp = 2 × 15 = 30 V"
+        ],
+        "answer": "T = 8 ms ; U_max = 15 V",
+        "formula_used": "T = n_div × balayage"
+      },
+      "hint": "Lecture sur oscilloscope",
+      "related_lesson": "L-T-P-070"
+    },
+    {
+      "id": "PT-EX-071",
+      "chapter": "Mécanique",
+      "topic": "Moment d'inertie",
+      "difficulty": "difficile",
+      "statement": "Une tige homogène de masse M = 3 kg et longueur L = 1.5 m tourne autour de son centre. Calculer son moment d'inertie et son énergie cinétique à ω = 5 rad/s.",
+      "data": {
+        "masse": "3 kg",
+        "longueur": "1.5 m",
+        "vitesse_angulaire": "5 rad/s"
+      },
+      "solution": {
+        "steps": [
+          "Moment d'inertie (tige/centre) : I = ML²/12",
+          "I = 3 × (1.5)² / 12 = 3 × 2.25 / 12",
+          "I = 6.75 / 12 = 0.5625 kg·m²",
+          "Énergie cinétique : Ec = (1/2)Iω²",
+          "Ec = 0.5 × 0.5625 × 25 = 7.03 J"
+        ],
+        "answer": "I = 0.5625 kg·m² ; Ec = 7.03 J",
+        "formula_used": "I = ML²/12 ; Ec = (1/2)Iω²"
+      },
+      "hint": "Moment d'inertie d'une tige par rapport à son centre",
+      "related_lesson": "L-T-P-071"
+    },
+    {
+      "id": "PT-EX-072",
+      "chapter": "Énergie",
+      "topic": "Loi de Wien",
+      "difficulty": "moyen",
+      "statement": "Une étoile émet un maximum de rayonnement à λ_max = 500 nm. Calculer sa température de surface (constante de Wien: 2.898×10⁻³ m·K).",
+      "data": {
+        "longueur_onde_max": "500 nm = 5×10⁻⁷ m",
+        "constante_wien": "2.898×10⁻³ m·K"
+      },
+      "solution": {
+        "steps": [
+          "Loi de Wien : λ_max × T = b",
+          "T = b / λ_max",
+          "T = 2.898×10⁻³ / 5×10⁻⁷",
+          "T = 5796 K ≈ 5800 K"
+        ],
+        "answer": "5800 K",
+        "formula_used": "λ_max·T = 2.898×10⁻³ m·K"
+      },
+      "hint": "Loi du déplacement de Wien",
+      "related_lesson": "L-T-P-072"
+    },
+    {
+      "id": "PT-EX-073",
+      "chapter": "Ondes et signaux",
+      "topic": "Charge et décharge condensateur",
+      "difficulty": "moyen",
+      "statement": "Un condensateur C = 100 μF se charge à travers R = 10 kΩ. Au bout de combien de temps atteint-il 95% de sa charge finale ?",
+      "data": {
+        "capacite": "100 μF = 10⁻⁴ F",
+        "resistance": "10 kΩ = 10⁴ Ω"
+      },
+      "solution": {
+        "steps": [
+          "Constante de temps : τ = RC",
+          "τ = 10⁴ × 10⁻⁴ = 1 s",
+          "Charge : q(t) = Q(1 - e^(-t/τ))",
+          "Pour 95% : 0.95 = 1 - e^(-t/τ)",
+          "e^(-t/τ) = 0.05",
+          "-t/τ = ln(0.05) = -3",
+          "t = 3τ = 3 s"
+        ],
+        "answer": "3 s",
+        "formula_used": "q = Q(1-e^(-t/τ))"
+      },
+      "hint": "Charge exponentielle du condensateur",
+      "related_lesson": "L-T-P-073"
+    },
+    {
+      "id": "PT-EX-074",
+      "chapter": "Mécanique",
+      "topic": "Théorème du moment cinétique",
+      "difficulty": "difficile",
+      "statement": "Un disque (I = 0.5 kg·m²) est initialement au repos. Un couple constant τ = 2 N·m est appliqué pendant 5 s. Calculer la vitesse angulaire finale.",
+      "data": {
+        "moment_inertie": "0.5 kg·m²",
+        "couple": "2 N·m",
+        "duree": "5 s"
+      },
+      "solution": {
+        "steps": [
+          "Théorème du moment cinétique : τ = dL/dt = I×dω/dt",
+          "Pour couple constant : ω = ω₀ + (τ/I)×t",
+          "ω = 0 + (2/0.5) × 5",
+          "ω = 4 × 5 = 20 rad/s"
+        ],
+        "answer": "20 rad/s",
+        "formula_used": "τ = Iα"
+      },
+      "hint": "Équation de la rotation avec couple constant",
+      "related_lesson": "L-T-P-074"
+    },
+    {
+      "id": "PT-EX-075",
+      "chapter": "Énergie",
+      "topic": "Rendement d'une pompe à chaleur",
+      "difficulty": "moyen",
+      "statement": "Une pompe à chaleur reçoit un travail W = 1 kWh et cède Q_c = 4 kWh à la source chaude. Calculer son coefficient de performance (COP).",
+      "data": {
+        "travail": "1 kWh",
+        "chaleur_cedee": "4 kWh"
+      },
+      "solution": {
+        "steps": [
+          "COP (pompe à chaleur) : COP = Q_c / W",
+          "COP = 4 / 1 = 4",
+          "Cela signifie que pour 1 kWh électrique consommé,",
+          "la PAC fournit 4 kWh de chaleur"
+        ],
+        "answer": "COP = 4",
+        "formula_used": "COP = Q_c/W"
+      },
+      "hint": "Performance d'une pompe à chaleur",
+      "related_lesson": "L-T-P-075"
+    },
+    {
+      "id": "PT-EX-076",
+      "chapter": "Ondes et signaux",
+      "topic": "Lentilles minces",
+      "difficulty": "moyen",
+      "statement": "Deux lentilles convergentes (f'₁ = 10 cm, f'₂ = 20 cm) sont accolées. Calculer la distance focale du système.",
+      "data": {
+        "focale_1": "10 cm = 0.1 m",
+        "focale_2": "20 cm = 0.2 m"
+      },
+      "solution": {
+        "steps": [
+          "Vergences : V₁ = 1/f'₁ = 1/0.1 = 10 δ",
+          "V₂ = 1/f'₂ = 1/0.2 = 5 δ",
+          "Système accolé : V = V₁ + V₂",
+          "V = 10 + 5 = 15 δ",
+          "Distance focale : f' = 1/V = 1/15 m ≈ 6.67 cm"
+        ],
+        "answer": "6.67 cm",
+        "formula_used": "V = V₁ + V₂ (lentilles accolées)"
+      },
+      "hint": "Addition des vergences pour lentilles accolées",
+      "related_lesson": "L-T-P-076"
+    },
+    {
+      "id": "PT-EX-077",
+      "chapter": "Mécanique",
+      "topic": "Conservation du moment cinétique",
+      "difficulty": "difficile",
+      "statement": "Un patineur tourne à ω₁ = 2 rad/s avec I₁ = 6 kg·m². Il ramène ses bras (I₂ = 2 kg·m²). Calculer sa nouvelle vitesse angulaire.",
+      "data": {
+        "omega_1": "2 rad/s",
+        "I1": "6 kg·m²",
+        "I2": "2 kg·m²"
+      },
+      "solution": {
+        "steps": [
+          "Conservation du moment cinétique : L₁ = L₂",
+          "I₁ω₁ = I₂ω₂",
+          "ω₂ = I₁ω₁/I₂",
+          "ω₂ = 6 × 2 / 2 = 6 rad/s"
+        ],
+        "answer": "6 rad/s",
+        "formula_used": "Iω = constante"
+      },
+      "hint": "Moment cinétique conservé en l'absence de couple extérieur",
+      "related_lesson": "L-T-P-077"
+    },
+    {
+      "id": "PT-EX-078",
+      "chapter": "Énergie",
+      "topic": "Puissance d'une éolienne",
+      "difficulty": "moyen",
+      "statement": "Une éolienne de rayon R = 20 m est soumise à un vent de v = 10 m/s. Calculer la puissance maximale théorique (ρ_air = 1.2 kg/m³, limite de Betz: 59%).",
+      "data": {
+        "rayon": "20 m",
+        "vitesse_vent": "10 m/s",
+        "masse_volumique_air": "1.2 kg/m³",
+        "limite_betz": "0.59"
+      },
+      "solution": {
+        "steps": [
+          "Surface : S = πR² = π × 20² = 1257 m²",
+          "Puissance du vent : P_vent = (1/2)ρSv³",
+          "P_vent = 0.5 × 1.2 × 1257 × 10³",
+          "P_vent = 0.6 × 1257 × 1000 = 754 200 W",
+          "Puissance max (Betz) : P_max = 0.59 × 754200",
+          "P_max ≈ 445 kW"
+        ],
+        "answer": "445 kW",
+        "formula_used": "P = 0.59 × (1/2)ρSv³"
+      },
+      "hint": "Limite de Betz pour éoliennes",
+      "related_lesson": "L-T-P-078"
+    },
+    {
+      "id": "PT-EX-079",
+      "chapter": "Ondes et signaux",
+      "topic": "Quantification de l'énergie",
+      "difficulty": "moyen",
+      "statement": "Un électron passe du niveau n=3 au niveau n=2 dans l'atome d'hydrogène (E_n = -13.6/n² eV). Calculer l'énergie et la longueur d'onde du photon émis.",
+      "data": {
+        "niveau_initial": "n=3",
+        "niveau_final": "n=2",
+        "formule_energie": "E_n = -13.6/n² eV",
+        "h": "6.63×10⁻³⁴ J·s",
+        "c": "3×10⁸ m/s"
+      },
+      "solution": {
+        "steps": [
+          "E₃ = -13.6/9 = -1.51 eV",
+          "E₂ = -13.6/4 = -3.4 eV",
+          "ΔE = E₃ - E₂ = -1.51 - (-3.4) = 1.89 eV",
+          "ΔE = 1.89 × 1.6×10⁻¹⁹ = 3.02×10⁻¹⁹ J",
+          "λ = hc/ΔE = (6.63×10⁻³⁴ × 3×10⁸) / 3.02×10⁻¹⁹",
+          "λ = 6.58×10⁻⁷ m = 658 nm (rouge, raie Hα)"
+        ],
+        "answer": "ΔE = 1.89 eV ; λ = 658 nm",
+        "formula_used": "ΔE = hc/λ"
+      },
+      "hint": "Série de Balmer de l'hydrogène",
+      "related_lesson": "L-T-P-079"
+    },
+    {
+      "id": "PT-EX-080",
+      "chapter": "Mécanique",
+      "topic": "Force de Lorentz",
+      "difficulty": "difficile",
+      "statement": "Un électron (q = -1.6×10⁻¹⁹ C, m = 9.1×10⁻³¹ kg) entre à v = 10⁶ m/s perpendiculairement dans un champ B = 0.1 T. Calculer le rayon de sa trajectoire circulaire.",
+      "data": {
+        "charge": "-1.6×10⁻¹⁹ C",
+        "masse": "9.1×10⁻³¹ kg",
+        "vitesse": "10⁶ m/s",
+        "champ_magnetique": "0.1 T"
+      },
+      "solution": {
+        "steps": [
+          "Force de Lorentz : F = qvB (centripète)",
+          "Force centripète : F = mv²/r",
+          "qvB = mv²/r",
+          "r = mv/(qB)",
+          "r = (9.1×10⁻³¹ × 10⁶) / (1.6×10⁻¹⁹ × 0.1)",
+          "r = 9.1×10⁻²⁵ / 1.6×10⁻²⁰",
+          "r = 5.69×10⁻⁵ m = 56.9 μm"
+        ],
+        "answer": "56.9 μm",
+        "formula_used": "r = mv/(qB)"
+      },
+      "hint": "Mouvement circulaire dans un champ magnétique",
+      "related_lesson": "L-T-P-080"
+    },
+    {
+      "id": "PT-EX-081",
+      "chapter": "Énergie",
+      "topic": "Loi de Coulomb",
+      "difficulty": "moyen",
+      "statement": "Deux charges q₁ = +2 μC et q₂ = -3 μC sont séparées de r = 10 cm. Calculer la force électrostatique (k = 9×10⁹ N·m²/C²).",
+      "data": {
+        "q1": "+2 μC = 2×10⁻⁶ C",
+        "q2": "-3 μC = -3×10⁻⁶ C",
+        "distance": "10 cm = 0.1 m",
+        "constante_coulomb": "9×10⁹ N·m²/C²"
+      },
+      "solution": {
+        "steps": [
+          "Loi de Coulomb : F = k|q₁q₂|/r²",
+          "F = 9×10⁹ × |2×10⁻⁶ × (-3×10⁻⁶)| / (0.1)²",
+          "F = 9×10⁹ × 6×10⁻¹² / 0.01",
+          "F = 54×10⁻³ / 0.01 = 5.4 N",
+          "Force attractive (charges opposées)"
+        ],
+        "answer": "5.4 N (attractive)",
+        "formula_used": "F = k|q₁q₂|/r²"
+      },
+      "hint": "Charges opposées s'attirent",
+      "related_lesson": "L-T-P-081"
+    },
+    {
+      "id": "PT-EX-082",
+      "chapter": "Ondes et signaux",
+      "topic": "Échographie",
+      "difficulty": "moyen",
+      "statement": "Un échographe émet une onde ultrasonore qui revient après t = 0.1 ms. Calculer la profondeur de l'obstacle (v_son = 1540 m/s dans les tissus).",
+      "data": {
+        "temps_aller_retour": "0.1 ms = 10⁻⁴ s",
+        "vitesse_son_tissus": "1540 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Distance aller-retour : d_total = v × t",
+          "d_total = 1540 × 10⁻⁴ = 0.154 m",
+          "Profondeur (aller simple) : d = d_total/2",
+          "d = 0.154/2 = 0.077 m = 7.7 cm"
+        ],
+        "answer": "7.7 cm",
+        "formula_used": "d = vt/2"
+      },
+      "hint": "Ne pas oublier l'aller-retour",
+      "related_lesson": "L-T-P-082"
+    },
+    {
+      "id": "PT-EX-083",
+      "chapter": "Mécanique",
+      "topic": "Accélération angulaire",
+      "difficulty": "moyen",
+      "statement": "Un volant d'inertie accélère de 0 à 300 tr/min en 10 s. Calculer son accélération angulaire moyenne.",
+      "data": {
+        "vitesse_angulaire_initiale": "0 tr/min",
+        "vitesse_angulaire_finale": "300 tr/min",
+        "duree": "10 s"
+      },
+      "solution": {
+        "steps": [
+          "Convertir : ω_f = 300 tr/min = 300/(60) tr/s",
+          "ω_f = 5 tr/s = 5 × 2π rad/s = 10π rad/s ≈ 31.4 rad/s",
+          "Accélération angulaire : α = Δω/Δt",
+          "α = 31.4/10 = 3.14 rad/s²"
+        ],
+        "answer": "3.14 rad/s² (ou π rad/s²)",
+        "formula_used": "α = Δω/Δt"
+      },
+      "hint": "Conversion tours/min vers rad/s",
+      "related_lesson": "L-T-P-083"
+    },
+    {
+      "id": "PT-EX-084",
+      "chapter": "Énergie",
+      "topic": "Effet photoélectrique",
+      "difficulty": "difficile",
+      "statement": "Le seuil photoélectrique d'un métal est λ₀ = 500 nm. Un photon de λ = 400 nm l'éclaire. Calculer l'énergie cinétique maximale des électrons émis (h = 6.63×10⁻³⁴ J·s, c = 3×10⁸ m/s).",
+      "data": {
+        "longueur_onde_seuil": "500 nm = 5×10⁻⁷ m",
+        "longueur_onde_incident": "400 nm = 4×10⁻⁷ m",
+        "constante_planck": "6.63×10⁻³⁴ J·s",
+        "vitesse_lumiere": "3×10⁸ m/s"
+      },
+      "solution": {
+        "steps": [
+          "Travail d'extraction : W₀ = hc/λ₀",
+          "W₀ = (6.63×10⁻³⁴ × 3×10⁸) / 5×10⁻⁷ = 3.98×10⁻¹⁹ J",
+          "Énergie photon incident : E = hc/λ",
+          "E = (6.63×10⁻³⁴ × 3×10⁸) / 4×10⁻⁷ = 4.97×10⁻¹⁹ J",
+          "Énergie cinétique : Ec = E - W₀",
+          "Ec = 4.97×10⁻¹⁹ - 3.98×10⁻¹⁹ = 0.99×10⁻¹⁹ J",
+          "Ec ≈ 0.62 eV"
+        ],
+        "answer": "0.99×10⁻¹⁹ J (≈ 0.62 eV)",
+        "formula_used": "Ec = hν - W₀"
+      },
+      "hint": "Effet photoélectrique : équation d'Einstein",
+      "related_lesson": "L-T-P-084"
+    },
+    {
+      "id": "PT-EX-085",
+      "chapter": "Ondes et signaux",
+      "topic": "Dispersion lumineuse",
+      "difficulty": "moyen",
+      "statement": "Un prisme (A = 60°) dévie la lumière rouge de δ_r = 40° et la lumière violette de δ_v = 44°. Calculer la dispersion angulaire.",
+      "data": {
+        "angle_prisme": "60°",
+        "deviation_rouge": "40°",
+        "deviation_violet": "44°"
+      },
+      "solution": {
+        "steps": [
+          "Dispersion angulaire : D = δ_v - δ_r",
+          "D = 44° - 40° = 4°",
+          "La dispersion sépare les couleurs"
+        ],
+        "answer": "4°",
+        "formula_used": "D = δ_v - δ_r"
+      },
+      "hint": "Différence de déviation entre extrêmes du spectre",
+      "related_lesson": "L-T-P-085"
+    },
+    {
+      "id": "PT-EX-086",
+      "chapter": "Mécanique",
+      "topic": "Travail d'une force variable",
+      "difficulty": "difficile",
+      "statement": "Une force F(x) = 2x² (en N, x en m) agit sur un objet de x = 0 à x = 3 m. Calculer le travail effectué.",
+      "data": {
+        "force": "F(x) = 2x² N",
+        "x_initial": "0 m",
+        "x_final": "3 m"
+      },
+      "solution": {
+        "steps": [
+          "Travail : W = ∫F(x)dx de 0 à 3",
+          "W = ∫₀³ 2x² dx",
+          "W = 2 × [x³/3]₀³",
+          "W = (2/3) × [3³ - 0³]",
+          "W = (2/3) × 27 = 18 J"
+        ],
+        "answer": "18 J",
+        "formula_used": "W = ∫F(x)dx"
+      },
+      "hint": "Intégration pour force variable",
+      "related_lesson": "L-T-P-086"
+    },
+    {
+      "id": "PT-EX-087",
+      "chapter": "Énergie",
+      "topic": "Inductance mutuelle",
+      "difficulty": "difficile",
+      "statement": "Deux bobines ont une inductance mutuelle M = 0.5 H. Le courant dans la première varie de ΔI = 2 A en Δt = 0.01 s. Calculer la f.e.m. induite dans la seconde.",
+      "data": {
+        "inductance_mutuelle": "0.5 H",
+        "variation_courant": "2 A",
+        "duree": "0.01 s"
+      },
+      "solution": {
+        "steps": [
+          "Loi de Faraday : e = -M × dI/dt",
+          "dI/dt = ΔI/Δt = 2/0.01 = 200 A/s",
+          "e = -0.5 × 200 = -100 V",
+          "|e| = 100 V"
+        ],
+        "answer": "100 V",
+        "formula_used": "e = -M(dI/dt)"
+      },
+      "hint": "Induction mutuelle entre deux bobines",
+      "related_lesson": "L-T-P-087"
+    },
+    {
+      "id": "PT-EX-088",
+      "chapter": "Ondes et signaux",
+      "topic": "Absorption lumineuse",
+      "difficulty": "moyen",
+      "statement": "Une solution absorbe 75% de la lumière incidente (I₀ = 100 W/m²). Calculer l'intensité transmise et l'absorbance.",
+      "data": {
+        "intensite_incidente": "100 W/m²",
+        "pourcentage_absorbe": "75%"
+      },
+      "solution": {
+        "steps": [
+          "Intensité absorbée : I_abs = 0.75 × 100 = 75 W/m²",
+          "Intensité transmise : I = I₀ - I_abs = 25 W/m²",
+          "Transmittance : T = I/I₀ = 25/100 = 0.25",
+          "Absorbance : A = -log(T) = -log(0.25)",
+          "A = -(-0.602) = 0.602"
+        ],
+        "answer": "I = 25 W/m² ; A = 0.602",
+        "formula_used": "A = -log(I/I₀)"
+      },
+      "hint": "Relation absorbance-transmittance",
+      "related_lesson": "L-T-P-088"
+    },
+    {
+      "id": "PT-EX-089",
+      "chapter": "Mécanique",
+      "topic": "Pression hydrostatique",
+      "difficulty": "facile",
+      "statement": "Calculer la pression à h = 50 m de profondeur dans l'eau (ρ = 1000 kg/m³, g = 10 m/s², P_atm = 10⁵ Pa).",
+      "data": {
+        "profondeur": "50 m",
+        "masse_volumique": "1000 kg/m³",
+        "g": "10 m/s²",
+        "pression_atmospherique": "10⁵ Pa"
+      },
+      "solution": {
+        "steps": [
+          "Pression hydrostatique : ΔP = ρgh",
+          "ΔP = 1000 × 10 × 50 = 500 000 Pa = 5×10⁵ Pa",
+          "Pression totale : P = P_atm + ΔP",
+          "P = 10⁵ + 5×10⁵ = 6×10⁵ Pa = 6 bar"
+        ],
+        "answer": "6×10⁵ Pa (6 bar)",
+        "formula_used": "P = P_atm + ρgh"
+      },
+      "hint": "Loi fondamentale de l'hydrostatique",
+      "related_lesson": "L-T-P-089"
+    },
+    {
+      "id": "PT-EX-090",
+      "chapter": "Énergie",
+      "topic": "Énergie éolienne",
+      "difficulty": "moyen",
+      "statement": "Une éolienne capte 40% de l'énergie du vent (v = 12 m/s, S = 100 m², ρ_air = 1.2 kg/m³). Calculer la puissance récupérée.",
+      "data": {
+        "vitesse_vent": "12 m/s",
+        "surface": "100 m²",
+        "masse_volumique_air": "1.2 kg/m³",
+        "rendement": "0.40"
+      },
+      "solution": {
+        "steps": [
+          "Puissance du vent : P_vent = (1/2)ρSv³",
+          "P_vent = 0.5 × 1.2 × 100 × 12³",
+          "P_vent = 60 × 1728 = 103 680 W",
+          "Puissance récupérée : P = 0.40 × 103680",
+          "P = 41 472 W ≈ 41.5 kW"
+        ],
+        "answer": "41.5 kW",
+        "formula_used": "P = η × (1/2)ρSv³"
+      },
+      "hint": "Énergie cinétique du vent par unité de temps",
+      "related_lesson": "L-T-P-090"
+    },
+    {
+      "id": "PT-EX-091",
+      "chapter": "Ondes et signaux",
+      "topic": "Fréquence propre circuit LC",
+      "difficulty": "moyen",
+      "statement": "Un circuit LC a L = 10 mH et C = 100 nF. Calculer sa fréquence propre et sa période d'oscillation.",
+      "data": {
+        "inductance": "10 mH = 0.01 H",
+        "capacite": "100 nF = 10⁻⁷ F"
+      },
+      "solution": {
+        "steps": [
+          "Pulsation propre : ω₀ = 1/√(LC)",
+          "ω₀ = 1/√(0.01 × 10⁻⁷) = 1/√(10⁻⁹)",
+          "ω₀ = 1/10⁻⁴·⁵ = 10⁴·⁵ = 31623 rad/s",
+          "Fréquence : f₀ = ω₀/(2π) = 31623/(2π)",
+          "f₀ ≈ 5033 Hz ≈ 5 kHz",
+          "Période : T = 1/f₀ ≈ 0.2 ms"
+        ],
+        "answer": "f₀ = 5 kHz ; T = 0.2 ms",
+        "formula_used": "f₀ = 1/(2π√(LC))"
+      },
+      "hint": "Oscillations électriques libres",
+      "related_lesson": "L-T-P-091"
+    },
+    {
+      "id": "PT-EX-092",
+      "chapter": "Mécanique",
+      "topic": "Énergie d'un satellite",
+      "difficulty": "difficile",
+      "statement": "Calculer l'énergie mécanique totale d'un satellite de masse m = 500 kg en orbite circulaire à r = 7000 km du centre de la Terre (M_T = 6×10²⁴ kg, G = 6.67×10⁻¹¹ SI).",
+      "data": {
+        "masse_satellite": "500 kg",
+        "rayon_orbital": "7×10⁶ m",
+        "masse_terre": "6×10²⁴ kg",
+        "G": "6.67×10⁻¹¹ N·m²/kg²"
+      },
+      "solution": {
+        "steps": [
+          "Énergie potentielle : Ep = -GMm/r",
+          "Ep = -(6.67×10⁻¹¹ × 6×10²⁴ × 500) / 7×10⁶",
+          "Ep = -2×10¹⁴ / 7×10⁶ = -2.86×10¹⁰ J",
+          "Pour orbite circulaire : Ec = -Ep/2 = 1.43×10¹⁰ J",
+          "Énergie totale : E = Ec + Ep = Ep/2",
+          "E = -1.43×10¹⁰ J = -14.3 GJ"
+        ],
+        "answer": "E = -14.3 GJ (liée)",
+        "formula_used": "E = -GMm/(2r)"
+      },
+      "hint": "Énergie négative pour système lié",
+      "related_lesson": "L-T-P-092"
+    },
+    {
+      "id": "PT-EX-093",
+      "chapter": "Énergie",
+      "topic": "Rendement de Carnot appliqué",
+      "difficulty": "moyen",
+      "statement": "Un moteur thermique réel a un rendement de 30% et fonctionne entre T_c = 500 K et T_f = 300 K. Quel est son rendement par rapport au rendement de Carnot ?",
+      "data": {
+        "rendement_reel": "30% = 0.30",
+        "temperature_chaude": "500 K",
+        "temperature_froide": "300 K"
+      },
+      "solution": {
+        "steps": [
+          "Rendement de Carnot : η_c = 1 - T_f/T_c",
+          "η_c = 1 - 300/500 = 1 - 0.6 = 0.4 = 40%",
+          "Rapport : r = η_réel/η_c",
+          "r = 0.30/0.40 = 0.75 = 75%",
+          "Le moteur atteint 75% du rendement maximal théorique"
+        ],
+        "answer": "75% du rendement de Carnot",
+        "formula_used": "η_c = 1 - T_f/T_c"
+      },
+      "hint": "Comparaison avec le rendement idéal",
+      "related_lesson": "L-T-P-093"
+    },
+    {
+      "id": "PT-EX-094",
+      "chapter": "Ondes et signaux",
+      "topic": "Résolution d'un instrument optique",
+      "difficulty": "difficile",
+      "statement": "Un télescope de diamètre D = 1 m observe à λ = 500 nm. Calculer son pouvoir de résolution angulaire (critère de Rayleigh: θ = 1.22λ/D).",
+      "data": {
+        "diametre": "1 m",
+        "longueur_onde": "500 nm = 5×10⁻⁷ m",
+        "critere_rayleigh": "θ = 1.22λ/D"
+      },
+      "solution": {
+        "steps": [
+          "Pouvoir de résolution : θ = 1.22λ/D",
+          "θ = 1.22 × 5×10⁻⁷ / 1",
+          "θ = 6.1×10⁻⁷ rad",
+          "En secondes d'arc : θ = 6.1×10⁻⁷ × 206265",
+          "θ ≈ 0.126 seconde d'arc"
+        ],
+        "answer": "6.1×10⁻⁷ rad (≈ 0.126\")",
+        "formula_used": "θ = 1.22λ/D"
+      },
+      "hint": "Limite de diffraction d'un instrument",
+      "related_lesson": "L-T-P-094"
+    },
+    {
+      "id": "PT-EX-095",
+      "chapter": "Mécanique",
+      "topic": "Cinématique 2D",
+      "difficulty": "moyen",
+      "statement": "Un mobile a les équations horaires x(t) = 2t et y(t) = 3t² (en m, t en s). Calculer le vecteur vitesse à t = 2 s et la norme de la vitesse.",
+      "data": {
+        "equation_x": "x(t) = 2t",
+        "equation_y": "y(t) = 3t²",
+        "temps": "2 s"
+      },
+      "solution": {
+        "steps": [
+          "Composante x : v_x = dx/dt = 2 m/s (constante)",
+          "Composante y : v_y = dy/dt = 6t",
+          "À t = 2s : v_y = 6 × 2 = 12 m/s",
+          "Vecteur vitesse : v⃗ = (2, 12) m/s",
+          "Norme : ||v|| = √(v_x² + v_y²) = √(4 + 144)",
+          "||v|| = √148 ≈ 12.17 m/s"
+        ],
+        "answer": "v⃗ = (2, 12) m/s ; ||v|| = 12.17 m/s",
+        "formula_used": "v = dr/dt"
+      },
+      "hint": "Dérivées des équations horaires",
+      "related_lesson": "L-T-P-095"
+    },
+    {
+      "id": "PT-EX-096",
+      "chapter": "Énergie",
+      "topic": "Effet de serre",
+      "difficulty": "moyen",
+      "statement": "La Terre reçoit 1360 W/m² du Soleil. En considérant un albédo de 30%, calculer la température d'équilibre sans effet de serre (σ = 5.67×10⁻⁸ W/(m²·K⁴)).",
+      "data": {
+        "flux_solaire": "1360 W/m²",
+        "albedo": "0.30",
+        "constante_stefan": "5.67×10⁻⁸ W/(m²·K⁴)"
+      },
+      "solution": {
+        "steps": [
+          "Puissance absorbée par unité de surface : P_abs = (1-α)×S/4",
+          "P_abs = 0.7 × 1360 / 4 = 238 W/m²",
+          "Équilibre radiatif : σT⁴ = 238",
+          "T⁴ = 238 / 5.67×10⁻⁸ = 4.2×10⁹",
+          "T = (4.2×10⁹)^(1/4) ≈ 255 K = -18°C"
+        ],
+        "answer": "255 K (-18°C)",
+        "formula_used": "σT⁴ = (1-α)S/4"
+      },
+      "hint": "Bilan radiatif terrestre",
+      "related_lesson": "L-T-P-096"
+    },
+    {
+      "id": "PT-EX-097",
+      "chapter": "Ondes et signaux",
+      "topic": "Antenne et onde radio",
+      "difficulty": "moyen",
+      "statement": "Une antenne émet à f = 100 MHz. Calculer la longueur d'onde et la longueur optimale de l'antenne (λ/4).",
+      "data": {
+        "frequence": "100 MHz = 10⁸ Hz",
+        "vitesse_lumiere": "3×10⁸ m/s"
+      },
+      "solution": {
+        "steps": [
+          "Longueur d'onde : λ = c/f",
+          "λ = 3×10⁸ / 10⁸ = 3 m",
+          "Antenne quart d'onde : L = λ/4",
+          "L = 3/4 = 0.75 m = 75 cm"
+        ],
+        "answer": "λ = 3 m ; L_antenne = 75 cm",
+        "formula_used": "λ = c/f ; L = λ/4"
+      },
+      "hint": "Antenne accordée sur la fréquence",
+      "related_lesson": "L-T-P-097"
+    },
+    {
+      "id": "PT-EX-098",
+      "chapter": "Mécanique",
+      "topic": "Choc mou",
+      "difficulty": "moyen",
+      "statement": "Un camion (M = 5000 kg, v₁ = 20 m/s) percute une voiture immobile (m = 1000 kg). Après collision ils restent solidaires. Calculer leur vitesse commune et l'énergie dissipée.",
+      "data": {
+        "masse_camion": "5000 kg",
+        "vitesse_camion": "20 m/s",
+        "masse_voiture": "1000 kg",
+        "vitesse_voiture": "0 m/s"
+      },
+      "solution": {
+        "steps": [
+          "Conservation quantité de mouvement : Mv₁ = (M+m)v_f",
+          "v_f = Mv₁/(M+m) = 5000×20/6000 = 16.67 m/s",
+          "Énergie initiale : Ec_i = (1/2)Mv₁² = 0.5×5000×400 = 10⁶ J",
+          "Énergie finale : Ec_f = (1/2)(M+m)v_f² = 0.5×6000×277.8",
+          "Ec_f = 833 400 J",
+          "Énergie dissipée : ΔE = 10⁶ - 833400 = 166 600 J ≈ 167 kJ"
+        ],
+        "answer": "v_f = 16.67 m/s ; ΔE = 167 kJ dissipée",
+        "formula_used": "p = constante ; ΔE = Ec_i - Ec_f"
+      },
+      "hint": "Collision inélastique : énergie perdue",
+      "related_lesson": "L-T-P-098"
+    },
+    {
+      "id": "PT-EX-099",
+      "chapter": "Énergie",
+      "topic": "Capacité calorifique molaire",
+      "difficulty": "moyen",
+      "statement": "On chauffe n = 2 moles de gaz parfait monoatomique de 20°C à 100°C à volume constant. Calculer l'énergie nécessaire (C_v = 12.5 J/(mol·K)).",
+      "data": {
+        "quantite_matiere": "2 mol",
+        "T_initiale": "20°C = 293 K",
+        "T_finale": "100°C = 373 K",
+        "capacite_calorifique": "12.5 J/(mol·K)"
+      },
+      "solution": {
+        "steps": [
+          "Variation de température : ΔT = 373 - 293 = 80 K",
+          "Chaleur (volume constant) : Q = nC_vΔT",
+          "Q = 2 × 12.5 × 80",
+          "Q = 2000 J = 2 kJ"
+        ],
+        "answer": "2 kJ",
+        "formula_used": "Q = nC_vΔT"
+      },
+      "hint": "Transformation isochore",
+      "related_lesson": "L-T-P-099"
+    },
+    {
+      "id": "PT-EX-100",
+      "chapter": "Ondes et signaux",
+      "topic": "Décibels et intensité sonore",
+      "difficulty": "moyen",
+      "statement": "Un son passe de 60 dB à 80 dB. Par quel facteur l'intensité sonore a-t-elle été multipliée ?",
+      "data": {
+        "niveau_initial": "60 dB",
+        "niveau_final": "80 dB",
+        "intensite_reference": "10⁻¹² W/m²"
+      },
+      "solution": {
+        "steps": [
+          "L = 10 log(I/I₀)",
+          "60 = 10 log(I₁/I₀) → I₁/I₀ = 10⁶",
+          "80 = 10 log(I₂/I₀) → I₂/I₀ = 10⁸",
+          "Rapport : I₂/I₁ = 10⁸/10⁶ = 10² = 100",
+          "L'intensité a été multipliée par 100"
+        ],
+        "answer": "Facteur 100",
+        "formula_used": "L = 10log(I/I₀)"
+      },
+      "hint": "Échelle logarithmique : +20 dB = ×100",
+      "related_lesson": "L-T-P-100"
+    }
+  ]
+}

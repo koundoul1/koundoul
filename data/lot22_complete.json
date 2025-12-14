@@ -1,0 +1,365 @@
+{
+  "metadata": {
+    "lot_number": 8,
+    "lot_name": "Lot 8 - Constitution de la Matière",
+    "level": "Seconde",
+    "subject": "Chimie",
+    "prefix": "C2",
+    "chapter": "Constitution de la Matière",
+    "lesson_range": "C2-01 à C2-08",
+    "total_lessons": 8
+  },
+  "lessons": [
+    {
+      "id": "C2-01",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Atomes - Structure et notation",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Comprendre la structure d'un atome (noyau et électrons)", "Connaître la composition du noyau (protons et neutrons)", "Utiliser la notation symbolique d'un atome", "Définir le numéro atomique Z et le nombre de masse A"],
+      "prerequisites": [],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["atome", "structure"],
+      "detailed_content": {
+        "introduction": "L'atome est la brique élémentaire de la matière. Bien qu'extrêmement petit (environ 10⁻¹⁰ m), il possède une structure organisée avec un noyau dense entouré d'électrons.",
+        "key_concepts": [
+          { "name": "Structure de l'atome", "explanation": "Noyau central (protons + neutrons) entouré d'électrons", "example": "Atome électriquement neutre : nb protons = nb électrons" },
+          { "name": "Notation ᴬzX", "explanation": "X = symbole chimique, Z = numéro atomique (nb protons), A = nombre de masse (protons + neutrons)", "example": "¹²₆C : carbone avec 6 protons et 6 neutrons" },
+          { "name": "Particules", "explanation": "Proton : charge +e, masse ~1,67×10⁻²⁷ kg. Neutron : charge nulle. Électron : charge -e, masse ~2000× plus petite", "example": "La masse est essentiellement dans le noyau" }
+        ],
+        "guided_example": {
+          "statement": "L'oxygène est noté ¹⁶₈O. Déterminer protons, neutrons et électrons.",
+          "solution_steps": [
+            "Z = 8 : 8 protons",
+            "A = 16 : N = A - Z = 16 - 8 = 8 neutrons",
+            "Atome neutre : 8 électrons"
+          ]
+        },
+        "quick_exercises": [
+          "Aluminium ²⁷₁₃Al : donner nb protons, neutrons, électrons",
+          "Identifier Z, A, N pour différents atomes"
+        ],
+        "common_mistakes": [
+          "Confondre Z et A",
+          "Oublier que A = Z + N",
+          "Penser que les électrons sont dans le noyau"
+        ],
+        "summary": {
+          "key_concept": "Z = nb protons, A = nb protons + neutrons, N = A - Z",
+          "key_method": "Atome neutre : nb électrons = nb protons = Z",
+          "next_step": "Étudier les molécules et formules chimiques"
+        }
+      }
+    },
+    {
+      "id": "C2-02",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Molécules et formules chimiques",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir une molécule", "Comprendre la notion de liaison chimique", "Lire et écrire une formule chimique", "Distinguer formule brute et formule développée"],
+      "prerequisites": ["C2-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["molécule", "formule"],
+      "detailed_content": {
+        "introduction": "Les atomes se lient entre eux pour former des molécules, des assemblages stables d'atomes. L'eau H₂O, le dioxyde de carbone CO₂ sont des exemples familiers de molécules.",
+        "key_concepts": [
+          { "name": "Molécule", "explanation": "Assemblage électriquement neutre d'au moins 2 atomes liés par liaisons covalentes", "example": "H₂, O₂, H₂O, CO₂" },
+          { "name": "Formule brute", "explanation": "Indique la nature et le nombre de chaque type d'atomes", "example": "H₂O = 2 hydrogènes + 1 oxygène. Pas d'indice si = 1" },
+          { "name": "Formule développée", "explanation": "Représente tous les atomes et toutes les liaisons", "example": "H-O-H pour l'eau" }
+        ],
+        "guided_example": {
+          "statement": "Écrire la formule brute du méthane sachant qu'il contient 1 atome C et 4 atomes H.",
+          "solution_steps": [
+            "Formule brute : CH₄",
+            "1 carbone + 4 hydrogènes"
+          ]
+        },
+        "quick_exercises": [
+          "Glucose C₆H₁₂O₆ : combien d'atomes de carbone ? Total d'atomes ?",
+          "Lire des formules chimiques et compter les atomes"
+        ],
+        "common_mistakes": [
+          "Confondre atome et molécule",
+          "Oublier qu'un indice 1 n'est pas écrit",
+          "Mal compter le nombre total d'atomes"
+        ],
+        "summary": {
+          "key_concept": "Molécule = assemblage d'au moins 2 atomes liés",
+          "key_method": "Formule brute = nb de chaque type d'atomes",
+          "next_step": "Étudier les ions (cations et anions)"
+        }
+      }
+    },
+    {
+      "id": "C2-03",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Ions - Cations et anions",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir un ion", "Distinguer cation et anion", "Écrire la formule d'un ion", "Comprendre la formation d'un ion à partir d'un atome"],
+      "prerequisites": ["C2-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["ion", "cation", "anion"],
+      "detailed_content": {
+        "introduction": "Contrairement aux atomes qui sont électriquement neutres, les ions portent une charge électrique. Ils se forment lorsqu'un atome perd ou gagne des électrons.",
+        "key_concepts": [
+          { "name": "Ion", "explanation": "Entité chimique chargée électriquement. Se forme quand un atome perd ou gagne des électrons", "example": "Le noyau reste inchangé, seuls les électrons changent" },
+          { "name": "Cation", "explanation": "Ion positif : atome a perdu des électrons. Notation : Xⁿ⁺", "example": "Na → Na⁺ (perte de 1 électron)" },
+          { "name": "Anion", "explanation": "Ion négatif : atome a gagné des électrons. Notation : Xⁿ⁻", "example": "Cl + e⁻ → Cl⁻ (gain de 1 électron)" }
+        ],
+        "guided_example": {
+          "statement": "Magnésium ²⁴₁₂Mg perd 2 électrons. Donner la formule de l'ion et sa composition.",
+          "solution_steps": [
+            "Ion formé : Mg²⁺ (cation)",
+            "12 protons, 12 neutrons, 10 électrons (12-2)",
+            "Charge +2"
+          ]
+        },
+        "quick_exercises": [
+          "Ion O²⁻ : nb protons, électrons ? Cation ou anion ?",
+          "Prédire le type d'ion formé par différents atomes"
+        ],
+        "common_mistakes": [
+          "Confondre cation et anion",
+          "Penser que le noyau change (non, seuls les électrons)",
+          "Se tromper dans le calcul du nb d'électrons"
+        ],
+        "summary": {
+          "key_concept": "Cation = ion POSITIF (perte d'électrons). Anion = ion NÉGATIF (gain)",
+          "key_method": "Le noyau ne change jamais",
+          "next_step": "Utiliser le tableau périodique"
+        }
+      }
+    },
+    {
+      "id": "C2-04",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Classification périodique des éléments",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Comprendre l'organisation du tableau périodique", "Identifier les familles chimiques principales", "Utiliser le tableau pour retrouver Z, A, symbole", "Connaître quelques propriétés des familles"],
+      "prerequisites": ["C2-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["tableau périodique", "familles"],
+      "detailed_content": {
+        "introduction": "Le tableau périodique classe tous les éléments chimiques connus de manière organisée. Il permet de prévoir certaines propriétés des éléments.",
+        "key_concepts": [
+          { "name": "Organisation", "explanation": "Éléments classés par Z croissant. Ligne = période. Colonne = famille", "example": "7 périodes, 18 colonnes (familles)" },
+          { "name": "Familles principales", "explanation": "Colonne 1 : Alcalins (M⁺). Colonne 17 : Halogènes (X⁻). Colonne 18 : Gaz nobles (stables)", "example": "Na → Na⁺, Cl → Cl⁻, He/Ne/Ar stables" },
+          { "name": "Utilité", "explanation": "Retrouver symbole, Z, M. Identifier familles. Prévoir type d'ion", "example": "Éléments d'une famille ont propriétés similaires" }
+        ],
+        "guided_example": {
+          "statement": "Le sodium (Na) appartient à la famille des alcalins (colonne 1). Quel type d'ion forme-t-il ?",
+          "solution_steps": [
+            "Les métaux alcalins perdent 1 électron",
+            "Ion formé : Na⁺ (cation)",
+            "Tous les alcalins forment M⁺"
+          ]
+        },
+        "quick_exercises": [
+          "Cl : Z ? Famille ? Type d'ion ?",
+          "Utiliser le tableau pour identifier des propriétés"
+        ],
+        "common_mistakes": [
+          "Confondre ligne (période) et colonne (famille)",
+          "Ne pas savoir retrouver un élément",
+          "Confondre Z et M"
+        ],
+        "summary": {
+          "key_concept": "Familles = propriétés chimiques similaires. Alcalins → cations M⁺, Halogènes → anions X⁻",
+          "key_method": "Utilisez le tableau comme référence permanente",
+          "next_step": "Étudier la répartition des électrons en couches"
+        }
+      }
+    },
+    {
+      "id": "C2-05",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Électrons et couches électroniques",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Comprendre la répartition des électrons en couches", "Connaître les règles de remplissage (K, L, M)", "Écrire la structure électronique simple", "Identifier la couche externe (couche de valence)"],
+      "prerequisites": ["C2-01", "C2-04"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["électrons", "couches"],
+      "detailed_content": {
+        "introduction": "Les électrons occupent des couches électroniques, notées K, L, M, N..., chacune pouvant contenir un nombre limité d'électrons.",
+        "key_concepts": [
+          { "name": "Couches", "explanation": "K (n=1) : max 2 électrons. L (n=2) : max 8. M (n=3) : max 8 (simplification)", "example": "Couches concentriques autour du noyau" },
+          { "name": "Règle de remplissage", "explanation": "Remplissage K → L → M... Chaque couche saturée avant la suivante", "example": "11 électrons : K(2) L(8) M(1)" },
+          { "name": "Couche externe", "explanation": "Dernière couche occupée = couche de valence", "example": "Électrons de valence déterminent les propriétés chimiques" }
+        ],
+        "guided_example": {
+          "statement": "Donner la structure électronique du sodium (Z = 11).",
+          "solution_steps": [
+            "11 électrons à répartir",
+            "K(2) L(8) M(1)",
+            "Couche externe : M avec 1 électron de valence"
+          ]
+        },
+        "quick_exercises": [
+          "Chlore Z=17 : structure ? Couche externe ? Électrons de valence ?",
+          "Construire les structures électroniques de différents éléments"
+        ],
+        "common_mistakes": [
+          "Ne pas respecter l'ordre K → L → M",
+          "Dépasser la capacité max d'une couche",
+          "Confondre couche externe et couche K"
+        ],
+        "summary": {
+          "key_concept": "Ordre de remplissage : K(2) puis L(8) puis M(8)...",
+          "key_method": "Électrons de valence = électrons sur la couche externe",
+          "next_step": "Calculer les masses molaires"
+        }
+      }
+    },
+    {
+      "id": "C2-06",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Masse molaire atomique et moléculaire",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir la masse molaire atomique", "Calculer la masse molaire moléculaire", "Utiliser le tableau périodique pour trouver M", "Connaître l'unité g/mol"],
+      "prerequisites": ["C2-01", "C2-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["masse molaire"],
+      "detailed_content": {
+        "introduction": "La masse molaire permet de faire le lien entre l'échelle microscopique (atomes, molécules) et l'échelle macroscopique (grammes).",
+        "key_concepts": [
+          { "name": "Masse molaire atomique", "explanation": "Masse d'une mole d'atomes, en g/mol. Indiquée dans le tableau périodique", "example": "M(H) ≈ 1 g/mol, M(C) ≈ 12 g/mol, M(O) ≈ 16 g/mol" },
+          { "name": "Masse molaire moléculaire", "explanation": "Somme des masses molaires atomiques × nombre d'atomes", "example": "M(H₂O) = 2×1 + 16 = 18 g/mol" },
+          { "name": "Additivité", "explanation": "M(molécule) = Σ (nb atomes × M atomique)", "example": "Additionner toutes les masses atomiques" }
+        ],
+        "guided_example": {
+          "statement": "Calculer la masse molaire du CO₂. M(C) = 12 g/mol, M(O) = 16 g/mol.",
+          "solution_steps": [
+            "M(CO₂) = M(C) + 2×M(O)",
+            "M(CO₂) = 12 + 2×16 = 44 g/mol"
+          ]
+        },
+        "quick_exercises": [
+          "Glucose C₆H₁₂O₆ : calculer M (C=12, H=1, O=16 g/mol)",
+          "Calculer masses molaires de différentes molécules"
+        ],
+        "common_mistakes": [
+          "Oublier de multiplier par le nb d'atomes",
+          "Se tromper dans la lecture de la formule",
+          "Confondre masse molaire et masse"
+        ],
+        "summary": {
+          "key_concept": "Masse molaire = somme des masses atomiques × nombre d'atomes",
+          "key_method": "Unité : g/mol. Utilisez le tableau périodique",
+          "next_step": "Étudier la quantité de matière (la mole)"
+        }
+      }
+    },
+    {
+      "id": "C2-07",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Quantité de matière - La mole",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir la mole et la constante d'Avogadro", "Utiliser la relation n = m/M", "Convertir entre masse, quantité de matière et nombre d'entités", "Résoudre des problèmes de calcul de quantité de matière"],
+      "prerequisites": ["C2-06"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["mole", "Avogadro"],
+      "detailed_content": {
+        "introduction": "La mole est l'unité de quantité de matière. Elle permet de compter les entités microscopiques à l'échelle macroscopique.",
+        "key_concepts": [
+          { "name": "Mole", "explanation": "1 mole = 6,02 × 10²³ entités (constante d'Avogadro Nₐ)", "example": "1 mol d'atomes = 6,02 × 10²³ atomes" },
+          { "name": "Relation n = m/M", "explanation": "Quantité de matière (mol) = masse (g) / masse molaire (g/mol)", "example": "n = 36 g / 18 g/mol = 2 mol" },
+          { "name": "Nombre d'entités", "explanation": "N = n × Nₐ (nombre = quantité × constante d'Avogadro)", "example": "N en mol⁻¹" }
+        ],
+        "guided_example": {
+          "statement": "Quelle est la quantité de matière dans 36 g d'eau H₂O ? M(H₂O) = 18 g/mol.",
+          "solution_steps": [
+            "n = m/M",
+            "n = 36 / 18 = 2 mol",
+            "Il y a 2 moles d'eau"
+          ]
+        },
+        "quick_exercises": [
+          "0,5 mol de glucose (M=180 g/mol) : masse ? nb molécules ?",
+          "Convertir entre n, m, N"
+        ],
+        "common_mistakes": [
+          "Inverser n = m/M (écrire n = M/m)",
+          "Confondre N (nombre) et n (quantité de matière)",
+          "Se tromper avec les puissances de 10"
+        ],
+        "summary": {
+          "key_concept": "1 mole = 6,02 × 10²³ entités. Formule clé : n = m/M",
+          "key_method": "N = n × Nₐ pour le nombre d'entités",
+          "next_step": "Déterminer la composition massique"
+        }
+      }
+    },
+    {
+      "id": "C2-08",
+      "level": "Seconde",
+      "subject": "Chimie",
+      "chapter": "Constitution de la Matière",
+      "title": "Formules et composition - Synthèse",
+      "duration_min": 6,
+      "difficulty": 2,
+      "xp_reward": 60,
+      "objectives": ["Déterminer la composition massique d'une molécule", "Calculer le pourcentage massique de chaque élément", "Relier formule brute et composition", "Résoudre des problèmes de composition"],
+      "prerequisites": ["C2-01", "C2-02", "C2-06", "C2-07"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["composition", "pourcentage"],
+      "detailed_content": {
+        "introduction": "À partir de la formule brute d'une molécule, on peut déterminer la composition massique, c'est-à-dire la masse de chaque élément et son pourcentage dans la molécule.",
+        "key_concepts": [
+          { "name": "Masse de chaque élément", "explanation": "m(élément) = (nombre d'atomes) × M(élément atomique)", "example": "Dans H₂O : masse H = 2×1 = 2 g/mol, masse O = 16 g/mol" },
+          { "name": "Pourcentage massique", "explanation": "% = [m(élément) / M(molécule)] × 100", "example": "%(C) dans CO₂ = (12/44)×100 ≈ 27,3%" },
+          { "name": "Utilité", "explanation": "Vérifier une formule, identifier une substance, calculer quantités", "example": "Comprendre les propriétés d'un composé" }
+        ],
+        "guided_example": {
+          "statement": "Calculer le pourcentage massique de carbone dans CO₂. M(C)=12 g/mol, M(O)=16 g/mol.",
+          "solution_steps": [
+            "M(CO₂) = 12 + 2×16 = 44 g/mol",
+            "Masse de C = 12 g/mol",
+            "%(C) = (12/44) × 100 ≈ 27,3%"
+          ]
+        },
+        "quick_exercises": [
+          "Ammoniac NH₃ : % d'azote ? (N=14, H=1 g/mol)",
+          "Calculer compositions massiques de différentes molécules"
+        ],
+        "common_mistakes": [
+          "Oublier de multiplier par le nb d'atomes",
+          "Ne pas convertir en % (oublier ×100)",
+          "Utiliser la mauvaise masse molaire"
+        ],
+        "summary": {
+          "key_concept": "%(élément) = [masse de l'élément / masse molaire totale] × 100",
+          "key_method": "Vérifiez : somme des % ≈ 100%",
+          "next_step": "Étudier les transformations chimiques"
+        }
+      }
+    }
+  ]
+}
+

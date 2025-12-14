@@ -1,0 +1,378 @@
+{
+  "metadata": {
+    "lot_number": 23,
+    "lot_name": "Lot 23 - Limites de Fonctions",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Limites de Fonctions",
+    "lesson_range": "MT-01 à MT-08",
+    "total_lessons": 8
+  },
+  "lessons": [
+    {
+      "id": "MT-01",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Limite finie en un point",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir la notion de limite finie en un point", "Comprendre intuitivement lim(x→a) f(x) = L", "Déterminer graphiquement une limite en un point", "Calculer des limites simples par substitution"],
+      "prerequisites": ["M1-13"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limite", "point"],
+      "detailed_content": {
+        "introduction": "La notion de limite est fondamentale en analyse. Elle permet de décrire le comportement d'une fonction au voisinage d'un point, même si la fonction n'est pas définie en ce point.",
+        "key_concepts": [
+          { "name": "Définition intuitive", "explanation": "f a pour limite L en a si f(x) peut être rendu aussi proche que l'on veut de L pourvu que x soit suffisamment proche de a (x ≠ a)", "example": "Quand x se rapproche de a, f(x) se rapproche de L" },
+          { "name": "Interprétation graphique", "explanation": "Sur le graphe, l'ordonnée se rapproche de L quand on s'approche du point d'abscisse x = a", "example": "La droite y = L est approchée par la courbe" },
+          { "name": "Limite à gauche et à droite", "explanation": "lim(x→a⁻) f(x) à gauche, lim(x→a⁺) f(x) à droite. Si elles sont égales, lim(x→a) f(x) existe", "example": "Limite existe si limite à gauche = limite à droite" },
+          { "name": "Cas simple : fonction continue", "explanation": "Si f est continue en a, alors lim(x→a) f(x) = f(a). Substitution directe possible", "example": "Polynômes toujours continus" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→1) (2x² - 3x + 5).",
+          "solution_steps": [
+            "Fonction polynomiale, donc continue partout",
+            "Par substitution : 2×1² - 3×1 + 5 = 2 - 3 + 5 = 4",
+            "lim(x→1) (2x² - 3x + 5) = 4"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer lim(x→-2) (x³ + 2x - 1)",
+          "Déterminer graphiquement des limites"
+        ],
+        "common_mistakes": [
+          "Confondre lim(x→a) f(x) et f(a)",
+          "Ne pas vérifier continuité",
+          "Oublier de distinguer limite à gauche et à droite"
+        ],
+        "summary": {
+          "key_concept": "Fonction continue en a ⇒ lim(x→a) f(x) = f(a). Polynômes toujours continus",
+          "key_method": "Vérifier d'abord si substitution directe est possible",
+          "next_step": "Étudier les limites infinies"
+        }
+      }
+    },
+    {
+      "id": "MT-02",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Limite infinie en un point",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir lim(x→a) f(x) = +∞ ou -∞", "Identifier une asymptote verticale", "Calculer des limites infinies", "Reconnaître les cas d'indétermination"],
+      "prerequisites": ["MT-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limite", "infini", "asymptote"],
+      "detailed_content": {
+        "introduction": "Une fonction peut avoir une limite infinie en un point, ce qui signifie qu'elle croît (ou décroît) sans borne au voisinage de ce point. Graphiquement, cela se traduit par une asymptote verticale.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "lim(x→a) f(x) = +∞ si f(x) devient aussi grand que l'on veut quand x est proche de a. Idem pour -∞", "example": "La fonction diverge en a" },
+          { "name": "Asymptote verticale", "explanation": "Si lim(x→a) f(x) = ±∞, alors x = a est asymptote verticale à la courbe", "example": "Courbe se rapproche de cette droite verticale" },
+          { "name": "Cas typique", "explanation": "Pour f(x) = P(x)/Q(x) où Q(a) = 0 et P(a) ≠ 0, limite infinie en a", "example": "lim(x→0) 1/x² = +∞, lim(x→0⁺) 1/x = +∞, lim(x→0⁻) 1/x = -∞" },
+          { "name": "Détermination du signe", "explanation": "Étudier le signe de f(x) au voisinage de a : numérateur et dénominateur, distinguer gauche et droite", "example": "Signe pour savoir +∞ ou -∞" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→2) 1/(x-2)².",
+          "solution_steps": [
+            "(x-2)² > 0 pour x ≠ 2",
+            "(x-2)² → 0⁺ quand x → 2",
+            "Donc 1/(x-2)² → +∞",
+            "lim(x→2) 1/(x-2)² = +∞"
+          ]
+        },
+        "quick_exercises": [
+          "Déterminer lim(x→3⁺) (x+1)/(x-3) et lim(x→3⁻) (x+1)/(x-3)",
+          "Identifier asymptotes verticales"
+        ],
+        "common_mistakes": [
+          "Oublier d'étudier le signe",
+          "Confondre limite à gauche et à droite",
+          "Ne pas identifier l'asymptote verticale"
+        ],
+        "summary": {
+          "key_concept": "Dénominateur → 0 : limite infinie. Asymptote x = a si lim(x→a) f(x) = ±∞",
+          "key_method": "Étudier le signe pour savoir +∞ ou -∞",
+          "next_step": "Étudier les limites à l'infini"
+        }
+      }
+    },
+    {
+      "id": "MT-03",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Limite finie à l'infini",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir lim(x→±∞) f(x) = L", "Identifier une asymptote horizontale", "Calculer des limites à l'infini", "Utiliser les théorèmes de comparaison"],
+      "prerequisites": ["MT-01"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limite", "infini", "asymptote"],
+      "detailed_content": {
+        "introduction": "Une fonction peut avoir une limite finie lorsque x tend vers +∞ ou -∞. Cela décrit le comportement de la fonction pour les grandes valeurs de x.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "lim(x→+∞) f(x) = L si f(x) peut être rendu aussi proche que l'on veut de L pourvu que x soit suffisamment grand", "example": "Idem pour -∞ avec x suffisamment petit" },
+          { "name": "Asymptote horizontale", "explanation": "Si lim(x→±∞) f(x) = L, alors y = L est asymptote horizontale", "example": "Courbe se rapproche de cette droite horizontale" },
+          { "name": "Cas typiques", "explanation": "Fonction rationnelle : dépend des degrés. 1/eˣ → 0, 1/xⁿ → 0 (n > 0)", "example": "Fonction périodique : peut ne pas avoir de limite" },
+          { "name": "Théorème des gendarmes", "explanation": "Si g(x) ≤ f(x) ≤ h(x) et lim g = lim h = L, alors lim f = L", "example": "Utile pour encadrer une limite" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→+∞) (3x² + 5)/(x² - 1).",
+          "solution_steps": [
+            "Diviser numérateur et dénominateur par x²",
+            "(3 + 5/x²)/(1 - 1/x²)",
+            "Quand x → +∞ : 5/x² → 0 et 1/x² → 0",
+            "Limite = 3/1 = 3"
+          ]
+        },
+        "quick_exercises": [
+          "Déterminer lim(x→+∞) (2x + 1)/(5x - 3)",
+          "Utiliser le théorème des gendarmes"
+        ],
+        "common_mistakes": [
+          "Ne pas diviser par le bon terme",
+          "Oublier que 1/x → 0 à l'infini",
+          "Confondre lim en +∞ et en -∞"
+        ],
+        "summary": {
+          "key_concept": "Asymptote y = L si lim(x→±∞) f(x) = L. Fonction rationnelle : diviser par la plus haute puissance",
+          "key_method": "1/xⁿ → 0 quand x → ±∞ (n > 0)",
+          "next_step": "Étudier les limites infinies à l'infini"
+        }
+      }
+    },
+    {
+      "id": "MT-04",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Limite infinie à l'infini",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir lim(x→±∞) f(x) = ±∞", "Calculer des limites infinies à l'infini", "Comparer les croissances", "Déterminer des branches infinies"],
+      "prerequisites": ["MT-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["limite", "infini", "croissance"],
+      "detailed_content": {
+        "introduction": "Lorsque x tend vers l'infini, une fonction peut également tendre vers l'infini. L'étude de ces limites permet de comprendre le comportement global de la fonction.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "lim(x→+∞) f(x) = +∞ si f(x) devient aussi grand que l'on veut quand x devient suffisamment grand. 4 combinaisons possibles", "example": "lim(x→±∞) f(x) = ±∞" },
+          { "name": "Cas des polynômes", "explanation": "Pour P(x) = aₙxⁿ + ..., comportement à l'infini déterminé par le terme de plus haut degré", "example": "lim(x→±∞) P(x) = lim(x→±∞) aₙxⁿ" },
+          { "name": "Fonctions rationnelles", "explanation": "deg(P) > deg(Q) : limite infinie (branche parabolique). deg(P) = deg(Q) : limite finie. deg(P) < deg(Q) : limite nulle", "example": "Comparaison des degrés" },
+          { "name": "Croissances comparées", "explanation": "Hiérarchie : ln(x) << xᵅ << eˣ pour x → +∞ (α > 0)", "example": "lim(x→+∞) eˣ/x = +∞, lim(x→+∞) ln(x)/x = 0" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→+∞) (x³ - 2x² + 5x).",
+          "solution_steps": [
+            "Terme prépondérant : x³",
+            "lim(x→+∞) x³ = +∞",
+            "Donc lim(x→+∞) (x³ - 2x² + 5x) = +∞"
+          ]
+        },
+        "quick_exercises": [
+          "Déterminer lim(x→+∞) (x³ + 2x)/(x² - 1)",
+          "Utiliser les croissances comparées"
+        ],
+        "common_mistakes": [
+          "Ne pas identifier le terme prépondérant",
+          "Confondre les règles selon les degrés",
+          "Erreurs de signe avec les puissances impaires"
+        ],
+        "summary": {
+          "key_concept": "Polynôme : seul le terme de plus haut degré compte à l'infini",
+          "key_method": "Croissances : ln << xᵅ << eˣ",
+          "next_step": "Introduire les formes indéterminées"
+        }
+      }
+    },
+    {
+      "id": "MT-05",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Formes indéterminées - Introduction",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Reconnaître les 4 formes indéterminées principales", "Comprendre pourquoi elles sont indéterminées", "Utiliser des techniques de levée d'indétermination", "Factoriser, développer, ou simplifier"],
+      "prerequisites": ["MT-01", "MT-02", "MT-03", "MT-04"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["indétermination", "levée"],
+      "detailed_content": {
+        "introduction": "Une forme indéterminée apparaît lorsque les règles usuelles de calcul de limites ne permettent pas de conclure directement. Des techniques spécifiques sont nécessaires pour lever l'indétermination.",
+        "key_concepts": [
+          { "name": "Les 4 formes", "explanation": "∞ - ∞, 0/0, ∞/∞, 0 × ∞. Il existe aussi 1^∞, 0⁰, ∞⁰ (plus rares)", "example": "Ces formes sont indéterminées" },
+          { "name": "Pourquoi indéterminé ?", "explanation": "Le résultat dépend de qui l'emporte entre les termes en compétition", "example": "lim(x→+∞) (x² - x) = ∞ - ∞, indéterminé sans calcul" },
+          { "name": "Techniques 0/0", "explanation": "Factoriser et simplifier. Utiliser limites de référence (taux d'accroissement)", "example": "Factorisation pour simplifier" },
+          { "name": "Techniques ∞/∞", "explanation": "Diviser numérateur et dénominateur par la plus haute puissance de x. Identifier le terme prépondérant", "example": "Utiliser croissances comparées" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→2) (x² - 4)/(x - 2). Forme 0/0.",
+          "solution_steps": [
+            "Factorisation : x² - 4 = (x-2)(x+2)",
+            "(x² - 4)/(x - 2) = (x-2)(x+2)/(x-2) = x + 2 pour x ≠ 2",
+            "Limite = 2 + 2 = 4"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer lim(x→+∞) (x² + x)/(3x² - 5). Forme indéterminée ?",
+          "Lever des indéterminations"
+        ],
+        "common_mistakes": [
+          "Ne pas reconnaître la forme indéterminée",
+          "Essayer de calculer ∞ - ∞ ou 0/0 directement",
+          "Ne pas factoriser ou simplifier"
+        ],
+        "summary": {
+          "key_concept": "4 formes : ∞-∞, 0/0, ∞/∞, 0×∞. 0/0 : factoriser. ∞/∞ : diviser par plus haute puissance",
+          "key_method": "∞-∞ : factoriser ou mettre au même dénominateur",
+          "next_step": "Étudier les opérations sur les limites"
+        }
+      }
+    },
+    {
+      "id": "MT-06",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Opérations sur les limites",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Utiliser les règles d'opérations sur les limites", "Appliquer pour somme, produit, quotient", "Reconnaître les cas déterminés", "Combiner avec les formes indéterminées"],
+      "prerequisites": ["MT-05"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["opérations", "limites"],
+      "detailed_content": {
+        "introduction": "Les limites se comportent de manière prévisible vis-à-vis des opérations arithmétiques, sauf dans les cas de formes indéterminées. Il existe des règles précises à connaître.",
+        "key_concepts": [
+          { "name": "Limite d'une somme", "explanation": "Si lim f = L et lim g = L', alors lim [f + g] = L + L'. Cas : L + (+∞) = +∞, (+∞) + (+∞) = +∞. FI : (+∞) + (-∞)", "example": "Tableau d'opérations" },
+          { "name": "Limite d'un produit", "explanation": "lim [f × g] = L × L'. Cas : L × (+∞) = +∞ si L > 0. (+∞) × (+∞) = +∞. FI : 0 × (±∞)", "example": "Attention aux signes" },
+          { "name": "Limite d'un quotient", "explanation": "lim [f/g] = L/L' si L' ≠ 0. Cas : L/0⁺ = +∞ (si L > 0). L/(±∞) = 0. FI : (±∞)/(±∞), 0/0", "example": "Distinguer 0⁺ et 0⁻" },
+          { "name": "Limite d'une composée", "explanation": "Si lim(x→a) g(x) = b et lim(y→b) f(y) = L, alors lim(x→a) f(g(x)) = L", "example": "Composition = limite de limite" }
+        ],
+        "guided_example": {
+          "statement": "lim(x→+∞) f(x) = 3 et lim(x→+∞) g(x) = +∞. Calculer lim [f × g].",
+          "solution_steps": [
+            "Limite d'un produit",
+            "3 × (+∞) = +∞ (car 3 > 0)",
+            "lim [f × g] = +∞"
+          ]
+        },
+        "quick_exercises": [
+          "lim(x→2) f(x) = 5 et lim(x→2) g(x) = 0⁺. Déterminer lim [f/g]",
+          "Utiliser les tableaux d'opérations"
+        ],
+        "common_mistakes": [
+          "Appliquer les règles sans vérifier les FI",
+          "Oublier de vérifier le signe",
+          "Confondre 0⁺ et 0⁻"
+        ],
+        "summary": {
+          "key_concept": "Apprendre les tableaux d'opérations sur les limites",
+          "key_method": "Attention aux signes et aux formes indéterminées",
+          "next_step": "Utiliser les théorèmes de comparaison"
+        }
+      }
+    },
+    {
+      "id": "MT-07",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Théorèmes de comparaison",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Utiliser le théorème de comparaison", "Appliquer le théorème des gendarmes", "Majorer ou minorer pour trouver une limite", "Justifier rigoureusement par comparaison"],
+      "prerequisites": ["MT-06"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["comparaison", "gendarmes"],
+      "detailed_content": {
+        "introduction": "Les théorèmes de comparaison permettent de déterminer des limites en comparant une fonction à d'autres dont on connaît les limites. Ils sont particulièrement utiles quand le calcul direct est difficile.",
+        "key_concepts": [
+          { "name": "Théorème de comparaison", "explanation": "Si f(x) ≤ g(x) et lim f(x) = +∞, alors lim g(x) = +∞. Si f(x) ≤ g(x) et lim g(x) = -∞, alors lim f(x) = -∞", "example": "Passage à la limite dans les inégalités" },
+          { "name": "Théorème des gendarmes", "explanation": "Si g(x) ≤ f(x) ≤ h(x) et lim g = lim h = L, alors lim f = L", "example": "f est coincée entre g et h" },
+          { "name": "Applications", "explanation": "Encadrer une fonction oscillante : -1 ≤ sin(x) ≤ 1. Majorer/minorer pour montrer limite infinie", "example": "Utiliser fonctions de référence" }
+        ],
+        "guided_example": {
+          "statement": "Montrer que lim(x→0) x² cos(1/x) = 0 en utilisant un encadrement.",
+          "solution_steps": [
+            "-1 ≤ cos(1/x) ≤ 1",
+            "-x² ≤ x² cos(1/x) ≤ x²",
+            "lim(x→0) (-x²) = 0 et lim(x→0) x² = 0",
+            "Par le théorème des gendarmes : lim(x→0) x² cos(1/x) = 0"
+          ]
+        },
+        "quick_exercises": [
+          "Utiliser le théorème des gendarmes pour d'autres fonctions",
+          "Majorer/minorer pour montrer limites infinies"
+        ],
+        "common_mistakes": [
+          "Mal choisir les fonctions d'encadrement",
+          "Oublier de vérifier que les bornes ont même limite",
+          "Confondre théorème de comparaison et gendarmes"
+        ],
+        "summary": {
+          "key_concept": "Gendarmes : g ≤ f ≤ h et lim g = lim h = L ⇒ lim f = L",
+          "key_method": "Utile avec sin, cos : toujours entre -1 et 1",
+          "next_step": "Étudier les asymptotes"
+        }
+      }
+    },
+    {
+      "id": "MT-08",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Asymptotes - Horizontales et verticales",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Définir et identifier les asymptotes horizontales", "Définir et identifier les asymptotes verticales", "Déterminer les équations d'asymptotes", "Interpréter graphiquement les asymptotes"],
+      "prerequisites": ["MT-02", "MT-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["asymptotes", "horizontale", "verticale"],
+      "detailed_content": {
+        "introduction": "Les asymptotes sont des droites dont la courbe d'une fonction se rapproche indéfiniment. Elles donnent une information essentielle sur le comportement global de la fonction.",
+        "key_concepts": [
+          { "name": "Asymptote horizontale", "explanation": "y = L est asymptote horizontale en ±∞ si lim(x→±∞) f(x) = L", "example": "Courbe se rapproche de y = L" },
+          { "name": "Asymptote verticale", "explanation": "x = a est asymptote verticale si lim(x→a) f(x) = ±∞ (gauche ou droite)", "example": "Courbe se rapproche de x = a" },
+          { "name": "Détermination pratique", "explanation": "AH : calculer lim(x→±∞) f(x). Si finie L, y = L. AV : chercher a où f non définie. Si lim(x→a) f(x) = ±∞, x = a", "example": "Méthodes de calcul" },
+          { "name": "Position relative", "explanation": "Étudier le signe de f(x) - L pour savoir si courbe au-dessus ou en dessous", "example": "f(x) - L > 0 : au-dessus, < 0 : en dessous" }
+        ],
+        "guided_example": {
+          "statement": "Déterminer les asymptotes de f(x) = (2x + 1)/(x - 3).",
+          "solution_steps": [
+            "Asymptote verticale : x = 3 (dénominateur nul)",
+            "lim(x→3) f(x) = ±∞",
+            "Asymptote horizontale : lim(x→±∞) f(x) = (2 + 1/x)/(1 - 3/x) = 2/1 = 2",
+            "y = 2"
+          ]
+        },
+        "quick_exercises": [
+          "Déterminer les asymptotes de g(x) = 1/(x² - 4)",
+          "Interpréter graphiquement"
+        ],
+        "common_mistakes": [
+          "Oublier de vérifier que la limite est bien infinie (AV)",
+          "Confondre AH et AV",
+          "Ne pas chercher les deux types"
+        ],
+        "summary": {
+          "key_concept": "AH : y = L si lim(x→±∞) f(x) = L. AV : x = a si lim(x→a) f(x) = ±∞",
+          "key_method": "Fonction rationnelle : toujours chercher AV et AH",
+          "next_step": "Vers la continuité et dérivabilité"
+        }
+      }
+    }
+  ]
+}
+

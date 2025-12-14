@@ -1,0 +1,424 @@
+{
+  "metadata": {
+    "lot_number": 32,
+    "lot_name": "Lot 40 - Électricité & Magnétisme",
+    "level": "Terminale",
+    "subject": "Physique",
+    "prefix": "PT",
+    "chapter": "Électricité & Magnétisme",
+    "lesson_range": "PT-21 à PT-30",
+    "total_lessons": 10
+  },
+  "lessons": [
+    {
+      "id": "PT-21",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Champ magnétique - Vecteur B⃗",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir le champ magnétique B⃗", "Connaître les sources de champ magnétique", "Utiliser le tesla comme unité", "Visualiser les lignes de champ"],
+      "prerequisites": ["P1-23"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["champ", "magnétique"],
+      "detailed_content": {
+        "introduction": "Le champ magnétique est une grandeur vectorielle qui caractérise l'action magnétique en un point de l'espace. Il est créé par des aimants ou des courants électriques.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Champ vectoriel B⃗. Direction tangente lignes, sens N→S extérieur. Unité tesla (T)", "example": "Champ" },
+          { "name": "Sources", "explanation": "Aimants permanents. Courants électriques. Charges en mouvement. Œrsted 1820", "example": "Origines" },
+          { "name": "Ordres grandeur", "explanation": "Terre ≈50 μT. Aimant ≈5 mT. IRM 1.5-3 T. Étoiles neutrons 10⁸ T. 1 T = 10⁴ G", "example": "Intensités" },
+          { "name": "Lignes", "explanation": "Tangentes B⃗. N→S extérieur. Sud→Nord intérieur. Lignes fermées. Densité ∝ B. Superposition", "example": "Représentation" }
+        ],
+        "guided_example": {
+          "statement": "Champ terre Paris B≈48 μT. En T et G ?",
+          "solution_steps": ["B = 4.8×10⁻⁵ T", "= 0.48 G"]
+        },
+        "quick_exercises": [
+          "IRM B=1.5 T vs terre 50 μT. Rapport ?",
+          "Champ magnétique"
+        ],
+        "common_mistakes": [
+          "Confondre B⃗ et B",
+          "Croire lignes S→N extérieur"
+        ],
+        "summary": {
+          "key_concept": "B⃗ : vecteur, B : intensité (T). Sources : aimants et courants",
+          "key_method": "Lignes : N → S (extérieur). 1 T = 10⁴ G = 1 N/(A·m)",
+          "next_step": "Force Lorentz"
+        }
+      }
+    },
+    {
+      "id": "PT-22",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Force de Lorentz",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Définir la force de Lorentz", "Calculer F⃗ = q(v⃗ ∧ B⃗)", "Déterminer la direction avec la règle de la main droite", "Analyser les effets sur une particule chargée"],
+      "prerequisites": ["PT-21"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Lorentz", "force"],
+      "detailed_content": {
+        "introduction": "La force de Lorentz est la force exercée par un champ magnétique sur une particule chargée en mouvement.",
+        "key_concepts": [
+          { "name": "Expression", "explanation": "F⃗ = q(v⃗∧B⃗). Produit vectoriel. F⃗⊥v⃗, F⃗⊥B⃗", "example": "Formule" },
+          { "name": "Propriétés", "explanation": "Direction ⊥ (v⃗,B⃗). Sens main droite. F = |q|vB sin(α). v∥B : F=0. v⊥B : F=max", "example": "Géométrie" },
+          { "name": "Conséquences", "explanation": "F⃗⊥v⃗ ⇒ W=0. ΔE_c=0. |v| constant direction change. v⊥B : circulaire. v quelconque : hélice", "example": "Trajectoires" },
+          { "name": "Applications", "explanation": "Spectrométrie masse. Cyclotron. Tube cathodique. Aurores. Confinement fusion. Hall", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Électron v=10⁶ m/s ⊥ B=0.1 T. F ?",
+          "solution_steps": ["F = |q|vB sin(90°)", "= 1.6×10⁻¹⁴ N"]
+        },
+        "quick_exercises": [
+          "Proton q, m. v=2×10⁷ m/s ⊥ B=0.5 T. F ? a ?",
+          "Force Lorentz"
+        ],
+        "common_mistakes": [
+          "Croire F⃗ change |v|",
+          "Oublier sin(α)"
+        ],
+        "summary": {
+          "key_concept": "F⃗ = q(v⃗∧B⃗). F = |q|vB sin(α). F⃗⊥v⃗ ⇒ W=0, |v| constant",
+          "key_method": "Main droite : v⃗ → B⃗ → F⃗ (si q>0)",
+          "next_step": "Mouvement"
+        }
+      }
+    },
+    {
+      "id": "PT-23",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Mouvement de particules chargées dans B⃗ uniforme",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 135,
+      "objectives": ["Établir l'équation du mouvement circulaire", "Calculer le rayon r = mv/(|q|B)", "Déterminer la période T = 2πm/(|q|B)", "Analyser les trajectoires hélicoïdales"],
+      "prerequisites": ["PT-22", "PT-03"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["mouvement", "circulaire"],
+      "detailed_content": {
+        "introduction": "Une particule chargée lancée perpendiculairement à un champ magnétique uniforme décrit un mouvement circulaire uniforme.",
+        "key_concepts": [
+          { "name": "Circulaire", "explanation": "v⊥B. F⃗ centripète. MCU. r = mv/(|q|B). Plus v grand, plus r grand. Plus B grand, plus r petit", "example": "Rayon" },
+          { "name": "Période", "explanation": "T = 2πr/v = 2πm/(|q|B). F_c = 1/T = |q|B/(2πm). ω_c = |q|B/m. T indépendant de v et r !", "example": "Temps" },
+          { "name": "Hélice", "explanation": "v quelconque. Décomposition v⃗=v⃗_⊥+v⃗_∥. v⃗_∥ : MRU. v⃗_⊥ : MCU. Spirale", "example": "Trajectoire" },
+          { "name": "Applications", "explanation": "Spectrométrie séparation ions. Cyclotron accélération. Piège confinement. Aurores hélices. Van Allen", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Électron v=10⁷ m/s ⊥ B=0.01 T. r ? T ?",
+          "solution_steps": ["r = mv/(|q|B) ≈ 5.7×10⁻³ m", "T = 2πm/(|q|B) ≈ 3.6×10⁻⁹ s"]
+        },
+        "quick_exercises": [
+          "¹²C⁺ et ¹⁴C⁺ même v ⊥ B. r₂/r₁ ?",
+          "Mouvement"
+        ],
+        "common_mistakes": [
+          "Confondre r et T",
+          "Croire T dépend de v"
+        ],
+        "summary": {
+          "key_concept": "r = mv/(|q|B) (rayon). T = 2πm/(|q|B) (période)",
+          "key_method": "T indépendant de v ! v⃗ quelconque → hélice",
+          "next_step": "Champ courant"
+        }
+      }
+    },
+    {
+      "id": "PT-24",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Champ magnétique créé par un courant",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Calculer B pour un fil rectiligne infini", "Appliquer B = μ₀I/(2πd)", "Connaître le champ d'une bobine", "Utiliser la règle de la main droite"],
+      "prerequisites": ["PT-21"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["champ", "courant"],
+      "detailed_content": {
+        "introduction": "Un courant électrique crée un champ magnétique dans l'espace environnant.",
+        "key_concepts": [
+          { "name": "Fil", "explanation": "B = μ₀I/(2πd). μ₀ = 4π×10⁻⁷ H/m. Lignes cercles concentriques. Main droite I→B⃗", "example": "Rectiligne" },
+          { "name": "Solénoïde", "explanation": "Intérieur B = μ₀nI. Uniforme. n = N/L spires/m. Main droite spires. Extérieur ≈0. Similaire aimant", "example": "Bobine" },
+          { "name": "Perméabilité", "explanation": "μ₀ = 4π×10⁻⁷ H/m constant. μ₀ε₀ = 1/c². Milieux μ = μ_rμ₀. Ferromagnétiques μ_r >> 1", "example": "Constante" },
+          { "name": "Applications", "explanation": "Électroaimants. Transformateurs. Moteurs. Relais. IRM supraconductrices. Maglev", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Fil I=10 A. B à d=5 cm ?",
+          "solution_steps": ["B = μ₀I/(2πd)", "≈ 40 μT"]
+        },
+        "quick_exercises": [
+          "Bobine 500 spires 20 cm, I=2 A. B intérieur ?",
+          "Champ courant"
+        ],
+        "common_mistakes": [
+          "Oublier 2π",
+          "Confondre N et n"
+        ],
+        "summary": {
+          "key_concept": "Fil : B = μ₀I/(2πd). Bobine : B = μ₀nI (n = N/L)",
+          "key_method": "μ₀ = 4π×10⁻⁷ H/m. Main droite : I → B⃗",
+          "next_step": "Force Laplace"
+        }
+      }
+    },
+    {
+      "id": "PT-25",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Force de Laplace",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir la force de Laplace", "Calculer F⃗ = I(l⃗ ∧ B⃗)", "Appliquer F = BIl sin(α)", "Identifier les applications (moteur, haut-parleur)"],
+      "prerequisites": ["PT-21", "PT-24"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Laplace", "force"],
+      "detailed_content": {
+        "introduction": "La force de Laplace est la force exercée par un champ magnétique sur un conducteur parcouru par un courant.",
+        "key_concepts": [
+          { "name": "Expression", "explanation": "F⃗ = I(l⃗∧B⃗). Somme Lorentz porteurs. F = BIl sin(α). l⊥B : F=max. l∥B : F=0", "example": "Formule" },
+          { "name": "Direction", "explanation": "F⃗⊥(l⃗,B⃗). Main droite/ga落实情况E : I→B⃗→F⃗", "example": "Géométrie" },
+          { "name": "Cadre", "explanation": "Opposées côtés parallèles. Couple côtés perpendiculaires. Γ = BIS. Collecteur moteur DC", "example": "Rotation" },
+          { "name": "Applications", "explanation": "Moteurs électriques conversion. Galvanomètres mesure. Haut-parleurs membrane. Balance Cotton. Rails démo. Freinage Foucault", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Fil 10 cm, I=5 A ⊥ B=0.2 T. F ?",
+          "solution_steps": ["F = BIl = 0.1 N"]
+        },
+        "quick_exercises": [
+          "Cadre carré a=5 cm, N=100, I=0.5 A ⊥ B=0.1 T. Γ ?",
+          "Force Laplace"
+        ],
+        "common_mistakes": [
+          "Confondre Lorentz et Laplace",
+          "Oublier sin(α)"
+        ],
+        "summary": {
+          "key_concept": "F⃗ = I(l⃗∧B⃗). F = BIl sin(α). F⃗⊥I et ⊥B⃗",
+          "key_method": "Moteur : Γ = NBIS",
+          "next_step": "Induction"
+        }
+      }
+    },
+    {
+      "id": "PT-26",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Induction électromagnétique - Loi de Faraday",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre le phénomène d'induction", "Définir le flux magnétique Φ = BS cos(θ)", "Appliquer la loi de Faraday e = -dΦ/dt", "Interpréter le signe de e"],
+      "prerequisites": ["PT-24"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["induction", "Faraday"],
+      "detailed_content": {
+        "introduction": "L'induction électromagnétique est le phénomène par lequel une variation de flux magnétique crée une force électromotrice induite.",
+        "key_concepts": [
+          { "name": "Flux", "explanation": "Φ = B⃗·S⃗ = BS cos(θ). S⃗ normale surface. Unité weber (Wb). N spires Φ_total = NΦ", "example": "Définition" },
+          { "name": "Faraday", "explanation": "e = -dΦ/dt. Variation Φ nécessaire. Causes : ΔB, ΔS, Δθ, déplacement. N spires e=-N(dΦ/dt)", "example": "Loi" },
+          { "name": "Lenz", "explanation": "Signe '-' : opposition variation. Φ ↗ : e<0. Φ ↘ : e>0. Résistance changement. Conservation énergie", "example": "Principe" },
+          { "name": "Applications", "explanation": "Alternateurs e sinusoïdale. Transformateurs. Plaques induction. Freinage Foucault. Détecteurs. NFC RFID", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Bobine N=100, S=10 cm² ⊥ B=0.5 T. Retrait 0.1 s. e_moy ?",
+          "solution_steps": ["Φ_i = 0.05 Wb", "e_moy = 0.5 V"]
+        },
+        "quick_exercises": [
+          "Spire r=5 cm ⊥ B=0.2 T. Rotation 90° 0.05 s. e_moy ?",
+          "Induction"
+        ],
+        "common_mistakes": [
+          "Confondre Φ et B",
+          "Oublier cos(θ)"
+        ],
+        "summary": {
+          "key_concept": "Φ = BS cos(θ) (weber). e = -dΦ/dt (Faraday)",
+          "key_method": "Signe '-' : loi de Lenz. Variation de Φ nécessaire",
+          "next_step": "Auto-induction"
+        }
+      }
+    },
+    {
+      "id": "PT-27",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Auto-induction et inductance",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre l'auto-induction", "Définir l'inductance L", "Calculer e = -L(di/dt)", "Analyser le comportement d'une bobine"],
+      "prerequisites": ["PT-26"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["auto-induction", "inducance"],
+      "detailed_content": {
+        "introduction": "L'auto-induction est le phénomène par lequel une variation de courant dans un circuit induit une fem dans ce même circuit.",
+        "key_concepts": [
+          { "name": "Auto-induction", "explanation": "Courant I → Φ = LI flux propre. Variation I → e = -L(dI/dt) opposition variation. Lissage courant", "example": "Phénomène" },
+          { "name": "Inductance", "explanation": "Unité henry (H). Solénoïde L = μ₀n²V = μ₀N²S/l. L∝N², L∝S, L∝1/l. Noyau fer : L↗↗. Ordres mH-H", "example": "L" },
+          { "name": "Tension", "explanation": "Idéale u_L = -e = L(di/dt). Réelle u = ri + L(di/dt). DC u_L=0 court-circuit. Ouverture surtension", "example": "Bobine" },
+          { "name": "Énergie", "explanation": "E_L = ½LI² stockée. Analogie E_C = ½CU². Champ magnétique. Densité u_mag = B²/(2μ₀)", "example": "Stockage" }
+        ],
+        "guided_example": {
+          "statement": "L=0.1 H. I 0→2 A en 0.01 s. e_moy ?",
+          "solution_steps": ["e = -L(ΔI/Δt)", "= -20 V"]
+        },
+        "quick_exercises": [
+          "Solénoïde N=1000, l=50 cm, S=10 cm². L ? E si I=5 A ?",
+          "Auto-induction"
+        ],
+        "common_mistakes": [
+          "Confondre L et N",
+          "Croire u_L=0 toujours"
+        ],
+        "summary": {
+          "key_concept": "e = -L(di/dt). u_L = L(di/dt) (bobine idéale). L : henry (H)",
+          "key_method": "E = ½LI² (énergie stockée)",
+          "next_step": "Circuit RL"
+        }
+      }
+    },
+    {
+      "id": "PT-28",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Circuit RL - Établissement du courant",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Établir l'équation différentielle du circuit RL", "Résoudre pour obtenir I(t)", "Définir la constante de temps τ = L/R", "Analyser les régimes transitoire et permanent"],
+      "prerequisites": ["PT-27"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["RL", "circuit"],
+      "detailed_content": {
+        "introduction": "Le circuit RL série est constitué d'une résistance R et d'une bobine d'inductance L alimentées par une source de tension.",
+        "key_concepts": [
+          { "name": "Équation", "explanation": "E = Ri + L(di/dt). I(0)=0. I_∞ = E/R", "example": "Différentielle" },
+          { "name": "Solution", "explanation": "I(t) = (E/R)(1 - e^(-t/τ)). u_L(t) = E·e^(-t/τ). τ = L/R", "example": "Exponentielle" },
+          { "name": "τ", "explanation": "τ = L/R constante temps. I(τ) = 0.63I_∞. À 5τ : ≈99% permanent. L grand/R petit : lent", "example": "Temps" },
+          { "name": "Énergétique", "explanation": "P_G = EI. P_R = RI². P_L = LI(di/dt). E_L = ½LI². Bilan générateur = dissipée + stockée", "example": "Bilan" }
+        ],
+        "guided_example": {
+          "statement": "E=12 V, R=10 Ω, L=0.1 H. τ ? I_∞ ? I(τ) ?",
+          "solution_steps": ["τ = 10 ms", "I_∞ = 1.2 A", "I(τ) ≈ 0.76 A"]
+        },
+        "quick_exercises": [
+          "E=6 V, R=20 Ω, L=0.4 H. τ ? I_∞ ? t pour 95% ?",
+          "Circuit RL"
+        ],
+        "common_mistakes": [
+          "Croire I(0) = E/R",
+          "Confondre τ RL et RC"
+        ],
+        "summary": {
+          "key_concept": "I(t) = (E/R)(1 - e^(-t/τ)). τ = L/R (constante de temps)",
+          "key_method": "À τ : 63% du régime permanent. À 5τ : ≈ 100% atteint",
+          "next_step": "Circuit RC"
+        }
+      }
+    },
+    {
+      "id": "PT-29",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Circuit RC - Charge et décharge",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Réviser le circuit RC (vu en Première)", "Approfondir la constante de temps τ = RC", "Analyser charge et décharge", "Relier aux circuits RL"],
+      "prerequisites": ["P1-25"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["RC", "circuit"],
+      "detailed_content": {
+        "introduction": "Le circuit RC est revisité pour approfondir les aspects théoriques et établir des parallèles avec le circuit RL.",
+        "key_concepts": [
+          { "name": "Charge", "explanation": "u_C(t) = E(1 - e^(-t/τ)). i(t) = (E/R)e^(-t/τ). τ = RC. u_C(τ) = 0.63E", "example": "Tension" },
+          { "name": "Décharge", "explanation": "u_C(t) = U₀·e^(-t/τ). i(t) = -(U₀/R)e^(-t/τ). u_C(τ) = 0.37U₀", "example": "Relâchement" },
+          { "name": "τ", "explanation": "τ = RC temps caractéristique. Grand : lent. Petit : rapide. 5τ : ≈99% complet. Tangente", "example": "Constante" },
+          { "name": "Comparaison", "explanation": "RC τ=RC tension. RL τ=L/R courant. Exponentielles, 5τ. Différences : C électrique, L magnétique. Continuité u_C vs I", "example": "RL vs RC" }
+        ],
+        "guided_example": {
+          "statement": "R=1 kΩ, C=100 μF, E=9 V. τ ? u_C(τ) ?",
+          "solution_steps": ["τ = 0.1 s", "u_C(τ) ≈ 5.7 V"]
+        },
+        "quick_exercises": [
+          "C=47 μF, U₀=12 V, R=2.2 kΩ. τ ? u_C(3τ) ?",
+          "Circuit RC"
+        ],
+        "common_mistakes": [
+          "Confondre τ RC et RL",
+          "Croire i constant"
+        ],
+        "summary": {
+          "key_concept": "Charge : u_C = E(1 - e^(-t/τ)). Décharge : u_C = U₀·e^(-t/τ). τ = RC",
+          "key_method": "À τ : 63% (charge) ou 37% (décharge)",
+          "next_step": "Synthèse"
+        }
+      }
+    },
+    {
+      "id": "PT-30",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Magnétisme",
+      "title": "Synthèse - Électricité & Magnétisme",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 140,
+      "objectives": ["Maîtriser tous les concepts d'électromagnétisme", "Relier champs, forces et induction", "Résoudre des problèmes de synthèse", "Comparer circuits RL et RC"],
+      "prerequisites": ["PT-21", "PT-26", "PT-28", "PT-29"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "électromagnétisme"],
+      "detailed_content": {
+        "introduction": "L'électromagnétisme combine champs magnétiques, forces de Lorentz et Laplace, induction électromagnétique et circuits RL/RC.",
+        "key_concepts": [
+          { "name": "Champs forces", "explanation": "B⃗ créé aimants/courants. Fil B=μ₀I/(2πd). Solénoïde B=μ₀nI. Lorentz F⃗=q(v⃗∧B⃗). Laplace F⃗=I(l⃗∧B⃗)", "example": "Fondamentaux" },
+          { "name": "Induction", "explanation": "Flux Φ=BS cos(θ). Faraday e=-dΦ/dt. Lenz opposition. Auto e=-L(di/dt). L henry. E_L=½LI²", "example": "Phénomènes" },
+          { "name": "Circuits", "explanation": "RL I(t)=(E/R)(1-e^(-t/τ)) τ=L/R. RC u_C(t)=E(1-e^(-t/τ)) τ=RC. Analogies 5τ. Différences", "example": "RL vs RC" },
+          { "name": "Stratégie", "explanation": "1) Identifier 2) Grandeurs 3) Loi 4) Formules unités 5) Résoudre 6) Interpréter 7) Vérifier", "example": "Méthode" }
+        ],
+        "guided_example": {
+          "statement": "Électron v=10⁶ ⊥ B=0.01 T. r ? T ? Proton même v ?",
+          "solution_steps": ["r_e ≈ 0.57 mm", "T ≈ 3.6 ns", "r_p ≈ 1.05 m"]
+        },
+        "quick_exercises": [
+          "RL E=24 V, R=40 Ω, L=0.8 H. τ ? I_∞ ? E_L ? Ouverture ?",
+          "Problèmes synthèse"
+        ],
+        "common_mistakes": [
+          "Mélanger RL et RC",
+          "Confondre Lorentz Laplace"
+        ],
+        "summary": {
+          "key_concept": "Lorentz particule F⃗=q(v⃗∧B⃗). Laplace conducteur F⃗=I(l⃗∧B⃗). Induction e=-dΦ/dt",
+          "key_method": "RL τ=L/R, RC τ=RC. 5τ permanent. Continuité I pour L, u_C pour C",
+          "next_step": "FÉLICITATIONS : PHYSIQUE TERMINALE COMPLÉTÉE ! 🎉",
+          "next_step_note": "L'électromagnétisme : fascinant et essentiel ! ⚡🧲"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

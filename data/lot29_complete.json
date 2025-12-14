@@ -1,0 +1,375 @@
+{
+  "metadata": {
+    "lot_number": 26,
+    "lot_name": "Lot 26 - Calcul Intégral (Partie 1/2)",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Calcul Intégral",
+    "lesson_range": "MT-38 à MT-46",
+    "total_lessons": 9
+  },
+  "lessons": [
+    {
+      "id": "MT-38",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Notion de primitive",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir une primitive d'une fonction", "Comprendre le lien primitive-dérivée", "Déterminer l'ensemble des primitives", "Calculer une primitive particulière"],
+      "prerequisites": ["MT-20"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["primitive"],
+      "detailed_content": {
+        "introduction": "Une primitive est l'opération inverse de la dérivation. Trouver une primitive de f consiste à chercher une fonction F dont la dérivée est f.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "F primitive de f si F'(x) = f(x). Inverse de la dérivation", "example": "Si F' = f, alors F primitive de f" },
+          { "name": "Ensemble des primitives", "explanation": "Si F primitive de f, alors toutes : F(x) + C où C ∈ ℝ", "example": "Deux primitives diffèrent d'une constante" },
+          { "name": "Primitive particulière", "explanation": "Condition initiale F(x₀) = y₀ pour déterminer C", "example": "Imposer une valeur fixe" },
+          { "name": "Existence", "explanation": "Toute fonction continue admet des primitives", "example": "Théorème fondamental" }
+        ],
+        "guided_example": {
+          "statement": "Trouver les primitives de f(x) = 2x.",
+          "solution_steps": ["Reconnaître (x²)' = 2x", "Donc F(x) = x² est une primitive", "Ensemble : x² + C, C ∈ ℝ"]
+        },
+        "quick_exercises": [
+          "Primitive de f(x) = 3x² qui s'annule en x = 0",
+          "Trouver une primitive particulière"
+        ],
+        "common_mistakes": [
+          "Oublier la constante C",
+          "Confondre primitive et dérivée"
+        ],
+        "summary": {
+          "key_concept": "Primitive = inverse de la dérivation",
+          "key_method": "Toujours +C. Condition initiale ⇒ valeur de C",
+          "next_step": "Apprendre les primitives usuelles"
+        }
+      }
+    },
+    {
+      "id": "MT-39",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Primitives usuelles",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Connaître les primitives des fonctions usuelles", "Calculer rapidement une primitive", "Utiliser un tableau de référence", "Reconnaître les formes à primitiver"],
+      "prerequisites": ["MT-38"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["primitives", "référence"],
+      "detailed_content": {
+        "introduction": "Les primitives des fonctions usuelles sont à connaître par cœur. Elles constituent la base du calcul intégral et permettent de résoudre de nombreux problèmes.",
+        "key_concepts": [
+          { "name": "Puissances", "explanation": "x^n → x^(n+1)/(n+1) + C (n ≠ -1)", "example": "x² → x³/3" },
+          { "name": "Exponentielle", "explanation": "e^x → e^x + C, 1/x → ln|x| + C", "example": "e^x reste e^x" },
+          { "name": "Trigonométrie", "explanation": "cos(x) → sin(x) + C, sin(x) → -cos(x) + C, 1/cos²(x) → tan(x) + C", "example": "Attention aux signes" },
+          { "name": "Tableau complet", "explanation": "x^n, 1/x, e^x, cos, sin, 1/cos² à connaître par cœur", "example": "Base du calcul intégral" }
+        ],
+        "guided_example": {
+          "statement": "Primitive de f(x) = 4x³ - 2e^x + 1/x.",
+          "solution_steps": ["∫ 4x³ = 4 × x⁴/4 = x⁴", "∫ -2e^x = -2e^x", "∫ 1/x = ln|x|", "F(x) = x⁴ - 2e^x + ln|x| + C"]
+        },
+        "quick_exercises": [
+          "Primitive de 3x² + cos(x) - 5",
+          "Utiliser le tableau des primitives"
+        ],
+        "common_mistakes": [
+          "Oublier de diviser par (n+1) dans x^n",
+          "Confondre sin et cos (attention au signe)"
+        ],
+        "summary": {
+          "key_concept": "Tableau à connaître PAR CŒUR",
+          "key_method": "x^n → x^(n+1)/(n+1), 1/x → ln|x|, e^x → e^x",
+          "next_step": "Utiliser la linéarité"
+        }
+      }
+    },
+    {
+      "id": "MT-40",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Linéarité des primitives",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Utiliser la linéarité pour primitiver", "Calculer la primitive d'une somme", "Factoriser par une constante", "Combiner plusieurs règles"],
+      "prerequisites": ["MT-39"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["linéarité"],
+      "detailed_content": {
+        "introduction": "La primitive, comme la dérivée, est une opération linéaire. Cela signifie qu'on peut primitiver terme à terme et factoriser les constantes.",
+        "key_concepts": [
+          { "name": "Primitive d'une somme", "explanation": "∫ (f + g) = ∫ f + ∫ g. On primitive terme à terme", "example": "Linéarité" },
+          { "name": "Multiplication par constante", "explanation": "∫ (λf) = λ ∫ f. On sort les constantes", "example": "∫ 5x² = 5 ∫ x² = 5x³/3" },
+          { "name": "Combinaison", "explanation": "∫ (λf + μg) = λ ∫ f + μ ∫ g. Linéarité complète", "example": "Décomposer puis primitiver" },
+          { "name": "Applications", "explanation": "Polynômes : décomposer en monômes. Simplifier avant", "example": "Méthode systématique" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫ (2x³ - 5sin(x) + 3e^x) dx.",
+          "solution_steps": ["Décomposer en 3 termes", "∫ 2x³ = 2x⁴/4 = x⁴/2", "∫ -5sin = -5×(-cos) = 5cos", "∫ 3e^x = 3e^x", "F(x) = x⁴/2 + 5cos(x) + 3e^x + C"]
+        },
+        "quick_exercises": [
+          "Calculer ∫ (4x² - 3/x + 2cos(x)) dx",
+          "Utiliser la linéarité"
+        ],
+        "common_mistakes": [
+          "Ne pas sortir les constantes",
+          "Oublier un terme dans la somme"
+        ],
+        "summary": {
+          "key_concept": "Linéarité : primitiver terme à terme",
+          "key_method": "∫ (λf + μg) = λ∫ f + μ∫ g",
+          "next_step": "Primitives de u'×f(u)"
+        }
+      }
+    },
+    {
+      "id": "MT-41",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Primitives de u' × f(u)",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Reconnaître la forme u' × f(u)", "Calculer des primitives par reconnaissance", "Utiliser les formules de composition", "Appliquer aux fonctions usuelles composées"],
+      "prerequisites": ["MT-39"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["composition"],
+      "detailed_content": {
+        "introduction": "Lorsqu'une fonction est de la forme u'(x) × f(u(x)), sa primitive peut s'obtenir en composant la primitive de f avec u. C'est l'inverse de la dérivation d'une composée.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Si F primitive de f, alors F(u(x)) primitive de u'(x)f(u(x))", "example": "Inverse de (F∘u)'" },
+          { "name": "u' × e^u", "explanation": "∫ u' e^u = e^u + C", "example": "∫ 2x e^(x²) = e^(x²)" },
+          { "name": "u'/u", "explanation": "∫ u'/u = ln|u| + C", "example": "∫ (2x)/(x²+1) = ln(x²+1)" },
+          { "name": "u' × u^n", "explanation": "∫ u' u^n = u^(n+1)/(n+1) + C", "example": "∫ 2x(x²+1)³ = (x²+1)⁴/4" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫ x e^(x²) dx.",
+          "solution_steps": ["Forme u' × e^u avec u = x², u' = 2x", "On a x = u'/2", "∫ x e^(x²) = (1/2) ∫ 2x e^(x²) = (1/2)e^(x²) + C"]
+        },
+        "quick_exercises": [
+          "Calculer ∫ (3x²)/(x³ + 1) dx",
+          "Reconnaître la forme"
+        ],
+        "common_mistakes": [
+          "Ne pas reconnaître la forme u'×f(u)",
+          "Oublier de factoriser la constante"
+        ],
+        "summary": {
+          "key_concept": "u'×e^u → e^u, u'/u → ln|u|, u'×u^n → u^(n+1)/(n+1)",
+          "key_method": "Chercher u, puis vérifier si u' apparaît",
+          "next_step": "Intégrale définie"
+        }
+      }
+    },
+    {
+      "id": "MT-42",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Intégrale définie - Définition",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Définir l'intégrale définie", "Comprendre la notation ∫[a,b] f(x) dx", "Calculer une intégrale avec une primitive", "Interpréter géométriquement"],
+      "prerequisites": ["MT-38"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["intégrale", "définie"],
+      "detailed_content": {
+        "introduction": "L'intégrale définie généralise la notion d'aire sous une courbe. Elle se calcule à l'aide d'une primitive et permet de mesurer des quantités accumulées.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "∫ₐᵇ f(x) dx = F(b) - F(a) = [F(x)]ₐᵇ où F primitive de f", "example": "Intégrale = différence" },
+          { "name": "Indépendance", "explanation": "Résultat ne dépend pas du choix de la primitive (C disparaît)", "example": "On prend C = 0 souvent" },
+          { "name": "Méthode", "explanation": "1) Trouver primitive F, 2) Calculer F(b) - F(a), 3) Simplifier", "example": "Étape par étape" },
+          { "name": "Interprétation", "explanation": "Si f ≥ 0 : aire sous la courbe. Sinon : aire algébrique", "example": "Géométrie" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫₁² (2x + 1) dx.",
+          "solution_steps": ["Primitive : F(x) = x² + x", "[x² + x]₁² = (4+2) - (1+1) = 6 - 2 = 4"]
+        },
+        "quick_exercises": [
+          "Calculer ∫₀^π sin(x) dx",
+          "Calculer des intégrales définies"
+        ],
+        "common_mistakes": [
+          "Inverser F(b) - F(a)",
+          "Garder la constante C"
+        ],
+        "summary": {
+          "key_concept": "∫ₐᵇ f = [F]ₐᵇ = F(b) - F(a)",
+          "key_method": "Constante C disparaît. Aire si f ≥ 0",
+          "next_step": "Propriétés de l'intégrale"
+        }
+      }
+    },
+    {
+      "id": "MT-43",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Propriétés de l'intégrale définie",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Utiliser les propriétés algébriques de l'intégrale", "Appliquer la linéarité", "Utiliser la relation de Chasles", "Exploiter les symétries"],
+      "prerequisites": ["MT-42"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["propriétés", "intégrale"],
+      "detailed_content": {
+        "introduction": "L'intégrale définie possède des propriétés algébriques qui facilitent les calculs et permettent de décomposer des intégrales complexes.",
+        "key_concepts": [
+          { "name": "Linéarité", "explanation": "∫ (λf + μg) = λ ∫ f + μ ∫ g. Distribuer et sortir constantes", "example": "Comme pour primitives" },
+          { "name": "Chasles", "explanation": "∫ₐᵇ f = ∫ₐᶜ f + ∫ᶜᵇ f. Découper une intégrale", "example": "Très utile" },
+          { "name": "Conventions", "explanation": "∫ₐᵃ f = 0, ∫ₐᵇ f = -∫ᵇₐ f (inversion signe)", "example": "Bornes égales" },
+          { "name": "Parité", "explanation": "f paire sur [-a,a] : ∫₋ₐᵃ f = 2∫₀ᵃ f. f impaire : ∫₋ₐᵃ f = 0", "example": "Exploiter symétrie" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫₋₂² x³ dx.",
+          "solution_steps": ["x³ est impaire (x³(-x) = -x³)", "Intervalle symétrique [-2,2]", "∫₋₂² x³ dx = 0"]
+        },
+        "quick_exercises": [
+          "Sachant ∫₀³ f = 5 et ∫₀¹ f = 2, calculer ∫₁³ f",
+          "Utiliser Chasles"
+        ],
+        "common_mistakes": [
+          "Mal appliquer Chasles",
+          "Confondre paire et impaire"
+        ],
+        "summary": {
+          "key_concept": "Linéarité, Chasles, parité",
+          "key_method": "∫ₐᵇ = -∫ᵇₐ, ∫₋ₐᵃ f impair = 0",
+          "next_step": "Calcul d'aires"
+        }
+      }
+    },
+    {
+      "id": "MT-44",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Calcul d'aire avec intégrales",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Calculer l'aire sous une courbe", "Gérer les aires avec fonctions négatives", "Calculer l'aire entre deux courbes", "Utiliser la valeur absolue si nécessaire"],
+      "prerequisites": ["MT-42", "MT-43"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["aire"],
+      "detailed_content": {
+        "introduction": "L'intégrale définie permet de calculer des aires de domaines du plan limités par des courbes. Il faut distinguer aire algébrique et aire géométrique.",
+        "key_concepts": [
+          { "name": "Aire (f ≥ 0)", "explanation": "Si f ≥ 0 sur [a,b], A = ∫ₐᵇ f(x) dx", "example": "Aire sous courbe" },
+          { "name": "Fonction négative", "explanation": "Si f ≤ 0, A = |∫ₐᵇ f| = -∫ₐᵇ f = ∫ₐᵇ (-f)", "example": "Valeur absolue" },
+          { "name": "Changement de signe", "explanation": "Découper en zones. Aire totale = somme valeurs absolues", "example": "Découper aux racines" },
+          { "name": "Entre deux courbes", "explanation": "Si f ≥ g, A = ∫ₐᵇ (f - g) dx. Dessus - dessous", "example": "Différence" }
+        ],
+        "guided_example": {
+          "statement": "Calculer l'aire sous y = x² entre 0 et 2.",
+          "solution_steps": ["f(x) = x² ≥ 0", "A = ∫₀² x² dx = [x³/3]₀² = 8/3"]
+        },
+        "quick_exercises": [
+          "Aire entre y = x et y = x² sur [0,1]",
+          "Calculer des aires"
+        ],
+        "common_mistakes": [
+          "Oublier valeur absolue si f < 0",
+          "Inverser f et g"
+        ],
+        "summary": {
+          "key_concept": "f ≥ 0 : A = ∫ f. Entre 2 courbes : A = ∫ (dessus - dessous)",
+          "key_method": "f change de signe : découper",
+          "next_step": "Valeur moyenne"
+        }
+      }
+    },
+    {
+      "id": "MT-45",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Valeur moyenne d'une fonction",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir la valeur moyenne d'une fonction", "Calculer une valeur moyenne", "Interpréter géométriquement", "Appliquer dans des contextes physiques"],
+      "prerequisites": ["MT-42"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["moyenne", "valeur"],
+      "detailed_content": {
+        "introduction": "La valeur moyenne d'une fonction sur un intervalle généralise la notion de moyenne arithmétique. Elle se calcule avec une intégrale.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "μ = (1/(b-a)) ∫ₐᵇ f(x) dx. Intégrale / longueur", "example": "Formule" },
+          { "name": "Interprétation", "explanation": "Hauteur du rectangle de même aire que sous courbe", "example": "Géométrique" },
+          { "name": "Propriétés", "explanation": "Si f constant, μ = f. Linéarité. Si m ≤ f ≤ M, alors m ≤ μ ≤ M", "example": "Encadrement" },
+          { "name": "Applications", "explanation": "Vitesse moyenne, tension, puissance. Probabilités. Température", "example": "Physique" }
+        ],
+        "guided_example": {
+          "statement": "Valeur moyenne de f(x) = x² sur [0,3].",
+          "solution_steps": ["μ = (1/3) ∫₀³ x² dx = (1/3)[x³/3]₀³", "= (1/3) × 9 = 3"]
+        },
+        "quick_exercises": [
+          "Valeur moyenne de g(x) = sin(x) sur [0,π]",
+          "Calculer des valeurs moyennes"
+        ],
+        "common_mistakes": [
+          "Oublier de diviser par (b-a)",
+          "Inverser la fraction"
+        ],
+        "summary": {
+          "key_concept": "μ = (1/(b-a)) ∫ₐᵇ f. Rectangle de même aire",
+          "key_method": "Toujours diviser par la longueur",
+          "next_step": "Intégration par parties"
+        }
+      }
+    },
+    {
+      "id": "MT-46",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Calcul Intégral",
+      "title": "Intégration par parties - Introduction",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 135,
+      "objectives": ["Comprendre le principe de l'IPP", "Appliquer la formule d'intégration par parties", "Choisir u et v'", "Résoudre des intégrales complexes"],
+      "prerequisites": ["MT-42"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["IPP", "intégration"],
+      "detailed_content": {
+        "introduction": "L'intégration par parties (IPP) est une technique puissante pour calculer des intégrales de produits. C'est l'équivalent intégral de la formule de dérivation d'un produit.",
+        "key_concepts": [
+          { "name": "Formule", "explanation": "∫ uv' = [uv] - ∫ u'v. Transformer produit", "example": "Formule fondamentale" },
+          { "name": "Principe", "explanation": "∫ u'v doit être plus simple que ∫ uv'", "example": "Choix crucial" },
+          { "name": "ILATE", "explanation": "Ordre pour choisir u : I, L, A, T, E. Inverses, Logarithmes, Algébriques, Trig, Exponentielles", "example": "Méthode de choix" },
+          { "name": "Étapes", "explanation": "1) Identifier produit, 2) Choisir u et v' (ILATE), 3) Calculer u' et v, 4) Appliquer formule, 5) Calculer ∫ u'v", "example": "Méthodologie" }
+        ],
+        "guided_example": {
+          "statement": "Calculer ∫₀¹ x e^x dx par IPP.",
+          "solution_steps": ["u = x (A), v' = e^x (E)", "u' = 1, v = e^x", "∫ x e^x = [x e^x]₀¹ - ∫₀¹ e^x dx", "= e - (e - 1) = 1"]
+        },
+        "quick_exercises": [
+          "Calculer ∫₁^e ln(x) dx par IPP",
+          "Appliquer IPP"
+        ],
+        "common_mistakes": [
+          "Mauvais choix de u et v'",
+          "Oublier le signe -"
+        ],
+        "summary": {
+          "key_concept": "IPP : ∫ uv' = [uv] - ∫ u'v. ILATE pour choisir u",
+          "key_method": "IPP utile pour x^n e^x, x^n sin, ln...",
+          "next_step": "Suite du calcul intégral"
+        }
+      }
+    }
+  ]
+}
+

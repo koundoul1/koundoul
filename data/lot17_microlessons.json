@@ -1,0 +1,142 @@
+[
+  {
+    "id": "M2-21",
+    "content_sections": [
+      { "title": "Introduction", "content": "Vecteurs du plan : définition, représentants, égalité, vecteur nul et opposé." },
+      { "title": "Objectifs", "items": ["Définir un vecteur", "Distinguer vecteur/bipoint", "Égalité de vecteurs", "Construire des vecteurs égaux"] },
+      { "title": "Prérequis", "items": ["Géométrie plane (collège)", "Direction et sens", "Points et segments"] },
+      { "title": "Concepts clés", "items": ["Vecteur = direction, sens, longueur", "Représentants multiples (glissement)", "AB = CD ⇔ ABDC parallélogramme", "Vecteur nul : AA", "Opposé : BA = −AB"] },
+      { "title": "Formules / Faits", "items": ["||AB|| = distance(A,B)", "AB = CD ⇔ ABDC parallélogramme", "BA = −AB", "AA = 0"] },
+      { "title": "Exemple guidé", "content": "Construire D tel que AB = CD (parallélogramme ABDC)." },
+      { "title": "Exercices", "items": ["Compléter dans un parallélogramme : AB=?, AD=?, BA=?", "Construire des représentants égaux"] },
+      { "title": "Astuces", "items": ["Un vecteur ‘glisse’ sur le plan", "Penser au parallélogramme pour AB=CD"] }
+    ]
+  },
+  {
+    "id": "M2-22",
+    "content_sections": [
+      { "title": "Introduction", "content": "Addition de vecteurs : règle du parallélogramme et relation de Chasles." },
+      { "title": "Objectifs", "items": ["Sommer deux vecteurs", "Appliquer Chasles", "Construire u+v", "Simplifier des chaînes vectorielles"] },
+      { "title": "Prérequis", "items": ["Vecteurs (M2-21)", "Parallélogramme"] },
+      { "title": "Concepts clés", "items": ["Parallélogramme : OC = OA+OB", "Chasles : AB+BC=AC", "Commutativité/associativité", "u+(−u)=0"] },
+      { "title": "Formules / Faits", "items": ["AB+BC=AC", "u+v=v+u", "(u+v)+w=u+(v+w)"] },
+      { "title": "Exemple guidé", "content": "Simplifier AB+BC+CA = 0 ; construire OM=OA+OB par parallélogramme." },
+      { "title": "Exercices", "items": ["Simplifier AB+BC+CD ; MA+AB+BM ; AB+CD+DA", "Construction de M tel que OM=OA+OB"] },
+      { "title": "Astuces", "items": ["Chercher AB+BA pour annuler", "Enchaîner ‘bout à bout’"] }
+    ]
+  },
+  {
+    "id": "M2-23",
+    "content_sections": [
+      { "title": "Introduction", "content": "Multiplication d’un vecteur par un réel k : effet sur longueur et sens." },
+      { "title": "Objectifs", "items": ["Définir ku", "Comprendre l’effet de k", "Propriétés algébriques", "Résoudre des problèmes avec ku"] },
+      { "title": "Prérequis", "items": ["Vecteurs (M2-21)", "Addition (M2-22)"] },
+      { "title": "Concepts clés", "items": ["||ku||=|k|·||u||", "k>0 même sens ; k<0 sens opposé", "k(u+v)=ku+kv", "k(mu)=(km)u"] },
+      { "title": "Formules / Faits", "items": ["0u=0 ; 1u=u ; (k+m)u=ku+mu"] },
+      { "title": "Exemple guidé", "content": "Construire OM=2OA et ON=−OA ; simplifier 2(u+v)−v." },
+      { "title": "Exercices", "items": ["Calculs : 3u+2u ; 5u−7u ; −3(u−v)", "Constructions de points avec rapports"] },
+      { "title": "Astuces", "items": ["k négatif inverse le sens", "2u = u+u"] }
+    ]
+  },
+  {
+    "id": "M2-24",
+    "content_sections": [
+      { "title": "Introduction", "content": "Colinéarité : même direction, applications à l’alignement et au parallélisme." },
+      { "title": "Objectifs", "items": ["Définir colinéarité", "Tester colinéarité", "Alignement et parallélisme", "Condition avec coordonnées"] },
+      { "title": "Prérequis", "items": ["Multiplication par k (M2-23)", "Droites parallèles"] },
+      { "title": "Concepts clés", "items": ["u=kv ⇒ u et v colinéaires", "A,B,C alignés ⇔ AB et AC colinéaires", "(AB)//(CD) ⇔ AB et CD colinéaires", "Test (x,y),(x',y') : xy'−x'y=0"] },
+      { "title": "Formules / Faits", "items": ["Colinéarité ⇔ ∃k", "Déterminant nul"] },
+      { "title": "Exemple guidé", "content": "Tester (2,4) et (1,2) ; A(1,2),B(3,5),C(5,8) alignés." },
+      { "title": "Exercices", "items": ["Déterminer colinéarité de paires", "Vérifier un alignement"] },
+      { "title": "Astuces", "items": ["Vecteur nul colinéaire à tout vecteur", "Toujours prendre deux vecteurs depuis le même point pour alignement"] }
+    ]
+  },
+  {
+    "id": "M2-25",
+    "content_sections": [
+      { "title": "Introduction", "content": "Coordonnées de points/vecteurs, opérations, norme et milieu." },
+      { "title": "Objectifs", "items": ["Lire/placer des points", "Calculer AB(xB−xA,yB−yA)", "Somme/opposé/ku", "Distance et milieu"] },
+      { "title": "Prérequis", "items": ["Vecteurs", "Repère orthonormé"] },
+      { "title": "Concepts clés", "items": ["OM=xi+yj", "u+v=(x+x',y+y')", "ku=(kx,ky)", "||u||=√(x²+y²)", "I=((xA+xB)/2,(yA+yB)/2)"] },
+      { "title": "Formules / Faits", "items": ["AB=(xB−xA,yB−yA)", "Distance = norme du vecteur AB"] },
+      { "title": "Exemple guidé", "content": "A(1,2),B(4,6),C(−1,3) : AB, AC, AB+AC ; distance et milieu." },
+      { "title": "Exercices", "items": ["Calculs coordonnés", "Longueur et milieu"] },
+      { "title": "Astuces", "items": ["AB = Arrivée − Départ", "Utiliser Pythagore pour la norme"] }
+    ]
+  },
+  {
+    "id": "M2-26",
+    "content_sections": [
+      { "title": "Introduction", "content": "Repérage : orthogonal/orthonormé, distance, équation de cercle." },
+      { "title": "Objectifs", "items": ["Types de repères", "Placer/lire des points", "Calculer des distances", "Équation d’un cercle"] },
+      { "title": "Prérequis", "items": ["Coordonnées (M2-25)", "Repère orthonormé"] },
+      { "title": "Concepts clés", "items": ["i ⟂ j ; orthonormé : ||i||=||j||=1", "Distance AB=√((Δx)²+(Δy)²)", "Cercle (x−a)²+(y−b)²=R²"] },
+      { "title": "Formules / Faits", "items": ["Distance valable si repère orthonormé", "Milieu = moyenne des coordonnées"] },
+      { "title": "Exemple guidé", "content": "Équation du cercle de centre (2,3), rayon 4 ; appartenance d’un point." },
+      { "title": "Exercices", "items": ["Distances", "Cercle : équation et test d’appartenance"] },
+      { "title": "Astuces", "items": ["Vérifier le type de repère avant d’appliquer la distance"] }
+    ]
+  },
+  {
+    "id": "M2-27",
+    "content_sections": [
+      { "title": "Introduction", "content": "Translation de vecteur u : image d’un point, propriétés et coordonnées." },
+      { "title": "Objectifs", "items": ["Définir la translation", "Construire M' (MM'=u)", "Coordonnées M'(x+a,y+b)", "Reconnaître une translation"] },
+      { "title": "Prérequis", "items": ["Vecteurs (M2-21)", "Coordonnées (M2-25)", "Transformations"] },
+      { "title": "Concepts clés", "items": ["MM'=u", "Conservation : longueurs, angles, parallélisme", "Image d’une droite = droite parallèle"] },
+      { "title": "Formules / Faits", "items": ["Si u(a,b) et M(x,y) ⇒ M'(x+a,y+b)"] },
+      { "title": "Exemple guidé", "content": "Image d’un triangle ABC par translation u=DE ; calculs de M'(…)" },
+      { "title": "Exercices", "items": ["Constructions de l’image par u", "Coordonnées avec u(−2,3)"] },
+      { "title": "Astuces", "items": ["Tous les points se déplacent du même vecteur"] }
+    ]
+  },
+  {
+    "id": "M2-28",
+    "content_sections": [
+      { "title": "Introduction", "content": "Homothétie h(O,k) : centre, rapport k, construction et propriétés." },
+      { "title": "Objectifs", "items": ["Définir l’homothétie", "Construire M'", "Comprendre l’effet de k", "Cas particuliers (k=1, −1)"] },
+      { "title": "Prérequis", "items": ["k·u (M2-23)", "Coordonnées (M2-25)", "Proportionnalité"] },
+      { "title": "Concepts clés", "items": ["OM'=k·OM", "|k|>1 agrandissement ; 0<|k|<1 réduction ; k<0 symétrie+échelle", "Conservation des angles/parallélisme"] },
+      { "title": "Formules / Faits", "items": ["Rapport de longueurs : M'N' = |k|·MN", "k=1 identité ; k=−1 symétrie centrale"] },
+      { "title": "Exemple guidé", "content": "Construire l’image d’un triangle par k=2 ; effets de k=−0,5." },
+      { "title": "Exercices", "items": ["Constructions avec centre O", "Calculs de longueurs et invariants"] },
+      { "title": "Astuces", "items": ["k<0 → changer de côté par rapport au centre"] }
+    ]
+  },
+  {
+    "id": "M2-29",
+    "content_sections": [
+      { "title": "Introduction", "content": "Théorème de Thalès, réciproque et lien avec colinéarité vectorielle." },
+      { "title": "Objectifs", "items": ["Appliquer Thalès", "Utiliser la réciproque", "Relier aux vecteurs", "Résoudre des problèmes"] },
+      { "title": "Prérequis", "items": ["Thalès (collège)", "Colinéarité (M2-24)", "Proportionnalité"] },
+      { "title": "Concepts clés", "items": ["(MN)//(BC) ⇒ MA/AB = MN/BC = AN/AC", "Réciproque : égalité des rapports + alignements", "MN colinéaire à BC ; MN=k·BC"] },
+      { "title": "Formules / Faits", "items": ["Rapports égaux en configuration papillon", "Zones proportionnelles"] },
+      { "title": "Exemple guidé", "content": "MA/AB=1/3 ⇒ MN=(1/3)·BC ; calcul d’AN si AC connu." },
+      { "title": "Exercices", "items": ["Calculs de MN et AN", "Réciproque : vérifier parallélisme"] },
+      { "title": "Astuces", "items": ["Soigner le schéma et l’ordre des points", "Toujours vérifier alignement pour la réciproque"] }
+    ]
+  },
+  {
+    "id": "M2-30",
+    "content_sections": [
+      { "title": "Introduction", "content": "Équations de droites : y=ax+b, formes cartésiennes, verticales/horizontales, positions relatives." },
+      { "title": "Objectifs", "items": ["Déterminer une équation", "Tester appartenance d’un point", "Changer de forme", "Parallélisme et perpendicularité"] },
+      { "title": "Prérequis", "items": ["Fonctions affines (M2-11)", "Coordonnées (M2-25)", "Repérage (M2-26)"] },
+      { "title": "Concepts clés", "items": ["Réduite : y=ax+b (non verticales)", "Verticale : x=c ; Horizontale : y=k", "Cartésienne : ax+by+c=0", "a=(yB−yA)/(xB−xA)"] },
+      { "title": "Formules / Faits", "items": ["(d)//(d') ⇔ a=a'", "(d)⊥(d') ⇔ a·a' = −1 (repère ON) "] },
+      { "title": "Exemple guidé", "content": "Droite par A(0,3) pente 2 : y=2x+3 ; par B(1,2),C(3,8) : y=3x−1." },
+      { "title": "Exercices", "items": ["Positions relatives (parallèles/perpendiculaires)", "Mettre 2x−3y+6=0 sous forme y=ax+b"] },
+      { "title": "Astuces", "items": ["Droite verticale ≠ forme y=ax+b", "Vérifier en substituant le point"] }
+    ]
+  }
+]
+
+
+
+
+
+
+
+
+
+

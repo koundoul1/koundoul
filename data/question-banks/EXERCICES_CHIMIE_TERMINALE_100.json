@@ -1,0 +1,1422 @@
+{
+  "bank_info": {
+    "title": "Banque Exercices - Chimie Terminale COMPLET",
+    "level": "Terminale",
+    "subject": "Chimie",
+    "type": "Exercices",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Transformations acide-base",
+      "Transformations en solution aqueuse",
+      "Évolution temporelle des systèmes",
+      "Stratégies de synthèse organique"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "exercises": [
+    {
+      "id": "CHIT-EX-001",
+      "chapter": "Acide-base",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer le pH d'une solution de HCl à 0,01 mol/L.",
+      "solution": {
+        "steps": ["HCl acide fort : [H₃O⁺] = C", "[H₃O⁺] = 0,01 = 10⁻²", "pH = -log(10⁻²) = 2"],
+        "final_answer": "pH = 2"
+      },
+      "hints": ["Acide fort totalement dissocié"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-002",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer le pH d'une solution de NaOH à 10⁻³ mol/L.",
+      "solution": {
+        "steps": ["NaOH base forte : [OH⁻] = C = 10⁻³", "pOH = 3", "pH = 14 - 3 = 11"],
+        "final_answer": "pH = 11"
+      },
+      "hints": ["pH + pOH = 14"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-003",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une solution d'acide éthanoïque (pKa = 4,75) à 0,1 mol/L a pH = 2,9. Calculer le taux d'avancement final τ.",
+      "solution": {
+        "steps": ["[H₃O⁺] = 10⁻²·⁹ ≈ 1,26×10⁻³", "τ = [H₃O⁺]/C₀", "τ = 1,26×10⁻³/0,1 = 0,0126 = 1,26%"],
+        "final_answer": "τ ≈ 1,3%"
+      },
+      "hints": ["τ = [dissocié]/[initial]"],
+      "related_lesson": "CHIT-09"
+    },
+    {
+      "id": "CHIT-EX-004",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer [H₃O⁺] pour un pH = 5.",
+      "solution": {
+        "steps": ["pH = -log[H₃O⁺]", "[H₃O⁺] = 10⁻ᵖᴴ", "[H₃O⁺] = 10⁻⁵ mol/L"],
+        "final_answer": "[H₃O⁺] = 10⁻⁵ mol/L"
+      },
+      "hints": ["[H₃O⁺] = 10⁻ᵖᴴ"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-005",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer le pH d'une solution tampon contenant CH₃COOH (0,1 M) et CH₃COO⁻ (0,1 M). pKa = 4,75.",
+      "solution": {
+        "steps": ["Henderson : pH = pKa + log([A⁻]/[AH])", "pH = 4,75 + log(0,1/0,1)", "pH = 4,75 + 0 = 4,75"],
+        "final_answer": "pH = 4,75"
+      },
+      "hints": ["Si [A⁻] = [AH] alors pH = pKa"],
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-EX-006",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer Ka sachant que pKa = 4,2.",
+      "solution": {
+        "steps": ["pKa = -log Ka", "Ka = 10⁻ᵖᴷᵃ", "Ka = 10⁻⁴·² ≈ 6,3×10⁻⁵"],
+        "final_answer": "Ka ≈ 6,3×10⁻⁵"
+      },
+      "hints": ["Ka = 10⁻ᵖᴷᵃ"],
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-EX-007",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On titre 20 mL de HCl 0,1 M par NaOH 0,1 M. Calculer le volume équivalent.",
+      "solution": {
+        "steps": ["À l'équivalence : n(acide) = n(base)", "C_A × V_A = C_B × V_éq", "0,1 × 20 = 0,1 × V_éq", "V_éq = 20 mL"],
+        "final_answer": "V_éq = 20 mL"
+      },
+      "hints": ["C_A V_A = C_B V_éq"],
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-EX-008",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer [OH⁻] dans une solution de pH = 10.",
+      "solution": {
+        "steps": ["pOH = 14 - pH = 4", "[OH⁻] = 10⁻ᵖᴼᴴ", "[OH⁻] = 10⁻⁴ mol/L"],
+        "final_answer": "[OH⁻] = 10⁻⁴ mol/L"
+      },
+      "hints": ["pOH = 14 - pH"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-009",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une solution tampon a pH = 5,2 avec pKa = 4,9. Calculer [A⁻]/[AH].",
+      "solution": {
+        "steps": ["pH = pKa + log([A⁻]/[AH])", "5,2 = 4,9 + log([A⁻]/[AH])", "log([A⁻]/[AH]) = 0,3", "[A⁻]/[AH] = 10⁰·³ ≈ 2"],
+        "final_answer": "[A⁻]/[AH] ≈ 2"
+      },
+      "hints": ["Henderson-Hasselbalch"],
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-EX-010",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer le pH d'une solution avec [H₃O⁺] = 2,5×10⁻⁴ mol/L.",
+      "solution": {
+        "steps": ["pH = -log[H₃O⁺]", "pH = -log(2,5×10⁻⁴)", "pH ≈ 3,6"],
+        "final_answer": "pH ≈ 3,6"
+      },
+      "hints": ["pH = -log[H₃O⁺]"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-011",
+      "chapter": "Transformations en solution",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer Ks pour AgCl sachant que [Ag⁺] = [Cl⁻] = 10⁻⁵ mol/L à saturation.",
+      "solution": {
+        "steps": ["Ks = [Ag⁺][Cl⁻]", "Ks = 10⁻⁵ × 10⁻⁵", "Ks = 10⁻¹⁰"],
+        "final_answer": "Ks = 10⁻¹⁰"
+      },
+      "hints": ["Ks = produit des concentrations"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-012",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer la solubilité s de AgCl sachant Ks = 1,8×10⁻¹⁰.",
+      "solution": {
+        "steps": ["Ks = [Ag⁺][Cl⁻] = s²", "s² = 1,8×10⁻¹⁰", "s = √(1,8×10⁻¹⁰) ≈ 1,3×10⁻⁵ mol/L"],
+        "final_answer": "s ≈ 1,3×10⁻⁵ mol/L"
+      },
+      "hints": ["Ks = s²"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-013",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la conductivité σ d'une solution de NaCl à 0,01 mol/L. λ(Na⁺) = 50 S·cm²·mol⁻¹, λ(Cl⁻) = 76 S·cm²·mol⁻¹.",
+      "solution": {
+        "steps": ["σ = Σ λᵢ[Xᵢ]", "σ = (50 + 76) × 0,01", "σ = 1,26 S·cm⁻¹"],
+        "final_answer": "σ = 1,26 S·cm⁻¹"
+      },
+      "hints": ["Loi de Kohlrausch"],
+      "related_lesson": "CHIT-12"
+    },
+    {
+      "id": "CHIT-EX-014",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Q = 2×10⁻⁹ et Ks = 10⁻¹⁰. Y a-t-il précipitation ?",
+      "solution": {
+        "steps": ["Comparer Q et Ks", "Q = 2×10⁻⁹ > Ks = 10⁻¹⁰", "Q > Ks donc précipitation"],
+        "final_answer": "Oui, précipitation"
+      },
+      "hints": ["Q > Ks → précipitation"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-015",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer l'absorbance A d'une solution de concentration 5×10⁻⁴ mol/L dans une cuve de 1 cm sachant ε = 2000 L·mol⁻¹·cm⁻¹.",
+      "solution": {
+        "steps": ["Beer-Lambert : A = ε·l·c", "A = 2000 × 1 × 5×10⁻⁴", "A = 1"],
+        "final_answer": "A = 1"
+      },
+      "hints": ["A = ε·l·c"],
+      "related_lesson": "CHIT-16"
+    },
+    {
+      "id": "CHIT-EX-016",
+      "chapter": "Cinétique chimique",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Pour une réaction d'ordre 1 avec k = 0,1 s⁻¹, calculer t₁/₂.",
+      "solution": {
+        "steps": ["t₁/₂ = ln(2)/k", "t₁/₂ = 0,693/0,1", "t₁/₂ = 6,93 s"],
+        "final_answer": "t₁/₂ ≈ 6,9 s"
+      },
+      "hints": ["t₁/₂ = ln2/k"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-017",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Une réaction a k = 0,05 min⁻¹ à 25°C et k = 0,2 min⁻¹ à 35°C. Calculer le facteur de multiplication de k.",
+      "solution": {
+        "steps": ["Facteur = k₂/k₁", "= 0,2/0,05", "= 4"],
+        "final_answer": "k × 4"
+      },
+      "hints": ["k augmente avec T"],
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-EX-018",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Pour une réaction d'ordre 1, [A]₀ = 1 mol/L et [A] = 0,25 mol/L après 20 s. Calculer k.",
+      "solution": {
+        "steps": ["ln([A]₀/[A]) = kt", "ln(1/0,25) = k×20", "ln(4) = 20k", "k = 1,386/20 ≈ 0,069 s⁻¹"],
+        "final_answer": "k ≈ 0,069 s⁻¹"
+      },
+      "hints": ["Équation intégrée ordre 1"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-019",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer le temps nécessaire pour que [A] diminue de 75% si k = 0,1 s⁻¹ (ordre 1).",
+      "solution": {
+        "steps": ["75% consommés → [A] = 0,25[A]₀", "t = (1/k)ln([A]₀/[A])", "t = 10 × ln(4) ≈ 13,9 s"],
+        "final_answer": "t ≈ 14 s"
+      },
+      "hints": ["2 demi-vies"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-020",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une réaction a t₁/₂ = 10 min avec [A]₀ = 2 mol/L et t₁/₂ = 5 min avec [A]₀ = 1 mol/L. Quel est l'ordre ?",
+      "solution": {
+        "steps": ["t₁/₂ dépend de [A]₀ → pas ordre 1", "Ordre 2 : t₁/₂ = 1/(k[A]₀)", "t₁/₂ ∝ 1/[A]₀", "Ordre 2"],
+        "final_answer": "Ordre 2"
+      },
+      "hints": ["Ordre 1 : t₁/₂ indépendant de [A]₀"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-021",
+      "chapter": "Synthèse organique",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Calculer le rendement si on obtient 8 g de produit pour 10 g théoriques.",
+      "solution": {
+        "steps": ["η = (masse obtenue / masse théorique) × 100", "η = (8/10) × 100", "η = 80%"],
+        "final_answer": "η = 80%"
+      },
+      "hints": ["η = (obtenu/théorique) × 100"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-022",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Une synthèse en 3 étapes a des rendements de 90%, 80%, 70%. Calculer le rendement global.",
+      "solution": {
+        "steps": ["η_global = η₁ × η₂ × η₃", "= 0,9 × 0,8 × 0,7", "= 0,504 = 50,4%"],
+        "final_answer": "η_global = 50,4%"
+      },
+      "hints": ["Multiplier les rendements"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-023",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer l'économie d'atomes pour : C₂H₅OH + CH₃COOH → CH₃COOC₂H₅ + H₂O (M(ester)=88, M(EtOH)=46, M(AcOH)=60).",
+      "solution": {
+        "steps": ["EA = M(produit désiré)/M(réactifs)", "EA = 88/(46+60)", "EA = 88/106 ≈ 0,83 = 83%"],
+        "final_answer": "EA ≈ 83%"
+      },
+      "hints": ["EA = M_produit/Σ M_réactifs"],
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-EX-024",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "On obtient 15 g de produit avec 3 g de sous-produits. Calculer le facteur E.",
+      "solution": {
+        "steps": ["E = masse déchets / masse produit", "E = 3/15", "E = 0,2"],
+        "final_answer": "E = 0,2"
+      },
+      "hints": ["E = m_déchets/m_produit"],
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-EX-025",
+      "chapter": "Spectroscopie",
+      "difficulty": 1,
+      "points": 10,
+      "time_limit_minutes": 5,
+      "problem": "Une molécule présente une large bande vers 3300 cm⁻¹ en IR. Quelle fonction ?",
+      "solution": {
+        "steps": ["Bande large 3000-3500 cm⁻¹ : O-H", "Fonction alcool ou acide"],
+        "final_answer": "Fonction O-H (alcool ou acide)"
+      },
+      "hints": ["O-H large et intense"],
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-EX-026",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un pic intense à 1720 cm⁻¹ en IR. Quelle liaison ?",
+      "solution": {
+        "steps": ["Pic vers 1700 cm⁻¹ : C=O", "Fonction carbonyle"],
+        "final_answer": "Liaison C=O (cétone, aldéhyde, acide...)"
+      },
+      "hints": ["C=O vers 1700 cm⁻¹"],
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-EX-027",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "En RMN ¹H, un signal à δ = 2,3 ppm (singulet, intégration 3H) et un à δ = 9,8 ppm (singulet, 1H). Identifier la molécule.",
+      "solution": {
+        "steps": ["δ ≈ 2 ppm : CH₃ à côté de C=O", "δ ≈ 10 ppm : H aldéhydique", "Structure : CH₃-CHO (éthanal)"],
+        "final_answer": "Éthanal (CH₃CHO)"
+      },
+      "hints": ["H aldéhyde très déblindé"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-028",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Un triplet en RMN indique combien de voisins ?",
+      "solution": {
+        "steps": ["Règle (n+1)-uplets", "Triplet = 3 pics", "n+1 = 3 donc n = 2"],
+        "final_answer": "2 voisins"
+      },
+      "hints": ["n+1 pics pour n voisins"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-029",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Un pic moléculaire M⁺ à m/z = 88 en SM. Pics à 73 (M-15) et 43. Formule probable ?",
+      "solution": {
+        "steps": ["M = 88", "Perte de 15 : CH₃", "m/z = 43 : CH₃CO⁺", "Structure : CH₃COCH₃ (propanone)"],
+        "final_answer": "Propanone (acétone)"
+      },
+      "hints": ["M-15 = perte CH₃"],
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-EX-030",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer pOH d'une solution de pH = 8,5.",
+      "solution": {
+        "steps": ["pH + pOH = 14", "pOH = 14 - 8,5", "pOH = 5,5"],
+        "final_answer": "pOH = 5,5"
+      },
+      "hints": ["pH + pOH = 14"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-031",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On mélange 10 mL de HCl 0,2 M avec 10 mL de NaOH 0,1 M. Calculer le pH.",
+      "solution": {
+        "steps": ["n(H₃O⁺) = 0,01×0,2 = 2×10⁻³ mol", "n(OH⁻) = 0,01×0,1 = 10⁻³ mol", "Excès H₃O⁺ = 10⁻³ mol", "V_total = 20 mL", "[H₃O⁺] = 10⁻³/0,02 = 0,05 M", "pH = -log(0,05) ≈ 1,3"],
+        "final_answer": "pH ≈ 1,3"
+      },
+      "hints": ["Réaction totale puis excès"],
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-EX-032",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer Ka pour un acide de pKa = 3,8.",
+      "solution": {
+        "steps": ["Ka = 10⁻ᵖᴷᵃ", "Ka = 10⁻³·⁸", "Ka ≈ 1,6×10⁻⁴"],
+        "final_answer": "Ka ≈ 1,6×10⁻⁴"
+      },
+      "hints": ["Ka = 10⁻ᵖᴷᵃ"],
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-EX-033",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer la solubilité de CaF₂ sachant Ks = 4×10⁻¹¹ (CaF₂ ⇌ Ca²⁺ + 2F⁻).",
+      "solution": {
+        "steps": ["Ks = [Ca²⁺][F⁻]²", "Ks = s × (2s)² = 4s³", "4s³ = 4×10⁻¹¹", "s³ = 10⁻¹¹", "s = 10⁻³·⁷ ≈ 2,15×10⁻⁴ mol/L"],
+        "final_answer": "s ≈ 2,2×10⁻⁴ mol/L"
+      },
+      "hints": ["Ks = 4s³"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-034",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Une solution contient [Ag⁺] = 10⁻⁶ M et [Cl⁻] = 10⁻⁴ M. Ks(AgCl) = 10⁻¹⁰. Y a-t-il précipitation ?",
+      "solution": {
+        "steps": ["Q = [Ag⁺][Cl⁻]", "Q = 10⁻⁶ × 10⁻⁴ = 10⁻¹⁰", "Q = Ks", "Système à l'équilibre, précipitation imminente"],
+        "final_answer": "À l'équilibre (précipitation possible)"
+      },
+      "hints": ["Comparer Q et Ks"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-035",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Pour une réaction d'ordre 1, calculer le temps pour que [A] = [A]₀/4 sachant k = 0,2 s⁻¹.",
+      "solution": {
+        "steps": ["[A]₀/4 = 2 demi-vies", "t = 2 × t₁/₂", "t₁/₂ = ln2/k = 3,5 s", "t = 2 × 3,5 = 7 s"],
+        "final_answer": "t = 7 s"
+      },
+      "hints": ["2 demi-vies"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-036",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Une réaction double de vitesse quand T passe de 20°C à 30°C. Estimer Ea (R = 8,314 J·mol⁻¹·K⁻¹).",
+      "solution": {
+        "steps": ["ln(k₂/k₁) = (Ea/R)(1/T₁ - 1/T₂)", "ln(2) = (Ea/8,314)(1/293 - 1/303)", "0,693 = Ea × 0,000114", "Ea ≈ 53 kJ/mol"],
+        "final_answer": "Ea ≈ 53 kJ/mol"
+      },
+      "hints": ["Loi d'Arrhenius"],
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-EX-037",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "On a 10 g de réactif théorique et on obtient 7 g. Quel rendement ?",
+      "solution": {
+        "steps": ["η = (7/10) × 100", "η = 70%"],
+        "final_answer": "η = 70%"
+      },
+      "hints": ["η = obtenu/théorique"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-038",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "RMN : doublet à 1,2 ppm (6H) et septuplet à 2,5 ppm (1H). Structure ?",
+      "solution": {
+        "steps": ["Doublet (6H) : 2 CH₃ équivalents voisins de 1H", "Septuplet (1H) : CH voisin de 6H", "Structure : (CH₃)₂CH- (isopropyle)"],
+        "final_answer": "Groupe isopropyle (CH₃)₂CH-"
+      },
+      "hints": ["Doublet-septuplet typique"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-039",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Calculer [OH⁻] pour pOH = 3.",
+      "solution": {
+        "steps": ["[OH⁻] = 10⁻ᵖᴼᴴ", "[OH⁻] = 10⁻³ mol/L"],
+        "final_answer": "[OH⁻] = 10⁻³ mol/L"
+      },
+      "hints": ["[OH⁻] = 10⁻ᵖᴼᴴ"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-040",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "pH d'une solution tampon avec 0,2 M d'acide (pKa=5,2) et 0,05 M de base conjuguée.",
+      "solution": {
+        "steps": ["pH = pKa + log([A⁻]/[AH])", "pH = 5,2 + log(0,05/0,2)", "pH = 5,2 + log(0,25)", "pH = 5,2 - 0,6 = 4,6"],
+        "final_answer": "pH = 4,6"
+      },
+      "hints": ["Henderson-Hasselbalch"],
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-EX-041",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Absorbance A = 0,5 avec ε = 1000 L·mol⁻¹·cm⁻¹ et l = 1 cm. Calculer c.",
+      "solution": {
+        "steps": ["A = ε·l·c", "0,5 = 1000 × 1 × c", "c = 0,5/1000", "c = 5×10⁻⁴ mol/L"],
+        "final_answer": "c = 5×10⁻⁴ mol/L"
+      },
+      "hints": ["c = A/(ε·l)"],
+      "related_lesson": "CHIT-16"
+    },
+    {
+      "id": "CHIT-EX-042",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Pour ordre 0, [A]₀ = 1 M, k = 0,1 M·s⁻¹. Quand [A] = 0 ?",
+      "solution": {
+        "steps": ["Ordre 0 : [A] = [A]₀ - kt", "0 = 1 - 0,1t", "t = 10 s"],
+        "final_answer": "t = 10 s"
+      },
+      "hints": ["[A] = [A]₀ - kt"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-043",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Synthèse en 2 étapes : η₁ = 85%, η₂ = 75%. Rendement global ?",
+      "solution": {
+        "steps": ["η_global = η₁ × η₂", "= 0,85 × 0,75", "= 0,6375 = 63,75%"],
+        "final_answer": "η ≈ 64%"
+      },
+      "hints": ["Multiplier"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-044",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "IR : bandes à 3000 cm⁻¹ (large), 1700 cm⁻¹ (intense). Fonction ?",
+      "solution": {
+        "steps": ["3000 cm⁻¹ large : O-H", "1700 cm⁻¹ : C=O", "Fonction : acide carboxylique"],
+        "final_answer": "Acide carboxylique"
+      },
+      "hints": ["O-H + C=O = acide"],
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-EX-045",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Solution HCl 10⁻³ M. Calculer pOH.",
+      "solution": {
+        "steps": ["pH = -log(10⁻³) = 3", "pOH = 14 - 3", "pOH = 11"],
+        "final_answer": "pOH = 11"
+      },
+      "hints": ["pH + pOH = 14"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-046",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Conductivité σ = 2 S·m⁻¹ pour NaCl. λ(Na⁺) = 5×10⁻³ S·m²·mol⁻¹, λ(Cl⁻) = 7,6×10⁻³ S·m²·mol⁻¹. Calculer [NaCl].",
+      "solution": {
+        "steps": ["σ = (λ_Na + λ_Cl) × [NaCl]", "2 = 12,6×10⁻³ × [NaCl]", "[NaCl] = 2/0,0126", "[NaCl] ≈ 159 mol/m³ = 0,159 mol/L"],
+        "final_answer": "[NaCl] ≈ 0,16 mol/L"
+      },
+      "hints": ["σ = Σλᵢ[Xᵢ]"],
+      "related_lesson": "CHIT-12"
+    },
+    {
+      "id": "CHIT-EX-047",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Ordre 1, t₁/₂ = 15 min. Calculer k.",
+      "solution": {
+        "steps": ["k = ln2/t₁/₂", "k = 0,693/15", "k ≈ 0,046 min⁻¹"],
+        "final_answer": "k ≈ 0,046 min⁻¹"
+      },
+      "hints": ["k = ln2/t₁/₂"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-048",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "SM : M⁺ = 60, pics à 45 (M-15) et 31 (M-29). Formule ?",
+      "solution": {
+        "steps": ["M = 60 : C₂H₄O₂ (60) ou autres", "M-15 : perte CH₃", "M-29 : perte CHO ou C₂H₅", "Structure probable : CH₃COOH (acide acétique)"],
+        "final_answer": "Acide éthanoïque (CH₃COOH)"
+      },
+      "hints": ["M-15 = CH₃"],
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-EX-049",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Dilution : 10 mL de HCl 0,1 M dans 90 mL d'eau. Nouveau pH ?",
+      "solution": {
+        "steps": ["C₂ = C₁V₁/V₂", "C₂ = 0,1×10/100 = 0,01 M", "pH = -log(0,01) = 2"],
+        "final_answer": "pH = 2"
+      },
+      "hints": ["Dilution puis pH"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-050",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Ks(PbI₂) = 8×10⁻⁹. Calculer s sachant PbI₂ ⇌ Pb²⁺ + 2I⁻.",
+      "solution": {
+        "steps": ["Ks = [Pb²⁺][I⁻]² = s(2s)² = 4s³", "4s³ = 8×10⁻⁹", "s³ = 2×10⁻⁹", "s = 1,26×10⁻³ mol/L"],
+        "final_answer": "s ≈ 1,3×10⁻³ mol/L"
+      },
+      "hints": ["Ks = 4s³"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-051",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Combien de demi-vies pour réduire [A] à 12,5% de [A]₀ ?",
+      "solution": {
+        "steps": ["12,5% = 1/8 de [A]₀", "1/8 = (1/2)³", "3 demi-vies"],
+        "final_answer": "3 demi-vies"
+      },
+      "hints": ["(1/2)ⁿ"],
+      "related_lesson": "CHIT-23"
+    },
+    {
+      "id": "CHIT-EX-052",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Économie d'atomes pour 2C₂H₅OH → C₄H₁₀O + H₂O (M(éther)=74, M(EtOH)=46).",
+      "solution": {
+        "steps": ["EA = M(produit)/M(réactifs)", "EA = 74/(2×46)", "EA = 74/92 ≈ 0,80 = 80%"],
+        "final_answer": "EA = 80%"
+      },
+      "hints": ["EA = M_produit/Σ M_réactifs"],
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-EX-053",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "RMN : singulet à 2,1 ppm (3H) et singulet à 2,4 ppm (2H). Identifier.",
+      "solution": {
+        "steps": ["Singulets : pas de couplage", "δ ≈ 2 ppm : CH₃ et CH₂ proches de C=O", "CH₃-CO-CH₂- (cétone)"],
+        "final_answer": "Cétone (type CH₃COCH₂-)"
+      },
+      "hints": ["Singulets = pas de voisins H"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-054",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "On titre 25 mL d'un acide faible (pKa=4,8) par NaOH 0,1 M. Véq = 20 mL. Calculer Ca.",
+      "solution": {
+        "steps": ["À l'équivalence : CₐVₐ = CᵦVᵦ", "Cₐ × 25 = 0,1 × 20", "Cₐ = 2/25", "Cₐ = 0,08 mol/L"],
+        "final_answer": "Cₐ = 0,08 mol/L"
+      },
+      "hints": ["CₐVₐ = CᵦVéq"],
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-EX-055",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Q = 5×10⁻¹¹, Ks = 10⁻¹⁰. Que se passe-t-il ?",
+      "solution": {
+        "steps": ["Q < Ks", "Pas de précipitation", "Dissolution si solide présent"],
+        "final_answer": "Pas de précipitation (Q < Ks)"
+      },
+      "hints": ["Q < Ks : dissolution"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-056",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Réaction d'ordre 2 : k = 0,05 L·mol⁻¹·s⁻¹, [A]₀ = 2 mol/L. Calculer t₁/₂.",
+      "solution": {
+        "steps": ["Ordre 2 : t₁/₂ = 1/(k[A]₀)", "t₁/₂ = 1/(0,05 × 2)", "t₁/₂ = 1/0,1 = 10 s"],
+        "final_answer": "t₁/₂ = 10 s"
+      },
+      "hints": ["t₁/₂ = 1/(k[A]₀)"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-057",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Masse théorique 50 g, obtenue 35 g. Rendement ?",
+      "solution": {
+        "steps": ["η = 35/50 × 100", "η = 70%"],
+        "final_answer": "η = 70%"
+      },
+      "hints": ["η = obtenu/théorique"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-058",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "IR : pas de bande 1700 cm⁻¹, large bande 3300 cm⁻¹. Fonction ?",
+      "solution": {
+        "steps": ["Pas de C=O", "O-H présent", "Fonction alcool"],
+        "final_answer": "Alcool"
+      },
+      "hints": ["O-H sans C=O = alcool"],
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-EX-059",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Relation entre pKa et pKb pour un couple conjugué.",
+      "solution": {
+        "steps": ["pKa + pKb = pKe", "pKa + pKb = 14"],
+        "final_answer": "pKa + pKb = 14"
+      },
+      "hints": ["pKa + pKb = 14"],
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-EX-060",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Calculer E° sachant E°(couple1) = 0,77 V, E°(couple2) = -0,76 V pour la réaction spontanée.",
+      "solution": {
+        "steps": ["ΔE° = E°(oxydant) - E°(réducteur)", "ΔE° = 0,77 - (-0,76)", "ΔE° = 1,53 V"],
+        "final_answer": "ΔE° = 1,53 V"
+      },
+      "hints": ["ΔE° = E°ox - E°red"],
+      "related_lesson": "CHIT-17"
+    },
+    {
+      "id": "CHIT-EX-061",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Ordre 1, [A]₀ = 0,8 M, après 30 s [A] = 0,2 M. Calculer k.",
+      "solution": {
+        "steps": ["ln([A]₀/[A]) = kt", "ln(0,8/0,2) = k × 30", "ln(4) = 30k", "k = 1,386/30 ≈ 0,046 s⁻¹"],
+        "final_answer": "k ≈ 0,046 s⁻¹"
+      },
+      "hints": ["ln([A]₀/[A]) = kt"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-062",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "4 étapes : η = 95%, 90%, 85%, 80%. Rendement global ?",
+      "solution": {
+        "steps": ["η_global = 0,95 × 0,90 × 0,85 × 0,80", "= 0,58 = 58%"],
+        "final_answer": "η ≈ 58%"
+      },
+      "hints": ["Multiplier tous"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-063",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "RMN : quadruplet à 2,4 ppm (2H) et triplet à 1,0 ppm (3H). Structure ?",
+      "solution": {
+        "steps": ["Quadruplet (2H) : CH₂ voisin de 3H", "Triplet (3H) : CH₃ voisin de 2H", "Structure : CH₃-CH₂-"],
+        "final_answer": "Groupe éthyle CH₃CH₂-"
+      },
+      "hints": ["Quadruplet-triplet typique"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-064",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "pH = 9 pour une solution de NH₃ à 0,1 M. Calculer Ka de NH₄⁺.",
+      "solution": {
+        "steps": ["pOH = 14 - 9 = 5", "Kb(NH₃) = 10⁻⁵", "Ka(NH₄⁺) × Kb(NH₃) = 10⁻¹⁴", "Ka = 10⁻¹⁴/10⁻⁵", "Ka = 10⁻⁹"],
+        "final_answer": "Ka(NH₄⁺) = 10⁻⁹"
+      },
+      "hints": ["Ka × Kb = Ke"],
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-EX-065",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Absorbance double quand concentration double. Vérifier Beer-Lambert.",
+      "solution": {
+        "steps": ["A = ε·l·c", "Si c → 2c alors A → 2A", "Vérifie Beer-Lambert"],
+        "final_answer": "Oui, vérifie la loi (A ∝ c)"
+      },
+      "hints": ["A proportionnelle à c"],
+      "related_lesson": "CHIT-16"
+    },
+    {
+      "id": "CHIT-EX-066",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Vitesse initiale v₀ = 0,01 M/s pour [A]₀ = 0,5 M. Si ordre 1, calculer k.",
+      "solution": {
+        "steps": ["v₀ = k[A]₀", "0,01 = k × 0,5", "k = 0,01/0,5", "k = 0,02 s⁻¹"],
+        "final_answer": "k = 0,02 s⁻¹"
+      },
+      "hints": ["v = k[A] pour ordre 1"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-067",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "10 g produit, 2 g déchets. Facteur E ?",
+      "solution": {
+        "steps": ["E = m_déchets/m_produit", "E = 2/10 = 0,2"],
+        "final_answer": "E = 0,2"
+      },
+      "hints": ["E = déchets/produit"],
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-EX-068",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "SM : M⁺ = 46, pic à 31 (M-15), pic à 29. Formule ?",
+      "solution": {
+        "steps": ["M = 46 : C₂H₆O (éthanol)", "M-15 : perte CH₃ → CH₂OH⁺ (31)", "Structure : CH₃CH₂OH"],
+        "final_answer": "Éthanol (CH₃CH₂OH)"
+      },
+      "hints": ["M = 46 = C₂H₆O"],
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-EX-069",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "NaOH 0,05 M. Calculer pH.",
+      "solution": {
+        "steps": ["[OH⁻] = 0,05 = 5×10⁻²", "pOH = -log(0,05) ≈ 1,3", "pH = 14 - 1,3 = 12,7"],
+        "final_answer": "pH ≈ 12,7"
+      },
+      "hints": ["Base forte"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-070",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Conductivité d'une solution double quand [ions] double. Expliquer.",
+      "solution": {
+        "steps": ["σ = Σλᵢ[Xᵢ]", "σ ∝ [ions]", "Si [ions] × 2 alors σ × 2"],
+        "final_answer": "Normal, σ proportionnelle à [ions]"
+      },
+      "hints": ["Loi de Kohlrausch"],
+      "related_lesson": "CHIT-12"
+    },
+    {
+      "id": "CHIT-EX-071",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "t₁/₂ = 20 min pour ordre 1. Après 60 min, quelle fraction reste ?",
+      "solution": {
+        "steps": ["60 min = 3 × t₁/₂", "[A] = [A]₀ × (1/2)³", "[A] = [A]₀/8", "Reste 1/8 = 12,5%"],
+        "final_answer": "12,5% restant"
+      },
+      "hints": ["(1/2)³"],
+      "related_lesson": "CHIT-23"
+    },
+    {
+      "id": "CHIT-EX-072",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Comparer 2 synthèses : A (3 étapes, η=60%) vs B (5 étapes, η=80% chacune). Laquelle ?",
+      "solution": {
+        "steps": ["A : η = 60%", "B : η = 0,8⁵ = 0,328 = 32,8%", "A meilleure"],
+        "final_answer": "Synthèse A (60% > 32,8%)"
+      },
+      "hints": ["Calculer rendement global"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-073",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "RMN : 1 seul singulet. Combien d'environnements H ?",
+      "solution": {
+        "steps": ["1 signal = 1 environnement", "Tous H équivalents"],
+        "final_answer": "1 environnement (H équivalents)"
+      },
+      "hints": ["1 signal = H équivalents"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-074",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Mélange : 50 mL pH=2 + 50 mL pH=12. pH final ?",
+      "solution": {
+        "steps": ["pH=2 : [H₃O⁺]=10⁻² M", "pH=12 : [OH⁻]=10⁻² M", "Quantités égales → neutralisation", "pH = 7"],
+        "final_answer": "pH = 7"
+      },
+      "hints": ["Neutralisation totale"],
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-EX-075",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Ks(BaSO₄) = 10⁻¹⁰. Solubilité s ?",
+      "solution": {
+        "steps": ["Ks = [Ba²⁺][SO₄²⁻] = s²", "s = √(10⁻¹⁰)", "s = 10⁻⁵ mol/L"],
+        "final_answer": "s = 10⁻⁵ mol/L"
+      },
+      "hints": ["Ks = s²"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-076",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "k double de 20°C à 30°C. Par combien k multiplie de 20°C à 40°C ?",
+      "solution": {
+        "steps": ["20-30°C : ×2", "30-40°C : ×2", "20-40°C : ×2 × ×2 = ×4"],
+        "final_answer": "k × 4"
+      },
+      "hints": ["Chaque 10°C : ×2"],
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-EX-077",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Rendement 72%, masse théorique 25 g. Masse obtenue ?",
+      "solution": {
+        "steps": ["m_obtenue = η × m_théorique", "= 0,72 × 25", "= 18 g"],
+        "final_answer": "m = 18 g"
+      },
+      "hints": ["m = η × m_théo"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-078",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "IR : 2200 cm⁻¹ (faible). Quelle liaison ?",
+      "solution": {
+        "steps": ["2200 cm⁻¹ : C≡C ou C≡N", "Liaison triple"],
+        "final_answer": "Liaison triple (alcyne ou nitrile)"
+      },
+      "hints": ["≡ vers 2200 cm⁻¹"],
+      "related_lesson": "CHIT-41"
+    },
+    {
+      "id": "CHIT-EX-079",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "pKa = 9,2. Calculer pKb de la base conjuguée.",
+      "solution": {
+        "steps": ["pKa + pKb = 14", "pKb = 14 - 9,2", "pKb = 4,8"],
+        "final_answer": "pKb = 4,8"
+      },
+      "hints": ["pKa + pKb = 14"],
+      "related_lesson": "CHIT-04"
+    },
+    {
+      "id": "CHIT-EX-080",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Absorbance = 0,8 dans cuve 2 cm. Dans cuve 1 cm, A = ?",
+      "solution": {
+        "steps": ["A = ε·l·c", "A₁/A₂ = l₁/l₂", "A₁/0,8 = 1/2", "A₁ = 0,4"],
+        "final_answer": "A = 0,4"
+      },
+      "hints": ["A ∝ l"],
+      "related_lesson": "CHIT-16"
+    },
+    {
+      "id": "CHIT-EX-081",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Ordre 1, 90% consommés. Combien de t₁/₂ ?",
+      "solution": {
+        "steps": ["Reste 10% = 0,1 = (1/2)ⁿ", "2ⁿ = 10", "n ≈ 3,3 demi-vies"],
+        "final_answer": "≈ 3,3 demi-vies"
+      },
+      "hints": ["log₂(10) ≈ 3,3"],
+      "related_lesson": "CHIT-23"
+    },
+    {
+      "id": "CHIT-EX-082",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Masse molaire réactif 100 g/mol, produit 150 g/mol. On a 50 g réactif, obtient 60 g produit. Rendement ?",
+      "solution": {
+        "steps": ["n_réactif = 50/100 = 0,5 mol", "m_théo = 0,5 × 150 = 75 g", "η = 60/75 = 0,8 = 80%"],
+        "final_answer": "η = 80%"
+      },
+      "hints": ["Calculer masse théorique"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-083",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "RMN : 2 singulets. Combien d'environnements ?",
+      "solution": {
+        "steps": ["2 signaux = 2 environnements", "2 types de H différents"],
+        "final_answer": "2 environnements"
+      },
+      "hints": ["Nombre signaux = nombre environnements"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-084",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "À demi-équivalence d'un titrage, pH = 5,3. Déduire pKa.",
+      "solution": {
+        "steps": ["À demi-équivalence : pH = pKa", "pKa = 5,3"],
+        "final_answer": "pKa = 5,3"
+      },
+      "hints": ["pH = pKa à demi-équivalence"],
+      "related_lesson": "CHIT-06"
+    },
+    {
+      "id": "CHIT-EX-085",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "[Ag⁺] = 2×10⁻⁵ M, [Cl⁻] = 3×10⁻⁶ M. Q = ?",
+      "solution": {
+        "steps": ["Q = [Ag⁺][Cl⁻]", "Q = 2×10⁻⁵ × 3×10⁻⁶", "Q = 6×10⁻¹¹"],
+        "final_answer": "Q = 6×10⁻¹¹"
+      },
+      "hints": ["Q = produit des concentrations"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-086",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Réaction : A → B. [A]₀ = 1 M, après 10 s [A] = 0,5 M, après 20 s [A] = 0,25 M. Ordre ?",
+      "solution": {
+        "steps": ["t₁/₂ = 10 s constant", "[A] × (1/2) chaque 10 s", "Ordre 1"],
+        "final_answer": "Ordre 1"
+      },
+      "hints": ["t₁/₂ constant → ordre 1"],
+      "related_lesson": "CHIT-24"
+    },
+    {
+      "id": "CHIT-EX-087",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Économie d'atomes 75%, M(réactifs) = 200 g/mol. M(produit) = ?",
+      "solution": {
+        "steps": ["EA = M_produit/M_réactifs", "0,75 = M_produit/200", "M_produit = 150 g/mol"],
+        "final_answer": "M_produit = 150 g/mol"
+      },
+      "hints": ["EA = M_p/M_r"],
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-EX-088",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "SM : pics à m/z = 57 (base) et M⁺ = 72. Formule probable ?",
+      "solution": {
+        "steps": ["M = 72 : C₄H₈O ou C₅H₁₂", "M-15 = 57 (perte CH₃)", "Pic base 57 : CH₃CH₂CO⁺", "Structure : butanone"],
+        "final_answer": "Butanone (CH₃COC₂H₅)"
+      },
+      "hints": ["M-15 fréquent"],
+      "related_lesson": "CHIT-43"
+    },
+    {
+      "id": "CHIT-EX-089",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "[H₃O⁺] = 3,2×10⁻⁵ M. Calculer pH.",
+      "solution": {
+        "steps": ["pH = -log(3,2×10⁻⁵)", "pH ≈ 4,5"],
+        "final_answer": "pH ≈ 4,5"
+      },
+      "hints": ["pH = -log[H₃O⁺]"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-090",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Solution 0,01 M d'un sel peu soluble, s = 10⁻⁵ M. Comparer à solubilité dans eau pure.",
+      "solution": {
+        "steps": ["Ion commun diminue solubilité", "s < s(eau pure)", "Effet d'ion commun"],
+        "final_answer": "Solubilité diminuée (ion commun)"
+      },
+      "hints": ["Ion commun → précipitation"],
+      "related_lesson": "CHIT-11"
+    },
+    {
+      "id": "CHIT-EX-091",
+      "chapter": "Cinétique chimique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Catalyseur divise t₁/₂ par 4. Par combien k est multiplié ?",
+      "solution": {
+        "steps": ["t₁/₂ = ln2/k", "t₁/₂ ÷ 4 ⇒ k × 4"],
+        "final_answer": "k × 4"
+      },
+      "hints": ["t₁/₂ ∝ 1/k"],
+      "related_lesson": "CHIT-22"
+    },
+    {
+      "id": "CHIT-EX-092",
+      "chapter": "Synthèse organique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Synthèse : 2 voies. A (2 étapes, 70% chacune) vs B (1 étape, 60%). Laquelle ?",
+      "solution": {
+        "steps": ["A : η = 0,7² = 0,49 = 49%", "B : η = 60%", "B meilleure"],
+        "final_answer": "Voie B (60% > 49%)"
+      },
+      "hints": ["Comparer rendements globaux"],
+      "related_lesson": "CHIT-34"
+    },
+    {
+      "id": "CHIT-EX-093",
+      "chapter": "Spectroscopie",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Intégration RMN : ratio 3:2:2. Nombre total H ?",
+      "solution": {
+        "steps": ["3+2+2 = 7", "7 protons minimum"],
+        "final_answer": "7 H (ou multiple de 7)"
+      },
+      "hints": ["Intégration = ratio relatif"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-094",
+      "chapter": "Acide-base",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Tampon : 0,3 M acide, 0,1 M base (pKa=4,5). Ajout de 0,05 M OH⁻. Nouveau pH ?",
+      "solution": {
+        "steps": ["[AH] = 0,3 - 0,05 = 0,25 M", "[A⁻] = 0,1 + 0,05 = 0,15 M", "pH = 4,5 + log(0,15/0,25)", "pH = 4,5 - 0,22 ≈ 4,3"],
+        "final_answer": "pH ≈ 4,3"
+      },
+      "hints": ["OH⁻ transforme AH en A⁻"],
+      "related_lesson": "CHIT-07"
+    },
+    {
+      "id": "CHIT-EX-095",
+      "chapter": "Transformations en solution",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Transmittance T = 50%. Calculer A.",
+      "solution": {
+        "steps": ["A = -log T", "A = -log(0,5)", "A ≈ 0,3"],
+        "final_answer": "A ≈ 0,3"
+      },
+      "hints": ["A = -log T"],
+      "related_lesson": "CHIT-16"
+    },
+    {
+      "id": "CHIT-EX-096",
+      "chapter": "Cinétique chimique",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Ea = 50 kJ/mol. Augmentation T de 25°C à 35°C multiplie k par combien ? (R=8,314)",
+      "solution": {
+        "steps": ["ln(k₂/k₁) = (Ea/R)(1/T₁-1/T₂)", "≈ (50000/8,314)(1/298-1/308)", "≈ 2,04", "k₂/k₁ ≈ e²·⁰⁴ ≈ 7,7"],
+        "final_answer": "k × 7,7"
+      },
+      "hints": ["Arrhenius"],
+      "related_lesson": "CHIT-25"
+    },
+    {
+      "id": "CHIT-EX-097",
+      "chapter": "Synthèse organique",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Facteur E = 0,15. Interprétation ?",
+      "solution": {
+        "steps": ["E faible = peu de déchets", "E = 0,15 : 15 g déchets pour 100 g produit", "Bon pour environnement"],
+        "final_answer": "Peu de déchets (réaction verte)"
+      },
+      "hints": ["E faible = bon"],
+      "related_lesson": "CHIT-35"
+    },
+    {
+      "id": "CHIT-EX-098",
+      "chapter": "Spectroscopie",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "RMN : δ = 10,5 ppm (1H, singulet échangeable D₂O). Fonction ?",
+      "solution": {
+        "steps": ["δ très déblindé + échangeable", "H mobile : OH ou COOH", "δ > 10 ppm : COOH"],
+        "final_answer": "Acide carboxylique (-COOH)"
+      },
+      "hints": ["H acide très déblindé"],
+      "related_lesson": "CHIT-42"
+    },
+    {
+      "id": "CHIT-EX-099",
+      "chapter": "Acide-base",
+      "difficulty": 2,
+      "points": 15,
+      "time_limit_minutes": 8,
+      "problem": "Solution pH = 7. Neutre, acide ou basique ?",
+      "solution": {
+        "steps": ["pH = 7 : neutre à 25°C"],
+        "final_answer": "Neutre"
+      },
+      "hints": ["pH = 7 à 25°C"],
+      "related_lesson": "CHIT-03"
+    },
+    {
+      "id": "CHIT-EX-100",
+      "chapter": "Transformations en solution",
+      "difficulty": 3,
+      "points": 20,
+      "time_limit_minutes": 10,
+      "problem": "Kf (constante formation complexe) = 10⁸. Le complexe est-il stable ?",
+      "solution": {
+        "steps": ["Kf >> 1", "Formation favorisée", "Complexe très stable"],
+        "final_answer": "Oui, très stable"
+      },
+      "hints": ["Kf grand = stable"],
+      "related_lesson": "CHIT-13"
+    }
+  ]
+}

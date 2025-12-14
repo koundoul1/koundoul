@@ -1,0 +1,306 @@
+[
+  {
+    "id": "M2-01",
+    "content_sections": [
+      {
+        "title": "Introduction",
+        "content": "Découvrir et distinguer les ensembles de nombres ℕ, ℤ, ℚ, ℝ, leur organisation et les inclusions."
+      },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Identifier et caractériser ℕ, ℤ, ℚ, ℝ",
+          "Reconnaître l'appartenance d'un nombre à un ensemble",
+          "Comprendre les inclusions entre ensembles",
+          "Utiliser la notation d'appartenance ∈"
+        ]
+      },
+      {
+        "title": "Prérequis",
+        "items": ["Notions de nombres entiers et décimaux (Collège)"]
+      },
+      {
+        "title": "Concepts clés",
+        "items": [
+          "ℕ = {0, 1, 2, ...} : entiers naturels (0 inclus)",
+          "ℤ = {..., -2, -1, 0, 1, 2, ...} : entiers relatifs",
+          "ℚ = {p/q | p ∈ ℤ, q ∈ ℤ*} : rationnels",
+          "ℝ : tous les réels (rationnels et irrationnels comme √2, π)",
+          "Inclusions : ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ"
+        ]
+      },
+      {
+        "title": "Formules / Faits",
+        "items": [
+          "ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ",
+          "a ∈ ℚ ⇔ ∃(p,q)∈ℤ×ℤ*, a = p/q"
+        ]
+      },
+      {
+        "title": "Exemple guidé",
+        "content": "Classer 5, -3, 1/2, √2 : 5 ∈ ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ; -3 ∈ ℤ ⊂ ℚ ⊂ ℝ ; 1/2 ∈ ℚ ⊂ ℝ ; √2 ∈ ℝ mais √2 ∉ ℚ."
+      },
+      {
+        "title": "Quiz (sélection)",
+        "items": [
+          "ℕ contient les entiers positifs ou nuls",
+          "-5 ∈ ℤ, donc aussi ℚ et ℝ",
+          "0,333... = 1/3 ∈ ℚ",
+          "7/2 ∈ ℚ",
+          "ℚ ⊂ ℝ"
+        ]
+      },
+      {
+        "title": "Exercices",
+        "items": [
+          "Classifier : 8, -3, 2/5, √5, π, 0",
+          "Vrai/Faux : 0 ∈ ℕ ; -1,5 ∈ ℤ ; 3,75 ∈ ℚ ; tout réel est rationnel"
+        ]
+      },
+      {
+        "title": "Astuces",
+        "items": [
+          "Mnémos : ℕ (Natural), ℤ (Zahlen), ℚ (Quotient), ℝ (Réels)",
+          "Tout décimal non entier est rationnel",
+          "Les √ de non-carrés parfaits sont irrationnels"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "M2-02",
+    "content_sections": [
+      { "title": "Introduction", "content": "La valeur absolue mesure une distance sur la droite réelle." },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Définir et calculer |x|",
+          "Interpréter géométriquement |x|",
+          "Résoudre des équations avec |.|",
+          "Mesurer des distances |a-b|"
+        ]
+      },
+      { "title": "Prérequis", "items": ["M2-01 : Ensembles de nombres", "Notion de distance"] },
+      {
+        "title": "Concepts clés",
+        "items": [
+          "|x| = x si x≥0, et -x si x<0",
+          "|x| = distance(x,0)",
+          "|a-b| = distance(a,b)",
+          "|x| ≥ 0 et |x|=0 ⇔ x=0"
+        ]
+      },
+      {
+        "title": "Formules / Faits",
+        "items": [
+          "|x| = { x si x≥0 ; -x si x<0",
+          "|a-b| = distance entre a et b",
+          "|x| = a ⇔ x = a ou x = -a (a≥0)",
+          "|xy| = |x||y| ; |x+y| ≤ |x|+|y|"
+        ]
+      },
+      {
+        "title": "Exemple guidé",
+        "content": "Résoudre |x-2|=3 ⇒ x=5 ou x=-1. Interprétation : points à distance 3 de 2."
+      },
+      { "title": "Exercices", "items": ["Calculs directs avec |.|", "Équations |x|=a, |x+c|=a, |ax+b|=a"] },
+      {
+        "title": "Astuces",
+        "items": [
+          "Toujours penser ‘distance’",
+          "Pour |x|=a, envisager x=a et x=-a",
+          "|x-a| = distance(x,a)"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "M2-03",
+    "content_sections": [
+      { "title": "Introduction", "content": "Intervalles de ℝ : notation, représentation, opérations (∩, ∪)." },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Définir/Noter les intervalles",
+          "Représenter graphiquement",
+          "Intersection et réunion",
+          "Appartenance"
+        ]
+      },
+      { "title": "Prérequis", "items": ["M2-01 : Ensembles", "M2-02 : Valeur absolue", "Ordre sur ℝ"] },
+      {
+        "title": "Concepts clés",
+        "items": [
+          "[a;b] : a≤x≤b ; ]a;b[ : a<x<b",
+          "[a;b[ et ]a;b] : semi-ouverts",
+          "[a;+∞[ ; ]-∞;b] ; ]-∞;+∞[=ℝ",
+          "Opérations : I∩J, I∪J"
+        ]
+      },
+      {
+        "title": "Formules / Faits",
+        "items": [
+          "Crochets fermés ⇒ borne incluse",
+          "I∩J : éléments communs ; I∪J : tous les éléments",
+          "x ∈ [a;b] ⇔ a≤x≤b"
+        ]
+      },
+      { "title": "Exemple guidé", "content": "[1;4] ∩ [3;6] = [3;4], [0;2] ∪ [1;3] = [0;3]." },
+      { "title": "Exercices", "items": ["Tracer [−1;3], ]2;5[, [0;+∞[", "Calculer des ∩ et ∪ d’intervalles"] },
+      { "title": "Astuces", "items": ["Infini toujours ouvert", "Pour ∩, prendre la borne la plus restrictive"] }
+    ]
+  },
+  {
+    "id": "M2-04",
+    "content_sections": [
+      { "title": "Introduction", "content": "Puissances d’exposant entier : définitions et règles de calcul." },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Maîtriser a^n (n∈ℤ)",
+          "Appliquer les règles (produit, quotient, puissance de puissance)",
+          "Simplifier des expressions",
+          "Résoudre des équations simples"
+        ]
+      },
+      { "title": "Prérequis", "items": ["Multiplication (Collège)", "Puissances d’exposant entier positif"] },
+      {
+        "title": "Concepts clés",
+        "items": [
+          "a^n : répétition de multiplications (n>0)",
+          "a^0=1 (a≠0)",
+          "a^{−n}=1/a^n (a≠0)",
+          "a^m×a^n=a^{m+n} ; a^m/a^n=a^{m−n} ; (a^m)^n=a^{mn}"
+        ]
+      },
+      { "title": "Formules / Faits", "items": ["(ab)^n=a^n b^n", "(a/b)^n=a^n/b^n (b≠0)"] },
+      { "title": "Exemple guidé", "content": "(2^3)^2=2^6=64 ; 5^6/5^2=5^4." },
+      { "title": "Exercices", "items": ["Simplifier 2^4×2^3 ; 5^7/5^4 ; (3^2)^3 ; 10^{−2}", "(x^2×x^5)/(x^3)^2"] },
+      { "title": "Astuces", "items": ["Exposant négatif ⇒ inverse", "Procéder étape par étape"] }
+    ]
+  },
+  {
+    "id": "M2-05",
+    "content_sections": [
+      { "title": "Introduction", "content": "Racines carrées : définition sur ℝ, propriétés et simplifications." },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Définir √a (a≥0)",
+          "Calculer et simplifier",
+          "Utiliser les propriétés",
+          "Résoudre avec racines"
+        ]
+      },
+      { "title": "Prérequis", "items": ["M2-04 : Puissances", "Carré d’un nombre"] },
+      {
+        "title": "Concepts clés",
+        "items": [
+          "√a ≥ 0 et (√a)^2=a (a≥0)",
+          "√(ab)=√a√b (a,b≥0)",
+          "√a/√b=√(a/b) (a≥0,b>0)",
+          "√(a^2 b)=a√b (a≥0,b≥0)"
+        ]
+      },
+      { "title": "Formules / Faits", "items": ["√(a^2)=|a|", "Attention : √(a+b) ≠ √a+√b"] },
+      { "title": "Exemple guidé", "content": "√18=√(9×2)=3√2 ; √12/√3=√4=2." },
+      { "title": "Exercices", "items": ["Calculs sans calculatrice", "Simplifications (√32, √75, √(4x^2), x≥0)"] },
+      { "title": "Astuces", "items": ["Extraire le plus grand carré parfait", "√2≈1,414 ; √3≈1,732"] }
+    ]
+  },
+  {
+    "id": "M2-06",
+    "content_sections": [
+      { "title": "Introduction", "content": "Calculs avec fractions : addition, soustraction, multiplication, division, simplification." },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Additionner/Soustraire (dénominateur commun)",
+          "Multiplier/Diviser",
+          "Simplifier (PGCD)",
+          "Gérer des fractions complexes"
+        ]
+      },
+      { "title": "Prérequis", "items": ["Fractions (Collège)", "M2-01 : ℚ", "Simplification"] },
+      { "title": "Concepts clés", "items": ["a/b + c/d = (ad+bc)/(bd)", "a/b × c/d = (ac)/(bd)", "(a/b) ÷ (c/d) = (ad)/(bc)"] },
+      { "title": "Formules / Faits", "items": ["a/b=(ka)/(kb) (k≠0)"] },
+      { "title": "Exemple guidé", "content": "(1/2+1/3)/(1/4) = 5/6 ÷ 1/4 = 20/6 = 10/3." },
+      { "title": "Exercices", "items": ["Opérations et simplifications", "Fractions complexes"] },
+      { "title": "Astuces", "items": ["Addition : dénominateur commun", "Division : multiplier par l’inverse"] }
+    ]
+  },
+  {
+    "id": "M2-07",
+    "content_sections": [
+      { "title": "Introduction", "content": "Calcul littéral : développer, réduire et factoriser des expressions." },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Développer (distributivité simple et double)",
+          "Factoriser (facteur commun)",
+          "Réduire des expressions",
+          "Reconnaître les termes semblables"
+        ]
+      },
+      { "title": "Prérequis", "items": ["Distributivité (Collège)", "Priorité des opérations", "Facteur commun"] },
+      {
+        "title": "Concepts clés",
+        "items": [
+          "k(a+b)=ka+kb",
+          "(a+b)(c+d)=ac+ad+bc+bd",
+          "ab+ac=a(b+c)",
+          "Réduction : regrouper termes semblables"
+        ]
+      },
+      { "title": "Formules / Faits", "items": ["ka+kb=k(a+b)", "a(b+c)+a(d+e)=a(b+c+d+e)"] },
+      { "title": "Exemple guidé", "content": "(x+4)(x−2)=x^2+2x−8 ; 6x+12=6(x+2)." },
+      { "title": "Exercices", "items": ["Développer et réduire", "Factoriser par facteur commun"] },
+      { "title": "Astuces", "items": ["Multiplier tout par tout", "Toujours vérifier en redéveloppant"] }
+    ]
+  },
+  {
+    "id": "M2-08",
+    "content_sections": [
+      { "title": "Introduction", "content": "Identités remarquables : (a±b)^2 et différence de carrés a^2−b^2." },
+      {
+        "title": "Objectifs",
+        "items": [
+          "Connaître les 3 identités",
+          "Développer avec (a±b)^2",
+          "Factoriser avec a^2−b^2",
+          "Calculs numériques astucieux"
+        ]
+      },
+      { "title": "Prérequis", "items": ["M2-07 : Calcul littéral", "Notion de carré"] },
+      {
+        "title": "Concepts clés",
+        "items": [
+          "(a+b)^2=a^2+2ab+b^2",
+          "(a−b)^2=a^2−2ab+b^2",
+          "a^2−b^2=(a+b)(a−b)",
+          "Reconnaissance des formes"
+        ]
+      },
+      {
+        "title": "Formules / Faits",
+        "items": [
+          "(a+b)^2 ≠ a^2+b^2",
+          "(a+b)(a−b)=a^2−b^2"
+        ]
+      },
+      { "title": "Exemple guidé", "content": "(x+5)^2=x^2+10x+25 ; x^2−16=(x+4)(x−4) ; (3y+1)(3y−1)=9y^2−1." },
+      { "title": "Exercices", "items": ["Développer (x+7)^2, (2a−5)^2", "Factoriser 9a^2−12a+4, 16−x^2", "Applications numériques : 101^2, 99^2, 103×97"] },
+      { "title": "Astuces", "items": ["Identifier a et b avant d’appliquer", "Terme 2ab crucial", "Utile pour calcul mental rapide"] }
+    ]
+  }
+]
+
+
+
+
+
+
+
+
+
+

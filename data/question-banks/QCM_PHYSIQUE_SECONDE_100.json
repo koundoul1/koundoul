@@ -1,0 +1,1621 @@
+{
+  "bank_info": {
+    "title": "Banque QCM - Physique Seconde",
+    "level": "Seconde",
+    "subject": "Physique",
+    "type": "QCM",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Mouvement & Vitesse",
+      "Ondes & Signaux",
+      "Énergie"
+    ],
+    "difficulty_distribution": {
+      "facile": 35,
+      "moyen": 45,
+      "difficile": 20
+    }
+  },
+  "questions": [
+    {
+      "id": "P2-QCM-001",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "Un référentiel est :",
+      "options": [
+        {"id": "A", "text": "Un objet par rapport auquel on étudie le mouvement", "is_correct": true},
+        {"id": "B", "text": "Une trajectoire", "is_correct": false},
+        {"id": "C", "text": "Une vitesse", "is_correct": false},
+        {"id": "D", "text": "Une force", "is_correct": false}
+      ],
+      "explanation": "Un référentiel est un système de coordonnées (objet ou système d'objets) par rapport auquel on étudie le mouvement.",
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-QCM-002",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "La trajectoire d'un mobile est :",
+      "options": [
+        {"id": "A", "text": "L'ensemble des positions successives", "is_correct": true},
+        {"id": "B", "text": "Sa vitesse", "is_correct": false},
+        {"id": "C", "text": "Son accélération", "is_correct": false},
+        {"id": "D", "text": "Son référentiel", "is_correct": false}
+      ],
+      "explanation": "La trajectoire est la ligne formée par l'ensemble des positions occupées successivement par le mobile.",
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-QCM-003",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "La vitesse moyenne se calcule par :",
+      "options": [
+        {"id": "A", "text": "v = d/t", "is_correct": true},
+        {"id": "B", "text": "v = t/d", "is_correct": false},
+        {"id": "C", "text": "v = d×t", "is_correct": false},
+        {"id": "D", "text": "v = t−d", "is_correct": false}
+      ],
+      "explanation": "Vitesse moyenne = distance parcourue / durée du parcours. v = d/t.",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-004",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "L'unité SI de la vitesse est :",
+      "options": [
+        {"id": "A", "text": "m/s", "is_correct": true},
+        {"id": "B", "text": "km/h", "is_correct": false},
+        {"id": "C", "text": "m/s²", "is_correct": false},
+        {"id": "D", "text": "m", "is_correct": false}
+      ],
+      "explanation": "L'unité SI (Système International) de la vitesse est le mètre par seconde (m/s).",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-005",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un mobile parcourt 100 m en 5 s. Sa vitesse moyenne est :",
+      "options": [
+        {"id": "A", "text": "20 m/s", "is_correct": true},
+        {"id": "B", "text": "500 m/s", "is_correct": false},
+        {"id": "C", "text": "0.05 m/s", "is_correct": false},
+        {"id": "D", "text": "5 m/s", "is_correct": false}
+      ],
+      "explanation": "v = d/t = 100/5 = 20 m/s.",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-006",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Convertir 72 km/h en m/s :",
+      "options": [
+        {"id": "A", "text": "20 m/s", "is_correct": true},
+        {"id": "B", "text": "72 m/s", "is_correct": false},
+        {"id": "C", "text": "7.2 m/s", "is_correct": false},
+        {"id": "D", "text": "200 m/s", "is_correct": false}
+      ],
+      "explanation": "72 km/h = 72 × (1000/3600) = 72/3.6 = 20 m/s.",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-007",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "Dans un mouvement rectiligne uniforme (MRU) :",
+      "options": [
+        {"id": "A", "text": "La vitesse est constante", "is_correct": true},
+        {"id": "B", "text": "La vitesse augmente", "is_correct": false},
+        {"id": "C", "text": "La vitesse diminue", "is_correct": false},
+        {"id": "D", "text": "La vitesse varie", "is_correct": false}
+      ],
+      "explanation": "MRU : mouvement sur une trajectoire rectiligne avec vitesse constante.",
+      "related_lesson": "P2-05"
+    },
+    {
+      "id": "P2-QCM-008",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Dans un MRUA, l'accélération est :",
+      "options": [
+        {"id": "A", "text": "Constante et non nulle", "is_correct": true},
+        {"id": "B", "text": "Nulle", "is_correct": false},
+        {"id": "C", "text": "Variable", "is_correct": false},
+        {"id": "D", "text": "Négative", "is_correct": false}
+      ],
+      "explanation": "MRUA : Mouvement Rectiligne Uniformément Accéléré, l'accélération est constante et ≠ 0.",
+      "related_lesson": "P2-06"
+    },
+    {
+      "id": "P2-QCM-009",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "L'unité SI de l'accélération est :",
+      "options": [
+        {"id": "A", "text": "m/s²", "is_correct": true},
+        {"id": "B", "text": "m/s", "is_correct": false},
+        {"id": "C", "text": "m²/s", "is_correct": false},
+        {"id": "D", "text": "s/m", "is_correct": false}
+      ],
+      "explanation": "L'accélération mesure la variation de vitesse par unité de temps : m/s².",
+      "related_lesson": "P2-06"
+    },
+    {
+      "id": "P2-QCM-010",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "En chute libre (sans frottements), l'accélération vaut environ :",
+      "options": [
+        {"id": "A", "text": "9.8 m/s²", "is_correct": true},
+        {"id": "B", "text": "1 m/s²", "is_correct": false},
+        {"id": "C", "text": "10 km/h", "is_correct": false},
+        {"id": "D", "text": "0 m/s²", "is_correct": false}
+      ],
+      "explanation": "L'accélération de la pesanteur g ≈ 9.8 m/s² à la surface de la Terre.",
+      "related_lesson": "P2-07"
+    },
+    {
+      "id": "P2-QCM-011",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "Une onde mécanique nécessite :",
+      "options": [
+        {"id": "A", "text": "Un milieu matériel pour se propager", "is_correct": true},
+        {"id": "B", "text": "Le vide", "is_correct": false},
+        {"id": "C", "text": "De la lumière", "is_correct": false},
+        {"id": "D", "text": "De l'électricité", "is_correct": false}
+      ],
+      "explanation": "Une onde mécanique a besoin d'un milieu matériel (solide, liquide, gaz) pour se propager.",
+      "related_lesson": "P2-08"
+    },
+    {
+      "id": "P2-QCM-012",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "Les ondes sonores sont des ondes :",
+      "options": [
+        {"id": "A", "text": "Mécaniques longitudinales", "is_correct": true},
+        {"id": "B", "text": "Électromagnétiques", "is_correct": false},
+        {"id": "C", "text": "Lumineuses", "is_correct": false},
+        {"id": "D", "text": "Transversales", "is_correct": false}
+      ],
+      "explanation": "Les ondes sonores sont mécaniques (besoin d'un milieu) et longitudinales (vibrations parallèles à la direction de propagation).",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-013",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "La fréquence d'une onde est :",
+      "options": [
+        {"id": "A", "text": "Le nombre d'oscillations par seconde", "is_correct": true},
+        {"id": "B", "text": "La durée d'une oscillation", "is_correct": false},
+        {"id": "C", "text": "La distance parcourue", "is_correct": false},
+        {"id": "D", "text": "L'amplitude", "is_correct": false}
+      ],
+      "explanation": "La fréquence f (en Hz) est le nombre de cycles par seconde.",
+      "related_lesson": "P2-10"
+    },
+    {
+      "id": "P2-QCM-014",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "L'unité de la fréquence est :",
+      "options": [
+        {"id": "A", "text": "Hertz (Hz)", "is_correct": true},
+        {"id": "B", "text": "Seconde (s)", "is_correct": false},
+        {"id": "C", "text": "Mètre (m)", "is_correct": false},
+        {"id": "D", "text": "Watt (W)", "is_correct": false}
+      ],
+      "explanation": "La fréquence se mesure en Hertz (Hz), soit des cycles par seconde.",
+      "related_lesson": "P2-10"
+    },
+    {
+      "id": "P2-QCM-015",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "La relation entre période T et fréquence f est :",
+      "options": [
+        {"id": "A", "text": "T = 1/f", "is_correct": true},
+        {"id": "B", "text": "T = f", "is_correct": false},
+        {"id": "C", "text": "T = f²", "is_correct": false},
+        {"id": "D", "text": "T = 2f", "is_correct": false}
+      ],
+      "explanation": "Période et fréquence sont inverses : T = 1/f.",
+      "related_lesson": "P2-10"
+    },
+    {
+      "id": "P2-QCM-016",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "La longueur d'onde λ est liée à la vitesse v et à la fréquence f par :",
+      "options": [
+        {"id": "A", "text": "λ = v/f", "is_correct": true},
+        {"id": "B", "text": "λ = vf", "is_correct": false},
+        {"id": "C", "text": "λ = f/v", "is_correct": false},
+        {"id": "D", "text": "λ = v + f", "is_correct": false}
+      ],
+      "explanation": "Longueur d'onde = vitesse / fréquence. λ = v/f = vT.",
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-QCM-017",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "La vitesse du son dans l'air est environ :",
+      "options": [
+        {"id": "A", "text": "340 m/s", "is_correct": true},
+        {"id": "B", "text": "3×10⁸ m/s", "is_correct": false},
+        {"id": "C", "text": "1500 m/s", "is_correct": false},
+        {"id": "D", "text": "34 m/s", "is_correct": false}
+      ],
+      "explanation": "La vitesse du son dans l'air à 20°C est d'environ 340 m/s.",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-018",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "La lumière est une onde :",
+      "options": [
+        {"id": "A", "text": "Électromagnétique", "is_correct": true},
+        {"id": "B", "text": "Mécanique", "is_correct": false},
+        {"id": "C", "text": "Sonore", "is_correct": false},
+        {"id": "D", "text": "Sismique", "is_correct": false}
+      ],
+      "explanation": "La lumière est une onde électromagnétique qui peut se propager dans le vide.",
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-QCM-019",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "La vitesse de la lumière dans le vide est environ :",
+      "options": [
+        {"id": "A", "text": "3×10⁸ m/s", "is_correct": true},
+        {"id": "B", "text": "340 m/s", "is_correct": false},
+        {"id": "C", "text": "3000 m/s", "is_correct": false},
+        {"id": "D", "text": "3×10⁶ m/s", "is_correct": false}
+      ],
+      "explanation": "La vitesse de la lumière c ≈ 3×10⁸ m/s = 300 000 km/s.",
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-QCM-020",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Le spectre électromagnétique visible s'étend environ de :",
+      "options": [
+        {"id": "A", "text": "400 nm à 800 nm", "is_correct": true},
+        {"id": "B", "text": "1 m à 10 m", "is_correct": false},
+        {"id": "C", "text": "1 km à 10 km", "is_correct": false},
+        {"id": "D", "text": "1 nm à 10 nm", "is_correct": false}
+      ],
+      "explanation": "La lumière visible va d'environ 400 nm (violet) à 800 nm (rouge).",
+      "related_lesson": "P2-14"
+    },
+    {
+      "id": "P2-QCM-021",
+      "chapter": "Énergie",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "L'énergie cinétique dépend de :",
+      "options": [
+        {"id": "A", "text": "La masse et la vitesse", "is_correct": true},
+        {"id": "B", "text": "La hauteur seulement", "is_correct": false},
+        {"id": "C", "text": "La température", "is_correct": false},
+        {"id": "D", "text": "La couleur", "is_correct": false}
+      ],
+      "explanation": "L'énergie cinétique Ec = ½mv² dépend de la masse m et de la vitesse v.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-022",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "La formule de l'énergie cinétique est :",
+      "options": [
+        {"id": "A", "text": "Ec = ½mv²", "is_correct": true},
+        {"id": "B", "text": "Ec = mgh", "is_correct": false},
+        {"id": "C", "text": "Ec = mv", "is_correct": false},
+        {"id": "D", "text": "Ec = m²v", "is_correct": false}
+      ],
+      "explanation": "Énergie cinétique : Ec = ½mv² où m est la masse et v la vitesse.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-023",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "L'unité SI de l'énergie est :",
+      "options": [
+        {"id": "A", "text": "Joule (J)", "is_correct": true},
+        {"id": "B", "text": "Watt (W)", "is_correct": false},
+        {"id": "C", "text": "Newton (N)", "is_correct": false},
+        {"id": "D", "text": "Kilogramme (kg)", "is_correct": false}
+      ],
+      "explanation": "L'énergie se mesure en Joules (J) dans le système international.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-024",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un objet de 2 kg se déplace à 5 m/s. Son énergie cinétique est :",
+      "options": [
+        {"id": "A", "text": "25 J", "is_correct": true},
+        {"id": "B", "text": "10 J", "is_correct": false},
+        {"id": "C", "text": "50 J", "is_correct": false},
+        {"id": "D", "text": "5 J", "is_correct": false}
+      ],
+      "explanation": "Ec = ½mv² = ½ × 2 × 5² = ½ × 2 × 25 = 25 J.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-025",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "L'énergie potentielle de pesanteur dépend de :",
+      "options": [
+        {"id": "A", "text": "La masse, g et l'altitude", "is_correct": true},
+        {"id": "B", "text": "La vitesse seulement", "is_correct": false},
+        {"id": "C", "text": "La température", "is_correct": false},
+        {"id": "D", "text": "La couleur", "is_correct": false}
+      ],
+      "explanation": "Énergie potentielle de pesanteur : Ep = mgh (masse, gravité, hauteur).",
+      "related_lesson": "P2-16"
+    },
+    {
+      "id": "P2-QCM-026",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "La formule de l'énergie potentielle de pesanteur est :",
+      "options": [
+        {"id": "A", "text": "Ep = mgh", "is_correct": true},
+        {"id": "B", "text": "Ep = ½mv²", "is_correct": false},
+        {"id": "C", "text": "Ep = mv", "is_correct": false},
+        {"id": "D", "text": "Ep = m/h", "is_correct": false}
+      ],
+      "explanation": "Énergie potentielle de pesanteur : Ep = mgh où h est la hauteur.",
+      "related_lesson": "P2-16"
+    },
+    {
+      "id": "P2-QCM-027",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un objet de 5 kg est à 10 m de hauteur (g = 10 m/s²). Son Ep vaut :",
+      "options": [
+        {"id": "A", "text": "500 J", "is_correct": true},
+        {"id": "B", "text": "50 J", "is_correct": false},
+        {"id": "C", "text": "5000 J", "is_correct": false},
+        {"id": "D", "text": "100 J", "is_correct": false}
+      ],
+      "explanation": "Ep = mgh = 5 × 10 × 10 = 500 J.",
+      "related_lesson": "P2-16"
+    },
+    {
+      "id": "P2-QCM-028",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "Dans un système isolé, l'énergie mécanique totale est :",
+      "options": [
+        {"id": "A", "text": "Conservée", "is_correct": true},
+        {"id": "B", "text": "Augmente", "is_correct": false},
+        {"id": "C", "text": "Diminue", "is_correct": false},
+        {"id": "D", "text": "Variable", "is_correct": false}
+      ],
+      "explanation": "Principe de conservation de l'énergie mécanique : Em = Ec + Ep = constante (sans frottements).",
+      "related_lesson": "P2-17"
+    },
+    {
+      "id": "P2-QCM-029",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "L'énergie mécanique est la somme de :",
+      "options": [
+        {"id": "A", "text": "Ec + Ep", "is_correct": true},
+        {"id": "B", "text": "Ec − Ep", "is_correct": false},
+        {"id": "C", "text": "Ec × Ep", "is_correct": false},
+        {"id": "D", "text": "Ec / Ep", "is_correct": false}
+      ],
+      "explanation": "Énergie mécanique : Em = Ec + Ep.",
+      "related_lesson": "P2-17"
+    },
+    {
+      "id": "P2-QCM-030",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "La puissance est :",
+      "options": [
+        {"id": "A", "text": "L'énergie par unité de temps", "is_correct": true},
+        {"id": "B", "text": "L'énergie totale", "is_correct": false},
+        {"id": "C", "text": "La vitesse", "is_correct": false},
+        {"id": "D", "text": "La force", "is_correct": false}
+      ],
+      "explanation": "Puissance P = Énergie / temps. Elle mesure le débit d'énergie.",
+      "related_lesson": "P2-19"
+    },
+    {
+      "id": "P2-QCM-031",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "Le mouvement relatif signifie que :",
+      "options": [
+        {"id": "A", "text": "Le mouvement dépend du référentiel", "is_correct": true},
+        {"id": "B", "text": "Tous les mouvements sont identiques", "is_correct": false},
+        {"id": "C", "text": "Il n'y a pas de mouvement", "is_correct": false},
+        {"id": "D", "text": "La vitesse est nulle", "is_correct": false}
+      ],
+      "explanation": "Un mouvement est relatif au référentiel choisi. Un passager dans un train est immobile par rapport au train mais mobile par rapport au sol.",
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-QCM-032",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Une voiture roule à vitesse constante de 90 km/h pendant 2h. La distance parcourue est :",
+      "options": [
+        {"id": "A", "text": "180 km", "is_correct": true},
+        {"id": "B", "text": "45 km", "is_correct": false},
+        {"id": "C", "text": "90 km", "is_correct": false},
+        {"id": "D", "text": "360 km", "is_correct": false}
+      ],
+      "explanation": "d = v × t = 90 × 2 = 180 km.",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-033",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "La vitesse instantanée se mesure :",
+      "options": [
+        {"id": "A", "text": "À un instant précis", "is_correct": true},
+        {"id": "B", "text": "Sur toute la durée du trajet", "is_correct": false},
+        {"id": "C", "text": "Au début seulement", "is_correct": false},
+        {"id": "D", "text": "À la fin seulement", "is_correct": false}
+      ],
+      "explanation": "La vitesse instantanée est la vitesse à un instant donné (limite de Δd/Δt quand Δt→0).",
+      "related_lesson": "P2-04"
+    },
+    {
+      "id": "P2-QCM-034",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un objet en chute libre (sans frottements) a un mouvement :",
+      "options": [
+        {"id": "A", "text": "Rectiligne uniformément accéléré", "is_correct": true},
+        {"id": "B", "text": "Rectiligne uniforme", "is_correct": false},
+        {"id": "C", "text": "Circulaire", "is_correct": false},
+        {"id": "D", "text": "Aléatoire", "is_correct": false}
+      ],
+      "explanation": "En chute libre, l'objet subit une accélération constante g, donc MRUA.",
+      "related_lesson": "P2-07"
+    },
+    {
+      "id": "P2-QCM-035",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Une onde sonore de fréquence 440 Hz a une période de :",
+      "options": [
+        {"id": "A", "text": "Environ 0.00227 s", "is_correct": true},
+        {"id": "B", "text": "440 s", "is_correct": false},
+        {"id": "C", "text": "0.44 s", "is_correct": false},
+        {"id": "D", "text": "44 s", "is_correct": false}
+      ],
+      "explanation": "T = 1/f = 1/440 ≈ 0.00227 s = 2.27 ms.",
+      "related_lesson": "P2-10"
+    },
+    {
+      "id": "P2-QCM-036",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Calculer la longueur d'onde d'un son de 500 Hz dans l'air (v = 340 m/s) :",
+      "options": [
+        {"id": "A", "text": "0.68 m", "is_correct": true},
+        {"id": "B", "text": "170 m", "is_correct": false},
+        {"id": "C", "text": "840 m", "is_correct": false},
+        {"id": "D", "text": "6.8 m", "is_correct": false}
+      ],
+      "explanation": "λ = v/f = 340/500 = 0.68 m = 68 cm.",
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-QCM-037",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "Les ultrasons ont une fréquence :",
+      "options": [
+        {"id": "A", "text": "> 20 kHz", "is_correct": true},
+        {"id": "B", "text": "< 20 Hz", "is_correct": false},
+        {"id": "C", "text": "Entre 20 Hz et 20 kHz", "is_correct": false},
+        {"id": "D", "text": "= 0 Hz", "is_correct": false}
+      ],
+      "explanation": "Les ultrasons sont des sons de fréquence supérieure à 20 000 Hz (inaudibles pour l'homme).",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-038",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 45,
+      "question": "Les infrasons ont une fréquence :",
+      "options": [
+        {"id": "A", "text": "< 20 Hz", "is_correct": true},
+        {"id": "B", "text": "> 20 kHz", "is_correct": false},
+        {"id": "C", "text": "Entre 20 Hz et 20 kHz", "is_correct": false},
+        {"id": "D", "text": "= 1 MHz", "is_correct": false}
+      ],
+      "explanation": "Les infrasons ont une fréquence inférieure à 20 Hz (inaudibles).",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-039",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Parmi ces ondes, laquelle peut se propager dans le vide ?",
+      "options": [
+        {"id": "A", "text": "Ondes électromagnétiques", "is_correct": true},
+        {"id": "B", "text": "Ondes sonores", "is_correct": false},
+        {"id": "C", "text": "Ondes sismiques", "is_correct": false},
+        {"id": "D", "text": "Ondes à la surface de l'eau", "is_correct": false}
+      ],
+      "explanation": "Seules les ondes électromagnétiques (lumière, radio, etc.) peuvent se propager dans le vide.",
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-QCM-040",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Le domaine visible du spectre électromagnétique correspond à :",
+      "options": [
+        {"id": "A", "text": "La lumière que nos yeux perçoivent", "is_correct": true},
+        {"id": "B", "text": "Les rayons X", "is_correct": false},
+        {"id": "C", "text": "Les ondes radio", "is_correct": false},
+        {"id": "D", "text": "Les micro-ondes", "is_correct": false}
+      ],
+      "explanation": "Le domaine visible (400-800 nm) est la partie du spectre EM que l'œil humain peut détecter.",
+      "related_lesson": "P2-14"
+    },
+    {
+      "id": "P2-QCM-041",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Si la vitesse d'un objet double, son énergie cinétique est multipliée par :",
+      "options": [
+        {"id": "A", "text": "4", "is_correct": true},
+        {"id": "B", "text": "2", "is_correct": false},
+        {"id": "C", "text": "8", "is_correct": false},
+        {"id": "D", "text": "16", "is_correct": false}
+      ],
+      "explanation": "Ec = ½mv². Si v → 2v, alors Ec → ½m(2v)² = 4×½mv² = 4Ec.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-042",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un objet tombe de h = 5 m (g = 10 m/s²). Sa vitesse juste avant impact est (en partant du repos) :",
+      "options": [
+        {"id": "A", "text": "10 m/s", "is_correct": true},
+        {"id": "B", "text": "5 m/s", "is_correct": false},
+        {"id": "C", "text": "50 m/s", "is_correct": false},
+        {"id": "D", "text": "√10 m/s", "is_correct": false}
+      ],
+      "explanation": "Conservation énergie : mgh = ½mv². v = √(2gh) = √(2×10×5) = √100 = 10 m/s.",
+      "related_lesson": "P2-17"
+    },
+    {
+      "id": "P2-QCM-043",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "L'unité SI de la puissance est :",
+      "options": [
+        {"id": "A", "text": "Watt (W)", "is_correct": true},
+        {"id": "B", "text": "Joule (J)", "is_correct": false},
+        {"id": "C", "text": "Newton (N)", "is_correct": false},
+        {"id": "D", "text": "Ampère (A)", "is_correct": false}
+      ],
+      "explanation": "La puissance se mesure en Watts (W), où 1 W = 1 J/s.",
+      "related_lesson": "P2-19"
+    },
+    {
+      "id": "P2-QCM-044",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un appareil de 1000 W fonctionne pendant 2 heures. L'énergie consommée est :",
+      "options": [
+        {"id": "A", "text": "7.2 MJ", "is_correct": true},
+        {"id": "B", "text": "2000 J", "is_correct": false},
+        {"id": "C", "text": "1000 J", "is_correct": false},
+        {"id": "D", "text": "2 MJ", "is_correct": false}
+      ],
+      "explanation": "E = P×t = 1000 W × 2 h = 1000 × 7200 s = 7 200 000 J = 7.2 MJ (ou 2 kWh).",
+      "related_lesson": "P2-19"
+    },
+    {
+      "id": "P2-QCM-045",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Le rendement d'un système est :",
+      "options": [
+        {"id": "A", "text": "Énergie utile / Énergie totale", "is_correct": true},
+        {"id": "B", "text": "Énergie totale / Énergie utile", "is_correct": false},
+        {"id": "C", "text": "Puissance / Temps", "is_correct": false},
+        {"id": "D", "text": "Énergie × Temps", "is_correct": false}
+      ],
+      "explanation": "Rendement η = Énergie utile / Énergie fournie (toujours ≤ 1).",
+      "related_lesson": "P2-20"
+    },
+    {
+      "id": "P2-QCM-046",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "Un mobile immobile dans un référentiel terrestre est :",
+      "options": [
+        {"id": "A", "text": "Au repos", "is_correct": true},
+        {"id": "B", "text": "En mouvement", "is_correct": false},
+        {"id": "C", "text": "En accélération", "is_correct": false},
+        {"id": "D", "text": "En chute", "is_correct": false}
+      ],
+      "explanation": "Immobile = au repos dans ce référentiel (vitesse nulle).",
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-QCM-047",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "La trajectoire d'un satellite autour de la Terre est approximativement :",
+      "options": [
+        {"id": "A", "text": "Circulaire", "is_correct": true},
+        {"id": "B", "text": "Rectiligne", "is_correct": false},
+        {"id": "C", "text": "Parabolique", "is_correct": false},
+        {"id": "D", "text": "Aléatoire", "is_correct": false}
+      ],
+      "explanation": "Un satellite en orbite basse suit approximativement une trajectoire circulaire (ou elliptique).",
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-QCM-048",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un train roule à 180 km/h. En m/s, cela vaut :",
+      "options": [
+        {"id": "A", "text": "50 m/s", "is_correct": true},
+        {"id": "B", "text": "180 m/s", "is_correct": false},
+        {"id": "C", "text": "18 m/s", "is_correct": false},
+        {"id": "D", "text": "500 m/s", "is_correct": false}
+      ],
+      "explanation": "180 km/h = 180/3.6 = 50 m/s.",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-049",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Une onde transversale vibre :",
+      "options": [
+        {"id": "A", "text": "Perpendiculairement à la direction de propagation", "is_correct": true},
+        {"id": "B", "text": "Dans la direction de propagation", "is_correct": false},
+        {"id": "C", "text": "Pas du tout", "is_correct": false},
+        {"id": "D", "text": "En cercle", "is_correct": false}
+      ],
+      "explanation": "Onde transversale : vibration ⊥ à la propagation (ex : vagues).",
+      "related_lesson": "P2-08"
+    },
+    {
+      "id": "P2-QCM-050",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Combien de temps met la lumière du Soleil pour atteindre la Terre (distance ≈ 150 millions de km) ?",
+      "options": [
+        {"id": "A", "text": "Environ 8 minutes", "is_correct": true},
+        {"id": "B", "text": "1 seconde", "is_correct": false},
+        {"id": "C", "text": "1 heure", "is_correct": false},
+        {"id": "D", "text": "1 jour", "is_correct": false}
+      ],
+      "explanation": "t = d/c = 1.5×10¹¹ m / 3×10⁸ m/s = 500 s ≈ 8.3 minutes.",
+      "related_lesson": "P2-12"
+    },
+    {
+      "id": "P2-QCM-051",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "L'accélération est la dérivée de :",
+      "options": [
+        {"id": "A", "text": "La vitesse par rapport au temps", "is_correct": true},
+        {"id": "B", "text": "La position", "is_correct": false},
+        {"id": "C", "text": "La force", "is_correct": false},
+        {"id": "D", "text": "L'énergie", "is_correct": false}
+      ],
+      "explanation": "Accélération a = dv/dt (taux de variation de la vitesse).",
+      "related_lesson": "P2-06"
+    },
+    {
+      "id": "P2-QCM-052",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Lorsqu'un objet tombe, son Ep :",
+      "options": [
+        {"id": "A", "text": "Diminue", "is_correct": true},
+        {"id": "B", "text": "Augmente", "is_correct": false},
+        {"id": "C", "text": "Reste constante", "is_correct": false},
+        {"id": "D", "text": "Devient négative", "is_correct": false}
+      ],
+      "explanation": "En tombant, h diminue donc Ep = mgh diminue.",
+      "related_lesson": "P2-16"
+    },
+    {
+      "id": "P2-QCM-053",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un ressort de raideur k = 100 N/m est comprimé de x = 0.1 m. L'énergie élastique est :",
+      "options": [
+        {"id": "A", "text": "0.5 J", "is_correct": true},
+        {"id": "B", "text": "10 J", "is_correct": false},
+        {"id": "C", "text": "100 J", "is_correct": false},
+        {"id": "D", "text": "0.05 J", "is_correct": false}
+      ],
+      "explanation": "Ee = ½kx² = ½ × 100 × (0.1)² = ½ × 100 × 0.01 = 0.5 J.",
+      "related_lesson": "P2-18"
+    },
+    {
+      "id": "P2-QCM-054",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "L'amplitude d'une onde correspond à :",
+      "options": [
+        {"id": "A", "text": "L'écart maximal par rapport à la position d'équilibre", "is_correct": true},
+        {"id": "B", "text": "La longueur d'onde", "is_correct": false},
+        {"id": "C", "text": "La fréquence", "is_correct": false},
+        {"id": "D", "text": "La période", "is_correct": false}
+      ],
+      "explanation": "L'amplitude mesure l'intensité de la perturbation (hauteur maximale).",
+      "related_lesson": "P2-10"
+    },
+    {
+      "id": "P2-QCM-055",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "Une trajectoire rectiligne signifie :",
+      "options": [
+        {"id": "A", "text": "En ligne droite", "is_correct": true},
+        {"id": "B", "text": "En cercle", "is_correct": false},
+        {"id": "C", "text": "En spirale", "is_correct": false},
+        {"id": "D", "text": "Aléatoire", "is_correct": false}
+      ],
+      "explanation": "Rectiligne = en ligne droite.",
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-QCM-056",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Le travail d'une force est exprimé en :",
+      "options": [
+        {"id": "A", "text": "Joules (J)", "is_correct": true},
+        {"id": "B", "text": "Watts (W)", "is_correct": false},
+        {"id": "C", "text": "Newtons (N)", "is_correct": false},
+        {"id": "D", "text": "Mètres (m)", "is_correct": false}
+      ],
+      "explanation": "Le travail d'une force est une énergie, donc en Joules.",
+      "related_lesson": "P2-18"
+    },
+    {
+      "id": "P2-QCM-057",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un son de 20 Hz est :",
+      "options": [
+        {"id": "A", "text": "À la limite de l'audible (infrason)", "is_correct": true},
+        {"id": "B", "text": "Ultrason", "is_correct": false},
+        {"id": "C", "text": "Très aigu", "is_correct": false},
+        {"id": "D", "text": "Inaudible car trop aigu", "is_correct": false}
+      ],
+      "explanation": "20 Hz est la limite inférieure de l'audition humaine (frontière avec les infrasons).",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-058",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un système conservatif est un système où :",
+      "options": [
+        {"id": "A", "text": "L'énergie mécanique est conservée", "is_correct": true},
+        {"id": "B", "text": "L'énergie augmente", "is_correct": false},
+        {"id": "C", "text": "Il y a des frottements", "is_correct": false},
+        {"id": "D", "text": "L'énergie disparaît", "is_correct": false}
+      ],
+      "explanation": "Dans un système conservatif (sans frottements), Em = Ec + Ep = constante.",
+      "related_lesson": "P2-17"
+    },
+    {
+      "id": "P2-QCM-059",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un mobile part du repos et atteint 20 m/s en 5 s. Son accélération moyenne est :",
+      "options": [
+        {"id": "A", "text": "4 m/s²", "is_correct": true},
+        {"id": "B", "text": "20 m/s²", "is_correct": false},
+        {"id": "C", "text": "5 m/s²", "is_correct": false},
+        {"id": "D", "text": "100 m/s²", "is_correct": false}
+      ],
+      "explanation": "a = Δv/Δt = (20−0)/5 = 4 m/s².",
+      "related_lesson": "P2-06"
+    },
+    {
+      "id": "P2-QCM-060",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Les rayons X font partie du spectre :",
+      "options": [
+        {"id": "A", "text": "Électromagnétique", "is_correct": true},
+        {"id": "B", "text": "Sonore", "is_correct": false},
+        {"id": "C", "text": "Mécanique", "is_correct": false},
+        {"id": "D", "text": "Sismique", "is_correct": false}
+      ],
+      "explanation": "Les rayons X sont des ondes électromagnétiques de haute énergie.",
+      "related_lesson": "P2-14"
+    },
+    {
+      "id": "P2-QCM-061",
+      "chapter": "Énergie",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "L'énergie cinétique d'un objet au repos est :",
+      "options": [
+        {"id": "A", "text": "Nulle", "is_correct": true},
+        {"id": "B", "text": "Maximale", "is_correct": false},
+        {"id": "C", "text": "Négative", "is_correct": false},
+        {"id": "D", "text": "Infinie", "is_correct": false}
+      ],
+      "explanation": "Si v = 0, alors Ec = ½mv² = 0.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-062",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Dans le référentiel géocentrique, le centre est :",
+      "options": [
+        {"id": "A", "text": "Le centre de la Terre", "is_correct": true},
+        {"id": "B", "text": "Le Soleil", "is_correct": false},
+        {"id": "C", "text": "La Lune", "is_correct": false},
+        {"id": "D", "text": "Un satellite", "is_correct": false}
+      ],
+      "explanation": "Référentiel géocentrique : centré sur le centre de la Terre.",
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-QCM-063",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Le son se propage plus vite dans :",
+      "options": [
+        {"id": "A", "text": "Les solides", "is_correct": true},
+        {"id": "B", "text": "Les gaz", "is_correct": false},
+        {"id": "C", "text": "Le vide", "is_correct": false},
+        {"id": "D", "text": "Les liquides", "is_correct": false}
+      ],
+      "explanation": "Le son se propage plus vite dans les milieux plus denses : solides > liquides > gaz.",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-064",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un pendule simple oscille. À la position la plus haute :",
+      "options": [
+        {"id": "A", "text": "Ep maximale, Ec minimale", "is_correct": true},
+        {"id": "B", "text": "Ep minimale, Ec maximale", "is_correct": false},
+        {"id": "C", "text": "Ep = Ec", "is_correct": false},
+        {"id": "D", "text": "Ep et Ec nulles", "is_correct": false}
+      ],
+      "explanation": "Position haute : vitesse nulle (Ec min = 0), hauteur max (Ep max).",
+      "related_lesson": "P2-17"
+    },
+    {
+      "id": "P2-QCM-065",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "La distance d'arrêt d'un véhicule dépend de :",
+      "options": [
+        {"id": "A", "text": "La vitesse et le temps de réaction", "is_correct": true},
+        {"id": "B", "text": "La couleur du véhicule", "is_correct": false},
+        {"id": "C", "text": "Le jour de la semaine", "is_correct": false},
+        {"id": "D", "text": "Le nombre de passagers seulement", "is_correct": false}
+      ],
+      "explanation": "Distance d'arrêt = distance parcourue pendant le temps de réaction + distance de freinage (dépend de v²).",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-066",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Une onde longitudinale vibre :",
+      "options": [
+        {"id": "A", "text": "Dans la direction de propagation", "is_correct": true},
+        {"id": "B", "text": "Perpendiculairement à la direction", "is_correct": false},
+        {"id": "C", "text": "En cercle", "is_correct": false},
+        {"id": "D", "text": "Pas du tout", "is_correct": false}
+      ],
+      "explanation": "Onde longitudinale : vibration // à la propagation (ex : son).",
+      "related_lesson": "P2-08"
+    },
+    {
+      "id": "P2-QCM-067",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "1 kWh équivaut à :",
+      "options": [
+        {"id": "A", "text": "3.6 MJ", "is_correct": true},
+        {"id": "B", "text": "1000 J", "is_correct": false},
+        {"id": "C", "text": "3600 J", "is_correct": false},
+        {"id": "D", "text": "1 J", "is_correct": false}
+      ],
+      "explanation": "1 kWh = 1000 W × 3600 s = 3 600 000 J = 3.6 MJ.",
+      "related_lesson": "P2-19"
+    },
+    {
+      "id": "P2-QCM-068",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un objet lancé verticalement vers le haut (sans frottements) :",
+      "options": [
+        {"id": "A", "text": "Ralentit en montant, accélère en descendant", "is_correct": true},
+        {"id": "B", "text": "Va à vitesse constante", "is_correct": false},
+        {"id": "C", "text": "Accélère tout le temps", "is_correct": false},
+        {"id": "D", "text": "Ralentit tout le temps", "is_correct": false}
+      ],
+      "explanation": "En montant : v diminue (décélération). En descendant : v augmente (accélération). Accélération = −g constante.",
+      "related_lesson": "P2-07"
+    },
+    {
+      "id": "P2-QCM-069",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "La lumière rouge a une longueur d'onde :",
+      "options": [
+        {"id": "A", "text": "Plus grande que le bleu", "is_correct": true},
+        {"id": "B", "text": "Plus petite que le bleu", "is_correct": false},
+        {"id": "C", "text": "Identique au bleu", "is_correct": false},
+        {"id": "D", "text": "Nulle", "is_correct": false}
+      ],
+      "explanation": "Rouge : λ ≈ 700 nm. Bleu : λ ≈ 450 nm. Rouge > bleu.",
+      "related_lesson": "P2-14"
+    },
+    {
+      "id": "P2-QCM-070",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Deux objets de même masse, l'un à 10 m/s, l'autre à 20 m/s. Rapport de leurs Ec ?",
+      "options": [
+        {"id": "A", "text": "1:4", "is_correct": true},
+        {"id": "B", "text": "1:2", "is_correct": false},
+        {"id": "C", "text": "1:1", "is_correct": false},
+        {"id": "D", "text": "1:8", "is_correct": false}
+      ],
+      "explanation": "Ec ∝ v². Ratio = (10)²:(20)² = 100:400 = 1:4.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-071",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "L'unité de temps en SI est :",
+      "options": [
+        {"id": "A", "text": "Seconde (s)", "is_correct": true},
+        {"id": "B", "text": "Minute (min)", "is_correct": false},
+        {"id": "C", "text": "Heure (h)", "is_correct": false},
+        {"id": "D", "text": "Jour", "is_correct": false}
+      ],
+      "explanation": "L'unité SI du temps est la seconde.",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-072",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un écho est dû à :",
+      "options": [
+        {"id": "A", "text": "La réflexion des ondes sonores", "is_correct": true},
+        {"id": "B", "text": "L'absorption du son", "is_correct": false},
+        {"id": "C", "text": "La diffraction", "is_correct": false},
+        {"id": "D", "text": "L'effet Doppler", "is_correct": false}
+      ],
+      "explanation": "Un écho résulte de la réflexion d'une onde sonore sur une surface.",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-073",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "L'énergie ne peut être :",
+      "options": [
+        {"id": "A", "text": "Ni créée ni détruite (principe de conservation)", "is_correct": true},
+        {"id": "B", "text": "Transformée", "is_correct": false},
+        {"id": "C", "text": "Transférée", "is_correct": false},
+        {"id": "D", "text": "Mesurée", "is_correct": false}
+      ],
+      "explanation": "Premier principe de la thermodynamique : l'énergie se conserve (se transforme mais ne disparaît pas).",
+      "related_lesson": "P2-17"
+    },
+    {
+      "id": "P2-QCM-074",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un avion vole à 900 km/h. Quelle distance parcourt-il en 20 minutes ?",
+      "options": [
+        {"id": "A", "text": "300 km", "is_correct": true},
+        {"id": "B", "text": "900 km", "is_correct": false},
+        {"id": "C", "text": "180 km", "is_correct": false},
+        {"id": "D", "text": "45 km", "is_correct": false}
+      ],
+      "explanation": "d = v×t = 900 km/h × (20/60) h = 900 × 1/3 = 300 km.",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-075",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Pourquoi le ciel est-il bleu ?",
+      "options": [
+        {"id": "A", "text": "Diffusion de Rayleigh (lumière bleue diffusée)", "is_correct": true},
+        {"id": "B", "text": "Absorption du rouge", "is_correct": false},
+        {"id": "C", "text": "Réflexion sur l'océan", "is_correct": false},
+        {"id": "D", "text": "Émission bleue du Soleil", "is_correct": false}
+      ],
+      "explanation": "La diffusion de Rayleigh privilégie la diffusion des courtes longueurs d'onde (bleu) par l'atmosphère.",
+      "related_lesson": "P2-14"
+    },
+    {
+      "id": "P2-QCM-076",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Une lampe de 60 W allumée 10 heures consomme :",
+      "options": [
+        {"id": "A", "text": "0.6 kWh", "is_correct": true},
+        {"id": "B", "text": "600 kWh", "is_correct": false},
+        {"id": "C", "text": "60 kWh", "is_correct": false},
+        {"id": "D", "text": "6 kWh", "is_correct": false}
+      ],
+      "explanation": "E = P×t = 60 W × 10 h = 600 Wh = 0.6 kWh.",
+      "related_lesson": "P2-19"
+    },
+    {
+      "id": "P2-QCM-077",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un chronophotographie permet d'étudier :",
+      "options": [
+        {"id": "A", "text": "Le mouvement d'un objet", "is_correct": true},
+        {"id": "B", "text": "La couleur", "is_correct": false},
+        {"id": "C", "text": "La température", "is_correct": false},
+        {"id": "D", "text": "Le son", "is_correct": false}
+      ],
+      "explanation": "Une chronophotographie capture les positions successives d'un mobile pour analyser son mouvement.",
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-QCM-078",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "L'unité de la longueur d'onde est :",
+      "options": [
+        {"id": "A", "text": "Mètre (m)", "is_correct": true},
+        {"id": "B", "text": "Hertz (Hz)", "is_correct": false},
+        {"id": "C", "text": "Seconde (s)", "is_correct": false},
+        {"id": "D", "text": "Joule (J)", "is_correct": false}
+      ],
+      "explanation": "La longueur d'onde est une distance, donc en mètres (ou nm, km, etc.).",
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-QCM-079",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un ascenseur de masse 500 kg monte de 20 m (g = 10 m/s²). Le travail de la force motrice est au minimum :",
+      "options": [
+        {"id": "A", "text": "100 kJ", "is_correct": true},
+        {"id": "B", "text": "10 kJ", "is_correct": false},
+        {"id": "C", "text": "1000 kJ", "is_correct": false},
+        {"id": "D", "text": "50 kJ", "is_correct": false}
+      ],
+      "explanation": "W = mgh = 500 × 10 × 20 = 100 000 J = 100 kJ.",
+      "related_lesson": "P2-18"
+    },
+    {
+      "id": "P2-QCM-080",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "La distance parcourue se mesure en :",
+      "options": [
+        {"id": "A", "text": "Mètres (m)", "is_correct": true},
+        {"id": "B", "text": "Secondes (s)", "is_correct": false},
+        {"id": "C", "text": "m/s", "is_correct": false},
+        {"id": "D", "text": "Joules (J)", "is_correct": false}
+      ],
+      "explanation": "La distance est une longueur, donc en mètres (ou km, etc.).",
+      "related_lesson": "P2-03"
+    },
+    {
+      "id": "P2-QCM-081",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "La vitesse du son dans l'eau est environ :",
+      "options": [
+        {"id": "A", "text": "1500 m/s", "is_correct": true},
+        {"id": "B", "text": "340 m/s", "is_correct": false},
+        {"id": "C", "text": "3×10⁸ m/s", "is_correct": false},
+        {"id": "D", "text": "34 m/s", "is_correct": false}
+      ],
+      "explanation": "Le son se propage à environ 1500 m/s dans l'eau (4 fois plus vite que dans l'air).",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-082",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Les frottements transforment l'énergie mécanique en :",
+      "options": [
+        {"id": "A", "text": "Chaleur", "is_correct": true},
+        {"id": "B", "text": "Lumière", "is_correct": false},
+        {"id": "C", "text": "Son seulement", "is_correct": false},
+        {"id": "D", "text": "Rien", "is_correct": false}
+      ],
+      "explanation": "Les frottements dissipent l'énergie mécanique principalement sous forme de chaleur.",
+      "related_lesson": "P2-18"
+    },
+    {
+      "id": "P2-QCM-083",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un mobile en MRUA avec a = 2 m/s², v₀ = 0, parcourt quelle distance en 5 s ?",
+      "options": [
+        {"id": "A", "text": "25 m", "is_correct": true},
+        {"id": "B", "text": "10 m", "is_correct": false},
+        {"id": "C", "text": "50 m", "is_correct": false},
+        {"id": "D", "text": "5 m", "is_correct": false}
+      ],
+      "explanation": "d = ½at² = ½ × 2 × 5² = ½ × 2 × 25 = 25 m.",
+      "related_lesson": "P2-06"
+    },
+    {
+      "id": "P2-QCM-084",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Les ondes radio sont des ondes :",
+      "options": [
+        {"id": "A", "text": "Électromagnétiques", "is_correct": true},
+        {"id": "B", "text": "Mécaniques", "is_correct": false},
+        {"id": "C", "text": "Sonores", "is_correct": false},
+        {"id": "D", "text": "Sismiques", "is_correct": false}
+      ],
+      "explanation": "Les ondes radio font partie du spectre électromagnétique (grandes longueurs d'onde).",
+      "related_lesson": "P2-14"
+    },
+    {
+      "id": "P2-QCM-085",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un moteur de rendement 40% fournit 200 J utiles. L'énergie totale consommée est :",
+      "options": [
+        {"id": "A", "text": "500 J", "is_correct": true},
+        {"id": "B", "text": "80 J", "is_correct": false},
+        {"id": "C", "text": "200 J", "is_correct": false},
+        {"id": "D", "text": "800 J", "is_correct": false}
+      ],
+      "explanation": "η = E_utile/E_totale. 0.4 = 200/E_totale. E_totale = 200/0.4 = 500 J.",
+      "related_lesson": "P2-20"
+    },
+    {
+      "id": "P2-QCM-086",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "La vitesse angulaire s'exprime en :",
+      "options": [
+        {"id": "A", "text": "rad/s", "is_correct": true},
+        {"id": "B", "text": "m/s", "is_correct": false},
+        {"id": "C", "text": "Hz", "is_correct": false},
+        {"id": "D", "text": "°/s", "is_correct": false}
+      ],
+      "explanation": "La vitesse angulaire (rotation) s'exprime en radians par seconde (rad/s).",
+      "related_lesson": "P2-02"
+    },
+    {
+      "id": "P2-QCM-087",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "La fréquence et la longueur d'onde sont :",
+      "options": [
+        {"id": "A", "text": "Inversement proportionnelles", "is_correct": true},
+        {"id": "B", "text": "Directement proportionnelles", "is_correct": false},
+        {"id": "C", "text": "Indépendantes", "is_correct": false},
+        {"id": "D", "text": "Égales", "is_correct": false}
+      ],
+      "explanation": "λ = v/f donc λ ∝ 1/f (inversement proportionnelles).",
+      "related_lesson": "P2-11"
+    },
+    {
+      "id": "P2-QCM-088",
+      "chapter": "Énergie",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "L'énergie est la capacité à :",
+      "options": [
+        {"id": "A", "text": "Effectuer un travail", "is_correct": true},
+        {"id": "B", "text": "Mesurer le temps", "is_correct": false},
+        {"id": "C", "text": "Créer de la masse", "is_correct": false},
+        {"id": "D", "text": "Rien faire", "is_correct": false}
+      ],
+      "explanation": "L'énergie est définie comme la capacité d'un système à effectuer un travail.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-089",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un objet part de 10 m/s et ralentit uniformément jusqu'à l'arrêt en 4 s. Son accélération est :",
+      "options": [
+        {"id": "A", "text": "−2.5 m/s²", "is_correct": true},
+        {"id": "B", "text": "2.5 m/s²", "is_correct": false},
+        {"id": "C", "text": "−10 m/s²", "is_correct": false},
+        {"id": "D", "text": "−0.4 m/s²", "is_correct": false}
+      ],
+      "explanation": "a = Δv/Δt = (0−10)/4 = −2.5 m/s² (négative car ralentissement).",
+      "related_lesson": "P2-06"
+    },
+    {
+      "id": "P2-QCM-090",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un sonar émet un ultrason qui revient après 0.2 s (v_son = 1500 m/s dans l'eau). La profondeur est :",
+      "options": [
+        {"id": "A", "text": "150 m", "is_correct": true},
+        {"id": "B", "text": "300 m", "is_correct": false},
+        {"id": "C", "text": "75 m", "is_correct": false},
+        {"id": "D", "text": "1500 m", "is_correct": false}
+      ],
+      "explanation": "Distance aller-retour = v×t = 1500 × 0.2 = 300 m. Profondeur = 300/2 = 150 m.",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-091",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un système qui dissipe de l'énergie par frottements a un rendement :",
+      "options": [
+        {"id": "A", "text": "< 100%", "is_correct": true},
+        {"id": "B", "text": "= 100%", "is_correct": false},
+        {"id": "C", "text": "> 100%", "is_correct": false},
+        {"id": "D", "text": "= 0%", "is_correct": false}
+      ],
+      "explanation": "Les frottements dissipent de l'énergie (chaleur), donc rendement < 100%.",
+      "related_lesson": "P2-20"
+    },
+    {
+      "id": "P2-QCM-092",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Dans un référentiel héliocentrique, le centre est :",
+      "options": [
+        {"id": "A", "text": "Le Soleil", "is_correct": true},
+        {"id": "B", "text": "La Terre", "is_correct": false},
+        {"id": "C", "text": "La Lune", "is_correct": false},
+        {"id": "D", "text": "Mars", "is_correct": false}
+      ],
+      "explanation": "Référentiel héliocentrique : centré sur le Soleil.",
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-QCM-093",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "L'effet Doppler concerne :",
+      "options": [
+        {"id": "A", "text": "Le changement de fréquence perçue due au mouvement", "is_correct": true},
+        {"id": "B", "text": "L'absorption de la lumière", "is_correct": false},
+        {"id": "C", "text": "La diffraction", "is_correct": false},
+        {"id": "D", "text": "L'interférence", "is_correct": false}
+      ],
+      "explanation": "L'effet Doppler modifie la fréquence perçue quand la source ou l'observateur est en mouvement.",
+      "related_lesson": "P2-13"
+    },
+    {
+      "id": "P2-QCM-094",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un objet de 10 kg à 5 m/s s'arrête sur 10 m. La force de frottement moyenne est :",
+      "options": [
+        {"id": "A", "text": "12.5 N", "is_correct": true},
+        {"id": "B", "text": "25 N", "is_correct": false},
+        {"id": "C", "text": "50 N", "is_correct": false},
+        {"id": "D", "text": "5 N", "is_correct": false}
+      ],
+      "explanation": "Ec initiale = ½×10×25 = 125 J. W = F×d donc F = 125/10 = 12.5 N.",
+      "related_lesson": "P2-18"
+    },
+    {
+      "id": "P2-QCM-095",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_seconds": 30,
+      "question": "Un mobile qui ne change pas de position est :",
+      "options": [
+        {"id": "A", "text": "Immobile (au repos)", "is_correct": true},
+        {"id": "B", "text": "En MRU", "is_correct": false},
+        {"id": "C", "text": "En MRUA", "is_correct": false},
+        {"id": "D", "text": "En chute libre", "is_correct": false}
+      ],
+      "explanation": "Pas de changement de position = immobile = au repos (v = 0).",
+      "related_lesson": "P2-01"
+    },
+    {
+      "id": "P2-QCM-096",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "La lumière visible correspond à des longueurs d'onde d'environ :",
+      "options": [
+        {"id": "A", "text": "400 à 800 nanomètres", "is_correct": true},
+        {"id": "B", "text": "1 à 10 mètres", "is_correct": false},
+        {"id": "C", "text": "1 à 10 kilomètres", "is_correct": false},
+        {"id": "D", "text": "1 à 10 micromètres", "is_correct": false}
+      ],
+      "explanation": "Le spectre visible s'étend d'environ 400 nm (violet) à 800 nm (rouge).",
+      "related_lesson": "P2-14"
+    },
+    {
+      "id": "P2-QCM-097",
+      "chapter": "Énergie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un skieur descend une pente. Son énergie potentielle :",
+      "options": [
+        {"id": "A", "text": "Diminue", "is_correct": true},
+        {"id": "B", "text": "Augmente", "is_correct": false},
+        {"id": "C", "text": "Reste constante", "is_correct": false},
+        {"id": "D", "text": "Devient nulle", "is_correct": false}
+      ],
+      "explanation": "En descendant, l'altitude h diminue donc Ep = mgh diminue.",
+      "related_lesson": "P2-16"
+    },
+    {
+      "id": "P2-QCM-098",
+      "chapter": "Mouvement & Vitesse",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Pour doubler la vitesse d'un objet, on doit multiplier son énergie cinétique par :",
+      "options": [
+        {"id": "A", "text": "4", "is_correct": true},
+        {"id": "B", "text": "2", "is_correct": false},
+        {"id": "C", "text": "8", "is_correct": false},
+        {"id": "D", "text": "16", "is_correct": false}
+      ],
+      "explanation": "Ec ∝ v². Si v → 2v, Ec → 4Ec.",
+      "related_lesson": "P2-15"
+    },
+    {
+      "id": "P2-QCM-099",
+      "chapter": "Ondes & Signaux",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_seconds": 60,
+      "question": "Un milieu qui absorbe toutes les ondes sonores est dit :",
+      "options": [
+        {"id": "A", "text": "Anéchoïque", "is_correct": true},
+        {"id": "B", "text": "Réfléchissant", "is_correct": false},
+        {"id": "C", "text": "Transparent", "is_correct": false},
+        {"id": "D", "text": "Diffusant", "is_correct": false}
+      ],
+      "explanation": "Un milieu anéchoïque absorbe les sons (pas d'écho).",
+      "related_lesson": "P2-09"
+    },
+    {
+      "id": "P2-QCM-100",
+      "chapter": "Énergie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_seconds": 90,
+      "question": "Un pendule oscille sans frottements. À quel moment Ec = Ep ?",
+      "options": [
+        {"id": "A", "text": "Aux positions intermédiaires", "is_correct": true},
+        {"id": "B", "text": "Au point le plus haut", "is_correct": false},
+        {"id": "C", "text": "Au point le plus bas", "is_correct": false},
+        {"id": "D", "text": "Jamais", "is_correct": false}
+      ],
+      "explanation": "Em = Ec + Ep = constante. Ec = Ep quand chacune vaut Em/2, aux positions intermédiaires.",
+      "related_lesson": "P2-17"
+    }
+  ]
+}

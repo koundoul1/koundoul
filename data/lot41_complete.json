@@ -1,0 +1,504 @@
+{
+  "metadata": {
+    "lot_number": 2,
+    "lot_name": "Lot 41 - Fonctions",
+    "level": "Seconde",
+    "subject": "Mathématiques",
+    "prefix": "M2",
+    "chapter": "Fonctions",
+    "lesson_range": "M2-09 à M2-20",
+    "total_lessons": 12
+  },
+  "lessons": [
+    {
+      "id": "M2-09",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Notion de fonction - Définition",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 70,
+      "objectives": ["Comprendre la notion de fonction", "Distinguer variable et image", "Utiliser les notations f(x)", "Identifier ensemble de définition"],
+      "prerequisites": ["M2-01", "M2-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["fonction", "definition"],
+      "detailed_content": {
+        "introduction": "Une fonction est une relation mathématique qui associe à chaque nombre d'un ensemble de départ un unique nombre d'un ensemble d'arrivée. C'est un concept central en mathématiques.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Fonction f machine x → f(x). Variable x, image f(x). Notation f : x ↦ f(x)", "example": "Processus" },
+          { "name": "Vocabulaire", "explanation": "Variable x antécédent. Image f(x) résultat. Ensemble définition Df. Antécédent de y", "example": "Termes" },
+          { "name": "Notations", "explanation": "f : Df→ℝ x↦f(x). f(x) = x², g(x)=2x+3, h(x)=√x. Distinguer f (fonction) et f(x) (nombre)", "example": "Formes" },
+          { "name": "Images", "explanation": "Remplacer x valeur expression f(x). f(x)=x²-3x+1 calcul f(2) f(0) f(-1). Attention parenthèses", "example": "Calculs" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=3x-5. Calculer f(4) et f(-2).",
+          "solution_steps": ["f(4) = 3×4 - 5 = 7", "f(-2) = 3×(-2) - 5 = -11"]
+        },
+        "quick_exercises": [
+          "g(x) = x² + 2x. g(3), g(0), g(-1) ?",
+          "Images"
+        ],
+        "common_mistakes": [
+          "Confondre f et f(x)",
+          "Oublier parenthèses f(-2)"
+        ],
+        "summary": {
+          "key_concept": "f : la fonction (processus). f(x) : l'image (nombre). x : variable, f(x) : image",
+          "key_method": "Toujours remplacer x par la valeur",
+          "next_step": "Représentation graphique"
+        }
+      }
+    },
+    {
+      "id": "M2-10",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Représentation graphique d'une fonction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Comprendre la courbe représentative", "Tracer des points de la courbe", "Lire graphiquement f(a)", "Interpréter un graphique"],
+      "prerequisites": ["M2-09"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["graphique", "courbe"],
+      "detailed_content": {
+        "introduction": "La représentation graphique d'une fonction permet de visualiser son comportement. C'est un outil essentiel pour comprendre et analyser les fonctions.",
+        "key_concepts": [
+          { "name": "Courbe", "explanation": "Cf ensemble points M(x, f(x)) x∈Df. M(a,b) ∈ Cf ⟺ b=f(a)", "example": "Définition" },
+          { "name": "Tracer", "explanation": "1) Choisir x valeurs 2) Calculer f(x) 3) Placer M(x,f(x)) 4) Relier continûment", "example": "Méthode" },
+          { "name": "Lecture", "explanation": "Image f(a) : verticale x=a. Antécédent b : horizontale y=b. Signe f au-dessus/bas Ox. Variations montée/descente", "example": "Interprétation" },
+          { "name": "Propriétés", "explanation": "Paire symétrie/Oy, impaire symétrie/O. Intersections Ox racines, Oy (0,f(0)) si 0∈Df", "example": "Caractéristiques" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=2x-1. Tracer 3 points Cf.",
+          "solution_steps": ["(0, -1), (1, 1), (2, 3)", "Tracer droite"]
+        },
+        "quick_exercises": [
+          "g(x)=x²-4. g(-2), g(0), g(2) ? Placer points",
+          "Graphique"
+        ],
+        "common_mistakes": [
+          "Confondre abscisse ordonnée",
+          "Inverser x et f(x)"
+        ],
+        "summary": {
+          "key_concept": "Point Cf : M(x, f(x)). Abscisse = x, ordonnée = f(x)",
+          "key_method": "Calculer plusieurs points pour tracer. Lecture : verticale pour image",
+          "next_step": "Fonctions affines"
+        }
+      }
+    },
+    {
+      "id": "M2-11",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Fonctions affines",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Reconnaître une fonction affine", "Identifier coefficient directeur et ordonnée à l'origine", "Tracer la droite représentative", "Déterminer l'équation d'une droite"],
+      "prerequisites": ["M2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["affine", "droite"],
+      "detailed_content": {
+        "introduction": "Les fonctions affines sont les fonctions les plus simples après les fonctions constantes. Leur représentation graphique est toujours une droite.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "f(x) = ax + b. a coefficient directeur, b ordonnée origine. Linéaire b=0, constante a=0", "example": "Forme" },
+          { "name": "Graphique", "explanation": "Courbe = droite. Méthode 2 points f(0)=b et f(1)=a+b. Méthode pente depuis (0,b). Rôle a pente, b intersection Oy", "example": "Tracé" },
+          { "name": "Coefficient", "explanation": "a = Δy/Δx = (y₂-y₁)/(x₂-x₁). |a| grand raide. a>0 croissante, a<0 décroissante, a=0 constante", "example": "Interprétation" },
+          { "name": "Déterminer", "explanation": "2 points A(x₁,y₁) B(x₂,y₂). a=(y₂-y₁)/(x₂-x₁), b=y₁-ax₁", "example": "Équation" }
+        ],
+        "guided_example": {
+          "statement": "Tracer y=2x-1.",
+          "solution_steps": ["a=2, b=-1", "Points (0,-1) (1,1)", "Droite"]
+        },
+        "quick_exercises": [
+          "Points A(2,5) B(5,11). Équation ?",
+          "Affines"
+        ],
+        "common_mistakes": [
+          "Confondre a et b",
+          "Erreur signe (y₂-y₁)/(x₂-x₁)"
+        ],
+        "summary": {
+          "key_concept": "f(x) = ax + b (droite). a : pente, b : ordonnée à l'origine",
+          "key_method": "2 points → unique droite. a = Δy/Δx",
+          "next_step": "Fonction carré"
+        }
+      }
+    },
+    {
+      "id": "M2-12",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Fonction carré",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir la fonction carré", "Tracer la parabole", "Comprendre la symétrie", "Étudier les variations"],
+      "prerequisites": ["M2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["carré", "parabole"],
+      "detailed_content": {
+        "introduction": "La fonction carré est une fonction de référence fondamentale. Sa courbe, appelée parabole, apparaît dans de nombreux contextes physiques et mathématiques.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "f: x ↦ x². Df=ℝ, image [0,+∞[. Paire (-x)²=x². x²≥0, nul seulement x=0", "example": "Propriétés" },
+          { "name": "Graphique", "explanation": "Parabole U symétrique. Sommet O(0,0). Points (1,1) (-1,1), (2,4) (-2,4). Symétrie/Oy", "example": "Allure" },
+          { "name": "Variations", "explanation": "]−∞,0] décroissante. [0,+∞[ croissante. Minimum 0 en x=0. Pas maximum", "example": "Tableau" },
+          { "name": "Applications", "explanation": "x²=a si a<0 ∅, a=0 x=0, a>0 x=±√a. x²≤a ⟺ -√a≤x≤√a. Identités remarquables", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Résoudre x²=25.",
+          "solution_steps": ["x² = 25 > 0", "x = 5 ou x = -5", "S = {-5, 5}"]
+        },
+        "quick_exercises": [
+          "f(x)=x². f(-3), f(0), f(2) ? x²=16 ? x²≤9 ?",
+          "Carré"
+        ],
+        "common_mistakes": [
+          "Oublier solution négative",
+          "Croire (-x)²=-x²"
+        ],
+        "summary": {
+          "key_concept": "f(x) = x² : parabole. f paire : f(−x) = f(x)",
+          "key_method": "Décroissante ℝ₋, croissante ℝ₊. x² = a > 0 ⇒ x = ±√a",
+          "next_step": "Fonction inverse"
+        }
+      }
+    },
+    {
+      "id": "M2-13",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Fonction inverse",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir la fonction inverse", "Identifier l'ensemble de définition", "Tracer l'hyperbole", "Comprendre les asymptotes"],
+      "prerequisites": ["M2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["inverse", "hyperbole"],
+      "detailed_content": {
+        "introduction": "La fonction inverse est une fonction de référence dont la courbe est une hyperbole. Elle est caractérisée par ses deux branches et ses asymptotes.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "f: x ↦ 1/x. Df=ℝ*. Paire ? f(-x)=-1/x=-f(x) impaire. x>0 f>0, x<0 f<0", "example": "Propriétés" },
+          { "name": "Graphique", "explanation": "Hyperbole 2 branches. Branche I (x>0, y>0). Branche III (x<0, y<0). Symétrie/O", "example": "Allure" },
+          { "name": "Asymptotes", "explanation": "Verticale x=0. Horizontale y=0. Courbe approche jamais franchit", "example": "Limites" },
+          { "name": "Variations", "explanation": "]−∞,0[ décroissante. ]0,+∞[ décroissante. Pas extremum", "example": "Tableau" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=1/x. x=2, x=-0.5, x=10.",
+          "solution_steps": ["f(2) = 0.5", "f(-0.5) = -2", "f(10) = 0.1"]
+        },
+        "quick_exercises": [
+          "f(x)=1/x. x=4, x=-4 ? Résoudre 1/x=2 ? Df ?",
+          "Inverse"
+        ],
+        "common_mistakes": [
+          "Croire f définie en 0",
+          "Confondre 2 branches"
+        ],
+        "summary": {
+          "key_concept": "f(x) = 1/x : hyperbole. Df = ℝ* (sans 0)",
+          "key_method": "Impaire : symétrie/O. Décroissante sur chaque branche",
+          "next_step": "Variations"
+        }
+      }
+    },
+    {
+      "id": "M2-14",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Variations d'une fonction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir croissance et décroissance", "Lire les variations sur un graphique", "Dresser un tableau de variations", "Comparer des images"],
+      "prerequisites": ["M2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["variations", "monotonie"],
+      "detailed_content": {
+        "introduction": "Étudier les variations d'une fonction, c'est déterminer les intervalles sur lesquels elle croît ou décroît.",
+        "key_concepts": [
+          { "name": "Définitions", "explanation": "Croissante x₁<x₂ ⟹ f(x₁)≤f(x₂). Décroissante x₁<x₂ ⟹ f(x₁)≥f(x₂). Constante f(x)=k", "example": "Sens" },
+          { "name": "Lecture", "explanation": "Croissante monte. Décroissante descend. Constante horizontale", "example": "Graphique" },
+          { "name": "Tableau", "explanation": "Ligne 1 x bornes. Ligne 2 flèches ↗ ↘ valeurs remarquables", "example": "Résumé" },
+          { "name": "Comparaison", "explanation": "Croissante x₁<x₂ ⟹ f(x₁)<f(x₂). Décroissante inversé. Attention non monotone", "example": "Images" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=2x+1. Variations sur ℝ.",
+          "solution_steps": ["a=2>0", "Strictement croissante sur ℝ", "Tableau ↗"]
+        },
+        "quick_exercises": [
+          "Tableau g: x|-∞ -1 2 +∞, g(x)|+∞↘ 3↗ 5↘-∞. Croissante ? Max [-1,2] ?",
+          "Variations"
+        ],
+        "common_mistakes": [
+          "Confondre croissante et positive",
+          "Inverser ↗ et ↘"
+        ],
+        "summary": {
+          "key_concept": "Croissante : x ↑ ⇒ f(x) ↑. Décroissante : x ↑ ⇒ f(x) ↓",
+          "key_method": "Tableau : flèches ↗ ou ↘. Lire de gauche à droite",
+          "next_step": "Extremums"
+        }
+      }
+    },
+    {
+      "id": "M2-15",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Extremums d'une fonction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Définir maximum et minimum", "Distinguer extremum local et global", "Identifier les extremums graphiquement", "Utiliser les extremums"],
+      "prerequisites": ["M2-14"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["extremums", "optimum"],
+      "detailed_content": {
+        "introduction": "Les extremums d'une fonction sont ses valeurs maximales ou minimales.",
+        "key_concepts": [
+          { "name": "Locaux", "explanation": "Maximum local f(a)≥f(x) voisinage a. Minimum local f(a)≤f(x). Changement variation", "example": "Définition" },
+          { "name": "Globaux", "explanation": "Maximum global f(a)≥f(x) ∀x∈Df. Minimum global f(a)≤f(x). Global implique local", "example": "Portée" },
+          { "name": "Graphique", "explanation": "Maximum sommet haut. Minimum creux bas. Global plus haut/bas. Changement variation", "example": "Reconnaissance" },
+          { "name": "Tableau", "explanation": "Maximum ↗→↘. Minimum ↘→↗. Valeurs bornes. Limites ±∞", "example": "Extrêmes" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=-x²+4x-3. Maximum x=2 f(2)=1.",
+          "solution_steps": ["↗→↘ en x=2", "Maximum local et global", "Valeur 1"]
+        },
+        "quick_exercises": [
+          "Tableau h: x|-∞ 0 3 +∞, h(x)|+∞↘ -2↗ 4↘ 1. Extrema globaux ? Locaux ?",
+          "Extremums"
+        ],
+        "common_mistakes": [
+          "Confondre x et f(x)",
+          "Confondre local global"
+        ],
+        "summary": {
+          "key_concept": "Maximum : point haut (↗ → ↘). Minimum : point bas (↘ → ↗)",
+          "key_method": "Global = sur tout Df. Local = dans un voisinage",
+          "next_step": "Résolutions"
+        }
+      }
+    },
+    {
+      "id": "M2-16",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Résolution graphique d'équations",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Résoudre f(x) = k graphiquement", "Trouver les antécédents", "Compter le nombre de solutions", "Interpréter une intersection"],
+      "prerequisites": ["M2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["équation", "graphique"],
+      "detailed_content": {
+        "introduction": "La résolution graphique d'une équation consiste à trouver les solutions en lisant sur la courbe représentative.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Tracer Cf et y=k. Intersections. Abscisses = solutions. Nb solutions = nb intersections", "example": "Méthode" },
+          { "name": "Cas f(x)=0", "explanation": "Intersections Cf avec Ox. Racines. 0,1,2,... racines possibles", "example": "Particulier" },
+          { "name": "Nombre", "explanation": "Selon position y=k. k>max ∅. k<min ∅. k=extremum 1-2 solutions. n intersections n solutions", "example": "Solutions" },
+          { "name": "Précision", "explanation": "Avantages visuel intuitif. Limites précision limitée. Complément algébrique", "example": "Limites" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=x²-1. Résoudre f(x)=3.",
+          "solution_steps": ["Tracer y=3", "2 intersections", "x≈-2, x≈2"]
+        },
+        "quick_exercises": [
+          "g(-1)=0, g(2)=4, g(4)=0. Résoudre g(x)=0, g(x)=4, g(x)=5",
+          "Graphique"
+        ],
+        "common_mistakes": [
+          "Confondre ordonnées abscisses",
+          "Lire f(x) au lieu x"
+        ],
+        "summary": {
+          "key_concept": "f(x) = k : droite y = k horizontale. Solutions = abscisses des intersections",
+          "key_method": "Nb intersections = nb solutions. f(x) = 0 : intersections avec Ox",
+          "next_step": "Inéquations"
+        }
+      }
+    },
+    {
+      "id": "M2-17",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Résolution graphique d'inéquations",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 80,
+      "objectives": ["Résoudre f(x) ≥ k graphiquement", "Identifier les zones au-dessus/en-dessous", "Donner les solutions en intervalles", "Interpréter une inéquation"],
+      "prerequisites": ["M2-16"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["inéquation", "zone"],
+      "detailed_content": {
+        "introduction": "La résolution graphique d'une inéquation permet de trouver tous les x pour lesquels f(x) vérifie une condition d'ordre.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "f(x)≥k Cf au-dessus y=k. f(x)≤k Cf en-dessous. ≥ ≤ fermés. > < ouverts", "example": "Condition" },
+          { "name": "Méthode", "explanation": "Tracer Cf et y=k. Intersections x₁,x₂,... Zones selon inéquation. Écrire intervalles union", "example": "Étapes" },
+          { "name": "Cas f(x)≥0", "explanation": "Cf au-dessus Ox. f(x)≤0 Cf en-dessous. Racines séparent zones. Tableau signes", "example": "Particulier" },
+          { "name": "Notation", "explanation": "S=[a,b], S=]a,b[, union S=[a,b]∪[c,d]. ∅ aucune. Df toutes", "example": "Solutions" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=x²-4. Résoudre f(x)≥0.",
+          "solution_steps": ["Intersections x=-2, x=2", "Parabole au-dessus", "S=]-∞,-2]∪[2,+∞["]
+        },
+        "quick_exercises": [
+          "g croît -∞→1 g(1)=3 puis décroît. g(-2)=0, g(4)=0. Résoudre g(x)≥0, g(x)<3",
+          "Inéquations"
+        ],
+        "common_mistakes": [
+          "Inverser au-dessus/en-dessous",
+          "Mauvaise notation bornes"
+        ],
+        "summary": {
+          "key_concept": "f(x) ≥ k : Cf au-dessus de y = k. f(x) ≤ k : Cf en-dessous de y = k",
+          "key_method": "≥ ou ≤ : crochets fermés [ ]. > ou < : crochets ouverts ] [",
+          "next_step": "Parité"
+        }
+      }
+    },
+    {
+      "id": "M2-18",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Parité d'une fonction",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Définir fonction paire et impaire", "Vérifier algébriquement la parité", "Reconnaître graphiquement", "Utiliser les symétries"],
+      "prerequisites": ["M2-09"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["parité", "symétrie"],
+      "detailed_content": {
+        "introduction": "La parité d'une fonction caractérise une symétrie de sa courbe.",
+        "key_concepts": [
+          { "name": "Définitions", "explanation": "Df symétrique 0. Paire f(-x)=f(x). Impaire f(-x)=-f(x). Ni paire ni impaire", "example": "Conditions" },
+          { "name": "Graphique", "explanation": "Paire symétrie/Oy M(x,y) M'(-x,y). Impaire symétrie/O M(x,y) M'(-x,-y). Tracer moitié", "example": "Symétries" },
+          { "name": "Vérification", "explanation": "1) Df symétrique 2) Calculer f(-x) 3) Comparer f(-x) avec f(x) -f(x)", "example": "Méthode" },
+          { "name": "Propriétés", "explanation": "Somme/produit règles. Fonction nulle paire+impaire. Impaire + f(0)=0 définie 0", "example": "Règles" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=x⁴-2x². Parité ?",
+          "solution_steps": ["Df=ℝ symétrique", "f(-x)=x⁴-2x²=f(x)", "Paire"]
+        },
+        "quick_exercises": [
+          "g(x)=x³+x, h(x)=x²+3, k(x)=x³-x². Parité ?",
+          "Parité"
+        ],
+        "common_mistakes": [
+          "Oublier vérifier Df symétrique",
+          "Erreurs (-x)"
+        ],
+        "summary": {
+          "key_concept": "Paire : f(−x) = f(x), symétrie/Oy. Impaire : f(−x) = −f(x), symétrie/O",
+          "key_method": "Vérifier d'abord Df symétrique. Calculer f(−x) et comparer",
+          "next_step": "Transformations"
+        }
+      }
+    },
+    {
+      "id": "M2-19",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Transformation de courbes - Translation",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Comprendre f(x) + k et f(x + h)", "Effectuer une translation verticale", "Effectuer une translation horizontale", "Construire la nouvelle courbe"],
+      "prerequisites": ["M2-10"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["transformation", "translation"],
+      "detailed_content": {
+        "introduction": "La transformation de courbes par translation permet de construire de nouvelles fonctions à partir de fonctions de référence.",
+        "key_concepts": [
+          { "name": "Verticale", "explanation": "g(x)=f(x)+k translation verticale. Amplitude |k|. k>0 haut, k<0 bas. Vecteur (0,k)", "example": "Déplacement" },
+          { "name": "Horizontale", "explanation": "h(x)=f(x+a) translation horizontale. Amplitude |a|. ATTENTION a>0 gauche, a<0 droite. Vecteur (-a,0)", "example": "Déplacement" },
+          { "name": "Composition", "explanation": "g(x)=f(x+a)+k. Horizontal -a puis vertical k. Vecteur (-a,k). Ordre peu importe", "example": "Combinaison" },
+          { "name": "Points", "explanation": "Verticale racines changent extremums conservent abscisse. Horizontale changement abscisse -a domaine peut changer. Forme conservée", "example": "Remarquables" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=x² passe (1,1). Où y=x²+3 et y=(x-2)² ?",
+          "solution_steps": ["x²+3: (1,4)", "(x-2)²: (3,1)"]
+        },
+        "quick_exercises": [
+          "Cf f(x)=1/x. Décrire g(x)=1/x+2 et h(x)=1/(x-3)",
+          "Transformations"
+        ],
+        "common_mistakes": [
+          "Confondre f(x)+k et f(x+k)",
+          "Inverser sens horizontal"
+        ],
+        "summary": {
+          "key_concept": "f(x) + k : translation verticale de k. f(x + a) : translation horizontale de −a",
+          "key_method": "a > 0 : vers la gauche ! Forme de courbe conservée",
+          "next_step": "Synthèse"
+        }
+      }
+    },
+    {
+      "id": "M2-20",
+      "level": "Seconde",
+      "subject": "Mathématiques",
+      "chapter": "Fonctions",
+      "title": "Synthèse - Fonctions",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 85,
+      "objectives": ["Maîtriser tous les concepts de base sur les fonctions", "Relier les différentes notions", "Résoudre des problèmes de synthèse", "Utiliser le bon outil selon le contexte"],
+      "prerequisites": ["M2-09", "M2-11", "M2-12", "M2-13", "M2-14", "M2-16", "M2-18"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "fonctions"],
+      "detailed_content": {
+        "introduction": "Le concept de fonction est central en mathématiques. Cette synthèse regroupe tous les outils fondamentaux étudiés en Seconde.",
+        "key_concepts": [
+          { "name": "Notions base", "explanation": "Fonction f: x↦f(x). Variable image antécédent Df. Cf points M(x,f(x)). Lecture verticale horizontale. Calcul images", "example": "Fondamentaux" },
+          { "name": "Variations extrema", "explanation": "Croissante ↗ décroissante ↘ constante. Tableau variations. Maximum minimum. Local global. Changement variation. Comparaison images", "example": "Comportement" },
+          { "name": "Références", "explanation": "Affine f(x)=ax+b droite. Carré f(x)=x² parabole paire. Inverse f(x)=1/x hyperbole impaire", "example": "Fonctions" },
+          { "name": "Résolutions propriétés", "explanation": "Graphique f(x)=k intersections Cf y=k. f(x)≥k au-dessus y=k. Parité paire impaire symétries. Transformations translations", "example": "Outils" },
+          { "name": "Stratégie", "explanation": "1) Identifier fonction 2) Df 3) Calculer images 4) Tracer/lire 5) Étudier variations 6) Résoudre 7) Vérifier parité 8) Interpréter", "example": "Méthode" }
+        ],
+        "guided_example": {
+          "statement": "f(x)=x²-4x+3. f(0), f(2) ? f(x)=0 ? Paire ?",
+          "solution_steps": ["f(0)=3, f(2)=-1", "x²-4x+3=0 Δ=4 x=1,3", "Ni paire ni impaire"]
+        },
+        "quick_exercises": [
+          "g(x)=-x²+2x+3. g(-1), g(1), g(3) ? Variations ? g(x)≥0 ?",
+          "Problèmes synthèse"
+        ],
+        "common_mistakes": [
+          "Mélanger notions",
+          "Oublier cas particuliers"
+        ],
+        "summary": {
+          "key_concept": "Fonction = relation x → f(x). Graphique : visualisation essentielle. Variations : sens parcours",
+          "key_method": "Résolution : graphique + algébrique. Fonctions référence : à connaître",
+          "next_step": "Toujours vérifier Df. Les fonctions : un monde à explorer ! 📈"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

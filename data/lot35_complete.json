@@ -1,0 +1,343 @@
+{
+  "metadata": {
+    "lot_number": 19,
+    "lot_name": "Lot 19 - Électricité",
+    "level": "Première",
+    "subject": "Physique",
+    "prefix": "P1",
+    "chapter": "Électricité",
+    "lesson_range": "P1-23 à P1-30",
+    "total_lessons": 8
+  },
+  "lessons": [
+    {
+      "id": "P1-23",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Courant électrique et tension",
+      "duration_min": 11,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": ["Définir le courant électrique", "Comprendre la notion de tension", "Distinguer courant continu et alternatif", "Connaître les unités (A, V)"],
+      "prerequisites": [],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["courant", "tension"],
+      "detailed_content": {
+        "introduction": "Le courant électrique et la tension sont les deux grandeurs fondamentales de l'électricité. Le courant correspond au déplacement de charges électriques, tandis que la tension représente la différence d'énergie potentielle entre deux points.",
+        "key_concepts": [
+          { "name": "Courant électrique", "explanation": "Déplacement ordonné de charges. I = Q/Δt. Unité : ampère (A). Métaux : électrons", "example": "Définition" },
+          { "name": "Tension", "explanation": "Différence potentiel U_AB. Unité : volt (V). Énergie par unité de charge", "example": "Définition" },
+          { "name": "Types", "explanation": "Continu (DC) : I constant. Alternatif (AC) : I varie périodiquement. France : 230V, 50Hz", "example": "Courants" },
+          { "name": "Mesure", "explanation": "Ampèremètre EN SÉRIE. Voltmètre EN PARALLÈLE. Attention polarité et calibre", "example": "Appareils" }
+        ],
+        "guided_example": {
+          "statement": "Charge 10 C traverse section en 2s. I ?",
+          "solution_steps": ["I = Q/Δt = 10/2", "= 5 A"]
+        },
+        "quick_exercises": [
+          "Ampèremètre 0,5A. Charge en 10s ? Nombre électrons ?",
+          "Courant et tension"
+        ],
+        "common_mistakes": [
+          "Confondre courant et tension",
+          "Brancher ampèremètre en parallèle"
+        ],
+        "summary": {
+          "key_concept": "I = intensité (A), U = tension (V). Courant = déplacement charges",
+          "key_method": "Ampèremètre SÉRIE, voltmètre PARALLÈLE",
+          "next_step": "Loi des nœuds"
+        }
+      }
+    },
+    {
+      "id": "P1-24",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Loi des nœuds",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Énoncer la loi des nœuds", "Appliquer la conservation de la charge", "Calculer des intensités dans un circuit", "Identifier un nœud dans un circuit"],
+      "prerequisites": ["P1-23"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["nœuds", "loi"],
+      "detailed_content": {
+        "introduction": "La loi des nœuds, ou loi des courants, est une des lois fondamentales de l'électricité. Elle traduit la conservation de la charge électrique dans un circuit.",
+        "key_concepts": [
+          { "name": "Nœud", "explanation": "Point où ≥ 3 conducteurs connectés. Jonction où courant se divise/regroupe", "example": "Définition" },
+          { "name": "Loi", "explanation": "Σ I_entrant = Σ I_sortant ou Σ I = 0. Conservation charge", "example": "Formulation" },
+          { "name": "Physique", "explanation": "Aucune charge accumulée. Tout ce qui arrive repart. Régime permanent", "example": "Principe" },
+          { "name": "Applications", "explanation": "Calculer intensité inconnue, vérifier cohérence, circuits complexes", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Nœud : entrants I₁=2A, I₂=3A, I₃=1A ; sortants I₄ et I₅=2A. I₄ ?",
+          "solution_steps": ["Loi : Σ entrant = Σ sortant", "2+3+1 = I₄ + 2", "I₄ = 4 A"]
+        },
+        "quick_exercises": [
+          "Circuit : I₁=5A, I₂=2A entrant ; I₃, I₄=4A sortant. I₃ ?",
+          "Loi des nœuds"
+        ],
+        "common_mistakes": [
+          "Ne pas identifier entrants/sortants",
+          "Confondre loi nœuds/mailles"
+        ],
+        "summary": {
+          "key_concept": "Nœud = ≥3 fils. Σ I_entrant = Σ I_sortant. Conservation charge",
+          "key_method": "Tout ce qui arrive repart",
+          "next_step": "Loi des mailles"
+        }
+      }
+    },
+    {
+      "id": "P1-25",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Loi des mailles",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Énoncer la loi des mailles", "Appliquer la conservation de l'énergie", "Calculer des tensions dans un circuit", "Utiliser la convention générateur/récepteur"],
+      "prerequisites": ["P1-23"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["mailles", "loi"],
+      "detailed_content": {
+        "introduction": "La loi des mailles, ou loi des tensions, est la seconde loi fondamentale de l'électricité. Elle traduit la conservation de l'énergie dans un circuit électrique.",
+        "key_concepts": [
+          { "name": "Maille", "explanation": "Chemin fermé dans circuit. Boucle revenant au départ sans repasser deux fois", "example": "Définition" },
+          { "name": "Loi", "explanation": "Σ U = 0 le long de la maille fermée. Somme algébrique tensions nulle", "example": "Formulation" },
+          { "name": "Convention", "explanation": "Choisir sens parcours. Comptabiliser tensions selon sens. Être cohérent", "example": "Signe" },
+          { "name": "Physique", "explanation": "Conservation énergie. Porteur revient même potentiel. Énergie fournie = consommée", "example": "Principe" }
+        ],
+        "guided_example": {
+          "statement": "Circuit : E = 12V, R₁, R₂ série. U₁=5V. U₂ ?",
+          "solution_steps": ["Maille : E - U₁ - U₂ = 0", "12 - 5 - U₂ = 0", "U₂ = 7 V"]
+        },
+        "quick_exercises": [
+          "Circuit : E₁=6V, E₂=4V opposition, R. U_R ?",
+          "Loi des mailles"
+        ],
+        "common_mistakes": [
+          "Ne pas choisir sens parcours",
+          "Erreurs de signe"
+        ],
+        "summary": {
+          "key_concept": "Maille = boucle fermée. Σ U = 0. Conservation énergie",
+          "key_method": "Choisir sens parcours, s'y tenir",
+          "next_step": "Loi d'Ohm"
+        }
+      }
+    },
+    {
+      "id": "P1-26",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Loi d'Ohm",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Énoncer la loi d'Ohm", "Appliquer U = RI", "Comprendre la notion de résistance", "Calculer R, U ou I"],
+      "prerequisites": ["P1-23"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Ohm", "résistance"],
+      "detailed_content": {
+        "introduction": "La loi d'Ohm est une relation fondamentale qui lie la tension aux bornes d'un conducteur ohmique, l'intensité qui le traverse, et sa résistance. C'est un outil essentiel pour l'analyse des circuits électriques.",
+        "key_concepts": [
+          { "name": "Conducteur ohmique", "explanation": "Tension proportionnelle à intensité. U = RI. Caractéristique droite origine", "example": "Dipôle" },
+          { "name": "Loi", "explanation": "U = R × I (ou I = U/R, R = U/I). Relation fondamentale", "example": "Formulation" },
+          { "name": "Puissance", "explanation": "P = U × I. P = R × I² = U²/R. Effet Joule. Dissipation chaleur", "example": "Énergie" },
+          { "name": "Caractéristique", "explanation": "Graphique U = RI. Droite, pente = R", "example": "Représentation" }
+        ],
+        "guided_example": {
+          "statement": "Conducteur ohmique 100Ω, I = 0,2A. U ?",
+          "solution_steps": ["U = R × I", "= 100 × 0,2", "= 20 V"]
+        },
+        "quick_exercises": [
+          "Résistance 220Ω aux bornes 12V. I ? P ?",
+          "Loi d'Ohm"
+        ],
+        "common_mistakes": [
+          "Inverser U et I",
+          "Confondre R et résistivité"
+        ],
+        "summary": {
+          "key_concept": "Loi Ohm : U = RI. R = résistance (Ω)",
+          "key_method": "I = U/R, R = U/I. P = UI = RI² = U²/R",
+          "next_step": "Associations résistances"
+        }
+      }
+    },
+    {
+      "id": "P1-27",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Associations de résistances",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Calculer la résistance équivalente en série", "Calculer la résistance équivalente en parallèle", "Simplifier un circuit avec plusieurs résistances", "Appliquer les formules R_série et R_parallèle"],
+      "prerequisites": ["P1-24", "P1-25", "P1-26"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["association", "résistances"],
+      "detailed_content": {
+        "introduction": "Dans un circuit électrique, les résistances peuvent être associées de différentes manières : en série ou en parallèle. Ces associations peuvent être remplacées par une résistance équivalente unique qui aurait le même effet dans le circuit.",
+        "key_concepts": [
+          { "name": "Série", "explanation": "Même courant. R_eq = R₁ + R₂ + ... (somme). Tensions s'ajoutent", "example": "Association" },
+          { "name": "Parallèle", "explanation": "Même tension. 1/R_eq = 1/R₁ + 1/R₂ + ... (inverses). Courants s'ajoutent", "example": "Association" },
+          { "name": "Simplification", "explanation": "Identifier série/parallèle, remplacer, répéter jusqu'à R_eq unique", "example": "Méthode" },
+          { "name": "Applications", "explanation": "Circuits complexes, dimensionnement, création valeurs spécifiques", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "R₁ = 100Ω, R₂ = 200Ω en série. R_eq ?",
+          "solution_steps": ["Série : R_eq = R₁ + R₂", "= 100 + 200", "= 300 Ω"]
+        },
+        "quick_exercises": [
+          "R₁=60Ω, R₂=30Ω en parallèle. R_eq ? Si U=12V, I total ?",
+          "Associations résistances"
+        ],
+        "common_mistakes": [
+          "Confondre série/parallèle",
+          "Additionner inverses en série"
+        ],
+        "summary": {
+          "key_concept": "Série : R_eq = R₁ + R₂ (somme). Parallèle : 1/R_eq = 1/R₁ + 1/R₂ (inverses)",
+          "key_method": "Série : même I. Parallèle : même U",
+          "next_step": "Pont diviseur tension"
+        }
+      }
+    },
+    {
+      "id": "P1-28",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Pont diviseur de tension",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 110,
+      "objectives": ["Comprendre le principe du diviseur de tension", "Appliquer la formule U_i = (R_i/R_total) × U_totale", "Calculer des tensions dans un circuit série", "Concevoir un diviseur de tension"],
+      "prerequisites": ["P1-25", "P1-26"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["diviseur", "tension"],
+      "detailed_content": {
+        "introduction": "Le pont diviseur de tension est un montage fondamental qui permet d'obtenir une tension plus faible qu'une tension d'alimentation en utilisant deux résistances en série. C'est un circuit très utilisé en électronique.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Deux résistances série alimentées par U. Tension se divise proportionnellement", "example": "Montage" },
+          { "name": "Formule", "explanation": "U₁ = (R₁/(R₁+R₂)) × U. U₂ = (R₂/(R₁+R₂)) × U. Proportionnelle à R", "example": "Calcul" },
+          { "name": "Démonstration", "explanation": "Même courant I. U₁ = R₁I, U = (R₁+R₂)I. Donc U₁ = (R₁/(R₁+R₂))U", "example": "Preuve" },
+          { "name": "Applications", "explanation": "Tension intermédiaire, potentiomètres, capteurs, adaptation niveaux. ATTENTION : fonctionne à vide", "example": "Utilisations" }
+        ],
+        "guided_example": {
+          "statement": "Diviseur R₁=100Ω, R₂=200Ω, U=12V. U₁ et U₂ ?",
+          "solution_steps": ["R_total = 300 Ω", "U₁ = (100/300)×12 = 4 V", "U₂ = (200/300)×12 = 8 V"]
+        },
+        "quick_exercises": [
+          "Obtenir 3,3V depuis 5V avec R₁=1kΩ. R₂ ?",
+          "Concevoir diviseur tension"
+        ],
+        "common_mistakes": [
+          "Inverser R₁ et R₂",
+          "Négliger effet de charge"
+        ],
+        "summary": {
+          "key_concept": "Diviseur tension : résistances série. U_i = (R_i/R_total)×U_totale",
+          "key_method": "Tension proportionnelle R. Fonctionne à vide",
+          "next_step": "Pont diviseur courant"
+        }
+      }
+    },
+    {
+      "id": "P1-29",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Pont diviseur de courant",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Comprendre le principe du diviseur de courant", "Appliquer la formule pour des résistances en parallèle", "Calculer des courants dans un circuit parallèle", "Comprendre la répartition inverse des courants"],
+      "prerequisites": ["P1-24", "P1-26"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["diviseur", "courant"],
+      "detailed_content": {
+        "introduction": "Le diviseur de courant est le pendant du diviseur de tension pour les résistances en parallèle. Il permet de calculer comment le courant se répartit entre plusieurs branches parallèles.",
+        "key_concepts": [
+          { "name": "Principe", "explanation": "Plusieurs résistances parallèle. Répartition INVERSE aux résistances", "example": "Montage" },
+          { "name": "Formule", "explanation": "I₁ = (R₂/(R₁+R₂)) × I. I₂ = (R₁/(R₁+R₂)) × I. R₂ au numérateur pour I₁", "example": "2 résistances" },
+          { "name": "Démonstration", "explanation": "Même tension U. I₁ = U/R₁, I = I₁+I₂. U = IR_eq. Donc I₁ = (R₂/(R₁+R₂))I", "example": "Preuve" },
+          { "name": "Cas général", "explanation": "I_i = (R_eq/R_i) × I ou I_i = U/R_i directement", "example": "n résistances" }
+        ],
+        "guided_example": {
+          "statement": "R₁=6Ω, R₂=3Ω parallèle, I=9A. I₁ et I₂ ?",
+          "solution_steps": ["I₁ = (R₂/(R₁+R₂)) × I = (3/9)×9 = 3 A", "I₂ = (R₁/(R₁+R₂)) × I = (6/9)×9 = 6 A"]
+        },
+        "quick_exercises": [
+          "R₁=10Ω, R₂=20Ω, R₃=30Ω parallèle, U=12V. I₁, I₂, I₃, I ?",
+          "Diviseur courant"
+        ],
+        "common_mistakes": [
+          "Croire que I répartit comme R (c'est inverse)",
+          "Inverser numérateur/dénominateur"
+        ],
+        "summary": {
+          "key_concept": "Diviseur courant : résistances parallèle. I inversement proportionnel R",
+          "key_method": "Petit R → grand I. Formule (2R) : I₁ = (R₂/(R₁+R₂)) × I",
+          "next_step": "Synthèse chapitre"
+        }
+      }
+    },
+    {
+      "id": "P1-30",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Synthèse - Électricité",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 105,
+      "objectives": ["Synthétiser les lois fondamentales de l'électricité", "Résoudre des circuits complexes", "Choisir la bonne méthode selon le circuit", "Appliquer les lois de manière combinée"],
+      "prerequisites": ["P1-24", "P1-25", "P1-26", "P1-27"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "électricité"],
+      "detailed_content": {
+        "introduction": "L'électricité en Première repose sur quatre lois fondamentales qui permettent d'analyser n'importe quel circuit : la loi des nœuds, la loi des mailles, la loi d'Ohm, et les règles d'association de résistances.",
+        "key_concepts": [
+          { "name": "4 lois", "explanation": "Loi nœuds : Σ I_entrant = Σ I_sortant. Loi mailles : Σ U = 0. Ohm : U = RI. Associations", "example": "Fondamentales" },
+          { "name": "Associations", "explanation": "Série : R_eq = R₁+R₂. Parallèle : 1/R_eq = 1/R₁+1/R₂", "example": "Résistances" },
+          { "name": "Diviseurs", "explanation": "Tension (série) : U_i = (R_i/R_total)×U. Courant (parallèle) : I inversement proportionnel R", "example": "Circuits" },
+          { "name": "Méthodologie", "explanation": "Schéma → nœuds/mailles → simplification → lois → résolution → vérification", "example": "Approche" }
+        ],
+        "guided_example": {
+          "statement": "Circuit : E=12V, R₁=10Ω et R₂=R₃=20Ω //, tout série. I ?",
+          "solution_steps": ["R₂//R₃ = 10 Ω", "R_total = 10 + 10 = 20 Ω", "I = 12/20 = 0,6 A"]
+        },
+        "quick_exercises": [
+          "Circuit : E=9V, R₁=30Ω série avec R₂=60Ω // R₃=40Ω. R_eq, I, U₁, U₂₃ ?",
+          "Circuits complexes"
+        ],
+        "common_mistakes": [
+          "Ne pas simplifier progressivement",
+          "Confondre série/parallèle"
+        ],
+        "summary": {
+          "key_concept": "4 lois : nœuds, mailles, Ohm, associations. Simplifier avant calculer",
+          "key_method": "Méthodologie : schéma → simplification → lois → résolution → vérification",
+          "next_step": "Fin chapitre Électricité"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

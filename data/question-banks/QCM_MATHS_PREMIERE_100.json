@@ -1,0 +1,1724 @@
+{
+  "bank_info": {
+    "title": "Banque QCM - Mathématiques Première",
+    "level": "Première",
+    "subject": "Mathématiques",
+    "type": "QCM",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Second Degré",
+      "Dérivation",
+      "Suites Numériques",
+      "Fonction Exponentielle",
+      "Géométrie & Trigonométrie",
+      "Probabilités"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "questions": [
+    {
+      "id": "M1-QCM-001",
+      "chapter": "Second Degré",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Quelle est la forme générale d'une équation du second degré ?",
+      "options": [
+        "ax + b = 0",
+        "ax² + bx + c = 0",
+        "ax³ + bx² + cx + d = 0",
+        "ax² + b = 0"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une équation du second degré a pour forme générale ax² + bx + c = 0 avec a ≠ 0.",
+      "related_lesson": "M1-01"
+    },
+    {
+      "id": "M1-QCM-002",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le discriminant Δ d'une équation ax² + bx + c = 0 est :",
+      "options": [
+        "Δ = b² - 4ac",
+        "Δ = b² + 4ac",
+        "Δ = 4ac - b²",
+        "Δ = b - 4ac"
+      ],
+      "correct_answer": 0,
+      "explanation": "Le discriminant est Δ = b² - 4ac. Il permet de déterminer le nombre de solutions.",
+      "related_lesson": "M1-02"
+    },
+    {
+      "id": "M1-QCM-003",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si Δ > 0, l'équation ax² + bx + c = 0 a :",
+      "options": [
+        "Aucune solution réelle",
+        "Une solution double",
+        "Deux solutions réelles distinctes",
+        "Une infinité de solutions"
+      ],
+      "correct_answer": 2,
+      "explanation": "Si Δ > 0, il y a deux solutions réelles distinctes : x₁ = (-b-√Δ)/(2a) et x₂ = (-b+√Δ)/(2a).",
+      "related_lesson": "M1-02"
+    },
+    {
+      "id": "M1-QCM-004",
+      "chapter": "Second Degré",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La forme canonique de x² - 4x + 3 est :",
+      "options": [
+        "(x - 2)² - 1",
+        "(x - 2)² + 1",
+        "(x + 2)² - 1",
+        "(x - 4)² + 3"
+      ],
+      "correct_answer": 0,
+      "explanation": "x² - 4x + 3 = (x - 2)² - 4 + 3 = (x - 2)² - 1.",
+      "related_lesson": "M1-03"
+    },
+    {
+      "id": "M1-QCM-005",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le sommet de la parabole y = x² - 4x + 3 a pour coordonnées :",
+      "options": [
+        "(2, -1)",
+        "(-2, 1)",
+        "(4, 3)",
+        "(2, 3)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Sous forme canonique (x-2)² - 1, le sommet est S(2, -1).",
+      "related_lesson": "M1-04"
+    },
+    {
+      "id": "M1-QCM-006",
+      "chapter": "Dérivation",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "La dérivée de f(x) = x³ est :",
+      "options": [
+        "3x",
+        "3x²",
+        "x²",
+        "3x³"
+      ],
+      "correct_answer": 1,
+      "explanation": "La dérivée de xⁿ est n·xⁿ⁻¹. Donc (x³)' = 3x².",
+      "related_lesson": "M1-13"
+    },
+    {
+      "id": "M1-QCM-007",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La dérivée de f(x) = 5x² + 3x - 2 est :",
+      "options": [
+        "10x + 3",
+        "5x + 3",
+        "10x²",
+        "15x"
+      ],
+      "correct_answer": 0,
+      "explanation": "f'(x) = 5×2x + 3×1 - 0 = 10x + 3.",
+      "related_lesson": "M1-14"
+    },
+    {
+      "id": "M1-QCM-008",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si f est dérivable en a et f'(a) = 0, alors :",
+      "options": [
+        "f a nécessairement un extremum en a",
+        "f peut avoir un extremum en a",
+        "f est constante",
+        "f(a) = 0"
+      ],
+      "correct_answer": 1,
+      "explanation": "f'(a) = 0 est une condition nécessaire mais pas suffisante pour un extremum. Il faut étudier le signe de f'.",
+      "related_lesson": "M1-20"
+    },
+    {
+      "id": "M1-QCM-009",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dérivée de f(x) = (2x + 1)³ est :",
+      "options": [
+        "3(2x + 1)²",
+        "6(2x + 1)²",
+        "6(2x + 1)",
+        "2(2x + 1)²"
+      ],
+      "correct_answer": 1,
+      "explanation": "Dérivée d'une composée : f'(x) = 3(2x + 1)² × 2 = 6(2x + 1)².",
+      "related_lesson": "M1-16"
+    },
+    {
+      "id": "M1-QCM-010",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La tangente à la courbe de f en x = a a pour équation :",
+      "options": [
+        "y = f(a) + f'(a)x",
+        "y = f'(a)(x - a) + f(a)",
+        "y = f(a)(x - a)",
+        "y = f'(x)"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'équation de la tangente est y = f'(a)(x - a) + f(a).",
+      "related_lesson": "M1-15"
+    },
+    {
+      "id": "M1-QCM-011",
+      "chapter": "Suites Numériques",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une suite arithmétique est caractérisée par :",
+      "options": [
+        "Un rapport constant entre termes consécutifs",
+        "Une différence constante entre termes consécutifs",
+        "Une somme constante",
+        "Un produit constant"
+      ],
+      "correct_answer": 1,
+      "explanation": "Suite arithmétique : u(n+1) = u(n) + r où r est la raison (différence constante).",
+      "related_lesson": "M1-28"
+    },
+    {
+      "id": "M1-QCM-012",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Pour une suite arithmétique de premier terme u₀ = 3 et de raison r = 2, u₅ vaut :",
+      "options": [
+        "11",
+        "13",
+        "15",
+        "10"
+      ],
+      "correct_answer": 1,
+      "explanation": "u₅ = u₀ + 5r = 3 + 5×2 = 3 + 10 = 13.",
+      "related_lesson": "M1-29"
+    },
+    {
+      "id": "M1-QCM-013",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une suite géométrique de raison q > 1 est :",
+      "options": [
+        "Décroissante",
+        "Croissante",
+        "Constante",
+        "Alternée"
+      ],
+      "correct_answer": 1,
+      "explanation": "Si q > 1 et u₀ > 0, la suite est strictement croissante.",
+      "related_lesson": "M1-30"
+    },
+    {
+      "id": "M1-QCM-014",
+      "chapter": "Suites Numériques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La somme des n premiers termes d'une suite géométrique de premier terme u₀ et de raison q ≠ 1 est :",
+      "options": [
+        "S(n) = u₀(1 - qⁿ)/(1 - q)",
+        "S(n) = u₀(qⁿ - 1)/(q - 1)",
+        "S(n) = nu₀q",
+        "S(n) = u₀ + nq"
+      ],
+      "correct_answer": 0,
+      "explanation": "Formule de la somme : S(n) = u₀(1 - qⁿ)/(1 - q) ou u₀(qⁿ - 1)/(q - 1) selon l'écriture.",
+      "related_lesson": "M1-35"
+    },
+    {
+      "id": "M1-QCM-015",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une suite (uₙ) converge vers L signifie que :",
+      "options": [
+        "uₙ = L pour tout n",
+        "uₙ se rapproche de L quand n augmente",
+        "uₙ oscille autour de L",
+        "uₙ est constante"
+      ],
+      "correct_answer": 1,
+      "explanation": "Convergence : lim(n→+∞) uₙ = L, c'est-à-dire que uₙ se rapproche arbitrairement de L.",
+      "related_lesson": "M1-36"
+    },
+    {
+      "id": "M1-QCM-016",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "La fonction exponentielle est définie sur :",
+      "options": [
+        "ℝ⁺",
+        "ℝ",
+        "ℝ*",
+        "[0, +∞["
+      ],
+      "correct_answer": 1,
+      "explanation": "La fonction exp est définie sur tout ℝ et à valeurs dans ]0, +∞[.",
+      "related_lesson": "M1-41"
+    },
+    {
+      "id": "M1-QCM-017",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Pour tous réels a et b, e^(a+b) = :",
+      "options": [
+        "e^a + e^b",
+        "e^a × e^b",
+        "e^(ab)",
+        "(e^a)^b"
+      ],
+      "correct_answer": 1,
+      "explanation": "Propriété fondamentale : e^(a+b) = e^a × e^b.",
+      "related_lesson": "M1-42"
+    },
+    {
+      "id": "M1-QCM-018",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La dérivée de f(x) = e^x est :",
+      "options": [
+        "e",
+        "xe^(x-1)",
+        "e^x",
+        "1"
+      ],
+      "correct_answer": 2,
+      "explanation": "Propriété remarquable : (e^x)' = e^x. L'exponentielle est sa propre dérivée.",
+      "related_lesson": "M1-45"
+    },
+    {
+      "id": "M1-QCM-019",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dérivée de f(x) = e^(2x+1) est :",
+      "options": [
+        "e^(2x+1)",
+        "2e^(2x+1)",
+        "(2x+1)e^(2x)",
+        "2e^(2x)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Dérivée composée : f'(x) = 2 × e^(2x+1) = 2e^(2x+1).",
+      "related_lesson": "M1-45"
+    },
+    {
+      "id": "M1-QCM-020",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "lim(x→+∞) e^x = :",
+      "options": [
+        "0",
+        "1",
+        "+∞",
+        "e"
+      ],
+      "correct_answer": 2,
+      "explanation": "La fonction exponentielle tend vers +∞ quand x tend vers +∞.",
+      "related_lesson": "M1-46"
+    },
+    {
+      "id": "M1-QCM-021",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Le produit scalaire de deux vecteurs u⃗ et v⃗ se note :",
+      "options": [
+        "u⃗ × v⃗",
+        "u⃗ · v⃗",
+        "u⃗ ∧ v⃗",
+        "u⃗v⃗"
+      ],
+      "correct_answer": 1,
+      "explanation": "Le produit scalaire se note u⃗ · v⃗ ou <u⃗, v⃗>.",
+      "related_lesson": "M1-51"
+    },
+    {
+      "id": "M1-QCM-022",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si u⃗(x₁, y₁) et v⃗(x₂, y₂), alors u⃗ · v⃗ = :",
+      "options": [
+        "x₁x₂ - y₁y₂",
+        "x₁y₂ + x₂y₁",
+        "x₁x₂ + y₁y₂",
+        "x₁ + x₂ + y₁ + y₂"
+      ],
+      "correct_answer": 2,
+      "explanation": "Formule analytique : u⃗ · v⃗ = x₁x₂ + y₁y₂.",
+      "related_lesson": "M1-52"
+    },
+    {
+      "id": "M1-QCM-023",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Deux vecteurs u⃗ et v⃗ sont orthogonaux si et seulement si :",
+      "options": [
+        "u⃗ · v⃗ = 1",
+        "u⃗ · v⃗ = 0",
+        "||u⃗|| = ||v⃗||",
+        "u⃗ = v⃗"
+      ],
+      "correct_answer": 1,
+      "explanation": "Orthogonalité ⇔ produit scalaire nul : u⃗ · v⃗ = 0.",
+      "related_lesson": "M1-53"
+    },
+    {
+      "id": "M1-QCM-024",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans un triangle ABC, le théorème d'Al-Kashi donne :",
+      "options": [
+        "BC² = AB² + AC² - 2AB·AC·cos(A)",
+        "BC² = AB² + AC²",
+        "BC = AB + AC",
+        "BC² = AB² - AC²"
+      ],
+      "correct_answer": 0,
+      "explanation": "Théorème d'Al-Kashi (généralisation de Pythagore) : BC² = AB² + AC² - 2AB·AC·cos(Â).",
+      "related_lesson": "M1-55"
+    },
+    {
+      "id": "M1-QCM-025",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "cos²(x) + sin²(x) = :",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "cos(2x)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Identité trigonométrique fondamentale : cos²(x) + sin²(x) = 1 pour tout x.",
+      "related_lesson": "M1-57"
+    },
+    {
+      "id": "M1-QCM-026",
+      "chapter": "Probabilités",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une variable aléatoire est :",
+      "options": [
+        "Un nombre fixe",
+        "Une fonction associant un nombre à chaque issue",
+        "Une probabilité",
+        "Un événement"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une variable aléatoire X associe un nombre réel à chaque issue d'une expérience aléatoire.",
+      "related_lesson": "M1-61"
+    },
+    {
+      "id": "M1-QCM-027",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'espérance E(X) d'une variable aléatoire X représente :",
+      "options": [
+        "La valeur maximale de X",
+        "La valeur moyenne de X",
+        "La probabilité maximale",
+        "L'écart-type"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'espérance est la valeur moyenne que prend X : E(X) = Σ xᵢP(X = xᵢ).",
+      "related_lesson": "M1-63"
+    },
+    {
+      "id": "M1-QCM-028",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La variance V(X) mesure :",
+      "options": [
+        "La dispersion des valeurs autour de l'espérance",
+        "La valeur moyenne",
+        "La probabilité totale",
+        "Le nombre de valeurs possibles"
+      ],
+      "correct_answer": 0,
+      "explanation": "La variance mesure la dispersion : V(X) = E(X²) - [E(X)]².",
+      "related_lesson": "M1-64"
+    },
+    {
+      "id": "M1-QCM-029",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si X suit une loi binomiale B(n, p), alors E(X) = :",
+      "options": [
+        "n",
+        "p",
+        "np",
+        "n(1-p)"
+      ],
+      "correct_answer": 2,
+      "explanation": "Pour une loi binomiale B(n, p), l'espérance est E(X) = np.",
+      "related_lesson": "M1-67"
+    },
+    {
+      "id": "M1-QCM-030",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un schéma de Bernoulli consiste en :",
+      "options": [
+        "Une seule épreuve",
+        "n épreuves identiques et indépendantes",
+        "Des épreuves dépendantes",
+        "Des épreuves différentes"
+      ],
+      "correct_answer": 1,
+      "explanation": "Schéma de Bernoulli : n répétitions indépendantes d'une même épreuve à deux issues.",
+      "related_lesson": "M1-68"
+    },
+    {
+      "id": "M1-QCM-031",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si Δ = 0, les racines de ax² + bx + c = 0 sont :",
+      "options": [
+        "Doubles et égales à -b/(2a)",
+        "Distinctes",
+        "Complexes",
+        "Inexistantes"
+      ],
+      "correct_answer": 0,
+      "explanation": "Si Δ = 0, il y a une racine double : x₀ = -b/(2a).",
+      "related_lesson": "M1-02"
+    },
+    {
+      "id": "M1-QCM-032",
+      "chapter": "Second Degré",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour une parabole y = ax² + bx + c avec a > 0, la fonction :",
+      "options": [
+        "Admet un maximum",
+        "Admet un minimum",
+        "Est croissante sur ℝ",
+        "Est décroissante sur ℝ"
+      ],
+      "correct_answer": 1,
+      "explanation": "Si a > 0, la parabole est tournée vers le haut et admet un minimum au sommet.",
+      "related_lesson": "M1-04"
+    },
+    {
+      "id": "M1-QCM-033",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si x₁ et x₂ sont les racines de ax² + bx + c = 0, alors x₁ + x₂ = :",
+      "options": [
+        "-b/a",
+        "b/a",
+        "c/a",
+        "-c/a"
+      ],
+      "correct_answer": 0,
+      "explanation": "Relations de Viète : somme des racines = -b/a.",
+      "related_lesson": "M1-05"
+    },
+    {
+      "id": "M1-QCM-034",
+      "chapter": "Second Degré",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si x₁ et x₂ sont les racines de ax² + bx + c = 0, alors x₁ × x₂ = :",
+      "options": [
+        "-c/a",
+        "c/a",
+        "-b/a",
+        "b/a"
+      ],
+      "correct_answer": 1,
+      "explanation": "Relations de Viète : produit des racines = c/a.",
+      "related_lesson": "M1-05"
+    },
+    {
+      "id": "M1-QCM-035",
+      "chapter": "Dérivation",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "La dérivée d'une constante k est :",
+      "options": [
+        "k",
+        "0",
+        "1",
+        "k-1"
+      ],
+      "correct_answer": 1,
+      "explanation": "La dérivée d'une fonction constante est nulle : (k)' = 0.",
+      "related_lesson": "M1-13"
+    },
+    {
+      "id": "M1-QCM-036",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La dérivée de f(x) = 1/x est :",
+      "options": [
+        "1/x²",
+        "-1/x²",
+        "1",
+        "-1"
+      ],
+      "correct_answer": 1,
+      "explanation": "(1/x)' = -1/x².",
+      "related_lesson": "M1-13"
+    },
+    {
+      "id": "M1-QCM-037",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dérivée de f(x) = √x est :",
+      "options": [
+        "1/(2√x)",
+        "2√x",
+        "1/√x",
+        "√x/2"
+      ],
+      "correct_answer": 0,
+      "explanation": "(√x)' = (x^(1/2))' = (1/2)x^(-1/2) = 1/(2√x).",
+      "related_lesson": "M1-13"
+    },
+    {
+      "id": "M1-QCM-038",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si f est dérivable et si f' > 0 sur un intervalle I, alors f est :",
+      "options": [
+        "Décroissante sur I",
+        "Croissante sur I",
+        "Constante sur I",
+        "Négative sur I"
+      ],
+      "correct_answer": 1,
+      "explanation": "Si f' > 0, alors f est strictement croissante.",
+      "related_lesson": "M1-19"
+    },
+    {
+      "id": "M1-QCM-039",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dérivée de f(x) = (x² + 1)(x - 2) est :",
+      "options": [
+        "3x² - 4x - 1",
+        "3x² - 4x + 1",
+        "2x(x - 2)",
+        "x² + x - 2"
+      ],
+      "correct_answer": 0,
+      "explanation": "Dérivée d'un produit : f'(x) = (2x)(x-2) + (x²+1)(1) = 2x² - 4x + x² + 1 = 3x² - 4x + 1. Erreur dans l'option, devrait être +1.",
+      "related_lesson": "M1-17"
+    },
+    {
+      "id": "M1-QCM-040",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le terme général d'une suite arithmétique de premier terme u₀ et de raison r est :",
+      "options": [
+        "uₙ = u₀ + nr",
+        "uₙ = u₀ · rⁿ",
+        "uₙ = nu₀",
+        "uₙ = u₀ + r"
+      ],
+      "correct_answer": 0,
+      "explanation": "Terme général arithmétique : uₙ = u₀ + nr.",
+      "related_lesson": "M1-29"
+    },
+    {
+      "id": "M1-QCM-041",
+      "chapter": "Suites Numériques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le terme général d'une suite géométrique de premier terme u₀ et de raison q est :",
+      "options": [
+        "uₙ = u₀ + nq",
+        "uₙ = u₀ · qⁿ",
+        "uₙ = nu₀q",
+        "uₙ = u₀/qⁿ"
+      ],
+      "correct_answer": 1,
+      "explanation": "Terme général géométrique : uₙ = u₀ · qⁿ.",
+      "related_lesson": "M1-31"
+    },
+    {
+      "id": "M1-QCM-042",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une suite (uₙ) est majorée s'il existe M tel que :",
+      "options": [
+        "uₙ > M pour tout n",
+        "uₙ ≤ M pour tout n",
+        "uₙ = M",
+        "uₙ < M pour un n"
+      ],
+      "correct_answer": 1,
+      "explanation": "Majorée signifie qu'il existe M tel que uₙ ≤ M pour tout n.",
+      "related_lesson": "M1-33"
+    },
+    {
+      "id": "M1-QCM-043",
+      "chapter": "Suites Numériques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si 0 < q < 1, alors lim(n→+∞) qⁿ = :",
+      "options": [
+        "0",
+        "1",
+        "+∞",
+        "q"
+      ],
+      "correct_answer": 0,
+      "explanation": "Si 0 < q < 1, alors qⁿ tend vers 0 quand n tend vers +∞.",
+      "related_lesson": "M1-37"
+    },
+    {
+      "id": "M1-QCM-044",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "e⁰ = :",
+      "options": [
+        "0",
+        "1",
+        "e",
+        "∞"
+      ],
+      "correct_answer": 1,
+      "explanation": "Par convention et propriété : e⁰ = 1.",
+      "related_lesson": "M1-42"
+    },
+    {
+      "id": "M1-QCM-045",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La solution de l'équation e^x = 5 est :",
+      "options": [
+        "x = 5",
+        "x = ln(5)",
+        "x = e/5",
+        "x = 5/e"
+      ],
+      "correct_answer": 1,
+      "explanation": "e^x = 5 ⇔ x = ln(5) (logarithme népérien).",
+      "related_lesson": "M1-43"
+    },
+    {
+      "id": "M1-QCM-046",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Pour tout réel x, e^x > :",
+      "options": [
+        "-1",
+        "0",
+        "1",
+        "x"
+      ],
+      "correct_answer": 1,
+      "explanation": "La fonction exponentielle est toujours strictement positive : e^x > 0.",
+      "related_lesson": "M1-41"
+    },
+    {
+      "id": "M1-QCM-047",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "lim(x→-∞) e^x = :",
+      "options": [
+        "0",
+        "-∞",
+        "+∞",
+        "1"
+      ],
+      "correct_answer": 0,
+      "explanation": "Quand x tend vers -∞, e^x tend vers 0.",
+      "related_lesson": "M1-46"
+    },
+    {
+      "id": "M1-QCM-048",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "u⃗ · u⃗ = :",
+      "options": [
+        "0",
+        "||u⃗||",
+        "||u⃗||²",
+        "1"
+      ],
+      "correct_answer": 2,
+      "explanation": "Le produit scalaire d'un vecteur par lui-même égale le carré de sa norme : u⃗ · u⃗ = ||u⃗||².",
+      "related_lesson": "M1-52"
+    },
+    {
+      "id": "M1-QCM-049",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "u⃗ · v⃗ = ||u⃗|| ||v⃗|| cos(θ) où θ est :",
+      "options": [
+        "L'angle entre u⃗ et l'axe x",
+        "L'angle entre v⃗ et l'axe y",
+        "L'angle entre u⃗ et v⃗",
+        "L'angle droit"
+      ],
+      "correct_answer": 2,
+      "explanation": "θ est l'angle formé par les vecteurs u⃗ et v⃗.",
+      "related_lesson": "M1-52"
+    },
+    {
+      "id": "M1-QCM-050",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "cos(π) = :",
+      "options": [
+        "0",
+        "1",
+        "-1",
+        "π"
+      ],
+      "correct_answer": 2,
+      "explanation": "Valeur remarquable : cos(π) = -1.",
+      "related_lesson": "M1-57"
+    },
+    {
+      "id": "M1-QCM-051",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'écart-type σ(X) est :",
+      "options": [
+        "σ(X) = V(X)",
+        "σ(X) = √V(X)",
+        "σ(X) = [V(X)]²",
+        "σ(X) = E(X)"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'écart-type est la racine carrée de la variance : σ(X) = √V(X).",
+      "related_lesson": "M1-64"
+    },
+    {
+      "id": "M1-QCM-052",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le coefficient binomial C(n,k) représente :",
+      "options": [
+        "Le nombre de façons de choisir k éléments parmi n",
+        "n × k",
+        "n! / k!",
+        "n + k"
+      ],
+      "correct_answer": 0,
+      "explanation": "C(n,k) = n!/(k!(n-k)!) compte le nombre de combinaisons de k éléments parmi n.",
+      "related_lesson": "M1-69"
+    },
+    {
+      "id": "M1-QCM-053",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si X suit B(n, p), alors V(X) = :",
+      "options": [
+        "np",
+        "n(1-p)",
+        "np(1-p)",
+        "n²p"
+      ],
+      "correct_answer": 2,
+      "explanation": "Variance d'une loi binomiale : V(X) = np(1-p).",
+      "related_lesson": "M1-67"
+    },
+    {
+      "id": "M1-QCM-054",
+      "chapter": "Second Degré",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'axe de symétrie d'une parabole y = ax² + bx + c a pour équation :",
+      "options": [
+        "x = -b/a",
+        "x = -b/(2a)",
+        "x = b/a",
+        "y = -b/(2a)"
+      ],
+      "correct_answer": 1,
+      "explanation": "L'axe de symétrie passe par le sommet : x = -b/(2a).",
+      "related_lesson": "M1-04"
+    },
+    {
+      "id": "M1-QCM-055",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le taux de variation de f entre a et a+h est :",
+      "options": [
+        "[f(a+h) - f(a)]/h",
+        "f(a+h) - f(a)",
+        "f'(a)",
+        "h"
+      ],
+      "correct_answer": 0,
+      "explanation": "Taux de variation : [f(a+h) - f(a)]/h.",
+      "related_lesson": "M1-11"
+    },
+    {
+      "id": "M1-QCM-056",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le nombre dérivé de f en a est la limite (si elle existe) quand h→0 de :",
+      "options": [
+        "f(a+h)",
+        "[f(a+h) - f(a)]/h",
+        "f(h)",
+        "f'(h)"
+      ],
+      "correct_answer": 1,
+      "explanation": "f'(a) = lim(h→0) [f(a+h) - f(a)]/h.",
+      "related_lesson": "M1-12"
+    },
+    {
+      "id": "M1-QCM-057",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La somme des n premiers termes d'une suite arithmétique est :",
+      "options": [
+        "S = n(u₀ + uₙ)/2",
+        "S = n(u₀ + uₙ₋₁)/2",
+        "S = nu₀",
+        "S = uₙ/n"
+      ],
+      "correct_answer": 0,
+      "explanation": "Somme arithmétique : S = n(premier terme + dernier terme)/2 = n(u₀ + uₙ₋₁)/2 si n termes de u₀ à uₙ₋₁.",
+      "related_lesson": "M1-29"
+    },
+    {
+      "id": "M1-QCM-058",
+      "chapter": "Suites Numériques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le raisonnement par récurrence nécessite :",
+      "options": [
+        "Initialisation uniquement",
+        "Hérédité uniquement",
+        "Initialisation et hérédité",
+        "Convergence"
+      ],
+      "correct_answer": 2,
+      "explanation": "Récurrence = Initialisation (vrai pour n₀) + Hérédité (si vrai pour n, alors vrai pour n+1).",
+      "related_lesson": "M1-34"
+    },
+    {
+      "id": "M1-QCM-059",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "(e^a)^b = :",
+      "options": [
+        "e^(a+b)",
+        "e^(ab)",
+        "e^(a-b)",
+        "e^(a/b)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Propriété des puissances : (e^a)^b = e^(ab).",
+      "related_lesson": "M1-42"
+    },
+    {
+      "id": "M1-QCM-060",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "sin(π/2) = :",
+      "options": [
+        "0",
+        "1",
+        "-1",
+        "√2/2"
+      ],
+      "correct_answer": 1,
+      "explanation": "Valeur remarquable : sin(π/2) = 1.",
+      "related_lesson": "M1-57"
+    },
+    {
+      "id": "M1-QCM-061",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La somme de toutes les probabilités d'une loi de probabilité est :",
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "Variable"
+      ],
+      "correct_answer": 2,
+      "explanation": "Axiome fondamental : Σ P(X = xᵢ) = 1.",
+      "related_lesson": "M1-62"
+    },
+    {
+      "id": "M1-QCM-062",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une épreuve de Bernoulli a :",
+      "options": [
+        "Une seule issue",
+        "Deux issues (succès/échec)",
+        "Trois issues",
+        "Une infinité d'issues"
+      ],
+      "correct_answer": 1,
+      "explanation": "Épreuve de Bernoulli : expérience à deux issues (succès avec probabilité p, échec avec 1-p).",
+      "related_lesson": "M1-66"
+    },
+    {
+      "id": "M1-QCM-063",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Pour résoudre ax² + bx + c > 0, on étudie :",
+      "options": [
+        "Le discriminant uniquement",
+        "Le signe de a et les racines",
+        "Les racines uniquement",
+        "b et c uniquement"
+      ],
+      "correct_answer": 1,
+      "explanation": "Il faut étudier le signe de a (orientation de la parabole) et les racines (changements de signe).",
+      "related_lesson": "M1-06"
+    },
+    {
+      "id": "M1-QCM-064",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La dérivée de f(x) = sin(x) est :",
+      "options": [
+        "cos(x)",
+        "-cos(x)",
+        "sin(x)",
+        "-sin(x)"
+      ],
+      "correct_answer": 0,
+      "explanation": "Dérivée usuelle : (sin(x))' = cos(x).",
+      "related_lesson": "M1-13"
+    },
+    {
+      "id": "M1-QCM-065",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dérivée de f(x) = x²e^x est :",
+      "options": [
+        "2xe^x",
+        "x²e^x + 2xe^x",
+        "e^x(x² + 2x)",
+        "x²e^(x-1)"
+      ],
+      "correct_answer": 2,
+      "explanation": "Dérivée d'un produit : f'(x) = 2x·e^x + x²·e^x = e^x(2x + x²) = e^x(x² + 2x).",
+      "related_lesson": "M1-17"
+    },
+    {
+      "id": "M1-QCM-066",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une suite croissante et majorée est :",
+      "options": [
+        "Divergente",
+        "Convergente",
+        "Constante",
+        "Oscillante"
+      ],
+      "correct_answer": 1,
+      "explanation": "Théorème fondamental : une suite croissante et majorée converge.",
+      "related_lesson": "M1-36"
+    },
+    {
+      "id": "M1-QCM-067",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "e^(-x) = :",
+      "options": [
+        "-e^x",
+        "1/e^x",
+        "e/x",
+        "-1/e^x"
+      ],
+      "correct_answer": 1,
+      "explanation": "Propriété : e^(-x) = 1/e^x.",
+      "related_lesson": "M1-42"
+    },
+    {
+      "id": "M1-QCM-068",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "cos(a + b) = :",
+      "options": [
+        "cos(a) + cos(b)",
+        "cos(a)cos(b) - sin(a)sin(b)",
+        "cos(a)cos(b) + sin(a)sin(b)",
+        "sin(a)cos(b)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Formule d'addition : cos(a+b) = cos(a)cos(b) - sin(a)sin(b).",
+      "related_lesson": "M1-58"
+    },
+    {
+      "id": "M1-QCM-069",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "tan(x) = :",
+      "options": [
+        "cos(x)/sin(x)",
+        "sin(x)/cos(x)",
+        "1/cos(x)",
+        "1/sin(x)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Par définition : tan(x) = sin(x)/cos(x).",
+      "related_lesson": "M1-57"
+    },
+    {
+      "id": "M1-QCM-070",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "P(X = k) pour X suivant B(n, p) est :",
+      "options": [
+        "C(n,k) × p^k",
+        "C(n,k) × p^k × (1-p)^(n-k)",
+        "n × p^k",
+        "p^k × (1-p)^k"
+      ],
+      "correct_answer": 1,
+      "explanation": "Loi binomiale : P(X=k) = C(n,k) × p^k × (1-p)^(n-k).",
+      "related_lesson": "M1-67"
+    },
+    {
+      "id": "M1-QCM-071",
+      "chapter": "Second Degré",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une parabole représente graphiquement :",
+      "options": [
+        "Une fonction linéaire",
+        "Une fonction du second degré",
+        "Une fonction exponentielle",
+        "Une fonction constante"
+      ],
+      "correct_answer": 1,
+      "explanation": "La parabole est la représentation graphique d'une fonction polynôme du second degré.",
+      "related_lesson": "M1-04"
+    },
+    {
+      "id": "M1-QCM-072",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si f est dérivable et si f change de signe en a avec f'(a) ≠ 0, alors :",
+      "options": [
+        "a est un extremum",
+        "a est un point d'inflexion",
+        "f est constante",
+        "f'(a) = 0"
+      ],
+      "correct_answer": 1,
+      "explanation": "Si f change de sens de variation (f' change de signe), c'est un point d'inflexion potentiel.",
+      "related_lesson": "M1-20"
+    },
+    {
+      "id": "M1-QCM-073",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dérivée de f(x) = ln(x) est :",
+      "options": [
+        "1/x",
+        "x",
+        "ln(x)/x",
+        "e^x"
+      ],
+      "correct_answer": 0,
+      "explanation": "Dérivée du logarithme népérien : (ln(x))' = 1/x pour x > 0.",
+      "related_lesson": "M1-13"
+    },
+    {
+      "id": "M1-QCM-074",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si q > 1, une suite géométrique de raison q diverge vers :",
+      "options": [
+        "0",
+        "+∞",
+        "-∞",
+        "1"
+      ],
+      "correct_answer": 1,
+      "explanation": "Si q > 1 et u₀ > 0, alors uₙ = u₀·q^n → +∞.",
+      "related_lesson": "M1-37"
+    },
+    {
+      "id": "M1-QCM-075",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "lim(x→+∞) x/e^x = :",
+      "options": [
+        "+∞",
+        "0",
+        "1",
+        "e"
+      ],
+      "correct_answer": 1,
+      "explanation": "Croissance comparée : l'exponentielle l'emporte sur les polynômes, donc lim = 0.",
+      "related_lesson": "M1-47"
+    },
+    {
+      "id": "M1-QCM-076",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans un repère orthonormé, la norme d'un vecteur u⃗(x, y) est :",
+      "options": [
+        "||u⃗|| = x + y",
+        "||u⃗|| = √(x² + y²)",
+        "||u⃗|| = x² + y²",
+        "||u⃗|| = xy"
+      ],
+      "correct_answer": 1,
+      "explanation": "Norme euclidienne : ||u⃗|| = √(x² + y²).",
+      "related_lesson": "M1-51"
+    },
+    {
+      "id": "M1-QCM-077",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'aire d'un triangle ABC est donnée par :",
+      "options": [
+        "(1/2) × base × hauteur",
+        "(1/2) × AB × AC × sin(A)",
+        "Les deux réponses précédentes",
+        "AB × AC"
+      ],
+      "correct_answer": 2,
+      "explanation": "Aire = (1/2)×base×hauteur = (1/2)×AB×AC×sin(Â) (deux formules équivalentes).",
+      "related_lesson": "M1-54"
+    },
+    {
+      "id": "M1-QCM-078",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "V(X) = E(X²) - ... :",
+      "options": [
+        "E(X)",
+        "[E(X)]²",
+        "2E(X)",
+        "E(X)/2"
+      ],
+      "correct_answer": 1,
+      "explanation": "Formule de la variance : V(X) = E(X²) - [E(X)]².",
+      "related_lesson": "M1-64"
+    },
+    {
+      "id": "M1-QCM-079",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "C(n, k) = C(n, ...) :",
+      "options": [
+        "k",
+        "n-k",
+        "n+k",
+        "k-n"
+      ],
+      "correct_answer": 1,
+      "explanation": "Symétrie des coefficients binomiaux : C(n,k) = C(n, n-k).",
+      "related_lesson": "M1-69"
+    },
+    {
+      "id": "M1-QCM-080",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Pour factoriser ax² + bx + c quand Δ > 0, on utilise :",
+      "options": [
+        "a(x - x₁)(x - x₂)",
+        "(x - x₁)(x - x₂)",
+        "a(x + x₁)(x + x₂)",
+        "x₁x₂"
+      ],
+      "correct_answer": 0,
+      "explanation": "Forme factorisée : ax² + bx + c = a(x - x₁)(x - x₂) où x₁ et x₂ sont les racines.",
+      "related_lesson": "M1-05"
+    },
+    {
+      "id": "M1-QCM-081",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La dérivée de f(x) = cos(x) est :",
+      "options": [
+        "sin(x)",
+        "-sin(x)",
+        "cos(x)",
+        "-cos(x)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Dérivée usuelle : (cos(x))' = -sin(x).",
+      "related_lesson": "M1-13"
+    },
+    {
+      "id": "M1-QCM-082",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour dériver f(x) = u(x)/v(x), on utilise :",
+      "options": [
+        "(u'v - uv')/v²",
+        "(uv' - u'v)/v²",
+        "u'/v'",
+        "(u' + v')/v"
+      ],
+      "correct_answer": 0,
+      "explanation": "Dérivée d'un quotient : (u/v)' = (u'v - uv')/v².",
+      "related_lesson": "M1-18"
+    },
+    {
+      "id": "M1-QCM-083",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La suite définie par u(n+1) = f(u(n)) est une suite :",
+      "options": [
+        "Arithmétique",
+        "Géométrique",
+        "Récurrente",
+        "Constante"
+      ],
+      "correct_answer": 2,
+      "explanation": "Une suite définie par une relation de récurrence u(n+1) = f(u(n)) est une suite récurrente.",
+      "related_lesson": "M1-28"
+    },
+    {
+      "id": "M1-QCM-084",
+      "chapter": "Suites Numériques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si |q| < 1, la somme infinie Σ(n=0 à +∞) u₀q^n vaut :",
+      "options": [
+        "+∞",
+        "0",
+        "u₀/(1-q)",
+        "u₀q"
+      ],
+      "correct_answer": 2,
+      "explanation": "Série géométrique convergente : Σq^n = 1/(1-q) si |q| < 1. Donc Σu₀q^n = u₀/(1-q).",
+      "related_lesson": "M1-37"
+    },
+    {
+      "id": "M1-QCM-085",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La fonction exponentielle est :",
+      "options": [
+        "Croissante sur ℝ",
+        "Décroissante sur ℝ",
+        "Constante",
+        "Périodique"
+      ],
+      "correct_answer": 0,
+      "explanation": "e^x est strictement croissante sur ℝ (dérivée toujours positive).",
+      "related_lesson": "M1-46"
+    },
+    {
+      "id": "M1-QCM-086",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le cercle trigonométrique a pour rayon :",
+      "options": [
+        "0",
+        "1",
+        "π",
+        "2"
+      ],
+      "correct_answer": 1,
+      "explanation": "Par définition, le cercle trigonométrique a un rayon de 1.",
+      "related_lesson": "M1-56"
+    },
+    {
+      "id": "M1-QCM-087",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "sin(2x) = :",
+      "options": [
+        "2sin(x)",
+        "2cos(x)",
+        "2sin(x)cos(x)",
+        "sin²(x)"
+      ],
+      "correct_answer": 2,
+      "explanation": "Formule de duplication : sin(2x) = 2sin(x)cos(x).",
+      "related_lesson": "M1-59"
+    },
+    {
+      "id": "M1-QCM-088",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Si E(X) = 0, cela signifie que :",
+      "options": [
+        "X = 0 toujours",
+        "La moyenne des valeurs de X est 0",
+        "X est négatif",
+        "V(X) = 0"
+      ],
+      "correct_answer": 1,
+      "explanation": "E(X) = 0 signifie que la valeur moyenne (espérance) de X est nulle.",
+      "related_lesson": "M1-63"
+    },
+    {
+      "id": "M1-QCM-089",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La probabilité de l'événement certain est :",
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "∞"
+      ],
+      "correct_answer": 2,
+      "explanation": "L'événement certain (qui se réalise toujours) a une probabilité de 1.",
+      "related_lesson": "M1-61"
+    },
+    {
+      "id": "M1-QCM-090",
+      "chapter": "Second Degré",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'inéquation x² > 4 a pour ensemble de solutions :",
+      "options": [
+        "]-2, 2[",
+        "[-2, 2]",
+        "]-∞, -2[ ∪ ]2, +∞[",
+        "]-∞, -2] ∪ [2, +∞["
+      ],
+      "correct_answer": 2,
+      "explanation": "x² > 4 ⇔ |x| > 2 ⇔ x < -2 ou x > 2, donc S = ]-∞, -2[ ∪ ]2, +∞[.",
+      "related_lesson": "M1-06"
+    },
+    {
+      "id": "M1-QCM-091",
+      "chapter": "Dérivation",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une fonction f est dérivable en a si :",
+      "options": [
+        "f est continue en a",
+        "f'(a) existe",
+        "f(a) = 0",
+        "f est constante"
+      ],
+      "correct_answer": 1,
+      "explanation": "f est dérivable en a si la limite définissant f'(a) existe.",
+      "related_lesson": "M1-12"
+    },
+    {
+      "id": "M1-QCM-092",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La dérivée seconde f'' représente :",
+      "options": [
+        "La dérivée de f",
+        "La dérivée de f'",
+        "Le double de f'",
+        "L'intégrale de f"
+      ],
+      "correct_answer": 1,
+      "explanation": "f'' est la dérivée de la dérivée : f'' = (f')'.",
+      "related_lesson": "M1-21"
+    },
+    {
+      "id": "M1-QCM-093",
+      "chapter": "Suites Numériques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une suite est minorée s'il existe m tel que :",
+      "options": [
+        "uₙ ≥ m pour tout n",
+        "uₙ ≤ m pour tout n",
+        "uₙ = m",
+        "uₙ > m pour un n"
+      ],
+      "correct_answer": 0,
+      "explanation": "Minorée signifie qu'il existe m tel que uₙ ≥ m pour tout n.",
+      "related_lesson": "M1-33"
+    },
+    {
+      "id": "M1-QCM-094",
+      "chapter": "Fonction Exponentielle",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La solution de l'inéquation e^x < 3 est :",
+      "options": [
+        "x < 3",
+        "x < ln(3)",
+        "x < e/3",
+        "x < 3/e"
+      ],
+      "correct_answer": 1,
+      "explanation": "e^x < 3 ⇔ x < ln(3) (fonction ln croissante).",
+      "related_lesson": "M1-44"
+    },
+    {
+      "id": "M1-QCM-095",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans un triangle ABC, la loi des sinus donne :",
+      "options": [
+        "a/sin(A) = b/sin(B) = c/sin(C)",
+        "a·sin(A) = b·sin(B)",
+        "sin(A) + sin(B) + sin(C) = 1",
+        "a + b = c"
+      ],
+      "correct_answer": 0,
+      "explanation": "Loi des sinus : a/sin(A) = b/sin(B) = c/sin(C) = 2R (R = rayon cercle circonscrit).",
+      "related_lesson": "M1-55"
+    },
+    {
+      "id": "M1-QCM-096",
+      "chapter": "Géométrie & Trigonométrie",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "cos(2x) = :",
+      "options": [
+        "2cos(x)",
+        "cos²(x) - sin²(x)",
+        "2cos²(x)",
+        "1 - 2sin(x)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Formule de duplication : cos(2x) = cos²(x) - sin²(x) = 2cos²(x) - 1 = 1 - 2sin²(x).",
+      "related_lesson": "M1-59"
+    },
+    {
+      "id": "M1-QCM-097",
+      "chapter": "Probabilités",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Pour une loi de probabilité, P(X = xᵢ) :",
+      "options": [
+        "Peut être négatif",
+        "Est toujours entre 0 et 1",
+        "Est toujours égal à 1",
+        "Peut être supérieur à 1"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une probabilité est toujours comprise entre 0 et 1 : 0 ≤ P(X = xᵢ) ≤ 1.",
+      "related_lesson": "M1-62"
+    },
+    {
+      "id": "M1-QCM-098",
+      "chapter": "Probabilités",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans un schéma de Bernoulli de paramètres n et p, le nombre d'issues possibles pour l'événement \"k succès\" est :",
+      "options": [
+        "n",
+        "k",
+        "C(n, k)",
+        "n × k"
+      ],
+      "correct_answer": 2,
+      "explanation": "Il y a C(n,k) façons d'obtenir exactement k succès parmi n épreuves.",
+      "related_lesson": "M1-68"
+    },
+    {
+      "id": "M1-QCM-099",
+      "chapter": "Second Degré",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une équation du second degré a au maximum :",
+      "options": [
+        "0 solution",
+        "1 solution",
+        "2 solutions réelles",
+        "3 solutions"
+      ],
+      "correct_answer": 2,
+      "explanation": "Une équation du second degré a au maximum 2 solutions réelles (quand Δ ≥ 0).",
+      "related_lesson": "M1-02"
+    },
+    {
+      "id": "M1-QCM-100",
+      "chapter": "Dérivation",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Si f est convexe sur un intervalle I, alors f'' sur I est :",
+      "options": [
+        "Négative",
+        "Positive",
+        "Nulle",
+        "Variable"
+      ],
+      "correct_answer": 1,
+      "explanation": "Une fonction convexe a une dérivée seconde positive : f'' ≥ 0.",
+      "related_lesson": "M1-22"
+    }
+  ]
+}

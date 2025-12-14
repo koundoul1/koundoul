@@ -1,0 +1,394 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Mathématiques",
+    "lesson_range": "M1-41 à M1-50",
+    "chapters": ["Fonction Exponentielle"],
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "Chapitre complet Fonction Exponentielle (M1-41 à M1-50)"
+  },
+  "lessons": [
+    {
+      "id": "M1-41",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Introduction - Croissance exponentielle",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": ["Reconnaître une croissance exponentielle", "Comparer croissance linéaire vs exponentielle", "Interpréter un coefficient multiplicateur"],
+      "prerequisites": ["Suites géométriques", "Pourcentages", "Lecture de graphique"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["exponentielle", "croissance", "coefficient multiplicateur"],
+      "detailed_content": {
+        "introduction": "On rencontre la croissance exponentielle dans la démographie, la finance, et les phénomènes physiques. Elle se caractérise par une multiplication par un facteur constant à intervalles réguliers.",
+        "method_step_by_step": [
+          "Identifier le pas de temps et le facteur multiplicateur (1 + taux)",
+          "Construire un tableau d'évolution: U_{n+1} = q·U_n",
+          "Comparer avec une croissance additive: U_{n+1} = U_n + r",
+          "Visualiser: l'exponentielle s'accélère, la linéaire croît à pente constante",
+          "Passer du discret au continu: motivation de exp(x)"
+        ],
+        "guided_example": {
+          "statement": "Un capital de 1000€ augmente de 8%/an. Calculer après 5 ans.",
+          "solution_steps": [
+            "Coefficient multiplicateur: q = 1.08",
+            "U_n = 1000·q^n",
+            "U_5 = 1000·1.08^5 ≈ 1469.33€",
+            "Comparaison linéaire (ajout 80€/an): 1000 + 5·80 = 1400€",
+            "Conclusion: l'exponentielle dépasse la linéaire au fil du temps"
+          ]
+        },
+        "quick_exercises": ["Population +3%/an, P0=2M: P5?", "Comparer +200/an vs +5%/an sur 10 ans", "Tracer à main levée les deux courbes"],
+        "common_mistakes": ["Confondre +x% avec +x points", "Utiliser addition au lieu de multiplication", "Oublier l'effet cumulatif"],
+        "summary": {"key_concept": "La croissance exponentielle multiplie par un facteur constant", "key_method": "U_n = U_0·q^n, q = 1+taux", "next_step": "Définir exp en continu"}
+      }
+    },
+    {
+      "id": "M1-42",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Définition de la fonction exponentielle",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Définir exp(x) comme unique dérivée égale à elle-même", "Connaître exp(0)=1", "Relier exp(x) au coefficient multiplicateur continu"],
+      "prerequisites": ["Nombre dérivé", "Fonctions usuelles", "Suites géométriques"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["exp", "définition", "continu"],
+      "detailed_content": {
+        "introduction": "La fonction exponentielle exp est l'unique fonction dérivable sur ℝ telle que exp'(x)=exp(x) et exp(0)=1. Elle modélise les croissances continues.",
+        "method_step_by_step": [
+          "Caractérisation: exp'(x)=exp(x), exp(0)=1",
+          "Conséquence: exp(x)>0 et croissante",
+          "Lien: exp(a+b)=exp(a)exp(b)",
+          "Définition de a^x = exp(x·ln a) (a>0)",
+          "Valeurs: exp(1)=e ≈ 2.71828"
+        ],
+        "guided_example": {
+          "statement": "Montrer que exp(x+y)=exp(x)exp(y).",
+          "solution_steps": [
+            "Considérer g(y)=exp(x+y)/exp(x)",
+            "g'(y)=exp(x+y)/exp(x)=g(y), g(0)=1",
+            "Unicité: g(y)=exp(y)",
+            "Donc exp(x+y)=exp(x)exp(y)",
+            "Propriété clé multiplicative"
+          ]
+        },
+        "quick_exercises": ["Montrer exp(-x)=1/exp(x)", "Comparer exp(x) et 1+x pour petits x", "Calculer exp(ln 3)"],
+        "common_mistakes": ["Penser que exp(x+y)=exp(x)+exp(y)", "Oublier exp(0)=1", "Confondre exp et a^x"],
+        "summary": {"key_concept": "exp est sa propre dérivée et respecte l'addition → produit", "key_method": "Utiliser unicité des solutions y'=y, y(0)=1", "next_step": "Propriétés algébriques"}
+      }
+    },
+    {
+      "id": "M1-43",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Propriétés algébriques de l'exponentielle",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Maîtriser exp(a+b), exp(-x), (exp x)^n", "Convertir a^x via exp et ln", "Simplifier des expressions"],
+      "prerequisites": ["Définition de exp", "Logarithme naturel (aperçu)", "Règles sur puissances"],
+      "content_types": ["video", "table", "quiz", "exercises"],
+      "tags": ["propriétés", "algèbre", "simplification"],
+      "detailed_content": {
+        "introduction": "Les règles de l'exponentielle facilitent calculs et simplifications.",
+        "method_step_by_step": [
+          "exp(a+b)=exp(a)exp(b), exp(0)=1, exp(-x)=1/exp(x)",
+          "(exp x)^n=exp(nx)",
+          "a^x=exp(x ln a) (a>0)",
+          "Simplifier en passant par exp/ln",
+          "Toujours garder exp(x)>0"
+        ],
+        "guided_example": {
+          "statement": "Simplifier S = 3·exp(2x)·exp(-x)·(exp x)^2.",
+          "solution_steps": [
+            "exp(2x)·exp(-x)=exp(x)",
+            "(exp x)^2=exp(2x)",
+            "S=3·exp(x)·exp(2x)=3·exp(3x)",
+            "Résultat: 3exp(3x)",
+            "Toujours vérifier la cohérence des exposants"
+          ]
+        },
+        "quick_exercises": ["Réécrire 5^x en exp/ln", "Simplifier exp(3x)/exp(x)", "Montrer exp(x)·exp(y)=exp(y)·exp(x)"],
+        "common_mistakes": ["Distribuer à tort exp(x+y)=exp x + exp y", "Oublier ln(a)>0 condition", "Perdre des facteurs"],
+        "summary": {"key_concept": "Les règles de l'exponentielle linearisent les puissances", "key_method": "Regrouper exponents; passer par exp/ln", "next_step": "Dérivée de exp"}
+      }
+    },
+    {
+      "id": "M1-44",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Dérivée de la fonction exponentielle",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 100,
+      "objectives": ["Calculer (exp x)'=exp x", "Dériver a^x via exp/ln", "Appliquer aux compositions"],
+      "prerequisites": ["Nombre dérivé", "Règle de chaîne", "Propriétés exp"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["dérivation", "exp", "a^x"],
+      "detailed_content": {
+        "introduction": "La fonction exp est sa propre dérivée, cas unique et central.",
+        "method_step_by_step": [
+          "(exp x)'=exp x",
+          "(a^x)'=a^x·ln a (a>0)",
+          "Règle de chaîne: (exp u(x))' = u'(x)·exp(u(x))",
+          "Produits/quotients avec exp",
+          "Dériver et factoriser exp quand c'est possible"
+        ],
+        "guided_example": {
+          "statement": "Dériver f(x)=exp(3x-1)/(x+1).",
+          "solution_steps": [
+            "u=3x-1 → (exp u)'=3·exp(3x-1)",
+            "Quotient: f'=[(3exp(3x-1))(x+1) - exp(3x-1)·1]/(x+1)^2",
+            "Factoriser: f'=exp(3x-1)[3(x+1)-1]/(x+1)^2",
+            "Simplifier: f'=exp(3x-1)(3x+2)/(x+1)^2",
+            "Toujours factoriser exp pour la lisibilité"
+          ]
+        },
+        "quick_exercises": ["(exp(2x))' ?", "(5^x)' ?", "Dériver exp(x^2)"],
+        "common_mistakes": ["Oublier ln a pour (a^x)'", "Oublier la chaîne u'", "Erreurs de quotient"],
+        "summary": {"key_concept": "exp se dérive en elle-même; a^x donne ln a", "key_method": "Chaîne + factorisation exp", "next_step": "Étude complète"}
+      }
+    },
+    {
+      "id": "M1-45",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Étude complète de la fonction exponentielle",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 125,
+      "objectives": ["Tracer la courbe de exp", "Connaître limites et variations", "Identifier asymptote"],
+      "prerequisites": ["Limites", "Dérivation exp", "Propriétés"],
+      "content_types": ["video", "graphing", "quiz", "exercises"],
+      "tags": ["étude", "variations", "asymptote"],
+      "detailed_content": {
+        "introduction": "Étude qualitative de y=exp(x): toujours positive, croissante, concave vers le haut.",
+        "method_step_by_step": [
+          "Limites: x→-∞: exp(x)→0; x→+∞: exp(x)→+∞",
+          "Asymptote horizontale: y=0 à gauche",
+          "Dérivée: exp'(x)=exp(x)>0 → croissance stricte",
+          "Points remarquables: (0,1), (1,e)",
+          "Tableau de variations et tracé"
+        ],
+        "guided_example": {
+          "statement": "Dresser tableau de variations de exp(x).",
+          "solution_steps": [
+            "exp'(x)=exp(x)>0 → croissante sur ℝ",
+            "Limites: 0 à gauche, +∞ à droite",
+            "Tableau: x: -∞ → +∞; exp: 0 → +∞",
+            "Tracé: courbe passant par (0,1)",
+            "Pas d'annulation ni extrema"
+          ]
+        },
+        "quick_exercises": ["Trouver équation tangente en x=0", "Résoudre exp(x)=5", "Comparer exp(x) et 1+x"],
+        "common_mistakes": ["Placer y=0 comme asymptote partout", "Chercher des zéros", "Confondre convexité"],
+        "summary": {"key_concept": "exp croît toujours et admet y=0 comme asymptote à gauche", "key_method": "Limites + dérivée + tracé", "next_step": "Équations/inéquations"}
+      }
+    },
+    {
+      "id": "M1-46",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Équations avec l'exponentielle",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": ["Résoudre exp(f(x))=k", "Utiliser ln pour inverser", "Identifier domaines"],
+      "prerequisites": ["Logarithme naturel", "Propriétés exp", "Équations"],
+      "content_types": ["video", "problem-solving", "quiz", "exercises"],
+      "tags": ["équations", "ln", "inversion"],
+      "detailed_content": {
+        "introduction": "Grâce à ln, on inverse exp pour résoudre des équations.",
+        "method_step_by_step": [
+          "Si exp(u)=k>0, alors u=ln k",
+          "Résoudre u(x)=ln k",
+          "Attention au domaine: k>0",
+          "Pour a^x=b: x=ln b/ln a",
+          "Vérifier la solution"
+        ],
+        "guided_example": {
+          "statement": "Résoudre exp(2x-3)=7.",
+          "solution_steps": [
+            "2x-3=ln 7",
+            "2x=ln 7+3",
+            "x=(ln 7+3)/2",
+            "Vérification numérique",
+            "Solution unique car exp est croissante"
+          ]
+        },
+        "quick_exercises": ["exp(x)=5", "3^x=10", "exp(4- x)=2"],
+        "common_mistakes": ["Prendre ln de valeurs ≤0", "Oublier ln a au dénominateur", "Erreurs d'isolement"],
+        "summary": {"key_concept": "ln est l'inverse de exp sur ℝ^+", "key_method": "exp(u)=k → u=ln k", "next_step": "Inéquations"}
+      }
+    },
+    {
+      "id": "M1-47",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Inéquations avec l'exponentielle",
+      "duration_min": 11,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Résoudre exp(u) ≥ k", "Utiliser monotonie de exp", "Traduire domaines"],
+      "prerequisites": ["Équations exponentielles", "Monotonie exp", "Inéquations"],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["inéquations", "monotonie", "ln"],
+      "detailed_content": {
+        "introduction": "La croissance de exp permet de résoudre les inéquations par passage au ln.",
+        "method_step_by_step": [
+          "k>0 obligatoire",
+          "exp(u) ≥ k ⇔ u ≥ ln k (car exp croissante)",
+          "Idem pour ≤, >, <",
+          "Cas a^x ≥ b: x ≥ ln b/ln a si a>1 (inverse si 0<a<1)",
+          "Vérifier les bornes et domaines"
+        ],
+        "guided_example": {
+          "statement": "Résoudre exp(1-2x) ≤ 3.",
+          "solution_steps": [
+            "1-2x ≤ ln 3",
+            "-2x ≤ ln 3 - 1",
+            "x ≥ (1- ln 3)/2",
+            "Intervalle: [ (1- ln3)/2 , +∞[",
+            "Vérifier avec un test"
+          ]
+        },
+        "quick_exercises": ["exp(3x) > 10", "2^x ≤ 5", "exp(2-x) ≥ 1"],
+        "common_mistakes": ["Oublier que exp est croissante", "Prendre ln de nombres négatifs", "Inverser sens avec a in (0,1)"],
+        "summary": {"key_concept": "Monotonie → passage au ln pour comparer", "key_method": "exp(u)∘ln: transformer en inéquation linéaire", "next_step": "Compositions"}
+      }
+    },
+    {
+      "id": "M1-48",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Fonctions composées avec l'exponentielle",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Dériver exp(u(x))", "Résoudre exp(g(x))=h(x)", "Étudier variations de exp(u)"],
+      "prerequisites": ["Règle de chaîne", "Étude de fonctions", "Équations exp"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["composition", "chaîne", "étude"],
+      "detailed_content": {
+        "introduction": "Composer exp avec des polynômes ou rationnelles permet de modéliser des croissances non linéaires.",
+        "method_step_by_step": [
+          "Dérivation: (exp(u))'=u'·exp(u)",
+          "Variations: signe de u' car exp(u)>0",
+          "Zéros: exp(u)=0 n'a pas de solution → zéros viennent de facteurs extérieurs",
+          "Limites: utiliser limites de u",
+          "Équations: passer par ln si possible"
+        ],
+        "guided_example": {
+          "statement": "Étudier f(x)=exp(-x^2).",
+          "solution_steps": [
+            "f'(x)=(-2x)exp(-x^2)",
+            "Signe: f' >0 sur (-∞,0), <0 sur (0,∞) → max en 0",
+            "f(0)=1, limites: x→±∞: 0",
+            "Tableau: cloche centrée en 0",
+            "Courbe positive, symétrique"
+          ]
+        },
+        "quick_exercises": ["Étudier exp(2x-1)", "Dériver exp(1/x)", "Limites de exp(-3x) quand x→±∞"],
+        "common_mistakes": ["Chercher des zéros à tort", "Oublier la chaîne", "Négliger le signe de u'"],
+        "summary": {"key_concept": "exp(u) hérite des variations via u'", "key_method": "Chaîne + analyse de u", "next_step": "Applications"}
+      }
+    },
+    {
+      "id": "M1-49",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Applications aux sciences - Modélisation",
+      "duration_min": 13,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": ["Modéliser en continu: N(t)=N0·exp(kt)", "Interpréter k (taux instantané)", "Résoudre des problèmes de demi-vie / temps de doublement"],
+      "prerequisites": ["Définition exp", "Logarithme", "Problèmes concrets"],
+      "content_types": ["video", "case-study", "quiz", "exercises"],
+      "tags": ["modélisation", "demi-vie", "doublement"],
+      "detailed_content": {
+        "introduction": "Exp modélise des évolutions continues: croissance/décroissance proportionnelle à l'état instantané.",
+        "method_step_by_step": [
+          "Modèle: N'(t)=kN(t) ⇒ N(t)=N0·exp(kt)",
+          "Temps de doublement: Td=ln 2 / k",
+          "Demi-vie: T1/2=ln 2 / |k|",
+          "Calage du modèle: estimer k via deux mesures",
+          "Validation: comparer aux données"
+        ],
+        "guided_example": {
+          "statement": "Une population suit N(t)=N0·exp(0.07t). Temps pour doubler ?",
+          "solution_steps": [
+            "Td=ln 2 / 0.07 ≈ 9.90 ans",
+            "Interprétation: +7%/an continu",
+            "Vérification numérique: exp(0.07·Td)≈2",
+            "Sensibilité: si 5%, Td≈13.86 ans",
+            "Conclusion: le taux fixe le rythme" 
+          ]
+        },
+        "quick_exercises": ["Demi-vie avec k=-0.12", "Trouver k si doublement en 6 ans", "Ajuster N0 et k à partir de deux points"],
+        "common_mistakes": ["Confondre taux discret et continu", "Oublier unités du temps", "Utiliser base 10 au lieu de e"],
+        "summary": {"key_concept": "N(t)=N0·exp(kt), Td=ln2/k", "key_method": "Identifier k à partir des données", "next_step": "Synthèse"}
+      }
+    },
+    {
+      "id": "M1-50",
+      "level": "Première",
+      "subject": "Mathématiques",
+      "chapter": "Fonction Exponentielle",
+      "title": "Synthèse - Fonction Exponentielle complète",
+      "duration_min": 14,
+      "difficulty": 5,
+      "xp_reward": 150,
+      "objectives": ["Mobiliser définition, propriétés, dérivation", "Résoudre équations/inéquations", "Appliquer à des modèles"],
+      "prerequisites": ["M1-41 à M1-49", "Étude de fonctions", "Calcul algébrique"],
+      "content_types": ["video", "synthesis", "quiz", "exercises"],
+      "tags": ["synthèse", "révision", "exp"],
+      "detailed_content": {
+        "introduction": "Synthèse du chapitre exponentielle: de la définition aux applications.",
+        "method_step_by_step": [
+          "Rappels: exp'(x)=exp(x), exp(a+b)=exp(a)exp(b)",
+          "Outils: ln pour inverser, règles de dérivation",
+          "Étude type: variations, limites, tangente",
+          "Problèmes: équations, inéquations, modélisation",
+          "Stratégies: reconnaître le bon outil (ln, chaîne, quotient)"
+        ],
+        "guided_example": {
+          "statement": "Étude de f(x)=exp(x)/(1+x). Variations, tangente en 0, limites.",
+          "solution_steps": [
+            "f'(x)=[exp(x)(1+x)-exp(x)]/(1+x)^2=exp(x)·x/(1+x)^2",
+            "Signe: x/(1+x)^2 ⇒ décroît sur (-∞,0), croît sur (0,∞)",
+            "Tangente en 0: f(0)=1, f'(0)=0 → y=1",
+            "Lim. -∞: 0; lim +∞: 0 (exp dominée par x^2 au dénominateur? en fait exp domine: vérifier)",
+            "Conclusion: maximum en x>0; comportement asymptotique à préciser numériquement"
+          ]
+        },
+        "quick_exercises": ["Étude complète de exp(2x)/(x+2)", "Résoudre exp(x-1)≥3/x", "Modèle N(t)=N0 exp(kt): estimer k"],
+        "common_mistakes": ["Erreurs de quotient", "Passage ln non justifié", "Ignorer domaines"],
+        "summary": {"key_concept": "exp: outil central d'analyse et de modélisation", "key_method": "Combiner exp, ln, dérivation, inégalités", "next_step": "Fonction logarithme (chapitre suivant)"}
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1721 @@
+{
+  "bank_info": {
+    "title": "Banque QCM - Chimie Première",
+    "level": "Première",
+    "subject": "Chimie",
+    "type": "QCM",
+    "total_questions": 100,
+    "chapters_covered": [
+      "Structure et transformation de la matière",
+      "Solutions aqueuses",
+      "Synthèse organique"
+    ],
+    "difficulty_distribution": {
+      "facile": 30,
+      "moyen": 50,
+      "difficile": 20
+    }
+  },
+  "questions": [
+    {
+      "id": "CHI1-QCM-001",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Le numéro atomique Z représente :",
+      "options": [
+        "Le nombre de neutrons",
+        "Le nombre de protons",
+        "Le nombre de nucléons",
+        "La masse de l'atome"
+      ],
+      "correct_answer": 1,
+      "explanation": "Z = nombre de protons dans le noyau.",
+      "related_lesson": "CHI1-01"
+    },
+    {
+      "id": "CHI1-QCM-002",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le nombre de masse A est égal à :",
+      "options": [
+        "Z + e⁻",
+        "Z + N (neutrons)",
+        "Z - N",
+        "Nombre d'électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "A = Z + N (protons + neutrons).",
+      "related_lesson": "CHI1-01"
+    },
+    {
+      "id": "CHI1-QCM-003",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Un atome neutre a :",
+      "options": [
+        "Plus d'électrons que de protons",
+        "Autant d'électrons que de protons",
+        "Moins d'électrons que de protons",
+        "Pas d'électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Atome neutre : nombre d'électrons = nombre de protons = Z.",
+      "related_lesson": "CHI1-01"
+    },
+    {
+      "id": "CHI1-QCM-004",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Des isotopes ont :",
+      "options": [
+        "Même Z, même A",
+        "Même Z, A différent",
+        "Z différent, même A",
+        "Tout différent"
+      ],
+      "correct_answer": 1,
+      "explanation": "Isotopes : même nombre de protons (Z), nombre de neutrons différent.",
+      "related_lesson": "CHI1-02"
+    },
+    {
+      "id": "CHI1-QCM-005",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "¹²C et ¹⁴C sont des isotopes. Quelle différence ?",
+      "options": [
+        "Nombre de protons",
+        "Nombre d'électrons",
+        "Nombre de neutrons",
+        "Charge"
+      ],
+      "correct_answer": 2,
+      "explanation": "Isotopes diffèrent par le nombre de neutrons (¹²C : 6n, ¹⁴C : 8n).",
+      "related_lesson": "CHI1-02"
+    },
+    {
+      "id": "CHI1-QCM-006",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La configuration électronique de l'atome de carbone (Z=6) est :",
+      "options": [
+        "(K)² (L)²",
+        "(K)² (L)⁴",
+        "(K)⁴ (L)²",
+        "(K)⁶"
+      ],
+      "correct_answer": 1,
+      "explanation": "6 électrons : 2 sur K, 4 sur L → (K)² (L)⁴.",
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-QCM-007",
+      "chapter": "Structure de la matière",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "La couche K peut contenir au maximum :",
+      "options": [
+        "2 électrons",
+        "8 électrons",
+        "18 électrons",
+        "32 électrons"
+      ],
+      "correct_answer": 0,
+      "explanation": "Couche K (n=1) : max 2 électrons.",
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-QCM-008",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un ion Cl⁻ (Z=17) a gagné :",
+      "options": [
+        "1 proton",
+        "1 électron",
+        "1 neutron",
+        "Rien"
+      ],
+      "correct_answer": 1,
+      "explanation": "Cl⁻ : 17 protons, 18 électrons (gain d'1 e⁻).",
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-QCM-009",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'ion Na⁺ (Z=11) a la même configuration électronique que :",
+      "options": [
+        "Mg (Z=12)",
+        "Ne (Z=10)",
+        "Cl (Z=17)",
+        "Na (Z=11)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Na⁺ a perdu 1 e⁻ → 10 e⁻ comme Ne.",
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-QCM-010",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans le tableau périodique, les éléments d'une même colonne ont :",
+      "options": [
+        "Même masse",
+        "Même nombre d'électrons de valence",
+        "Même nombre de neutrons",
+        "Même période"
+      ],
+      "correct_answer": 1,
+      "explanation": "Même colonne = même nombre d'électrons de valence (propriétés similaires).",
+      "related_lesson": "CHI1-05"
+    },
+    {
+      "id": "CHI1-QCM-011",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une liaison covalente se forme par :",
+      "options": [
+        "Transfert d'électrons",
+        "Partage d'électrons",
+        "Attraction électrostatique",
+        "Forces de Van der Waals"
+      ],
+      "correct_answer": 1,
+      "explanation": "Liaison covalente = mise en commun d'électrons.",
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-QCM-012",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La molécule H₂O comporte :",
+      "options": [
+        "2 liaisons covalentes",
+        "1 liaison covalente",
+        "3 liaisons covalentes",
+        "Pas de liaison"
+      ],
+      "correct_answer": 0,
+      "explanation": "H₂O : 2 liaisons O-H (covalentes).",
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-QCM-013",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Une liaison ionique se forme entre :",
+      "options": [
+        "Deux non-métaux",
+        "Un métal et un non-métal",
+        "Deux métaux",
+        "Des gaz rares"
+      ],
+      "correct_answer": 1,
+      "explanation": "Liaison ionique : transfert d'électrons entre métal et non-métal.",
+      "related_lesson": "CHI1-07"
+    },
+    {
+      "id": "CHI1-QCM-014",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La règle de l'octet stipule que les atomes tendent à avoir :",
+      "options": [
+        "2 électrons de valence",
+        "8 électrons de valence",
+        "10 électrons de valence",
+        "18 électrons de valence"
+      ],
+      "correct_answer": 1,
+      "explanation": "Règle de l'octet : 8 e⁻ sur la couche externe (stabilité).",
+      "related_lesson": "CHI1-08"
+    },
+    {
+      "id": "CHI1-QCM-015",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le nombre de liaisons covalentes dans N₂ est :",
+      "options": [
+        "1 (simple)",
+        "2 (double)",
+        "3 (triple)",
+        "0"
+      ],
+      "correct_answer": 2,
+      "explanation": "N≡N : liaison triple (3 doublets liants).",
+      "related_lesson": "CHI1-06"
+    },
+    {
+      "id": "CHI1-QCM-016",
+      "chapter": "Réactions chimiques",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Dans une équation chimique équilibrée, on conserve :",
+      "options": [
+        "Les masses seulement",
+        "Les atomes de chaque élément",
+        "Les molécules",
+        "Les électrons seulement"
+      ],
+      "correct_answer": 1,
+      "explanation": "Conservation des atomes (loi de Lavoisier).",
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-QCM-017",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Les réactifs sont :",
+      "options": [
+        "À droite de la flèche",
+        "À gauche de la flèche",
+        "Au-dessus de la flèche",
+        "En dessous de la flèche"
+      ],
+      "correct_answer": 1,
+      "explanation": "Réactifs → Produits.",
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-QCM-018",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'équation CH₄ + 2O₂ → CO₂ + 2H₂O est :",
+      "options": [
+        "Non équilibrée",
+        "Équilibrée",
+        "Impossible",
+        "Incomplète"
+      ],
+      "correct_answer": 1,
+      "explanation": "1C, 4H, 4O de chaque côté : équilibrée.",
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-QCM-019",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction exothermique :",
+      "options": [
+        "Absorbe de la chaleur",
+        "Dégage de la chaleur",
+        "Ne change pas de température",
+        "Nécessite de la lumière"
+      ],
+      "correct_answer": 1,
+      "explanation": "Exothermique : libération d'énergie (chaleur).",
+      "related_lesson": "CHI1-10"
+    },
+    {
+      "id": "CHI1-QCM-020",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le réactif limitant est celui qui :",
+      "options": [
+        "Est en excès",
+        "Est totalement consommé en premier",
+        "Ne réagit pas",
+        "Est le plus cher"
+      ],
+      "correct_answer": 1,
+      "explanation": "Réactif limitant : détermine la quantité de produit formé.",
+      "related_lesson": "CHI1-11"
+    },
+    {
+      "id": "CHI1-QCM-021",
+      "chapter": "Solutions",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Le soluté est :",
+      "options": [
+        "L'espèce dissoute",
+        "Le liquide dissolvant",
+        "Le mélange",
+        "Le récipient"
+      ],
+      "correct_answer": 0,
+      "explanation": "Soluté = substance dissoute dans le solvant.",
+      "related_lesson": "CHI1-21"
+    },
+    {
+      "id": "CHI1-QCM-022",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La concentration molaire C est définie par :",
+      "options": [
+        "C = m/V",
+        "C = n/V",
+        "C = V/n",
+        "C = M×n"
+      ],
+      "correct_answer": 1,
+      "explanation": "C = n/V (mol/L) où n = quantité de matière.",
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-QCM-023",
+      "chapter": "Solutions",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'unité de la concentration molaire est :",
+      "options": [
+        "g/L",
+        "mol/L",
+        "L/mol",
+        "mol/g"
+      ],
+      "correct_answer": 1,
+      "explanation": "Concentration molaire en mol/L (ou M).",
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-QCM-024",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour diluer une solution, on :",
+      "options": [
+        "Ajoute du soluté",
+        "Ajoute du solvant",
+        "Évapore le solvant",
+        "Chauffe"
+      ],
+      "correct_answer": 1,
+      "explanation": "Dilution = ajout de solvant (diminution de C).",
+      "related_lesson": "CHI1-23"
+    },
+    {
+      "id": "CHI1-QCM-025",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La relation de dilution est :",
+      "options": [
+        "C₁V₁ = C₂V₂",
+        "C₁ + V₁ = C₂ + V₂",
+        "C₁/V₁ = C₂/V₂",
+        "C₁V₂ = C₂V₁"
+      ],
+      "correct_answer": 0,
+      "explanation": "Conservation de la quantité de matière : C₁V₁ = C₂V₂.",
+      "related_lesson": "CHI1-23"
+    },
+    {
+      "id": "CHI1-QCM-026",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le pH mesure :",
+      "options": [
+        "La température",
+        "L'acidité/basicité",
+        "La concentration",
+        "La pression"
+      ],
+      "correct_answer": 1,
+      "explanation": "pH = indicateur d'acidité (pH < 7) ou basicité (pH > 7).",
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-QCM-027",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une solution neutre a un pH de :",
+      "options": [
+        "0",
+        "7",
+        "14",
+        "1"
+      ],
+      "correct_answer": 1,
+      "explanation": "pH = 7 : solution neutre (eau pure).",
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-QCM-028",
+      "chapter": "Solutions",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une solution acide a un pH :",
+      "options": [
+        "< 7",
+        "> 7",
+        "= 7",
+        "= 0"
+      ],
+      "correct_answer": 0,
+      "explanation": "Acide : pH < 7.",
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-QCM-029",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La quantité de matière n (en mol) est donnée par :",
+      "options": [
+        "n = m/M",
+        "n = m×M",
+        "n = M/m",
+        "n = m+M"
+      ],
+      "correct_answer": 0,
+      "explanation": "n = m/M où m = masse (g) et M = masse molaire (g/mol).",
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-QCM-030",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'unité de la quantité de matière est :",
+      "options": [
+        "Gramme (g)",
+        "Mole (mol)",
+        "Litre (L)",
+        "Kilogramme (kg)"
+      ],
+      "correct_answer": 1,
+      "explanation": "Quantité de matière en mole (mol).",
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-QCM-031",
+      "chapter": "Chimie organique",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "L'élément central de la chimie organique est :",
+      "options": [
+        "L'hydrogène",
+        "L'oxygène",
+        "Le carbone",
+        "L'azote"
+      ],
+      "correct_answer": 2,
+      "explanation": "Chimie organique = chimie des composés du carbone.",
+      "related_lesson": "CHI1-31"
+    },
+    {
+      "id": "CHI1-QCM-032",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un alcane a pour formule générale :",
+      "options": [
+        "CₙH₂ₙ₊₂",
+        "CₙH₂ₙ",
+        "CₙH₂ₙ₋₂",
+        "CₙHₙ"
+      ],
+      "correct_answer": 0,
+      "explanation": "Alcanes saturés : CₙH₂ₙ₊₂.",
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-QCM-033",
+      "chapter": "Chimie organique",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Le méthane a pour formule :",
+      "options": [
+        "CH₄",
+        "C₂H₆",
+        "C₃H₈",
+        "CH₂"
+      ],
+      "correct_answer": 0,
+      "explanation": "Méthane : CH₄ (plus simple alcane).",
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-QCM-034",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le groupe fonctionnel des alcools est :",
+      "options": [
+        "-COOH",
+        "-OH",
+        "-CHO",
+        "-NH₂"
+      ],
+      "correct_answer": 1,
+      "explanation": "Alcools : groupe hydroxyle -OH.",
+      "related_lesson": "CHI1-33"
+    },
+    {
+      "id": "CHI1-QCM-035",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'éthanol a pour formule :",
+      "options": [
+        "CH₃OH",
+        "C₂H₅OH",
+        "C₃H₇OH",
+        "CH₂OH"
+      ],
+      "correct_answer": 1,
+      "explanation": "Éthanol : C₂H₅OH (alcool à 2 carbones).",
+      "related_lesson": "CHI1-33"
+    },
+    {
+      "id": "CHI1-QCM-036",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le groupe fonctionnel des acides carboxyliques est :",
+      "options": [
+        "-OH",
+        "-COOH",
+        "-CO-",
+        "-CHO"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acides carboxyliques : groupe carboxyle -COOH.",
+      "related_lesson": "CHI1-34"
+    },
+    {
+      "id": "CHI1-QCM-037",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un alcène contient :",
+      "options": [
+        "Une liaison simple C-C",
+        "Une liaison double C=C",
+        "Une liaison triple C≡C",
+        "Pas de carbone"
+      ],
+      "correct_answer": 1,
+      "explanation": "Alcènes : au moins une liaison double C=C.",
+      "related_lesson": "CHI1-35"
+    },
+    {
+      "id": "CHI1-QCM-038",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La formule générale des alcènes est :",
+      "options": [
+        "CₙH₂ₙ₊₂",
+        "CₙH₂ₙ",
+        "CₙH₂ₙ₋₂",
+        "CₙH₂ₙ₊₁"
+      ],
+      "correct_answer": 1,
+      "explanation": "Alcènes : CₙH₂ₙ.",
+      "related_lesson": "CHI1-35"
+    },
+    {
+      "id": "CHI1-QCM-039",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le groupe fonctionnel des cétones est :",
+      "options": [
+        "-OH",
+        "-CHO",
+        "-CO-",
+        "-COOH"
+      ],
+      "correct_answer": 2,
+      "explanation": "Cétones : groupe carbonyle -CO- entre 2 carbones.",
+      "related_lesson": "CHI1-36"
+    },
+    {
+      "id": "CHI1-QCM-040",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le groupe fonctionnel des aldéhydes est :",
+      "options": [
+        "-CHO",
+        "-COOH",
+        "-CO-",
+        "-OH"
+      ],
+      "correct_answer": 0,
+      "explanation": "Aldéhydes : groupe -CHO (carbonyle terminal).",
+      "related_lesson": "CHI1-36"
+    },
+    {
+      "id": "CHI1-QCM-041",
+      "chapter": "Transformations",
+      "difficulty": 1,
+      "points": 5,
+      "time_limit_minutes": 2,
+      "question": "Une oxydation correspond à :",
+      "options": [
+        "Un gain d'électrons",
+        "Une perte d'électrons",
+        "Un gain de protons",
+        "Une perte de neutrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Oxydation = perte d'électrons.",
+      "related_lesson": "CHI1-41"
+    },
+    {
+      "id": "CHI1-QCM-042",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réduction correspond à :",
+      "options": [
+        "Une perte d'électrons",
+        "Un gain d'électrons",
+        "Une perte de protons",
+        "Rien"
+      ],
+      "correct_answer": 1,
+      "explanation": "Réduction = gain d'électrons.",
+      "related_lesson": "CHI1-41"
+    },
+    {
+      "id": "CHI1-QCM-043",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Dans une réaction d'oxydo-réduction :",
+      "options": [
+        "Seule l'oxydation se produit",
+        "Seule la réduction se produit",
+        "Oxydation et réduction simultanées",
+        "Rien ne se passe"
+      ],
+      "correct_answer": 2,
+      "explanation": "Redox : oxydation et réduction couplées.",
+      "related_lesson": "CHI1-41"
+    },
+    {
+      "id": "CHI1-QCM-044",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'oxydation d'un alcool primaire donne :",
+      "options": [
+        "Un aldéhyde",
+        "Une cétone",
+        "Un acide",
+        "Un alcane"
+      ],
+      "correct_answer": 0,
+      "explanation": "Alcool primaire → aldéhyde (oxydation ménagée).",
+      "related_lesson": "CHI1-42"
+    },
+    {
+      "id": "CHI1-QCM-045",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'oxydation d'un alcool secondaire donne :",
+      "options": [
+        "Un aldéhyde",
+        "Une cétone",
+        "Un acide",
+        "Rien"
+      ],
+      "correct_answer": 1,
+      "explanation": "Alcool secondaire → cétone.",
+      "related_lesson": "CHI1-42"
+    },
+    {
+      "id": "CHI1-QCM-046",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La combustion complète d'un hydrocarbure produit :",
+      "options": [
+        "CO₂ et H₂O",
+        "CO et H₂",
+        "C et H₂O",
+        "Seulement CO₂"
+      ],
+      "correct_answer": 0,
+      "explanation": "Combustion complète : CO₂ + H₂O.",
+      "related_lesson": "CHI1-43"
+    },
+    {
+      "id": "CHI1-QCM-047",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un catalyseur :",
+      "options": [
+        "Est consommé",
+        "Accélère la réaction",
+        "Change les produits",
+        "Ralentit la réaction"
+      ],
+      "correct_answer": 1,
+      "explanation": "Catalyseur : accélère sans être consommé.",
+      "related_lesson": "CHI1-44"
+    },
+    {
+      "id": "CHI1-QCM-048",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une estérification est la réaction entre :",
+      "options": [
+        "Un acide et un alcool",
+        "Deux alcools",
+        "Deux acides",
+        "Un alcane et eau"
+      ],
+      "correct_answer": 0,
+      "explanation": "Estérification : acide + alcool → ester + eau.",
+      "related_lesson": "CHI1-45"
+    },
+    {
+      "id": "CHI1-QCM-049",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un ester a pour groupe fonctionnel :",
+      "options": [
+        "-COOH",
+        "-COO-",
+        "-OH",
+        "-CHO"
+      ],
+      "correct_answer": 1,
+      "explanation": "Esters : groupe -COO-.",
+      "related_lesson": "CHI1-45"
+    },
+    {
+      "id": "CHI1-QCM-050",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La saponification est :",
+      "options": [
+        "Synthèse d'un ester",
+        "Hydrolyse basique d'un ester",
+        "Oxydation d'un alcool",
+        "Combustion"
+      ],
+      "correct_answer": 1,
+      "explanation": "Saponification : ester + base → savon.",
+      "related_lesson": "CHI1-46"
+    },
+    {
+      "id": "CHI1-QCM-051",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La masse d'un atome est essentiellement concentrée dans :",
+      "options": [
+        "Les électrons",
+        "Le noyau",
+        "Les orbitales",
+        "Le vide"
+      ],
+      "correct_answer": 1,
+      "explanation": "Masse concentrée dans le noyau (protons + neutrons).",
+      "related_lesson": "CHI1-01"
+    },
+    {
+      "id": "CHI1-QCM-052",
+      "chapter": "Structure de la matière",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'ion Al³⁺ (Z=13) a combien d'électrons ?",
+      "options": [
+        "13",
+        "10",
+        "16",
+        "3"
+      ],
+      "correct_answer": 1,
+      "explanation": "Al³⁺ a perdu 3 e⁻ : 13-3 = 10 électrons.",
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-QCM-053",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La couche L peut contenir au maximum :",
+      "options": [
+        "2 électrons",
+        "8 électrons",
+        "18 électrons",
+        "32 électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Couche L (n=2) : max 8 électrons.",
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-QCM-054",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La molécule CO₂ est :",
+      "options": [
+        "Linéaire",
+        "Coudée",
+        "Tétraédrique",
+        "Triangulaire"
+      ],
+      "correct_answer": 0,
+      "explanation": "CO₂ : géométrie linéaire (O=C=O).",
+      "related_lesson": "CHI1-08"
+    },
+    {
+      "id": "CHI1-QCM-055",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une molécule polaire possède :",
+      "options": [
+        "Des charges uniformes",
+        "Un moment dipolaire non nul",
+        "Que des liaisons ioniques",
+        "Pas d'électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Molécule polaire : répartition non symétrique des charges.",
+      "related_lesson": "CHI1-08"
+    },
+    {
+      "id": "CHI1-QCM-056",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un coefficient stœchiométrique indique :",
+      "options": [
+        "La masse",
+        "Le nombre de moles",
+        "La température",
+        "Le pH"
+      ],
+      "correct_answer": 1,
+      "explanation": "Coefficient = rapport de quantités de matière.",
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-QCM-057",
+      "chapter": "Réactions chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'avancement ξ (ksi) d'une réaction s'exprime en :",
+      "options": [
+        "Grammes",
+        "Moles",
+        "Litres",
+        "Secondes"
+      ],
+      "correct_answer": 1,
+      "explanation": "Avancement ξ en moles.",
+      "related_lesson": "CHI1-11"
+    },
+    {
+      "id": "CHI1-QCM-058",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction endothermique :",
+      "options": [
+        "Dégage de la chaleur",
+        "Absorbe de la chaleur",
+        "Ne change pas T",
+        "Est explosive"
+      ],
+      "correct_answer": 1,
+      "explanation": "Endothermique : absorption d'énergie.",
+      "related_lesson": "CHI1-10"
+    },
+    {
+      "id": "CHI1-QCM-059",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La masse molaire de H₂O est (H=1, O=16) :",
+      "options": [
+        "18 g/mol",
+        "17 g/mol",
+        "16 g/mol",
+        "20 g/mol"
+      ],
+      "correct_answer": 0,
+      "explanation": "M(H₂O) = 2×1 + 16 = 18 g/mol.",
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-QCM-060",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une solution basique a un pH :",
+      "options": [
+        "< 7",
+        "> 7",
+        "= 7",
+        "= 14"
+      ],
+      "correct_answer": 1,
+      "explanation": "Basique : pH > 7.",
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-QCM-061",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La concentration massique Cm est :",
+      "options": [
+        "m/V",
+        "n/V",
+        "V/m",
+        "M×V"
+      ],
+      "correct_answer": 0,
+      "explanation": "Cm = m/V (g/L).",
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-QCM-062",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'éthane a pour formule :",
+      "options": [
+        "CH₄",
+        "C₂H₆",
+        "C₃H₈",
+        "C₂H₄"
+      ],
+      "correct_answer": 1,
+      "explanation": "Éthane : C₂H₆ (alcane à 2 C).",
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-QCM-063",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le propane a pour formule :",
+      "options": [
+        "C₂H₆",
+        "C₃H₈",
+        "C₄H₁₀",
+        "C₃H₆"
+      ],
+      "correct_answer": 1,
+      "explanation": "Propane : C₃H₈.",
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-QCM-064",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un alcool tertiaire a le groupe -OH sur un carbone lié à :",
+      "options": [
+        "1 carbone",
+        "2 carbones",
+        "3 carbones",
+        "0 carbone"
+      ],
+      "correct_answer": 2,
+      "explanation": "Tertiaire : C-OH lié à 3 autres carbones.",
+      "related_lesson": "CHI1-33"
+    },
+    {
+      "id": "CHI1-QCM-065",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'éthène (éthylène) a pour formule :",
+      "options": [
+        "C₂H₆",
+        "C₂H₄",
+        "C₂H₂",
+        "C₃H₆"
+      ],
+      "correct_answer": 1,
+      "explanation": "Éthène : C₂H₄ (alcène).",
+      "related_lesson": "CHI1-35"
+    },
+    {
+      "id": "CHI1-QCM-066",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'acide éthanoïque (acétique) a pour formule :",
+      "options": [
+        "CH₃COOH",
+        "HCOOH",
+        "C₂H₅COOH",
+        "CH₃CHO"
+      ],
+      "correct_answer": 0,
+      "explanation": "Acide éthanoïque : CH₃COOH.",
+      "related_lesson": "CHI1-34"
+    },
+    {
+      "id": "CHI1-QCM-067",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le réactif de Fehling permet de distinguer :",
+      "options": [
+        "Alcool et cétone",
+        "Aldéhyde et cétone",
+        "Acide et ester",
+        "Alcane et alcène"
+      ],
+      "correct_answer": 1,
+      "explanation": "Fehling : test positif pour aldéhydes (pas cétones).",
+      "related_lesson": "CHI1-47"
+    },
+    {
+      "id": "CHI1-QCM-068",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La distillation permet de séparer :",
+      "options": [
+        "Solide et liquide",
+        "Liquides de températures d'ébullition différentes",
+        "Ions",
+        "Gaz"
+      ],
+      "correct_answer": 1,
+      "explanation": "Distillation : séparation par Téb différentes.",
+      "related_lesson": "CHI1-48"
+    },
+    {
+      "id": "CHI1-QCM-069",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un acide faible se dissocie :",
+      "options": [
+        "Totalement",
+        "Partiellement",
+        "Pas du tout",
+        "Uniquement à chaud"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acide faible : dissociation partielle.",
+      "related_lesson": "CHI1-26"
+    },
+    {
+      "id": "CHI1-QCM-070",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un polymère est obtenu par :",
+      "options": [
+        "Hydrolyse",
+        "Polymérisation",
+        "Combustion",
+        "Distillation"
+      ],
+      "correct_answer": 1,
+      "explanation": "Polymérisation : enchaînement de monomères.",
+      "related_lesson": "CHI1-49"
+    },
+    {
+      "id": "CHI1-QCM-071",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le numéro atomique Z du chlore est 17. Combien d'électrons dans Cl⁻ ?",
+      "options": [
+        "16",
+        "17",
+        "18",
+        "35"
+      ],
+      "correct_answer": 2,
+      "explanation": "Cl⁻ a gagné 1 e⁻ : 17+1 = 18 électrons.",
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-QCM-072",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La molécule H₂O est :",
+      "options": [
+        "Linéaire",
+        "Coudée",
+        "Triangulaire plane",
+        "Tétraédrique"
+      ],
+      "correct_answer": 1,
+      "explanation": "H₂O : géométrie coudée (angle ≈104,5°).",
+      "related_lesson": "CHI1-08"
+    },
+    {
+      "id": "CHI1-QCM-073",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Dans 2H₂ + O₂ → 2H₂O, le coefficient de H₂O est :",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": 1,
+      "explanation": "Coefficient stœchiométrique de H₂O = 2.",
+      "related_lesson": "CHI1-09"
+    },
+    {
+      "id": "CHI1-QCM-074",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Pour préparer 500 mL d'une solution à 0,1 mol/L, il faut combien de moles ?",
+      "options": [
+        "0,05 mol",
+        "0,1 mol",
+        "0,5 mol",
+        "5 mol"
+      ],
+      "correct_answer": 0,
+      "explanation": "n = C×V = 0,1×0,5 = 0,05 mol.",
+      "related_lesson": "CHI1-22"
+    },
+    {
+      "id": "CHI1-QCM-075",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le nombre d'Avogadro vaut environ :",
+      "options": [
+        "6,02 × 10²³",
+        "6,02 × 10²²",
+        "1,6 × 10⁻¹⁹",
+        "9,81"
+      ],
+      "correct_answer": 0,
+      "explanation": "Nₐ ≈ 6,02 × 10²³ mol⁻¹.",
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-QCM-076",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le butane a pour formule :",
+      "options": [
+        "C₃H₈",
+        "C₄H₁₀",
+        "C₅H₁₂",
+        "C₄H₈"
+      ],
+      "correct_answer": 1,
+      "explanation": "Butane : C₄H₁₀.",
+      "related_lesson": "CHI1-32"
+    },
+    {
+      "id": "CHI1-QCM-077",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le méthanol a pour formule :",
+      "options": [
+        "CH₃OH",
+        "C₂H₅OH",
+        "CH₄",
+        "HCOOH"
+      ],
+      "correct_answer": 0,
+      "explanation": "Méthanol : CH₃OH.",
+      "related_lesson": "CHI1-33"
+    },
+    {
+      "id": "CHI1-QCM-078",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un alcyne contient :",
+      "options": [
+        "Une liaison simple",
+        "Une liaison double",
+        "Une liaison triple C≡C",
+        "Pas de carbone"
+      ],
+      "correct_answer": 2,
+      "explanation": "Alcynes : au moins une liaison triple C≡C.",
+      "related_lesson": "CHI1-37"
+    },
+    {
+      "id": "CHI1-QCM-079",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La liqueur de Fehling en présence d'un aldéhyde donne un précipité :",
+      "options": [
+        "Bleu",
+        "Rouge brique",
+        "Blanc",
+        "Vert"
+      ],
+      "correct_answer": 1,
+      "explanation": "Test positif : précipité rouge brique (Cu₂O).",
+      "related_lesson": "CHI1-47"
+    },
+    {
+      "id": "CHI1-QCM-080",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'hydratation d'un alcène produit :",
+      "options": [
+        "Un alcane",
+        "Un alcool",
+        "Un aldéhyde",
+        "Un acide"
+      ],
+      "correct_answer": 1,
+      "explanation": "Alcène + H₂O → alcool.",
+      "related_lesson": "CHI1-50"
+    },
+    {
+      "id": "CHI1-QCM-081",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'oxygène (Z=8) a combien d'électrons de valence ?",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
+      "correct_answer": 2,
+      "explanation": "O : (K)²(L)⁶ → 6 électrons de valence.",
+      "related_lesson": "CHI1-03"
+    },
+    {
+      "id": "CHI1-QCM-082",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le nombre de doublets non liants dans H₂O est :",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correct_answer": 2,
+      "explanation": "O dans H₂O : 2 doublets liants + 2 doublets non liants.",
+      "related_lesson": "CHI1-08"
+    },
+    {
+      "id": "CHI1-QCM-083",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Le rendement d'une réaction est :",
+      "options": [
+        "Toujours 100%",
+        "n_obtenu / n_théorique",
+        "V_final / V_initial",
+        "Jamais calculable"
+      ],
+      "correct_answer": 1,
+      "explanation": "η = (quantité obtenue / quantité théorique) × 100%.",
+      "related_lesson": "CHI1-11"
+    },
+    {
+      "id": "CHI1-QCM-084",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Diluer 10 fois une solution 1 mol/L donne :",
+      "options": [
+        "10 mol/L",
+        "0,1 mol/L",
+        "1 mol/L",
+        "0,01 mol/L"
+      ],
+      "correct_answer": 1,
+      "explanation": "C_finale = C_initiale / 10 = 0,1 mol/L.",
+      "related_lesson": "CHI1-23"
+    },
+    {
+      "id": "CHI1-QCM-085",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'eau pure a un pH de :",
+      "options": [
+        "0",
+        "7",
+        "14",
+        "Variable"
+      ],
+      "correct_answer": 1,
+      "explanation": "Eau pure : pH = 7 (neutre).",
+      "related_lesson": "CHI1-24"
+    },
+    {
+      "id": "CHI1-QCM-086",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La formule générale des alcynes est :",
+      "options": [
+        "CₙH₂ₙ₊₂",
+        "CₙH₂ₙ",
+        "CₙH₂ₙ₋₂",
+        "CₙHₙ"
+      ],
+      "correct_answer": 2,
+      "explanation": "Alcynes : CₙH₂ₙ₋₂.",
+      "related_lesson": "CHI1-37"
+    },
+    {
+      "id": "CHI1-QCM-087",
+      "chapter": "Chimie organique",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "L'acétone est :",
+      "options": [
+        "Un aldéhyde",
+        "Une cétone",
+        "Un alcool",
+        "Un acide"
+      ],
+      "correct_answer": 1,
+      "explanation": "Acétone (propanone) : CH₃-CO-CH₃ (cétone).",
+      "related_lesson": "CHI1-36"
+    },
+    {
+      "id": "CHI1-QCM-088",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Le groupe fonctionnel des amines est :",
+      "options": [
+        "-OH",
+        "-NH₂",
+        "-COOH",
+        "-CHO"
+      ],
+      "correct_answer": 1,
+      "explanation": "Amines : groupe -NH₂.",
+      "related_lesson": "CHI1-38"
+    },
+    {
+      "id": "CHI1-QCM-089",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La déshydratation d'un alcool produit :",
+      "options": [
+        "Un alcane",
+        "Un alcène",
+        "Un aldéhyde",
+        "Un ester"
+      ],
+      "correct_answer": 1,
+      "explanation": "Alcool -H₂O → alcène.",
+      "related_lesson": "CHI1-51"
+    },
+    {
+      "id": "CHI1-QCM-090",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "L'addition de HBr sur un alcène donne :",
+      "options": [
+        "Un alcane",
+        "Un dérivé halogéné",
+        "Un alcool",
+        "Un acide"
+      ],
+      "correct_answer": 1,
+      "explanation": "Alcène + HBr → dérivé bromé.",
+      "related_lesson": "CHI1-52"
+    },
+    {
+      "id": "CHI1-QCM-091",
+      "chapter": "Structure de la matière",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un anion est :",
+      "options": [
+        "Chargé positivement",
+        "Chargé négativement",
+        "Neutre",
+        "Sans électrons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Anion : ion négatif (gain d'électrons).",
+      "related_lesson": "CHI1-04"
+    },
+    {
+      "id": "CHI1-QCM-092",
+      "chapter": "Liaisons chimiques",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La molécule NH₃ a une géométrie :",
+      "options": [
+        "Linéaire",
+        "Plane",
+        "Pyramidale",
+        "Tétraédrique"
+      ],
+      "correct_answer": 2,
+      "explanation": "NH₃ : géométrie pyramidale à base triangulaire.",
+      "related_lesson": "CHI1-08"
+    },
+    {
+      "id": "CHI1-QCM-093",
+      "chapter": "Réactions chimiques",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Une réaction totale :",
+      "options": [
+        "Ne produit rien",
+        "Consomme totalement le réactif limitant",
+        "S'arrête à l'équilibre",
+        "Est toujours lente"
+      ],
+      "correct_answer": 1,
+      "explanation": "Réaction totale : réactif limitant entièrement consommé.",
+      "related_lesson": "CHI1-11"
+    },
+    {
+      "id": "CHI1-QCM-094",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La masse molaire de NaCl est (Na=23, Cl=35,5) :",
+      "options": [
+        "58,5 g/mol",
+        "35,5 g/mol",
+        "23 g/mol",
+        "12,5 g/mol"
+      ],
+      "correct_answer": 0,
+      "explanation": "M(NaCl) = 23 + 35,5 = 58,5 g/mol.",
+      "related_lesson": "CHI1-25"
+    },
+    {
+      "id": "CHI1-QCM-095",
+      "chapter": "Solutions",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un indicateur coloré change de couleur selon :",
+      "options": [
+        "La température",
+        "Le pH",
+        "La pression",
+        "Le volume"
+      ],
+      "correct_answer": 1,
+      "explanation": "Indicateur coloré : vire selon le pH.",
+      "related_lesson": "CHI1-27"
+    },
+    {
+      "id": "CHI1-QCM-096",
+      "chapter": "Chimie organique",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un composé aromatique contient :",
+      "options": [
+        "Un cycle benzénique",
+        "Uniquement des C et H",
+        "Une triple liaison",
+        "Un groupe -OH"
+      ],
+      "correct_answer": 0,
+      "explanation": "Aromatiques : cycle benzénique C₆H₆ ou dérivés.",
+      "related_lesson": "CHI1-39"
+    },
+    {
+      "id": "CHI1-QCM-097",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "La réaction inverse de l'estérification est :",
+      "options": [
+        "La polymérisation",
+        "L'hydrolyse",
+        "La combustion",
+        "L'oxydation"
+      ],
+      "correct_answer": 1,
+      "explanation": "Hydrolyse : ester + eau → acide + alcool.",
+      "related_lesson": "CHI1-45"
+    },
+    {
+      "id": "CHI1-QCM-098",
+      "chapter": "Transformations",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "Un oxydant est une espèce qui :",
+      "options": [
+        "Cède des électrons",
+        "Capte des électrons",
+        "Ne réagit pas",
+        "Perd des protons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Oxydant : capte des électrons (se réduit).",
+      "related_lesson": "CHI1-41"
+    },
+    {
+      "id": "CHI1-QCM-099",
+      "chapter": "Transformations",
+      "difficulty": 2,
+      "points": 10,
+      "time_limit_minutes": 3,
+      "question": "Un réducteur est une espèce qui :",
+      "options": [
+        "Capte des électrons",
+        "Cède des électrons",
+        "Reste neutre",
+        "Gagne des protons"
+      ],
+      "correct_answer": 1,
+      "explanation": "Réducteur : cède des électrons (s'oxyde).",
+      "related_lesson": "CHI1-41"
+    },
+    {
+      "id": "CHI1-QCM-100",
+      "chapter": "Solutions",
+      "difficulty": 3,
+      "points": 15,
+      "time_limit_minutes": 4,
+      "question": "La solubilité est :",
+      "options": [
+        "Toujours infinie",
+        "La masse maximale dissolvable par unité de volume",
+        "Indépendante de T",
+        "Constante"
+      ],
+      "correct_answer": 1,
+      "explanation": "Solubilité : masse max de soluté / volume de solvant.",
+      "related_lesson": "CHI1-28"
+    }
+  ]
+}

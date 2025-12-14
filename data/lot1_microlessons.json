@@ -1,0 +1,584 @@
+{
+  "metadata": {
+    "total_lessons": 10,
+    "level": "Première",
+    "subject": "Chimie",
+    "version": "2.0_realistic",
+    "generated_date": "2025-10-30",
+    "description": "10 premières leçons de Chimie Première avec contenus détaillés et structure pédagogique complète"
+  },
+  "lessons": [
+    {
+      "id": "C1-01",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Configuration électronique et règles de remplissage",
+      "duration_min": 12,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Écrire la configuration électronique d'un atome",
+        "Appliquer les règles de Klechkowski",
+        "Identifier les électrons de valence"
+      ],
+      "prerequisites": [
+        "Structure de l'atome",
+        "Nombre quantique",
+        "Orbitales atomiques"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["configuration", "électrons", "couches", "Klechkowski"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la configuration électronique des atomes, notion fondamentale pour comprendre les propriétés chimiques des éléments. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière au niveau Première. L'objectif est de maîtriser les règles de remplissage des orbitales atomiques en 12 minutes.",
+        "method_step_by_step": [
+          "Identifier le numéro atomique Z de l'élément",
+          "Appliquer la règle de Klechkowski (1s, 2s, 2p, 3s, 3p, 4s, 3d...)",
+          "Remplir les orbitales selon le principe d'exclusion de Pauli",
+          "Respecter la règle de Hund pour les orbitales dégénérées",
+          "Identifier les électrons de valence (couche externe)"
+        ],
+        "guided_example": {
+          "statement": "Écrire la configuration électronique du fer (Fe, Z=26) et identifier ses électrons de valence.",
+          "solution_steps": [
+            "Données: Fe a 26 électrons (Z=26)",
+            "Ordre de remplissage: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶",
+            "Vérification: 2+2+6+2+6+2+6 = 26 ✓",
+            "Électrons de valence: 4s² 3d⁶ = 8 électrons",
+            "Conclusion: Fe appartient au bloc d (métaux de transition)"
+          ]
+        },
+        "quick_exercises": [
+          "Écrire la configuration électronique de l'oxygène (O, Z=8)",
+          "Déterminer le nombre d'électrons de valence du chlore (Cl, Z=17)",
+          "Identifier l'élément de configuration 1s² 2s² 2p⁶ 3s² 3p³"
+        ],
+        "common_mistakes": [
+          "Oublier que 4s se remplit avant 3d",
+          "Ne pas respecter la règle de Hund (électrons célibataires)",
+          "Confondre électrons de valence et électrons totaux"
+        ],
+        "summary": {
+          "key_concept": "La configuration électronique décrit la répartition des électrons dans les orbitales atomiques",
+          "key_method": "Identifier Z → Appliquer Klechkowski → Remplir → Vérifier",
+          "next_step": "Utiliser la configuration pour prédire les liaisons chimiques"
+        }
+      }
+    },
+    {
+      "id": "C1-02",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Classification périodique et propriétés des éléments",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Localiser un élément dans le tableau périodique",
+        "Relier position et configuration électronique",
+        "Prévoir les propriétés périodiques"
+      ],
+      "prerequisites": [
+        "Configuration électronique",
+        "Numéro atomique"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["tableau périodique", "familles", "périodes", "électronégativité"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon explore le tableau périodique de Mendeleïev et les propriétés périodiques des éléments. Elle fait partie du chapitre Structure & Propriétés de la Matière en Première. L'objectif est de comprendre l'organisation du tableau et ses applications en 10 minutes.",
+        "method_step_by_step": [
+          "Identifier la période (ligne) = nombre de couches électroniques",
+          "Identifier la famille (colonne) = nombre d'électrons de valence",
+          "Repérer les blocs s, p, d, f selon la dernière orbitale remplie",
+          "Utiliser la position pour prévoir les propriétés (rayon, électronégativité)",
+          "Prévoir le type de liaison probable (ionique, covalente)"
+        ],
+        "guided_example": {
+          "statement": "Le sodium (Na, Z=11) et le chlore (Cl, Z=17) : analyser leur position dans le tableau et prévoir le type de liaison.",
+          "solution_steps": [
+            "Na: 1s² 2s² 2p⁶ 3s¹ → Période 3, Groupe 1 (alcalin), 1 électron de valence",
+            "Cl: 1s² 2s² 2p⁶ 3s² 3p⁵ → Période 3, Groupe 17 (halogène), 7 électrons de valence",
+            "Na tend à perdre 1 e⁻ → cation Na⁺",
+            "Cl tend à gagner 1 e⁻ → anion Cl⁻",
+            "Conclusion: Liaison ionique → formation de NaCl (sel de table)"
+          ]
+        },
+        "quick_exercises": [
+          "Déterminer la période et la famille du carbone (C, Z=6)",
+          "Classer par électronégativité croissante: F, O, N",
+          "Prévoir le type de liaison entre Mg (Z=12) et O (Z=8)"
+        ],
+        "common_mistakes": [
+          "Confondre période et groupe",
+          "Oublier que l'électronégativité augmente vers le haut à droite",
+          "Ne pas tenir compte des exceptions (métaux de transition)"
+        ],
+        "summary": {
+          "key_concept": "Le tableau périodique organise les éléments selon leur configuration électronique et permet de prévoir leurs propriétés",
+          "key_method": "Localiser → Analyser configuration → Prévoir propriétés",
+          "next_step": "Étudier les liaisons chimiques en détail"
+        }
+      }
+    },
+    {
+      "id": "C1-03",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Liaisons covalentes : formation et représentation",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Comprendre la formation d'une liaison covalente",
+        "Représenter les liaisons par la formule de Lewis",
+        "Distinguer liaison simple, double et triple"
+      ],
+      "prerequisites": [
+        "Électrons de valence",
+        "Règle de l'octet"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["covalence", "Lewis", "doublets", "octet"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les liaisons covalentes, où deux atomes partagent des électrons pour atteindre une configuration stable. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de maîtriser la représentation de Lewis en 11 minutes.",
+        "method_step_by_step": [
+          "Compter les électrons de valence de chaque atome",
+          "Calculer le nombre total d'électrons à placer",
+          "Placer les atomes et créer les liaisons (doublets liants)",
+          "Compléter avec des doublets non liants pour satisfaire l'octet",
+          "Vérifier que chaque atome respecte la règle de l'octet (ou duet pour H)"
+        ],
+        "guided_example": {
+          "statement": "Représenter la formule de Lewis de la molécule d'eau H₂O.",
+          "solution_steps": [
+            "Électrons de valence: O (6e⁻) + 2×H (1e⁻) = 8 électrons",
+            "Structure de base: H-O-H (2 liaisons = 4 électrons)",
+            "Électrons restants: 8 - 4 = 4 électrons",
+            "Placer 2 doublets non liants sur O: H-O-H avec 2 paires libres sur O",
+            "Vérification: O a 8e⁻ (2 liaisons + 2 doublets libres), H a 2e⁻ ✓"
+          ]
+        },
+        "quick_exercises": [
+          "Représenter la formule de Lewis de NH₃ (ammoniac)",
+          "Déterminer le nombre de liaisons dans CO₂ (dioxyde de carbone)",
+          "Identifier les doublets non liants dans CH₄ (méthane)"
+        ],
+        "common_mistakes": [
+          "Oublier de compter tous les électrons de valence",
+          "Ne pas placer les doublets non liants",
+          "Violer la règle de l'octet (sauf exceptions: B, Be, éléments période 3+)"
+        ],
+        "summary": {
+          "key_concept": "Une liaison covalente résulte du partage d'électrons entre atomes pour atteindre la stabilité (règle de l'octet)",
+          "key_method": "Compter électrons → Relier atomes → Compléter doublets → Vérifier octet",
+          "next_step": "Étudier la géométrie des molécules"
+        }
+      }
+    },
+    {
+      "id": "C1-04",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Géométrie des molécules - Théorie VSEPR",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Appliquer la théorie VSEPR (répulsion des doublets)",
+        "Déterminer la géométrie d'une molécule",
+        "Relier géométrie et formule de Lewis"
+      ],
+      "prerequisites": [
+        "Formule de Lewis",
+        "Doublets liants et non liants"
+      ],
+      "content_types": ["video", "3D-model", "quiz", "exercises"],
+      "tags": ["VSEPR", "géométrie", "angles", "répulsion"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la théorie VSEPR (Valence Shell Electron Pair Repulsion) qui permet de prévoir la géométrie tridimensionnelle des molécules. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de maîtriser la prédiction de géométrie en 12 minutes.",
+        "method_step_by_step": [
+          "Écrire la formule de Lewis de la molécule",
+          "Compter les doublets autour de l'atome central (liants + non liants)",
+          "Déterminer l'arrangement spatial qui minimise les répulsions",
+          "Identifier la géométrie de la molécule (en ne considérant que les atomes)",
+          "Vérifier les angles de liaison théoriques"
+        ],
+        "guided_example": {
+          "statement": "Déterminer la géométrie de la molécule d'ammoniac NH₃.",
+          "solution_steps": [
+            "Lewis: N au centre avec 3 liaisons N-H et 1 doublet non liant",
+            "Autour de N: 4 doublets (3 liants + 1 non liant)",
+            "Arrangement: tétraédrique (minimise les répulsions)",
+            "Géométrie de la molécule: pyramidale à base triangulaire",
+            "Angles: ~107° (< 109.5° car doublet libre repousse plus)"
+          ]
+        },
+        "quick_exercises": [
+          "Déterminer la géométrie de CO₂",
+          "Expliquer pourquoi H₂O est coudée et non linéaire",
+          "Prédire les angles de liaison dans CH₄"
+        ],
+        "common_mistakes": [
+          "Oublier de compter les doublets non liants",
+          "Confondre arrangement des doublets et géométrie de la molécule",
+          "Négliger l'effet des doublets libres sur les angles"
+        ],
+        "summary": {
+          "key_concept": "La géométrie des molécules résulte de la répulsion entre doublets d'électrons (théorie VSEPR)",
+          "key_method": "Lewis → Compter doublets → Arrangement spatial → Géométrie molécule",
+          "next_step": "Étudier la polarité des molécules"
+        }
+      }
+    },
+    {
+      "id": "C1-05",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Polarité des liaisons et des molécules",
+      "duration_min": 10,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir l'électronégativité et la polarité d'une liaison",
+        "Déterminer si une molécule est polaire",
+        "Relier polarité et moment dipolaire"
+      ],
+      "prerequisites": [
+        "Électronégativité",
+        "Géométrie des molécules",
+        "Formule de Lewis"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["polarité", "électronégativité", "dipôle", "moment"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la notion de polarité des liaisons et des molécules, essentielle pour comprendre les interactions intermoléculaires. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de maîtriser l'analyse de polarité en 10 minutes.",
+        "method_step_by_step": [
+          "Calculer la différence d'électronégativité Δχ entre atomes liés",
+          "Si Δχ > 0.4 : liaison polarisée (δ+ vers δ-)",
+          "Représenter les vecteurs moment dipolaire de chaque liaison",
+          "Faire la somme vectorielle des moments dipolaires",
+          "Si somme ≠ 0 : molécule polaire; si somme = 0 : molécule apolaire"
+        ],
+        "guided_example": {
+          "statement": "Déterminer si la molécule de dioxyde de carbone CO₂ est polaire.",
+          "solution_steps": [
+            "Électronégativités: χ(C) = 2.5, χ(O) = 3.5",
+            "Δχ(C-O) = 1.0 > 0.4 → liaisons C-O polarisées",
+            "Géométrie: CO₂ est linéaire (O=C=O)",
+            "Moments dipolaires: deux vecteurs opposés de même norme",
+            "Somme vectorielle = 0 → CO₂ est APOLAIRE malgré liaisons polaires"
+          ]
+        },
+        "quick_exercises": [
+          "La molécule H₂O est-elle polaire ? Justifier",
+          "Comparer la polarité de CCl₄ et CHCl₃",
+          "Expliquer pourquoi NH₃ est polaire"
+        ],
+        "common_mistakes": [
+          "Confondre liaison polaire et molécule polaire",
+          "Oublier de tenir compte de la géométrie",
+          "Ne pas faire la somme vectorielle correctement"
+        ],
+        "summary": {
+          "key_concept": "Une molécule est polaire si la somme vectorielle de ses moments dipolaires est non nulle",
+          "key_method": "Électronégativité → Polarité liaisons → Géométrie → Somme vectorielle",
+          "next_step": "Étudier les interactions intermoléculaires (Van der Waals, liaisons H)"
+        }
+      }
+    },
+    {
+      "id": "C1-06",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Forces intermoléculaires : Van der Waals et liaison hydrogène",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Distinguer les différents types d'interactions",
+        "Identifier les molécules capables de liaisons hydrogène",
+        "Relier forces intermoléculaires et propriétés physiques"
+      ],
+      "prerequisites": [
+        "Polarité des molécules",
+        "Électronégativité"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["Van der Waals", "liaison hydrogène", "interactions", "cohésion"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les forces intermoléculaires qui expliquent les propriétés physiques des substances (température d'ébullition, solubilité). Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de comprendre ces interactions en 11 minutes.",
+        "method_step_by_step": [
+          "Identifier si la molécule est polaire ou apolaire",
+          "Pour molécules apolaires : forces de London (dipôles induits)",
+          "Pour molécules polaires : interactions dipôle-dipôle",
+          "Vérifier la présence de liaison H: H lié à F, O ou N",
+          "Classer les forces par intensité croissante: London < dipôle-dipôle < liaison H"
+        ],
+        "guided_example": {
+          "statement": "Expliquer pourquoi l'eau (H₂O, Téb = 100°C) bout à température plus élevée que le sulfure d'hydrogène (H₂S, Téb = -60°C) malgré une masse molaire plus faible.",
+          "solution_steps": [
+            "H₂O: molécule polaire avec H lié à O → liaisons hydrogène fortes",
+            "H₂S: molécule polaire avec H lié à S → pas de liaison H (S peu électronégatif)",
+            "H₂S a seulement des interactions dipôle-dipôle (plus faibles)",
+            "Plus de liaisons H dans H₂O → plus d'énergie pour les rompre",
+            "Conclusion: Téb(H₂O) > Téb(H₂S) à cause des liaisons hydrogène"
+          ]
+        },
+        "quick_exercises": [
+          "Identifier les molécules capables de liaisons H: CH₃OH, CH₄, NH₃",
+          "Classer par température d'ébullition: N₂, HF, HCl",
+          "Expliquer la miscibilité de l'éthanol dans l'eau"
+        ],
+        "common_mistakes": [
+          "Croire que toute liaison avec H forme une liaison hydrogène",
+          "Confondre liaison hydrogène et liaison covalente",
+          "Négliger les forces de London pour les grosses molécules"
+        ],
+        "summary": {
+          "key_concept": "Les forces intermoléculaires (Van der Waals, liaison H) déterminent les propriétés physiques des substances",
+          "key_method": "Type molécule → Identifier interactions → Classer intensité → Prévoir propriétés",
+          "next_step": "Appliquer à la solubilité et aux mélanges"
+        }
+      }
+    },
+    {
+      "id": "C1-07",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Solubilité et miscibilité - Règle « qui se ressemble s'assemble »",
+      "duration_min": 10,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Appliquer la règle de solubilité",
+        "Prévoir la miscibilité de deux liquides",
+        "Expliquer le rôle des interactions intermoléculaires"
+      ],
+      "prerequisites": [
+        "Polarité des molécules",
+        "Forces intermoléculaires"
+      ],
+      "content_types": ["video", "experiment", "quiz", "exercises"],
+      "tags": ["solubilité", "miscibilité", "polaire", "apolaire"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les règles de solubilité basées sur les interactions intermoléculaires. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de prédire la solubilité en 10 minutes.",
+        "method_step_by_step": [
+          "Identifier la nature du solvant (polaire ou apolaire)",
+          "Identifier la nature du soluté (polaire, apolaire, ionique)",
+          "Appliquer la règle: 'polaire dissout polaire', 'apolaire dissout apolaire'",
+          "Cas particulier: les composés ioniques se dissolvent dans les solvants polaires",
+          "Expliquer en termes d'interactions: substitution d'interactions de même nature"
+        ],
+        "guided_example": {
+          "statement": "Expliquer pourquoi le sel de table (NaCl) se dissout dans l'eau mais pas dans l'hexane (C₆H₁₄).",
+          "solution_steps": [
+            "NaCl: composé ionique (Na⁺ et Cl⁻)",
+            "H₂O: solvant polaire avec liaisons hydrogène",
+            "C₆H₁₄: solvant apolaire (hydrocarbure)",
+            "Dans H₂O: hydratation des ions (interactions ion-dipôle fortes)",
+            "Dans C₆H₁₄: pas d'interaction favorable → NaCl insoluble"
+          ]
+        },
+        "quick_exercises": [
+          "Le diiode I₂ est-il plus soluble dans l'eau ou dans le cyclohexane?",
+          "Expliquer la miscibilité de l'éthanol (C₂H₅OH) et de l'eau",
+          "Prévoir si le glucose (C₆H₁₂O₆, polyol) est soluble dans l'eau"
+        ],
+        "common_mistakes": [
+          "Oublier de considérer la polarité du solvant",
+          "Croire que tous les composés organiques sont apolaires",
+          "Négliger les liaisons hydrogène dans les alcools"
+        ],
+        "summary": {
+          "key_concept": "La solubilité résulte de la compatibilité des interactions: polaire/polaire, apolaire/apolaire",
+          "key_method": "Nature soluté → Nature solvant → Compatibilité → Solubilité",
+          "next_step": "Étudier les mélanges et les extractions"
+        }
+      }
+    },
+    {
+      "id": "C1-08",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "États physiques et changements d'état",
+      "duration_min": 9,
+      "difficulty": 2,
+      "xp_reward": 75,
+      "objectives": [
+        "Décrire les trois états de la matière",
+        "Relier changements d'état et énergie",
+        "Interpréter un diagramme de changement d'état"
+      ],
+      "prerequisites": [
+        "Forces intermoléculaires",
+        "Énergie cinétique et potentielle"
+      ],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["états", "fusion", "vaporisation", "énergie"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente les états physiques de la matière et leurs transitions. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de comprendre les changements d'état en 9 minutes.",
+        "method_step_by_step": [
+          "Identifier l'état initial et final",
+          "Déterminer si le changement absorbe (endothermique) ou libère (exothermique) de l'énergie",
+          "Solide → Liquide (fusion): endothermique",
+          "Liquide → Gaz (vaporisation): endothermique",
+          "Processus inverses (solidification, liquéfaction): exothermiques"
+        ],
+        "guided_example": {
+          "statement": "Expliquer le plateau de température lors de la fusion de la glace.",
+          "solution_steps": [
+            "Au début: glace à 0°C (solide)",
+            "Apport d'énergie: rompt les liaisons H entre molécules H₂O",
+            "Température reste à 0°C pendant toute la fusion (chaleur latente)",
+            "Énergie sert à changer l'état, pas à augmenter la température",
+            "Une fois toute la glace fondue: température de l'eau liquide augmente"
+          ]
+        },
+        "quick_exercises": [
+          "Classer les changements endothermiques: fusion, condensation, sublimation",
+          "Expliquer pourquoi l'ébullition de l'eau se produit à 100°C (1 atm)",
+          "Interpréter une courbe de refroidissement du naphtalène"
+        ],
+        "common_mistakes": [
+          "Confondre température et énergie",
+          "Croire que la température augmente pendant le changement d'état",
+          "Oublier que les changements inverses ont des énergies opposées"
+        ],
+        "summary": {
+          "key_concept": "Les changements d'état résultent de la rupture/formation d'interactions intermoléculaires",
+          "key_method": "État initial → Énergie → État final (température constante pendant transition)",
+          "next_step": "Étudier les diagrammes de phase"
+        }
+      }
+    },
+    {
+      "id": "C1-09",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Spectroscopie infrarouge - Identification des groupes fonctionnels",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 125,
+      "objectives": [
+        "Lire un spectre infrarouge",
+        "Identifier les bandes caractéristiques",
+        "Associer bande IR et groupe fonctionnel"
+      ],
+      "prerequisites": [
+        "Liaisons covalentes",
+        "Groupes fonctionnels"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["IR", "spectroscopie", "absorption", "fonctionnel"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente la spectroscopie infrarouge, technique essentielle pour identifier les molécules organiques. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de maîtriser l'analyse IR en 12 minutes.",
+        "method_step_by_step": [
+          "Repérer les bandes intenses et larges (souvent OH, NH)",
+          "Identifier les bandes caractéristiques: O-H (3200-3600), C=O (1650-1750), C-H (2850-3000)",
+          "Utiliser une table de corrélation IR",
+          "Vérifier la cohérence avec la formule brute",
+          "Conclure sur les groupes fonctionnels présents"
+        ],
+        "guided_example": {
+          "statement": "Analyser le spectre IR d'un composé C₂H₆O présentant une large bande à 3300 cm⁻¹ et une bande à 2900 cm⁻¹.",
+          "solution_steps": [
+            "Bande large et intense à 3300 cm⁻¹ → liaison O-H (alcool)",
+            "Bande à 2900 cm⁻¹ → liaisons C-H",
+            "Absence de bande vers 1700 cm⁻¹ → pas de C=O (donc pas aldéhyde/cétone)",
+            "Formule C₂H₆O avec fonction alcool → éthanol CH₃-CH₂-OH",
+            "Conclusion: le composé est l'éthanol"
+          ]
+        },
+        "quick_exercises": [
+          "Identifier si un spectre montre un alcool ou un ester",
+          "Expliquer l'absence de bande O-H dans le spectre d'un éther",
+          "Distinguer un aldéhyde d'une cétone par IR"
+        ],
+        "common_mistakes": [
+          "Confondre bande O-H et N-H (largeur différente)",
+          "Oublier de vérifier l'absence de bandes (information importante)",
+          "Négliger l'intensité et la forme des bandes"
+        ],
+        "summary": {
+          "key_concept": "La spectroscopie IR permet d'identifier les groupes fonctionnels par leurs vibrations caractéristiques",
+          "key_method": "Observer spectre → Identifier bandes clés → Table corrélation → Déduire structure",
+          "next_step": "Combiner avec d'autres méthodes (RMN, masse)"
+        }
+      }
+    },
+    {
+      "id": "C1-10",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Propriétés de la Matière",
+      "title": "Isomérie - Molécules de même formule brute",
+      "duration_min": 11,
+      "difficulty": 3,
+      "xp_reward": 100,
+      "objectives": [
+        "Définir les différents types d'isomérie",
+        "Représenter des isomères de constitution",
+        "Distinguer isomères de chaîne, de position et de fonction"
+      ],
+      "prerequisites": [
+        "Formules développées",
+        "Groupes fonctionnels"
+      ],
+      "content_types": ["video", "interactive", "quiz", "exercises"],
+      "tags": ["isomérie", "isomères", "constitution", "stéréoisomérie"],
+      "detailed_content": {
+        "introduction": "Cette micro-leçon présente l'isomérie, phénomène où plusieurs molécules partagent la même formule brute mais diffèrent par leur structure. Elle s'inscrit dans le chapitre Structure & Propriétés de la Matière en Première. L'objectif est de maîtriser l'identification d'isomères en 11 minutes.",
+        "method_step_by_step": [
+          "Vérifier que les molécules ont la même formule brute",
+          "Comparer les formules développées ou semi-développées",
+          "Si connectivité différente → isomères de constitution",
+          "Sous-types: isomères de chaîne (squelette), de position (groupe), de fonction",
+          "Si même connectivité mais arrangement spatial différent → stéréoisomères (hors programme Première)"
+        ],
+        "guided_example": {
+          "statement": "Identifier tous les isomères de constitution de formule C₄H₁₀O.",
+          "solution_steps": [
+            "Possibilités: alcools (R-OH) ou éthers (R-O-R')",
+            "Alcools: butan-1-ol, butan-2-ol, 2-méthylpropan-1-ol, 2-méthylpropan-2-ol",
+            "Éthers: méthoxyéthane, éthoxyéthane, 1-méthoxypropane, 2-méthoxypropane",
+            "Total: 7 isomères de constitution",
+            "Classification: 4 isomères de position (alcools) + 3 isomères de fonction (éthers)"
+          ]
+        },
+        "quick_exercises": [
+          "Dessiner les isomères de C₃H₈O",
+          "Distinguer butan-1-ol et butan-2-ol (isomères de quelle type?)",
+          "Expliquer pourquoi les propriétés physiques des isomères diffèrent"
+        ],
+        "common_mistakes": [
+          "Compter deux fois la même molécule (rotation/symétrie)",
+          "Oublier les isomères de fonction",
+          "Confondre isomères et molécules différentes"
+        ],
+        "summary": {
+          "key_concept": "Les isomères ont la même formule brute mais des structures différentes, entraînant des propriétés distinctes",
+          "key_method": "Formule brute → Énumérer structures → Vérifier connectivité → Classer type",
+          "next_step": "Étudier la nomenclature systématique"
+        }
+      }
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+

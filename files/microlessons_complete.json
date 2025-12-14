@@ -1,0 +1,3159 @@
+{
+  "metadata": {
+    "total_lessons": 110,
+    "version": "1.0",
+    "generated_date": "2025-10-30",
+    "description": "450 micro-leçons complètes Lycée (Mathématiques, Physique, Chimie)"
+  },
+  "lessons": [
+    {
+      "id": "P1-01",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Vecteur vitesse",
+      "duration_min": 8,
+      "objectives": [
+        "Définir vecteur vitesse",
+        "Calculer v⃗",
+        "Direction et sens"
+      ],
+      "prerequisites": [
+        "Vitesse Seconde",
+        "Vecteurs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "vecteur",
+        "vitesse"
+      ]
+    },
+    {
+      "id": "P1-02",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Vecteur accélération",
+      "duration_min": 8,
+      "objectives": [
+        "Définir vecteur accélération",
+        "Calculer a⃗",
+        "Relation avec variation vitesse"
+      ],
+      "prerequisites": [
+        "Vecteur vitesse"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "vecteur",
+        "accélération"
+      ]
+    },
+    {
+      "id": "P1-03",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Deuxième loi de Newton",
+      "duration_min": 9,
+      "objectives": [
+        "Énoncer F⃗=ma⃗",
+        "Appliquer la loi",
+        "Résoudre des problèmes"
+      ],
+      "prerequisites": [
+        "Forces",
+        "Accélération"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "deuxième",
+        "loi",
+        "de"
+      ]
+    },
+    {
+      "id": "P1-04",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Chute libre",
+      "duration_min": 8,
+      "objectives": [
+        "Étudier la chute libre",
+        "Équations du mouvement",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Newton",
+        "Pesanteur"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "chute",
+        "libre"
+      ]
+    },
+    {
+      "id": "P1-05",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Mouvement circulaire uniforme",
+      "duration_min": 8,
+      "objectives": [
+        "Caractériser MCU",
+        "Vitesse angulaire",
+        "Accélération centripète"
+      ],
+      "prerequisites": [
+        "Vitesse",
+        "Vecteurs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "mouvement",
+        "circulaire",
+        "uniforme"
+      ]
+    },
+    {
+      "id": "P1-06",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Mouvement parabolique (projectile)",
+      "duration_min": 9,
+      "objectives": [
+        "Étudier le tir de projectile",
+        "Équations paramétriques",
+        "Portée et hauteur max"
+      ],
+      "prerequisites": [
+        "Chute libre",
+        "Vecteurs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "mouvement",
+        "parabolique",
+        "(projectile)"
+      ]
+    },
+    {
+      "id": "P1-07",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Forces et mouvements",
+      "duration_min": 8,
+      "objectives": [
+        "Relier force et mouvement",
+        "Principe fondamental",
+        "Applications variées"
+      ],
+      "prerequisites": [
+        "Newton"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "forces",
+        "et",
+        "mouvements"
+      ]
+    },
+    {
+      "id": "P1-08",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie cinétique",
+      "duration_min": 7,
+      "objectives": [
+        "Définir Ec=½mv²",
+        "Calculer l'énergie cinétique",
+        "Théorème de l'énergie cinétique"
+      ],
+      "prerequisites": [
+        "Vitesse",
+        "Énergie"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "énergie",
+        "cinétique"
+      ]
+    },
+    {
+      "id": "P1-09",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Énergie potentielle de pesanteur",
+      "duration_min": 7,
+      "objectives": [
+        "Définir Ep=mgh",
+        "Calculer Ep",
+        "Référence d'altitude"
+      ],
+      "prerequisites": [
+        "Poids",
+        "Énergie"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "énergie",
+        "potentielle",
+        "de"
+      ]
+    },
+    {
+      "id": "P1-10",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Travail d'une force",
+      "duration_min": 8,
+      "objectives": [
+        "Définir W=F⃗·d⃗",
+        "Calculer un travail",
+        "Travail moteur/résistant"
+      ],
+      "prerequisites": [
+        "Forces",
+        "Vecteurs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "travail",
+        "d'une",
+        "force"
+      ]
+    },
+    {
+      "id": "P1-11",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Puissance mécanique",
+      "duration_min": 7,
+      "objectives": [
+        "Définir P=W/Δt",
+        "Calculer une puissance",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Travail"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "puissance",
+        "mécanique"
+      ]
+    },
+    {
+      "id": "P1-12",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Mécanique",
+      "title": "Conservation de l'énergie mécanique",
+      "duration_min": 8,
+      "objectives": [
+        "Em=Ec+Ep=constante",
+        "Appliquer le principe",
+        "Situations sans frottements"
+      ],
+      "prerequisites": [
+        "Ec",
+        "Ep"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "conservation",
+        "de",
+        "l'énergie"
+      ]
+    },
+    {
+      "id": "P1-13",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Ondes mécaniques progressives",
+      "duration_min": 8,
+      "objectives": [
+        "Définir onde progressive",
+        "Célérité",
+        "Propagation"
+      ],
+      "prerequisites": [
+        "Ondes Seconde"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "ondes",
+        "mécaniques",
+        "progressives"
+      ]
+    },
+    {
+      "id": "P1-14",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Ondes sinusoïdales",
+      "duration_min": 8,
+      "objectives": [
+        "Caractériser onde sinusoïdale",
+        "Période, fréquence",
+        "Longueur d'onde"
+      ],
+      "prerequisites": [
+        "Ondes progressives"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "ondes",
+        "sinusoïdales"
+      ]
+    },
+    {
+      "id": "P1-15",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Période, fréquence, longueur d'onde",
+      "duration_min": 7,
+      "objectives": [
+        "Relations T, f, λ",
+        "Formule v=λf",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Ondes sinusoïdales"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "période,",
+        "fréquence,",
+        "longueur"
+      ]
+    },
+    {
+      "id": "P1-16",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Célérité d'une onde",
+      "duration_min": 7,
+      "objectives": [
+        "Mesurer la célérité",
+        "Facteurs influençant",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Ondes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "célérité",
+        "d'une",
+        "onde"
+      ]
+    },
+    {
+      "id": "P1-17",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Diffraction des ondes",
+      "duration_min": 8,
+      "objectives": [
+        "Observer la diffraction",
+        "Relation θ≈λ/a",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Ondes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "diffraction",
+        "des",
+        "ondes"
+      ]
+    },
+    {
+      "id": "P1-18",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Interférences",
+      "duration_min": 8,
+      "objectives": [
+        "Comprendre les interférences",
+        "Constructives et destructives",
+        "Conditions"
+      ],
+      "prerequisites": [
+        "Ondes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "interférences"
+      ]
+    },
+    {
+      "id": "P1-19",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Effet Doppler (introduction)",
+      "duration_min": 8,
+      "objectives": [
+        "Découvrir l'effet Doppler",
+        "Variation de fréquence",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Fréquence"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "effet",
+        "doppler",
+        "(introduction)"
+      ]
+    },
+    {
+      "id": "P1-20",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Ondes sonores et ultrasons",
+      "duration_min": 7,
+      "objectives": [
+        "Caractéristiques du son",
+        "Ultrasons",
+        "Applications médicales"
+      ],
+      "prerequisites": [
+        "Ondes Seconde"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "ondes",
+        "sonores",
+        "et"
+      ]
+    },
+    {
+      "id": "P1-21",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Spectre sonore",
+      "duration_min": 7,
+      "objectives": [
+        "Analyse fréquentielle",
+        "Spectre",
+        "Timbre"
+      ],
+      "prerequisites": [
+        "Son"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "spectre",
+        "sonore"
+      ]
+    },
+    {
+      "id": "P1-22",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Ondes",
+      "title": "Applications des ondes",
+      "duration_min": 8,
+      "objectives": [
+        "Échographie",
+        "Radar",
+        "Sismologie"
+      ],
+      "prerequisites": [
+        "Ondes complètes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "applications",
+        "des",
+        "ondes"
+      ]
+    },
+    {
+      "id": "P1-23",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Courant électrique",
+      "duration_min": 7,
+      "objectives": [
+        "Définir le courant",
+        "Intensité I",
+        "Sens du courant"
+      ],
+      "prerequisites": [
+        "Aucun"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 1,
+      "xp_reward": 50,
+      "tags": [
+        "courant",
+        "électrique"
+      ]
+    },
+    {
+      "id": "P1-24",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Tension et intensité",
+      "duration_min": 7,
+      "objectives": [
+        "Définir la tension U",
+        "Mesurer U et I",
+        "Appareils"
+      ],
+      "prerequisites": [
+        "Courant"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 60,
+      "tags": [
+        "tension",
+        "et",
+        "intensité"
+      ]
+    },
+    {
+      "id": "P1-25",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Loi d'Ohm",
+      "duration_min": 7,
+      "objectives": [
+        "U=RI",
+        "Résistance",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Tension",
+        "Intensité"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 60,
+      "tags": [
+        "loi",
+        "d'ohm"
+      ]
+    },
+    {
+      "id": "P1-26",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Conducteurs ohmiques",
+      "duration_min": 7,
+      "objectives": [
+        "Caractéristiques",
+        "Comportement linéaire",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Loi d'Ohm"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 60,
+      "tags": [
+        "conducteurs",
+        "ohmiques"
+      ]
+    },
+    {
+      "id": "P1-27",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Circuits en série et parallèle",
+      "duration_min": 8,
+      "objectives": [
+        "Lois des circuits série",
+        "Lois des circuits parallèle",
+        "Calculs"
+      ],
+      "prerequisites": [
+        "Loi d'Ohm"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 60,
+      "tags": [
+        "circuits",
+        "en",
+        "série"
+      ]
+    },
+    {
+      "id": "P1-28",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Générateurs et récepteurs",
+      "duration_min": 7,
+      "objectives": [
+        "Rôle des générateurs",
+        "Rôle des récepteurs",
+        "f.e.m."
+      ],
+      "prerequisites": [
+        "Circuits"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 60,
+      "tags": [
+        "générateurs",
+        "et",
+        "récepteurs"
+      ]
+    },
+    {
+      "id": "P1-29",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Énergie électrique",
+      "duration_min": 7,
+      "objectives": [
+        "Calculer E=UIt",
+        "Énergie consommée",
+        "kWh"
+      ],
+      "prerequisites": [
+        "Tension",
+        "Intensité"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 60,
+      "tags": [
+        "énergie",
+        "électrique"
+      ]
+    },
+    {
+      "id": "P1-30",
+      "level": "Première",
+      "subject": "Physique",
+      "chapter": "Électricité",
+      "title": "Puissance électrique",
+      "duration_min": 8,
+      "objectives": [
+        "P=UI",
+        "Calculs de puissance",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Énergie électrique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 60,
+      "tags": [
+        "puissance",
+        "électrique"
+      ]
+    },
+    {
+      "id": "C1-01",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Configuration électronique",
+      "duration_min": 8,
+      "objectives": [
+        "Règles de remplissage",
+        "Écrire config électronique",
+        "Couches et sous-couches"
+      ],
+      "prerequisites": [
+        "Structure atome"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "configuration",
+        "électronique"
+      ]
+    },
+    {
+      "id": "C1-02",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Règles de remplissage",
+      "duration_min": 7,
+      "objectives": [
+        "Klechkowski",
+        "Ordre de remplissage",
+        "Exceptions"
+      ],
+      "prerequisites": [
+        "Config électronique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "règles",
+        "de",
+        "remplissage"
+      ]
+    },
+    {
+      "id": "C1-03",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Familles chimiques",
+      "duration_min": 7,
+      "objectives": [
+        "Identifier familles",
+        "Propriétés",
+        "Tableau périodique"
+      ],
+      "prerequisites": [
+        "Config électronique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "familles",
+        "chimiques"
+      ]
+    },
+    {
+      "id": "C1-04",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Liaisons covalentes",
+      "duration_min": 8,
+      "objectives": [
+        "Définir liaison covalente",
+        "Doublets liants/non-liants",
+        "Représentation Lewis"
+      ],
+      "prerequisites": [
+        "Atomes",
+        "Électrons"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "liaisons",
+        "covalentes"
+      ]
+    },
+    {
+      "id": "C1-05",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Géométrie des molécules (VSEPR)",
+      "duration_min": 9,
+      "objectives": [
+        "Modèle VSEPR",
+        "Prévoir la géométrie",
+        "Formes moléculaires"
+      ],
+      "prerequisites": [
+        "Liaisons covalentes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "géométrie",
+        "des",
+        "molécules"
+      ]
+    },
+    {
+      "id": "C1-06",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Électronégativité",
+      "duration_min": 7,
+      "objectives": [
+        "Définir électronégativité",
+        "Échelle de Pauling",
+        "Utilisation"
+      ],
+      "prerequisites": [
+        "Liaisons"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "électronégativité"
+      ]
+    },
+    {
+      "id": "C1-07",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Polarité des liaisons",
+      "duration_min": 8,
+      "objectives": [
+        "Liaison polaire/apolaire",
+        "Moment dipolaire",
+        "Conséquences"
+      ],
+      "prerequisites": [
+        "Électronégativité"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "polarité",
+        "des",
+        "liaisons"
+      ]
+    },
+    {
+      "id": "C1-08",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Forces intermoléculaires",
+      "duration_min": 8,
+      "objectives": [
+        "Van der Waals",
+        "Liaisons hydrogène",
+        "Influence propriétés"
+      ],
+      "prerequisites": [
+        "Polarité"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "forces",
+        "intermoléculaires"
+      ]
+    },
+    {
+      "id": "C1-09",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Transformations acide-base",
+      "duration_min": 8,
+      "objectives": [
+        "Acides et bases",
+        "Couples acide/base",
+        "Réactions"
+      ],
+      "prerequisites": [
+        "pH Seconde"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "transformations",
+        "acide-base"
+      ]
+    },
+    {
+      "id": "C1-10",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "pH et pKa",
+      "duration_min": 8,
+      "objectives": [
+        "Définir pKa",
+        "Relation pH/pKa",
+        "Diagramme"
+      ],
+      "prerequisites": [
+        "pH"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "ph",
+        "et",
+        "pka"
+      ]
+    },
+    {
+      "id": "C1-11",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Réactions d'oxydo-réduction",
+      "duration_min": 9,
+      "objectives": [
+        "Oxydant et réducteur",
+        "Couples redox",
+        "Réactions"
+      ],
+      "prerequisites": [
+        "Ions"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "réactions",
+        "d'oxydo-réduction"
+      ]
+    },
+    {
+      "id": "C1-12",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Structure & Transformation",
+      "title": "Équations redox",
+      "duration_min": 8,
+      "objectives": [
+        "Équilibrer équations redox",
+        "Demi-équations",
+        "Méthode"
+      ],
+      "prerequisites": [
+        "Redox"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "équations",
+        "redox"
+      ]
+    },
+    {
+      "id": "C1-13",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Chaînes carbonées",
+      "duration_min": 7,
+      "objectives": [
+        "Atome de carbone",
+        "Tétravalence",
+        "Chaînes"
+      ],
+      "prerequisites": [
+        "Liaisons"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "chaînes",
+        "carbonées"
+      ]
+    },
+    {
+      "id": "C1-14",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Formules brutes et semi-développées",
+      "duration_min": 7,
+      "objectives": [
+        "Écrire différentes formules",
+        "Représentations",
+        "Conventions"
+      ],
+      "prerequisites": [
+        "Chaînes carbonées"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "formules",
+        "brutes",
+        "et"
+      ]
+    },
+    {
+      "id": "C1-15",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Groupes caractéristiques",
+      "duration_min": 8,
+      "objectives": [
+        "Identifier groupes fonctionnels",
+        "Alcool, aldéhyde, cétone, acide",
+        "Propriétés"
+      ],
+      "prerequisites": [
+        "Formules"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "groupes",
+        "caractéristiques"
+      ]
+    },
+    {
+      "id": "C1-16",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Nomenclature (alcanes)",
+      "duration_min": 8,
+      "objectives": [
+        "Règles IUPAC",
+        "Nommer alcanes",
+        "Ramifications"
+      ],
+      "prerequisites": [
+        "Chaînes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "nomenclature",
+        "(alcanes)"
+      ]
+    },
+    {
+      "id": "C1-17",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Nomenclature (alcools)",
+      "duration_min": 7,
+      "objectives": [
+        "Nommer les alcools",
+        "Position du OH",
+        "Règles"
+      ],
+      "prerequisites": [
+        "Alcanes",
+        "Groupes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "nomenclature",
+        "(alcools)"
+      ]
+    },
+    {
+      "id": "C1-18",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Nomenclature (autres fonctions)",
+      "duration_min": 8,
+      "objectives": [
+        "Aldéhydes, cétones, acides",
+        "Nomenclature complète",
+        "Exercices"
+      ],
+      "prerequisites": [
+        "Nomenclature alcools"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "nomenclature",
+        "(autres",
+        "fonctions)"
+      ]
+    },
+    {
+      "id": "C1-19",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Isomérie de constitution",
+      "duration_min": 8,
+      "objectives": [
+        "Définir isomères",
+        "Isomères de chaîne, position, fonction",
+        "Exemples"
+      ],
+      "prerequisites": [
+        "Formules"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "isomérie",
+        "de",
+        "constitution"
+      ]
+    },
+    {
+      "id": "C1-20",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Réactivité des alcools",
+      "duration_min": 8,
+      "objectives": [
+        "Réactions des alcools",
+        "Mécanismes simples",
+        "Produits"
+      ],
+      "prerequisites": [
+        "Alcools"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "réactivité",
+        "des",
+        "alcools"
+      ]
+    },
+    {
+      "id": "C1-21",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Réactions d'oxydation",
+      "duration_min": 9,
+      "objectives": [
+        "Oxydation alcools",
+        "Oxydants",
+        "Aldéhydes/cétones/acides"
+      ],
+      "prerequisites": [
+        "Réactivité alcools"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "réactions",
+        "d'oxydation"
+      ]
+    },
+    {
+      "id": "C1-22",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Réactions d'estérification",
+      "duration_min": 9,
+      "objectives": [
+        "Formation d'esters",
+        "Acide + alcool",
+        "Équilibre"
+      ],
+      "prerequisites": [
+        "Alcools",
+        "Acides"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "réactions",
+        "d'estérification"
+      ]
+    },
+    {
+      "id": "C1-23",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Synthèse organique",
+      "duration_min": 9,
+      "objectives": [
+        "Planifier une synthèse",
+        "Étapes",
+        "Rendement"
+      ],
+      "prerequisites": [
+        "Réactions organiques"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "synthèse",
+        "organique"
+      ]
+    },
+    {
+      "id": "C1-24",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Extraction et purification",
+      "duration_min": 8,
+      "objectives": [
+        "Techniques d'extraction",
+        "Purification",
+        "Chromatographie"
+      ],
+      "prerequisites": [
+        "Synthèse"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "extraction",
+        "et",
+        "purification"
+      ]
+    },
+    {
+      "id": "C1-25",
+      "level": "Première",
+      "subject": "Chimie",
+      "chapter": "Chimie Organique",
+      "title": "Protocoles expérimentaux",
+      "duration_min": 8,
+      "objectives": [
+        "Suivre un protocole",
+        "Sécurité",
+        "Analyse"
+      ],
+      "prerequisites": [
+        "Synthèse"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "protocoles",
+        "expérimentaux"
+      ]
+    },
+    {
+      "id": "PT-01",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Mouvement dans un champ de pesanteur",
+      "duration_min": 9,
+      "objectives": [
+        "Étudier mouvement parabolique",
+        "Avec frottements",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Mécanique Première"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "mouvement",
+        "dans",
+        "un"
+      ]
+    },
+    {
+      "id": "PT-02",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Mouvement des planètes",
+      "duration_min": 9,
+      "objectives": [
+        "Lois de Kepler",
+        "Orbites elliptiques",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Gravitation"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "mouvement",
+        "des",
+        "planètes"
+      ]
+    },
+    {
+      "id": "PT-03",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Lois de Kepler",
+      "duration_min": 9,
+      "objectives": [
+        "Trois lois de Kepler",
+        "Démonstrations",
+        "Conséquences"
+      ],
+      "prerequisites": [
+        "Mouvement planètes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "lois",
+        "de",
+        "kepler"
+      ]
+    },
+    {
+      "id": "PT-04",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Satellites et orbites",
+      "duration_min": 8,
+      "objectives": [
+        "Satellites géostationnaires",
+        "Vitesse orbitale",
+        "Période"
+      ],
+      "prerequisites": [
+        "Kepler"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "satellites",
+        "et",
+        "orbites"
+      ]
+    },
+    {
+      "id": "PT-05",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Énergie mécanique d'un satellite",
+      "duration_min": 9,
+      "objectives": [
+        "Énergie potentielle gravitationnelle",
+        "Énergie totale",
+        "Vitesse de libération"
+      ],
+      "prerequisites": [
+        "Satellites"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "énergie",
+        "mécanique",
+        "d'un"
+      ]
+    },
+    {
+      "id": "PT-06",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Mouvement dans un champ électrique",
+      "duration_min": 9,
+      "objectives": [
+        "Force électrique",
+        "Accélération",
+        "Trajectoire"
+      ],
+      "prerequisites": [
+        "Newton"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "mouvement",
+        "dans",
+        "un"
+      ]
+    },
+    {
+      "id": "PT-07",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Mouvement dans un champ magnétique",
+      "duration_min": 9,
+      "objectives": [
+        "Force de Lorentz",
+        "Trajectoire circulaire",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Champ électrique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "mouvement",
+        "dans",
+        "un"
+      ]
+    },
+    {
+      "id": "PT-08",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Force de Lorentz",
+      "duration_min": 8,
+      "objectives": [
+        "F⃗=q(E⃗+v⃗∧B⃗)",
+        "Composantes",
+        "Calculs"
+      ],
+      "prerequisites": [
+        "Champs"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "force",
+        "de",
+        "lorentz"
+      ]
+    },
+    {
+      "id": "PT-09",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Applications (cyclotron, spectrographe)",
+      "duration_min": 9,
+      "objectives": [
+        "Cyclotron",
+        "Spectrographe de masse",
+        "Principe"
+      ],
+      "prerequisites": [
+        "Lorentz"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "applications",
+        "(cyclotron,",
+        "spectrographe)"
+      ]
+    },
+    {
+      "id": "PT-10",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Mécanique Avancée",
+      "title": "Dynamique relativiste (introduction)",
+      "duration_min": 9,
+      "objectives": [
+        "Limites mécanique classique",
+        "Effets relativistes",
+        "E=mc²"
+      ],
+      "prerequisites": [
+        "Mécanique avancée"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 100,
+      "tags": [
+        "dynamique",
+        "relativiste",
+        "(introduction)"
+      ]
+    },
+    {
+      "id": "PT-11",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Ondes progressives périodiques",
+      "duration_min": 8,
+      "objectives": [
+        "Caractériser onde périodique",
+        "Double périodicité",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Ondes Première"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "ondes",
+        "progressives",
+        "périodiques"
+      ]
+    },
+    {
+      "id": "PT-12",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Analyse spectrale",
+      "duration_min": 8,
+      "objectives": [
+        "Spectroscopie",
+        "Raies d'émission/absorption",
+        "Identification"
+      ],
+      "prerequisites": [
+        "Spectres"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "analyse",
+        "spectrale"
+      ]
+    },
+    {
+      "id": "PT-13",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Effet Doppler (approfondissement)",
+      "duration_min": 9,
+      "objectives": [
+        "Formules Doppler",
+        "Cas général",
+        "Applications astronomiques"
+      ],
+      "prerequisites": [
+        "Doppler Première"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "effet",
+        "doppler",
+        "(approfondissement)"
+      ]
+    },
+    {
+      "id": "PT-14",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Lunette astronomique",
+      "duration_min": 8,
+      "objectives": [
+        "Principe de la lunette",
+        "Grossissement",
+        "Utilisation"
+      ],
+      "prerequisites": [
+        "Optique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "lunette",
+        "astronomique"
+      ]
+    },
+    {
+      "id": "PT-15",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Télescope",
+      "duration_min": 8,
+      "objectives": [
+        "Principe du télescope",
+        "Avantages",
+        "Types"
+      ],
+      "prerequisites": [
+        "Lunette"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "télescope"
+      ]
+    },
+    {
+      "id": "PT-16",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Diffraction par une fente",
+      "duration_min": 9,
+      "objectives": [
+        "Figure de diffraction",
+        "Écart angulaire θ=λ/a",
+        "Observations"
+      ],
+      "prerequisites": [
+        "Diffraction Première"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "diffraction",
+        "par",
+        "une"
+      ]
+    },
+    {
+      "id": "PT-17",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Diffraction par un obstacle circulaire",
+      "duration_min": 8,
+      "objectives": [
+        "Tache d'Airy",
+        "Rayon angulaire",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Diffraction fente"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "diffraction",
+        "par",
+        "un"
+      ]
+    },
+    {
+      "id": "PT-18",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Critère de Rayleigh",
+      "duration_min": 8,
+      "objectives": [
+        "Pouvoir séparateur",
+        "Résolution optique",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Diffraction"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "critère",
+        "de",
+        "rayleigh"
+      ]
+    },
+    {
+      "id": "PT-19",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Interférences à deux ondes",
+      "duration_min": 9,
+      "objectives": [
+        "Dispositif des fentes d'Young",
+        "Franges d'interférence",
+        "Calculs"
+      ],
+      "prerequisites": [
+        "Interférences Première"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "interférences",
+        "à",
+        "deux"
+      ]
+    },
+    {
+      "id": "PT-20",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Ondes & Signaux",
+      "title": "Applications en physique moderne",
+      "duration_min": 9,
+      "objectives": [
+        "Interférométrie",
+        "Holographie",
+        "Techniques modernes"
+      ],
+      "prerequisites": [
+        "Interférences"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "applications",
+        "en",
+        "physique"
+      ]
+    },
+    {
+      "id": "PT-21",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Dipôles RC",
+      "duration_min": 9,
+      "objectives": [
+        "Circuit RC",
+        "Constante de temps τ=RC",
+        "Équation différentielle"
+      ],
+      "prerequisites": [
+        "Circuits Première"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "dipôles",
+        "rc"
+      ]
+    },
+    {
+      "id": "PT-22",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Charge et décharge d'un condensateur",
+      "duration_min": 9,
+      "objectives": [
+        "Étudier charge/décharge",
+        "Courbes",
+        "Applications"
+      ],
+      "prerequisites": [
+        "RC"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "charge",
+        "et",
+        "décharge"
+      ]
+    },
+    {
+      "id": "PT-23",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Énergie stockée dans un condensateur",
+      "duration_min": 8,
+      "objectives": [
+        "E=½CU²",
+        "Calculs",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Condensateur"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "énergie",
+        "stockée",
+        "dans"
+      ]
+    },
+    {
+      "id": "PT-24",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Dipôles RL",
+      "duration_min": 9,
+      "objectives": [
+        "Circuit RL",
+        "Constante de temps τ=L/R",
+        "Équation différentielle"
+      ],
+      "prerequisites": [
+        "RC"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "dipôles",
+        "rl"
+      ]
+    },
+    {
+      "id": "PT-25",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Auto-induction",
+      "duration_min": 8,
+      "objectives": [
+        "Phénomène d'induction",
+        "Bobine",
+        "f.e.m. induite"
+      ],
+      "prerequisites": [
+        "RL"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "auto-induction"
+      ]
+    },
+    {
+      "id": "PT-26",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Transferts énergétiques en électricité",
+      "duration_min": 8,
+      "objectives": [
+        "Bilan énergétique",
+        "Rendement",
+        "Pertes"
+      ],
+      "prerequisites": [
+        "Énergie électrique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "transferts",
+        "énergétiques",
+        "en"
+      ]
+    },
+    {
+      "id": "PT-27",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Oscillations électriques (RLC)",
+      "duration_min": 10,
+      "objectives": [
+        "Circuit RLC",
+        "Oscillations",
+        "Amortissement"
+      ],
+      "prerequisites": [
+        "RC",
+        "RL"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "oscillations",
+        "électriques",
+        "(rlc)"
+      ]
+    },
+    {
+      "id": "PT-28",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Résonance",
+      "duration_min": 9,
+      "objectives": [
+        "Résonance d'un circuit",
+        "Fréquence propre",
+        "Applications"
+      ],
+      "prerequisites": [
+        "RLC"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "résonance"
+      ]
+    },
+    {
+      "id": "PT-29",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Champs magnétiques",
+      "duration_min": 8,
+      "objectives": [
+        "Créer un champ B⃗",
+        "Bobine, aimant",
+        "Mesure"
+      ],
+      "prerequisites": [
+        "Magnétisme"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "champs",
+        "magnétiques"
+      ]
+    },
+    {
+      "id": "PT-30",
+      "level": "Terminale",
+      "subject": "Physique",
+      "chapter": "Électricité & Électromagnétisme",
+      "title": "Induction électromagnétique",
+      "duration_min": 9,
+      "objectives": [
+        "Loi de Faraday",
+        "Loi de Lenz",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Champs magnétiques"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "induction",
+        "électromagnétique"
+      ]
+    },
+    {
+      "id": "CT-01",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Vitesse de réaction",
+      "duration_min": 8,
+      "objectives": [
+        "Définir vitesse réaction",
+        "Facteurs cinétiques",
+        "Mesure"
+      ],
+      "prerequisites": [
+        "Réactions chimiques"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "vitesse",
+        "de",
+        "réaction"
+      ]
+    },
+    {
+      "id": "CT-02",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Facteurs cinétiques (température)",
+      "duration_min": 8,
+      "objectives": [
+        "Influence température",
+        "Loi d'Arrhenius",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Vitesse réaction"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "facteurs",
+        "cinétiques",
+        "(température)"
+      ]
+    },
+    {
+      "id": "CT-03",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Facteurs cinétiques (concentration)",
+      "duration_min": 8,
+      "objectives": [
+        "Influence concentration",
+        "Ordre de réaction",
+        "Loi de vitesse"
+      ],
+      "prerequisites": [
+        "Vitesse réaction"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "facteurs",
+        "cinétiques",
+        "(concentration)"
+      ]
+    },
+    {
+      "id": "CT-04",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Catalyse",
+      "duration_min": 8,
+      "objectives": [
+        "Rôle du catalyseur",
+        "Types de catalyse",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Cinétique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "catalyse"
+      ]
+    },
+    {
+      "id": "CT-05",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Mécanismes réactionnels",
+      "duration_min": 9,
+      "objectives": [
+        "Étapes élémentaires",
+        "Intermédiaires",
+        "Étape cinétiquement déterminante"
+      ],
+      "prerequisites": [
+        "Vitesse",
+        "Catalyse"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "mécanismes",
+        "réactionnels"
+      ]
+    },
+    {
+      "id": "CT-06",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Énergie d'activation",
+      "duration_min": 8,
+      "objectives": [
+        "Définir Ea",
+        "Diagramme énergétique",
+        "Influence sur vitesse"
+      ],
+      "prerequisites": [
+        "Mécanismes"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "énergie",
+        "d'activation"
+      ]
+    },
+    {
+      "id": "CT-07",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Loi d'Arrhenius",
+      "duration_min": 9,
+      "objectives": [
+        "k=A·exp(-Ea/RT)",
+        "Applications",
+        "Détermination Ea"
+      ],
+      "prerequisites": [
+        "Énergie activation"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "loi",
+        "d'arrhenius"
+      ]
+    },
+    {
+      "id": "CT-08",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Transformations spontanées",
+      "duration_min": 8,
+      "objectives": [
+        "Critère de spontanéité",
+        "Entropie",
+        "Énergie libre"
+      ],
+      "prerequisites": [
+        "Thermodynamique"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "transformations",
+        "spontanées"
+      ]
+    },
+    {
+      "id": "CT-09",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Transformations forcées",
+      "duration_min": 8,
+      "objectives": [
+        "Électrolyse",
+        "Piles",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Redox"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "transformations",
+        "forcées"
+      ]
+    },
+    {
+      "id": "CT-10",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Premier principe de thermodynamique",
+      "duration_min": 9,
+      "objectives": [
+        "Conservation énergie",
+        "ΔU=W+Q",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Énergie"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "premier",
+        "principe",
+        "de"
+      ]
+    },
+    {
+      "id": "CT-11",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Enthalpie de réaction",
+      "duration_min": 9,
+      "objectives": [
+        "Définir ΔH",
+        "Réaction exo/endothermique",
+        "Calculs"
+      ],
+      "prerequisites": [
+        "Premier principe"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "enthalpie",
+        "de",
+        "réaction"
+      ]
+    },
+    {
+      "id": "CT-12",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Transformations endothermiques/exothermiques",
+      "duration_min": 8,
+      "objectives": [
+        "Caractériser les transformations",
+        "Exemples",
+        "Diagrammes"
+      ],
+      "prerequisites": [
+        "Enthalpie"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "transformations",
+        "endothermiques/exothermiques"
+      ]
+    },
+    {
+      "id": "CT-13",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Cinétique & Thermodynamique",
+      "title": "Applications énergétiques",
+      "duration_min": 9,
+      "objectives": [
+        "Combustion",
+        "Pile à combustible",
+        "Rendement"
+      ],
+      "prerequisites": [
+        "Thermodynamique complète"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "applications",
+        "énergétiques"
+      ]
+    },
+    {
+      "id": "CT-14",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "État d'équilibre chimique",
+      "duration_min": 8,
+      "objectives": [
+        "Définir l'équilibre",
+        "Système fermé",
+        "Constante K"
+      ],
+      "prerequisites": [
+        "Réactions"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "état",
+        "d'équilibre",
+        "chimique"
+      ]
+    },
+    {
+      "id": "CT-15",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Constante d'équilibre K",
+      "duration_min": 8,
+      "objectives": [
+        "Expression de K",
+        "Calculs",
+        "Unités"
+      ],
+      "prerequisites": [
+        "Équilibre"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "constante",
+        "d'équilibre",
+        "k"
+      ]
+    },
+    {
+      "id": "CT-16",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Quotient de réaction Q",
+      "duration_min": 8,
+      "objectives": [
+        "Définir Q",
+        "Comparer Q et K",
+        "Sens d'évolution"
+      ],
+      "prerequisites": [
+        "Constante K"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "quotient",
+        "de",
+        "réaction"
+      ]
+    },
+    {
+      "id": "CT-17",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Loi de Le Chatelier",
+      "duration_min": 9,
+      "objectives": [
+        "Perturbations d'un équilibre",
+        "Déplacements",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Équilibre"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "loi",
+        "de",
+        "le"
+      ]
+    },
+    {
+      "id": "CT-18",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Équilibres acide-base",
+      "duration_min": 9,
+      "objectives": [
+        "Ka et pKa",
+        "pH solutions",
+        "Calculs"
+      ],
+      "prerequisites": [
+        "Acide-base Première"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "équilibres",
+        "acide-base"
+      ]
+    },
+    {
+      "id": "CT-19",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Dosage par titrage direct",
+      "duration_min": 9,
+      "objectives": [
+        "Principe du dosage",
+        "Point d'équivalence",
+        "Calculs"
+      ],
+      "prerequisites": [
+        "Équilibres"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "dosage",
+        "par",
+        "titrage"
+      ]
+    },
+    {
+      "id": "CT-20",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Dosage pH-métrique",
+      "duration_min": 9,
+      "objectives": [
+        "Suivi pH-métrique",
+        "Courbe de titrage",
+        "Exploitation"
+      ],
+      "prerequisites": [
+        "Dosage"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "dosage",
+        "ph-métrique"
+      ]
+    },
+    {
+      "id": "CT-21",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Dosage conductimétrique",
+      "duration_min": 9,
+      "objectives": [
+        "Suivi conductimétrique",
+        "Courbe",
+        "Exploitation"
+      ],
+      "prerequisites": [
+        "Dosage"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "dosage",
+        "conductimétrique"
+      ]
+    },
+    {
+      "id": "CT-22",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Dosage colorimétrique",
+      "duration_min": 8,
+      "objectives": [
+        "Suivi colorimétrique",
+        "Spectrophotométrie",
+        "Loi de Beer-Lambert"
+      ],
+      "prerequisites": [
+        "Dosage"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "dosage",
+        "colorimétrique"
+      ]
+    },
+    {
+      "id": "CT-23",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Indicateurs colorés",
+      "duration_min": 7,
+      "objectives": [
+        "Rôle des indicateurs",
+        "Zone de virage",
+        "Choix"
+      ],
+      "prerequisites": [
+        "pH",
+        "Dosage"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 2,
+      "xp_reward": 70,
+      "tags": [
+        "indicateurs",
+        "colorés"
+      ]
+    },
+    {
+      "id": "CT-24",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Dosages redox",
+      "duration_min": 9,
+      "objectives": [
+        "Titrages redox",
+        "Équivalence",
+        "Applications"
+      ],
+      "prerequisites": [
+        "Redox",
+        "Dosages"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 4,
+      "xp_reward": 90,
+      "tags": [
+        "dosages",
+        "redox"
+      ]
+    },
+    {
+      "id": "CT-25",
+      "level": "Terminale",
+      "subject": "Chimie",
+      "chapter": "Équilibres & Dosages",
+      "title": "Applications analytiques",
+      "duration_min": 9,
+      "objectives": [
+        "Dosages dans l'industrie",
+        "Analyse quantitative",
+        "Méthodes"
+      ],
+      "prerequisites": [
+        "Tous dosages"
+      ],
+      "content_types": [
+        "video",
+        "animation",
+        "quiz",
+        "exercises"
+      ],
+      "difficulty": 3,
+      "xp_reward": 80,
+      "tags": [
+        "applications",
+        "analytiques"
+      ]
+    }
+  ]
+}

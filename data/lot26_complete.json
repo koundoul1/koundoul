@@ -1,0 +1,333 @@
+{
+  "metadata": {
+    "lot_number": 23,
+    "lot_name": "Lot 23 - Limites de Fonctions (Suite et Fin)",
+    "level": "Terminale",
+    "subject": "Mathématiques",
+    "prefix": "MT",
+    "chapter": "Limites de Fonctions",
+    "lesson_range": "MT-09 à MT-15",
+    "total_lessons": 7
+  },
+  "lessons": [
+    {
+      "id": "MT-09",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Asymptote oblique",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Définir une asymptote oblique", "Déterminer l'équation d'une asymptote oblique", "Étudier la position relative de la courbe par rapport à l'asymptote", "Identifier les branches paraboliques"],
+      "prerequisites": ["MT-08"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["asymptote", "oblique"],
+      "detailed_content": {
+        "introduction": "Lorsqu'une fonction ne tend ni vers une valeur finie ni vers l'infini à l'infini, elle peut admettre une asymptote oblique : une droite non horizontale dont la courbe se rapproche.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "Droite y = ax + b (a ≠ 0) asymptote oblique si lim(x→±∞) [f(x) - (ax + b)] = 0", "example": "L'écart entre f(x) et la droite tend vers 0" },
+          { "name": "Méthode", "explanation": "1) a = lim f(x)/x, 2) b = lim [f(x) - ax], 3) Vérifier lim [f(x) - (ax+b)] = 0", "example": "Deux étapes pour déterminer a et b" },
+          { "name": "Fonctions rationnelles", "explanation": "Si deg(P) = deg(Q) + 1, division euclidienne donne AO", "example": "f(x) = ax + b + R(x)/Q(x), reste → 0" },
+          { "name": "Branche parabolique", "explanation": "Si deg(P) > deg(Q) + 1, branche parabolique (pas d'asymptote)", "example": "Courbe s'éloigne indéfiniment" }
+        ],
+        "guided_example": {
+          "statement": "Déterminer l'asymptote oblique de f(x) = (x² + 2x + 3)/(x + 1) en +∞.",
+          "solution_steps": [
+            "Division euclidienne : x² + 2x + 3 = (x + 1)(x + 1) + 2",
+            "Donc f(x) = x + 1 + 2/(x+1)",
+            "Quand x → +∞ : 2/(x+1) → 0",
+            "Asymptote oblique : y = x + 1"
+          ]
+        },
+        "quick_exercises": [
+          "Déterminer l'asymptote oblique de g(x) = (2x² - x + 5)/(x - 2)",
+          "Étudier la position relative"
+        ],
+        "common_mistakes": [
+          "Confondre asymptote oblique et horizontale",
+          "Erreurs dans la division euclidienne",
+          "Oublier de vérifier que le reste tend vers 0"
+        ],
+        "summary": {
+          "key_concept": "AO : y = ax + b avec a ≠ 0 si lim [f(x) - (ax+b)] = 0",
+          "key_method": "Fonction rationnelle : deg(P) = deg(Q) + 1 → division euclidienne",
+          "next_step": "Étudier le lien avec la continuité"
+        }
+      }
+    },
+    {
+      "id": "MT-10",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Limites et continuité",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Relier limite et continuité en un point", "Comprendre la condition de continuité", "Identifier les types de discontinuités", "Utiliser la continuité pour calculer des limites"],
+      "prerequisites": ["MT-01", "MT-02"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["continuité", "discontinuité"],
+      "detailed_content": {
+        "introduction": "La notion de limite est intimement liée à celle de continuité. Une fonction est continue en un point si elle ne présente ni saut, ni trou, ni asymptote verticale en ce point.",
+        "key_concepts": [
+          { "name": "Définition", "explanation": "f continue en a si 3 conditions : 1) f définie en a, 2) lim(x→a) f(x) existe, 3) lim(x→a) f(x) = f(a)", "example": "Ni saut ni trou ni asymptote" },
+          { "name": "Lien avec les limites", "explanation": "Si f continue en a, alors lim(x→a) f(x) = f(a). Substitution directe possible", "example": "Fonctions usuelles continues sur leur domaine" },
+          { "name": "Types de discontinuités", "explanation": "Par saut : lim gauche ≠ lim droite. Par trou : lim existe mais ≠ f(a). Essentielle : limite infinie", "example": "Identifier le type" },
+          { "name": "Prolongement par continuité", "explanation": "Si f non définie en a mais lim(x→a) f(x) = L (fini), poser f(a) = L", "example": "Rendre f continue en a" }
+        ],
+        "guided_example": {
+          "statement": "f(x) = (x² - 4)/(x - 2) est-elle continue en x = 2 ?",
+          "solution_steps": [
+            "f non définie en 2",
+            "Mais lim(x→2) (x² - 4)/(x - 2) = lim(x→2) (x+2) = 4",
+            "On peut prolonger par continuité en posant f(2) = 4"
+          ]
+        },
+        "quick_exercises": [
+          "Prolonger g(x) = (x³ - 8)/(x - 2) par continuité en x = 2",
+          "Identifier types de discontinuités"
+        ],
+        "common_mistakes": [
+          "Confondre définie et limite existe",
+          "Oublier de vérifier les 3 conditions",
+          "Ne pas identifier les discontinuités"
+        ],
+        "summary": {
+          "key_concept": "Continue en a ⇔ lim(x→a) f(x) = f(a)",
+          "key_method": "Prolongement : définir f(a) = lim(x→a) f(x)",
+          "next_step": "Étudier les limites de fonctions composées"
+        }
+      }
+    },
+    {
+      "id": "MT-11",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Limites de fonctions composées",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Calculer la limite d'une fonction composée", "Appliquer le théorème de composition des limites", "Utiliser les changements de variable", "Identifier les cas d'application"],
+      "prerequisites": ["MT-01", "MT-06"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["composition", "composée"],
+      "detailed_content": {
+        "introduction": "Les fonctions composées sont omniprésentes en mathématiques. Le calcul de leur limite repose sur un théorème fondamental de composition des limites.",
+        "key_concepts": [
+          { "name": "Fonction composée", "explanation": "f ∘ g : (f ∘ g)(x) = f(g(x)). On applique g puis f", "example": "f(x) = x², g(x) = x + 1 ⇒ (f ∘ g)(x) = (x+1)²" },
+          { "name": "Théorème", "explanation": "Si lim(x→a) g(x) = b et lim(y→b) f(y) = L, alors lim(x→a) f(g(x)) = L", "example": "Composition des limites" },
+          { "name": "Méthode", "explanation": "1) Calculer lim g(x) = b, 2) Calculer lim f(y) = L, 3) Conclure : lim f(g(x)) = L", "example": "Limite intermédiaire" },
+          { "name": "Changement de variable", "explanation": "Poser u = g(x). Quand x → a, u → b. Calculer lim(u→b) f(u)", "example": "Simplifier le calcul" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→+∞) ln(x² + 1).",
+          "solution_steps": [
+            "Poser g(x) = x² + 1. lim(x→+∞) g(x) = +∞",
+            "Puis f(y) = ln(y), lim(y→+∞) ln(y) = +∞",
+            "Donc lim(x→+∞) ln(x² + 1) = +∞"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer lim(x→0) e^(1/x²)",
+          "Utiliser changements de variable"
+        ],
+        "common_mistakes": [
+          "Inverser l'ordre des fonctions",
+          "Oublier de calculer la limite intermédiaire",
+          "Appliquer sans vérifier les conditions"
+        ],
+        "summary": {
+          "key_concept": "Théorème : lim f(g(x)) = f(lim g(x)) sous conditions",
+          "key_method": "Changement de variable : u = g(x)",
+          "next_step": "Appliquer les croissances comparées avec exponentielle"
+        }
+      }
+    },
+    {
+      "id": "MT-12",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Croissances comparées - Exponentielle",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre la hiérarchie des croissances", "Appliquer les théorèmes de croissances comparées avec e^x", "Calculer des limites faisant intervenir e^x et des polynômes", "Utiliser les limites de référence"],
+      "prerequisites": ["MT-04", "M1-41"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["exponentielle", "croissance"],
+      "detailed_content": {
+        "introduction": "L'exponentielle croît beaucoup plus vite que n'importe quelle fonction polynomiale. Ces résultats de croissances comparées sont fondamentaux pour lever des formes indéterminées.",
+        "key_concepts": [
+          { "name": "Théorèmes", "explanation": "lim(x→+∞) e^x / x^n = +∞, lim(x→+∞) x^n e^(-x) = 0", "example": "L'exponentielle l'emporte sur toute puissance" },
+          { "name": "Intuition", "explanation": "Courbe e^x dépasse toujours x^n, même pour n très grand", "example": "Croissance exponentielle" },
+          { "name": "Applications", "explanation": "Lever FI ∞/∞ ou 0×∞. Exemple : (x³ + e^x) / e^x → 1", "example": "Diviser par e^x" },
+          { "name": "Variantes négatives", "explanation": "lim(x→+∞) e^(-ax) / x^n = 0 (a > 0). e^(-x) décroît", "example": "Exponentielle décroissante l'emporte" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→+∞) (x² - e^x) / e^x.",
+          "solution_steps": [
+            "lim (x²/e^x - 1) = lim(x²/e^x) - 1",
+            "Par croissance comparée : x²/e^x → 0",
+            "Limite = 0 - 1 = -1"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer lim(x→+∞) (e^x + x³) / (e^x - x²)",
+          "Utiliser croissances comparées"
+        ],
+        "common_mistakes": [
+          "Penser que x^n peut l'emporter",
+          "Oublier d'appliquer les croissances comparées",
+          "Confondre e^x et e^(-x)"
+        ],
+        "summary": {
+          "key_concept": "Croissance : e^x >> x^n quand x → +∞",
+          "key_method": "Diviser par e^x pour simplifier",
+          "next_step": "Comparer avec le logarithme"
+        }
+      }
+    },
+    {
+      "id": "MT-13",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Croissances comparées - Logarithme",
+      "duration_min": 12,
+      "difficulty": 5,
+      "xp_reward": 130,
+      "objectives": ["Comprendre la croissance lente du logarithme", "Appliquer les théorèmes de croissances comparées avec ln(x)", "Calculer des limites faisant intervenir ln(x) et des polynômes", "Comparer ln, puissances et exponentielle"],
+      "prerequisites": ["MT-12"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["logarithme", "croissance"],
+      "detailed_content": {
+        "introduction": "Le logarithme népérien croît très lentement à l'infini, beaucoup plus lentement que n'importe quelle puissance positive de x, aussi petite soit-elle.",
+        "key_concepts": [
+          { "name": "Théorèmes", "explanation": "lim(x→+∞) ln(x) / x^α = 0 (α > 0), lim(x→0⁺) x^α ln(x) = 0 (α > 0)", "example": "Toute puissance l'emporte sur le logarithme" },
+          { "name": "Intuition", "explanation": "ln croît de plus en plus lentement : multiplier x par e pour augmenter ln(x) de 1", "example": "Croissance lente" },
+          { "name": "Applications", "explanation": "Lever FI en +∞ : diviser par la puissance dominante", "example": "ln(x) + x² / x² → 1" },
+          { "name": "En 0⁺", "explanation": "lim(x→0⁺) ln(x) = -∞. Mais x^α ln(x) → 0 (α > 0)", "example": "Puissance neutralise le log négatif" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→+∞) (x² + ln(x)) / x².",
+          "solution_steps": [
+            "lim (1 + ln(x)/x²)",
+            "Par croissance comparée : ln(x)/x² → 0",
+            "Limite = 1 + 0 = 1"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer lim(x→0⁺) x² ln(x)",
+          "Utiliser croissances comparées"
+        ],
+        "common_mistakes": [
+          "Penser que ln croît vite (non, très lentement)",
+          "Confondre ln(x) → +∞ et ln(x)/x → 0",
+          "Oublier x^α ln(x) → 0 en 0⁺"
+        ],
+        "summary": {
+          "key_concept": "Hiérarchie : ln(x) << x^α << e^x",
+          "key_method": "En +∞ : ln(x)/x^α → 0. En 0⁺ : x^α ln(x) → 0",
+          "next_step": "Apprendre limites trigonométriques de référence"
+        }
+      }
+    },
+    {
+      "id": "MT-14",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Limites trigonométriques de référence",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 120,
+      "objectives": ["Connaître les limites trigonométriques fondamentales", "Calculer lim(x→0) sin(x)/x", "Calculer lim(x→0) (1-cos(x))/x²", "Utiliser ces limites pour lever des formes indéterminées"],
+      "prerequisites": ["MT-01", "M1-51"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["trigonométrie", "limites"],
+      "detailed_content": {
+        "introduction": "Les limites trigonométriques de référence sont essentielles pour lever des formes indéterminées impliquant sin, cos, tan. Elles sont à connaître par cœur.",
+        "key_concepts": [
+          { "name": "sin(x)/x", "explanation": "lim(x→0) sin(x)/x = 1. LA limite de référence trigonométrique", "example": "Forme 0/0, sin(x) ~ x au voisinage de 0" },
+          { "name": "(1-cos(x))/x²", "explanation": "lim(x→0) (1 - cos(x))/x² = 1/2. Forme 0/0", "example": "1 - cos(x) ~ x²/2" },
+          { "name": "tan(x)/x", "explanation": "lim(x→0) tan(x)/x = 1", "example": "Car tan(x)/x = sin(x)/(x cos(x))" },
+          { "name": "Variantes", "explanation": "sin(ax)/x → a, (1-cos(ax))/x² → a²/2, tan(ax)/x → a", "example": "Changement de variable u = ax" }
+        ],
+        "guided_example": {
+          "statement": "Calculer lim(x→0) sin(2x)/x.",
+          "solution_steps": [
+            "lim sin(2x)/x = lim 2 × sin(2x)/(2x)",
+            "Avec u = 2x : 2 × lim(u→0) sin(u)/u",
+            "Limite = 2 × 1 = 2"
+          ]
+        },
+        "quick_exercises": [
+          "Calculer lim(x→0) (1 - cos(3x)) / x²",
+          "Factoriser pour faire apparaître les formes de référence"
+        ],
+        "common_mistakes": [
+          "Oublier de travailler en radians",
+          "Ne pas factoriser pour faire apparaître les formes",
+          "Oublier le coefficient a"
+        ],
+        "summary": {
+          "key_concept": "À connaître : lim sin(x)/x = 1, lim (1-cos(x))/x² = 1/2",
+          "key_method": "sin(ax)/x → a, (1-cos(ax))/x² → a²/2. Toujours en radians",
+          "next_step": "Synthèse finale du chapitre"
+        }
+      }
+    },
+    {
+      "id": "MT-15",
+      "level": "Terminale",
+      "subject": "Mathématiques",
+      "chapter": "Limites de Fonctions",
+      "title": "Synthèse - Limites de fonctions",
+      "duration_min": 12,
+      "difficulty": 4,
+      "xp_reward": 130,
+      "objectives": ["Synthétiser toutes les techniques de calcul de limites", "Résoudre des problèmes complexes combinant plusieurs méthodes", "Identifier rapidement la méthode adaptée", "Rédiger proprement une étude de limites"],
+      "prerequisites": ["MT-01", "MT-02", "MT-03", "MT-04", "MT-05", "MT-06", "MT-07", "MT-08", "MT-09", "MT-10", "MT-11", "MT-12", "MT-13", "MT-14"],
+      "content_types": ["video", "animation", "quiz", "exercises"],
+      "tags": ["synthèse", "méthodologie"],
+      "detailed_content": {
+        "introduction": "Cette leçon de synthèse récapitule toutes les méthodes de calcul de limites et propose une approche méthodique pour résoudre n'importe quel problème de limite.",
+        "key_concepts": [
+          { "name": "Arbre de décision", "explanation": "1) Continue en a ? → Substitution. 2) 0/0 ? → Factoriser/limites trigo. 3) ∞/∞ ? → Diviser/croissances. 4) ∞-∞ ? → Factoriser/commun dénom. 5) 0×∞ ? → Quotient. 6) Composée ? → Théorème. 7) Encadrement ? → Gendarmes", "example": "Identifier la méthode adaptée" },
+          { "name": "Récapitulatif techniques", "explanation": "Substitution, factorisation, division, dénominateur commun, croissances comparées, limites trigo, composition, encadrement, changement variable", "example": "Panorama complet" },
+          { "name": "Asymptotes", "explanation": "AH : y = L si lim = L (fini). AV : x = a si lim = ±∞. AO : y = ax + b si lim [f(x)-(ax+b)] = 0", "example": "Trois types d'asymptotes" },
+          { "name": "Rédaction", "explanation": "1) Identification, 2) Détection forme, 3) Choix méthode, 4) Calculs, 5) Conclusion, 6) Interprétation", "example": "Rédaction rigoureuse" }
+        ],
+        "guided_example": {
+          "statement": "Étude : limites et asymptotes de f(x) = (x² + 2x + 3)/(x + 1).",
+          "solution_steps": [
+            "Limites : lim(+∞) → AO y = x + 1, lim(-∞) → AO y = x + 1",
+            "lim(-1) → AV x = -1",
+            "Asymptotes : AV x = -1, AO y = x + 1",
+            "Étude complète"
+          ]
+        },
+        "quick_exercises": [
+          "Étude complète de g(x) = (e^x + x) / (e^x - 1) en 0, +∞, -∞",
+          "Combiner plusieurs techniques"
+        ],
+        "common_mistakes": [
+          "Ne pas étudier tous les cas",
+          "Oublier de chercher asymptotes",
+          "Mauvaise identification des FI",
+          "Rédaction incomplète"
+        ],
+        "summary": {
+          "key_concept": "Arbre de décision : forme → méthode. Croissances : ln << x^α << e^x",
+          "key_method": "Étude : limites en ±∞, points singuliers, asymptotes. Rédaction rigoureuse",
+          "next_step": "Vers la dérivabilité et étude de fonctions"
+        }
+      }
+    }
+  ]
+}
+

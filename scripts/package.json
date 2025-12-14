@@ -1,0 +1,19 @@
+{
+  "name": "microlessons-tools",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "generate": "node ./generate_all_450_lessons.py",
+    "import": "node ./import_to_supabase.js",
+    "import:pg": "node ./import_via_pg.js",
+    "init:pg": "node ./init_schema_pg.js",
+    "import:lot1": "node ./import_lot_sections.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.46.1",
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0",
+    "use-debounce": "^10.0.6"
+  }
+}
