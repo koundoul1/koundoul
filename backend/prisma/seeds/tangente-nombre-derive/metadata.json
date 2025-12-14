@@ -1,0 +1,40 @@
+{
+  "id": "tangente-nombre-derive",
+  "title": "Tangente et nombre dérivé",
+  "subject": "math",
+  "level": "premiere",
+  "chapter": "Dérivation",
+  "duration": 8,
+  "prerequisites": [
+    "Notion de fonction",
+    "Représentation graphique d'une fonction",
+    "Coefficient directeur d'une droite"
+  ],
+  "objectives": [
+    "Comprendre le lien entre taux de variation et pente",
+    "Définir le nombre dérivé comme limite du taux de variation",
+    "Associer le nombre dérivé à la pente de la tangente",
+    "Calculer un nombre dérivé par la définition"
+  ],
+  "difficulty": 3,
+  "xpReward": 150,
+  "realWorldApp": "Calculer la vitesse instantanée d'un véhicule en mouvement",
+  "keywords": ["tangente", "nombre dérivé", "taux de variation", "limite", "pente"],
+  "phases": {
+    "hook": { "duration": 30, "interactions": 1 },
+    "recall": { "duration": 45, "interactions": 1 },
+    "course": { "duration": 180, "interactions": 3 },
+    "method": { "duration": 60, "interactions": 1 },
+    "exercise": { "duration": 120, "interactions": 3 },
+    "quiz": { "duration": 60, "interactions": 5 },
+    "closure": { "duration": 30, "interactions": 1 }
+  },
+  "colorTheme": "#3B82F6",
+  "estimatedVideoSize": "<2MB",
+  "accessibility": {
+    "altTexts": true,
+    "voiceOverTranscript": true,
+    "dyslexiaFriendly": true,
+    "contrastWCAG": "AAA"
+  }
+}

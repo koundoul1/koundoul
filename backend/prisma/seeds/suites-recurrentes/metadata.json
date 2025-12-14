@@ -1,0 +1,22 @@
+﻿{
+    "id":  "suites-recurrentes",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "suites",
+                     "recurrentes"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Suites Recurrentes",
+    "duration":  8
+}

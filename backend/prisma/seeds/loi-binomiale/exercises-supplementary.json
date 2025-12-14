@@ -1,0 +1,69 @@
+[
+  {
+    "id": "ex1",
+    "title": "Calcul avec la loi binomiale",
+    "difficulty": "FACILE",
+    "statement": "On lance une piece equilibree 5 fois. Quelle est la probabilite d'obtenir exactement 3 Piles ?",
+    "correctAnswer": "P(X=3) = 10/32 ≈ 0.313",
+    "solution": "X ~ B(5, 0.5). P(X=3) = C(5,3) × 0.5³ × 0.5² = 10 × (1/32) = 10/32 ≈ 0.313",
+    "hints": ["Utilise la formule P(X=k) = C(n,k) p^k (1-p)^(n-k)", "n=5, p=0.5, k=3"],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex2",
+    "title": "Esperance et variance",
+    "difficulty": "MOYEN",
+    "statement": "Pour X ~ B(20, 0.4), calcule E(X) et V(X).",
+    "correctAnswer": "E(X) = 8, V(X) = 4.8",
+    "solution": "E(X) = np = 20×0.4 = 8. V(X) = np(1-p) = 20×0.4×0.6 = 4.8",
+    "hints": [
+      "E(X) = np",
+      "V(X) = np(1-p)"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex3",
+    "title": "Controle qualite",
+    "difficulty": "MOYEN",
+    "statement": "Dans un lot de 100 pieces, 5% sont defectueuses. On preleve 10 pieces. Quelle est la probabilite qu'au moins 2 soient defectueuses ?",
+    "correctAnswer": "P(X≥2) = 1 - P(X=0) - P(X=1) ≈ 0.086",
+    "solution": "X ~ B(10, 0.05). P(X≥2) = 1 - P(X=0) - P(X=1) = 1 - C(10,0)×0.05⁰×0.95¹⁰ - C(10,1)×0.05¹×0.95⁹ ≈ 1 - 0.598 - 0.315 ≈ 0.086",
+    "hints": [
+      "Utilise P(X≥k) = 1 - P(X<k)",
+      "Calcule P(X=0) et P(X=1)"
+    ],
+    "points": 20,
+    "xpReward": 40
+  },
+  {
+    "id": "ex4",
+    "title": "Situation concrete",
+    "difficulty": "DIFFICILE",
+    "statement": "Un etudiant repond au hasard un QCM de 20 questions a 4 choix. Quelle est l'esperance de son nombre de bonnes reponses ?",
+    "correctAnswer": "5 bonnes reponses attendues",
+    "solution": "La probabilite de reussite est p=1/4=0.25. X ~ B(20, 0.25). E(X) = np = 20×0.25 = 5 bonnes reponses.",
+    "hints": [
+      "Identifie n et p",
+      "L'esperance est np"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex5",
+    "title": "Atteindre un seuil",
+    "difficulty": "DIFFICILE",
+    "statement": "Dans un jeu ou on gagne avec probabilite 0.3 a chaque tentative, combien faut-il jouer en moyenne pour gagner 3 fois ?",
+    "correctAnswer": "10 tentatives",
+    "solution": "Si X ~ B(n, 0.3) et E(X) = 3, alors np = 3, donc n×0.3 = 3, soit n = 10 tentatives en moyenne.",
+    "hints": [
+      "Utilise E(X) = np = 3",
+      "Resous 0.3n = 3"
+    ],
+    "points": 20,
+    "xpReward": 40
+  }
+]

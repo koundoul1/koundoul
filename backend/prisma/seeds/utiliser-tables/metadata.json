@@ -1,0 +1,22 @@
+﻿{
+    "id":  "utiliser-tables",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "utiliser",
+                     "tables"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Utiliser Tables",
+    "duration":  8
+}

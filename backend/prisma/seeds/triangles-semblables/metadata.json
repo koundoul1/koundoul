@@ -1,0 +1,22 @@
+﻿{
+    "id":  "triangles-semblables",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "triangles",
+                     "semblables"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Triangles Semblables",
+    "duration":  8
+}

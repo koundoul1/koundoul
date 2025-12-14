@@ -1,0 +1,23 @@
+﻿{
+    "id":  "fonction-affine-generalisee",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "fonction",
+                     "affine",
+                     "generalisee"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Fonction Affine Generalisee",
+    "duration":  8
+}

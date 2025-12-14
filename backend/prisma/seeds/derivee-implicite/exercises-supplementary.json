@@ -1,0 +1,76 @@
+[
+  {
+    "id": "ex1",
+    "title": "Deriver exp(-x)",
+    "difficulty": "FACILE",
+    "statement": "Calcule la derivee de f(x) = exp(-x)",
+    "correctAnswer": "-exp(-x)",
+    "solution": "Pour f(x) = exp(-x), on a u(x) = -x, donc u'(x) = -1. La derivee est donc f'(x) = -1 × exp(-x) = -exp(-x).",
+    "hints": [
+      "Identifie la fonction interne u(x) dans exp(u(x))",
+      "N'oublie pas le signe negatif dans la derivee"
+    ],
+    "points": 10,
+    "xpReward": 20
+  },
+  {
+    "id": "ex2",
+    "title": "Deriver exp(x³)",
+    "difficulty": "MOYEN",
+    "statement": "Calcule la derivee de g(x) = exp(x³)",
+    "correctAnswer": "3x² × exp(x³)",
+    "solution": "Pour g(x) = exp(x³), on a u(x) = x³, donc u'(x) = 3x². La derivee est donc g'(x) = 3x² × exp(x³).",
+    "hints": [
+      "Quelle est la derivee de x³ ?",
+      "Applique la formule [exp(u)]' = u' × exp(u)"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex3",
+    "title": "Deriver avec coefficient",
+    "difficulty": "MOYEN",
+    "statement": "Calcule la derivee de h(x) = 7exp(4x - 2)",
+    "correctAnswer": "28exp(4x - 2)",
+    "solution": "Pour h(x) = 7exp(4x - 2), on garde le coefficient 7 et on derive l'exponentielle. On a u(x) = 4x - 2, donc u'(x) = 4. D'ou h'(x) = 7 × 4 × exp(4x - 2) = 28exp(4x - 2).",
+    "hints": [
+      "Gardez le coefficient 7",
+      "Derive d'abord exp(4x - 2) separement",
+      "Multiplie ensuite par 7"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex4",
+    "title": "Application calculer une valeur",
+    "difficulty": "DIFFICILE",
+    "statement": "Soit f(x) = 2exp(x²). Calcule f'(1) (la valeur de la derivee en x = 1).",
+    "correctAnswer": "4e",
+    "solution": "D'abord on derive : f'(x) = 2 × 2x × exp(x²) = 4x × exp(x²). Ensuite, f'(1) = 4 × 1 × exp(1²) = 4 × exp(1) = 4e.",
+    "hints": [
+      "Calcule d'abord la derivee f'(x)",
+      "Remplace ensuite x par 1",
+      "Utilise e = exp(1)"
+    ],
+    "points": 20,
+    "xpReward": 40
+  },
+  {
+    "id": "ex5",
+    "title": "Application croissance bacterienne",
+    "difficulty": "DIFFICILE",
+    "statement": "Une population de bacteries evolue selon N(t) = 500exp(0.3t) ou t est en heures. A quel moment le taux de croissance est-il de 200 bacteries/heure ?",
+    "correctAnswer": "t ≈ 0.96 heures",
+    "solution": "Le taux de croissance est N'(t) = 500 × 0.3 × exp(0.3t) = 150exp(0.3t). On cherche t tel que 150exp(0.3t) = 200. Donc exp(0.3t) = 200/150 = 4/3. Prenons le logarithme : 0.3t = ln(4/3), donc t = ln(4/3)/0.3 ≈ 0.287/0.3 ≈ 0.96 heures.",
+    "hints": [
+      "Calcule N'(t) d'abord",
+      "Resous l'equation 150exp(0.3t) = 200",
+      "Utilise la fonction ln pour isoler t"
+    ],
+    "points": 25,
+    "xpReward": 50
+  }
+]
+

@@ -1,0 +1,22 @@
+﻿{
+    "id":  "limite-quotient",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "limite",
+                     "quotient"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Limite Quotient",
+    "duration":  8
+}

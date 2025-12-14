@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ex1",
+    "title": "Calculer f'(2) pour f(x) = x²",
+    "difficulty": "FACILE",
+    "statement": "Pour f(x) = x², calcule le nombre dérivé en x = 2 en utilisant la définition.",
+    "correctAnswer": "f'(2) = 4",
+    "solution": "Utilisons la définition : f'(2) = lim(h→0) [f(2+h) - f(2)] / h = lim(h→0) [(2+h)² - 4] / h = lim(h→0) [4+4h+h²-4] / h = lim(h→0) [4h+h²] / h = lim(h→0) [4+h] = 4",
+    "hints": [
+      "Utilise la definition f'(a) = lim(h→0) [f(a+h) - f(a)] / h",
+      "Développe (2+h)² = 4 + 4h + h²"
+    ],
+    "points": 10,
+    "xpReward": 20
+  },
+  {
+    "id": "ex2",
+    "title": "Nombre derivé de f(x) = 3x",
+    "difficulty": "FACILE",
+    "statement": "Calcule le nombre dérivé de f(x) = 3x en x = 1.",
+    "correctAnswer": "f'(1) = 3",
+    "solution": "f'(1) = lim(h→0) [3(1+h) - 3] / h = lim(h→0) [3+3h-3] / h = lim(h→0) 3h/h = 3",
+    "hints": [
+      "Applique la definition du nombre derivé",
+      "Pour une fonction affine ax+b, la derivée est a"
+    ],
+    "points": 10,
+    "xpReward": 20
+  },
+  {
+    "id": "ex3",
+    "title": "Tangente en un point",
+    "difficulty": "MOYEN",
+    "statement": "Pour f(x) = x², calcule l'équation de la tangente en x = 1.",
+    "correctAnswer": "y = 2x - 1",
+    "solution": "f'(x) = 2x, donc f'(1) = 2. Le point de tangence est (1, f(1)) = (1, 1). L'équation de la tangente est y = f'(1)(x-1) + f(1) = 2(x-1) + 1 = 2x - 1",
+    "hints": [
+      "Calcule d'abord f'(1) et f(1)",
+      "Utilise la formule : y = f'(a)(x-a) + f(a)"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex4",
+    "title": "Application : vitesse instantanée",
+    "difficulty": "DIFFICILE",
+    "statement": "Un mobile se déplace selon s(t) = t² en mètres (t en secondes). Quelle est sa vitesse instantanée à t = 3s ?",
+    "correctAnswer": "6 m/s",
+    "solution": "La vitesse instantanée est la dérivée de la position : v(t) = s'(t) = 2t. Donc v(3) = 2×3 = 6 m/s.",
+    "hints": [
+      "La vitesse instantanée est la dérivée de la position",
+      "s'(t) = 2t"
+    ],
+    "points": 20,
+    "xpReward": 40
+  },
+  {
+    "id": "ex5",
+    "title": "Interpretation graphique",
+    "difficulty": "MOYEN",
+    "statement": "Si f'(2) = -3, que peut-on dire sur le comportement de f en x = 2 ?",
+    "correctAnswer": "La fonction est decroissante et la tangente descend",
+    "solution": "Un nombre dérivé négatif (-3) signifie que la tangente a une pente négative, donc elle descend vers la droite. La fonction est localement décroissante en ce point.",
+    "hints": [
+      "Que signifie un nombre dérivé négatif ?",
+      "Pense à la pente de la tangente"
+    ],
+    "points": 15,
+    "xpReward": 30
+  }
+]

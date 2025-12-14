@@ -1,0 +1,23 @@
+﻿{
+    "id":  "croissance-comparÃ©e-limites",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "croissance",
+                     "comparÃ©e",
+                     "limites"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Croissance Comparã©E Limites",
+    "duration":  8
+}

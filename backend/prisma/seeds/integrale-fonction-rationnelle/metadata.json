@@ -1,0 +1,23 @@
+﻿{
+    "id":  "integrale-fonction-rationnelle",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "integrale",
+                     "fonction",
+                     "rationnelle"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Integrale Fonction Rationnelle",
+    "duration":  8
+}

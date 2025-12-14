@@ -1,0 +1,109 @@
+{
+  "lesson": {
+    "id": "derivee-fonction-exponentielle",
+    "title": "Dérivée de la fonction exponentielle",
+    "subject": "Mathématiques",
+    "level": "PREMIERE",
+    "chapter": "Fonctions exponentielles",
+    "slug": "derivee-fonction-exponentielle",
+    "duration": 8,
+    "difficulty": 3,
+    "prerequisites": [
+      "Notion de dérivée (limite du taux d'accroissement)",
+      "Fonction exp(x) et ses propriétés",
+      "Règle de dérivation des fonctions composées"
+    ],
+    "objectives": [
+      "Dériver exp(x) et exp(u(x))",
+      "Comprendre pourquoi la dérivée de exp est elle-même",
+      "Appliquer les formules dans des exercices concrets",
+      "Lier cette notion aux applications pratiques"
+    ],
+    "constraints": {
+      "includeConcreteApplication": true,
+      "interactiveAnimationRequired": true,
+      "linkWithOtherChapters": ["Fonctions composées", "Applications des dérivées"],
+      "languageLevel": "Intermédiaire"
+    },
+    "phases": {
+      "count": 7,
+      "structure": [
+        {
+          "phase": 1,
+          "title": "Rappel sur la fonction exponentielle",
+          "duration": "1 min",
+          "type": "Rappel théorique"
+        },
+        {
+          "phase": 2,
+          "title": "Découverte intuitive",
+          "duration": "1 min",
+          "type": "Intuition géométrique"
+        },
+        {
+          "phase": 3,
+          "title": "Démonstration rigoureuse",
+          "duration": "2 min",
+          "type": "Preuve mathématique"
+        },
+        {
+          "phase": 4,
+          "title": "Dérivation de fonctions composées",
+          "duration": "2 min",
+          "type": "Règle générale"
+        },
+        {
+          "phase": 5,
+          "title": "Applications concrètes",
+          "duration": "1 min",
+          "type": "Modélisation"
+        },
+        {
+          "phase": 6,
+          "title": "Erreurs courantes",
+          "duration": "30 sec",
+          "type": "Pièges à éviter"
+        },
+        {
+          "phase": 7,
+          "title": "Récapitulatif et fiche mémo",
+          "duration": "30 sec",
+          "type": "Synthèse"
+        }
+      ]
+    },
+    "content": {
+      "markdownFile": "derivative-exponential-lesson.md",
+      "interactiveComponents": [
+        "GraphiqueExp",
+        "DerivativeCalculator",
+        "AnimationGrowth"
+      ],
+      "mediaAssets": [
+        "graphic-exp-function.png",
+        "animation-derivative.mp4",
+        "simulation-growth.jsx"
+      ]
+    },
+    "exercises": {
+      "count": 5,
+      "types": ["CALCUL"],
+      "difficulties": ["FACILE", "MOYEN", "DIFFICILE"],
+      "points": [10, 15, 20]
+    },
+    "quiz": {
+      "questionCount": 7,
+      "types": ["MULTIPLE_CHOICE", "TRUE_FALSE"],
+      "passingScore": 70,
+      "timeLimit": 10
+    },
+    "supplementary": {
+      "flashcards": 3,
+      "handout": "fiche-memo-derivee-expo.pdf",
+      "videoLinks": [],
+      "externalResources": []
+    }
+  }
+}
+
+

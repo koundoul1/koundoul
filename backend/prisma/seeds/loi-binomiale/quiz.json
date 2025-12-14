@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q1",
+    "question": "Dans un schema de Bernoulli, combien d'issues possibles a chaque epreuve ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["2", "3", "Infinite", "Variable"],
+    "correctAnswer": 0,
+    "explanation": "Un schema de Bernoulli n'a que 2 issues : Succes (probabilite p) ou Echec (probabilite 1-p).",
+    "difficulty": 1,
+    "xpReward": 10,
+    "order": 1
+  },
+  {
+    "id": "q2",
+    "question": "Si X suit une loi binomiale B(n,p), combien vaut P(X=k) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": [
+      "C(n,k) p^k (1-p)^(n-k)",
+      "n p^k",
+      "p^k",
+      "C(n,k)"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Pour X ~ B(n,p), P(X=k) = C(n,k) p^k (1-p)^(n-k). C'est la formule fondamentale.",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 2
+  },
+  {
+    "id": "q3",
+    "question": "Pour X ~ B(10, 0.3), que vaut l'esperance E(X) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["3", "10", "0.3", "30"],
+    "correctAnswer": 0,
+    "explanation": "L'esperance d'une loi binomiale est E(X) = np = 10 0.3 = 3.",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 3
+  },
+  {
+    "id": "q4",
+    "question": "Lancer une piece 5 fois et compter les Piles. Quelle est la loi suivie ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["B(5, 0.5)", "B(5, 1)", "Loi uniforme", "Loi normale"],
+    "correctAnswer": 0,
+    "explanation": "Schema de Bernoulli : n=5 epreuves independantes, p=0.5. Donc X ~ B(5, 0.5).",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 4
+  },
+  {
+    "id": "q5",
+    "question": "Pour X ~ B(n,p), quelle est la variance V(X) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["np", "np(1-p)", "n(1-p)", "p(1-p)"],
+    "correctAnswer": 1,
+    "explanation": "La variance d'une loi binomiale est V(X) = np(1-p).",
+    "difficulty": 3,
+    "xpReward": 25,
+    "order": 5
+  }
+]

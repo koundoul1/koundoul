@@ -1,0 +1,63 @@
+[
+  {
+    "id": "q1",
+    "question": "Quelle est la dérivée de exp(x) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["exp(x)", "x × exp(x)", "0", "1"],
+    "correctAnswer": 0,
+    "explanation": "C'est la propriété unique de l'exponentielle ! La dérivée de exp(x) est exp(x) elle-même. C'est la seule fonction (non constante) avec cette propriété remarquable.",
+    "difficulty": 1,
+    "xpReward": 10,
+    "order": 1
+  },
+  {
+    "id": "q2",
+    "question": "Calcule la dérivée de exp(3x)",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["exp(3x)", "3exp(x)", "3exp(3x)", "xexp(3x)"],
+    "correctAnswer": 2,
+    "explanation": "Pour exp(3x), on identifie u(x) = 3x, donc u'(x) = 3. En appliquant la formule [exp(u(x))]' = u'(x) × exp(u(x)), on obtient 3 × exp(3x).",
+    "difficulty": 1,
+    "xpReward": 15,
+    "order": 2
+  },
+  {
+    "id": "q3",
+    "question": "Calcule la dérivée de exp(x²)",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["exp(x²)", "2x × exp(x²)", "2 × exp(x²)", "x² × exp(x²)"],
+    "correctAnswer": 1,
+    "explanation": "Attention ! Pour exp(x²), on a u(x) = x², donc u'(x) = 2x. La dérivée est donc 2x × exp(x²). Le x est essentiel dans la réponse !",
+    "difficulty": 2,
+    "xpReward": 15,
+    "order": 3
+  },
+  {
+    "id": "q4",
+    "question": "Calcule la dérivée de 5exp(2x)",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["5exp(2x)", "10exp(x)", "10exp(2x)", "2exp(2x)"],
+    "correctAnswer": 2,
+    "explanation": "On garde le coefficient 5 et on dérive exp(2x) qui donne 2exp(2x) (car u(x) = 2x donc u' = 2). Donc f'(x) = 5 × 2exp(2x) = 10exp(2x).",
+    "difficulty": 2,
+    "xpReward": 15,
+    "order": 4
+  },
+  {
+    "id": "q5",
+    "question": "Quelle erreur est commise ici : [exp(5x)]' = exp(5x) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": [
+      "Aucune erreur",
+      "Oubli de la dérivée interne 5",
+      "Confusion des signes",
+      "Mauvaise formule de base"
+    ],
+    "correctAnswer": 1,
+    "explanation": "L'erreur est d'avoir oublié la dérivée interne ! Pour exp(5x), on a u(x) = 5x donc u' = 5. La dérivée correcte est [exp(5x)]' = 5exp(5x). C'est l'erreur classique la plus fréquente !",
+    "difficulty": 3,
+    "xpReward": 20,
+    "order": 5
+  }
+]
+

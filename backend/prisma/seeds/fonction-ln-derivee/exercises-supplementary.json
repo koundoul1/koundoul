@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ex1",
+    "title": "Deriver ln(2x)",
+    "difficulty": "FACILE",
+    "statement": "Calcule la derivee de f(x) = ln(2x)",
+    "correctAnswer": "f'(x) = 1/x",
+    "solution": "Avec la regle de la chaîne : [ln(2x)]' = (2x)'/(2x) = 2/(2x) = 1/x",
+    "hints": ["Utilise ln(u)' = u'/u", "u(x) = 2x donc u' = 2"],
+    "points": 10,
+    "xpReward": 20
+  },
+  {
+    "id": "ex2",
+    "title": "Deriver ln(x²+1)",
+    "difficulty": "MOYEN",
+    "statement": "Calcule la derivee de g(x) = ln(x²+1)",
+    "correctAnswer": "g'(x) = 2x/(x²+1)",
+    "solution": "[ln(x²+1)]' = (x²+1)'/(x²+1) = 2x/(x²+1)",
+    "hints": [
+      "Applique ln(u)' = u'/u",
+      "La derivee de x²+1 est 2x"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex3",
+    "title": "Deriver 3ln(x)",
+    "difficulty": "FACILE",
+    "statement": "Calcule la derivee de h(x) = 3ln(x)",
+    "correctAnswer": "h'(x) = 3/x",
+    "solution": "Le coefficient 3 reste, donc h'(x) = 3 × [ln(x)]' = 3 × (1/x) = 3/x",
+    "hints": ["Le coefficient reste constant", "La derivee de ln(x) est 1/x"],
+    "points": 10,
+    "xpReward": 20
+  },
+  {
+    "id": "ex4",
+    "title": "Integrale de 1/x",
+    "difficulty": "DIFFICILE",
+    "statement": "Quelle fonction a pour derivee 1/(x+3) ?",
+    "correctAnswer": "ln(x+3) + C",
+    "solution": "Si f'(x) = 1/(x+3), alors f(x) = ∫1/(x+3) dx = ln(x+3) + C. C'est l'integrale de 1/(u) qui donne ln(u).",
+    "hints": [
+      "L'integrale de 1/u est ln(u)",
+      "N'oublie pas la constante C"
+    ],
+    "points": 20,
+    "xpReward": 40
+  },
+  {
+    "id": "ex5",
+    "title": "Application demographie",
+    "difficulty": "DIFFICILE",
+    "statement": "Une population evolue selon P(t) = 1000×ln(t+1). Calcule le taux de croissance à t=9.",
+    "correctAnswer": "100 individus/unite de temps",
+    "solution": "Le taux de croissance est P'(t) = 1000×[ln(t+1)]' = 1000×(1/(t+1)). Donc P'(9) = 1000/10 = 100.",
+    "hints": [
+      "Le taux de croissance est la derivee P'(t)",
+      "Calcule P'(t) puis remplace t=9"
+    ],
+    "points": 20,
+    "xpReward": 40
+  }
+]

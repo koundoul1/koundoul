@@ -1,0 +1,312 @@
+/**
+ * 🎨 PALETTE DE COULEURS PÉDAGOGIQUES - KOUNDOUL
+ * 
+ * Design System pour une expérience d'apprentissage engageante et accessible
+ */
+
+:root {
+  /* ========================================
+     COULEURS PAR MATIÈRE
+     ======================================== */
+  
+  /* Mathématiques - Bleu (Logique, Rigueur) */
+  --math-primary: #3B82F6;
+  --math-light: #DBEAFE;
+  --math-dark: #1E40AF;
+  --math-hover: #2563EB;
+  
+  /* Physique - Violet (Énergie, Mouvement) */
+  --physics-primary: #8B5CF6;
+  --physics-light: #EDE9FE;
+  --physics-dark: #5B21B6;
+  --physics-hover: #7C3AED;
+  
+  /* Chimie - Vert (Nature, Transformation) */
+  --chemistry-primary: #10B981;
+  --chemistry-light: #D1FAE5;
+  --chemistry-dark: #047857;
+  --chemistry-hover: #059669;
+  
+  /* Biologie - Orange (Vie, Organique) */
+  --biology-primary: #F59E0B;
+  --biology-light: #FEF3C7;
+  --biology-dark: #D97706;
+  --biology-hover: #F97316;
+  
+  /* Général - Indigo (Neutre, Professionnel) */
+  --general-primary: #6366F1;
+  --general-light: #E0E7FF;
+  --general-dark: #4338CA;
+  --general-hover: #4F46E5;
+  
+  /* ========================================
+     FEEDBACK & ÉTATS
+     ======================================== */
+  
+  /* Succès */
+  --success: #10B981;
+  --success-bg: #D1FAE5;
+  --success-border: #6EE7B7;
+  --success-text: #065F46;
+  
+  /* Attention */
+  --warning: #F59E0B;
+  --warning-bg: #FEF3C7;
+  --warning-border: #FCD34D;
+  --warning-text: #92400E;
+  
+  /* Erreur (Doux, Non-Décourageant) */
+  --error: #EF4444;
+  --error-bg: #FEE2E2;
+  --error-border: #FCA5A5;
+  --error-text: #991B1B;
+  
+  /* Info */
+  --info: #06B6D4;
+  --info-bg: #CFFAFE;
+  --info-border: #67E8F9;
+  --info-text: #164E63;
+  
+  /* En cours / Progress */
+  --progress: #8B5CF6;
+  --progress-bg: #EDE9FE;
+  --progress-border: #C4B5FD;
+  
+  /* ========================================
+     NIVEAUX DE DIFFICULTÉ
+     ======================================== */
+  
+  /* Facile - Vert Encourageant */
+  --easy: #10B981;
+  --easy-bg: #D1FAE5;
+  --easy-icon: '🌱';
+  
+  /* Moyen - Orange Neutre */
+  --medium: #F59E0B;
+  --medium-bg: #FEF3C7;
+  --medium-icon: '🔥';
+  
+  /* Difficile - Rouge Motivant */
+  --hard: #EF4444;
+  --hard-bg: #FEE2E2;
+  --hard-icon: '💪';
+  
+  /* Expert - Violet Prestigieux */
+  --expert: #8B5CF6;
+  --expert-bg: #EDE9FE;
+  --expert-icon: '🏆';
+  
+  /* ========================================
+     GAMIFICATION
+     ======================================== */
+  
+  /* XP / Points */
+  --xp-color: #F59E0B;
+  --xp-glow: #FBBF24;
+  
+  /* Badges */
+  --badge-gold: #F59E0B;
+  --badge-silver: #94A3B8;
+  --badge-bronze: #D97706;
+  
+  /* Streak */
+  --streak-fire: #EF4444;
+  --streak-glow: #FCA5A5;
+  
+  /* Niveau */
+  --level-up: #8B5CF6;
+  --level-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  /* ========================================
+     THÈME GÉNÉRAL
+     ======================================== */
+  
+  /* Fond */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --bg-tertiary: #F3F4F6;
+  
+  /* Texte */
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  
+  /* Bordures */
+  --border-light: #E5E7EB;
+  --border-medium: #D1D5DB;
+  --border-dark: #9CA3AF;
+  
+  /* Ombres */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* ========================================
+     ANIMATIONS & TRANSITIONS
+     ======================================== */
+  
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+  
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* ========================================
+     ACCESSIBILITÉ
+     ======================================== */
+  
+  /* Focus visible pour navigation clavier */
+  --focus-ring: 0 0 0 3px rgba(99, 102, 241, 0.5);
+  --focus-ring-offset: 2px;
+}
+
+/* ========================================
+   MODE SOMBRE (Dark Mode)
+   ======================================== */
+
+[data-theme="dark"] {
+  /* Fond */
+  --bg-primary: #111827;
+  --bg-secondary: #1F2937;
+  --bg-tertiary: #374151;
+  
+  /* Texte */
+  --text-primary: #F9FAFB;
+  --text-secondary: #D1D5DB;
+  --text-tertiary: #9CA3AF;
+  
+  /* Bordures */
+  --border-light: #374151;
+  --border-medium: #4B5563;
+  --border-dark: #6B7280;
+  
+  /* Ajuster les backgrounds de feedback pour le dark mode */
+  --success-bg: rgba(16, 185, 129, 0.1);
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --info-bg: rgba(6, 182, 212, 0.1);
+  
+  /* Ajuster les backgrounds de matières */
+  --math-light: rgba(59, 130, 246, 0.1);
+  --physics-light: rgba(139, 92, 246, 0.1);
+  --chemistry-light: rgba(16, 185, 129, 0.1);
+  --biology-light: rgba(245, 158, 11, 0.1);
+  --general-light: rgba(99, 102, 241, 0.1);
+}
+
+/* ========================================
+   CLASSES UTILITAIRES
+   ======================================== */
+
+/* Couleurs de matière */
+.subject-math { color: var(--math-primary); }
+.bg-subject-math { background-color: var(--math-light); }
+.border-subject-math { border-color: var(--math-primary); }
+
+.subject-physics { color: var(--physics-primary); }
+.bg-subject-physics { background-color: var(--physics-light); }
+.border-subject-physics { border-color: var(--physics-primary); }
+
+.subject-chemistry { color: var(--chemistry-primary); }
+.bg-subject-chemistry { background-color: var(--chemistry-light); }
+.border-subject-chemistry { border-color: var(--chemistry-primary); }
+
+.subject-biology { color: var(--biology-primary); }
+.bg-subject-biology { background-color: var(--biology-light); }
+.border-subject-biology { border-color: var(--biology-primary); }
+
+.subject-general { color: var(--general-primary); }
+.bg-subject-general { background-color: var(--general-light); }
+.border-subject-general { border-color: var(--general-primary); }
+
+/* Niveaux de difficulté */
+.difficulty-easy { 
+  color: var(--easy); 
+  background-color: var(--easy-bg);
+}
+
+.difficulty-medium { 
+  color: var(--medium); 
+  background-color: var(--medium-bg);
+}
+
+.difficulty-hard { 
+  color: var(--hard); 
+  background-color: var(--hard-bg);
+}
+
+.difficulty-expert { 
+  color: var(--expert); 
+  background-color: var(--expert-bg);
+}
+
+/* Feedback */
+.feedback-success {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.feedback-warning {
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
+  border: 1px solid var(--warning-border);
+}
+
+.feedback-error {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid var(--error-border);
+}
+
+.feedback-info {
+  background-color: var(--info-bg);
+  color: var(--info-text);
+  border: 1px solid var(--info-border);
+}
+
+/* Animations */
+.animate-success {
+  animation: pulse-success 0.5s ease-in-out;
+}
+
+@keyframes pulse-success {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.5var ease var(--easing-bounce);
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* XP Gain Animation */
+.xp-gain {
+  animation: float-up 1s ease-out;
+  color: var(--xp-color);
+  font-weight: bold;
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
+
+/* Streak Fire Animation */
+.streak-fire {
+  animation: flicker 1.5s infinite;
+  color: var(--streak-fire);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+

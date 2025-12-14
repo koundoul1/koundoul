@@ -1,0 +1,62 @@
+{
+  "id": "derivee-fonction-exponentielle",
+  "title": "Dérivée de la fonction exponentielle",
+  "subject": "math",
+  "level": "premiere",
+  "chapter": "Fonctions exponentielles",
+  "duration": 8,
+  "prerequisites": [
+    "Notion de dérivée (limite du taux d'accroissement)",
+    "Fonction exp(x) et ses propriétés",
+    "Règle de dérivation des fonctions composées"
+  ],
+  "objectives": [
+    "Dériver exp(x) et comprendre pourquoi sa dérivée est elle-même",
+    "Maîtriser la formule de dérivation de exp(u(x))",
+    "Appliquer ces formules dans des exercices concrets",
+    "Lier cette notion aux applications pratiques (croissance, intérêts)"
+  ],
+  "difficulty": 3,
+  "xpReward": 150,
+  "realWorldApp": "Modélisation de la croissance d'une population de bactéries",
+  "keywords": ["dérivée", "exponentielle", "exp(u)", "croissance", "formule"],
+  "phases": {
+    "hook": {
+      "duration": 30,
+      "interactions": 1
+    },
+    "recall": {
+      "duration": 45,
+      "interactions": 1
+    },
+    "course": {
+      "duration": 180,
+      "interactions": 3
+    },
+    "method": {
+      "duration": 60,
+      "interactions": 1
+    },
+    "exercise": {
+      "duration": 120,
+      "interactions": 3
+    },
+    "quiz": {
+      "duration": 60,
+      "interactions": 5
+    },
+    "closure": {
+      "duration": 30,
+      "interactions": 1
+    }
+  },
+  "colorTheme": "#3B82F6",
+  "estimatedVideoSize": "<2MB",
+  "accessibility": {
+    "altTexts": true,
+    "voiceOverTranscript": true,
+    "dyslexiaFriendly": true,
+    "contrastWCAG": "AAA"
+  }
+}
+

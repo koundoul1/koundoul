@@ -1,0 +1,69 @@
+[
+  {
+    "id": "ex1",
+    "title": "Deriver une somme simple",
+    "difficulty": "FACILE",
+    "statement": "Calcule la derivee de f(x) = x³ + x²",
+    "correctAnswer": "f'(x) = 3x² + 2x",
+    "solution": "La derivee d'une somme est la somme des derivees : (x³+x²)' = (x³)' + (x²)' = 3x² + 2x",
+    "hints": ["Utilise la regle (f+g)' = f' + g'", "La derivee de x³ est 3x²"],
+    "points": 10,
+    "xpReward": 20
+  },
+  {
+    "id": "ex2",
+    "title": "Deriver un produit",
+    "difficulty": "MOYEN",
+    "statement": "Calcule la derivee de g(x) = (x+1)(x+2)",
+    "correctAnswer": "g'(x) = 2x + 3",
+    "solution": "Avec f=x+1 et g=x+2, on a f'=1 et g'=1. Donc (fg)' = f'g + fg' = 1(x+2) + (x+1)1 = x+2+x+1 = 2x+3",
+    "hints": [
+      "Utilise la regle (fg)' = f'g + fg'",
+      "Identifie f et g dans le produit"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex3",
+    "title": "Deriver un quotient",
+    "difficulty": "MOYEN",
+    "statement": "Calcule la derivee de h(x) = (x²+1)/(x+1)",
+    "correctAnswer": "h'(x) = (x²+2x-1)/(x+1)²",
+    "solution": "Avec f=x²+1 et g=x+1, on a f'=2x et g'=1. Donc (f/g)' = (f'g - fg')/g² = (2x(x+1) - (x²+1)1)/(x+1)² = (2x²+2x-x²-1)/(x+1)² = (x²+2x-1)/(x+1)²",
+    "hints": [
+      "Utilise la formule (f/g)' = (f'g - fg')/g²",
+      "Attention au signe - et au carré au denominateur"
+    ],
+    "points": 15,
+    "xpReward": 30
+  },
+  {
+    "id": "ex4",
+    "title": "Application complexe",
+    "difficulty": "DIFFICILE",
+    "statement": "Derive f(x) = x(x-1)(x-2)",
+    "correctAnswer": "f'(x) = 3x² - 6x + 2",
+    "solution": "On peut developper d'abord : f(x) = x(x²-3x+2) = x³-3x²+2x. Donc f'(x) = 3x² - 6x + 2. Ou utiliser deux fois la regle du produit.",
+    "hints": [
+      "Developpe d'abord le produit",
+      "Ou applique deux fois la regle (fg)' = f'g + fg'"
+    ],
+    "points": 20,
+    "xpReward": 40
+  },
+  {
+    "id": "ex5",
+    "title": "Verification",
+    "difficulty": "MOYEN",
+    informed": "Verifie que pour f(x) = x², on a bien (f²)' = 2ff'",
+    "correctAnswer": "Oui, car [x²]² = x⁴, donc ([x²]²)' = 4x³ = 2(x²)(2x) = 2ff'",
+    "solution": "f(x) = x², donc f²(x) = (x²)² = x⁴. Alors (f²)' = 4x³. Et 2ff' = 2(x²)(2x) = 4x³. C'est verifie !",
+    "hints": [
+      "f²(x) = (x²)² = x⁴",
+      "La derivee de x⁴ est 4x³"
+    ],
+    "points": 15,
+    "xpReward": 30
+  }
+]

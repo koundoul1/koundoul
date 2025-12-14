@@ -1,0 +1,37 @@
+{
+  "id": "derivee-fonction-composee",
+  "title": "Dérivée d'une fonction composée - Règle de la chaîne",
+  "subject": "math",
+  "level": "premiere",
+  "chapter": "Dérivation",
+  "duration": 8,
+  "prerequisites": [
+    "Dérivées des fonctions usuelles",
+    "Notion de fonction composée",
+    "Dérivée des fonctions polynômes"
+  ],
+  "objectives": [
+    "Comprendre la notion de fonction composée",
+    "Maîtriser la règle de la chaîne (chain rule)",
+    "Dériver des fonctions comme cos(2x), ln(x²), etc.",
+    "Appliquer cette règle dans des exercices concrets"
+  ],
+  "difficulty": 4,
+  "xpReward": 180,
+  "realWorldApp": "Modélisation de signaux périodiques en électronique",
+  "keywords": ["dérivée", "fonction composée", "chaîne", "chain rule"]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

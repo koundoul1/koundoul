@@ -1,0 +1,106 @@
+{
+  "lessons": [
+    {
+      "id": "tangente-nombre-derive",
+      "title": "Tangente et nombre dérivé",
+      "subject": "math",
+      "level": "premiere",
+      "chapter": "Dérivation",
+      "duration": 8,
+      "difficulty": 3,
+      "xpReward": 150,
+      "realWorldApp": "Calculer la vitesse instantanée d'un véhicule"
+    },
+    {
+      "id": "derivee-somme-produit",
+      "title": "Dérivée d'une somme, produit et quotient",
+      "subject": "math",
+      "level": "premiere",
+      "chapter": "Dérivation",
+      "duration": 8,
+      "difficulty": 3,
+      "xpReward": 160,
+      "realWorldApp": "Analyser la variation de fonctions complexes"
+    },
+    {
+      "id": "variations-fonction",
+      "title": "Variations d'une fonction avec la dérivée",
+      "subject": "math",
+      "level": "premiere",
+      "chapter": "Dérivation",
+      "duration": 8,
+      "difficulty": 4,
+      "xpReward": 170,
+      "realWorldApp": "Optimiser un processus industriel"
+    },
+    {
+      "id": "discriminant-delta",
+      "title": "Discriminant (Δ) et nature des solutions",
+      "subject": "math",
+      "level": "premiere",
+      "chapter": "Second degré",
+      "duration": 8,
+      "difficulty": 3,
+      "xpReward": 150,
+      "realWorldApp": "Déterminer les points d'intersection d'une parabole"
+    },
+    {
+      "id": "fonction-ln-derivee",
+      "title": "Fonction logarithme népérien et sa dérivée",
+      "subject": "math",
+      "level": "premiere",
+      "chapter": "Exponentielle et Logarithme",
+      "duration": 8,
+      "difficulty": 4,
+      "xpReward": 170,
+      "realWorldApp": "Modéliser la croissance démographique"
+    },
+    {
+      "id": "loi-binomiale",
+      "title": "Loi binomiale - Calculs et applications",
+      "subject": "math",
+      "level": "premiere",
+      "chapter": "Probabilités",
+      "duration": 8,
+      "difficulty": 4,
+      "xpReward": 180,
+      "realWorldApp": "Évaluer la fiabilité d'un contrôle qualité"
+    },
+    {
+      "id": "loi-ohm",
+      "title": "Loi d'Ohm et résistance électrique",
+      "subject": "physics",
+      "level": "premiere",
+      "chapter": "Électricité",
+      "duration": 8,
+      "difficulty": 3,
+      "xpReward": 150,
+      "realWorldApp": "Dimensionner les composants d'un circuit"
+    },
+    {
+      "id": "acides-bases",
+      "title": "Acides et bases - pH et réactions",
+      "subject": "chemistry",
+      "level": "premiere",
+      "chapter": "Transformations chimiques",
+      "duration": 8,
+      "difficulty": 3,
+      "xpReward": 150,
+      "realWorldApp": "Contrôler le pH d'une solution"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

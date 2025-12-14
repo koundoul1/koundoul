@@ -1,0 +1,57 @@
+[
+  {
+    "id": "q1",
+    "question": "Quelle est la dérivée de ln(x) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["1/x", "x", "1", "ln(x)"],
+    "correctAnswer": 0,
+    "explanation": "La dérivée de ln(x) est 1/x. C'est une formule fondamentale à retenir !",
+    "difficulty": 1,
+    "xpReward": 15,
+    "order": 1
+  },
+  {
+    "id": "q2",
+    "question": "Calcule la dérivée de ln(3x)",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["1/(3x)", "3/x", "1/x", "ln(3)"],
+    "correctAnswer": 2,
+    "explanation": "Avec la règle de la chaîne : [ln(3x)]' = (3x)'/(3x) = 3/(3x) = 1/x. La dérivée de ln(ax) est toujours 1/x !",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 2
+  },
+  {
+    "id": "q3",
+    "question": "Pour f(x) = ln(x²), quelle est la dérivée ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["1/x²", "2/x", "x", "2x"],
+    "correctAnswer": 1,
+    "explanation": "[ln(x²)]' = (x²)'/(x²) = 2x/(x²) = 2/x. On applique ln(u)' = u'/u.",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 3
+  },
+  {
+    "id": "q4",
+    "question": "Si f'(x) = 1/x, que peut être f(x) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["ln(x) + C", "x + C", "1/x", "x²"],
+    "correctAnswer": 0,
+    "explanation": "Si f'(x) = 1/x, alors f(x) = ln(x) + C. C'est l'intégrale de 1/x. La constante C est importante !",
+    "difficulty": 3,
+    "xpReward": 25,
+    "order": 4
+  },
+  {
+    "id": "q5",
+    "question": "Quelle est la dérivée de ln(x+1) ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["1/(x+1)", "1/x", "x+1", "1/(x²+1)"],
+    "correctAnswer": 0,
+    "explanation": "[ln(x+1)]' = (x+1)'/(x+1) = 1/(x+1). Attention : on n'oublie pas de dériver l'intérieur !",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 5
+  }
+]

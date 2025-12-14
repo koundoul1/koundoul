@@ -1,0 +1,23 @@
+﻿{
+    "id":  "mouvement-uniformement-accelere",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "mouvement",
+                     "uniformement",
+                     "accelere"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Mouvement Uniformement Accelere",
+    "duration":  8
+}

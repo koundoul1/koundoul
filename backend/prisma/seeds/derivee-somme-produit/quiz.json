@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q1",
+    "question": "Quelle est la dérivée d'une somme : (f+g)' ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["f' + g'", "fg + f'g'", "f'g + fg'", "(f' + g')/2"],
+    "correctAnswer": 0,
+    "explanation": "La dérivée d'une somme est la somme des dérivées : (f+g)' = f' + g'. C'est la règle la plus simple !",
+    "difficulty": 1,
+    "xpReward": 15,
+    "order": 1
+  },
+  {
+    "id": "q2",
+    "question": "Quelle est la formule de dérivation d'un produit (fg)' ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["fg'", "f'g", "f'g + fg'", "f'g'"],
+    "correctAnswer": 2,
+    "explanation": "La dérivée d'un produit est : (fg)' = f'g + fg'. On dérive la première en gardant la seconde, plus on garde la première en dérivant la seconde.",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 2
+  },
+  {
+    "id": "q3",
+    "question": "Dérive f(x) = (x² + 1)(x - 3)",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["2x(x-3)", "2x + 1", "2x(x-3) + (x²+1)", "3x² - 6x - 1"],
+    "correctAnswer": 3,
+    "explanation": "Avec f = x²+1 et g = x-3, on a f' = 2x et g' = 1. Donc (fg)' = 2x(x-3) + (x²+1)×1 = 2x²-6x+x²+1 = 3x²-6x+1.",
+    "difficulty": 3,
+    "xpReward": 25,
+    "order": 3
+  },
+  {
+    "id": "q4",
+    "question": "Si f(x) = x³ + x², alors f'(x) = ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["3x² + 2x", "6x + 2", "x² + 2x", "3x + 2"],
+    "correctAnswer": 0,
+    "explanation": "La dérivée de x³ est 3x² et la dérivée de x² est 2x. Donc (x³+x²)' = 3x² + 2x.",
+    "difficulty": 1,
+    "xpReward": 15,
+    "order": 4
+  },
+  {
+    "id": "q5",
+    "question": "Pour dériver un quotient f/g, quelle formule utilise-t-on ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": [
+      "(f/g)' = f'/g'",
+      "(f/g)' = (f'g - fg')/g²",
+      "(f/g)' = (f'g')/(g²)",
+      "(f/g)' = f' - g'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "La dérivée d'un quotient est (f/g)' = (f'g - fg')/g². Attention au signe - et au carré du dénominateur !",
+    "difficulty": 3,
+    "xpReward": 25,
+    "order": 5
+  }
+]

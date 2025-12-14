@@ -1,0 +1,12 @@
+{
+  "id": "derivee-somme-produit",
+  "title": "Dérivée d'une somme, produit et quotient",
+  "subject": "math",
+  "level": "premiere",
+  "chapter": "Dérivation",
+  "duration": 8,
+  "difficulty": 3,
+  "xpReward": 160,
+  "realWorldApp": "Analyser la variation de fonctions complexes en sciences",
+  "keywords": ["dérivée", "somme", "produit", "quotient", "opérations", "formules"]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "discriminant-delta",
+  "title": "Discriminant (Δ) et nature des solutions",
+  "subject": "math",
+  "level": "premiere",
+  "chapter": "Second degré",
+  "duration": 8,
+  "prerequisites": [
+    "Équations du premier degré",
+    "Identités remarquables",
+    "Notation des racines carrées"
+  ],
+  "objectives": [
+    "Calculer le discriminant d'un trinôme ax² + bx + c",
+    "Déterminer le nombre de solutions selon le signe de Δ",
+    "Utiliser la formule des racines avec Δ",
+    "Interpréter graphiquement le discriminant"
+  ],
+  "difficulty": 3,
+  "xpReward": 150,
+  "realWorldApp": "Déterminer les points d'intersection d'une parabole avec l'axe des abscisses",
+  "keywords": ["discriminant", "delta", "trinôme", "racines", "équation second degré"]
+}

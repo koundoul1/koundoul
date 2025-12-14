@@ -1,0 +1,72 @@
+[
+  {
+    "id": "q1",
+    "question": "Qu'est-ce que le nombre dérivé en un point ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": [
+      "La limite du taux de variation quand h tend vers 0",
+      "La dérivée de la fonction en ce point",
+      "Le coefficient directeur de la tangente",
+      "Toutes ces réponses"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Le nombre dérivé est tout à la fois : la limite du taux de variation, la dérivée, et le coefficient directeur de la tangente. C'est le même concept !",
+    "difficulty": 2,
+    "xpReward": 15,
+    "order": 1
+  },
+  {
+    "id": "q2",
+    "question": "Si f(x) = x², quel est le nombre dérivé en x = 3 ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["3", "6", "9", "12"],
+    "correctAnswer": 1,
+    "explanation": "Pour f(x) = x², on a f'(x) = 2x. Donc f'(3) = 2×3 = 6. Le nombre dérivé en 3 est 6, ce qui signifie que la pente de la tangente en ce point est 6.",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 2
+  },
+  {
+    "id": "q3",
+    "question": "Que représente graphiquement le nombre dérivé ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": [
+      "La longueur de la tangente",
+      "La pente de la tangente à la courbe",
+      "L'ordonnée du point",
+      "L'aire sous la courbe"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Le nombre dérivé représente le coefficient directeur de la tangente, c'est-à-dire sa pente. Plus la valeur est grande, plus la tangente est raide.",
+    "difficulty": 1,
+    "xpReward": 15,
+    "order": 3
+  },
+  {
+    "id": "q4",
+    "question": "Calculer la limite : lim(h→0) [(3+h)² - 3²] / h",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["3", "6", "9", "0"],
+    "correctAnswer": 1,
+    "explanation": "En développant : (3+h)² = 9 + 6h + h². Donc [(9+6h+h²) - 9] / h = (6h+h²)/h = 6+h. Quand h→0, cela tend vers 6. C'est bien f'(3) pour f(x)=x².",
+    "difficulty": 3,
+    "xpReward": 20,
+    "order": 4
+  },
+  {
+    "id": "q5",
+    "question": "Si le nombre dérivé en un point est négatif, que peut-on dire ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": [
+      "La fonction est décroissante en ce point",
+      "La tangente descend vers la droite",
+      "La fonction est négative",
+      "Les réponses A et B sont vraies"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Un nombre dérivé négatif signifie deux choses : la fonction est décroissante à cet endroit ET la tangente descend vers la droite (pente négative).",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 5
+  }
+]

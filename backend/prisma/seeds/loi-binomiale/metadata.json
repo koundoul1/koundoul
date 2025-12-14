@@ -1,0 +1,12 @@
+{
+  "id": "loi-binomiale",
+  "title": "Loi binomiale - Calculs et applications",
+  "subject": "math",
+  "level": "premiere",
+  "chapter": "Probabilités",
+  "duration": 8,
+  "difficulty": 4,
+  "xpReward": 180,
+  "realWorldApp": "Évaluer la fiabilité d'un contrôle qualité industriel",
+  "keywords": ["probabilité", "binomiale", "schéma de Bernoulli", "C(n,k)", "p^n"]
+}

@@ -1,0 +1,24 @@
+﻿{
+    "id":  "derive-second-derivÃ©e-troisieme",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "derive",
+                     "second",
+                     "derivÃ©e",
+                     "troisieme"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Derive Second Derivã©E Troisieme",
+    "duration":  8
+}

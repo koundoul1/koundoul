@@ -1,0 +1,23 @@
+﻿{
+    "id":  "equation-exponentielle-complexe",
+    "prerequisites":  [
+                          "Notions de base"
+                      ],
+    "keywords":  [
+                     "equation",
+                     "exponentielle",
+                     "complexe"
+                 ],
+    "realWorldApp":  "Applications pratiques",
+    "level":  "premiere",
+    "xpReward":  150,
+    "objectives":  [
+                       "Comprendre les concepts fondamentaux",
+                       "Appliquer les mÃ©thodes"
+                   ],
+    "subject":  "math",
+    "chapter":  "Chapitre",
+    "difficulty":  3,
+    "title":  "Equation Exponentielle Complexe",
+    "duration":  8
+}

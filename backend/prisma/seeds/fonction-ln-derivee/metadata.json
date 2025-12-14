@@ -1,0 +1,12 @@
+{
+  "id": "fonction-ln-derivee",
+  "title": "Fonction logarithme népérien et sa dérivée",
+  "subject": "math",
+  "level": "premiere",
+  "chapter": "Exponentielle et Logarithme",
+  "duration": 8,
+  "difficulty": 4,
+  "xpReward": 170,
+  "realWorldApp": "Modéliser la croissance démographique et les phénomènes exponentiels inverses",
+  "keywords": ["logarithme", "ln", "dérivée", "1/x", "croissance"]
+}

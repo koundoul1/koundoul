@@ -1,0 +1,74 @@
+﻿{
+    "questions":  [
+                      {
+                          "id":  "q5",
+                          "question":  "Quelle est la notion principale de cette leÃ§on ?",
+                          "difficulty":  "DIFFICILE",
+                          "explanation":  "L\u0027explication de la rÃ©ponse correcte.",
+                          "options":  [
+                                          "Option A",
+                                          "Option B",
+                                          "Option C",
+                                          "Option D"
+                                      ],
+                          "xpReward":  50,
+                          "correctAnswer":  0
+                      },
+                      {
+                          "id":  "q5",
+                          "question":  "Quelle est la notion principale de cette leÃ§on ?",
+                          "difficulty":  "DIFFICILE",
+                          "explanation":  "L\u0027explication de la rÃ©ponse correcte.",
+                          "options":  [
+                                          "Option A",
+                                          "Option B",
+                                          "Option C",
+                                          "Option D"
+                                      ],
+                          "xpReward":  50,
+                          "correctAnswer":  0
+                      },
+                      {
+                          "id":  "q5",
+                          "question":  "Quelle est la notion principale de cette leÃ§on ?",
+                          "difficulty":  "DIFFICILE",
+                          "explanation":  "L\u0027explication de la rÃ©ponse correcte.",
+                          "options":  [
+                                          "Option A",
+                                          "Option B",
+                                          "Option C",
+                                          "Option D"
+                                      ],
+                          "xpReward":  50,
+                          "correctAnswer":  0
+                      },
+                      {
+                          "id":  "q5",
+                          "question":  "Quelle est la notion principale de cette leÃ§on ?",
+                          "difficulty":  "DIFFICILE",
+                          "explanation":  "L\u0027explication de la rÃ©ponse correcte.",
+                          "options":  [
+                                          "Option A",
+                                          "Option B",
+                                          "Option C",
+                                          "Option D"
+                                      ],
+                          "xpReward":  50,
+                          "correctAnswer":  0
+                      },
+                      {
+                          "id":  "q5",
+                          "question":  "Quelle est la notion principale de cette leÃ§on ?",
+                          "difficulty":  "DIFFICILE",
+                          "explanation":  "L\u0027explication de la rÃ©ponse correcte.",
+                          "options":  [
+                                          "Option A",
+                                          "Option B",
+                                          "Option C",
+                                          "Option D"
+                                      ],
+                          "xpReward":  50,
+                          "correctAnswer":  0
+                      }
+                  ]
+}

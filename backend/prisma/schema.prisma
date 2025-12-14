@@ -1,0 +1,833 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===== UTILISATEURS =====
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  username    String   @unique
+  password    String
+  firstName   String?
+  lastName    String?
+  avatar      String?
+  xp          Int      @default(0)
+  level       Int      @default(1)
+  isActive    Boolean  @default(true)
+  preferences Json? // Stockage des préférences utilisateur (langue, thème, etc.)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations existantes
+  problems  Problem[]
+  solutions Solution[]
+  quizzes   QuizAttempt[]
+  badges    UserBadge[]
+  payments  Payment[]
+
+  // Nouvelles relations pédagogiques
+  lessonCompletions LessonCompletion[]
+  exerciseAttempts  ExerciseAttempt[]
+
+  // Révision espacée
+  flashcardReviews FlashcardReview[]
+
+  // Forum
+  discussions     Discussion[]
+  replies         Reply[]
+  discussionVotes DiscussionVote[]
+  replyVotes      ReplyVote[]
+
+  // Coach Virtuel
+  coachSessions CoachSession[]
+
+  // Maîtrise des concepts
+  masteries UserMastery[]
+
+  // Challenges et Duels
+  challengeParticipants ChallengeParticipant[]
+  challengerDuels       Duel[]                 @relation("Challenger")
+  opponentDuels         Duel[]                 @relation("Opponent")
+  wonDuels              Duel[]                 @relation("Winner")
+
+  // Informations pour classements
+  school  String?
+  region  String?
+  country String? @default("France")
+
+  @@map("users")
+}
+
+// ===== CONTENU PÉDAGOGIQUE =====
+
+model Subject {
+  id          String @id @default(cuid())
+  name        String // "Mathématiques", "Physique", "Chimie"
+  slug        String @unique // "mathematiques", "physique", "chimie"
+  icon        String // Emoji ou URL icône
+  description String
+  color       String // Couleur thème
+  order       Int    @default(0)
+
+  chapters    Chapter[]
+  exercises   Exercise[]
+  quizzes     Quiz[]
+  flashcards  Flashcard[]
+  discussions Discussion[]
+  challenges  Challenge[]
+  duels       Duel[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("subjects")
+}
+
+model Chapter {
+  id        String  @id @default(cuid())
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  title       String // "Équations du second degré"
+  slug        String // "equations-second-degre"
+  description String
+  level       Level // SECONDE, PREMIERE, TERMINALE
+  order       Int    @default(0)
+
+  // Progression
+  requiredChapters String[] // IDs des chapitres pré-requis
+
+  lessons    Lesson[]
+  exercises  Exercise[]
+  quizzes    Quiz[]
+  flashcards Flashcard[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([subjectId, slug])
+  @@map("chapters")
+}
+
+model Lesson {
+  id        String  @id @default(cuid())
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  title    String // "Calcul du discriminant"
+  slug     String
+  order    Int    @default(0)
+  duration Int    @default(15) // minutes estimées
+
+  // Contenu
+  content    String   @db.Text // Markdown
+  summary    String // Résumé court
+  objectives String[] // ["Calculer Δ", "Identifier les solutions"]
+
+  // Médias
+  videoUrl String?
+  images   String[] // URLs
+
+  // Complétion utilisateur
+  completions LessonCompletion[]
+  flashcards  Flashcard[]
+  discussions Discussion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([chapterId, slug])
+  @@map("lessons")
+}
+
+model Exercise {
+  id        String   @id @default(cuid())
+  subjectId String
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+  chapterId String?
+  chapter   Chapter? @relation(fields: [chapterId], references: [id])
+
+  title      String
+  difficulty Difficulty // FACILE, MOYEN, DIFFICILE
+  level      Level
+  type       ExerciseType // QCM, CALCUL, DEMONSTRATION, REDACTION
+
+  // Énoncé
+  statement String   @db.Text // Markdown
+  hints     String[] // Indices progressifs
+
+  // Solution
+  solution      String  @db.Text // Markdown
+  steps         Json // [{step: 1, title: "...", content: "..."}]
+  correctAnswer String? // Pour QCM
+
+  // Métadonnées
+  points       Int      @default(10)
+  timeEstimate Int      @default(10) // minutes
+  tags         String[] // ["équations", "discriminant"]
+
+  // Statistiques
+  attempts    ExerciseAttempt[]
+  discussions Discussion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("exercises")
+}
+
+model ExerciseAttempt {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  exerciseId String
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+
+  userAnswer String  @db.Text
+  isCorrect  Boolean
+  score      Int     @default(0)
+  timeSpent  Int // secondes
+  hintsUsed  Int     @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@map("exercise_attempts")
+}
+
+model LessonCompletion {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+  lessonId String
+  lesson   Lesson @relation(fields: [lessonId], references: [id])
+
+  completed Boolean @default(true)
+  timeSpent Int     @default(0) // secondes
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, lessonId])
+  @@map("lesson_completions")
+}
+
+// ===== SYSTÈME EXISTANT (SIMPLIFIÉ) =====
+
+model Problem {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  category    String
+  difficulty  String // easy, medium, hard
+  subject     String // math, physics, chemistry, etc.
+  points      Int      @default(10)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  solutions Solution[]
+
+  @@map("problems")
+}
+
+model Solution {
+  id          String   @id @default(cuid())
+  content     String
+  explanation String?
+  isCorrect   Boolean  @default(false)
+  points      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  problemId String
+  problem   Problem @relation(fields: [problemId], references: [id])
+
+  @@map("solutions")
+}
+
+model Quiz {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  subjectId   String
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  chapterId   String?
+  chapter     Chapter? @relation(fields: [chapterId], references: [id])
+
+  level        Level
+  difficulty   Difficulty
+  timeLimit    Int?       @default(15) // minutes
+  passingScore Int        @default(60) // pourcentage
+  isActive     Boolean    @default(true)
+
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
+  challenge Challenge?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("quizzes")
+}
+
+model QuizQuestion {
+  id     String @id @default(cuid())
+  quizId String
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  questionText  String       @db.Text
+  type          QuestionType @default(MULTIPLE_CHOICE)
+  options       String[] // Pour QCM
+  correctAnswer String
+  explanation   String       @db.Text
+  points        Int          @default(10)
+  order         Int          @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("quiz_questions")
+}
+
+model QuizAttempt {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  quizId String
+  quiz   Quiz   @relation(fields: [quizId], references: [id])
+
+  status  QuizStatus @default(IN_PROGRESS)
+  score   Int        @default(0)
+  answers Json // Map questionId -> answer
+  passed  Boolean    @default(false)
+
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+  timeSpent   Int? // seconds
+
+  createdAt DateTime @default(now())
+
+  @@map("quiz_attempts")
+}
+
+model Badge {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String
+  icon        String
+  condition   String // XP threshold or specific achievement
+  points      Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  // Relations
+  users UserBadge[]
+
+  @@map("badges")
+}
+
+model UserBadge {
+  id       String   @id @default(cuid())
+  earnedAt DateTime @default(now())
+
+  // Relations
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+  badgeId String
+  badge   Badge  @relation(fields: [badgeId], references: [id])
+
+  @@unique([userId, badgeId])
+  @@map("user_badges")
+}
+
+model Payment {
+  id          String   @id @default(cuid())
+  amount      Int // in cents
+  currency    String   @default("eur")
+  status      String // pending, completed, failed, refunded
+  stripeId    String?  @unique
+  description String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("payments")
+}
+
+// ===== SYSTÈME DE RÉVISION ESPACÉE =====
+
+model Flashcard {
+  id String @id @default(cuid())
+
+  // Contenu
+  question    String  @db.Text
+  answer      String  @db.Text
+  explanation String? @db.Text
+
+  // Source
+  lessonId  String?
+  lesson    Lesson?  @relation(fields: [lessonId], references: [id])
+  chapterId String?
+  chapter   Chapter? @relation(fields: [chapterId], references: [id])
+  subjectId String
+  subject   Subject  @relation(fields: [subjectId], references: [id])
+
+  // Métadonnées
+  difficulty Difficulty @default(FACILE)
+  tags       String[]
+
+  // Relations
+  reviews FlashcardReview[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("flashcards")
+}
+
+model FlashcardReview {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  flashcardId String
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+
+  // Algorithme SM-2
+  quality     Int // 0-5 (0=blackout, 5=perfect)
+  interval    Int // jours jusqu'à prochaine révision
+  easeFactor  Float // facteur de facilité (min 1.3)
+  repetitions Int   @default(0)
+
+  // Dates
+  reviewedAt DateTime @default(now())
+  nextReview DateTime // date de prochaine révision
+
+  // Stats
+  timeSpent Int? // secondes
+
+  @@index([userId, nextReview])
+  @@map("flashcard_reviews")
+}
+
+// ===== FORUM COMMUNAUTAIRE =====
+
+model Discussion {
+  id String @id @default(cuid())
+
+  title    String
+  content  String             @db.Text
+  category DiscussionCategory @default(QUESTION)
+
+  // Contexte pédagogique
+  lessonId   String?
+  lesson     Lesson?   @relation(fields: [lessonId], references: [id])
+  exerciseId String?
+  exercise   Exercise? @relation(fields: [exerciseId], references: [id])
+  subjectId  String?
+  subject    Subject?  @relation(fields: [subjectId], references: [id])
+
+  // Auteur
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // Stats
+  upvotes  Int     @default(0)
+  views    Int     @default(0)
+  solved   Boolean @default(false)
+  isPinned Boolean @default(false)
+
+  // Relations
+  replies Reply[]
+  votes   DiscussionVote[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category, createdAt])
+  @@index([userId])
+  @@map("discussions")
+}
+
+model Reply {
+  id String @id @default(cuid())
+
+  discussionId String
+  discussion   Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  content      String  @db.Text
+  upvotes      Int     @default(0)
+  isBestAnswer Boolean @default(false)
+
+  // Relations
+  votes ReplyVote[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([discussionId])
+  @@map("replies")
+}
+
+model DiscussionVote {
+  id String @id @default(cuid())
+
+  discussionId String
+  discussion   Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  value Int // +1 ou -1
+
+  createdAt DateTime @default(now())
+
+  @@unique([discussionId, userId])
+  @@map("discussion_votes")
+}
+
+model ReplyVote {
+  id String @id @default(cuid())
+
+  replyId String
+  reply   Reply  @relation(fields: [replyId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  value Int // +1 ou -1
+
+  createdAt DateTime @default(now())
+
+  @@unique([replyId, userId])
+  @@map("reply_votes")
+}
+
+// ===== ENUMS =====
+
+enum Level {
+  SECONDE
+  PREMIERE
+  TERMINALE
+  SUPERIEUR
+}
+
+enum Difficulty {
+  FACILE
+  MOYEN
+  DIFFICILE
+  EXPERT
+}
+
+enum ExerciseType {
+  QCM
+  CALCUL
+  DEMONSTRATION
+  REDACTION
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
+enum QuizStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+enum DiscussionCategory {
+  QUESTION
+  EXPLANATION
+  RESOURCE
+  BUG
+  OTHER
+}
+
+// ===== COACH VIRTUEL =====
+
+model CoachSession {
+  id String @id @default(cuid())
+
+  // Utilisateur (optionnel pour permettre l'usage anonyme)
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  // Analyse de l'exercice
+  exerciseAnalysis Json // Données d'analyse de l'IA
+
+  // Progression de la session
+  status      CoachSessionStatus @default(IN_PROGRESS)
+  currentStep Int                @default(0)
+
+  // Statistiques
+  score     Int?
+  totalTime Int? // en minutes
+  xpEarned  Int  @default(0)
+
+  // Résumé final
+  summary Json?
+
+  // Dates
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  // Relations
+  answers CoachAnswer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("coach_sessions")
+}
+
+model CoachAnswer {
+  id String @id @default(cuid())
+
+  sessionId String
+  session   CoachSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  // Question et réponse
+  question   Json // Données de la question
+  userAnswer String
+  helpLevel  Int    @default(0) // Niveau d'aide utilisé
+
+  // Validation
+  isCorrect Boolean
+  feedback  String?
+  points    Int     @default(0)
+
+  // Timing
+  timeSpent Int? // secondes
+
+  createdAt DateTime @default(now())
+
+  @@map("coach_answers")
+}
+
+enum CoachSessionStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+// ===== SUIVI DE MAÎTRISE DES CONCEPTS =====
+
+model ConceptNode {
+  id String @id @default(cuid())
+
+  // Identifiants
+  conceptId String @unique // ID unique du concept (ex: "derivatives", "kinematics")
+  name      String // Nom lisible (ex: "Dérivées", "Cinématique")
+  domain    String // "mathematics", "physics", "chemistry", "mechanics"
+  level     Level // SECONDE, PREMIERE, TERMINALE, SUPERIEUR
+
+  // Structure pédagogique
+  description     String?  @db.Text
+  prerequisites   String[] // IDs des concepts prérequis (ex: ["limits", "continuity"])
+  masteryRequired Float // Score de maîtrise nécessaire (0-1)
+
+  // Liens pédagogiques
+  microLessonId String? // ID de la micro-leçon associée
+
+  // Relations
+  masteries UserMastery[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([domain, level])
+  @@map("concept_nodes")
+}
+
+model UserMastery {
+  id String @id @default(cuid())
+
+  // Relations
+  userId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conceptId String
+  concept   ConceptNode @relation(fields: [conceptId], references: [id], onDelete: Cascade)
+
+  // Niveaux de Maîtrise
+  masteryScore Float    @default(0.0) // Score de 0 à 1 basé sur la performance
+  lastTested   DateTime @updatedAt
+
+  // Révision Espacée
+  nextReviewDate DateTime? // Date suggérée pour la prochaine révision
+  reviewCount    Int       @default(0) // Nombre de fois que le concept a été revu
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, conceptId])
+  @@index([userId, nextReviewDate])
+  @@map("user_masteries")
+}
+
+// ===== CHALLENGES ET DUELS =====
+
+model Challenge {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  subjectId   String?
+  subject     Subject? @relation(fields: [subjectId], references: [id])
+
+  difficulty Difficulty @default(MOYEN)
+  level      Level?
+  questions  Int        @default(10)
+  timeLimit  Int // en minutes
+
+  // Dates
+  startDate DateTime
+  endDate   DateTime
+  isActive  Boolean  @default(true)
+
+  // Récompenses
+  prize       String? // "1000 XP + Badge Or"
+  xpReward    Int     @default(100)
+  badgeReward String? // ID du badge
+
+  // Quiz associé (optionnel)
+  quizId String? @unique
+  quiz   Quiz?   @relation(fields: [quizId], references: [id])
+
+  // Relations
+  participants  ChallengeParticipant[]
+  questionsList ChallengeQuestion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive, endDate])
+  @@map("challenges")
+}
+
+model ChallengeQuestion {
+  id          String    @id @default(cuid())
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  questionId String // ID de la question du quiz
+  order      Int    @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@index([challengeId, order])
+  @@map("challenge_questions")
+}
+
+model ChallengeParticipant {
+  id          String    @id @default(cuid())
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Résultats
+  score          Int? @default(0)
+  correctAnswers Int? @default(0)
+  timeSpent      Int? // en secondes
+
+  // Statut
+  status ChallengeStatus @default(IN_PROGRESS)
+
+  // Dates
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  // Quiz attempt associé
+  quizAttemptId String? @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([challengeId, userId])
+  @@index([challengeId, score])
+  @@index([userId])
+  @@map("challenge_participants")
+}
+
+enum ChallengeStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+  TIMEOUT
+}
+
+model Duel {
+  id String @id @default(cuid())
+
+  // Participants
+  challengerId String
+  challenger   User    @relation("Challenger", fields: [challengerId], references: [id])
+  opponentId   String
+  opponent     User    @relation("Opponent", fields: [opponentId], references: [id])
+  winnerId     String?
+  winner       User?   @relation("Winner", fields: [winnerId], references: [id])
+
+  // Paramètres du duel
+  subjectId  String?
+  subject    Subject?   @relation(fields: [subjectId], references: [id])
+  difficulty Difficulty @default(MOYEN)
+  questions  Int        @default(5)
+  timeLimit  Int // en minutes
+
+  // Statut
+  status DuelStatus @default(PENDING)
+
+  // Résultats
+  challengerScore Int? @default(0)
+  opponentScore   Int? @default(0)
+
+  // Quiz associés
+  challengerQuizAttemptId String? @unique
+  opponentQuizAttemptId   String? @unique
+
+  // Récompenses
+  xpReward Int @default(50)
+
+  // Dates
+  createdAt   DateTime  @default(now())
+  acceptedAt  DateTime?
+  completedAt DateTime?
+
+  @@index([challengerId, status])
+  @@index([opponentId, status])
+  @@index([status, createdAt])
+  @@map("duels")
+}
+
+enum DuelStatus {
+  PENDING
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}

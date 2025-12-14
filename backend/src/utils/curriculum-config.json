@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-10-27",
+    "totalLessons": 450,
+    "estimatedGenerationTime": "8-12 hours"
+  },
+  "levels": {
+    "seconde": {
+      "math": {
+        "chapters": [
+          {
+            "id": "nombres-calculs",
+            "name": "Nombres et Calculs",
+            "lessons": [
+              {
+                "id": "ensembles-nombres",
+                "title": "Ensembles de nombres (ℕ, ℤ, ℚ, ℝ)",
+                "duration": 8,
+                "difficulty": 2,
+                "prerequisites": [],
+                "objectives": [
+                  "Distinguer les différents ensembles de nombres",
+                  "Comprendre les inclusions entre ensembles",
+                  "Utiliser la notation correcte"
+                ],
+                "keywords": ["nombres", "ensembles", "naturels", "entiers", "rationnels", "réels"],
+                "realWorldApp": "Classification des mesures en physique"
+              }
+            ]
+          }
+        ]
+      },
+      "physics": {
+        "chapters": []
+      },
+      "chemistry": {
+        "chapters": []
+      }
+    },
+    "premiere": {
+      "math": {
+        "chapters": [
+          {
+            "id": "fonctions-exponentielles",
+            "name": "Fonctions exponentielles",
+            "lessons": [
+              {
+                "id": "derivee-fonction-exponentielle",
+                "title": "Dérivée de la fonction exponentielle",
+                "duration": 8,
+                "difficulty": 3,
+                "prerequisites": [
+                  "Notion de dérivée (limite du taux d'accroissement)",
+                  "Fonction exp(x) et ses propriétés",
+                  "Règle de dérivation des fonctions composées"
+                ],
+                "objectives": [
+                  "Dériver exp(x) et comprendre pourquoi sa dérivée est elle-même",
+                  "Maîtriser la formule de dérivation de exp(u(x))",
+                  "Appliquer ces formules dans des exercices concrets",
+                  "Lier cette notion aux applications pratiques (croissance, intérêts)"
+                ],
+                "keywords": ["dérivée", "exponentielle", "exp(u)", "croissance", "formule"],
+                "realWorldApp": "Modélisation de la croissance d'une population de bactéries"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "terminale": {
+      "math": {
+        "chapters": []
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

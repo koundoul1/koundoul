@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q1",
+    "question": "Quelle est la formule du discriminant Δ d'un trinôme ax² + bx + c ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["Δ = b² - 4ac", "Δ = b² + 4ac", "Δ = 4ac - b²", "Δ = ac - b"],
+    "correctAnswer": 0,
+    "explanation": "Le discriminant est Δ = b² - 4ac. C'est lui qui détermine le nombre et la nature des solutions de l'équation ax² + bx + c = 0.",
+    "difficulty": 1,
+    "xpReward": 10,
+    "order": 1
+  },
+  {
+    "id": "q2",
+    "question": "Si Δ > 0, combien de solutions a l'équation ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["Aucune", "Une seule", "Deux solutions distinctes", "Une infinité"],
+    "correctAnswer": 2,
+    "explanation": "Quand Δ > 0, l'équation a deux solutions distinctes : x₁ = (-b-√Δ)/2a et x₂ = (-b+√Δ)/2a. Graphiquement, la parabole coupe l'axe en deux points.",
+    "difficulty": 1,
+    "xpReward": 15,
+    "order": 2
+  },
+  {
+    "id": "q3",
+    "question": "Pour l'équation x² - 5x + 6 = 0, quel est le discriminant ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["1", "0", "-1", "49"],
+    "correctAnswer": 0,
+    "explanation": "Avec a=1, b=-5, c=6, on a Δ = (-5)² - 4×1×6 = 25 - 24 = 1. Le discriminant est positif, donc deux solutions.",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 3
+  },
+  {
+    "id": "q4",
+    "question": "Si Δ = 0, que se passe-t-il ?",
+    "type": "MULTIPLE_CHOICE",
+    "options": [
+      "L'équation n'a pas de solution",
+      "L'équation a une solution double",
+      "L'équation a deux solutions",
+      "Impossible de déterminer"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Quand Δ = 0, l'équation a une solution double x = -b/(2a). Graphiquement, la parabole est tangente à l'axe des abscisses en un seul point.",
+    "difficulty": 2,
+    "xpReward": 15,
+    "order": 4
+  },
+  {
+    "id": "q5",
+    "question": "Calculer le discriminant de 2x² - 8x + 8",
+    "type": "MULTIPLE_CHOICE",
+    "options": ["0", "64", "32", "-32"],
+    "correctAnswer": 0,
+    "explanation": "Δ = (-8)² - 4×2×8 = 64 - 64 = 0. Le discriminant est nul, donc une solution double : x = -(-8)/(2×2) = 2.",
+    "difficulty": 2,
+    "xpReward": 20,
+    "order": 5
+  }
+]
