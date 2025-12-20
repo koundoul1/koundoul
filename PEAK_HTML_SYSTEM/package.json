@@ -1,0 +1,18 @@
+{
+  "name": "peak_html_system",
+  "version": "1.0.0",
+  "description": "Système complet pour générer et gérer des sites HTML via Claude AI et Supabase Storage.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.87.2"
+  }
+}

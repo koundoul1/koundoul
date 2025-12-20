@@ -59,11 +59,6 @@ model User {
   opponentDuels         Duel[]                 @relation("Opponent")
   wonDuels              Duel[]                 @relation("Winner")
 
-  // Informations pour classements
-  school  String?
-  region  String?
-  country String? @default("France")
-
   @@map("users")
 }
 

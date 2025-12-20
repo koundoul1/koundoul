@@ -1,0 +1,22 @@
+COMMANDES POUR UPLOADER PK-4358-DER-DESIGN.html
+==================================================
+
+1. Ouvrir PowerShell
+
+2. Aller dans le dossier:
+   cd c:\Users\conta\koundoul\PEAK_HTML_SYSTEM
+
+3. Definir la cle Supabase (remplacez VOTRE_CLE):
+   $env:NEXT_PUBLIC_SUPABASE_ANON_KEY="VOTRE_CLE_ICI"
+   $env:NEXT_PUBLIC_SUPABASE_URL="https://wnbkplyerizogmufatxb.supabase.co"
+
+4. Uploader le fichier:
+   node scripts/upload-file-direct.cjs "C:\Users\conta\peak-1000\Fichiers Html\PK-4358-DER-DESIGN.html" "PK-4358"
+
+5. Copier l'URL generee et ouvrir dans le navigateur
+
+==================================================
+POUR OBTENIR LA CLE SUPABASE:
+1. https://supabase.com/dashboard/project/wnbkplyerizogmufatxb/settings/api
+2. Copier "anon public" key
+==================================================

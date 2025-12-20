@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Upload - Peak</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+        }
+        .success {
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Test Upload Réussi !</h1>
+        <div class="success">
+            <p><strong>Félicitations !</strong></p>
+            <p>Ce fichier HTML a été uploadé avec succès dans Supabase Storage.</p>
+            <p>Si vous voyez cette page, cela signifie que :</p>
+            <ul>
+                <li>✅ Le bucket Supabase est configuré</li>
+                <li>✅ Les permissions sont correctes</li>
+                <li>✅ L'URL publique fonctionne</li>
+            </ul>
+        </div>
+        <p><strong>Date de test :</strong> <span id="date"></span></p>
+    </div>
+    <script>
+        document.getElementById('date').textContent = new Date().toLocaleString('fr-FR');
+    </script>
+</body>
+</html>
