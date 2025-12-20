@@ -38,7 +38,7 @@ dotenv.config()
 class App {
   constructor() {
     this.app = express()
-    this.port = process.env.PORT || 5000
+    this.port = process.env.PORT || 3001
     this.setupMiddlewares()
     this.setupRoutes()
     this.setupErrorHandling()
@@ -71,16 +71,33 @@ class App {
           }
         } else {
           // En production, utiliser la liste des origines autorisées
-          const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [
+          const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(o => o.trim()) : [
             'http://localhost:3000', // React (port principal)
             'http://localhost:5173', // Vite (port alternatif)
-            'http://localhost:5000', // Port alternatif
+            'http://localhost:3002', // Vite (port alternatif)
           ]
           
-          if (!origin || allowedOrigins.includes(origin)) {
+          // Autoriser les requêtes sans origine (mobile apps, Postman, etc.)
+          if (!origin) {
+            return callback(null, true)
+          }
+          
+          // Vérifier si l'origine correspond exactement ou via pattern
+          const isAllowed = allowedOrigins.some(allowed => {
+            // Support des wildcards pour Vercel preview URLs (ex: *.vercel.app)
+            if (allowed.includes('*')) {
+              const pattern = '^' + allowed.replace(/\*/g, '.*') + '$'
+              return new RegExp(pattern).test(origin)
+            }
+            // Correspondance exacte
+            return origin === allowed || origin.startsWith(allowed)
+          })
+          
+          if (isAllowed) {
             callback(null, true)
           } else {
             console.error(`❌ CORS Refusé: Tentative d'accès depuis ${origin}`)
+            console.error(`   Origines autorisées: ${allowedOrigins.join(', ')}`)
             callback(new Error('Accès non autorisé par la politique CORS.'))
           }
         }
