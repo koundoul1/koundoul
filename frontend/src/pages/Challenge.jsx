@@ -80,8 +80,8 @@ const Challenge = () => {
       challenge &&
       challenge.id &&
       challenge.title &&
-      challenge.questions > 0 &&
-      challenge.timeLimit > 0
+      (challenge.questions > 0 || challenge.questions === undefined) &&
+      (challenge.timeLimit > 0 || challenge.timeLimit === undefined)
     );
   }, []);
 
@@ -384,7 +384,7 @@ const Challenge = () => {
               <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-2 border-yellow-500/50 rounded-2xl p-8">
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    {weeklyChallenge.isActive && (
+                    {weeklyChallenge?.isActive && (
                       <div className="flex items-center mb-2">
                         <Flame className="h-6 w-6 text-orange-500 mr-2 animate-pulse" />
                         <span className="px-3 py-1 bg-orange-500/30 text-orange-200 rounded-full text-sm font-semibold">
@@ -392,11 +392,11 @@ const Challenge = () => {
                         </span>
                       </div>
                     )}
-                    <h2 className="text-3xl font-bold text-white mb-2">{weeklyChallenge.title}</h2>
-                    <p className="text-gray-300">{weeklyChallenge.description}</p>
+                    <h2 className="text-3xl font-bold text-white mb-2">{weeklyChallenge?.title || 'Aucun challenge actif'}</h2>
+                    <p className="text-gray-300">{weeklyChallenge?.description || 'Il n\'y a pas de challenge hebdomadaire actif pour le moment.'}</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-4xl font-bold text-yellow-400 mb-1">{weeklyChallenge.participants || 0}</div>
+                    <div className="text-4xl font-bold text-yellow-400 mb-1">{weeklyChallenge?.participants || 0}</div>
                     <div className="text-sm text-gray-300">Participants</div>
                   </div>
                 </div>
@@ -407,34 +407,34 @@ const Challenge = () => {
                     <BookOpen className="h-5 w-5 mr-2" />
                     Matière
                   </div>
-                  <div className="text-xl font-bold text-white">{weeklyChallenge.subject}</div>
+                    <div className="text-xl font-bold text-white">{weeklyChallenge?.subject || 'Mathématiques'}</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="flex items-center text-gray-300 mb-2">
                     <Target className="h-5 w-5 mr-2" />
                     Difficulté
                   </div>
-                  <div className="text-xl font-bold text-yellow-400">{weeklyChallenge.difficulty}</div>
+                  <div className="text-xl font-bold text-yellow-400">{weeklyChallenge?.difficulty || 'Moyen'}</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="flex items-center text-gray-300 mb-2">
                     <Timer className="h-5 w-5 mr-2" />
                     Durée
                   </div>
-                  <div className="text-xl font-bold text-white">{weeklyChallenge.timeLimit} min</div>
+                  <div className="text-xl font-bold text-white">{weeklyChallenge?.timeLimit || 20} min</div>
                 </div>
                 <div className="bg-white/10 rounded-lg p-4">
                   <div className="flex items-center text-gray-300 mb-2">
                     <Award className="h-5 w-5 mr-2" />
                     Récompense
                   </div>
-                  <div className="text-lg font-bold text-purple-300">{weeklyChallenge.prize}</div>
+                  <div className="text-lg font-bold text-purple-300">{weeklyChallenge?.prize || 'Récompenses à venir'}</div>
                 </div>
               </div>
 
                 <button
                   onClick={startChallenge}
-                  disabled={loading || !weeklyChallenge.isActive}
+                  disabled={loading || !weeklyChallenge?.isActive}
                   aria-label="Commencer le challenge hebdomadaire"
                   className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-lg font-bold text-lg hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/50 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
@@ -473,7 +473,7 @@ const Challenge = () => {
               <ul className="space-y-2 text-gray-300">
                 <li className="flex items-start">
                   <span className="text-green-400 mr-2">✓</span>
-                  Vous avez {weeklyChallenge.timeLimit} minutes pour répondre à {weeklyChallenge.questions} questions
+                  Vous avez {weeklyChallenge?.timeLimit || 20} minutes pour répondre à {weeklyChallenge?.questions || 10} questions
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-400 mr-2">✓</span>
