@@ -268,14 +268,14 @@ const Header = () => {
             {/* Bouton Rechercher Mobile */}
             <button
               onClick={() => setShowSearchResults(!showSearchResults)}
-              className="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+              className="p-2 rounded-md text-gray-900 hover:text-blue-600 hover:bg-gray-100 transition-colors"
             >
               <Search className="h-5 w-5" />
             </button>
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+              className="p-2 rounded-md text-gray-900 hover:text-blue-600 hover:bg-gray-100 transition-colors"
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -354,7 +354,7 @@ const Header = () => {
             <nav className="py-4 space-y-1 px-4">
               {/* Navigation principale */}
               <div className="mb-4">
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-3 py-2">
+                <div className="text-xs font-semibold text-gray-700 uppercase tracking-wider px-3 py-2">
                   Navigation
                 </div>
                 {navigation.map((item) => (
@@ -375,7 +375,7 @@ const Header = () => {
               
               {/* Nouvelles fonctionnalités */}
               <div>
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-3 py-2">
+                <div className="text-xs font-semibold text-gray-700 uppercase tracking-wider px-3 py-2">
                   Fonctionnalités
                 </div>
                 {advancedFeatures.map((item) => (
