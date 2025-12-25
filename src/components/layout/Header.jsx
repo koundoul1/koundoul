@@ -40,11 +40,18 @@ const Header = () => {
   const navigate = useNavigate()
   const searchRef = useRef(null)
 
+  const profileRef = useRef(null)
+  const profileButtonRef = useRef(null)
+  const profileMenuRef = useRef(null)
+
   // Fermer les résultats quand on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearchResults(false)
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false)
       }
     }
 
@@ -53,6 +60,36 @@ const Header = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
+
+  // Ajuster la position du menu profil pour qu'il reste visible
+  useEffect(() => {
+    if (isProfileOpen && profileButtonRef.current && profileMenuRef.current) {
+      const buttonRect = profileButtonRef.current.getBoundingClientRect()
+      const menuWidth = 224 // w-56 = 14rem = 224px
+      const viewportWidth = window.innerWidth
+      const spacing = 8 // mt-2 = 0.5rem = 8px
+      
+      // Positionner le menu en fixed pour un contrôle total
+      let rightPosition = viewportWidth - buttonRect.right
+      
+      // S'assurer que le menu ne dépasse pas à droite (marge de 1rem)
+      const minRightMargin = 16
+      if (rightPosition < minRightMargin) {
+        rightPosition = minRightMargin
+      }
+      
+      // S'assurer que le menu ne dépasse pas à gauche
+      const leftPosition = viewportWidth - rightPosition - menuWidth
+      if (leftPosition < minRightMargin) {
+        rightPosition = viewportWidth - menuWidth - minRightMargin
+      }
+      
+      profileMenuRef.current.style.position = 'fixed'
+      profileMenuRef.current.style.top = `${buttonRect.bottom + spacing}px`
+      profileMenuRef.current.style.right = `${rightPosition}px`
+      profileMenuRef.current.style.left = 'auto'
+    }
+  }, [isProfileOpen])
 
   const handleLogout = () => {
     logout()
@@ -117,7 +154,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Premier menu - Navigation principale */}
         <div className="flex justify-between items-center h-16 min-h-[4rem]">
           {/* Logo */}
@@ -147,7 +184,7 @@ const Header = () => {
           </nav>
 
           {/* Actions utilisateur */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 relative">
             {/* Bouton Rechercher */}
             <div className="hidden md:block relative" ref={searchRef}>
               <button
@@ -213,54 +250,80 @@ const Header = () => {
               <span className="absolute top-0 right-0 h-3 w-3 bg-red-500 rounded-full border-2 border-white"></span>
             </button>
 
-            {/* Menu Profil */}
-            <div className="relative">
-              <button
-                onClick={() => setIsProfileOpen(!isProfileOpen)}
-                className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
-              >
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-                  <User className="h-4 w-4 text-white" />
-                </div>
-                <span className="hidden md:block text-sm font-medium text-gray-700">
-                  {user?.username || 'Mon Profil'}
-                </span>
-              </button>
-
-              {/* Dropdown Profil */}
-              {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                  <Link
-                    to="/profile"
-                    onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <User className="h-4 w-4 mr-2" />
-                    Mon Profil
-                  </Link>
-                  <Link
-                    to="/parent-dashboard"
-                    onClick={() => setIsProfileOpen(false)}
-                    className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    <Settings className="h-4 w-4 mr-2" />
-                    Espace Parents
-                  </Link>
-                  <div className="border-t border-gray-200 my-2"></div>
-                  <div className="px-4 py-2">
-                    <LanguageSwitcher />
+            {/* Menu Profil - Toujours visible si connecté */}
+            {isAuthenticated && (
+              <div className="relative" ref={profileRef}>
+                <button
+                  ref={profileButtonRef}
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
+                  aria-label="Menu profil"
+                  aria-expanded={isProfileOpen}
+                >
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                    <User className="h-4 w-4 text-white" />
                   </div>
-                  <div className="border-t border-gray-200 my-2"></div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                  >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Déconnexion
-                  </button>
-                </div>
-              )}
-            </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    {user?.username || user?.email || 'Mon Profil'}
+                  </span>
+                </button>
+
+                {/* Dropdown Profil - Positionné pour rester dans le viewport */}
+                {isProfileOpen && (
+                  <>
+                    {/* Overlay pour fermer au clic extérieur */}
+                    <div 
+                      className="fixed inset-0 z-40" 
+                      onClick={() => setIsProfileOpen(false)}
+                    />
+                    <div 
+                      ref={profileMenuRef}
+                      className="w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-[60]"
+                      style={{ maxWidth: 'calc(100vw - 2rem)' }}
+                    >
+                      {/* Nom d'utilisateur affiché dans le menu */}
+                      <div className="px-4 py-2 border-b border-gray-200">
+                        <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+                          Connecté en tant que
+                        </div>
+                        <div className="text-sm font-semibold text-gray-900 truncate">
+                          {user?.username || user?.email || 'Utilisateur'}
+                        </div>
+                      </div>
+
+                      <Link
+                        to="/profile"
+                        onClick={() => setIsProfileOpen(false)}
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        <User className="h-4 w-4 mr-2 text-gray-500" />
+                        Mon Profil
+                      </Link>
+                      <Link
+                        to="/parent-dashboard"
+                        onClick={() => setIsProfileOpen(false)}
+                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                      >
+                        <Settings className="h-4 w-4 mr-2 text-gray-500" />
+                        Espace Parents
+                      </Link>
+                      <div className="border-t border-gray-200 my-2"></div>
+                      <div className="px-4 py-2">
+                        <LanguageSwitcher />
+                      </div>
+                      <div className="border-t border-gray-200 my-2"></div>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Déconnexion
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Menu mobile */}
