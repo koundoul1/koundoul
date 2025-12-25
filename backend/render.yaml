@@ -2,7 +2,7 @@ services:
   - type: web
     name: koundoul-backend
     env: node
-    buildCommand: npm install
+    buildCommand: rm -f src/routes/leaves.js; npm install
     startCommand: npm start
     envVars:
       - key: NODE_ENV
