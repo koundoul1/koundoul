@@ -18,7 +18,8 @@ class SolverController {
 
       console.log('🔍 Solver request:', { 
         userId, 
-        input, 
+        inputLength: input?.length || 0,
+        inputPreview: input?.substring(0, 100) || '',
         domain, 
         level,
         guidedMode,
@@ -27,6 +28,9 @@ class SolverController {
 
       // 1. VALIDATION DE L'INPUT
       const inputValidation = validateInput(input);
+      if (!inputValidation.isValid) {
+        console.warn('❌ Validation input échouée:', inputValidation.reason, '| Input length:', input?.length || 0);
+      }
       if (!inputValidation.isValid) {
         return res.status(400).json({
           success: false,

@@ -177,10 +177,13 @@ export const validateInput = (input) => {
     }
   }
   
-  if (trimmed.length > 2000) {
+  // Limite augmentée à 5000 caractères pour permettre des problèmes plus détaillés
+  const MAX_LENGTH = 5000;
+  if (trimmed.length > MAX_LENGTH) {
+    console.warn(`⚠️ Input trop long: ${trimmed.length} caractères (max: ${MAX_LENGTH})`);
     return {
       isValid: false,
-      reason: 'Le problème est trop long (max 2000 caractères)'
+      reason: `Le problème est trop long (max ${MAX_LENGTH} caractères, vous avez ${trimmed.length} caractères)`
     }
   }
   

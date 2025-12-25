@@ -152,7 +152,7 @@ describe('Input Validation', () => {
   })
   
   test('refuse input trop long', () => {
-    const longInput = 'x'.repeat(2001)
+    const longInput = 'x'.repeat(5001)
     const result = validateInput(longInput)
     expect(result.isValid).toBe(false)
     expect(result.reason).toContain('trop long')
