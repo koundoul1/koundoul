@@ -239,13 +239,19 @@ export const getParentDashboard = async (req, res) => {
       ? olderScores.reduce((a, b) => a + b, 0) / olderScores.length
       : 0;
     
-    const progression = olderAvg > 0
+    const examProgression = olderAvg > 0
       ? (simulatedScore >= olderAvg ? '+' : '') + (Math.round((simulatedScore - olderAvg) * 10) / 10).toFixed(1)
       : simulatedScore > 0 ? `+${simulatedScore.toFixed(1)}` : '0';
     
     // Compter les quiz complétés (approximation pour "annales")
     const annalsCompleted = quizAttempts.length;
-    const annalsTotal = 30; // Objectif fixe
+    
+    // Calculer le nombre total de quiz disponibles (dynamique)
+    const annalsTotal = await prismaService.client.quiz.count({
+      where: {
+        isActive: true
+      }
+    });
     
     // Compter les chapitres maîtrisés (leçons complétées)
     const chaptersMastered = await prismaService.client.lessonCompletion.count({
@@ -254,11 +260,13 @@ export const getParentDashboard = async (req, res) => {
         completed: true
       }
     });
-    const chaptersTotal = 25; // Objectif fixe
+    
+    // Calculer le nombre total de leçons disponibles (dynamique)
+    const chaptersTotal = await prismaService.client.lesson.count();
     
     const examPreparation = {
       simulatedScore,
-      progression,
+      progression: examProgression,
       annalsCompleted: `${annalsCompleted}/${annalsTotal}`,
       chaptersMastered: `${chaptersMastered}/${chaptersTotal}`
     };
@@ -296,22 +304,51 @@ export const getParentDashboard = async (req, res) => {
       status: dailyAverageMinutes <= 180 && !nocturnalUsage && longSessions === 0 ? 'healthy' : 'warning'
     };
     
-    // Objectifs partagés (basés sur progression réelle)
+    // Objectifs partagés (basés sur progression réelle et objectifs adaptatifs)
+    // Calculer la moyenne des scores de tous les quiz pour définir un objectif réaliste
+    const allQuizAttempts = await prismaService.client.quizAttempt.findMany({
+      where: {
+        userId: childId,
+        status: 'COMPLETED',
+        completedAt: { not: null }
+      },
+      select: { score: true }
+    });
+    
+    // Calculer la moyenne des scores (score est sur 100, convertir en note sur 20)
+    const avgScoreAllTime = allQuizAttempts.length > 0
+      ? Math.round((allQuizAttempts.reduce((sum, q) => sum + (q.score || 0), 0) / allQuizAttempts.length) / 100 * 20 * 10) / 10
+      : 12; // Valeur par défaut si aucun quiz complété
+    
+    // Objectif de note : 10% au-dessus de la moyenne actuelle, minimum 12/20, maximum 18/20
+    const targetScore = Math.min(Math.max(Math.round((avgScoreAllTime * 1.1) * 10) / 10, 12), 18);
+    
+    // Objectif de temps : basé sur la moyenne hebdomadaire récente + 20%, minimum 3h
+    // Si pas d'activité la semaine dernière, utiliser cette semaine comme base
+    const baseStudyHours = studyTimeHours > 0 ? studyTimeHours : (totalLastWeek > 0 ? studyTimeMinutes / 60 : 3);
+    const targetStudyHours = Math.max(Math.round((baseStudyHours * 1.2) * 10) / 10, 3);
+    
     const sharedGoals = [
       { 
         name: 'Note visée au Bac', 
-        target: '15/20', 
-        progress: Math.min(Math.round((simulatedScore / 15) * 100), 100)
+        target: `${targetScore}/20`, 
+        progress: simulatedScore > 0 
+          ? Math.min(Math.round((simulatedScore / targetScore) * 100), 100)
+          : 0
       },
       { 
         name: "Temps d'étude/semaine", 
-        target: '5h', 
-        progress: Math.min(Math.round((studyTimeHours / 5) * 100), 100)
+        target: `${targetStudyHours}h`, 
+        progress: studyTimeHours > 0
+          ? Math.min(Math.round((studyTimeHours / targetStudyHours) * 100), 100)
+          : 0
       },
       { 
         name: 'Chapitres maîtrisés', 
         target: `${chaptersTotal} chapitres`, 
-        progress: Math.min(Math.round((chaptersMastered / chaptersTotal) * 100), 100)
+        progress: chaptersTotal > 0
+          ? Math.min(Math.round((chaptersMastered / chaptersTotal) * 100), 100)
+          : 0
       }
     ];
     
