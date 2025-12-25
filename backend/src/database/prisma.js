@@ -50,7 +50,22 @@ class PrismaService {
   async findUserWithStats(userId) {
     return await this.prisma.user.findUnique({
       where: { id: userId },
-      include: {
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        firstName: true,
+        lastName: true,
+        avatar: true,
+        xp: true,
+        level: true,
+        streak: true,
+        invitationCode: true,
+        isActive: true,
+        isAdmin: true,
+        preferences: true,
+        createdAt: true,
+        updatedAt: true,
         problems: {
           select: {
             id: true,

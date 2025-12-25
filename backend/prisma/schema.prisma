@@ -26,16 +26,18 @@ model User {
   streak         Int      @default(0)
   invitationCode String?  @unique
   isActive       Boolean  @default(true)
+  isAdmin        Boolean  @default(false) @map("is_admin") // Rôle administrateur
   preferences    Json? // Stockage des préférences utilisateur (langue, thème, etc.)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
   // Relations existantes
-  problems  Problem[]
-  solutions Solution[]
-  quizzes   QuizAttempt[]
-  badges    UserBadge[]
-  payments  Payment[]
+  problems     Problem[]
+  solutions    Solution[]
+  quizzes      QuizAttempt[]
+  badges       UserBadge[]
+  payments     Payment[]
+  subscriptions Subscription[]
 
   // Nouvelles relations pédagogiques
   lessonCompletions LessonCompletion[]
@@ -359,11 +361,21 @@ model UserBadge {
 model Payment {
   id          String   @id @default(cuid())
   amount      Int // in cents
-  currency    String   @default("eur")
-  status      String // pending, completed, failed, refunded
-  stripeId    String?  @unique
+  currency    String   @default("xof") // XOF pour Sénégal (Wave/Orange Money), EUR pour Stripe
+  status      PaymentStatus @default(PENDING)
+  paymentType PaymentType @default(STRIPE)
+  
+  // Identifiants selon le type de paiement
+  stripeId    String?  @unique // Pour Stripe
+  waveId      String?  @unique // Pour Wave Sénégal
+  orangeMoneyId String? @unique // Pour Orange Money
+  
+  // Abonnement associé
+  subscriptionId String?
+  subscription   Subscription? @relation(fields: [subscriptionId], references: [id])
+  
   description String?
-  metadata    Json?
+  metadata    Json? // Données additionnelles (numéro de téléphone pour Wave/OM, etc.)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -372,6 +384,70 @@ model Payment {
   user   User   @relation(fields: [userId], references: [id])
 
   @@map("payments")
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentType {
+  STRIPE
+  WAVE
+  ORANGE_MONEY
+}
+
+// Plans d'abonnement
+model SubscriptionPlan {
+  id          String   @id @default(cuid())
+  name        String   @unique // "Gratuit", "Premium", "Pro", etc.
+  description String?  @db.Text
+  price       Int      @default(0) // Prix en centimes
+  currency    String   @default("xof")
+  duration    Int      @default(30) // Durée en jours
+  features    Json? // Liste des fonctionnalités incluses
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  subscriptions Subscription[]
+
+  @@map("subscription_plans")
+}
+
+// Abonnements utilisateurs
+model Subscription {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  planId      String
+  plan        SubscriptionPlan @relation(fields: [planId], references: [id])
+  
+  status      SubscriptionStatus @default(ACTIVE)
+  startDate   DateTime @default(now())
+  endDate     DateTime
+  autoRenew   Boolean  @default(false)
+  cancelledAt DateTime?
+  
+  // Paiements associés
+  payments    Payment[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, status])
+  @@map("subscriptions")
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  PENDING_PAYMENT
 }
 
 // ===== SYSTÈME DE RÉVISION ESPACÉE =====

@@ -86,6 +86,19 @@ class AuthService {
       const user = await this.prisma.user.findUnique({
         where: {
           email: email.toLowerCase()
+        },
+        select: {
+          id: true,
+          email: true,
+          username: true,
+          password: true,
+          firstName: true,
+          lastName: true,
+          xp: true,
+          level: true,
+          isActive: true,
+          isAdmin: true,
+          createdAt: true
         }
       })
 
@@ -124,6 +137,7 @@ class AuthService {
           lastName: user.lastName,
           xp: user.xp,
           level: user.level,
+          isAdmin: user.isAdmin || false,
           createdAt: user.createdAt
         },
         token
@@ -150,6 +164,7 @@ class AuthService {
           xp: true,
           level: true,
           isActive: true,
+          isAdmin: true,
           createdAt: true
         }
       })

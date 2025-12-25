@@ -76,4 +76,48 @@ export const optionalAuth = (req, res, next) => {
 // Alias pour compatibilité
 export const requireAuth = authenticateToken;
 
+// Middleware pour vérifier que l'utilisateur est admin
+// Note: Doit être utilisé APRÈS requireAuth
+export const requireAdmin = async (req, res, next) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'UNAUTHORIZED',
+          message: 'Authentification requise'
+        }
+      });
+    }
+
+    // Vérifier si l'utilisateur est admin
+    const prismaService = (await import('../database/prisma.js')).default;
+    const user = await prismaService.client.user.findUnique({
+      where: { id: req.user.id },
+      select: { isAdmin: true }
+    });
+
+    if (!user || !user.isAdmin) {
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: 'FORBIDDEN',
+          message: 'Accès administrateur requis'
+        }
+      });
+    }
+
+    next();
+  } catch (error) {
+    console.error('❌ Admin middleware error:', error);
+    res.status(500).json({
+      success: false,
+      error: {
+        code: 'ADMIN_CHECK_ERROR',
+        message: 'Erreur lors de la vérification des droits administrateur'
+      }
+    });
+  }
+};
+
 export default authenticateToken;

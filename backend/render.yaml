@@ -2,7 +2,7 @@ services:
   - type: web
     name: koundoul-backend
     env: node
-    buildCommand: rm -f src/routes/leaves.js; npm install
+    buildCommand: rm -f src/routes/leaves.js; npm install && npx prisma generate
     startCommand: npm start
     envVars:
       - key: NODE_ENV

@@ -28,6 +28,9 @@ import userRoutes from './modules/user/user.routes.js'
 import parentRoutes from './modules/parent/parent.routes.js'
 import challengesRoutes from './modules/challenges/challenges.routes.js'
 import duelsRoutes from './modules/duels/duels.routes.js'
+import subscriptionsRoutes from './modules/subscriptions/subscriptions.routes.js'
+import paymentsRoutes from './modules/payments/payments.routes.js'
+import adminRoutes from './modules/admin/admin.routes.js'
 
 // Import du service Prisma
 import prismaService from './database/prisma.js'
@@ -226,6 +229,9 @@ class App {
     this.app.use('/api/question-banks', questionbanksRoutes)
     this.app.use('/api/challenges', challengesRoutes)
     this.app.use('/api/duels', duelsRoutes)
+    this.app.use('/api/subscriptions', subscriptionsRoutes)
+    this.app.use('/api/payments', paymentsRoutes)
+    this.app.use('/api/admin', adminRoutes)
 
     // Route de documentation API
     this.app.get('/api/docs', (req, res) => {
