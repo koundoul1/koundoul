@@ -41,6 +41,8 @@ const Header = () => {
   const searchRef = useRef(null)
 
   const profileRef = useRef(null)
+  const profileButtonRef = useRef(null)
+  const profileMenuRef = useRef(null)
 
   // Fermer les résultats quand on clique en dehors
   useEffect(() => {
@@ -58,6 +60,25 @@ const Header = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
+
+  // Ajuster la position du menu profil pour qu'il reste visible
+  useEffect(() => {
+    if (isProfileOpen && profileButtonRef.current && profileMenuRef.current) {
+      const buttonRect = profileButtonRef.current.getBoundingClientRect()
+      const menuRect = profileMenuRef.current.getBoundingClientRect()
+      const viewportWidth = window.innerWidth
+      
+      // Si le menu dépasse à droite, l'aligner à droite du viewport
+      if (buttonRect.right + menuRect.width > viewportWidth) {
+        const rightOffset = viewportWidth - buttonRect.right
+        profileMenuRef.current.style.right = `${Math.max(0, rightOffset)}px`
+        profileMenuRef.current.style.left = 'auto'
+      } else {
+        profileMenuRef.current.style.right = '0'
+        profileMenuRef.current.style.left = 'auto'
+      }
+    }
+  }, [isProfileOpen])
 
   const handleLogout = () => {
     logout()
@@ -122,7 +143,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Premier menu - Navigation principale */}
         <div className="flex justify-between items-center h-16 min-h-[4rem]">
           {/* Logo */}
@@ -152,7 +173,7 @@ const Header = () => {
           </nav>
 
           {/* Actions utilisateur */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 relative">
             {/* Bouton Rechercher */}
             <div className="hidden md:block relative" ref={searchRef}>
               <button
@@ -222,6 +243,7 @@ const Header = () => {
             {isAuthenticated && (
               <div className="relative" ref={profileRef}>
                 <button
+                  ref={profileButtonRef}
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
                   aria-label="Menu profil"
@@ -235,7 +257,7 @@ const Header = () => {
                   </span>
                 </button>
 
-                {/* Dropdown Profil - Z-index élevé et visible */}
+                {/* Dropdown Profil - Positionné pour rester dans le viewport */}
                 {isProfileOpen && (
                   <>
                     {/* Overlay pour fermer au clic extérieur */}
@@ -243,7 +265,11 @@ const Header = () => {
                       className="fixed inset-0 z-40" 
                       onClick={() => setIsProfileOpen(false)}
                     />
-                    <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-[60]">
+                    <div 
+                      ref={profileMenuRef}
+                      className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-[60]"
+                      style={{ maxWidth: 'calc(100vw - 2rem)' }}
+                    >
                       {/* Nom d'utilisateur affiché dans le menu */}
                       <div className="px-4 py-2 border-b border-gray-200">
                         <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">
