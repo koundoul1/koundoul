@@ -48,6 +48,9 @@ const Profile = () => {
   const [success, setSuccess] = useState('')
   const [userStats, setUserStats] = useState(null)
   const [loadingStats, setLoadingStats] = useState(true)
+  const [invitationCode, setInvitationCode] = useState(null)
+  const [loadingCode, setLoadingCode] = useState(false)
+  const [profileData, setProfileData] = useState(null)
 
   // Initialiser les données du formulaire
   useEffect(() => {
@@ -60,10 +63,39 @@ const Profile = () => {
     }
   }, [user])
 
-  // Charger les statistiques utilisateur
+  // Charger les statistiques utilisateur et le profil
   useEffect(() => {
     loadUserStats()
+    loadProfileData()
   }, [])
+  
+  const loadProfileData = async () => {
+    try {
+      const response = await api.user.getProfile()
+      if (response.data.success) {
+        setProfileData(response.data.data)
+        setInvitationCode(response.data.data.invitationCode)
+      }
+    } catch (error) {
+      console.error('Erreur chargement profil:', error)
+    }
+  }
+  
+  const handleGenerateInvitationCode = async () => {
+    try {
+      setLoadingCode(true)
+      const response = await api.user.generateInvitationCode()
+      if (response.data.success) {
+        setInvitationCode(response.data.data.code)
+        setSuccess(response.data.data.message || 'Code d\'invitation généré avec succès')
+        setTimeout(() => setSuccess(''), 5000)
+      }
+    } catch (error) {
+      setError('Erreur lors de la génération du code')
+    } finally {
+      setLoadingCode(false)
+    }
+  }
 
   const loadUserStats = async () => {
     try {
@@ -448,11 +480,67 @@ const Profile = () => {
                   <h3 className="text-lg font-semibold text-gray-900">Espace Parents</h3>
                 </div>
                 <p className="text-sm text-gray-800 mb-4 font-medium">
-                  Accédez au tableau de bord pour suivre la progression de vos enfants de manière bienveillante.
+                  Partagez votre code d'invitation avec vos parents pour qu'ils puissent suivre votre progression.
                 </p>
+                
+                {/* Code d'invitation */}
+                <div className="mb-4 p-4 bg-white rounded-lg border-2 border-blue-300">
+                  {invitationCode ? (
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-700 mb-2">
+                        Code d'invitation
+                      </label>
+                      <div className="flex items-center space-x-2">
+                        <code className="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-lg font-bold text-gray-900 text-center">
+                          {invitationCode}
+                        </code>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(invitationCode)
+                            setSuccess('Code copié !')
+                            setTimeout(() => setSuccess(''), 2000)
+                          }}
+                          className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium"
+                        >
+                          Copier
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center py-2">
+                      <p className="text-sm text-gray-700 mb-3 font-medium">
+                        Aucun code généré
+                      </p>
+                    </div>
+                  )}
+                  
+                  <button
+                    onClick={handleGenerateInvitationCode}
+                    disabled={loadingCode}
+                    className="w-full mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                  >
+                    {loadingCode ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Génération...
+                      </>
+                    ) : invitationCode ? (
+                      <>
+                        <Settings className="h-4 w-4 mr-2" />
+                        Régénérer le code
+                      </>
+                    ) : (
+                      <>
+                        <Shield className="h-4 w-4 mr-2" />
+                        Générer un code
+                      </>
+                    )}
+                  </button>
+                </div>
+                
                 <Link
                   to="/parent-dashboard"
-                  className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="flex items-center justify-center px-4 py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
                 >
                   <Shield className="h-4 w-4 mr-2" />
                   Accéder au Dashboard Parents
@@ -527,6 +615,42 @@ const Profile = () => {
                           {userStats?.streak || user.streak || 0} jours
                         </span>
                       </div>
+
+                      {userStats && (
+                        <>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <Calendar className="h-5 w-5 text-purple-600 mr-2" />
+                              <span className="text-gray-800 font-medium">Jours actifs (30j)</span>
+                            </div>
+                            <span className="font-bold text-gray-900 text-lg">
+                              {userStats.daysActiveLast30Days || 0}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <Clock className="h-5 w-5 text-indigo-600 mr-2" />
+                              <span className="text-gray-800 font-medium">Temps d'étude</span>
+                            </div>
+                            <span className="font-bold text-gray-900 text-lg">
+                              {userStats.estimatedStudyTimeHours || 0}h
+                            </span>
+                          </div>
+
+                          {userStats.quizAverageScore > 0 && (
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center">
+                                <Star className="h-5 w-5 text-yellow-600 mr-2" />
+                                <span className="text-gray-800 font-medium">Score moyen quiz</span>
+                              </div>
+                              <span className="font-bold text-gray-900 text-lg">
+                                {userStats.quizAverageScore}%
+                              </span>
+                            </div>
+                          )}
+                        </>
+                      )}
                     </div>
                   </>
                 )}

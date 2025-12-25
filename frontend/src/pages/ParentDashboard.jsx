@@ -233,7 +233,11 @@ const ParentDashboard = () => {
               <Calendar className="h-6 w-6 mr-2" />
               Cette semaine
             </h2>
-            <span className="text-sm text-white font-medium">Mise à jour il y a 2h</span>
+            {dashboardData && (
+              <span className="text-sm text-white font-medium">
+                {selectedChild?.name || 'Enfant'} - Niveau {selectedChild?.level || 1}
+              </span>
+            )}
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -256,14 +260,16 @@ const ParentDashboard = () => {
                 <TrendingUp className="h-5 w-5 mr-2" />
                 <span className="text-sm font-semibold">Progression</span>
               </div>
-              <div className="text-2xl font-bold">+{weeklySummary.progression}%</div>
+              <div className={`text-2xl font-bold ${weeklySummary.progression >= 0 ? '' : 'text-red-200'}`}>
+                {weeklySummary.progression >= 0 ? '+' : ''}{weeklySummary.progression}%
+              </div>
             </div>
             <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 text-white">
               <div className="flex items-center mb-2">
-                <Target className="h-5 w-5 mr-2" />
-                <span className="text-sm font-semibold">Objectif hebdo</span>
+                <Calendar className="h-5 w-5 mr-2" />
+                <span className="text-sm font-semibold">Jours actifs</span>
               </div>
-              <div className="text-2xl font-bold">{weeklySummary.weeklyGoal}%</div>
+              <div className="text-2xl font-bold">{weeklySummary.daysActive}/7</div>
             </div>
           </div>
         </div>
@@ -329,21 +335,15 @@ const ParentDashboard = () => {
                 ))}
               </div>
 
-              {/* Graphique d'évolution */}
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <h4 className="text-sm font-semibold text-gray-900 mb-3">Évolution sur 30 jours</h4>
-                <div className="h-32 bg-gray-50 rounded-lg flex items-end justify-around p-4">
-                  {[...Array(7)].map((_, i) => (
-                    <div key={i} className="flex flex-col items-center">
-                      <div 
-                        className="bg-blue-500 rounded-t w-8 mb-1"
-                        style={{ height: `${Math.random() * 60 + 40}%` }}
-                      />
-                      <span className="text-xs text-gray-800 font-semibold">J-{6-i}</span>
-                    </div>
-                  ))}
+              {/* Message si pas de données */}
+              {subjectsProgress.length === 0 && (
+                <div className="mt-6 pt-6 border-t border-gray-200 text-center py-8">
+                  <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-sm text-gray-600 font-medium">
+                    Aucune activité enregistrée pour le moment. Les données de progression apparaîtront ici.
+                  </p>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Points forts et faiblesses */}
@@ -382,15 +382,14 @@ const ParentDashboard = () => {
                 </div>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <h4 className="font-semibold text-blue-700 mb-2 flex items-center">
-                  <Lightbulb className="h-5 w-5 mr-2" />
-                  Suggestions
-                </h4>
-                <p className="text-sm text-gray-900 font-medium">
-                  Proposez une pause de 48h pour recharger les batteries. Révision collective suggérée en probabilités.
-                </p>
-              </div>
+              {recommendations.length === 0 && strengths.length === 0 && weaknesses.length === 0 && (
+                <div className="mt-6 pt-6 border-t border-gray-200 text-center py-8">
+                  <Lightbulb className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-sm text-gray-600 font-medium">
+                    Les analyses apparaîtront ici une fois que {selectedChild?.name || 'votre enfant'} aura complété quelques activités.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Engagement et motivation */}
@@ -410,12 +409,16 @@ const ParentDashboard = () => {
                   <div className="text-xs text-gray-800 font-semibold mt-1">Jours consécutifs 🔥</div>
                 </div>
                 <div className="text-center p-4 bg-purple-50 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600">87%</div>
-                  <div className="text-xs text-gray-800 font-semibold mt-1">Taux d'achèvement</div>
+                  <div className="text-2xl font-bold text-purple-600">
+                    {dashboardData?.weeklySummary?.quizzesCompleted || 0}
+                  </div>
+                  <div className="text-xs text-gray-800 font-semibold mt-1">Quiz complétés</div>
                 </div>
                 <div className="text-center p-4 bg-orange-50 rounded-lg">
-                  <div className="text-2xl font-bold text-orange-600">32 min</div>
-                  <div className="text-xs text-gray-800 font-semibold mt-1">Temps moyen/session</div>
+                  <div className="text-2xl font-bold text-orange-600">
+                    {dashboardData?.weeklySummary?.lessonsCompleted || 0}
+                  </div>
+                  <div className="text-xs text-gray-800 font-semibold mt-1">Leçons complétées</div>
                 </div>
               </div>
             </div>

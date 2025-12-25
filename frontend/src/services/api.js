@@ -8,7 +8,7 @@
 // En développement, utilise localhost par défaut
 const API_BASE = import.meta.env.VITE_API_URL 
   ? `${import.meta.env.VITE_API_URL}/api`
-  : 'http://localhost:5000/api'
+  : 'http://localhost:3001/api'
 
 // Helper pour les requêtes avec gestion d'erreurs
 const request = async (url, options = {}) => {
@@ -69,7 +69,8 @@ const request = async (url, options = {}) => {
     }
     
     if (error.message === 'Failed to fetch') {
-      throw new Error('❌ Impossible de joindre le serveur. Vérifiez que le backend est démarré sur le port 5000.');
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+      throw new Error(`❌ Impossible de joindre le serveur. Vérifiez que le backend est démarré sur ${apiUrl}`);
     }
     
     throw error
@@ -152,6 +153,13 @@ const api = {
   },
 
   // 👤 UTILISATEURS
+  user: {
+    getProfile: () => request('/user/profile'),
+    getStats: () => request('/user/stats'),
+    generateInvitationCode: () => request('/user/generate-invitation-code', {
+      method: 'POST'
+    })
+  },
   users: {
     getProfile: () => request('/users/profile'),
     
