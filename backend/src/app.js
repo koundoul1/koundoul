@@ -144,11 +144,15 @@ class App {
       this.app.use(morgan('combined'))
     }
 
-    // Middleware pour ajouter des headers de sécurité
+    // Middleware pour ajouter des headers de sécurité et encodage UTF-8
     this.app.use((req, res, next) => {
       res.setHeader('X-Content-Type-Options', 'nosniff')
       res.setHeader('X-Frame-Options', 'DENY')
       res.setHeader('X-XSS-Protection', '1; mode=block')
+      // S'assurer que les réponses JSON utilisent UTF-8
+      if (res.getHeader('Content-Type')?.includes('application/json')) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8')
+      }
       next()
     })
   }

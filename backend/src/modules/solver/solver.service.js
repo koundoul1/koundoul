@@ -4,6 +4,30 @@ import { ALL_PHYSICS_CONSTANTS, findConstantBySymbol, formatConstant } from '../
 import { convertUnit, detectUnitType, formatValue } from '../../constants/unit-conversions.js';
 import { ALL_FORMULAS, findFormulas, formatFormula } from '../../constants/formulas.js';
 
+/**
+ * Corriger l'encodage UTF-8 d'une chaîne de caractères
+ * Convertit les caractères mal encodés (ex: "ProblÃ¨me" -> "Problème")
+ * @param {string} text - Texte à corriger
+ * @returns {string} - Texte corrigé en UTF-8
+ */
+const fixEncoding = (text) => {
+  if (!text || typeof text !== 'string') return text;
+  
+  try {
+    // Si le texte contient des séquences d'encodage incorrectes typiques (Ã¨, Ã©, etc.)
+    // On tente de les corriger en supposant qu'elles viennent d'une mauvaise interprétation UTF-8 -> Latin1
+    if (text.includes('Ã')) {
+      // Décoder comme si c'était Latin1, puis encoder en UTF-8
+      const buffer = Buffer.from(text, 'latin1');
+      return buffer.toString('utf8');
+    }
+    return text;
+  } catch (error) {
+    console.warn('⚠️ Erreur lors de la correction d\'encodage:', error);
+    return text;
+  }
+};
+
 class SolverService {
   
   // Résoudre un problème avec Gemini
@@ -281,31 +305,42 @@ RÈGLES STRICTES:
         ];
       }
       
-      // Nettoyer aussi le contenu des champs si nécessaire
+      // Nettoyer et corriger l'encodage UTF-8 de tous les champs texte
       if (parsed.solution) {
         if (typeof parsed.solution === 'string') {
-          parsed.solution = parsed.solution.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+          parsed.solution = fixEncoding(
+            parsed.solution.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+          );
         } else if (typeof parsed.solution === 'object') {
           // Si solution est un objet, le convertir en string lisible
-          parsed.solution = parsed.solution.solution || JSON.stringify(parsed.solution);
+          parsed.solution = fixEncoding(
+            parsed.solution.solution || JSON.stringify(parsed.solution)
+          );
         }
       }
       if (parsed.explanation) {
         if (typeof parsed.explanation === 'string') {
-          parsed.explanation = parsed.explanation.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+          parsed.explanation = fixEncoding(
+            parsed.explanation.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+          );
         } else if (typeof parsed.explanation === 'object') {
           // Si explanation est un objet, le convertir en string lisible
-          parsed.explanation = parsed.explanation.explanation || JSON.stringify(parsed.explanation);
+          parsed.explanation = fixEncoding(
+            parsed.explanation.explanation || JSON.stringify(parsed.explanation)
+          );
         }
       }
       if (parsed.steps && Array.isArray(parsed.steps)) {
         parsed.steps = parsed.steps.map(step => {
           if (typeof step === 'string') {
-            return step.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-          } else if (step.content) {
+            return fixEncoding(step.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim());
+          } else if (step && typeof step === 'object') {
             return {
               ...step,
-              content: step.content.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+              title: step.title ? fixEncoding(String(step.title).trim()) : step.title,
+              content: step.content ? fixEncoding(
+                String(step.content).replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
+              ) : step.content
             };
           }
           return step;

@@ -110,7 +110,8 @@ class SolverController {
         );
       }
 
-      // 6. RÉPONSE SUCCÈS
+      // 6. RÉPONSE SUCCÈS avec headers UTF-8 explicites
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
       res.json({
         success: true,
         message: 'Problème résolu avec succès',
