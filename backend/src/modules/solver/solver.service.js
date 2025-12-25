@@ -164,13 +164,20 @@ Réponds UNIQUEMENT en JSON avec cette structure exacte:
   "explanation": "Résumé pédagogique complet avec points clés, applications pratiques, et conseils d'apprentissage. Formules importantes en LaTeX."
 }
 
+⚠️ IMPORTANT - STRUCTURE OBLIGATOIRE:
+- Le champ "steps" DOIT être un tableau avec EXACTEMENT 5 éléments (ni plus, ni moins)
+- Chaque élément du tableau "steps" DOIT avoir "title" et "content"
+- Le JSON DOIT être valide et bien formé
+- NE PAS ajouter de texte avant ou après le JSON
+- NE PAS utiliser de markdown, UNIQUEMENT du JSON pur
+
 RÈGLES STRICTES:
 - RÉSOLUTION COMPLÈTE (pas de "on trouve", montre TOUS les calculs)
-- Minimum 5 étapes détaillées
+- EXACTEMENT 5 étapes détaillées (obligatoire)
 - TOUTES les formules en LaTeX
 - Contenu exhaustif et pédagogique
 - Pas de raccourcis, tout doit être expliqué
-- JSON valide uniquement`;
+- JSON valide uniquement (commence par { et se termine par })`;
 
     // Utiliser le customPrompt si fourni, sinon le prompt par défaut
     const prompt = customPrompt || `${systemPrompt}\n\n${userPrompt}`;
@@ -249,6 +256,30 @@ RÈGLES STRICTES:
       }
       
       const parsed = JSON.parse(cleanText);
+      
+      // Log pour debug - vérifier la structure
+      console.log('📋 Structure de la réponse parsée:', {
+        hasSolution: !!parsed.solution,
+        hasSteps: !!parsed.steps,
+        stepsCount: parsed.steps?.length || 0,
+        hasExplanation: !!parsed.explanation
+      });
+      
+      // S'assurer que les steps existent toujours
+      if (!parsed.steps || !Array.isArray(parsed.steps) || parsed.steps.length === 0) {
+        console.warn('⚠️ Aucune étape structurée trouvée dans la réponse. Génération de steps par défaut.');
+        // Générer des steps par défaut à partir de la solution
+        parsed.steps = [
+          {
+            title: "📚 Analyse Complète du Problème",
+            content: parsed.solution || "Analyse du problème en cours..."
+          },
+          {
+            title: "🎯 Stratégie de Résolution",
+            content: parsed.explanation || "Stratégie de résolution détaillée..."
+          }
+        ];
+      }
       
       // Nettoyer aussi le contenu des champs si nécessaire
       if (parsed.solution) {

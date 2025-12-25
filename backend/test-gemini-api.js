@@ -1,7 +1,11 @@
 const testGeminiAPI = async () => {
   console.log('🧪 Test de l\'API Gemini...');
   
-  const apiKey = process.env.GEMINI_API_KEY || 'AIzaSyDVodrl0dbcOxJOcO2n9zhUQyjA1flYZFk';
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_AI_API_KEY;
+  if (!apiKey) {
+    console.error('❌ Erreur: GEMINI_API_KEY ou GOOGLE_AI_API_KEY doit être définie dans .env');
+    process.exit(1);
+  }
   
   console.log('🔑 Clé API:', apiKey.substring(0, 10) + '...');
   
