@@ -14,7 +14,6 @@ import {
   Settings, 
   LogOut, 
   Bell,
-  Search,
   Brain,
   BookOpen,
   Home,
@@ -35,22 +34,15 @@ const Header = () => {
   const { user, logout, isAuthenticated } = useAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [searchResults, setSearchResults] = useState([])
-  const [showSearchResults, setShowSearchResults] = useState(false)
   const navigate = useNavigate()
-  const searchRef = useRef(null)
 
   const profileRef = useRef(null)
   const profileButtonRef = useRef(null)
   const profileMenuRef = useRef(null)
 
-  // Fermer les résultats quand on clique en dehors
+  // Fermer les menus quand on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setShowSearchResults(false)
-      }
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setIsProfileOpen(false)
       }
@@ -96,37 +88,6 @@ const Header = () => {
     logout()
     navigate('/')
     setIsProfileOpen(false)
-  }
-
-  // Fonction de recherche
-  const handleSearch = (query) => {
-    setSearchQuery(query)
-    
-    if (query.length < 2) {
-      setSearchResults([])
-      setShowSearchResults(false)
-      return
-    }
-
-    // Rechercher dans les éléments de navigation
-    const results = [
-      ...navigation.filter(item => 
-        item.name.toLowerCase().includes(query.toLowerCase())
-      ).map(item => ({ ...item, type: 'navigation' })),
-      ...advancedFeatures.filter(item => 
-        item.name.toLowerCase().includes(query.toLowerCase())
-      ).map(item => ({ ...item, type: 'feature' }))
-    ]
-
-    setSearchResults(results)
-    setShowSearchResults(results.length > 0)
-  }
-
-  const handleResultClick = (href) => {
-    navigate(href)
-    setSearchQuery('')
-    setShowSearchResults(false)
-    setIsMenuOpen(false)
   }
 
   const navigation = [
@@ -186,65 +147,6 @@ const Header = () => {
 
           {/* Actions utilisateur */}
           <div className="flex items-center space-x-4 relative">
-            {/* Bouton Rechercher */}
-            <div className="hidden md:block relative" ref={searchRef}>
-              <button
-                onClick={() => setShowSearchResults(!showSearchResults)}
-                className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:text-blue-600 hover:border-blue-500 transition-colors"
-              >
-                <Search className="h-4 w-4 mr-2" />
-                <span className="text-sm font-medium">Rechercher</span>
-              </button>
-              
-              {/* Fenêtre de recherche */}
-              {showSearchResults && (
-                <div className="absolute top-full right-0 mt-2 w-96 bg-white border border-gray-200 rounded-lg shadow-xl z-50">
-                  <div className="p-4">
-                    <div className="mb-3 flex items-center">
-                      <Search className="h-5 w-5 text-gray-400 mr-2" />
-                      <input
-                        type="text"
-                        placeholder="Rechercher une page..."
-                        value={searchQuery}
-                        onChange={(e) => handleSearch(e.target.value)}
-                        className="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                        autoFocus
-                      />
-                    </div>
-                    
-                    {/* Résultats */}
-                    {searchQuery.length >= 2 && searchResults.length > 0 && (
-                      <div className="max-h-80 overflow-y-auto">
-                        {searchResults.map((result, index) => (
-                          <div
-                            key={index}
-                            onClick={() => handleResultClick(result.href)}
-                            className="px-3 py-2 hover:bg-blue-50 cursor-pointer transition-colors rounded-md"
-                          >
-                            <div className="flex items-center">
-                              <result.icon className="h-4 w-4 mr-2 text-blue-600" />
-                              <div>
-                                <div className="text-sm font-medium text-gray-900">{result.name}</div>
-                                <div className="text-xs text-gray-500">
-                                  {result.type === 'navigation' ? 'Navigation' : 'Fonctionnalité'}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    
-                    {searchQuery.length >= 2 && searchResults.length === 0 && (
-                      <div className="text-center py-4 text-gray-500 text-sm">
-                        Aucun résultat trouvé
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-
             {/* Notifications */}
             <button className="p-2 text-gray-600 hover:text-gray-900 relative">
               <Bell className="h-5 w-5" />
@@ -353,14 +255,6 @@ const Header = () => {
 
           {/* Menu mobile */}
           <div className="lg:hidden flex items-center space-x-3">
-            {/* Bouton Rechercher Mobile */}
-            <button
-              onClick={() => setShowSearchResults(!showSearchResults)}
-              className="p-2 rounded-md text-gray-900 hover:text-blue-600 hover:bg-gray-100 transition-colors"
-            >
-              <Search className="h-5 w-5" />
-            </button>
-            
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-md text-gray-900 hover:text-blue-600 hover:bg-gray-100 transition-colors"
@@ -387,54 +281,6 @@ const Header = () => {
             </nav>
           </div>
         </div>
-
-        {/* Fenêtre de recherche mobile */}
-        {showSearchResults && (
-          <div className="lg:hidden border-t border-gray-200 bg-white">
-            <div className="p-4">
-              <div className="mb-3 flex items-center">
-                <Search className="h-5 w-5 text-gray-400 mr-2" />
-                <input
-                  type="text"
-                  placeholder="Rechercher une page..."
-                  value={searchQuery}
-                  onChange={(e) => handleSearch(e.target.value)}
-                  className="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  autoFocus
-                />
-              </div>
-              
-              {/* Résultats */}
-              {searchQuery.length >= 2 && searchResults.length > 0 && (
-                <div className="max-h-96 overflow-y-auto">
-                  {searchResults.map((result, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleResultClick(result.href)}
-                      className="px-3 py-2 hover:bg-blue-50 cursor-pointer transition-colors rounded-md"
-                    >
-                      <div className="flex items-center">
-                        <result.icon className="h-4 w-4 mr-2 text-blue-600" />
-                        <div>
-                          <div className="text-sm font-medium text-gray-900">{result.name}</div>
-                          <div className="text-xs text-gray-500">
-                            {result.type === 'navigation' ? 'Navigation' : 'Fonctionnalité'}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              
-              {searchQuery.length >= 2 && searchResults.length === 0 && (
-                <div className="text-center py-4 text-gray-500 text-sm">
-                  Aucun résultat trouvé
-                </div>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* Menu mobile */}
         {isMenuOpen && (
