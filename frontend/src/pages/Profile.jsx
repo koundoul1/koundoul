@@ -8,6 +8,7 @@ import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
 import api from '../services/api'
 import LanguageSwitcher from '../components/LanguageSwitcher'
+import SubscriptionSection from '../components/subscriptions/SubscriptionSection'
 import { 
   User, 
   Mail, 
@@ -24,7 +25,9 @@ import {
   TrendingUp,
   Globe,
   Shield,
-  Loader2
+  Loader2,
+  CreditCard,
+  Clock
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -545,6 +548,19 @@ const Profile = () => {
                   <Shield className="h-4 w-4 mr-2" />
                   Accéder au Dashboard Parents
                 </Link>
+              </div>
+            </div>
+
+            {/* Section Abonnements */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+              <div className="p-6 border-b border-gray-200">
+                <div className="flex items-center">
+                  <CreditCard className="h-5 w-5 text-blue-600 mr-2" />
+                  <h3 className="text-lg font-semibold text-gray-900">Abonnements</h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <SubscriptionSection />
               </div>
             </div>
 

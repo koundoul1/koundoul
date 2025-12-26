@@ -27,7 +27,8 @@ import {
   Lightbulb,
   Sparkles,
   Trophy,
-  ListChecks
+  ListChecks,
+  Shield
 } from 'lucide-react'
 
 const Header = () => {
@@ -65,18 +66,29 @@ const Header = () => {
   useEffect(() => {
     if (isProfileOpen && profileButtonRef.current && profileMenuRef.current) {
       const buttonRect = profileButtonRef.current.getBoundingClientRect()
-      const menuRect = profileMenuRef.current.getBoundingClientRect()
+      const menuWidth = 224 // w-56 = 14rem = 224px
       const viewportWidth = window.innerWidth
+      const spacing = 8 // mt-2 = 0.5rem = 8px
       
-      // Si le menu dépasse à droite, l'aligner à droite du viewport
-      if (buttonRect.right + menuRect.width > viewportWidth) {
-        const rightOffset = viewportWidth - buttonRect.right
-        profileMenuRef.current.style.right = `${Math.max(0, rightOffset)}px`
-        profileMenuRef.current.style.left = 'auto'
-      } else {
-        profileMenuRef.current.style.right = '0'
-        profileMenuRef.current.style.left = 'auto'
+      // Positionner le menu en fixed pour un contrôle total
+      let rightPosition = viewportWidth - buttonRect.right
+      
+      // S'assurer que le menu ne dépasse pas à droite (marge de 1rem)
+      const minRightMargin = 16
+      if (rightPosition < minRightMargin) {
+        rightPosition = minRightMargin
       }
+      
+      // S'assurer que le menu ne dépasse pas à gauche
+      const leftPosition = viewportWidth - rightPosition - menuWidth
+      if (leftPosition < minRightMargin) {
+        rightPosition = viewportWidth - menuWidth - minRightMargin
+      }
+      
+      profileMenuRef.current.style.position = 'fixed'
+      profileMenuRef.current.style.top = `${buttonRect.bottom + spacing}px`
+      profileMenuRef.current.style.right = `${rightPosition}px`
+      profileMenuRef.current.style.left = 'auto'
     }
   }, [isProfileOpen])
 
@@ -252,9 +264,16 @@ const Header = () => {
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
                     <User className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-sm font-medium text-gray-700">
-                    {user?.username || user?.email || 'Mon Profil'}
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-medium text-gray-700">
+                      {user?.username || user?.email || 'Mon Profil'}
+                    </span>
+                    {user?.isAdmin && (
+                      <span className="px-1.5 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800 rounded">
+                        Admin
+                      </span>
+                    )}
+                  </div>
                 </button>
 
                 {/* Dropdown Profil - Positionné pour rester dans le viewport */}
@@ -267,43 +286,60 @@ const Header = () => {
                     />
                     <div 
                       ref={profileMenuRef}
-                      className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-[60]"
+                      className="w-56 bg-gray-800 rounded-lg shadow-2xl border border-gray-700 py-2 z-[60]"
                       style={{ maxWidth: 'calc(100vw - 2rem)' }}
                     >
                       {/* Nom d'utilisateur affiché dans le menu */}
-                      <div className="px-4 py-2 border-b border-gray-200">
-                        <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+                      <div className="px-4 py-2 border-b border-gray-700">
+                        <div className="text-xs text-gray-400 uppercase tracking-wide mb-1">
                           Connecté en tant que
                         </div>
-                        <div className="text-sm font-semibold text-gray-900 truncate">
-                          {user?.username || user?.email || 'Utilisateur'}
+                        <div className="flex items-center justify-between">
+                          <div className="text-sm font-semibold text-white truncate">
+                            {user?.username || user?.email || 'Utilisateur'}
+                          </div>
+                          {user?.isAdmin && (
+                            <span className="px-2 py-0.5 text-xs font-medium bg-yellow-500 text-yellow-900 rounded ml-2 flex-shrink-0">
+                              Admin
+                            </span>
+                          )}
                         </div>
                       </div>
 
                       <Link
                         to="/profile"
                         onClick={() => setIsProfileOpen(false)}
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                        className="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white transition-colors"
                       >
-                        <User className="h-4 w-4 mr-2 text-gray-500" />
+                        <User className="h-4 w-4 mr-2 text-gray-400" />
                         Mon Profil
                       </Link>
                       <Link
                         to="/parent-dashboard"
                         onClick={() => setIsProfileOpen(false)}
-                        className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                        className="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700 hover:text-white transition-colors"
                       >
-                        <Settings className="h-4 w-4 mr-2 text-gray-500" />
+                        <Settings className="h-4 w-4 mr-2 text-gray-400" />
                         Espace Parents
                       </Link>
-                      <div className="border-t border-gray-200 my-2"></div>
+                      {user?.isAdmin && (
+                        <Link
+                          to="/admin"
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center px-4 py-2 text-sm text-yellow-200 hover:bg-yellow-900/20 hover:text-yellow-100 transition-colors border-l-2 border-yellow-500/50"
+                        >
+                          <Shield className="h-4 w-4 mr-2 text-yellow-400" />
+                          Administration
+                        </Link>
+                      )}
+                      <div className="border-t border-gray-700 my-2"></div>
                       <div className="px-4 py-2">
-                        <LanguageSwitcher />
+                        <LanguageSwitcher dark={true} />
                       </div>
-                      <div className="border-t border-gray-200 my-2"></div>
+                      <div className="border-t border-gray-700 my-2"></div>
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                        className="w-full flex items-center px-4 py-2 text-sm text-white bg-red-600 hover:bg-red-700 transition-colors rounded-md"
                       >
                         <LogOut className="h-4 w-4 mr-2" />
                         Déconnexion

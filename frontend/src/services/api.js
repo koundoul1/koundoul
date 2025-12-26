@@ -175,17 +175,65 @@ const api = {
 
   // 💳 PAIEMENTS
   payments: {
-    createIntent: (data) => request('/payments/create-intent', {
+    createStripeIntent: (data) => request('/payments/stripe/create-intent', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
     
-    confirmPayment: (data) => request('/payments/confirm', {
+    createWavePayment: (data) => request('/payments/wave/create', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
     
-    getHistory: () => request('/payments/history')
+    createOrangeMoneyPayment: (data) => request('/payments/orange-money/create', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+    
+    getMyPayments: () => request('/payments/my-payments')
+  },
+
+  // 📦 ABONNEMENTS
+  subscriptions: {
+    getPlans: () => request('/subscriptions/plans'),
+    
+    getMySubscription: () => request('/subscriptions/my-subscription'),
+    
+    getHistory: () => request('/subscriptions/history'),
+    
+    create: (data) => request('/subscriptions/create', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+    
+    cancel: (id) => request(`/subscriptions/${id}/cancel`, {
+      method: 'POST',
+    })
+  },
+
+  // 👨‍💼 ADMIN
+  admin: {
+    getDashboard: () => request('/admin/dashboard'),
+    
+    getUsers: (params = {}) => {
+      const queryParams = new URLSearchParams(params).toString()
+      return request(`/admin/users${queryParams ? `?${queryParams}` : ''}`)
+    },
+    
+    updateUser: (id, data) => request(`/admin/users/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
+    
+    getSubscriptions: (params = {}) => {
+      const queryParams = new URLSearchParams(params).toString()
+      return request(`/admin/subscriptions${queryParams ? `?${queryParams}` : ''}`)
+    },
+    
+    getPayments: (params = {}) => {
+      const queryParams = new URLSearchParams(params).toString()
+      return request(`/admin/payments${queryParams ? `?${queryParams}` : ''}`)
+    }
   },
 
   // 🏆 GAMIFICATION
