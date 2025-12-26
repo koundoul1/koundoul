@@ -153,9 +153,9 @@ const Header = () => {
               <span className="absolute top-0 right-0 h-3 w-3 bg-red-500 rounded-full border-2 border-white"></span>
             </button>
 
-            {/* Menu Profil - Toujours visible si connecté */}
-            {isAuthenticated && (
-              <div className="relative" ref={profileRef}>
+            {/* Menu Profil - Toujours visible */}
+            <div className="relative" ref={profileRef}>
+              {isAuthenticated ? (
                 <button
                   ref={profileButtonRef}
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -177,9 +177,22 @@ const Header = () => {
                     )}
                   </div>
                 </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                    <User className="h-4 w-4 text-white" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">
+                    Connexion
+                  </span>
+                </Link>
+              )}
 
-                {/* Dropdown Profil - Positionné pour rester dans le viewport */}
-                {isProfileOpen && (
+              {/* Dropdown Profil - Positionné pour rester dans le viewport */}
+              {isAuthenticated && isProfileOpen && (
                   <>
                     {/* Overlay pour fermer au clic extérieur */}
                     <div 
@@ -249,8 +262,7 @@ const Header = () => {
                     </div>
                   </>
                 )}
-              </div>
-            )}
+            </div>
           </div>
 
           {/* Menu mobile */}
