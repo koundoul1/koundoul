@@ -39,6 +39,7 @@ import WhyItWorks from './pages/WhyItWorks'
 import AdvancedFeatures from './pages/AdvancedFeatures'
 import Challenge from './pages/Challenge'
 import ParentDashboard from './pages/ParentDashboard'
+import AdminDashboard from './pages/AdminDashboard'
 import QuestionBanks from './pages/QuestionBanks'
 import QuestionBankDetail from './pages/QuestionBankDetail'
 import TestHintSystem from './pages/TestHintSystem'
@@ -320,6 +321,16 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <ParentDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              {/* Route Admin */}
+              <Route 
+                path="/admin" 
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
                   </ProtectedRoute>
                 } 
               />

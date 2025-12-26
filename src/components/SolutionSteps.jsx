@@ -35,16 +35,30 @@ const getStepIcon = (title) => {
   return <Edit3 className="h-5 w-5" />;
 };
 
-// Couleur selon le type d'étape
+// Couleur selon le type d'étape - Design amélioré avec gradients
 const getStepColor = (title) => {
   const lowerTitle = title.toLowerCase();
   
-  if (lowerTitle.includes('rappel')) return 'bg-blue-500/10 border-blue-400/30 text-blue-300';
-  if (lowerTitle.includes('stratégie')) return 'bg-purple-500/10 border-purple-400/30 text-purple-300';
-  if (lowerTitle.includes('vérification')) return 'bg-green-500/10 border-green-400/30 text-green-300';
-  if (lowerTitle.includes('plus loin')) return 'bg-yellow-500/10 border-yellow-400/30 text-yellow-300';
+  if (lowerTitle.includes('analyse') || lowerTitle.includes('rappel')) {
+    return 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-400/40 text-blue-200';
+  }
+  if (lowerTitle.includes('stratégie') || lowerTitle.includes('plan')) {
+    return 'bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-400/40 text-purple-200';
+  }
+  if (lowerTitle.includes('résolution') || lowerTitle.includes('détaillée') || lowerTitle.includes('calcul')) {
+    return 'bg-gradient-to-br from-indigo-500/10 to-blue-500/10 border-indigo-400/40 text-indigo-200';
+  }
+  if (lowerTitle.includes('application') || lowerTitle.includes('numérique')) {
+    return 'bg-gradient-to-br from-cyan-500/10 to-teal-500/10 border-cyan-400/40 text-cyan-200';
+  }
+  if (lowerTitle.includes('vérification') || lowerTitle.includes('validation')) {
+    return 'bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-400/40 text-green-200';
+  }
+  if (lowerTitle.includes('plus loin') || lowerTitle.includes('conseil')) {
+    return 'bg-gradient-to-br from-yellow-500/10 to-amber-500/10 border-yellow-400/40 text-yellow-200';
+  }
   
-  return 'bg-gray-500/10 border-gray-400/30 text-gray-300';
+  return 'bg-gradient-to-br from-gray-500/10 to-slate-500/10 border-gray-400/40 text-gray-200';
 };
 
 // Composant pour rendre le contenu avec support LaTeX
@@ -147,7 +161,7 @@ const RenderContentWithLaTeX = ({ content }) => {
 
 const SolutionSteps = ({ steps = [] }) => {
   const [expandedSteps, setExpandedSteps] = useState(
-    new Set(steps.map((_, i) => i)) // Tous expandés par défaut
+    new Set() // Tous repliés par défaut pour une meilleure lisibilité
   );
 
   const toggleStep = (index) => {
@@ -163,11 +177,41 @@ const SolutionSteps = ({ steps = [] }) => {
   if (!steps || steps.length === 0) return null;
 
   return (
-    <div className="space-y-4">
-      <h4 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
-        <BookOpen className="h-5 w-5 text-blue-400" />
-        Étapes de résolution détaillées
-      </h4>
+    <div className="space-y-3 mt-6">
+      <div className="flex items-center justify-between mb-4">
+        <h4 className="text-xl font-bold text-gray-100 flex items-center gap-3">
+          <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-400/30">
+            <BookOpen className="h-5 w-5 text-blue-400" />
+          </div>
+          <span className="bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
+            Étapes de résolution détaillées
+          </span>
+        </h4>
+        
+        {/* Bouton "Tout expand / Tout collapse" */}
+        <button
+          onClick={() => {
+            if (expandedSteps.size === steps.length) {
+              setExpandedSteps(new Set());
+            } else {
+              setExpandedSteps(new Set(steps.map((_, i) => i)));
+            }
+          }}
+          className="text-sm px-3 py-1.5 rounded-lg bg-gray-700/50 hover:bg-gray-600/50 text-gray-300 hover:text-white transition-all duration-200 flex items-center gap-2 border border-gray-600/50"
+        >
+          {expandedSteps.size === steps.length ? (
+            <>
+              <ChevronUp className="h-4 w-4" />
+              Réduire tout
+            </>
+          ) : (
+            <>
+              <ChevronDown className="h-4 w-4" />
+              Développer tout
+            </>
+          )}
+        </button>
+      </div>
 
       {steps.map((step, index) => {
         const stepData = typeof step === 'string' ? { title: `Étape ${index + 1}`, content: step } : step;
@@ -178,67 +222,68 @@ const SolutionSteps = ({ steps = [] }) => {
         return (
           <div 
             key={index} 
-            className={`rounded-lg border-2 overflow-hidden transition-all duration-300 ${colorClass} ${
-              isExpanded ? 'shadow-md' : 'shadow-sm'
-            }`}
+            className={`rounded-xl border overflow-hidden transition-all duration-300 ${
+              isExpanded 
+                ? 'border-opacity-60 shadow-lg shadow-blue-500/10' 
+                : 'border-opacity-40 shadow-sm hover:shadow-md hover:border-opacity-60'
+            } ${colorClass}`}
           >
             {/* Header - Cliquable pour expand/collapse */}
             <button
               onClick={() => toggleStep(index)}
-              className="w-full px-4 py-3 flex items-center justify-between hover:bg-opacity-80 transition-colors"
+              className={`w-full px-5 py-4 flex items-center justify-between transition-all duration-200 ${
+                isExpanded 
+                  ? 'bg-opacity-30' 
+                  : 'bg-opacity-10 hover:bg-opacity-20'
+              } ${colorClass.replace('text-', 'hover:text-').replace('/30', '/40')}`}
             >
-              <div className="flex items-center gap-3">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-800/50 flex items-center justify-center shadow-sm border border-gray-600">
-                  {icon}
+              <div className="flex items-center gap-4">
+                <div className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-md border-2 transition-all duration-200 ${
+                  isExpanded 
+                    ? 'bg-gradient-to-br from-blue-500/30 to-purple-500/30 border-blue-400/50 scale-110' 
+                    : 'bg-gray-800/60 border-gray-600/50'
+                }`}>
+                  <div className="text-blue-300">
+                    {icon}
+                  </div>
                 </div>
-                <span className="font-medium text-left">
-                  {stepData.title}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold text-gray-400 bg-gray-800/50 px-2 py-1 rounded">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-semibold text-left text-base">
+                    {stepData.title}
+                  </span>
+                </div>
               </div>
               
-              {isExpanded ? (
-                <ChevronUp className="h-5 w-5 flex-shrink-0" />
-              ) : (
-                <ChevronDown className="h-5 w-5 flex-shrink-0" />
-              )}
+              <div className={`flex items-center gap-2 transition-transform duration-300 ${
+                isExpanded ? 'rotate-180' : ''
+              }`}>
+                <ChevronDown className="h-5 w-5 flex-shrink-0 opacity-70" />
+              </div>
             </button>
 
-            {/* Contenu - Expandable avec support LaTeX */}
-            {isExpanded && (
-              <div className="px-4 pb-4 pt-2 bg-black/20 max-h-96 overflow-y-auto">
-                <RenderContentWithLaTeX content={stepData.content} />
+            {/* Contenu - Expandable avec support LaTeX et animation */}
+            <div 
+              className={`overflow-hidden transition-all duration-300 ${
+                isExpanded ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <div className="px-5 pb-5 pt-3 bg-gradient-to-b from-black/30 via-black/20 to-black/30">
+                <div className="border-l-4 border-blue-500/50 pl-4">
+                  <RenderContentWithLaTeX content={stepData.content} />
+                </div>
               </div>
-            )}
+            </div>
 
-            {/* Barre de progression visuelle */}
-            <div className="h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-20" />
+            {/* Barre de progression visuelle avec animation */}
+            {isExpanded && (
+              <div className="h-1 bg-gradient-to-r from-transparent via-blue-400/50 to-transparent opacity-50 animate-pulse" />
+            )}
           </div>
         );
       })}
-
-      {/* Bouton "Tout expand / Tout collapse" */}
-      <button
-        onClick={() => {
-          if (expandedSteps.size === steps.length) {
-            setExpandedSteps(new Set());
-          } else {
-            setExpandedSteps(new Set(steps.map((_, i) => i)));
-          }
-        }}
-        className="text-sm text-gray-400 hover:text-gray-200 transition-colors flex items-center gap-1"
-      >
-        {expandedSteps.size === steps.length ? (
-          <>
-            <ChevronUp className="h-4 w-4" />
-            Réduire tout
-          </>
-        ) : (
-          <>
-            <ChevronDown className="h-4 w-4" />
-            Développer tout
-          </>
-        )}
-      </button>
     </div>
   );
 };
