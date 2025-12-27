@@ -213,55 +213,147 @@ const AdminDashboard = () => {
               >
                 Paiements
               </button>
+              <button
+                onClick={() => setActiveTab('plans')}
+                className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                  activeTab === 'plans'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                Plans d'abonnement
+              </button>
             </nav>
           </div>
         </div>
 
         {/* Dashboard Tab */}
-        {activeTab === 'dashboard' && stats && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">Utilisateurs totaux</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">{stats.users?.total || 0}</p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {stats.users?.active || 0} actifs
-                  </p>
-                </div>
-                <Users className="h-12 w-12 text-blue-500" />
+        {activeTab === 'dashboard' && (
+          <div>
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
               </div>
-            </div>
+            ) : stats ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-500">Utilisateurs totaux</p>
+                        <p className="text-3xl font-bold text-gray-900 mt-2">{stats.users?.total || 0}</p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          {stats.users?.active || 0} actifs
+                        </p>
+                      </div>
+                      <Users className="h-12 w-12 text-blue-500" />
+                    </div>
+                  </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">Abonnements</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">
-                    {stats.subscriptions?.active || 0}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {stats.subscriptions?.total || 0} au total
-                  </p>
-                </div>
-                <CreditCard className="h-12 w-12 text-green-500" />
-              </div>
-            </div>
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-500">Abonnements</p>
+                        <p className="text-3xl font-bold text-gray-900 mt-2">
+                          {stats.subscriptions?.active || 0}
+                        </p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          {stats.subscriptions?.total || 0} au total
+                        </p>
+                      </div>
+                      <CreditCard className="h-12 w-12 text-green-500" />
+                    </div>
+                  </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">Revenus totaux</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">
-                    {formatPrice(stats.payments?.revenue || 0)}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {stats.payments?.total || 0} paiements
-                  </p>
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-500">Revenus totaux</p>
+                        <p className="text-3xl font-bold text-gray-900 mt-2">
+                          {formatPrice(stats.payments?.revenue || 0)}
+                        </p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          {stats.payments?.total || 0} paiements
+                        </p>
+                      </div>
+                      <TrendingUp className="h-12 w-12 text-purple-500" />
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-500">Taux de conversion</p>
+                        <p className="text-3xl font-bold text-gray-900 mt-2">
+                          {stats.users?.total > 0 
+                            ? Math.round((stats.subscriptions?.active / stats.users?.total) * 100) 
+                            : 0}%
+                        </p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          Utilisateurs premium
+                        </p>
+                      </div>
+                      <TrendingUp className="h-12 w-12 text-orange-500" />
+                    </div>
+                  </div>
                 </div>
-                <TrendingUp className="h-12 w-12 text-purple-500" />
+
+                {/* Statistiques supplémentaires */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Activité récente</h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Nouveaux utilisateurs (7j)</span>
+                        <span className="font-medium text-gray-900">-</span>
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Abonnements (30j)</span>
+                        <span className="font-medium text-gray-900">-</span>
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Revenus (30j)</span>
+                        <span className="font-medium text-gray-900">-</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Actions rapides</h3>
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => setActiveTab('users')}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                      >
+                        Gérer les utilisateurs
+                      </button>
+                      <button
+                        onClick={() => setActiveTab('plans')}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                      >
+                        Gérer les plans d'abonnement
+                      </button>
+                      <button
+                        onClick={() => setActiveTab('subscriptions')}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+                      >
+                        Voir tous les abonnements
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+                <p className="text-gray-500">Aucune donnée disponible</p>
+                <button
+                  onClick={loadDashboard}
+                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                >
+                  Recharger
+                </button>
               </div>
-            </div>
+            )}
           </div>
         )}
 
@@ -301,8 +393,9 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {users.users?.map((u) => (
-                    <tr key={u.id}>
+                  {users.users && users.users.length > 0 ? (
+                    users.users.map((u) => (
+                      <tr key={u.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="font-medium text-gray-900">{u.username}</div>
                         {u.firstName && u.lastName && (
@@ -339,8 +432,15 @@ const AdminDashboard = () => {
                           {u.isActive ? 'Désactiver' : 'Activer'}
                         </button>
                       </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="px-6 py-8 text-center text-gray-500">
+                        Aucun utilisateur trouvé
+                      </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
@@ -389,7 +489,8 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {subscriptions.subscriptions?.map((sub) => (
+                  {subscriptions.subscriptions && subscriptions.subscriptions.length > 0 ? (
+                    subscriptions.subscriptions.map((sub) => (
                     <tr key={sub.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="font-medium text-gray-900">{sub.user?.username || sub.user?.email}</div>
@@ -412,7 +513,14 @@ const AdminDashboard = () => {
                         {formatDate(sub.endDate)}
                       </td>
                     </tr>
-                  ))}
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="4" className="px-6 py-8 text-center text-gray-500">
+                        Aucun abonnement trouvé
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -438,7 +546,8 @@ const AdminDashboard = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {payments.payments?.map((payment) => (
+                  {payments.payments && payments.payments.length > 0 ? (
+                    payments.payments.map((payment) => (
                     <tr key={payment.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="font-medium text-gray-900">{payment.user?.username || payment.user?.email}</div>
@@ -465,9 +574,140 @@ const AdminDashboard = () => {
                         {formatDate(payment.createdAt)}
                       </td>
                     </tr>
-                  ))}
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="px-6 py-8 text-center text-gray-500">
+                        Aucun paiement trouvé
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {/* Plans Tab */}
+        {activeTab === 'plans' && (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900">Plans d'abonnement</h2>
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium">
+                Créer un plan
+              </button>
+            </div>
+
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Plan Gratuit */}
+                <div className="border border-gray-200 rounded-lg p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-gray-900">Gratuit</h3>
+                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                      Actif
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <span className="text-3xl font-bold text-gray-900">0</span>
+                    <span className="text-gray-600 ml-2">FCFA</span>
+                  </div>
+                  <ul className="space-y-2 mb-6 text-sm text-gray-600">
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Accès aux cours gratuits
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Exercices limités
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Forum communautaire
+                    </li>
+                  </ul>
+                  <button className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50">
+                    Modifier
+                  </button>
+                </div>
+
+                {/* Plan Premium */}
+                <div className="border-2 border-blue-500 rounded-lg p-6 relative">
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full">
+                    Populaire
+                  </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-gray-900">Premium</h3>
+                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                      Actif
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <span className="text-3xl font-bold text-gray-900">5 000</span>
+                    <span className="text-gray-600 ml-2">FCFA/mois</span>
+                  </div>
+                  <ul className="space-y-2 mb-6 text-sm text-gray-600">
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Tous les cours
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Exercices illimités
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Coach IA
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Support prioritaire
+                    </li>
+                  </ul>
+                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
+                    Modifier
+                  </button>
+                </div>
+
+                {/* Plan Pro */}
+                <div className="border border-gray-200 rounded-lg p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-gray-900">Pro</h3>
+                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                      Actif
+                    </span>
+                  </div>
+                  <div className="mb-4">
+                    <span className="text-3xl font-bold text-gray-900">10 000</span>
+                    <span className="text-gray-600 ml-2">FCFA/mois</span>
+                  </div>
+                  <ul className="space-y-2 mb-6 text-sm text-gray-600">
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Tout Premium
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Sessions privées
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Analyses avancées
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                      Accès API
+                    </li>
+                  </ul>
+                  <button className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50">
+                    Modifier
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-6 text-center text-gray-500 text-sm">
+                Gérer les plans d'abonnement, leurs prix et fonctionnalités
+              </div>
             </div>
           </div>
         )}
@@ -477,3 +717,4 @@ const AdminDashboard = () => {
 }
 
 export default AdminDashboard
+
