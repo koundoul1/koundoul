@@ -44,6 +44,7 @@ export const getUserStats = async (req, res) => {
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     
     // Calculer toutes les statistiques en parallèle pour optimiser
+    // Chaque requête est dans un try-catch pour éviter qu'une erreur fasse planter tout
     const [
       problemsCount,
       problemsThisWeek,
@@ -64,12 +65,18 @@ export const getUserStats = async (req, res) => {
       // Problèmes résolus
       prismaService.client.problem.count({
         where: { userId: userId }
+      }).catch(err => {
+        console.warn('⚠️ Error counting problems:', err.message);
+        return 0;
       }),
       prismaService.client.problem.count({
         where: { 
           userId: userId,
           createdAt: { gte: sevenDaysAgo }
         }
+      }).catch(err => {
+        console.warn('⚠️ Error counting problems this week:', err.message);
+        return 0;
       }),
       // Quiz complétés
       prismaService.client.quizAttempt.count({
@@ -77,6 +84,9 @@ export const getUserStats = async (req, res) => {
           userId: userId,
           status: 'COMPLETED'
         }
+      }).catch(err => {
+        console.warn('⚠️ Error counting quizzes:', err.message);
+        return 0;
       }),
       prismaService.client.quizAttempt.count({
         where: {
@@ -84,6 +94,9 @@ export const getUserStats = async (req, res) => {
           status: 'COMPLETED',
           completedAt: { gte: sevenDaysAgo }
         }
+      }).catch(err => {
+        console.warn('⚠️ Error counting quizzes this week:', err.message);
+        return 0;
       }),
       // Score moyen quiz
       prismaService.client.quizAttempt.aggregate({
@@ -92,16 +105,25 @@ export const getUserStats = async (req, res) => {
           status: 'COMPLETED'
         },
         _avg: { score: true }
-      }).then(result => Math.round(result._avg.score || 0)),
+      }).then(result => Math.round(result._avg.score || 0)).catch(err => {
+        console.warn('⚠️ Error calculating quiz average:', err.message);
+        return 0;
+      }),
       // Badges
       prismaService.client.userBadge.count({
         where: { userId: userId }
+      }).catch(err => {
+        console.warn('⚠️ Error counting badges:', err.message);
+        return 0;
       }),
       prismaService.client.userBadge.count({
         where: { 
           userId: userId,
           earnedAt: { gte: sevenDaysAgo }
         }
+      }).catch(err => {
+        console.warn('⚠️ Error counting badges this week:', err.message);
+        return 0;
       }),
       // Leçons complétées
       prismaService.client.lessonCompletion.count({
@@ -109,6 +131,9 @@ export const getUserStats = async (req, res) => {
           userId: userId,
           completed: true
         }
+      }).catch(err => {
+        console.warn('⚠️ Error counting lessons:', err.message);
+        return 0;
       }),
       prismaService.client.lessonCompletion.count({
         where: { 
@@ -116,32 +141,53 @@ export const getUserStats = async (req, res) => {
           completed: true,
           createdAt: { gte: sevenDaysAgo }
         }
+      }).catch(err => {
+        console.warn('⚠️ Error counting lessons this week:', err.message);
+        return 0;
       }),
       // Tentatives d'exercices
       prismaService.client.exerciseAttempt.count({
         where: { userId: userId }
+      }).catch(err => {
+        console.warn('⚠️ Error counting exercise attempts:', err.message);
+        return 0;
       }),
       prismaService.client.exerciseAttempt.count({
         where: { 
           userId: userId,
           createdAt: { gte: sevenDaysAgo }
         }
+      }).catch(err => {
+        console.warn('⚠️ Error counting exercise attempts this week:', err.message);
+        return 0;
       }),
       // Flashcards révisées
       prismaService.client.flashcardReview.count({
         where: { userId: userId }
+      }).catch(err => {
+        console.warn('⚠️ Error counting flashcard reviews:', err.message);
+        return 0;
       }),
       // Sessions coach
       prismaService.client.coachSession.count({
         where: { userId: userId }
+      }).catch(err => {
+        console.warn('⚠️ Error counting coach sessions:', err.message);
+        return 0;
       }),
       // Discussions créées
       prismaService.client.discussion.count({
         where: { userId: userId }
+      }).catch(err => {
+        console.warn('⚠️ Error counting discussions:', err.message);
+        return 0;
       }),
       // Réponses dans le forum
       prismaService.client.reply.count({
         where: { userId: userId }
+      }).catch(err => {
+        console.warn('⚠️ Error counting replies:', err.message);
+        return 0;
       })
     ]);
     
@@ -174,7 +220,9 @@ export const getUserStats = async (req, res) => {
       (exerciseAttemptsThisWeek * 8);
     
     // Progression par matière (basée sur les problèmes)
-    const problemsBySubject = await prismaService.client.problem.groupBy({
+    let problemsBySubject = [];
+    try {
+      problemsBySubject = await prismaService.client.problem.groupBy({
       by: ['subject'],
       where: { userId: userId },
       _count: { id: true }
@@ -414,6 +462,36 @@ export const getProfile = async (req, res) => {
   } catch (error) {
     console.error('❌ Get profile error:', error);
     console.error('❌ Error details:', error.message, error.stack);
+    
+    // Si c'est une erreur de colonne manquante, essayer sans invitationCode
+    if (error.message && error.message.includes('invitationCode')) {
+      try {
+        const fallbackUser = await prismaService.client.user.findUnique({
+          where: { id: req.user.id },
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            username: true,
+            email: true,
+            xp: true,
+            level: true,
+            streak: true,
+            createdAt: true
+          }
+        });
+        
+        if (fallbackUser) {
+          return res.json({
+            success: true,
+            data: { ...fallbackUser, invitationCode: null }
+          });
+        }
+      } catch (fallbackError) {
+        console.error('❌ Fallback profile error:', fallbackError);
+      }
+    }
+    
     res.status(500).json({
       success: false,
       error: 'Erreur lors de la récupération du profil'
