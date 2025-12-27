@@ -226,16 +226,25 @@ const ParentDashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Loading state */}
+        {loadingDashboard && (
+          <div className="flex items-center justify-center py-12 mb-6">
+            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            <span className="ml-3 text-gray-700 font-medium">Chargement des données...</span>
+          </div>
+        )}
+
         {/* Résumé hebdomadaire */}
+        {!loadingDashboard && (
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 mb-6 shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-white flex items-center">
               <Calendar className="h-6 w-6 mr-2" />
               Cette semaine
             </h2>
-            {dashboardData && (
+            {selectedChild && (
               <span className="text-sm text-white font-medium">
-                {selectedChild?.name || 'Enfant'} - Niveau {selectedChild?.level || 1}
+                {selectedChild.firstName || selectedChild.username || 'Enfant'} - Niveau {selectedChild.level || 1}
               </span>
             )}
           </div>
@@ -537,12 +546,15 @@ const ParentDashboard = () => {
         </div>
 
         {/* Bouton Rapport mensuel */}
-        <div className="mt-8 flex justify-center">
-          <button className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center">
-            <BarChart3 className="h-5 w-5 mr-2" />
-            Générer le Rapport Mensuel
-          </button>
-        </div>
+        {!loadingDashboard && (
+          <div className="mt-8 flex justify-center">
+            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center">
+              <BarChart3 className="h-5 w-5 mr-2" />
+              Générer le Rapport Mensuel
+            </button>
+          </div>
+        )}
+        )}
       </div>
     </div>
   );
