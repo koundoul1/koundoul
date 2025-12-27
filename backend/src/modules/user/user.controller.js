@@ -220,19 +220,23 @@ export const getUserStats = async (req, res) => {
       (exerciseAttemptsThisWeek * 8);
     
     // Progression par matière (basée sur les problèmes)
-    let problemsBySubject = [];
+    let subjectsProgress = [];
     try {
-      problemsBySubject = await prismaService.client.problem.groupBy({
-      by: ['subject'],
-      where: { userId: userId },
-      _count: { id: true }
-    });
-    
-    const subjectsProgress = problemsBySubject.map(p => ({
-      subject: p.subject,
-      count: p._count.id,
-      progress: Math.min(Math.round((p._count.id / 50) * 100), 100) // Max 100%
-    }));
+      const problemsBySubject = await prismaService.client.problem.groupBy({
+        by: ['subject'],
+        where: { userId: userId },
+        _count: { id: true }
+      });
+      
+      subjectsProgress = problemsBySubject.map(p => ({
+        subject: p.subject,
+        count: p._count.id,
+        progress: Math.min(Math.round((p._count.id / 50) * 100), 100) // Max 100%
+      }));
+    } catch (err) {
+      console.warn('⚠️ Error calculating subjects progress:', err.message);
+      subjectsProgress = [];
+    }
     
     // Stats complètes
     const stats = {
