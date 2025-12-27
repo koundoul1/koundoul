@@ -210,50 +210,85 @@ class AuthService {
 
       // Si le parent n'existe pas, le créer
       if (!parent) {
-        // Générer un mot de passe aléatoire (ne sera jamais utilisé directement)
-        const randomPassword = await bcrypt.hash(crypto.randomBytes(32).toString('hex'), this.bcryptRounds)
-        
-        parent = await this.prisma.user.create({
-          data: {
-            email: parentEmail,
-            username: `parent_${child.id}`,
-            password: randomPassword,
-            firstName: child.firstName ? `Parent de ${child.firstName}` : 'Parent',
-            lastName: child.lastName || '',
-            isActive: true
-          },
-          select: {
-            id: true,
-            email: true,
-            username: true,
-            firstName: true,
-            lastName: true,
-            createdAt: true
-          }
-        })
+        try {
+          // Générer un mot de passe aléatoire (ne sera jamais utilisé directement)
+          const randomPassword = await bcrypt.hash(crypto.randomBytes(32).toString('hex'), this.bcryptRounds)
+          
+          // Générer un username unique (limiter à 50 caractères pour éviter les problèmes)
+          const username = `parent_${child.id}`.substring(0, 50)
+          
+          parent = await this.prisma.user.create({
+            data: {
+              email: parentEmail,
+              username: username,
+              password: randomPassword,
+              firstName: child.firstName ? `Parent de ${child.firstName}`.substring(0, 100) : 'Parent',
+              lastName: (child.lastName || '').substring(0, 100),
+              isActive: true
+            },
+            select: {
+              id: true,
+              email: true,
+              username: true,
+              firstName: true,
+              lastName: true,
+              createdAt: true
+            }
+          })
 
-        logger.info(`Compte parent créé automatiquement: ${parentEmail}`)
+          logger.info(`Compte parent créé automatiquement: ${parentEmail}`)
+        } catch (createError) {
+          // Si le compte parent existe déjà (race condition), le récupérer
+          if (createError.code === 'P2002') {
+            parent = await this.prisma.user.findFirst({
+              where: {
+                email: parentEmail
+              },
+              select: {
+                id: true,
+                email: true,
+                username: true,
+                firstName: true,
+                lastName: true,
+                createdAt: true
+              }
+            })
+            if (!parent) {
+              throw new Error('Erreur lors de la création/récupération du compte parent')
+            }
+            logger.info(`Compte parent existant récupéré: ${parentEmail}`)
+          } else {
+            throw createError
+          }
+        }
       }
 
       // Vérifier si le lien parent-enfant existe, sinon le créer
-      const existingLink = await this.prisma.parentChildLink.findUnique({
+      // Utiliser findFirst avec une condition OR au lieu de findUnique car le compound unique peut ne pas fonctionner
+      const existingLink = await this.prisma.parentChildLink.findFirst({
         where: {
-          parentId_childId: {
-            parentId: parent.id,
-            childId: child.id
-          }
+          parentId: parent.id,
+          childId: child.id
         }
       })
 
       if (!existingLink) {
-        await this.prisma.parentChildLink.create({
-          data: {
-            parentId: parent.id,
-            childId: child.id,
-            approved: true
+        try {
+          await this.prisma.parentChildLink.create({
+            data: {
+              parentId: parent.id,
+              childId: child.id,
+              approved: true
+            }
+          })
+          logger.info(`Lien parent-enfant créé: parent ${parent.id} -> enfant ${child.id}`)
+        } catch (linkError) {
+          // Si le lien existe déjà (race condition), ignorer l'erreur
+          if (linkError.code !== 'P2002') {
+            throw linkError
           }
-        })
-        logger.info(`Lien parent-enfant créé: parent ${parent.id} -> enfant ${child.id}`)
+          logger.info(`Lien parent-enfant existe déjà: parent ${parent.id} -> enfant ${child.id}`)
+        }
       }
 
       // Générer le token JWT avec l'ID du parent
