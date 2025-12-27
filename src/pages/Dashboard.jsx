@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   BookOpen, Target, Award, TrendingUp, Clock, Flame, 
   ChevronRight, CheckCircle, Trophy, Zap, Activity 
@@ -9,6 +9,7 @@ import api from '../services/api';
 export default function Dashboard() {
   const [dashboard, setDashboard] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchDashboard();
@@ -20,6 +21,15 @@ export default function Dashboard() {
       setDashboard(response.data);
     } catch (error) {
       console.error('Erreur:', error);
+      // Si erreur 401 (non authentifié), rediriger vers la page de connexion
+      if (error.status === 401 || error.message?.includes('Token') || error.message?.includes('Session')) {
+        api.auth.logout();
+        navigate('/login', { 
+          state: { 
+            message: 'Veuillez vous connecter pour accéder à votre dashboard.' 
+          } 
+        });
+      }
     } finally {
       setLoading(false);
     }
