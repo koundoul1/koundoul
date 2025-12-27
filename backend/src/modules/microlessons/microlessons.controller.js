@@ -68,8 +68,9 @@ class MicrolessonsController {
       const { id } = req.params
       const userId = req.user?.id
 
+      // Si pas d'utilisateur authentifié, retourner null (pas d'erreur)
       if (!userId) {
-        return res.status(401).json({ success: false, error: { message: 'Non authentifié' } })
+        return res.json({ success: true, data: null })
       }
 
       const completion = await microlessonsService.getCompletionStatus(userId, id)
