@@ -354,21 +354,50 @@ export const getProfile = async (req, res) => {
   try {
     const userId = req.user.id;
     
-    const user = await prismaService.client.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        firstName: true,
-        lastName: true,
-        username: true,
-        email: true,
-        xp: true,
-        level: true,
-        streak: true,
-        invitationCode: true,
-        createdAt: true
+    // Essayer d'abord avec invitationCode
+    let user;
+    try {
+      user = await prismaService.client.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          username: true,
+          email: true,
+          xp: true,
+          level: true,
+          streak: true,
+          invitationCode: true,
+          createdAt: true
+        }
+      });
+    } catch (selectError) {
+      // Si invitationCode n'existe pas, réessayer sans
+      if (selectError.message && selectError.message.includes('invitationCode')) {
+        console.warn('⚠️ Colonne invitationCode non trouvée, récupération sans cette colonne');
+        user = await prismaService.client.user.findUnique({
+          where: { id: userId },
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            username: true,
+            email: true,
+            xp: true,
+            level: true,
+            streak: true,
+            createdAt: true
+          }
+        });
+        // Ajouter invitationCode null pour éviter les erreurs frontend
+        if (user) {
+          user.invitationCode = null;
+        }
+      } else {
+        throw selectError;
       }
-    });
+    }
     
     if (!user) {
       return res.status(404).json({
@@ -384,6 +413,7 @@ export const getProfile = async (req, res) => {
     
   } catch (error) {
     console.error('❌ Get profile error:', error);
+    console.error('❌ Error details:', error.message, error.stack);
     res.status(500).json({
       success: false,
       error: 'Erreur lors de la récupération du profil'
