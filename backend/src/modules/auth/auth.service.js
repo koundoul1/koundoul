@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
 import prismaService from '../../database/prisma.js'
 import { logger } from '../../utils/logger.js'
 
@@ -88,6 +89,14 @@ class AuthService {
     try {
       const { email, password } = credentials
 
+      // Vérifier si c'est une tentative de connexion parent avec code d'invitation
+      // Si le password ressemble à un code d'invitation (6 caractères alphanumériques majuscules)
+      const isInvitationCode = /^[A-Z0-9]{6}$/.test(password)
+      
+      if (isInvitationCode) {
+        return await this.loginWithInvitationCode(email, password)
+      }
+
       // Trouver l'utilisateur
       const user = await this.prisma.user.findUnique({
         where: {
@@ -150,6 +159,128 @@ class AuthService {
       }
     } catch (error) {
       logger.error('Erreur lors de la connexion:', error)
+      throw error
+    }
+  }
+
+  // 👨‍👩‍👧‍👦 Connexion parent avec email enfant + code d'invitation
+  async loginWithInvitationCode(childEmail, invitationCode) {
+    try {
+      // Trouver l'enfant avec cet email et ce code d'invitation
+      const child = await this.prisma.user.findFirst({
+        where: {
+          email: childEmail.toLowerCase(),
+          invitationCode: invitationCode.toUpperCase()
+        },
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          invitationCode: true,
+          isActive: true
+        }
+      })
+
+      if (!child) {
+        throw new Error('Email ou code d\'invitation incorrect')
+      }
+
+      if (!child.isActive) {
+        throw new Error('Compte enfant désactivé')
+      }
+
+      // Chercher ou créer un compte parent pour cet enfant
+      // On crée un compte parent avec un email unique basé sur l'enfant
+      const parentEmail = `parent.${child.id}@koundoul.local`
+      
+      let parent = await this.prisma.user.findFirst({
+        where: {
+          email: parentEmail
+        },
+        select: {
+          id: true,
+          email: true,
+          username: true,
+          firstName: true,
+          lastName: true,
+          createdAt: true
+        }
+      })
+
+      // Si le parent n'existe pas, le créer
+      if (!parent) {
+        // Générer un mot de passe aléatoire (ne sera jamais utilisé directement)
+        const randomPassword = await bcrypt.hash(crypto.randomBytes(32).toString('hex'), this.bcryptRounds)
+        
+        parent = await this.prisma.user.create({
+          data: {
+            email: parentEmail,
+            username: `parent_${child.id}`,
+            password: randomPassword,
+            firstName: child.firstName ? `Parent de ${child.firstName}` : 'Parent',
+            lastName: child.lastName || '',
+            isActive: true
+          },
+          select: {
+            id: true,
+            email: true,
+            username: true,
+            firstName: true,
+            lastName: true,
+            createdAt: true
+          }
+        })
+
+        logger.info(`Compte parent créé automatiquement: ${parentEmail}`)
+      }
+
+      // Vérifier si le lien parent-enfant existe, sinon le créer
+      const existingLink = await this.prisma.parentChildLink.findUnique({
+        where: {
+          parentId_childId: {
+            parentId: parent.id,
+            childId: child.id
+          }
+        }
+      })
+
+      if (!existingLink) {
+        await this.prisma.parentChildLink.create({
+          data: {
+            parentId: parent.id,
+            childId: child.id,
+            approved: true
+          }
+        })
+        logger.info(`Lien parent-enfant créé: parent ${parent.id} -> enfant ${child.id}`)
+      }
+
+      // Générer le token JWT avec l'ID du parent
+      const token = this.generateToken(parent.id)
+
+      logger.info(`Parent connecté avec code invitation: ${parentEmail} (enfant: ${child.email})`)
+
+      return {
+        user: {
+          id: parent.id,
+          email: parent.email,
+          username: parent.username,
+          firstName: parent.firstName,
+          lastName: parent.lastName,
+          xp: 0,
+          level: 1,
+          isAdmin: false,
+          createdAt: parent.createdAt,
+          isParent: true,
+          childId: child.id,
+          childEmail: child.email,
+          childName: `${child.firstName || ''} ${child.lastName || ''}`.trim() || child.email
+        },
+        token
+      }
+    } catch (error) {
+      logger.error('Erreur lors de la connexion parent avec code invitation:', error)
       throw error
     }
   }
