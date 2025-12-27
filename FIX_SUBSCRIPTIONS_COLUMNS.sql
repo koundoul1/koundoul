@@ -29,7 +29,7 @@ BEGIN
 END $$;
 
 -- 2. Vérifier et corriger subscriptions
--- Renommer user_id en userId si nécessaire
+-- Renommer user_id en userId si nécessaire, ou créer la colonne si elle n'existe pas
 DO $$ 
 BEGIN
   -- Vérifier si userId existe
@@ -43,19 +43,74 @@ BEGIN
       WHERE table_name = 'subscriptions' AND column_name = 'user_id'
     ) THEN
       ALTER TABLE subscriptions RENAME COLUMN user_id TO "userId";
-      ALTER TABLE subscriptions RENAME COLUMN plan_id TO "planId";
-      ALTER TABLE subscriptions RENAME COLUMN start_date TO "startDate";
-      ALTER TABLE subscriptions RENAME COLUMN end_date TO "endDate";
-      ALTER TABLE subscriptions RENAME COLUMN auto_renew TO "autoRenew";
-      ALTER TABLE subscriptions RENAME COLUMN cancelled_at TO "cancelledAt";
-      ALTER TABLE subscriptions RENAME COLUMN created_at TO "createdAt";
-      ALTER TABLE subscriptions RENAME COLUMN updated_at TO "updatedAt";
     ELSE
-      -- Sinon, créer les colonnes (ne devrait pas arriver)
-      ALTER TABLE subscriptions ADD COLUMN "userId" TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE;
-      ALTER TABLE subscriptions ADD COLUMN "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW();
-      ALTER TABLE subscriptions ADD COLUMN "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW();
+      -- Sinon, créer la colonne userId (obligatoire)
+      ALTER TABLE subscriptions ADD COLUMN "userId" TEXT;
+      -- Mettre à jour les lignes existantes si nécessaire (optionnel)
+      -- UPDATE subscriptions SET "userId" = (SELECT id FROM users LIMIT 1) WHERE "userId" IS NULL;
     END IF;
+  END IF;
+  
+  -- Vérifier et renommer les autres colonnes si nécessaire
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'subscriptions' AND column_name = 'plan_id'
+  ) THEN
+    ALTER TABLE subscriptions RENAME COLUMN plan_id TO "planId";
+  END IF;
+  
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'subscriptions' AND column_name = 'start_date'
+  ) THEN
+    ALTER TABLE subscriptions RENAME COLUMN start_date TO "startDate";
+  END IF;
+  
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'subscriptions' AND column_name = 'end_date'
+  ) THEN
+    ALTER TABLE subscriptions RENAME COLUMN end_date TO "endDate";
+  END IF;
+  
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'subscriptions' AND column_name = 'auto_renew'
+  ) THEN
+    ALTER TABLE subscriptions RENAME COLUMN auto_renew TO "autoRenew";
+  END IF;
+  
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'subscriptions' AND column_name = 'cancelled_at'
+  ) THEN
+    ALTER TABLE subscriptions RENAME COLUMN cancelled_at TO "cancelledAt";
+  END IF;
+  
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'subscriptions' AND column_name = 'created_at'
+  ) THEN
+    ALTER TABLE subscriptions RENAME COLUMN created_at TO "createdAt";
+  END IF;
+  
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns 
+    WHERE table_name = 'subscriptions' AND column_name = 'updated_at'
+  ) THEN
+    ALTER TABLE subscriptions RENAME COLUMN updated_at TO "updatedAt";
+  END IF;
+  
+  -- Ajouter la contrainte NOT NULL et la foreign key si userId est créé maintenant
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.table_constraints 
+    WHERE table_name = 'subscriptions' 
+    AND constraint_name LIKE '%userId%'
+    AND constraint_type = 'FOREIGN KEY'
+  ) THEN
+    -- Vérifier que userId n'est pas null avant d'ajouter la contrainte
+    -- ALTER TABLE subscriptions ALTER COLUMN "userId" SET NOT NULL;
+    -- ALTER TABLE subscriptions ADD CONSTRAINT fk_subscriptions_user_id FOREIGN KEY ("userId") REFERENCES users(id) ON DELETE CASCADE;
   END IF;
 END $$;
 
