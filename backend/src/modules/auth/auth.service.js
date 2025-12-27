@@ -89,15 +89,7 @@ class AuthService {
     try {
       const { email, password } = credentials
 
-      // Vérifier si c'est une tentative de connexion parent avec code d'invitation
-      // Si le password ressemble à un code d'invitation (6 caractères alphanumériques majuscules)
-      const isInvitationCode = /^[A-Z0-9]{6}$/.test(password)
-      
-      if (isInvitationCode) {
-        return await this.loginWithInvitationCode(email, password)
-      }
-
-      // Trouver l'utilisateur
+      // Trouver l'utilisateur d'abord
       const user = await this.prisma.user.findUnique({
         where: {
           email: email.toLowerCase()
@@ -117,46 +109,65 @@ class AuthService {
         }
       })
 
-      if (!user) {
-        throw new Error('Email ou mot de passe incorrect')
+      // Si l'utilisateur existe, essayer la connexion normale
+      if (user) {
+        if (!user.isActive) {
+          throw new Error('Compte désactivé')
+        }
+
+        // Vérifier le mot de passe
+        const isPasswordValid = await bcrypt.compare(password, user.password)
+
+        if (isPasswordValid) {
+          // Générer le token JWT
+          const token = this.generateToken(user.id)
+
+          // Mettre à jour la dernière connexion
+          await this.prisma.user.update({
+            where: { id: user.id },
+            data: { updatedAt: new Date() }
+          })
+
+          logger.info(`Utilisateur connecté: ${user.email}`)
+
+          return {
+            user: {
+              id: user.id,
+              email: user.email,
+              username: user.username,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              xp: user.xp,
+              level: user.level,
+              isAdmin: user.isAdmin || false,
+              createdAt: user.createdAt
+            },
+            token
+          }
+        }
       }
 
-      if (!user.isActive) {
-        throw new Error('Compte désactivé')
+      // Si la connexion normale a échoué, vérifier si c'est une tentative de connexion parent avec code d'invitation
+      // Le password doit ressembler à un code d'invitation (6 caractères alphanumériques majuscules)
+      const isInvitationCode = /^[A-Z0-9]{6}$/.test(password)
+      
+      if (isInvitationCode) {
+        try {
+          return await this.loginWithInvitationCode(email, password)
+        } catch (invitationError) {
+          // Si l'erreur est "Email ou code d'invitation incorrect", c'est normal
+          // Sinon, propager l'erreur
+          if (invitationError.message.includes('code d\'invitation incorrect') || 
+              invitationError.message.includes('Email ou code')) {
+            throw new Error('Email ou mot de passe incorrect')
+          }
+          throw invitationError
+        }
       }
 
-      // Vérifier le mot de passe
-      const isPasswordValid = await bcrypt.compare(password, user.password)
+      // Si on arrive ici, c'est que ni la connexion normale ni la connexion avec code n'a fonctionné
+      throw new Error('Email ou mot de passe incorrect')
 
-      if (!isPasswordValid) {
-        throw new Error('Email ou mot de passe incorrect')
-      }
-
-      // Générer le token JWT
-      const token = this.generateToken(user.id)
-
-      // Mettre à jour la dernière connexion
-      await this.prisma.user.update({
-        where: { id: user.id },
-        data: { updatedAt: new Date() }
-      })
-
-      logger.info(`Utilisateur connecté: ${user.email}`)
-
-      return {
-        user: {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          xp: user.xp,
-          level: user.level,
-          isAdmin: user.isAdmin || false,
-          createdAt: user.createdAt
-        },
-        token
-      }
     } catch (error) {
       logger.error('Erreur lors de la connexion:', error)
       throw error
@@ -166,11 +177,10 @@ class AuthService {
   // 👨‍👩‍👧‍👦 Connexion parent avec email enfant + code d'invitation
   async loginWithInvitationCode(childEmail, invitationCode) {
     try {
-      // Trouver l'enfant avec cet email et ce code d'invitation
+      // Trouver l'enfant avec cet email
       const child = await this.prisma.user.findFirst({
         where: {
-          email: childEmail.toLowerCase(),
-          invitationCode: invitationCode.toUpperCase()
+          email: childEmail.toLowerCase()
         },
         select: {
           id: true,
@@ -183,6 +193,11 @@ class AuthService {
       })
 
       if (!child) {
+        throw new Error('Email ou code d\'invitation incorrect')
+      }
+
+      // Vérifier que l'enfant a un code d'invitation et qu'il correspond
+      if (!child.invitationCode || child.invitationCode.toUpperCase() !== invitationCode.toUpperCase()) {
         throw new Error('Email ou code d\'invitation incorrect')
       }
 
