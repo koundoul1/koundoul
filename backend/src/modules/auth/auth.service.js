@@ -8,7 +8,7 @@ class AuthService {
   constructor() {
     this.prisma = prismaService.client
     this.jwtSecret = process.env.JWT_SECRET
-    this.jwtExpiresIn = process.env.JWT_EXPIRES_IN || '7d'
+    this.jwtExpiresIn = process.env.JWT_EXPIRES_IN || '30d'
     this.bcryptRounds = parseInt(process.env.BCRYPT_ROUNDS) || 12
     
     // Vérifier que JWT_SECRET est configuré
