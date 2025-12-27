@@ -9,6 +9,12 @@ class AuthService {
     this.jwtSecret = process.env.JWT_SECRET
     this.jwtExpiresIn = process.env.JWT_EXPIRES_IN || '7d'
     this.bcryptRounds = parseInt(process.env.BCRYPT_ROUNDS) || 12
+    
+    // Vérifier que JWT_SECRET est configuré
+    if (!this.jwtSecret) {
+      logger.error('❌ JWT_SECRET n\'est pas défini dans les variables d\'environnement')
+      throw new Error('JWT_SECRET n\'est pas configuré. Veuillez définir JWT_SECRET dans les variables d\'environnement.')
+    }
   }
 
   // 🔐 Inscription d'un nouvel utilisateur
@@ -324,6 +330,11 @@ class AuthService {
 
   // 🔧 Méthodes utilitaires
   generateToken(userId) {
+    if (!this.jwtSecret) {
+      logger.error('❌ JWT_SECRET n\'est pas défini lors de la génération du token')
+      throw new Error('JWT_SECRET n\'est pas configuré')
+    }
+    
     return jwt.sign(
       { userId },
       this.jwtSecret,
