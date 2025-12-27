@@ -11,6 +11,14 @@ import prismaService from '../../database/prisma.js';
  */
 export const getUserStats = async (req, res) => {
   try {
+    // Vérifier que l'utilisateur est authentifié
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        error: 'Non authentifié'
+      });
+    }
+    
     const userId = req.user.id;
     
     // Récupérer les données utilisateur avec toutes les relations nécessaires
