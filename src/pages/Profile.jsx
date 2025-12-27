@@ -29,11 +29,12 @@ import {
   CreditCard,
   Clock
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Profile = () => {
-  const { user, updateProfile, changePassword } = useAuth()
+  const { user, updateProfile, changePassword, isAuthenticated } = useAuth()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const [isChangingPassword, setIsChangingPassword] = useState(false)
   const [formData, setFormData] = useState({
@@ -87,6 +88,7 @@ const Profile = () => {
   const handleGenerateInvitationCode = async () => {
     try {
       setLoadingCode(true)
+      setError('')
       const response = await api.user.generateInvitationCode()
       if (response.data.success) {
         setInvitationCode(response.data.data.code)
@@ -94,7 +96,22 @@ const Profile = () => {
         setTimeout(() => setSuccess(''), 5000)
       }
     } catch (error) {
-      setError('Erreur lors de la génération du code')
+      console.error('Erreur génération code:', error)
+      // Si erreur 401 (session expirée), rediriger vers la page de connexion
+      if (error.status === 401 || error.message?.includes('Session expirée') || error.message?.includes('Non authentifié')) {
+        setError('Votre session a expiré. Veuillez vous reconnecter.')
+        // Rediriger vers la page de connexion après 2 secondes
+        setTimeout(() => {
+          api.auth.logout()
+          navigate('/login', { 
+            state: { 
+              message: 'Votre session a expiré. Veuillez vous reconnecter pour continuer.' 
+            } 
+          })
+        }, 2000)
+      } else {
+        setError(error.message || 'Erreur lors de la génération du code. Veuillez réessayer.')
+      }
     } finally {
       setLoadingCode(false)
     }
