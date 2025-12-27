@@ -457,12 +457,67 @@ export const generateInvitationCode = async (req, res) => {
   }
 };
 
+// Fonction helper pour générer un code d'invitation unique
+const generateUniqueInvitationCode = async (excludeUserId) => {
+  let code;
+  let attempts = 0;
+  let isUnique = false;
+  const maxAttempts = 20;
+  
+  while (!isUnique && attempts < maxAttempts) {
+    // Générer un code de 6 caractères alphanumériques majuscules
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    code = '';
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    
+    // Vérifier l'unicité du code
+    try {
+      const existing = await prismaService.client.user.findFirst({
+        where: { 
+          invitationCode: code,
+          NOT: { id: excludeUserId }
+        }
+      });
+      
+      if (!existing) {
+        isUnique = true;
+      }
+    } catch (queryError) {
+      // Si la colonne invitationCode n'existe pas, considérer comme unique
+      if (queryError.message && queryError.message.includes('invitationCode')) {
+        console.warn('⚠️ Colonne invitationCode non trouvée');
+        isUnique = true;
+      } else {
+        throw queryError;
+      }
+    }
+    
+    attempts++;
+  }
+  
+  if (!isUnique) {
+    throw new Error('Impossible de générer un code unique');
+  }
+  
+  return code;
+};
+
 /**
  * Obtenir le profil utilisateur
  * GET /api/user/profile
  */
 export const getProfile = async (req, res) => {
   try {
+    // Vérifier que l'utilisateur est authentifié
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        error: 'Non authentifié'
+      });
+    }
+    
     const userId = req.user.id;
     
     // Essayer d'abord avec invitationCode
@@ -517,6 +572,35 @@ export const getProfile = async (req, res) => {
       });
     }
     
+    // Générer automatiquement un code d'invitation s'il n'existe pas
+    if (!user.invitationCode) {
+      try {
+        const newCode = await generateUniqueInvitationCode(userId);
+        
+        // Mettre à jour l'utilisateur avec le nouveau code
+        try {
+          await prismaService.client.user.update({
+            where: { id: userId },
+            data: { invitationCode: newCode }
+          });
+          user.invitationCode = newCode;
+          console.log(`✅ Code d'invitation généré automatiquement pour l'utilisateur ${userId}: ${newCode}`);
+        } catch (updateError) {
+          // Si la colonne n'existe pas, on ne peut pas la mettre à jour
+          if (updateError.message && updateError.message.includes('invitationCode')) {
+            console.warn('⚠️ Impossible de sauvegarder le code, colonne invitationCode n\'existe pas');
+            user.invitationCode = null;
+          } else {
+            throw updateError;
+          }
+        }
+      } catch (codeGenError) {
+        console.error('❌ Erreur lors de la génération automatique du code:', codeGenError.message);
+        // Continuer même si la génération échoue
+        user.invitationCode = null;
+      }
+    }
+    
     res.json({
       success: true,
       data: user
@@ -530,7 +614,7 @@ export const getProfile = async (req, res) => {
     if (error.message && error.message.includes('invitationCode')) {
       try {
         const fallbackUser = await prismaService.client.user.findUnique({
-          where: { id: req.user.id },
+          where: { id: req.user?.id },
           select: {
             id: true,
             firstName: true,

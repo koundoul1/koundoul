@@ -15,7 +15,6 @@ import {
   Calendar, 
   Award, 
   Target, 
-  Settings,
   Edit3,
   Save,
   X,
@@ -29,11 +28,12 @@ import {
   CreditCard,
   Clock
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Profile = () => {
-  const { user, updateProfile, changePassword } = useAuth()
+  const { user, updateProfile, changePassword, isAuthenticated } = useAuth()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
   const [isChangingPassword, setIsChangingPassword] = useState(false)
   const [formData, setFormData] = useState({
@@ -52,7 +52,6 @@ const Profile = () => {
   const [userStats, setUserStats] = useState(null)
   const [loadingStats, setLoadingStats] = useState(true)
   const [invitationCode, setInvitationCode] = useState(null)
-  const [loadingCode, setLoadingCode] = useState(false)
   const [profileData, setProfileData] = useState(null)
 
   // Initialiser les données du formulaire
@@ -84,29 +83,14 @@ const Profile = () => {
     }
   }
   
-  const handleGenerateInvitationCode = async () => {
-    try {
-      setLoadingCode(true)
-      const response = await api.user.generateInvitationCode()
-      if (response.data.success) {
-        setInvitationCode(response.data.data.code)
-        setSuccess(response.data.data.message || 'Code d\'invitation généré avec succès')
-        setTimeout(() => setSuccess(''), 5000)
-      }
-    } catch (error) {
-      setError('Erreur lors de la génération du code')
-    } finally {
-      setLoadingCode(false)
-    }
-  }
 
   const loadUserStats = async () => {
     try {
       setLoadingStats(true)
-      const response = await api.get('/user/stats')
+      const response = await api.user.getStats()
       
-      if (response.data.success) {
-        setUserStats(response.data.data)
+      if (response.success || response.data?.success) {
+        setUserStats(response.data?.data || response.data)
       }
     } catch (error) {
       console.error('Erreur chargement stats:', error)
@@ -491,8 +475,11 @@ const Profile = () => {
                   {invitationCode ? (
                     <div>
                       <label className="block text-xs font-semibold text-gray-700 mb-2">
-                        Code d'invitation
+                        Code d'invitation pour les parents
                       </label>
+                      <p className="text-xs text-gray-600 mb-3">
+                        Partagez ce code avec vos parents. Ils pourront l'utiliser pour se connecter et suivre votre progression.
+                      </p>
                       <div className="flex items-center space-x-2">
                         <code className="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-lg font-bold text-gray-900 text-center">
                           {invitationCode}
@@ -500,7 +487,7 @@ const Profile = () => {
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(invitationCode)
-                            setSuccess('Code copié !')
+                            setSuccess('Code copié dans le presse-papiers !')
                             setTimeout(() => setSuccess(''), 2000)
                           }}
                           className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium"
@@ -510,35 +497,13 @@ const Profile = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-2">
-                      <p className="text-sm text-gray-700 mb-3 font-medium">
-                        Aucun code généré
+                    <div className="text-center py-4">
+                      <Loader2 className="h-5 w-5 animate-spin text-blue-600 mx-auto mb-2" />
+                      <p className="text-sm text-gray-700 font-medium">
+                        Chargement du code...
                       </p>
                     </div>
                   )}
-                  
-                  <button
-                    onClick={handleGenerateInvitationCode}
-                    disabled={loadingCode}
-                    className="w-full mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
-                  >
-                    {loadingCode ? (
-                      <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Génération...
-                      </>
-                    ) : invitationCode ? (
-                      <>
-                        <Settings className="h-4 w-4 mr-2" />
-                        Régénérer le code
-                      </>
-                    ) : (
-                      <>
-                        <Shield className="h-4 w-4 mr-2" />
-                        Générer un code
-                      </>
-                    )}
-                  </button>
                 </div>
                 
                 <Link
