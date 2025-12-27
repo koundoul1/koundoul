@@ -43,11 +43,17 @@ export default function Dashboard() {
     );
   }
 
-  if (!dashboard) {
+  if (!dashboard && !loading) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-600 font-semibold">Erreur de chargement du dashboard</p>
+          <p className="text-red-600 font-semibold mb-4">Erreur de chargement du dashboard</p>
+          <Link 
+            to="/login" 
+            className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Se connecter
+          </Link>
         </div>
       </div>
     );
