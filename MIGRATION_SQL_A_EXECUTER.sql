@@ -3,8 +3,8 @@
 -- À exécuter dans Supabase SQL Editor
 -- ========================================
 
--- 1. Ajouter colonne invitationCode à la table User
-ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "invitationCode" TEXT UNIQUE;
+-- 1. Ajouter colonne invitationCode à la table users
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "invitationCode" TEXT UNIQUE;
 
 -- 2. Créer la table parent_child_links
 CREATE TABLE IF NOT EXISTS "parent_child_links" (
@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS "parent_child_links" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     
     CONSTRAINT "parent_child_links_pkey" PRIMARY KEY ("id"),
-    CONSTRAINT "parent_child_links_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "parent_child_links_childId_fkey" FOREIGN KEY ("childId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "parent_child_links_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "parent_child_links_childId_fkey" FOREIGN KEY ("childId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "parent_child_links_parentId_childId_key" UNIQUE ("parentId", "childId")
 );
 
@@ -26,7 +26,7 @@ CREATE INDEX IF NOT EXISTS "parent_child_links_childId_idx" ON "parent_child_lin
 
 -- 4. Ajouter les commentaires
 COMMENT ON TABLE "parent_child_links" IS 'Liens entre comptes parents et enfants';
-COMMENT ON COLUMN "User"."invitationCode" IS 'Code pour lier un compte parent';
+COMMENT ON COLUMN "users"."invitationCode" IS 'Code pour lier un compte parent';
 
 -- ========================================
 -- FIN DE LA MIGRATION
@@ -37,7 +37,7 @@ SELECT
     'Migration réussie!' as status,
     COUNT(*) as nombre_colonnes
 FROM information_schema.columns 
-WHERE table_name = 'User' AND column_name = 'invitationCode';
+WHERE table_name = 'users' AND column_name = 'invitationCode';
 
 SELECT 
     'Table créée!' as status,
