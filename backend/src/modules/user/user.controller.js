@@ -298,15 +298,34 @@ export const getUserStats = async (req, res) => {
   } catch (error) {
     console.error('❌ Get user stats error:', error);
     console.error('❌ Error details:', error.message, error.stack);
+    
+    // Essayer de récupérer au moins les données de base de l'utilisateur pour les stats par défaut
+    let defaultUser = null;
+    if (req.user && req.user.id) {
+      try {
+        defaultUser = await prismaService.client.user.findUnique({
+          where: { id: req.user.id },
+          select: {
+            xp: true,
+            level: true,
+            streak: true,
+            createdAt: true
+          }
+        });
+      } catch (userError) {
+        console.warn('⚠️ Could not fetch user for default stats:', userError.message);
+      }
+    }
+    
     // Retourner des stats par défaut au lieu d'une erreur 500 pour éviter de casser l'interface
     res.json({
       success: true,
       data: {
-        totalXp: user?.xp || 0,
-        level: user?.level || 1,
-        streak: user?.streak || 0,
-        daysSinceJoined: user?.createdAt ? Math.floor(
-          (Date.now() - new Date(user.createdAt).getTime()) / (1000 * 60 * 60 * 24)
+        totalXp: defaultUser?.xp || 0,
+        level: defaultUser?.level || 1,
+        streak: defaultUser?.streak || 0,
+        daysSinceJoined: defaultUser?.createdAt ? Math.floor(
+          (Date.now() - new Date(defaultUser.createdAt).getTime()) / (1000 * 60 * 60 * 24)
         ) : 0,
         daysActiveLast30Days: 0,
         problemsSolved: 0,
