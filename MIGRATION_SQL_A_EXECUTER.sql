@@ -25,11 +25,12 @@ SELECT
 FROM information_schema.columns 
 WHERE table_name = 'users' AND column_name = 'invitationCode';
 
-SELECT 
-    'Table créée!' as status,
-    COUNT(*) as nombre_tables
-FROM information_schema.tables 
-WHERE table_name = 'parent_child_links';
+-- Vérification optionnelle pour la table parent_child_links (elle devrait déjà exister)
+-- SELECT 
+--     'Table parent_child_links existe!' as status,
+--     COUNT(*) as nombre_tables
+-- FROM information_schema.tables 
+-- WHERE table_name = 'parent_child_links';
 
 
 
