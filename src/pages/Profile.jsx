@@ -120,10 +120,10 @@ const Profile = () => {
   const loadUserStats = async () => {
     try {
       setLoadingStats(true)
-      const response = await api.get('/user/stats')
+      const response = await api.user.getStats()
       
-      if (response.data.success) {
-        setUserStats(response.data.data)
+      if (response.success || response.data?.success) {
+        setUserStats(response.data?.data || response.data)
       }
     } catch (error) {
       console.error('Erreur chargement stats:', error)
