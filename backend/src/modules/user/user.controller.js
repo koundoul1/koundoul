@@ -264,33 +264,69 @@ export const generateInvitationCode = async (req, res) => {
     let code;
     let attempts = 0;
     let isUnique = false;
+    const maxAttempts = 20; // Augmenter le nombre de tentatives
     
-    // Vérifier l'unicité du code (avec limite de tentatives pour éviter boucle infinie)
-    while (!isUnique && attempts < 10) {
-      code = Math.random().toString(36).substring(2, 8).toUpperCase();
-      
-      const existing = await prismaService.client.user.findUnique({
-        where: { invitationCode: code }
-      });
-      
-      if (!existing || existing.id === userId) {
-        isUnique = true;
+    // Générer un code avec format plus robuste
+    while (!isUnique && attempts < maxAttempts) {
+      // Générer un code de 6 caractères alphanumériques majuscules
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      code = '';
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
       }
+      
+      // Vérifier l'unicité du code
+      try {
+        const existing = await prismaService.client.user.findFirst({
+          where: { 
+            invitationCode: code,
+            NOT: { id: userId } // Exclure l'utilisateur actuel
+          }
+        });
+        
+        if (!existing) {
+          isUnique = true;
+        }
+      } catch (queryError) {
+        // Si la colonne invitationCode n'existe pas, essayer quand même de créer le code
+        if (queryError.message && queryError.message.includes('invitationCode')) {
+          console.warn('⚠️ Colonne invitationCode non trouvée, génération du code de toute façon');
+          isUnique = true;
+        } else {
+          throw queryError;
+        }
+      }
+      
       attempts++;
     }
     
     if (!isUnique) {
+      console.error('❌ Impossible de générer un code unique après', maxAttempts, 'tentatives');
       return res.status(500).json({
         success: false,
         error: 'Erreur lors de la génération du code (trop de tentatives)'
       });
     }
     
-    // Mettre à jour l'utilisateur
-    await prismaService.client.user.update({
-      where: { id: userId },
-      data: { invitationCode: code }
-    });
+    // Mettre à jour l'utilisateur avec gestion d'erreur améliorée
+    try {
+      await prismaService.client.user.update({
+        where: { id: userId },
+        data: { invitationCode: code }
+      });
+    } catch (updateError) {
+      console.error('❌ Erreur lors de la mise à jour de invitationCode:', updateError);
+      
+      // Si la colonne n'existe pas, retourner une erreur explicite
+      if (updateError.message && updateError.message.includes('invitationCode')) {
+        return res.status(500).json({
+          success: false,
+          error: 'La colonne invitationCode n\'existe pas dans la base de données. Veuillez appliquer la migration SQL.'
+        });
+      }
+      
+      throw updateError;
+    }
     
     res.json({
       success: true,
@@ -302,9 +338,10 @@ export const generateInvitationCode = async (req, res) => {
     
   } catch (error) {
     console.error('❌ Generate code error:', error);
+    console.error('❌ Error details:', error.message, error.stack);
     res.status(500).json({
       success: false,
-      error: 'Erreur lors de la génération du code'
+      error: error.message || 'Erreur lors de la génération du code'
     });
   }
 };
