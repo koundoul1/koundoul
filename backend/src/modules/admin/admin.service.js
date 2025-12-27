@@ -10,6 +10,8 @@ class AdminService {
    */
   async getDashboardStats() {
     try {
+      console.log('📊 Getting admin dashboard stats...');
+      
       const [
         totalUsers,
         activeUsers,
@@ -18,36 +20,59 @@ class AdminService {
         totalPayments,
         revenue
       ] = await Promise.all([
-        prismaService.client.user.count(),
-        prismaService.client.user.count({ where: { isActive: true } }),
-        prismaService.client.subscription.count(),
-        prismaService.client.subscription.count({ where: { status: 'ACTIVE' } }),
-        prismaService.client.payment.count({ where: { status: 'COMPLETED' } }),
+        prismaService.client.user.count().catch(err => {
+          console.error('❌ Error counting total users:', err);
+          return 0;
+        }),
+        prismaService.client.user.count({ where: { isActive: true } }).catch(err => {
+          console.error('❌ Error counting active users:', err);
+          return 0;
+        }),
+        prismaService.client.subscription.count().catch(err => {
+          console.error('❌ Error counting subscriptions:', err);
+          return 0;
+        }),
+        prismaService.client.subscription.count({ where: { status: 'ACTIVE' } }).catch(err => {
+          console.error('❌ Error counting active subscriptions:', err);
+          return 0;
+        }),
+        prismaService.client.payment.count({ where: { status: 'COMPLETED' } }).catch(err => {
+          console.error('❌ Error counting payments:', err);
+          return 0;
+        }),
         prismaService.client.payment.aggregate({
           where: { status: 'COMPLETED' },
           _sum: { amount: true }
+        }).catch(err => {
+          console.error('❌ Error aggregating revenue:', err);
+          return { _sum: { amount: 0 } };
         })
       ]);
 
+      const stats = {
+        users: {
+          total: totalUsers || 0,
+          active: activeUsers || 0
+        },
+        subscriptions: {
+          total: totalSubscriptions || 0,
+          active: activeSubscriptions || 0
+        },
+        payments: {
+          total: totalPayments || 0,
+          revenue: revenue?._sum?.amount || 0
+        }
+      };
+
+      console.log('✅ Dashboard stats:', stats);
+      
       return {
         success: true,
-        data: {
-          users: {
-            total: totalUsers,
-            active: activeUsers
-          },
-          subscriptions: {
-            total: totalSubscriptions,
-            active: activeSubscriptions
-          },
-          payments: {
-            total: totalPayments,
-            revenue: revenue._sum.amount || 0
-          }
-        }
+        data: stats
       };
     } catch (error) {
       console.error('❌ Error getting admin dashboard stats:', error);
+      console.error('❌ Error details:', error.message, error.stack);
       return { success: false, error: error.message };
     }
   }
