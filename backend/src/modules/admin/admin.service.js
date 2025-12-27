@@ -264,7 +264,20 @@ class AdminService {
    */
   async getPlans() {
     try {
+      // Sélectionner uniquement les colonnes qui existent
       const plans = await prismaService.client.subscriptionPlan.findMany({
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          price: true,
+          currency: true,
+          duration: true,
+          features: true,
+          createdAt: true,
+          updatedAt: true
+          // Ne pas sélectionner isActive car la colonne peut ne pas exister
+        },
         orderBy: { price: 'asc' }
       });
 
@@ -274,7 +287,19 @@ class AdminService {
       };
     } catch (error) {
       console.error('❌ Error getting plans:', error);
-      return { success: false, error: error.message };
+      // Fallback avec requête SQL brute si Prisma échoue
+      try {
+        const plans = await prismaService.client.$queryRaw`
+          SELECT id, name, description, price, currency, duration, features, 
+                 "createdAt", "updatedAt"
+          FROM subscription_plans
+          ORDER BY price ASC
+        `;
+        return { success: true, data: plans };
+      } catch (rawError) {
+        console.error('❌ Error with raw query:', rawError);
+        return { success: false, error: error.message };
+      }
     }
   }
 
@@ -283,21 +308,34 @@ class AdminService {
    */
   async createPlan(planData) {
     try {
-      const { name, description, price, currency, duration, features, isActive } = planData;
+      const { name, description, price, currency, duration, features } = planData;
 
       if (!name || price === undefined) {
         return { success: false, error: 'Nom et prix requis' };
       }
 
+      // Créer le plan sans isActive car la colonne peut ne pas exister
+      const planDataClean = {
+        name,
+        description,
+        price,
+        currency: currency || 'xof',
+        duration: duration || 30,
+        features: features || {}
+      };
+
       const plan = await prismaService.client.subscriptionPlan.create({
-        data: {
-          name,
-          description,
-          price,
-          currency: currency || 'xof',
-          duration: duration || 30,
-          features: features || {},
-          isActive: isActive !== undefined ? isActive : true
+        data: planDataClean,
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          price: true,
+          currency: true,
+          duration: true,
+          features: true,
+          createdAt: true,
+          updatedAt: true
         }
       });
 
@@ -313,9 +351,23 @@ class AdminService {
    */
   async updatePlan(planId, planData) {
     try {
+      // Exclure isActive du planData car la colonne peut ne pas exister
+      const { isActive, ...planDataClean } = planData;
+
       const plan = await prismaService.client.subscriptionPlan.update({
         where: { id: planId },
-        data: planData
+        data: planDataClean,
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          price: true,
+          currency: true,
+          duration: true,
+          features: true,
+          createdAt: true,
+          updatedAt: true
+        }
       });
 
       return { success: true, data: plan };

@@ -9,19 +9,41 @@ class SubscriptionsService {
    */
   async getActivePlans() {
     try {
-      // Récupérer tous les plans sans filtrer par isActive
-      // car la colonne pourrait ne pas exister dans la base de données
+      // Récupérer tous les plans en sélectionnant uniquement les colonnes qui existent
+      // La colonne isActive n'existe peut-être pas encore dans la base de données
       const plans = await prismaService.client.subscriptionPlan.findMany({
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          price: true,
+          currency: true,
+          duration: true,
+          features: true,
+          createdAt: true,
+          updatedAt: true
+          // Ne pas sélectionner isActive car la colonne peut ne pas exister
+        },
         orderBy: { price: 'asc' }
       });
       
-      // Filtrer côté application si la colonne isActive existe
-      const activePlans = plans.filter(plan => plan.isActive !== false);
-      
-      return { success: true, data: activePlans };
+      // Retourner tous les plans (pas de filtre isActive)
+      return { success: true, data: plans };
     } catch (error) {
       console.error('❌ Error getting subscription plans:', error);
-      return { success: false, error: error.message };
+      // En cas d'erreur, essayer sans select pour récupérer ce qui est disponible
+      try {
+        const plans = await prismaService.client.$queryRaw`
+          SELECT id, name, description, price, currency, duration, features, 
+                 "createdAt", "updatedAt"
+          FROM subscription_plans
+          ORDER BY price ASC
+        `;
+        return { success: true, data: plans };
+      } catch (rawError) {
+        console.error('❌ Error with raw query:', rawError);
+        return { success: false, error: error.message };
+      }
     }
   }
 
