@@ -27,4 +27,8 @@ router.post('/plans', adminController.createPlan.bind(adminController));
 router.patch('/plans/:id', adminController.updatePlan.bind(adminController));
 router.delete('/plans/:id', adminController.deletePlan.bind(adminController));
 
+// Gestion des comptes élèves
+router.post('/students', adminController.createStudent.bind(adminController));
+router.get('/students/:id/stats', adminController.getStudentStats.bind(adminController));
+
 export default router;

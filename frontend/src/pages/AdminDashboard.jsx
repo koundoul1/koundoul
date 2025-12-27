@@ -57,6 +57,16 @@ const AdminDashboard = () => {
     isActive: true,
     features: {}
   })
+  
+  // Students
+  const [showStudentModal, setShowStudentModal] = useState(false)
+  const [studentForm, setStudentForm] = useState({
+    email: '',
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: ''
+  })
 
   useEffect(() => {
     if (!user?.isAdmin) {
@@ -77,6 +87,32 @@ const AdminDashboard = () => {
       loadPlans()
     }
   }, [activeTab, usersPage, subscriptionsPage, paymentsPage, usersSearch])
+  
+  const handleCreateStudent = () => {
+    setStudentForm({
+      email: '',
+      username: '',
+      password: '',
+      firstName: '',
+      lastName: ''
+    })
+    setShowStudentModal(true)
+  }
+  
+  const handleSaveStudent = async () => {
+    try {
+      await api.admin.createStudent(studentForm)
+      setShowStudentModal(false)
+      alert('Compte élève créé avec succès !')
+      // Recharger la liste des utilisateurs
+      if (activeTab === 'users') {
+        loadUsers()
+      }
+    } catch (error) {
+      console.error('Erreur création élève:', error)
+      alert('Erreur lors de la création du compte élève')
+    }
+  }
 
   const loadDashboard = async () => {
     try {
@@ -863,6 +899,138 @@ const AdminDashboard = () => {
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
                 >
                   {editingPlan ? 'Sauvegarder' : 'Créer'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Students Tab */}
+        {activeTab === 'students' && (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900">Comptes Élèves</h2>
+              <button 
+                onClick={handleCreateStudent}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
+              >
+                Créer un compte élève
+              </button>
+            </div>
+
+            <div className="p-6">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <p className="text-sm text-blue-800">
+                  <strong>Information :</strong> Les comptes élèves peuvent être créés ici ou par les parents via le système de codes d'invitation. 
+                  Les parents peuvent lier leur compte à celui de leur enfant pour suivre leur progression.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Cette section affichera les élèves créés via l'admin */}
+                <div className="border border-gray-200 rounded-lg p-4 text-center text-gray-500">
+                  <Users className="h-12 w-12 mx-auto mb-2 text-gray-400" />
+                  <p className="text-sm">Utilisez la page "Utilisateurs" pour voir tous les comptes élèves</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal Student */}
+        {showStudentModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900">
+                  Créer un compte élève
+                </h3>
+              </div>
+              <div className="p-6 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Prénom
+                    </label>
+                    <input
+                      type="text"
+                      value={studentForm.firstName}
+                      onChange={(e) => setStudentForm({...studentForm, firstName: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Prénom"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Nom
+                    </label>
+                    <input
+                      type="text"
+                      value={studentForm.lastName}
+                      onChange={(e) => setStudentForm({...studentForm, lastName: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Nom"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    value={studentForm.email}
+                    onChange={(e) => setStudentForm({...studentForm, email: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="eleve@exemple.com"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Nom d'utilisateur *
+                  </label>
+                  <input
+                    type="text"
+                    value={studentForm.username}
+                    onChange={(e) => setStudentForm({...studentForm, username: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="nom_utilisateur"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Mot de passe *
+                  </label>
+                  <input
+                    type="password"
+                    value={studentForm.password}
+                    onChange={(e) => setStudentForm({...studentForm, password: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Minimum 6 caractères"
+                    required
+                  />
+                </div>
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                  <p className="text-xs text-yellow-800">
+                    ⚠️ Le mot de passe doit être communiqué à l'élève de manière sécurisée. 
+                    Il pourra le changer depuis son profil une fois connecté.
+                  </p>
+                </div>
+              </div>
+              <div className="p-6 border-t border-gray-200 flex justify-end space-x-3">
+                <button
+                  onClick={() => setShowStudentModal(false)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50"
+                >
+                  Annuler
+                </button>
+                <button
+                  onClick={handleSaveStudent}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
+                >
+                  Créer le compte
                 </button>
               </div>
             </div>

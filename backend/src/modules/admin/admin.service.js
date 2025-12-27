@@ -1,4 +1,5 @@
 import prismaService from '../../database/prisma.js';
+import bcrypt from 'bcryptjs';
 
 /**
  * Service pour les fonctionnalités administrateur
@@ -325,6 +326,154 @@ class AdminService {
       return { success: true, data: plan };
     } catch (error) {
       console.error('❌ Error deleting plan:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Créer un compte élève (par un parent ou admin)
+   */
+  async createStudentAccount(studentData) {
+    try {
+      const { email, username, password, firstName, lastName, parentId } = studentData;
+
+      if (!email || !username || !password) {
+        return { success: false, error: 'Email, nom d\'utilisateur et mot de passe requis' };
+      }
+
+      // Vérifier si l'utilisateur existe déjà
+      const existing = await prismaService.client.user.findFirst({
+        where: {
+          OR: [
+            { email: email.toLowerCase() },
+            { username: username.toLowerCase() }
+          ]
+        }
+      });
+
+      if (existing) {
+        return { success: false, error: 'Un utilisateur avec cet email ou nom d\'utilisateur existe déjà' };
+      }
+
+      // Hasher le mot de passe
+      const hashedPassword = await bcrypt.hash(password, 12);
+
+      // Créer l'élève
+      const student = await prismaService.client.user.create({
+        data: {
+          email: email.toLowerCase(),
+          username: username.toLowerCase(),
+          password: hashedPassword,
+          firstName: firstName || null,
+          lastName: lastName || null,
+          xp: 0,
+          level: 1,
+          isActive: true,
+          isAdmin: false
+        },
+        select: {
+          id: true,
+          email: true,
+          username: true,
+          firstName: true,
+          lastName: true,
+          createdAt: true
+        }
+      });
+
+      // Si un parent est spécifié, créer le lien parent-enfant
+      if (parentId) {
+        await prismaService.client.parentChildLink.create({
+          data: {
+            parentId,
+            childId: student.id,
+            approved: true
+          }
+        });
+      }
+
+      return { success: true, data: student };
+    } catch (error) {
+      console.error('❌ Error creating student account:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Obtenir les statistiques d'un élève
+   */
+  async getStudentStats(studentId) {
+    try {
+      const student = await prismaService.client.user.findUnique({
+        where: { id: studentId },
+        select: {
+          id: true,
+          email: true,
+          username: true,
+          firstName: true,
+          lastName: true,
+          xp: true,
+          level: true,
+          streak: true,
+          createdAt: true
+        }
+      });
+
+      if (!student) {
+        return { success: false, error: 'Élève non trouvé' };
+      }
+
+      // Calculer les statistiques
+      const [
+        lessonsCompleted,
+        exercisesAttempted,
+        exercisesCorrect,
+        quizzesCompleted,
+        badgesEarned,
+        totalTimeSpent
+      ] = await Promise.all([
+        prismaService.client.lessonCompletion.count({
+          where: { userId: studentId, completed: true }
+        }),
+        prismaService.client.exerciseAttempt.count({
+          where: { userId: studentId }
+        }),
+        prismaService.client.exerciseAttempt.count({
+          where: { userId: studentId, isCorrect: true }
+        }),
+        prismaService.client.quizAttempt.count({
+          where: { userId: studentId, status: 'COMPLETED' }
+        }),
+        prismaService.client.userBadge.count({
+          where: { userId: studentId }
+        }),
+        prismaService.client.lessonCompletion.aggregate({
+          where: { userId: studentId },
+          _sum: { timeSpent: true }
+        })
+      ]);
+
+      const successRate = exercisesAttempted > 0 
+        ? Math.round((exercisesCorrect / exercisesAttempted) * 100) 
+        : 0;
+
+      return {
+        success: true,
+        data: {
+          student,
+          stats: {
+            lessonsCompleted,
+            exercisesAttempted,
+            exercisesCorrect,
+            successRate,
+            quizzesCompleted,
+            badgesEarned,
+            totalTimeSpent: Math.floor((totalTimeSpent._sum.timeSpent || 0) / 60) // en minutes
+          }
+        }
+      };
+    } catch (error) {
+      console.error('❌ Error getting student stats:', error);
       return { success: false, error: error.message };
     }
   }

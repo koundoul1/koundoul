@@ -250,7 +250,15 @@ const api = {
     
     deletePlan: (id) => request(`/admin/plans/${id}`, {
       method: 'DELETE',
-    })
+    }),
+    
+    // Comptes élèves
+    createStudent: (data) => request('/admin/students', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+    
+    getStudentStats: (id) => request(`/admin/students/${id}/stats`)
   },
 
   // 🏆 GAMIFICATION

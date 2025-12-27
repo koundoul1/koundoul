@@ -280,6 +280,63 @@ class AdminController {
       });
     }
   }
+
+  /**
+   * POST /api/admin/students
+   * Créer un compte élève
+   */
+  async createStudent(req, res) {
+    try {
+      const result = await adminService.createStudentAccount(req.body);
+
+      if (!result.success) {
+        return res.status(400).json({
+          success: false,
+          error: { message: result.error }
+        });
+      }
+
+      res.status(201).json({
+        success: true,
+        data: result.data
+      });
+    } catch (error) {
+      console.error('❌ Error in createStudent controller:', error);
+      res.status(500).json({
+        success: false,
+        error: { message: 'Erreur serveur' }
+      });
+    }
+  }
+
+  /**
+   * GET /api/admin/students/:id/stats
+   * Obtenir les statistiques d'un élève
+   */
+  async getStudentStats(req, res) {
+    try {
+      const { id } = req.params;
+      const result = await adminService.getStudentStats(id);
+
+      if (!result.success) {
+        return res.status(404).json({
+          success: false,
+          error: { message: result.error }
+        });
+      }
+
+      res.json({
+        success: true,
+        data: result.data
+      });
+    } catch (error) {
+      console.error('❌ Error in getStudentStats controller:', error);
+      res.status(500).json({
+        success: false,
+        error: { message: 'Erreur serveur' }
+      });
+    }
+  }
 }
 
 export default new AdminController();
