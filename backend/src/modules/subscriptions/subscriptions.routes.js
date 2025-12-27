@@ -4,11 +4,11 @@ import { requireAuth } from '../../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
+// Route publique pour obtenir tous les plans
+router.get('/plans', subscriptionsController.getPlans.bind(subscriptionsController));
+
 // Routes protégées (nécessitent authentification)
 router.use(requireAuth);
-
-// Obtenir tous les plans
-router.get('/plans', subscriptionsController.getPlans.bind(subscriptionsController));
 
 // Obtenir l'abonnement actif de l'utilisateur
 router.get('/my-subscription', subscriptionsController.getMySubscription.bind(subscriptionsController));

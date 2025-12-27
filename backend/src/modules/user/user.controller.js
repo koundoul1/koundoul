@@ -250,6 +250,14 @@ export const getUserStats = async (req, res) => {
  */
 export const generateInvitationCode = async (req, res) => {
   try {
+    // Vérifier que l'utilisateur est authentifié
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        error: 'Non authentifié'
+      });
+    }
+    
     const userId = req.user.id;
     
     // Générer code unique (6 caractères alphanumériques)

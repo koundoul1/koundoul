@@ -9,11 +9,16 @@ class SubscriptionsService {
    */
   async getActivePlans() {
     try {
+      // Récupérer tous les plans sans filtrer par isActive
+      // car la colonne pourrait ne pas exister dans la base de données
       const plans = await prismaService.client.subscriptionPlan.findMany({
-        where: { isActive: true },
         orderBy: { price: 'asc' }
       });
-      return { success: true, data: plans };
+      
+      // Filtrer côté application si la colonne isActive existe
+      const activePlans = plans.filter(plan => plan.isActive !== false);
+      
+      return { success: true, data: activePlans };
     } catch (error) {
       console.error('❌ Error getting subscription plans:', error);
       return { success: false, error: error.message };
