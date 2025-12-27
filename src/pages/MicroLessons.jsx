@@ -112,19 +112,27 @@ const MicroLessons = () => {
   const fetchCompletions = async (lessonList) => {
     try {
       const completionPromises = lessonList.slice(0, 50).map(lesson => 
-        api.microlessons.getCompletion(lesson.id).catch(() => null)
+        api.microlessons.getCompletion(lesson.id)
+          .catch(error => {
+            // Ignorer silencieusement les erreurs 401 (non authentifié)
+            if (error.status === 401) {
+              return { success: true, data: null };
+            }
+            return null;
+          })
       );
       const results = await Promise.all(completionPromises);
       
       const completionMap = {};
       results.forEach((result, index) => {
-        if (result?.data) {
+        if (result?.success && result?.data) {
           completionMap[lessonList[index].id] = result.data;
         }
       });
       setCompletions(completionMap);
     } catch (error) {
-      console.error('Erreur lors du chargement des complétions:', error);
+      // Ignorer les erreurs silencieusement
+      console.debug('Chargement des complétions:', error.message);
     }
   };
 
