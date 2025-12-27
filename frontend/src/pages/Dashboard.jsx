@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   BookOpen, Target, Award, TrendingUp, Clock, Flame, 
   ChevronRight, CheckCircle, Trophy, Zap, Activity 
@@ -9,17 +9,42 @@ import api from '../services/api';
 export default function Dashboard() {
   const [dashboard, setDashboard] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const hasRedirectedRef = useRef(false);
+  const fetchCalledRef = useRef(false);
 
   useEffect(() => {
+    // Éviter les appels multiples (React StrictMode en développement)
+    if (fetchCalledRef.current) return;
+    fetchCalledRef.current = true;
+    
     fetchDashboard();
   }, []);
 
   const fetchDashboard = async () => {
+    // Éviter les appels multiples si une redirection est déjà en cours
+    if (hasRedirectedRef.current) return;
+    
     try {
       const response = await api.dashboard.get();
       setDashboard(response.data);
     } catch (error) {
       console.error('Erreur:', error);
+      // Si erreur 401 (non authentifié), rediriger vers la page de connexion
+      if (error.status === 401 || error.message?.includes('Token') || error.message?.includes('Session')) {
+        // Éviter les redirections multiples
+        if (hasRedirectedRef.current) return;
+        hasRedirectedRef.current = true;
+        
+        api.auth.logout();
+        navigate('/login', { 
+          replace: true,
+          state: { 
+            message: 'Veuillez vous connecter pour accéder à votre dashboard.' 
+          } 
+        });
+        return;
+      }
     } finally {
       setLoading(false);
     }
@@ -33,11 +58,17 @@ export default function Dashboard() {
     );
   }
 
-  if (!dashboard) {
+  if (!dashboard && !loading) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-600 font-semibold">Erreur de chargement du dashboard</p>
+          <p className="text-red-600 font-semibold mb-4">Erreur de chargement du dashboard</p>
+          <Link 
+            to="/login" 
+            className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Se connecter
+          </Link>
         </div>
       </div>
     );
