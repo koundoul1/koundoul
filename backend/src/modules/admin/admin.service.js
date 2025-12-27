@@ -232,6 +232,102 @@ class AdminService {
       return { success: false, error: error.message };
     }
   }
+
+  /**
+   * Obtenir tous les plans d'abonnement
+   */
+  async getPlans() {
+    try {
+      const plans = await prismaService.client.subscriptionPlan.findMany({
+        orderBy: { price: 'asc' }
+      });
+
+      return {
+        success: true,
+        data: plans
+      };
+    } catch (error) {
+      console.error('❌ Error getting plans:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Créer un nouveau plan d'abonnement
+   */
+  async createPlan(planData) {
+    try {
+      const { name, description, price, currency, duration, features, isActive } = planData;
+
+      if (!name || price === undefined) {
+        return { success: false, error: 'Nom et prix requis' };
+      }
+
+      const plan = await prismaService.client.subscriptionPlan.create({
+        data: {
+          name,
+          description,
+          price,
+          currency: currency || 'xof',
+          duration: duration || 30,
+          features: features || {},
+          isActive: isActive !== undefined ? isActive : true
+        }
+      });
+
+      return { success: true, data: plan };
+    } catch (error) {
+      console.error('❌ Error creating plan:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Mettre à jour un plan d'abonnement
+   */
+  async updatePlan(planId, planData) {
+    try {
+      const plan = await prismaService.client.subscriptionPlan.update({
+        where: { id: planId },
+        data: planData
+      });
+
+      return { success: true, data: plan };
+    } catch (error) {
+      console.error('❌ Error updating plan:', error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Supprimer un plan d'abonnement (soft delete en désactivant)
+   */
+  async deletePlan(planId) {
+    try {
+      // Vérifier s'il y a des abonnements actifs avec ce plan
+      const activeSubscriptions = await prismaService.client.subscription.count({
+        where: {
+          planId,
+          status: 'ACTIVE'
+        }
+      });
+
+      if (activeSubscriptions > 0) {
+        return { success: false, error: 'Impossible de supprimer un plan avec des abonnements actifs' };
+      }
+
+      // Désactiver le plan au lieu de le supprimer
+      const plan = await prismaService.client.subscriptionPlan.update({
+        where: { id: planId },
+        data: { isActive: false }
+      });
+
+      return { success: true, data: plan };
+    } catch (error) {
+      console.error('❌ Error deleting plan:', error);
+      return { success: false, error: error.message };
+    }
+  }
 }
 
 export default new AdminService();

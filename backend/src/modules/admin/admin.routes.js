@@ -21,4 +21,10 @@ router.get('/subscriptions', adminController.getSubscriptions.bind(adminControll
 // Gestion des paiements
 router.get('/payments', adminController.getPayments.bind(adminController));
 
+// Gestion des plans d'abonnement
+router.get('/plans', adminController.getPlans.bind(adminController));
+router.post('/plans', adminController.createPlan.bind(adminController));
+router.patch('/plans/:id', adminController.updatePlan.bind(adminController));
+router.delete('/plans/:id', adminController.deletePlan.bind(adminController));
+
 export default router;

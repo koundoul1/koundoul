@@ -17,7 +17,8 @@ import {
   Edit,
   CheckCircle,
   XCircle,
-  Calendar
+  Calendar,
+  Trash2
 } from 'lucide-react'
 
 const AdminDashboard = () => {
@@ -41,6 +42,21 @@ const AdminDashboard = () => {
   // Payments
   const [payments, setPayments] = useState([])
   const [paymentsPage, setPaymentsPage] = useState(1)
+  
+  // Plans
+  const [plans, setPlans] = useState([])
+  const [loadingPlans, setLoadingPlans] = useState(false)
+  const [showPlanModal, setShowPlanModal] = useState(false)
+  const [editingPlan, setEditingPlan] = useState(null)
+  const [planForm, setPlanForm] = useState({
+    name: '',
+    description: '',
+    price: 0,
+    currency: 'xof',
+    duration: 30,
+    isActive: true,
+    features: {}
+  })
 
   useEffect(() => {
     if (!user?.isAdmin) {
@@ -57,6 +73,8 @@ const AdminDashboard = () => {
       loadSubscriptions()
     } else if (activeTab === 'payments') {
       loadPayments()
+    } else if (activeTab === 'plans') {
+      loadPlans()
     }
   }, [activeTab, usersPage, subscriptionsPage, paymentsPage, usersSearch])
 
@@ -125,6 +143,76 @@ const AdminDashboard = () => {
       loadUsers()
     } catch (error) {
       console.error('Erreur mise à jour utilisateur:', error)
+    }
+  }
+
+  const loadPlans = async () => {
+    try {
+      setLoadingPlans(true)
+      const response = await api.admin.getPlans()
+      if (response.success) {
+        setPlans(response.data || [])
+      }
+    } catch (error) {
+      console.error('Erreur chargement plans:', error)
+    } finally {
+      setLoadingPlans(false)
+    }
+  }
+
+  const handleCreatePlan = () => {
+    setEditingPlan(null)
+    setPlanForm({
+      name: '',
+      description: '',
+      price: 0,
+      currency: 'xof',
+      duration: 30,
+      isActive: true,
+      features: {}
+    })
+    setShowPlanModal(true)
+  }
+
+  const handleEditPlan = (plan) => {
+    setEditingPlan(plan)
+    setPlanForm({
+      name: plan.name,
+      description: plan.description || '',
+      price: plan.price,
+      currency: plan.currency || 'xof',
+      duration: plan.duration || 30,
+      isActive: plan.isActive,
+      features: plan.features || {}
+    })
+    setShowPlanModal(true)
+  }
+
+  const handleSavePlan = async () => {
+    try {
+      if (editingPlan) {
+        await api.admin.updatePlan(editingPlan.id, planForm)
+      } else {
+        await api.admin.createPlan(planForm)
+      }
+      setShowPlanModal(false)
+      loadPlans()
+    } catch (error) {
+      console.error('Erreur sauvegarde plan:', error)
+      alert('Erreur lors de la sauvegarde du plan')
+    }
+  }
+
+  const handleDeletePlan = async (planId) => {
+    if (!confirm('Êtes-vous sûr de vouloir désactiver ce plan ?')) {
+      return
+    }
+    try {
+      await api.admin.deletePlan(planId)
+      loadPlans()
+    } catch (error) {
+      console.error('Erreur suppression plan:', error)
+      alert('Erreur lors de la suppression du plan')
     }
   }
 
@@ -593,120 +681,189 @@ const AdminDashboard = () => {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="p-6 border-b border-gray-200 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">Plans d'abonnement</h2>
-              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium">
+              <button 
+                onClick={handleCreatePlan}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
+              >
                 Créer un plan
               </button>
             </div>
 
             <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Plan Gratuit */}
-                <div className="border border-gray-200 rounded-lg p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-gray-900">Gratuit</h3>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
-                      Actif
-                    </span>
-                  </div>
-                  <div className="mb-4">
-                    <span className="text-3xl font-bold text-gray-900">0</span>
-                    <span className="text-gray-600 ml-2">FCFA</span>
-                  </div>
-                  <ul className="space-y-2 mb-6 text-sm text-gray-600">
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Accès aux cours gratuits
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Exercices limités
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Forum communautaire
-                    </li>
-                  </ul>
-                  <button className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50">
-                    Modifier
+              {loadingPlans ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+                </div>
+              ) : plans.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {plans.map((plan) => (
+                    <div 
+                      key={plan.id}
+                      className={`border rounded-lg p-6 ${
+                        plan.price > 0 && plan.price < 10000 
+                          ? 'border-2 border-blue-500 relative' 
+                          : 'border-gray-200'
+                      }`}
+                    >
+                      {plan.price > 0 && plan.price < 10000 && (
+                        <div className="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full">
+                          Populaire
+                        </div>
+                      )}
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
+                        <span className={`px-3 py-1 text-xs font-medium rounded-full ${
+                          plan.isActive 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {plan.isActive ? 'Actif' : 'Inactif'}
+                        </span>
+                      </div>
+                      <div className="mb-4">
+                        <span className="text-3xl font-bold text-gray-900">
+                          {formatPrice(plan.price, plan.currency)}
+                        </span>
+                        {plan.price > 0 && (
+                          <span className="text-gray-600 ml-2">/mois</span>
+                        )}
+                      </div>
+                      {plan.description && (
+                        <p className="text-sm text-gray-600 mb-4">{plan.description}</p>
+                      )}
+                      <div className="flex space-x-2 mt-6">
+                        <button
+                          onClick={() => handleEditPlan(plan)}
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50"
+                        >
+                          Modifier
+                        </button>
+                        {plan.isActive && (
+                          <button
+                            onClick={() => handleDeletePlan(plan.id)}
+                            className="px-4 py-2 bg-red-100 text-red-700 rounded-lg text-sm font-medium hover:bg-red-200"
+                          >
+                            Désactiver
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12 text-gray-500">
+                  <p className="mb-4">Aucun plan d'abonnement créé</p>
+                  <button
+                    onClick={handleCreatePlan}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  >
+                    Créer le premier plan
                   </button>
                 </div>
+              )}
+            </div>
+          </div>
+        )}
 
-                {/* Plan Premium */}
-                <div className="border-2 border-blue-500 rounded-lg p-6 relative">
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full">
-                    Populaire
-                  </div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-gray-900">Premium</h3>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
-                      Actif
-                    </span>
-                  </div>
-                  <div className="mb-4">
-                    <span className="text-3xl font-bold text-gray-900">5 000</span>
-                    <span className="text-gray-600 ml-2">FCFA/mois</span>
-                  </div>
-                  <ul className="space-y-2 mb-6 text-sm text-gray-600">
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Tous les cours
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Exercices illimités
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Coach IA
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Support prioritaire
-                    </li>
-                  </ul>
-                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700">
-                    Modifier
-                  </button>
+        {/* Modal Plan */}
+        {showPlanModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900">
+                  {editingPlan ? 'Modifier le plan' : 'Créer un plan'}
+                </h3>
+              </div>
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Nom du plan *
+                  </label>
+                  <input
+                    type="text"
+                    value={planForm.name}
+                    onChange={(e) => setPlanForm({...planForm, name: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Ex: Premium"
+                  />
                 </div>
-
-                {/* Plan Pro */}
-                <div className="border border-gray-200 rounded-lg p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-gray-900">Pro</h3>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
-                      Actif
-                    </span>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    value={planForm.description}
+                    onChange={(e) => setPlanForm({...planForm, description: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="3"
+                    placeholder="Description du plan"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Prix *
+                    </label>
+                    <input
+                      type="number"
+                      value={planForm.price}
+                      onChange={(e) => setPlanForm({...planForm, price: parseInt(e.target.value) || 0})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      min="0"
+                    />
                   </div>
-                  <div className="mb-4">
-                    <span className="text-3xl font-bold text-gray-900">10 000</span>
-                    <span className="text-gray-600 ml-2">FCFA/mois</span>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Devise
+                    </label>
+                    <select
+                      value={planForm.currency}
+                      onChange={(e) => setPlanForm({...planForm, currency: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="xof">FCFA</option>
+                      <option value="eur">EUR</option>
+                    </select>
                   </div>
-                  <ul className="space-y-2 mb-6 text-sm text-gray-600">
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Tout Premium
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Sessions privées
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Analyses avancées
-                    </li>
-                    <li className="flex items-center">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      Accès API
-                    </li>
-                  </ul>
-                  <button className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50">
-                    Modifier
-                  </button>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Durée (en jours)
+                  </label>
+                  <input
+                    type="number"
+                    value={planForm.duration}
+                    onChange={(e) => setPlanForm({...planForm, duration: parseInt(e.target.value) || 30})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    min="1"
+                  />
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="isActive"
+                    checked={planForm.isActive}
+                    onChange={(e) => setPlanForm({...planForm, isActive: e.target.checked})}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor="isActive" className="ml-2 text-sm text-gray-700">
+                    Plan actif
+                  </label>
                 </div>
               </div>
-
-              <div className="mt-6 text-center text-gray-500 text-sm">
-                Gérer les plans d'abonnement, leurs prix et fonctionnalités
+              <div className="p-6 border-t border-gray-200 flex justify-end space-x-3">
+                <button
+                  onClick={() => setShowPlanModal(false)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50"
+                >
+                  Annuler
+                </button>
+                <button
+                  onClick={handleSavePlan}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
+                >
+                  {editingPlan ? 'Sauvegarder' : 'Créer'}
+                </button>
               </div>
             </div>
           </div>

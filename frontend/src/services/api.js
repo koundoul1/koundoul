@@ -233,7 +233,24 @@ const api = {
     getPayments: (params = {}) => {
       const queryParams = new URLSearchParams(params).toString()
       return request(`/admin/payments${queryParams ? `?${queryParams}` : ''}`)
-    }
+    },
+    
+    // Plans d'abonnement
+    getPlans: () => request('/admin/plans'),
+    
+    createPlan: (data) => request('/admin/plans', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+    
+    updatePlan: (id, data) => request(`/admin/plans/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
+    
+    deletePlan: (id) => request(`/admin/plans/${id}`, {
+      method: 'DELETE',
+    })
   },
 
   // 🏆 GAMIFICATION

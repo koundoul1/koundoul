@@ -166,6 +166,120 @@ class AdminController {
       });
     }
   }
+
+  /**
+   * GET /api/admin/plans
+   * Obtenir tous les plans d'abonnement
+   */
+  async getPlans(req, res) {
+    try {
+      const result = await adminService.getPlans();
+
+      if (!result.success) {
+        return res.status(400).json({
+          success: false,
+          error: { message: result.error }
+        });
+      }
+
+      res.json({
+        success: true,
+        data: result.data
+      });
+    } catch (error) {
+      console.error('❌ Error in getPlans controller:', error);
+      res.status(500).json({
+        success: false,
+        error: { message: 'Erreur serveur' }
+      });
+    }
+  }
+
+  /**
+   * POST /api/admin/plans
+   * Créer un nouveau plan d'abonnement
+   */
+  async createPlan(req, res) {
+    try {
+      const result = await adminService.createPlan(req.body);
+
+      if (!result.success) {
+        return res.status(400).json({
+          success: false,
+          error: { message: result.error }
+        });
+      }
+
+      res.status(201).json({
+        success: true,
+        data: result.data
+      });
+    } catch (error) {
+      console.error('❌ Error in createPlan controller:', error);
+      res.status(500).json({
+        success: false,
+        error: { message: 'Erreur serveur' }
+      });
+    }
+  }
+
+  /**
+   * PATCH /api/admin/plans/:id
+   * Mettre à jour un plan d'abonnement
+   */
+  async updatePlan(req, res) {
+    try {
+      const { id } = req.params;
+      const result = await adminService.updatePlan(id, req.body);
+
+      if (!result.success) {
+        return res.status(400).json({
+          success: false,
+          error: { message: result.error }
+        });
+      }
+
+      res.json({
+        success: true,
+        data: result.data
+      });
+    } catch (error) {
+      console.error('❌ Error in updatePlan controller:', error);
+      res.status(500).json({
+        success: false,
+        error: { message: 'Erreur serveur' }
+      });
+    }
+  }
+
+  /**
+   * DELETE /api/admin/plans/:id
+   * Supprimer (désactiver) un plan d'abonnement
+   */
+  async deletePlan(req, res) {
+    try {
+      const { id } = req.params;
+      const result = await adminService.deletePlan(id);
+
+      if (!result.success) {
+        return res.status(400).json({
+          success: false,
+          error: { message: result.error }
+        });
+      }
+
+      res.json({
+        success: true,
+        data: result.data
+      });
+    } catch (error) {
+      console.error('❌ Error in deletePlan controller:', error);
+      res.status(500).json({
+        success: false,
+        error: { message: 'Erreur serveur' }
+      });
+    }
+  }
 }
 
 export default new AdminController();
