@@ -149,6 +149,79 @@
   animation: card-hover 0.3s ease forwards;
 }
 
+/* Mobile-first improvements */
+@layer utilities {
+  /* Touch-friendly tap targets */
+  .tap-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent text selection on buttons */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
+  /* Better focus states for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+  }
+  
+  /* Safe area insets for mobile devices */
+  @supports (padding: max(0px)) {
+    .safe-top {
+      padding-top: max(1rem, env(safe-area-inset-top));
+    }
+    
+    .safe-bottom {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+    
+    .safe-left {
+      padding-left: max(1rem, env(safe-area-inset-left));
+    }
+    
+    .safe-right {
+      padding-right: max(1rem, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* Mobile menu animations */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #367C89 0%, #4DA6B3 100%);

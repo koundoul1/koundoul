@@ -5,40 +5,42 @@ import {
   MessageSquare, BarChart3, Gamepad2, Trophy, Star, Flame, Eye, Headphones, 
   Hand, Scale, FileText, Microscope, FlaskConical, PieChart
 } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function Home() {
+  const { t } = useTranslation();
   const subjects = [
-    { name: 'Mathématiques', icon: '📐', color: 'bg-primary-500', topics: 'Algèbre, Géométrie, Analyse' },
-    { name: 'Physique', icon: '⚛️', color: 'bg-primary-400', topics: 'Mécanique, Électricité, Optique' },
-    { name: 'Chimie', icon: '🧪', color: 'bg-accent-400', topics: 'Atomes, Réactions, Organique' }
+    { name: t('home.subjects.math'), icon: '📐', color: 'bg-primary-500', topics: t('home.subjectsTopics.math') },
+    { name: t('home.subjects.physics'), icon: '⚛️', color: 'bg-primary-400', topics: t('home.subjectsTopics.physics') },
+    { name: t('home.subjects.chemistry'), icon: '🧪', color: 'bg-accent-400', topics: t('home.subjectsTopics.chemistry') }
   ];
 
   const levels = [
-    { name: 'Seconde', grade: '2nde', difficulty: 'Fondamentaux', icon: '📘' },
-    { name: 'Première', grade: '1ère', difficulty: 'Approfondissement', icon: '📗' },
-    { name: 'Terminale', grade: 'Tle', difficulty: 'Maîtrise & Bac', icon: '📕' }
+    { name: t('home.levels.seconde.name'), grade: t('home.levels.seconde.grade'), difficulty: t('home.levels.seconde.difficulty'), icon: '📘' },
+    { name: t('home.levels.premiere.name'), grade: t('home.levels.premiere.grade'), difficulty: t('home.levels.premiere.difficulty'), icon: '📗' },
+    { name: t('home.levels.terminale.name'), grade: t('home.levels.terminale.grade'), difficulty: t('home.levels.terminale.difficulty'), icon: '📕' }
   ];
 
   const features = [
     { 
       icon: <Target className="w-8 h-8" />, 
-      title: 'Parcours Personnalisé',
-      desc: 'Progression adaptée à votre niveau et vos objectifs académiques'
+      title: t('home.features.personalized.title'),
+      desc: t('home.features.personalized.desc')
     },
     { 
       icon: <BookOpen className="w-8 h-8" />, 
-      title: 'Exercices Guidés',
-      desc: 'Solutions détaillées étape par étape pour comprendre chaque concept'
+      title: t('home.features.guided.title'),
+      desc: t('home.features.guided.desc')
     },
     { 
       icon: <TrendingUp className="w-8 h-8" />, 
-      title: 'Suivi de Progression',
-      desc: 'Visualisez vos progrès et identifiez les domaines à améliorer'
+      title: t('home.features.progress.title'),
+      desc: t('home.features.progress.desc')
     },
     { 
       icon: <Award className="w-8 h-8" />, 
-      title: 'Badges & Récompenses',
-      desc: 'Gagnez des points XP et débloquez des badges en progressant'
+      title: t('home.features.badges.title'),
+      desc: t('home.features.badges.desc')
     }
   ];
 
@@ -46,50 +48,50 @@ export default function Home() {
   const mainFeatures = [
     {
       icon: <Brain className="w-10 h-10" />,
-      title: 'Résolveur IA Intelligent',
-      desc: 'Résolvez vos problèmes avec l\'IA. Mode guidé avec indices progressifs et espace de travail personnalisé',
+      title: t('home.mainFeatures.solver.title'),
+      desc: t('home.mainFeatures.solver.desc'),
       href: '/solver',
-      badge: 'RÉVOLUTIONNAIRE',
+      badge: t('home.mainFeatures.solver.badge'),
       color: 'from-blue-600 to-cyan-600'
     },
     {
       icon: <BookOpen className="w-10 h-10" />,
-      title: '450 Micro-Leçons',
-      desc: 'Capsules de 5-10 min pour maîtriser tous les concepts. Structurées, détaillées et progressives',
+      title: t('home.mainFeatures.microLessons.title'),
+      desc: t('home.mainFeatures.microLessons.desc'),
       href: '/micro-lessons',
-      badge: 'COMPLET',
+      badge: t('home.mainFeatures.microLessons.badge'),
       color: 'from-purple-600 to-pink-600'
     },
     {
       icon: <Target className="w-10 h-10" />,
-      title: '1800 Exercices Corrigés',
-      desc: '900 QCM + 900 Exercices avec corrections détaillées. Tous les chapitres du programme',
+      title: t('home.mainFeatures.exercises.title'),
+      desc: t('home.mainFeatures.exercises.desc'),
       href: '/exercices',
-      badge: 'EXHAUSTIF',
+      badge: t('home.mainFeatures.exercises.badge'),
       color: 'from-green-600 to-emerald-600'
     },
     {
       icon: <Gamepad2 className="w-10 h-10" />,
-      title: 'Mode Défi',
-      desc: 'Exercices adaptatifs avec validation flexible. Entraînez-vous sans limite !',
+      title: t('home.mainFeatures.defi.title'),
+      desc: t('home.mainFeatures.defi.desc'),
       href: '/defi',
-      badge: 'ILLIMITÉ',
+      badge: t('home.mainFeatures.defi.badge'),
       color: 'from-orange-600 to-red-600'
     },
     {
       icon: <Trophy className="w-10 h-10" />,
-      title: 'Challenge Quotidien',
-      desc: 'Défiez-vous chaque jour avec des problèmes sélectionnés. Gagnez des badges et montez de niveau',
+      title: t('home.mainFeatures.challenge.title'),
+      desc: t('home.mainFeatures.challenge.desc'),
       href: '/challenge',
-      badge: 'MOTIVANT',
+      badge: t('home.mainFeatures.challenge.badge'),
       color: 'from-yellow-600 to-orange-600'
     },
     {
       icon: <Globe className="w-10 h-10" />,
-      title: 'Visualisations 3D',
-      desc: 'Explorez les concepts en 3D et en temps réel. Molécules, vecteurs, graphiques interactifs',
+      title: t('home.mainFeatures.visualizations.title'),
+      desc: t('home.mainFeatures.visualizations.desc'),
       href: '/visualizations',
-      badge: 'IMMERSIF',
+      badge: t('home.mainFeatures.visualizations.badge'),
       color: 'from-indigo-600 to-purple-600'
     }
   ];
@@ -147,10 +149,10 @@ export default function Home() {
   ];
 
   const stats = [
-    { value: '1,800+', label: 'Exercices Corrigés', icon: '📝' },
-    { value: '450+', label: 'Micro-Leçons', icon: '📚' },
-    { value: '18', label: 'Chapitres Couverts', icon: '🎯' },
-    { value: '100%', label: 'Gratuit', icon: '✨' }
+    { value: '1,800+', label: t('home.stats.exercises'), icon: '📝' },
+    { value: '450+', label: t('home.stats.microLessons'), icon: '📚' },
+    { value: '18', label: t('home.stats.chapters'), icon: '🎯' },
+    { value: '100%', label: t('home.stats.free'), icon: '✨' }
   ];
 
   return (
@@ -158,49 +160,48 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="koundoul-navbar">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded-full text-sm font-semibold border border-indigo-400">
-              🎓 Plateforme d'Apprentissage Scientifique
+            <div className="inline-block mb-4 px-3 py-1.5 sm:px-4 sm:py-2 bg-indigo-500/20 text-indigo-300 rounded-full text-xs sm:text-sm font-semibold border border-indigo-400">
+              🎓 {t('home.platformBadge')}
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold koundoul-text-gradient mb-6">
-              Réussissez en Maths, Physique & Chimie
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold koundoul-text-gradient mb-4 sm:mb-6 leading-tight">
+              {t('home.title')}
             </h1>
             
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              1800 exercices corrigés + 450 micro-leçons + Explications détaillées. 
-              Progressez à votre rythme de la Seconde à la Terminale.
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed px-2">
+              {t('home.subtitle')}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-4">
               <Link 
                 to="/register"
-                className="koundoul-btn-primary text-lg px-10 py-5 shadow-2xl"
+                className="koundoul-btn-primary text-base sm:text-lg px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 md:py-5 shadow-2xl rounded-xl font-semibold transition-all active:scale-95 flex items-center justify-center gap-2"
               >
-                <Zap className="w-5 h-5 inline mr-2" />
-                Commencer Gratuitement
+                <Zap className="w-5 h-5" />
+                <span>{t('home.startButton')}</span>
               </Link>
               <Link 
                 to="/exercices"
-                className="koundoul-btn-secondary text-lg px-10 py-5"
+                className="koundoul-btn-secondary text-base sm:text-lg px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 md:py-5 rounded-xl font-semibold transition-all active:scale-95 flex items-center justify-center gap-2"
               >
-                <Target className="w-5 h-5 inline mr-2" />
-                Voir les 1800 Exercices
+                <Target className="w-5 h-5" />
+                <span>{t('home.seeExercises')}</span>
               </Link>
             </div>
 
             <p className="text-sm text-gray-400 italic">
-              ✨ 100% Gratuit • Explications Détaillées • Tous les Chapitres au Programme
+              ✨ {t('home.freeBadge')}
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 px-2">
               {stats.map((stat, i) => (
-                <div key={i} className="text-center transform hover:scale-105 transition-transform">
-                  <div className="text-4xl mb-2">{stat.icon}</div>
-                  <div className="text-3xl font-bold text-indigo-400 mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-300 font-medium">{stat.label}</div>
+                <div key={i} className="text-center transform hover:scale-105 active:scale-95 transition-transform p-2 sm:p-4 rounded-lg hover:bg-white/5">
+                  <div className="text-3xl sm:text-4xl mb-2">{stat.icon}</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-indigo-400 mb-1">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -209,33 +210,33 @@ export default function Home() {
       </section>
 
       {/* Matières Section */}
-      <section className="container mx-auto px-4 py-20 bg-white">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
-              Trois Matières, Un Objectif : Votre Réussite
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-2">
+              {t('home.subjectsTitle')}
             </h2>
-            <p className="text-xl text-gray-600 font-medium">
-              Mathématiques, Physique et Chimie au programme du lycée
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium px-2">
+              {t('home.subjectsSubtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {subjects.map((subject, i) => (
               <div 
                 key={i}
-                className="group p-8 card card-hover cursor-pointer"
+                className="group p-6 sm:p-8 card card-hover cursor-pointer active:scale-95 transition-all"
               >
-                <div className={`w-16 h-16 ${subject.color} rounded-xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform`}>
+                <div className={`w-14 h-14 sm:w-16 sm:h-16 ${subject.color} rounded-xl flex items-center justify-center text-2xl sm:text-3xl mb-4 group-hover:scale-110 transition-transform`}>
                   {subject.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-primary mb-2">{subject.name}</h3>
-                <p className="text-secondary mb-4">{subject.topics}</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">{subject.name}</h3>
+                <p className="text-sm sm:text-base text-secondary mb-4">{subject.topics}</p>
                 <Link 
                   to="/solver"
-                  className="inline-flex items-center text-primary-500 font-semibold hover:text-primary-600"
+                  className="inline-flex items-center text-primary-500 font-semibold hover:text-primary-600 active:scale-95 transition-transform text-sm sm:text-base"
                 >
-                  Commencer <ArrowRight className="w-4 h-4 ml-2" />
+                  {t('home.continue')} <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </div>
             ))}
@@ -244,27 +245,27 @@ export default function Home() {
       </section>
 
       {/* Niveaux Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
-              Pour Tous les Niveaux Lycée
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-2">
+              {t('home.levelsTitle')}
             </h2>
-            <p className="text-xl text-gray-600 font-medium">
-              De la Seconde à la Terminale, progressez à votre rythme
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium px-2">
+              {t('home.levelsSubtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {levels.map((level, i) => (
               <div 
                 key={i}
-                className="p-8 card card-hover text-center transform hover:scale-105 transition-transform"
+                className="p-6 sm:p-8 card card-hover text-center transform hover:scale-105 active:scale-95 transition-transform"
               >
-                <div className="text-6xl mb-4">{level.icon}</div>
-                <h3 className="text-2xl font-bold text-primary mb-2">{level.name}</h3>
-                <p className="text-secondary text-lg mb-3">{level.grade}</p>
-                <span className="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold">
+                <div className="text-5xl sm:text-6xl mb-4">{level.icon}</div>
+                <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">{level.name}</h3>
+                <p className="text-secondary text-base sm:text-lg mb-3">{level.grade}</p>
+                <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary-100 text-primary-700 rounded-full text-xs sm:text-sm font-semibold">
                   {level.difficulty}
                 </span>
               </div>
@@ -274,29 +275,29 @@ export default function Home() {
       </section>
 
       {/* Fonctionnalités Principales - 6 Cartes */}
-      <section className="container mx-auto px-4 py-20 bg-white">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <Rocket className="h-8 w-8 text-blue-600 mr-3" />
-              <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-3 sm:mb-4">
+              <Rocket className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 mr-2 sm:mr-3" />
+              <span className="bg-blue-100 text-blue-800 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
                 FONCTIONNALITÉS PRINCIPALES
               </span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Tout Ce Dont Vous Avez Besoin Pour Réussir
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
+              {t('home.mainFeaturesTitle')}
             </h2>
-            <p className="text-xl text-gray-600 font-medium max-w-3xl mx-auto">
-              Une plateforme complète avec des outils pédagogiques innovants pour exceller en sciences
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium max-w-3xl mx-auto px-2">
+              {t('home.mainFeaturesSubtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {mainFeatures.map((feature, i) => (
               <Link
                 key={i}
                 to={feature.href}
-                className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 hover:border-blue-300 relative overflow-hidden"
+                className="group p-5 sm:p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 hover:border-blue-300 relative overflow-hidden active:scale-95"
               >
                 {/* Badge */}
                 <div className="absolute top-4 right-4">
@@ -306,21 +307,21 @@ export default function Home() {
                 </div>
                 
                 {/* Icône */}
-                <div className={`flex-shrink-0 w-16 h-16 bg-gradient-to-br ${feature.color} text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                  {feature.icon}
+                <div className={`flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br ${feature.color} text-white rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10">{feature.icon}</div>
                 </div>
                 
                 {/* Contenu */}
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm leading-relaxed">
                   {feature.desc}
                 </p>
                 
                 {/* Flèche */}
                 <div className="inline-flex items-center text-blue-600 font-semibold group-hover:text-blue-700 transition-colors">
-                  Découvrir <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  {t('home.discover')} <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}
@@ -329,28 +330,28 @@ export default function Home() {
       </section>
 
       {/* Fonctionnalités Avancées - 8 Mini-Cartes */}
-      <section className="container mx-auto px-4 py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <Sparkles className="h-8 w-8 text-purple-600 mr-3" />
-              <span className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-3 sm:mb-4">
+              <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600 mr-2 sm:mr-3" />
+              <span className="bg-purple-100 text-purple-800 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
                 FONCTIONNALITÉS AVANCÉES
               </span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Technologies de Pointe Pour Votre Apprentissage
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
+              {t('home.advancedFeaturesTitle')}
             </h2>
-            <p className="text-xl text-gray-600 font-medium max-w-3xl mx-auto">
-              IA, personnalisation cognitive, analyse d'erreurs et bien plus encore
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium max-w-3xl mx-auto px-2">
+              {t('home.advancedFeaturesSubtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
             {advancedFeatures.map((feature, i) => (
               <div
                 key={i}
-                className="p-5 bg-white rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200 hover:border-purple-300"
+                className="p-4 sm:p-5 bg-white rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200 hover:border-purple-300 active:scale-95"
               >
                 {/* Badge */}
                 <div className="mb-3">
@@ -376,85 +377,84 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <Link
-              to="/advanced-features"
-              className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg"
-            >
-              <Sparkles className="h-5 w-5 mr-2" />
-              Explorer Toutes les Fonctionnalités Avancées
-            </Link>
+              <Link
+                to="/advanced-features"
+                className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 active:scale-95 shadow-lg text-sm sm:text-base"
+              >
+                <Sparkles className="h-5 w-5 mr-2" />
+                {t('home.exploreAdvanced')}
+              </Link>
           </div>
         </div>
       </section>
 
       {/* Section 1800 Exercices & QCM */}
-      <section className="container mx-auto px-4 py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-block mb-4 px-4 py-2 bg-blue-500/20 text-blue-700 rounded-full text-sm font-semibold border border-blue-400">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-500/20 text-blue-700 rounded-full text-xs sm:text-sm font-semibold border border-blue-400">
               📚 CONTENU PÉDAGOGIQUE COMPLET
             </div>
-            <h2 className="text-4xl font-bold text-primary mb-4">
-              1 800 Exercices avec Corrections Détaillées
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-3 sm:mb-4 px-2">
+              {t('home.exercisesSectionTitle')}
             </h2>
-            <p className="text-lg text-secondary max-w-3xl mx-auto">
-              Entraînez-vous avec des exercices progressifs pour chaque chapitre du programme. 
-              Chaque exercice inclut une correction pas à pas pour bien comprendre la méthode.
+            <p className="text-sm sm:text-base md:text-lg text-secondary max-w-3xl mx-auto px-2">
+              {t('home.exercisesSectionSubtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-2 border-blue-200">
-              <div className="text-5xl mb-4 text-center">📝</div>
-              <h3 className="text-2xl font-bold text-blue-600 mb-3 text-center">900 QCM</h3>
-              <p className="text-gray-600 text-center mb-4">
-                Questions à choix multiples pour vérifier votre compréhension
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
+            <div className="bg-white p-5 sm:p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-2 border-blue-200 active:scale-95">
+              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 text-center">📝</div>
+              <h3 className="text-xl sm:text-2xl font-bold text-blue-600 mb-2 sm:mb-3 text-center">{t('home.exercisesSection.qcm.title')}</h3>
+              <p className="text-sm sm:text-base text-gray-600 text-center mb-3 sm:mb-4">
+                {t('home.exercisesSection.qcm.desc')}
               </p>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Réponse justifiée</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Méthode expliquée</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Tous les chapitres</li>
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-700">
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.qcm.points.0')}</li>
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.qcm.points.1')}</li>
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.qcm.points.2')}</li>
               </ul>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-200">
-              <div className="text-5xl mb-4 text-center">🎯</div>
-              <h3 className="text-2xl font-bold text-purple-600 mb-3 text-center">900 Exercices</h3>
-              <p className="text-gray-600 text-center mb-4">
-                Entraînement progressif avec corrections pas à pas
+            <div className="bg-white p-5 sm:p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-200 active:scale-95">
+              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 text-center">🎯</div>
+              <h3 className="text-xl sm:text-2xl font-bold text-purple-600 mb-2 sm:mb-3 text-center">{t('home.exercisesSection.exercises.title')}</h3>
+              <p className="text-sm sm:text-base text-gray-600 text-center mb-3 sm:mb-4">
+                {t('home.exercisesSection.exercises.desc')}
               </p>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Correction détaillée</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Astuces de résolution</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Difficultés variées</li>
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-700">
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.exercises.points.0')}</li>
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.exercises.points.1')}</li>
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.exercises.points.2')}</li>
               </ul>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-2 border-green-200">
-              <div className="text-5xl mb-4 text-center">📖</div>
-              <h3 className="text-2xl font-bold text-green-600 mb-3 text-center">Par Chapitre</h3>
-              <p className="text-gray-600 text-center mb-4">
-                Organisé par matière, niveau et thème du programme
+            <div className="bg-white p-5 sm:p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border-2 border-green-200 active:scale-95 sm:col-span-2 md:col-span-1">
+              <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 text-center">📖</div>
+              <h3 className="text-xl sm:text-2xl font-bold text-green-600 mb-2 sm:mb-3 text-center">{t('home.exercisesSection.byChapter.title')}</h3>
+              <p className="text-sm sm:text-base text-gray-600 text-center mb-3 sm:mb-4">
+                {t('home.exercisesSection.byChapter.desc')}
               </p>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Maths, Physique, Chimie</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> 2nde, 1ère, Terminale</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-green-500 mr-2" /> Révision ciblée</li>
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-700">
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.byChapter.points.0')}</li>
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.byChapter.points.1')}</li>
+                <li className="flex items-center"><CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-500 mr-2 flex-shrink-0" /> {t('home.exercisesSection.byChapter.points.2')}</li>
               </ul>
             </div>
           </div>
 
-          <div className="text-center">
+          <div className="text-center px-2">
             <Link
               to="/exercices"
-              className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-5 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 md:py-5 rounded-xl font-bold text-sm sm:text-base md:text-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
             >
-              <Target className="h-6 w-6 mr-3" />
-              Accéder aux 1800 Exercices
-              <ArrowRight className="h-6 w-6 ml-3" />
+              <Target className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
+              {t('home.exercisesSection.accessButton')}
+              <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 ml-2 sm:ml-3" />
             </Link>
-            <p className="text-sm text-gray-500 mt-4">
-              📖 Programme officiel Seconde, Première et Terminale • Corrections pédagogiques
+            <p className="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4 px-2">
+              {t('home.exercisesSection.footer')}
             </p>
           </div>
         </div>
@@ -559,29 +559,29 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-20 bg-white">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
-              Pourquoi Choisir Koundoul ?
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-2">
+              {t('home.featuresTitle')}
             </h2>
-            <p className="text-xl text-gray-600 font-medium">
-              Une approche pédagogique complète pour votre réussite au lycée
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium px-2">
+              {t('home.featuresSubtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {features.map((feature, i) => (
               <div 
                 key={i}
-                className="flex gap-4 p-6 card-gradient text-white hover:shadow-xl transition-all"
+                className="flex gap-3 sm:gap-4 p-5 sm:p-6 card-gradient text-white hover:shadow-xl transition-all active:scale-95 rounded-xl"
               >
-                <div className="flex-shrink-0 w-16 h-16 bg-white bg-opacity-20 text-white rounded-lg flex items-center justify-center">
-                  {feature.icon}
+                <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-white bg-opacity-20 text-white rounded-lg flex items-center justify-center">
+                  <div className="text-xl sm:text-2xl md:text-3xl">{feature.icon}</div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
-                  <p className="text-white text-opacity-90">{feature.desc}</p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{feature.title}</h3>
+                  <p className="text-sm sm:text-base text-white text-opacity-90">{feature.desc}</p>
                 </div>
               </div>
             ))}
@@ -590,36 +590,36 @@ export default function Home() {
       </section>
 
       {/* Méthode Pédagogique */}
-      <section className="container mx-auto px-4 py-20 bg-gray-50">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
-              Notre Méthode d'Apprentissage
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 sm:mb-4 px-2">
+              {t('home.methodTitle')}
             </h2>
-            <p className="text-xl text-gray-600 font-medium">
-              4 étapes pour réussir en Maths, Physique et Chimie
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium px-2">
+              {t('home.methodSubtitle')}
             </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {[
               { step: '1', title: 'Comprendre', desc: 'Explications claires des concepts fondamentaux avec 450 micro-leçons', icon: <BookOpen className="w-5 h-5" /> },
               { step: '2', title: 'Pratiquer', desc: 'Exercices progressifs avec corrections détaillées (1800 exercices)', icon: <Target className="w-5 h-5" /> },
               { step: '3', title: 'Maîtriser', desc: 'Tests et quiz pour valider vos connaissances avec feedback immédiat', icon: <Trophy className="w-5 h-5" /> },
               { step: '4', title: 'Progresser', desc: 'Suivi personnalisé avec dashboard, badges et recommandations IA', icon: <TrendingUp className="w-5 h-5" /> }
             ].map((item, i) => (
-              <div key={i} className="flex items-start gap-6 p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200">
-                <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-lg">
+              <div key={i} className="flex items-start gap-4 sm:gap-6 p-4 sm:p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200 active:scale-95">
+                <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-full flex items-center justify-center text-lg sm:text-xl font-bold shadow-lg">
                   {item.step}
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
-                    {item.icon}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                    <span className="w-5 h-5">{item.icon}</span>
                     {item.title}
                   </h3>
-                  <p className="text-gray-600">{item.desc}</p>
+                  <p className="text-sm sm:text-base text-gray-600">{item.desc}</p>
                 </div>
-                <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
+                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 flex-shrink-0 mt-1" />
               </div>
             ))}
           </div>
@@ -627,24 +627,24 @@ export default function Home() {
       </section>
 
       {/* Témoignages */}
-      <section className="container mx-auto px-4 py-20 bg-white">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <Star className="h-8 w-8 text-yellow-500 mr-3" />
-              <span className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-3 sm:mb-4">
+              <Star className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-500 mr-2 sm:mr-3" />
+              <span className="bg-yellow-100 text-yellow-800 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
                 ILS ONT RÉUSSI AVEC KOUNDOUL
               </span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Des Milliers d'Élèves Progressent Chaque Jour
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
+              {t('home.testimonialsTitle')}
             </h2>
-            <p className="text-xl text-gray-600 font-medium">
-              Découvrez comment Koundoul a transformé leur apprentissage
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium px-2">
+              {t('home.testimonialsSubtitle')}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               {
                 name: 'Marie L.',
@@ -668,27 +668,27 @@ export default function Home() {
                 avatar: 'S'
               }
             ].map((testimonial, i) => (
-              <div key={i} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border-2 border-blue-200 hover:border-blue-400 transition-all">
+              <div key={i} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-5 sm:p-6 border-2 border-blue-200 hover:border-blue-400 transition-all active:scale-95">
                 {/* Rating */}
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-1 mb-3 sm:mb-4">
                   {[...Array(testimonial.rating)].map((_, j) => (
-                    <Star key={j} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={j} className="h-4 w-4 sm:h-5 sm:w-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 
                 {/* Texte */}
-                <p className="text-gray-700 mb-6 italic leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-700 mb-4 sm:mb-6 italic leading-relaxed">
                   "{testimonial.text}"
                 </p>
                 
                 {/* Auteur */}
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg flex-shrink-0">
                     {testimonial.avatar}
                   </div>
-                  <div>
-                    <div className="font-bold text-gray-900">{testimonial.name}</div>
-                    <div className="text-sm text-gray-600">{testimonial.level}</div>
+                  <div className="min-w-0">
+                    <div className="font-bold text-sm sm:text-base text-gray-900 truncate">{testimonial.name}</div>
+                    <div className="text-xs sm:text-sm text-gray-600 truncate">{testimonial.level}</div>
                   </div>
                 </div>
               </div>
@@ -698,26 +698,26 @@ export default function Home() {
       </section>
 
       {/* CTA Final */}
-      <section className="container mx-auto px-4 py-20 card-gradient my-20">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 card-gradient my-12 sm:my-16 md:my-20 rounded-2xl sm:rounded-3xl mx-2 sm:mx-4 md:mx-0">
         <div className="max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">
-            Prêt à Exceller en Sciences ?
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 px-2">
+            {t('home.ctaTitle')}
           </h2>
-          <p className="text-xl mb-8 text-white text-opacity-90">
-            Rejoignez des milliers d'étudiants qui progressent chaque jour
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-white text-opacity-90 px-2">
+            {t('home.ctaSubtitle')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
             <Link 
               to="/register"
-              className="btn-accent text-lg px-8 py-4"
+              className="btn-accent text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-semibold active:scale-95 transition-all"
             >
-              Créer Mon Compte Gratuit
+              {t('home.ctaButtons.createAccount')}
             </Link>
             <Link 
               to="/login"
-              className="px-8 py-4 bg-white bg-opacity-20 text-white rounded-lg font-semibold hover:bg-opacity-30 transition-all border border-white border-opacity-30"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 bg-white bg-opacity-20 text-white rounded-xl font-semibold hover:bg-opacity-30 transition-all border border-white border-opacity-30 active:scale-95 text-base sm:text-lg"
             >
-              Se Connecter
+              {t('home.ctaButtons.login')}
             </Link>
           </div>
         </div>

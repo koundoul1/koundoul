@@ -15,7 +15,6 @@ import {
   Calendar, 
   Award, 
   Target, 
-  Settings,
   Edit3,
   Save,
   X,
@@ -53,7 +52,6 @@ const Profile = () => {
   const [userStats, setUserStats] = useState(null)
   const [loadingStats, setLoadingStats] = useState(true)
   const [invitationCode, setInvitationCode] = useState(null)
-  const [loadingCode, setLoadingCode] = useState(false)
   const [profileData, setProfileData] = useState(null)
 
   // Initialiser les données du formulaire
@@ -85,37 +83,6 @@ const Profile = () => {
     }
   }
   
-  const handleGenerateInvitationCode = async () => {
-    try {
-      setLoadingCode(true)
-      setError('')
-      const response = await api.user.generateInvitationCode()
-      if (response.data.success) {
-        setInvitationCode(response.data.data.code)
-        setSuccess(response.data.data.message || 'Code d\'invitation généré avec succès')
-        setTimeout(() => setSuccess(''), 5000)
-      }
-    } catch (error) {
-      console.error('Erreur génération code:', error)
-      // Si erreur 401 (session expirée), rediriger vers la page de connexion
-      if (error.status === 401 || error.message?.includes('Session expirée') || error.message?.includes('Non authentifié')) {
-        setError('Votre session a expiré. Veuillez vous reconnecter.')
-        // Rediriger vers la page de connexion après 2 secondes
-        setTimeout(() => {
-          api.auth.logout()
-          navigate('/login', { 
-            state: { 
-              message: 'Votre session a expiré. Veuillez vous reconnecter pour continuer.' 
-            } 
-          })
-        }, 2000)
-      } else {
-        setError(error.message || 'Erreur lors de la génération du code. Veuillez réessayer.')
-      }
-    } finally {
-      setLoadingCode(false)
-    }
-  }
 
   const loadUserStats = async () => {
     try {
@@ -195,7 +162,7 @@ const Profile = () => {
       })
       
       if (result.success) {
-        setSuccess('Mot de passe changé avec succès')
+        setSuccess(t('profile.passwordChanged'))
         setPasswordData({
           currentPassword: '',
           newPassword: '',
@@ -237,7 +204,7 @@ const Profile = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600">Chargement du profil...</p>
+          <p className="text-gray-600">{t('profile.loading')}</p>
         </div>
       </div>
     )
@@ -251,10 +218,10 @@ const Profile = () => {
           <div className="py-6">
             <h1 className="text-2xl font-bold text-gray-900 flex items-center">
               <User className="h-8 w-8 text-blue-600 mr-3" />
-              Mon Profil
+              {t('profile.title')}
             </h1>
             <p className="text-gray-800 font-medium mt-1">
-              Gérez vos informations personnelles et paramètres
+              {t('profile.description')}
             </p>
           </div>
         </div>
@@ -267,14 +234,14 @@ const Profile = () => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200">
               <div className="p-6 border-b border-gray-200">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-gray-900">Informations personnelles</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">{t('profile.personalInfo')}</h2>
                   {!isEditing && (
                     <button
                       onClick={() => setIsEditing(true)}
                       className="flex items-center px-3 py-2 text-blue-600 hover:text-blue-700 transition-colors"
                     >
                       <Edit3 className="h-4 w-4 mr-1" />
-                      Modifier
+                      {t('profile.editProfile')}
                     </button>
                   )}
                 </div>
@@ -317,7 +284,7 @@ const Profile = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-800 mb-2">
-                        Prénom
+                        {t('profile.firstName')}
                       </label>
                       <input
                         type="text"
@@ -331,7 +298,7 @@ const Profile = () => {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-800 mb-2">
-                        Nom
+                        {t('profile.lastName')}
                       </label>
                       <input
                         type="text"
@@ -345,7 +312,7 @@ const Profile = () => {
 
                     <div className="md:col-span-2">
                       <label className="block text-sm font-semibold text-gray-800 mb-2">
-                        Email
+                        {t('profile.email')}
                       </label>
                       <input
                         type="email"
@@ -430,7 +397,7 @@ const Profile = () => {
                   <div className="space-y-4">
                     <div>
                                           <label className="block text-sm font-semibold text-gray-800 mb-2">
-                      Mot de passe actuel
+                      {t('profile.currentPassword')}
                     </label>
                     <input
                       type="password"
@@ -508,8 +475,11 @@ const Profile = () => {
                   {invitationCode ? (
                     <div>
                       <label className="block text-xs font-semibold text-gray-700 mb-2">
-                        Code d'invitation
+                        Code d'invitation pour les parents
                       </label>
+                      <p className="text-xs text-gray-600 mb-3">
+                        Partagez ce code avec vos parents. Ils pourront l'utiliser pour se connecter et suivre votre progression.
+                      </p>
                       <div className="flex items-center space-x-2">
                         <code className="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-lg font-bold text-gray-900 text-center">
                           {invitationCode}
@@ -517,7 +487,7 @@ const Profile = () => {
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(invitationCode)
-                            setSuccess('Code copié !')
+                            setSuccess('Code copié dans le presse-papiers !')
                             setTimeout(() => setSuccess(''), 2000)
                           }}
                           className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium"
@@ -527,35 +497,13 @@ const Profile = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-2">
-                      <p className="text-sm text-gray-700 mb-3 font-medium">
-                        Aucun code généré
+                    <div className="text-center py-4">
+                      <Loader2 className="h-5 w-5 animate-spin text-blue-600 mx-auto mb-2" />
+                      <p className="text-sm text-gray-700 font-medium">
+                        Chargement du code...
                       </p>
                     </div>
                   )}
-                  
-                  <button
-                    onClick={handleGenerateInvitationCode}
-                    disabled={loadingCode}
-                    className="w-full mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
-                  >
-                    {loadingCode ? (
-                      <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Génération...
-                      </>
-                    ) : invitationCode ? (
-                      <>
-                        <Settings className="h-4 w-4 mr-2" />
-                        Régénérer le code
-                      </>
-                    ) : (
-                      <>
-                        <Shield className="h-4 w-4 mr-2" />
-                        Générer un code
-                      </>
-                    )}
-                  </button>
                 </div>
                 
                 <Link

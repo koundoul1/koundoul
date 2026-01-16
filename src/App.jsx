@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
-import { I18nProvider } from './hooks/useTranslation.jsx'
+import { I18nProvider, useTranslation } from './hooks/useTranslation.jsx'
 import ProtectedRoute from './components/ProtectedRoute'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
@@ -45,6 +45,24 @@ import QuestionBankDetail from './pages/QuestionBankDetail'
 import TestHintSystem from './pages/TestHintSystem'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
+
+function NotFoundPage() {
+  const { t } = useTranslation()
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('notFound.title')}</h1>
+        <p className="text-gray-600 mb-8">{t('notFound.message')}</p>
+        <a 
+          href="/" 
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          {t('notFound.backHome')}
+        </a>
+      </div>
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -338,20 +356,7 @@ function App() {
               {/* Route 404 */}
               <Route 
                 path="*" 
-                element={
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
-                      <p className="text-gray-600 mb-8">Page non trouvée</p>
-                      <a 
-                        href="/" 
-                        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-                      >
-                        Retour à l'accueil
-                      </a>
-                    </div>
-                  </div>
-                } 
+                element={<NotFoundPage />} 
               />
             </Routes>
           </main>

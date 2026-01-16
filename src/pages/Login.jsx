@@ -6,9 +6,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useTranslation } from '../hooks/useTranslation'
 import { Eye, EyeOff, Mail, Lock, Loader2 } from 'lucide-react'
 
 const Login = () => {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -58,15 +60,15 @@ const Login = () => {
     const newErrors = {}
 
     if (!formData.email) {
-      newErrors.email = 'L\'email est requis'
+      newErrors.email = t('auth.login.errors.emailRequired')
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Format d\'email invalide'
+      newErrors.email = t('auth.login.errors.emailInvalid')
     }
 
     if (!formData.password) {
-      newErrors.password = 'Le mot de passe est requis'
+      newErrors.password = t('auth.login.errors.passwordRequired')
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Le mot de passe doit contenir au moins 6 caractères'
+      newErrors.password = t('auth.login.errors.passwordMinLength')
     }
 
     setErrors(newErrors)
@@ -97,28 +99,28 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-4">
-            <span className="text-2xl font-bold text-white">K</span>
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-3 sm:mb-4 transition-transform hover:scale-110">
+            <span className="text-xl sm:text-2xl font-bold text-white">K</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Bienvenue sur Koundoul
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+            {t('auth.login.title')}
           </h1>
-          <p className="text-gray-600">
-            Connectez-vous pour résoudre des problèmes scientifiques
+          <p className="text-sm sm:text-base text-gray-600">
+            {t('auth.login.subtitle')}
           </p>
         </div>
 
         {/* Formulaire */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Adresse email
+                {t('auth.login.emailLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -131,10 +133,10 @@ const Login = () => {
                   autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`block w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                    errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  className={`block w-full pl-10 pr-3 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                    errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                   }`}
-                  placeholder="votre@email.com"
+                  placeholder={t('auth.login.emailPlaceholder')}
                 />
               </div>
               {errors.email && (
@@ -145,7 +147,7 @@ const Login = () => {
             {/* Mot de passe */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Mot de passe
+                {t('auth.login.passwordLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -158,10 +160,10 @@ const Login = () => {
                   autoComplete="current-password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`block w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                    errors.password ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  className={`block w-full pl-10 pr-12 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                    errors.password ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-blue-500'
                   }`}
-                  placeholder="••••••••"
+                  placeholder={t('auth.login.passwordPlaceholder')}
                 />
                 <button
                   type="button"
@@ -187,15 +189,15 @@ const Login = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center active:scale-95 text-base shadow-lg hover:shadow-xl"
             >
               {isLoading ? (
                 <>
                   <Loader2 className="animate-spin h-5 w-5 mr-2" />
-                  Connexion...
+                  {t('auth.login.submitting')}
                 </>
               ) : (
-                'Se connecter'
+                t('auth.login.submitButton')
               )}
             </button>
           </form>
@@ -203,12 +205,12 @@ const Login = () => {
           {/* Liens */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Pas encore de compte ?{' '}
+              {t('auth.login.noAccount')}{' '}
               <Link
                 to="/register"
                 className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
               >
-                Créer un compte
+                {t('auth.login.createAccount')}
               </Link>
             </p>
           </div>
@@ -219,7 +221,7 @@ const Login = () => {
               to="/forgot-password"
               className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
             >
-              Mot de passe oublié ?
+              {t('auth.login.forgotPassword')}
             </Link>
           </div>
         </div>
@@ -227,13 +229,13 @@ const Login = () => {
         {/* Footer */}
         <div className="mt-8 text-center">
           <p className="text-xs text-gray-500">
-            En vous connectant, vous acceptez nos{' '}
+            {t('auth.login.terms').split('{terms}')[0]}
             <Link to="/terms" className="text-blue-600 hover:text-blue-500">
-              conditions d'utilisation
-            </Link>{' '}
-            et notre{' '}
+              {t('auth.login.termsLink')}
+            </Link>
+            {' '}{t('auth.login.terms').split('{terms}')[1].split('{privacy}')[0]}
             <Link to="/privacy" className="text-blue-600 hover:text-blue-500">
-              politique de confidentialité
+              {t('auth.login.privacyLink')}
             </Link>
           </p>
         </div>

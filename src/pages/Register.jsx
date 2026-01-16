@@ -6,10 +6,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useTranslation } from '../hooks/useTranslation'
 import api from '../services/api'
 import { Eye, EyeOff, Mail, Lock, User, UserCheck, Loader2 } from 'lucide-react'
 
 const Register = () => {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -180,29 +182,29 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mb-4">
-            <span className="text-2xl font-bold text-white">K</span>
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mb-3 sm:mb-4 transition-transform hover:scale-110">
+            <span className="text-xl sm:text-2xl font-bold text-white">K</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Rejoignez Koundoul
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+            {t('auth.register.title')}
           </h1>
-          <p className="text-gray-600">
-            Créez votre compte et commencez à résoudre des problèmes
+          <p className="text-sm sm:text-base text-gray-600">
+            {t('auth.register.subtitle')}
           </p>
         </div>
 
         {/* Formulaire */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Prénom et Nom */}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                  Prénom
+                  {t('auth.register.firstNameLabel')}
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -215,10 +217,10 @@ const Register = () => {
                     autoComplete="given-name"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className={`block w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
-                      errors.firstName ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                    className={`block w-full pl-10 pr-3 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all ${
+                      errors.firstName ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-purple-500'
                     }`}
-                    placeholder="Jean"
+                    placeholder={t('auth.register.firstNamePlaceholder')}
                   />
                 </div>
                 {errors.firstName && (
@@ -228,7 +230,7 @@ const Register = () => {
 
               <div>
                 <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                  Nom
+                  {t('auth.register.lastNameLabel')}
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -241,10 +243,10 @@ const Register = () => {
                     autoComplete="family-name"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className={`block w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
-                      errors.lastName ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                    className={`block w-full pl-10 pr-3 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all ${
+                      errors.lastName ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-purple-500'
                     }`}
-                    placeholder="Dupont"
+                    placeholder={t('auth.register.lastNamePlaceholder')}
                   />
                 </div>
                 {errors.lastName && (
@@ -256,7 +258,7 @@ const Register = () => {
             {/* Nom d'utilisateur */}
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Nom d'utilisateur
+                {t('auth.register.usernameLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -270,10 +272,10 @@ const Register = () => {
                   value={formData.username}
                   onChange={handleChange}
                   onBlur={() => checkUsernameAvailability(formData.username)}
-                  className={`block w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
-                    errors.username ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  className={`block w-full pl-10 pr-3 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all ${
+                    errors.username ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-purple-500'
                   }`}
-                  placeholder="jean_dupont"
+                  placeholder={t('auth.register.usernamePlaceholder')}
                 />
                 {isChecking.username && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -289,7 +291,7 @@ const Register = () => {
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Adresse email
+                {t('auth.register.emailLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -303,10 +305,10 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={() => checkEmailAvailability(formData.email)}
-                  className={`block w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
-                    errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  className={`block w-full pl-10 pr-3 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all ${
+                    errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-purple-500'
                   }`}
-                  placeholder="jean@example.com"
+                  placeholder={t('auth.register.emailPlaceholder')}
                 />
                 {isChecking.email && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -335,8 +337,8 @@ const Register = () => {
                   autoComplete="new-password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`block w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
-                    errors.password ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  className={`block w-full pl-10 pr-12 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all ${
+                    errors.password ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-purple-500'
                   }`}
                   placeholder="••••••••"
                 />
@@ -369,8 +371,8 @@ const Register = () => {
                   autoComplete="new-password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={`block w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors ${
-                    errors.confirmPassword ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  className={`block w-full pl-10 pr-12 py-3.5 sm:py-3 text-base border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all ${
+                    errors.confirmPassword ? 'border-red-300 bg-red-50' : 'border-gray-300 focus:border-purple-500'
                   }`}
                   placeholder="••••••••"
                 />
@@ -398,15 +400,15 @@ const Register = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center"
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-4 rounded-xl font-semibold hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center active:scale-95 text-base shadow-lg hover:shadow-xl"
             >
               {isLoading ? (
                 <>
                   <Loader2 className="animate-spin h-5 w-5 mr-2" />
-                  Création du compte...
+                  {t('auth.register.submitting')}
                 </>
               ) : (
-                'Créer mon compte'
+                t('auth.register.submitButton')
               )}
             </button>
           </form>
@@ -414,12 +416,12 @@ const Register = () => {
           {/* Liens */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Déjà un compte ?{' '}
+              {t('auth.register.hasAccount')}{' '}
               <Link
                 to="/login"
                 className="font-medium text-purple-600 hover:text-purple-500 transition-colors"
               >
-                Se connecter
+                {t('auth.register.login')}
               </Link>
             </p>
           </div>
@@ -428,13 +430,13 @@ const Register = () => {
         {/* Footer */}
         <div className="mt-8 text-center">
           <p className="text-xs text-gray-500">
-            En créant un compte, vous acceptez nos{' '}
+            {t('auth.register.terms').split('{terms}')[0]}
             <Link to="/terms" className="text-purple-600 hover:text-purple-500">
-              conditions d'utilisation
-            </Link>{' '}
-            et notre{' '}
+              {t('auth.register.termsLink')}
+            </Link>
+            {' '}{t('auth.register.terms').split('{terms}')[1].split('{privacy}')[0]}
             <Link to="/privacy" className="text-purple-600 hover:text-purple-500">
-              politique de confidentialité
+              {t('auth.register.privacyLink')}
             </Link>
           </p>
         </div>

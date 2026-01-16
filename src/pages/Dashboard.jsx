@@ -1,21 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   BookOpen, Target, Award, TrendingUp, Clock, Flame, 
   ChevronRight, CheckCircle, Trophy, Zap, Activity 
 } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 import api from '../services/api';
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const [dashboard, setDashboard] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const hasRedirectedRef = useRef(false);
+  const fetchCalledRef = useRef(false);
 
   useEffect(() => {
+    // Éviter les appels multiples (React StrictMode en développement)
+    if (fetchCalledRef.current) return;
+    fetchCalledRef.current = true;
+    
     fetchDashboard();
   }, []);
 
   const fetchDashboard = async () => {
+    // Éviter les appels multiples si une redirection est déjà en cours
+    if (hasRedirectedRef.current) return;
+    
     try {
       const response = await api.dashboard.get();
       setDashboard(response.data);
@@ -23,12 +34,18 @@ export default function Dashboard() {
       console.error('Erreur:', error);
       // Si erreur 401 (non authentifié), rediriger vers la page de connexion
       if (error.status === 401 || error.message?.includes('Token') || error.message?.includes('Session')) {
+        // Éviter les redirections multiples
+        if (hasRedirectedRef.current) return;
+        hasRedirectedRef.current = true;
+        
         api.auth.logout();
         navigate('/login', { 
+          replace: true,
           state: { 
-            message: 'Veuillez vous connecter pour accéder à votre dashboard.' 
+            message: t('dashboard.loadingError')
           } 
         });
+        return;
       }
     } finally {
       setLoading(false);
@@ -47,12 +64,12 @@ export default function Dashboard() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-600 font-semibold mb-4">Erreur de chargement du dashboard</p>
+          <p className="text-red-600 font-semibold mb-4">{t('dashboard.loadingError')}</p>
           <Link 
             to="/login" 
             className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
-            Se connecter
+            {t('dashboard.connectButton')}
           </Link>
         </div>
       </div>
@@ -63,27 +80,27 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         
         {/* Header avec profil */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white mb-8">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-4 sm:p-6 md:p-8 text-white mb-4 sm:mb-6 md:mb-8">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold mb-2">
-                Bonjour {profile.firstName || profile.username} ! 👋
+            <div className="flex-1 min-w-0">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+                {t('dashboard.title').replace('{name}', profile.firstName || profile.username)}
               </h1>
-              <p className="text-xl text-blue-100">
-                Prêt à continuer ton apprentissage ?
+              <p className="text-base sm:text-lg md:text-xl text-blue-100">
+                {t('dashboard.subtitle')}
               </p>
             </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold mb-1">
-                Niveau {profile.level}
+            <div className="text-right flex-shrink-0 ml-4">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">
+                {t('dashboard.level').replace('{level}', profile.level)}
               </div>
-              <div className="text-blue-200">
-                {profile.xp} / {profile.nextLevelXp} XP
+              <div className="text-sm sm:text-base text-blue-200">
+                {t('dashboard.xp').replace('{xp}', profile.xp).replace('{nextXp}', profile.nextLevelXp)}
               </div>
-              <div className="w-48 h-2 bg-blue-500 rounded-full mt-2">
+              <div className="w-32 sm:w-40 md:w-48 h-2 bg-blue-500 rounded-full mt-2">
                 <div 
                   className="h-full bg-white rounded-full transition-all"
                   style={{ width: `${(profile.xp / profile.nextLevelXp) * 100}%` }}
@@ -94,37 +111,37 @@ export default function Dashboard() {
         </div>
 
         {/* Statistiques principales */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
+          <div className="bg-white rounded-xl p-4 sm:p-6 border-2 border-gray-200 transition-all hover:shadow-lg active:scale-95">
             <div className="flex items-center justify-between mb-2">
-              <BookOpen className="w-8 h-8 text-blue-600" />
-              <span className="text-3xl font-bold text-gray-900">{stats.lessonsCompleted}</span>
+              <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 flex-shrink-0" />
+              <span className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.lessonsCompleted}</span>
             </div>
-            <p className="text-gray-600 font-semibold">Leçons complétées</p>
+            <p className="text-xs sm:text-sm text-gray-600 font-semibold">{t('dashboard.stats.lessonsCompleted')}</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
+          <div className="bg-white rounded-xl p-4 sm:p-6 border-2 border-gray-200 transition-all hover:shadow-lg active:scale-95">
             <div className="flex items-center justify-between mb-2">
-              <Target className="w-8 h-8 text-green-600" />
-              <span className="text-3xl font-bold text-gray-900">{stats.successRate}%</span>
+              <Target className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 flex-shrink-0" />
+              <span className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.successRate}%</span>
             </div>
-            <p className="text-gray-600 font-semibold">Taux de réussite</p>
+            <p className="text-xs sm:text-sm text-gray-600 font-semibold">{t('dashboard.stats.successRate')}</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
+          <div className="bg-white rounded-xl p-4 sm:p-6 border-2 border-gray-200 transition-all hover:shadow-lg active:scale-95">
             <div className="flex items-center justify-between mb-2">
-              <Flame className="w-8 h-8 text-orange-600" />
-              <span className="text-3xl font-bold text-gray-900">{stats.streak}</span>
+              <Flame className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600 flex-shrink-0" />
+              <span className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.streak}</span>
             </div>
-            <p className="text-gray-600 font-semibold">Jours consécutifs</p>
+            <p className="text-xs sm:text-sm text-gray-600 font-semibold">{t('dashboard.stats.streak')}</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
+          <div className="bg-white rounded-xl p-4 sm:p-6 border-2 border-gray-200 transition-all hover:shadow-lg active:scale-95">
             <div className="flex items-center justify-between mb-2">
-              <Clock className="w-8 h-8 text-purple-600" />
-              <span className="text-3xl font-bold text-gray-900">{stats.totalTimeSpent}</span>
+              <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600 flex-shrink-0" />
+              <span className="text-2xl sm:text-3xl font-bold text-gray-900">{stats.totalTimeSpent}</span>
             </div>
-            <p className="text-gray-600 font-semibold">Minutes d'étude</p>
+            <p className="text-xs sm:text-sm text-gray-600 font-semibold">{t('dashboard.stats.totalTime')}</p>
           </div>
         </div>
 
@@ -138,7 +155,7 @@ export default function Dashboard() {
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Zap className="w-7 h-7 text-yellow-500" />
-                  Recommandations pour toi
+                  {t('dashboard.recommendations.title')}
                 </h2>
                 <div className="space-y-4">
                   {recommendations.map((rec, index) => (
@@ -165,10 +182,10 @@ export default function Dashboard() {
 
             {/* Progression par matière */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <TrendingUp className="w-7 h-7 text-blue-600" />
-                Ta progression par matière
-              </h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-7 h-7 text-blue-600" />
+                  {t('dashboard.subjectProgress.title')}
+                </h2>
               <div className="space-y-4">
                 {subjectProgress.map(subject => (
                   <Link
@@ -181,12 +198,12 @@ export default function Dashboard() {
                       <div className="flex-1">
                         <h3 className="text-xl font-bold text-gray-900">{subject.name}</h3>
                         <p className="text-sm text-gray-600">
-                          {subject.lessons.completed}/{subject.lessons.total} leçons • {subject.exercises.attempted}/{subject.exercises.total} exercices
+                          {t('dashboard.subjectProgress.lessons').replace('{completed}', subject.lessons.completed).replace('{total}', subject.lessons.total)} • {t('dashboard.subjectProgress.exercises').replace('{attempted}', subject.exercises.attempted).replace('{total}', subject.exercises.total)}
                         </p>
                       </div>
                       <div className="text-right">
                         <div className="text-2xl font-bold text-blue-600">
-                          {subject.overallProgress}%
+                          {t('dashboard.subjectProgress.progress').replace('{progress}', subject.overallProgress)}
                         </div>
                       </div>
                     </div>
@@ -209,7 +226,7 @@ export default function Dashboard() {
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Activity className="w-7 h-7 text-green-600" />
-                  Continue là où tu t'es arrêté
+                  {t('dashboard.chaptersInProgress.title')}
                 </h2>
                 <div className="grid md:grid-cols-2 gap-4">
                   {chaptersInProgress.map(chapter => (
@@ -227,7 +244,7 @@ export default function Dashboard() {
                       </h3>
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <BookOpen className="w-4 h-4" />
-                        <span>{chapter.lessons.length} leçons</span>
+                        <span>{t('dashboard.chaptersInProgress.lessons').replace('{count}', chapter.lessons.length)}</span>
                       </div>
                     </Link>
                   ))}
@@ -241,7 +258,7 @@ export default function Dashboard() {
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <Award className="w-7 h-7 text-orange-500" />
-              Activité récente
+              {t('dashboard.recentActivity.title')}
             </h2>
             <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
               <div className="space-y-4">
@@ -276,16 +293,16 @@ export default function Dashboard() {
             {/* Call to Action */}
             <div className="mt-6 bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-6 text-white">
               <h3 className="text-xl font-bold mb-2">
-                🎯 Objectif du jour
+                {t('dashboard.dailyGoal.title')}
               </h3>
               <p className="text-green-100 mb-4">
-                Complète 1 leçon et 2 exercices pour maintenir ton streak !
+                {t('dashboard.dailyGoal.desc')}
               </p>
               <Link
                 to="/courses"
                 className="inline-block px-6 py-2 bg-white text-green-600 rounded-lg font-semibold hover:bg-green-50 transition-all"
               >
-                Commencer maintenant
+                {t('dashboard.dailyGoal.startButton')}
               </Link>
             </div>
           </div>

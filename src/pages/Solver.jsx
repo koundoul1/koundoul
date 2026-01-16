@@ -131,17 +131,17 @@ const Solver = () => {
   const [showGraph, setShowGraph] = useState(false)
 
   const subjects = [
-    { value: 'math', label: 'Mathématiques', icon: '📐' },
-    { value: 'physics', label: 'Physique', icon: '⚛️' },
-    { value: 'chemistry', label: 'Chimie', icon: '🧪' },
-    { value: 'biology', label: 'Biologie', icon: '🧬' },
-    { value: 'general', label: 'Général', icon: '🔬' }
+    { value: 'math', label: t('solver.subjects.math'), icon: '📐' },
+    { value: 'physics', label: t('solver.subjects.physics'), icon: '⚛️' },
+    { value: 'chemistry', label: t('solver.subjects.chemistry'), icon: '🧪' },
+    { value: 'biology', label: t('solver.subjects.biology'), icon: '🧬' },
+    { value: 'general', label: t('solver.subjects.general'), icon: '🔬' }
   ]
 
   const difficulties = [
-    { value: 'easy', label: 'Facile', color: 'green' },
-    { value: 'medium', label: 'Moyen', color: 'yellow' },
-    { value: 'hard', label: 'Difficile', color: 'red' }
+    { value: 'easy', label: t('solver.difficulties.easy'), color: 'green' },
+    { value: 'medium', label: t('solver.difficulties.medium'), color: 'yellow' },
+    { value: 'hard', label: t('solver.difficulties.hard'), color: 'red' }
   ]
 
   // Charger l'historique des problèmes

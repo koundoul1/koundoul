@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { BookOpen, Trophy, Play, Filter, Target, ArrowLeft, CheckCircle, XCircle, Timer, Clock, Settings, BarChart3, Star, Zap, Users, TrendingUp, AlertCircle, Eye } from 'lucide-react'
+import { useTranslation } from '../hooks/useTranslation'
 import api from '../services/api'
 
 const Quiz = () => {
+  const { t } = useTranslation()
   const [questionBanks, setQuestionBanks] = useState([])
   const [filteredBanks, setFilteredBanks] = useState([])
   const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState({
-    subject: 'Toutes les matières',
-    level: 'Tous les niveaux'
+    subject: t('quiz.allSubjects'),
+    level: t('quiz.allLevels')
   })
 
   // État pour le quiz en cours
@@ -453,7 +455,7 @@ const Quiz = () => {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
           <p className="text-white text-lg">
-            {quizLoading ? 'Chargement des questions...' : 'Chargement des QCM...'}
+            {quizLoading ? t('quiz.loadingQuestions') : t('quiz.loadingBanks')}
           </p>
         </div>
       </div>
@@ -476,12 +478,12 @@ const Quiz = () => {
       return (
         <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 flex items-center justify-center">
           <div className="text-center">
-            <p className="text-white text-xl mb-4">Aucune question dans ce quiz</p>
+            <p className="text-white text-xl mb-4">{t('quiz.noQuestionInQuiz')}</p>
             <button
               onClick={backToList}
               className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:opacity-90 transition-all"
             >
-              Retour aux quiz
+              {t('quiz.backToQuizzes')}
             </button>
           </div>
         </div>
@@ -565,35 +567,35 @@ const Quiz = () => {
                   percentage >= 80 ? 'text-green-400' : percentage >= 60 ? 'text-yellow-400' : 'text-red-400'
                 }`} />
               </div>
-              <h2 className="text-4xl font-bold text-white mb-2">Quiz terminé !</h2>
-              <p className="text-blue-100 text-lg">{selectedBank?.title || 'Résultats du quiz'}</p>
+              <h2 className="text-4xl font-bold text-white mb-2">{t('quiz.quizCompleted')}</h2>
+              <p className="text-blue-100 text-lg">{selectedBank?.title || t('quiz.quizResults')}</p>
             </div>
 
             {/* Statistiques principales */}
             <div className="grid grid-cols-4 gap-4 mb-8">
               <div className="bg-white/10 rounded-xl p-4 border border-white/20">
-                <p className="text-blue-200 text-sm mb-1">Score</p>
+                <p className="text-blue-200 text-sm mb-1">{t('quiz.score')}</p>
                 <p className="text-2xl font-bold text-white">{finalScoreValue || score || 0} pts</p>
               </div>
               <div className="bg-white/10 rounded-xl p-4 border border-white/20">
-                <p className="text-blue-200 text-sm mb-1">Réussite</p>
+                <p className="text-blue-200 text-sm mb-1">{t('quiz.success')}</p>
                 <p className={`text-2xl font-bold ${
                   percentage >= 80 ? 'text-green-400' : percentage >= 60 ? 'text-yellow-400' : 'text-red-400'
                 }`}>{percentage}%</p>
               </div>
               <div className="bg-white/10 rounded-xl p-4 border border-white/20">
-                <p className="text-blue-200 text-sm mb-1">Bonnes réponses</p>
+                <p className="text-blue-200 text-sm mb-1">{t('quiz.goodAnswers')}</p>
                 <p className="text-2xl font-bold text-green-400">{finalCorrectCount || 0}/{questions.length}</p>
               </div>
               <div className="bg-white/10 rounded-xl p-4 border border-white/20">
-                <p className="text-blue-200 text-sm mb-1">Temps moyen</p>
+                <p className="text-blue-200 text-sm mb-1">{t('quiz.avgTime')}</p>
                 <p className="text-2xl font-bold text-white">{formatTime(avgTime)}</p>
               </div>
             </div>
 
             {/* Détails */}
             <div className="bg-white/10 rounded-xl p-6 mb-8 border border-white/20">
-              <h3 className="text-xl font-bold text-white mb-4">Détails des réponses</h3>
+              <h3 className="text-xl font-bold text-white mb-4">{t('quiz.answerDetails')}</h3>
               <div className="space-y-2">
                 {questions.length > 0 ? (
                   questions.map((q, index) => {
@@ -626,7 +628,7 @@ const Quiz = () => {
                             <AlertCircle className="w-5 h-5 text-gray-400 flex-shrink-0" />
                           )}
                           <div className="flex flex-col flex-1">
-                            <span className="text-white font-semibold">Question {index + 1}</span>
+                            <span className="text-white font-semibold">{t('quiz.question')} {index + 1}</span>
                             {q.question && (
                               <span className="text-gray-300 text-xs mt-1">
                                 {typeof q.question === 'string' ? q.question.substring(0, 80) + (q.question.length > 80 ? '...' : '') : q.statement?.substring(0, 80) + (q.statement?.length > 80 ? '...' : '')}
@@ -639,7 +641,7 @@ const Quiz = () => {
                             )}
                             {isAnswered && !isCorrect && correctAnswerIndex !== undefined && (
                               <span className="text-xs text-yellow-300 mt-1">
-                                Réponse correcte: {String.fromCharCode(65 + correctAnswerIndex)}
+                                {t('quiz.correctAnswer')} {String.fromCharCode(65 + correctAnswerIndex)}
                               </span>
                             )}
                           </div>
@@ -649,13 +651,13 @@ const Quiz = () => {
                             ? (isCorrect ? 'text-green-400' : 'text-red-400')
                             : 'text-gray-400'
                         }`}>
-                          {isAnswered ? (isCorrect ? '✓ Correct' : '✗ Incorrect') : 'Non répondue'}
+                          {isAnswered ? (isCorrect ? `✓ ${t('quiz.correct')}` : `✗ ${t('quiz.incorrect')}`) : t('quiz.notAnswered')}
                         </span>
                       </div>
                     )
                   })
                 ) : (
-                  <p className="text-white text-center py-4">Aucune question à afficher</p>
+                  <p className="text-white text-center py-4">{t('quiz.noQuestionToShow')}</p>
                 )}
               </div>
             </div>
@@ -667,14 +669,14 @@ const Quiz = () => {
                 className="flex-1 px-6 py-3 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 transition-all border border-white/20 flex items-center justify-center gap-2"
               >
                 <ArrowLeft className="w-5 h-5" />
-                Retour aux quiz
+                {t('quiz.backToQuizzes')}
               </button>
               <button
                 onClick={restartQuiz}
                 className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2"
               >
                 <Play className="w-5 h-5" />
-                Recommencer
+                {t('quiz.restart')}
               </button>
             </div>
           </div>
@@ -693,7 +695,7 @@ const Quiz = () => {
             className="flex items-center gap-2 text-white hover:text-blue-200 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            Retour à la liste
+            {t('quiz.backToList')}
           </button>
 
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">

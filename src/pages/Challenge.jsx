@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../hooks/useTranslation';
 import { 
   Trophy, 
   Users, 
@@ -30,6 +31,7 @@ import {
 import api from '../services/api';
 
 const Challenge = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('weekly');
   const [challenges, setChallenges] = useState([]);
@@ -571,19 +573,19 @@ const Challenge = () => {
             {/* Créer un duel */}
             <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-2 border-dashed border-purple-500/50 rounded-xl p-8 text-center">
               <Sword className="h-16 w-16 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-2">Créer votre propre duel</h3>
+              <h3 className="text-2xl font-bold text-white mb-2">{t('challenge.createOwnDuel')}</h3>
               <p className="text-gray-300 mb-6">
-                Défiez vos amis et camarades dans un duel personnalisé
+                {t('challenge.duelDescription')}
               </p>
               <button 
                 onClick={() => {
                   // TODO: Implémenter la création de duel
-                  setError('La création de duel sera bientôt disponible');
+                  setError(t('challenge.duelSoonAvailable'));
                 }}
-                aria-label="Créer un nouveau duel"
+                aria-label={t('challenge.createDuel')}
                 className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors transform hover:scale-105"
               >
-                Créer un Duel
+                {t('challenge.createDuel')}
               </button>
             </div>
           </div>

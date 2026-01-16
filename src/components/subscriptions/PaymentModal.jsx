@@ -247,3 +247,5 @@ const PaymentModal = ({ plan, subscription, onClose, onSuccess }) => {
 }
 
 export default PaymentModal
+
+
