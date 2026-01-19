@@ -282,6 +282,7 @@ const ParentDashboard = () => {
             </div>
           </div>
         </div>
+        )}
 
         {/* Alertes intelligentes */}
         {alerts.length > 0 && (
