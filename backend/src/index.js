@@ -28,6 +28,22 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Import routes
+const authRoutes = require('./routes/auth');
+const dashboardRoutes = require('./routes/dashboard');
+const badgesRoutes = require('./routes/badges');
+const flashcardsRoutes = require('./routes/flashcards');
+const quizRoutes = require('./routes/quiz');
+const questionBanksRoutes = require('./routes/questionBanks');
+const challengesRoutes = require('./routes/challenges');
+const duelsRoutes = require('./routes/duels');
+const solverRoutes = require('./routes/solver');
+const forumRoutes = require('./routes/forum');
+const microlessonsRoutes = require('./routes/microlessons');
+const coachRoutes = require('./routes/coach');
+const usersRoutes = require('./routes/users');
+const errorHandler = require('./middlewares/errorHandler');
+
 // API Routes
 app.get('/api', (req, res) => {
   res.json({
@@ -35,59 +51,39 @@ app.get('/api', (req, res) => {
     version: '1.0.0',
     endpoints: {
       health: '/health',
-      api: '/api'
+      api: '/api',
+      auth: '/api/auth',
+      dashboard: '/api/dashboard',
+      badges: '/api/badges',
+      flashcards: '/api/flashcards',
+      quiz: '/api/quiz',
+      challenges: '/api/challenges',
+      solver: '/api/solver',
+      forum: '/api/forum',
+      microlessons: '/api/microlessons',
+      coach: '/api/coach',
+      users: '/api/users'
     }
   });
 });
 
-// Auth routes placeholder
-app.post('/api/auth/login', async (req, res) => {
-  try {
-    res.json({
-      message: 'Login endpoint - to be implemented',
-      success: true
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.post('/api/auth/register', async (req, res) => {
-  try {
-    res.json({
-      message: 'Register endpoint - to be implemented',
-      success: true
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Users routes
-app.get('/api/users', async (req, res) => {
-  try {
-    const users = await prisma.user.findMany({
-      take: 10,
-      select: {
-        id: true,
-        email: true,
-        name: true
-      }
-    });
-    res.json({ users });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+// Mount routes
+app.use('/api/auth', authRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/badges', badgesRoutes);
+app.use('/api/flashcards', flashcardsRoutes);
+app.use('/api/quiz', quizRoutes);
+app.use('/api/question-banks', questionBanksRoutes);
+app.use('/api/challenges', challengesRoutes);
+app.use('/api/duels', duelsRoutes);
+app.use('/api/solver', solverRoutes);
+app.use('/api/forum', forumRoutes);
+app.use('/api/microlessons', microlessonsRoutes);
+app.use('/api/coach', coachRoutes);
+app.use('/api/users', usersRoutes);
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  res.status(err.status || 500).json({
-    error: err.message || 'Internal server error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-  });
-});
+app.use(errorHandler);
 
 // 404 handler
 app.use((req, res) => {
