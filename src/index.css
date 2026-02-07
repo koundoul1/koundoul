@@ -13,22 +13,15 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
-    overflow-x: hidden;
-    /* Mobile-first: taille de base pour mobile */
-    font-size: 16px;
-    /* Smooth scrolling pour mobile */
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
   }
   
   body {
-    background: linear-gradient(180deg, #68A8AD 0%, #DDE5E8 100%);
+    background: #111827; /* bg-gray-900 pour le nouveau design */
     min-height: 100vh;
-    min-height: -webkit-fill-available; /* iOS Safari fix */
-    overflow-x: hidden;
-    width: 100%;
-    /* Padding pour safe area sur mobile */
-    padding-bottom: env(safe-area-inset-bottom);
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    width: 100%; /* Assure que le body prend toute la largeur */
+    color: white; /* Texte blanc par défaut pour le thème sombre */
   }
   
   /* Empêche le défilement horizontal sur tous les éléments */
@@ -39,22 +32,7 @@
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', 'Inter', system-ui, sans-serif;
-    color: #34495E;
-  }
-  
-  /* Mobile-first: amélioration des interactions tactiles */
-  button, a, [role="button"] {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-    touch-action: manipulation;
-    cursor: pointer;
-  }
-  
-  /* Amélioration du texte sur mobile */
-  @media (max-width: 768px) {
-    body {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    color: #34495E; /* Texte principal */
   }
 }
 
@@ -199,11 +177,11 @@
   /* Safe area insets for mobile devices */
   @supports (padding: max(0px)) {
     .safe-top {
-      padding-top: max(0.5rem, env(safe-area-inset-top));
+      padding-top: max(1rem, env(safe-area-inset-top));
     }
     
     .safe-bottom {
-      padding-bottom: max(4rem, env(safe-area-inset-bottom)); /* Espace pour bottom nav */
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
     }
     
     .safe-left {
@@ -212,22 +190,6 @@
     
     .safe-right {
       padding-right: max(1rem, env(safe-area-inset-right));
-    }
-  }
-  
-  /* Mobile-first: amélioration des cartes et boutons */
-  @media (max-width: 768px) {
-    .card {
-      @apply rounded-2xl shadow-md;
-      /* Touch-friendly padding */
-      padding: 1rem;
-    }
-    
-    .btn-primary,
-    .btn-secondary,
-    .btn-accent {
-      @apply min-h-[48px] px-6 py-3;
-      /* Touch target minimum 48px */
     }
   }
 }
@@ -267,4 +229,84 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ========================================
+   KOUNDOUL 2.0 - STYLES MODERNES
+   ======================================== */
+
+/* Animations personnalisées */
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* Classes utilitaires */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom gradient backgrounds */
+.gradient-dark {
+  background: linear-gradient(to bottom, #0f172a, #1e293b, #0f172a);
+}
+
+/* Safe area insets pour mobile (iOS) */
+@supports (padding: max(0px)) {
+  .safe-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+  
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+  
+  .safe-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
 }
