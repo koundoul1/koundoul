@@ -16,6 +16,10 @@ router.post('/register', async (req, res, next) => {
       return res.status(400).json({ error: 'Email et mot de passe requis' });
     }
 
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 6 caractères' });
+    }
+
     // Vérifier si l'email existe déjà
     const existingUser = await prisma.user.findUnique({
       where: { email }
@@ -23,6 +27,16 @@ router.post('/register', async (req, res, next) => {
 
     if (existingUser) {
       return res.status(409).json({ error: 'Cet email est déjà utilisé' });
+    }
+
+    // Vérifier username si fourni
+    if (username) {
+      const existingUsername = await prisma.user.findFirst({
+        where: { username }
+      });
+      if (existingUsername) {
+        return res.status(409).json({ error: 'Ce nom d\'utilisateur est déjà pris' });
+      }
     }
 
     // Hasher le mot de passe
@@ -35,7 +49,10 @@ router.post('/register', async (req, res, next) => {
         password: hashedPassword,
         firstName: firstName || null,
         lastName: lastName || null,
-        username: username || email.split('@')[0]
+        username: username || email.split('@')[0],
+        xp: 0,
+        level: 1,
+        streak: 0
       },
       select: {
         id: true,
@@ -43,6 +60,9 @@ router.post('/register', async (req, res, next) => {
         firstName: true,
         lastName: true,
         username: true,
+        xp: true,
+        level: true,
+        streak: true,
         createdAt: true
       }
     });
@@ -106,7 +126,10 @@ router.post('/login', async (req, res, next) => {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
-          username: user.username
+          username: user.username,
+          xp: user.xp,
+          level: user.level,
+          streak: user.streak
         },
         token
       }
@@ -127,6 +150,9 @@ router.get('/profile', authenticateToken, async (req, res, next) => {
         firstName: true,
         lastName: true,
         username: true,
+        xp: true,
+        level: true,
+        streak: true,
         createdAt: true,
         updatedAt: true
       }
@@ -147,6 +173,19 @@ router.put('/profile', authenticateToken, async (req, res, next) => {
   try {
     const { firstName, lastName, username } = req.body;
 
+    // Vérifier username si fourni
+    if (username) {
+      const existingUsername = await prisma.user.findFirst({
+        where: {
+          username,
+          NOT: { id: req.user.userId }
+        }
+      });
+      if (existingUsername) {
+        return res.status(409).json({ error: 'Ce nom d\'utilisateur est déjà pris' });
+      }
+    }
+
     const user = await prisma.user.update({
       where: { id: req.user.userId },
       data: {
@@ -159,7 +198,10 @@ router.put('/profile', authenticateToken, async (req, res, next) => {
         email: true,
         firstName: true,
         lastName: true,
-        username: true
+        username: true,
+        xp: true,
+        level: true,
+        streak: true
       }
     });
 
@@ -176,6 +218,10 @@ router.put('/change-password', authenticateToken, async (req, res, next) => {
 
     if (!currentPassword || !newPassword) {
       return res.status(400).json({ error: 'Mot de passe actuel et nouveau mot de passe requis' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 6 caractères' });
     }
 
     const user = await prisma.user.findUnique({
@@ -245,5 +291,32 @@ router.get('/check-username', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+// Refresh token
+router.post('/refresh-token', async (req, res, next) => {
+  try {
+    const { token } = req.body;
 
+    if (!token) {
+      return res.status(400).json({ error: 'Token requis' });
+    }
+
+    // Vérifier le token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret');
+
+    // Générer un nouveau token
+    const newToken = jwt.sign(
+      { userId: decoded.userId, email: decoded.email },
+      process.env.JWT_SECRET || 'default-secret',
+      { expiresIn: '7d' }
+    );
+
+    res.json({ success: true, data: { token: newToken } });
+  } catch (error) {
+    if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+      return res.status(401).json({ error: 'Token invalide ou expiré' });
+    }
+    next(error);
+  }
+});
+
+module.exports = router;
