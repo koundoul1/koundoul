@@ -2,12 +2,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { I18nProvider, useTranslation } from './hooks/useTranslation.jsx'
 import ProtectedRoute from './components/ProtectedRoute'
-import Header from './components/layout/Header'
-import Footer from './components/layout/Footer'
-import Home from './pages/Home'
+// NOUVEAU : Navigation moderne mobile-first
+import MobileNavBar from './components/MobileNavBar'
+// ANCIEN : Header et Footer (commentés pour le nouveau design)
+// import Header from './components/layout/Header'
+// import Footer from './components/layout/Footer'
+import NewHome from './pages/NewHome'
+import Home from './pages/Home' // Gardé pour compatibilité
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Dashboard from './pages/Dashboard'
+import NewDashboard from './pages/NewDashboard'
+import Dashboard from './pages/Dashboard' // Gardé pour compatibilité
 import Solver from './pages/Solver'
 import Quiz from './pages/Quiz'
 import Profile from './pages/Profile'
@@ -69,26 +74,31 @@ function App() {
     <I18nProvider>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen bg-gray-50 flex flex-col">
-        <OfflineIndicator />
-        <ConnectionStatus />
-        <FlashcardsDueNotification />
-            <Header />
-          <main className="flex-1">
-            <Routes>
-              {/* Routes publiques */}
-              <Route path="/" element={<Home />} />
+          <div className="min-h-screen bg-gray-900 flex flex-col">
+            <OfflineIndicator />
+            <ConnectionStatus />
+            <FlashcardsDueNotification />
+            
+            {/* NOUVEAU : Navigation universelle mobile-first */}
+            <MobileNavBar />
+            
+            {/* MODIFIÉ : Padding pour bottom nav mobile */}
+            <main className="flex-1 pb-20 lg:pb-0">
+              <Routes>
+                {/* REMPLACÉ : Nouvelle page d'accueil moderne */}
+                <Route path="/" element={<NewHome />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
               
               {/* Routes protégées */}
+              {/* REMPLACÉ : Nouveau dashboard gamifié */}
               <Route 
                 path="/dashboard" 
                 element={
                   <ProtectedRoute>
-                    <Dashboard />
+                    <NewDashboard />
                   </ProtectedRoute>
                 } 
               />
@@ -360,7 +370,8 @@ function App() {
               />
             </Routes>
           </main>
-          <Footer />
+          {/* ANCIEN : Footer commenté (remplacé par bottom nav) */}
+          {/* <Footer /> */}
         </div>
       </Router>
     </AuthProvider>

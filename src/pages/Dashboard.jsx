@@ -79,28 +79,28 @@ export default function Dashboard() {
   const { profile, stats, subjectProgress, chaptersInProgress, recommendations, recentActivity } = dashboard;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pb-20 md:pb-0">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         
         {/* Header avec profil */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-4 sm:p-6 md:p-8 text-white mb-4 sm:mb-6 md:mb-8">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
                 {t('dashboard.title').replace('{name}', profile.firstName || profile.username)}
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-blue-100">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-100">
                 {t('dashboard.subtitle')}
               </p>
             </div>
-            <div className="text-right flex-shrink-0 ml-4">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1">
+            <div className="text-left sm:text-right flex-shrink-0 w-full sm:w-auto">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1">
                 {t('dashboard.level').replace('{level}', profile.level)}
               </div>
-              <div className="text-sm sm:text-base text-blue-200">
+              <div className="text-xs sm:text-sm md:text-base text-blue-200 mb-2">
                 {t('dashboard.xp').replace('{xp}', profile.xp).replace('{nextXp}', profile.nextLevelXp)}
               </div>
-              <div className="w-32 sm:w-40 md:w-48 h-2 bg-blue-500 rounded-full mt-2">
+              <div className="w-full sm:w-32 md:w-40 lg:w-48 h-2 bg-blue-500 rounded-full">
                 <div 
                   className="h-full bg-white rounded-full transition-all"
                   style={{ width: `${(profile.xp / profile.nextLevelXp) * 100}%` }}
@@ -145,34 +145,34 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           
           {/* Colonne principale */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6 md:space-y-8">
             
             {/* Recommandations */}
             {recommendations.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Zap className="w-7 h-7 text-yellow-500" />
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
+                  <Zap className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-yellow-500" />
                   {t('dashboard.recommendations.title')}
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {recommendations.map((rec, index) => (
                     <Link
                       key={index}
                       to={rec.action}
-                      className="block bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all group"
+                      className="block bg-white rounded-xl p-4 sm:p-6 border-2 border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all group active:scale-95"
                     >
-                      <div className="flex items-start gap-4">
-                        <div className="text-4xl">{rec.icon}</div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-blue-600">
+                      <div className="flex items-start gap-3 sm:gap-4">
+                        <div className="text-2xl sm:text-3xl md:text-4xl flex-shrink-0">{rec.icon}</div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-1 group-hover:text-blue-600">
                             {rec.title}
                           </h3>
-                          <p className="text-gray-600">{rec.description}</p>
+                          <p className="text-sm sm:text-base text-gray-600">{rec.description}</p>
                         </div>
-                        <ChevronRight className="w-6 h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
                       </div>
                     </Link>
                   ))}

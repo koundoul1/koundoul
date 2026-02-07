@@ -1,0 +1,25 @@
+# Configuration Render pour Koundoul
+# NOTE: Ce fichier nécessite que backend/package.json existe
+# Si le backend n'est pas prêt, désactiver ce service dans Render Dashboard
+
+services:
+  - type: web
+    name: koundoul-backend
+    env: node
+    # Option 1: Si backend est dans un sous-dossier avec package.json
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm start
+    # Option 2: Si backend est à la racine, utiliser:
+    # buildCommand: npm install && npx prisma generate
+    # startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 5000
+

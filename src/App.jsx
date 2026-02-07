@@ -4,6 +4,7 @@ import { I18nProvider, useTranslation } from './hooks/useTranslation.jsx'
 import ProtectedRoute from './components/ProtectedRoute'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import BottomNavigation from './components/layout/BottomNavigation'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -74,7 +75,7 @@ function App() {
         <ConnectionStatus />
         <FlashcardsDueNotification />
             <Header />
-          <main className="flex-1">
+          <main className="flex-1 pb-16 md:pb-0">
             <Routes>
               {/* Routes publiques */}
               <Route path="/" element={<Home />} />
@@ -360,7 +361,12 @@ function App() {
               />
             </Routes>
           </main>
-          <Footer />
+          {/* Footer - Desktop uniquement */}
+          <div className="hidden md:block">
+            <Footer />
+          </div>
+          {/* Bottom Navigation - Mobile uniquement */}
+          <BottomNavigation />
         </div>
       </Router>
     </AuthProvider>
