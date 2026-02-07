@@ -6,7 +6,7 @@ services:
   - type: web
     name: koundoul-backend
     env: node
-    # Option 1: Si backend est dans un sous-dossier avec package.json
+    # Le rootDir définit déjà le répertoire de travail
     rootDir: backend
     buildCommand: npm install && npx prisma generate
     startCommand: npm start
