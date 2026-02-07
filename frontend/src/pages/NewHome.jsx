@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Sparkles, BookOpen, Star, Award, 
-  ArrowRight, Heart, Shield, Users, Crown
+  ArrowRight, Heart, Shield, Users, Crown,
+  Brain, Trophy, Zap, Target, MessageSquare,
+  Repeat, Globe, Lightbulb, Rocket
 } from 'lucide-react';
 
 const NewHome = () => {
@@ -193,8 +195,139 @@ const NewHome = () => {
         </div>
       </section>
 
-      {/* Subjects Section */}
+      {/* All Modules Section - Tous les modules disponibles */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-gray-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-black mb-4">
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Tous les Modules
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400">Explore toutes les fonctionnalités de Koundoul</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+            {[
+              { 
+                name: 'Résolveur IA', 
+                href: '/solver', 
+                icon: Brain, 
+                gradient: 'from-blue-500 to-purple-500',
+                badge: 'Populaire',
+                desc: 'Résous tes problèmes avec l\'IA'
+              },
+              { 
+                name: 'Cours', 
+                href: '/courses', 
+                icon: BookOpen, 
+                gradient: 'from-purple-500 to-pink-500',
+                desc: 'Tous les cours par matière'
+              },
+              { 
+                name: 'Quiz', 
+                href: '/quiz', 
+                icon: Zap, 
+                gradient: 'from-yellow-500 to-orange-500',
+                desc: 'Teste tes connaissances'
+              },
+              { 
+                name: 'Défi', 
+                href: '/challenge', 
+                icon: Trophy, 
+                gradient: 'from-amber-500 to-red-500',
+                badge: 'Nouveau',
+                desc: 'Défis quotidiens'
+              },
+              { 
+                name: 'Exercices', 
+                href: '/exercices', 
+                icon: Target, 
+                gradient: 'from-green-500 to-emerald-500',
+                desc: '1800+ exercices corrigés'
+              },
+              { 
+                name: 'Flashcards', 
+                href: '/flashcards', 
+                icon: Repeat, 
+                gradient: 'from-cyan-500 to-blue-500',
+                desc: 'Révision espacée'
+              },
+              { 
+                name: 'Forum', 
+                href: '/forum', 
+                icon: MessageSquare, 
+                gradient: 'from-pink-500 to-rose-500',
+                desc: 'Communauté d\'entraide'
+              },
+              { 
+                name: 'Badges', 
+                href: '/badges', 
+                icon: Award, 
+                gradient: 'from-purple-500 to-indigo-500',
+                desc: 'Collection de badges'
+              },
+              { 
+                name: 'Micro-Leçons', 
+                href: '/micro-lessons', 
+                icon: BookOpen, 
+                gradient: 'from-indigo-500 to-purple-500',
+                desc: '450+ micro-leçons'
+              },
+              { 
+                name: 'Visualisations', 
+                href: '/visualizations', 
+                icon: Globe, 
+                gradient: 'from-blue-500 to-cyan-500',
+                desc: 'Graphiques interactifs'
+              },
+              { 
+                name: 'Coach IA', 
+                href: '/coach', 
+                icon: Brain, 
+                gradient: 'from-purple-500 to-pink-500',
+                desc: 'Assistant personnel'
+              },
+              { 
+                name: 'Ressources', 
+                href: '/resources', 
+                icon: Lightbulb, 
+                gradient: 'from-amber-500 to-yellow-500',
+                desc: 'Ressources pédagogiques'
+              }
+            ].map((module, idx) => {
+              const Icon = module.icon;
+              return (
+                <Link
+                  key={idx}
+                  to={module.href}
+                  className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105"
+                >
+                  {module.badge && (
+                    <div className="absolute top-3 right-3 px-2 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg text-xs font-bold text-white">
+                      {module.badge}
+                    </div>
+                  )}
+                  <div className={`w-14 h-14 bg-gradient-to-br ${module.gradient} rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
+                    <Icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 group-hover:text-purple-400 transition-colors">
+                    {module.name}
+                  </h3>
+                  <p className="text-sm text-gray-400 mb-3">{module.desc}</p>
+                  <div className="flex items-center text-purple-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Accéder
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Subjects Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-800 to-gray-900">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-black mb-4">
