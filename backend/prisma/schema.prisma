@@ -10,6 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Placeholder schema - Backend not yet fully implemented
-// TODO: Add actual models when backend is implemented
+// Minimal model to allow prisma generate to pass
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+  name  String?
+}
 
