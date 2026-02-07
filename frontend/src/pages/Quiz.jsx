@@ -451,9 +451,9 @@ const Quiz = () => {
   // Écran de chargement
   if (loading || quizLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
           <p className="text-white text-lg">
             {quizLoading ? t('quiz.loadingQuestions') : t('quiz.loadingBanks')}
           </p>
@@ -476,7 +476,7 @@ const Quiz = () => {
     if (questions.length === 0) {
       console.error('❌ Aucune question - retour à la liste')
       return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
           <div className="text-center">
             <p className="text-white text-xl mb-4">{t('quiz.noQuestionInQuiz')}</p>
             <button
@@ -556,7 +556,7 @@ const Quiz = () => {
     console.log('🎯 FinalCorrectCount:', finalCorrectCount)
     
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white pb-20 lg:pb-0">
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
             <div className="text-center mb-8">
@@ -688,7 +688,7 @@ const Quiz = () => {
   // Écran de configuration du quiz
   if (selectedBank && !quizStarted && allQuestions.length > 0 && !quizComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white pb-20 lg:pb-0">
         <div className="max-w-4xl mx-auto px-4 py-8">
           <button
             onClick={backToList}
@@ -839,7 +839,7 @@ const Quiz = () => {
     const isAnswered = answered.includes(currentIndex)
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white pb-20 lg:pb-0">
         <div className="bg-white/10 backdrop-blur-md border-b border-white/20">
           <div className="max-w-6xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between mb-4">
@@ -1091,73 +1091,73 @@ const Quiz = () => {
 
   // Écran de liste des banques QCM
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800">
-      
-      {/* Header avec titre et stats */}
-      <div className="bg-white/10 backdrop-blur-md border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold text-white flex items-center mb-2">
-                <BookOpen className="h-10 w-10 mr-4" />
-                📚 Quiz & QCM
-              </h1>
-              <p className="text-blue-100 text-lg">
-                900 QCM pour Seconde, Première et Terminale
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-white">
-              <BarChart3 className="w-5 h-5" />
-              <span className="text-sm">Testez vos connaissances</span>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white pb-20 lg:pb-0">
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        
+        {/* Header avec titre et stats */}
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full border border-blue-500/30 backdrop-blur-sm mb-6">
+            <BookOpen className="w-4 h-4 text-blue-400" />
+            <span className="text-sm font-medium">Quiz & QCM</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 flex items-center justify-center gap-3">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              📚 Quiz & QCM
+            </span>
+          </h1>
+          <p className="text-lg sm:text-xl text-gray-300">
+            900 QCM pour Seconde, Première et Terminale
+          </p>
+        </div>
         
         {/* Statistiques améliorées */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-blue-400/60 transition-all">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-blue-500/50 transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 mb-1">Banques QCM</p>
-                <p className="text-3xl font-bold text-white">{questionBanks.length}</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Banques QCM</p>
+                <p className="text-2xl sm:text-3xl font-black text-white">{questionBanks.length}</p>
               </div>
-              <BookOpen className="h-12 w-12 text-blue-400 opacity-50" />
+              <BookOpen className="h-10 w-10 sm:h-12 sm:w-12 text-blue-400 opacity-50" />
             </div>
           </div>
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-blue-400/60 transition-all">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-green-500/50 transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 mb-1">Total QCM</p>
-                <p className="text-3xl font-bold text-white">{totalQCM}</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Total QCM</p>
+                <p className="text-2xl sm:text-3xl font-black text-white">{totalQCM}</p>
               </div>
-              <Target className="h-12 w-12 text-green-400 opacity-50" />
+              <Target className="h-10 w-10 sm:h-12 sm:w-12 text-green-400 opacity-50" />
             </div>
           </div>
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-blue-400/60 transition-all">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 mb-1">Matières</p>
-                <p className="text-3xl font-bold text-white">{subjectsCount}</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Matières</p>
+                <p className="text-2xl sm:text-3xl font-black text-white">{subjectsCount}</p>
               </div>
-              <Star className="h-12 w-12 text-yellow-400 opacity-50" />
+              <Star className="h-10 w-10 sm:h-12 sm:w-12 text-yellow-400 opacity-50" />
             </div>
           </div>
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-blue-400/60 transition-all">
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-indigo-500/50 transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-200 mb-1">Niveaux</p>
-                <p className="text-3xl font-bold text-white">3</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Niveaux</p>
+                <p className="text-2xl sm:text-3xl font-black text-white">3</p>
               </div>
-              <TrendingUp className="h-12 w-12 text-purple-400 opacity-50" />
+              <TrendingUp className="h-10 w-10 sm:h-12 sm:w-12 text-purple-400 opacity-50" />
             </div>
           </div>
         </div>
 
         {/* Filtres améliorés */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 mb-8 border border-white/20">
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-8 border border-white/10">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold text-white flex items-center gap-2">
               <Filter className="w-5 h-5" />
@@ -1215,8 +1215,10 @@ const Quiz = () => {
               return (
                 <div 
                   key={bank.id} 
-                  className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-blue-400/60 hover:shadow-2xl transition-all transform hover:scale-105"
+                  className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105"
                 >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="relative z-10">
                   
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -1225,17 +1227,17 @@ const Quiz = () => {
                          bank.subject === 'Physique' ? '⚡' : '🧪'}
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white">{bank.title}</h3>
-                        <p className="text-sm text-blue-100">{bank.subject} • {bank.level}</p>
+                        <h3 className="text-lg sm:text-xl font-black text-white">{bank.title}</h3>
+                        <p className="text-xs sm:text-sm text-gray-400">{bank.subject} • {bank.level}</p>
                       </div>
                     </div>
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-200 border border-blue-400/30">
+                    <span className="px-2 sm:px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30">
                       QCM
                     </span>
                   </div>
 
                   <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-6 text-sm text-blue-100">
+                    <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-300">
                       <span className="flex items-center gap-1">
                         <Target className="w-4 h-4" />
                         {bank.total_questions || 0} questions
@@ -1248,7 +1250,7 @@ const Quiz = () => {
                       )}
                     </div>
                     {bank.chapters_covered && bank.chapters_covered.length > 0 && (
-                      <div className="text-xs text-blue-200">
+                      <div className="text-xs text-gray-400">
                         {bank.chapters_covered.slice(0, 2).join(', ')}
                         {bank.chapters_covered.length > 2 && ` +${bank.chapters_covered.length - 2} autres`}
                       </div>
@@ -1257,20 +1259,21 @@ const Quiz = () => {
 
                   <button
                     onClick={() => loadBankQuestions(bank)}
-                    className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:opacity-95 transition-all shadow-xl border border-white/10 hover:shadow-2xl"
+                    className="flex items-center justify-center gap-2 w-full px-4 sm:px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:opacity-95 transition-all shadow-xl border border-white/10 hover:shadow-2xl hover:scale-105"
                   >
-                    <Settings className="w-5 h-5" />
+                    <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
                     Configurer le quiz
                   </button>
+                  </div>
                 </div>
               )
             })}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white/5 rounded-2xl border border-white/10">
-            <Trophy className="w-16 h-16 text-blue-300 mx-auto mb-4" />
-            <p className="text-white text-lg">Aucun QCM disponible pour ces filtres</p>
-            <p className="text-blue-200 text-sm mt-2">Essayez de changer les filtres pour voir plus de résultats</p>
+          <div className="text-center py-12 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl border border-white/10">
+            <Trophy className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+            <p className="text-white text-lg mb-2">Aucun QCM disponible pour ces filtres</p>
+            <p className="text-gray-400 text-sm">Essayez de changer les filtres pour voir plus de résultats</p>
           </div>
         )}
 

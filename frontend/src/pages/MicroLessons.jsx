@@ -175,87 +175,80 @@ const MicroLessons = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white pb-20 lg:pb-0">
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            📚 Micro-Leçons
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full border border-blue-500/30 backdrop-blur-sm mb-6">
+            <BookOpen className="w-4 h-4 text-blue-400" />
+            <span className="text-sm font-medium">Micro-Leçons</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              📚 Micro-Leçons
+            </span>
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-lg sm:text-xl text-gray-300">
             {lessons.length} leçons disponibles • 8 minutes par leçon
           </p>
         </div>
 
         {/* Stats */}
-        <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">Total</p>
-                <p className="text-3xl font-bold text-blue-600">{lessons.length}</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+          {[
+            { icon: BookOpen, label: 'Total', value: lessons.length, color: 'from-blue-500 to-cyan-500', iconColor: 'text-blue-400' },
+            { icon: CheckCircle2, label: 'Complétées', value: stats?.total_completed || Object.keys(completions).filter(id => completions[id]?.completed).length, color: 'from-green-500 to-emerald-500', iconColor: 'text-green-400' },
+            { icon: Star, label: 'XP Gagné', value: stats?.total_xp_earned ? Math.round(stats.total_xp_earned).toLocaleString() : '0', color: 'from-purple-500 to-pink-500', iconColor: 'text-purple-400' },
+            { icon: TrendingUp, label: 'Taux de réussite', value: stats?.average_score ? `${Math.round(stats.average_score)}%` : '—', color: 'from-indigo-500 to-purple-500', iconColor: 'text-indigo-400' }
+          ].map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <div key={idx} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-gray-400 text-xs sm:text-sm mb-1">{stat.label}</p>
+                    <p className={`text-2xl sm:text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                      {stat.value}
+                    </p>
+                  </div>
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center`}>
+                    <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.iconColor}`} />
+                  </div>
+                </div>
               </div>
-              <BookOpen className="h-12 w-12 text-blue-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">Complétées</p>
-                <p className="text-3xl font-bold text-green-600">
-                  {stats?.total_completed || Object.keys(completions).filter(id => completions[id]?.completed).length}
-                </p>
-              </div>
-              <CheckCircle2 className="h-12 w-12 text-green-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">XP Gagné</p>
-                <p className="text-3xl font-bold text-purple-600">
-                  {stats?.total_xp_earned ? Math.round(stats.total_xp_earned).toLocaleString() : '0'}
-                </p>
-              </div>
-              <Star className="h-12 w-12 text-yellow-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">Taux de réussite</p>
-                <p className="text-3xl font-bold text-indigo-600">
-                  {stats?.average_score ? `${Math.round(stats.average_score)}%` : '—'}
-                </p>
-              </div>
-              <TrendingUp className="h-12 w-12 text-indigo-500" />
-            </div>
-          </div>
+            );
+          })}
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-bold mb-4 text-blue-700">Filtres</h2>
+        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-4 sm:p-6 border border-white/10 mb-8">
+          <h2 className="text-xl sm:text-2xl font-black mb-4 sm:mb-6 text-center sm:text-left">Filtres</h2>
           
           {/* Subjects */}
-          <div className="mb-4">
-            <label className="block text-sm font-semibold mb-2 text-blue-600">Matière</label>
-            <div className="flex flex-wrap gap-2">
+          <div className="mb-4 sm:mb-6">
+            <label className="block text-sm sm:text-base font-semibold mb-3 text-gray-300">Matière</label>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {subjects.map(subject => (
                 <button
                   key={subject.value}
                   onClick={() => setFilter({ ...filter, subject: subject.value })}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-3 sm:px-4 py-2 rounded-xl font-medium transition-all text-sm sm:text-base ${
                     filter.subject === subject.value
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
+                      : 'bg-white/10 backdrop-blur-sm text-gray-300 hover:bg-white/20 border border-white/10'
                   }`}
                 >
                   <span className="mr-2">{subject.icon}</span>
@@ -268,16 +261,16 @@ const MicroLessons = () => {
 
           {/* Levels */}
           <div>
-            <label className="block text-sm font-semibold mb-2 text-purple-600">Niveau</label>
-            <div className="flex flex-wrap gap-2">
+            <label className="block text-sm sm:text-base font-semibold mb-3 text-gray-300">Niveau</label>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
             {levels.map(level => (
                 <button
                   key={level.value}
                   onClick={() => setFilter({ ...filter, level: level.value })}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-3 sm:px-4 py-2 rounded-xl font-medium transition-all text-sm sm:text-base ${
                     filter.level === level.value
-                      ? 'bg-purple-600 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg scale-105'
+                      : 'bg-white/10 backdrop-blur-sm text-gray-300 hover:bg-white/20 border border-white/10'
                   }`}
                 >
                   {level.name}
@@ -289,9 +282,10 @@ const MicroLessons = () => {
 
         {/* Lessons Grid */}
         {filteredLessons.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600 text-lg mb-4">Aucune leçon trouvée avec les filtres sélectionnés</p>
-            <p className="text-gray-500 text-sm">
+          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-8 sm:p-12 border border-white/10 text-center">
+            <BookOpen className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+            <p className="text-gray-300 text-lg mb-2">Aucune leçon trouvée avec les filtres sélectionnés</p>
+            <p className="text-gray-400 text-sm">
               {lessons.length === 0 ? (
                 <span>Chargement des leçons en cours...</span>
               ) : (
@@ -300,50 +294,53 @@ const MicroLessons = () => {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredLessons.map((lesson) => (
               <div
                 key={lesson.id}
                 onClick={() => navigate(`/microlessons/${lesson.id}`)}
-                className={`bg-white rounded-lg shadow-md hover:shadow-xl transition-all cursor-pointer transform hover:scale-105 border-2 ${
+                className={`group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border transition-all duration-300 cursor-pointer hover:scale-105 ${
                   completions[lesson.id]?.completed 
-                    ? 'border-green-300 hover:border-green-500' 
-                    : 'border-gray-200 hover:border-blue-500'
+                    ? 'border-green-500/50 hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/50' 
+                    : 'border-white/10 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/50'
                 }`}
               >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-1">
-                    <h3 className="text-xl font-bold text-blue-900">{lesson.title}</h3>
-                    <div className="flex items-center gap-2">
+                {completions[lesson.id]?.completed && (
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                )}
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-lg sm:text-xl font-black text-white flex-1 pr-2 line-clamp-2">{lesson.title}</h3>
+                    <div className="flex items-center gap-2 flex-shrink-0">
                       {completions[lesson.id]?.completed && (
-                        <CheckCircle2 className="h-5 w-5 text-green-500" title="Complétée" />
+                        <CheckCircle2 className="h-5 w-5 text-green-400" title="Complétée" />
                       )}
-                      <span className="bg-gray-200 text-gray-700 text-xs font-bold px-2 py-1 rounded">
+                      <span className="bg-white/10 backdrop-blur-sm text-gray-300 text-xs font-bold px-2 py-1 rounded">
                         {lesson.id}
                       </span>
-                      <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      <span className={`bg-gradient-to-r ${getDifficultyColor(lesson.difficulty || 1)} text-white text-xs font-bold px-2 py-1 rounded-full`}>
                         {lesson.difficulty || 1}/5
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-blue-700 mb-3">{lesson.subject} • {lesson.chapter}</p>
+                  <p className="text-xs text-gray-400 mb-3">{lesson.subject} • {lesson.chapter}</p>
                   
-                  <p className="text-gray-700 text-sm mb-4 line-clamp-2">Niveau: {lesson.level}</p>
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-2">Niveau: {lesson.level}</p>
                   
-                  <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
+                  <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
                     <span className="flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
                       {lesson.duration_min || 8} min
                     </span>
                     <span className="flex items-center">
-                      <Star className="h-4 w-4 mr-1 text-yellow-500" />
+                      <Star className="h-4 w-4 mr-1 text-yellow-400" />
                       +{lesson.xp_reward || 50} XP
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <span className="text-xs text-purple-700 capitalize">{lesson.level}</span>
-                    <button className="text-blue-700 hover:text-blue-800 font-semibold text-sm flex items-center">
+                  <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                    <span className="text-xs text-purple-400 capitalize">{lesson.level}</span>
+                    <button className="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center group-hover:translate-x-1 transition-transform">
                       Commencer
                       <span className="ml-1">→</span>
                     </button>

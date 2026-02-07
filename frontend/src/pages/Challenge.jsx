@@ -300,73 +300,75 @@ const Challenge = () => {
   }, [showCountryMenu]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950 text-gray-100">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-8">
-            <div className="flex items-center mb-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mr-4">
-                <Trophy className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-4xl font-bold text-white flex items-center">
-                  Mode Défi
-                  <Sparkles className="h-8 w-8 ml-3 text-yellow-400 animate-pulse" />
-                </h1>
-                <p className="text-purple-200 mt-1">
-                  Duels, challenges hebdomadaires et classements
-                </p>
-              </div>
-            </div>
-
-            {/* Navigation */}
-            <div className="flex space-x-4 mt-6">
-              <button
-                onClick={() => setActiveTab('weekly')}
-                aria-label="Onglet Challenge Hebdomadaire"
-                aria-selected={activeTab === 'weekly'}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeTab === 'weekly'
-                    ? 'bg-yellow-500 text-indigo-950 shadow-lg shadow-yellow-500/50'
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
-                }`}
-              >
-                <Calendar className="h-5 w-5 inline mr-2" />
-                Challenge Hebdomadaire
-              </button>
-              <button
-                onClick={() => setActiveTab('duels')}
-                aria-label="Onglet Duels"
-                aria-selected={activeTab === 'duels'}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeTab === 'duels'
-                    ? 'bg-yellow-500 text-indigo-950 shadow-lg shadow-yellow-500/50'
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
-                }`}
-              >
-                <Sword className="h-5 w-5 inline mr-2" />
-                Duels
-              </button>
-              <button
-                onClick={() => setActiveTab('leaderboard')}
-                aria-label="Onglet Classements"
-                aria-selected={activeTab === 'leaderboard'}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  activeTab === 'leaderboard'
-                    ? 'bg-yellow-500 text-indigo-950 shadow-lg shadow-yellow-500/50'
-                    : 'bg-white/10 text-gray-300 hover:bg-white/20'
-                }`}
-              >
-                <Trophy className="h-5 w-5 inline mr-2" />
-                Classements
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white pb-20 lg:pb-0">
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        {/* Header */}
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-500/30 backdrop-blur-sm mb-6">
+            <Trophy className="w-4 h-4 text-yellow-400" />
+            <span className="text-sm font-medium">Mode Défi</span>
+          </div>
+          <div className="flex items-center justify-center mb-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black flex items-center gap-3">
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
+                Mode Défi
+              </span>
+              <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-400 animate-pulse" />
+            </h1>
+          </div>
+          <p className="text-lg sm:text-xl text-gray-300">
+            Duels, challenges hebdomadaires et classements
+          </p>
+
+          {/* Navigation */}
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-6">
+            <button
+              onClick={() => setActiveTab('weekly')}
+              aria-label="Onglet Challenge Hebdomadaire"
+              aria-selected={activeTab === 'weekly'}
+              className={`px-4 sm:px-6 py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
+                activeTab === 'weekly'
+                  ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg shadow-yellow-500/50 scale-105'
+                  : 'bg-white/10 backdrop-blur-sm text-gray-300 hover:bg-white/20 border border-white/10'
+              }`}
+            >
+              <Calendar className="h-4 w-4 sm:h-5 sm:w-5 inline mr-2" />
+              Challenge Hebdomadaire
+            </button>
+            <button
+              onClick={() => setActiveTab('duels')}
+              aria-label="Onglet Duels"
+              aria-selected={activeTab === 'duels'}
+              className={`px-4 sm:px-6 py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
+                activeTab === 'duels'
+                  ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg shadow-yellow-500/50 scale-105'
+                  : 'bg-white/10 backdrop-blur-sm text-gray-300 hover:bg-white/20 border border-white/10'
+              }`}
+            >
+              <Sword className="h-4 w-4 sm:h-5 sm:w-5 inline mr-2" />
+              Duels
+            </button>
+            <button
+              onClick={() => setActiveTab('leaderboard')}
+              aria-label="Onglet Classements"
+              aria-selected={activeTab === 'leaderboard'}
+              className={`px-4 sm:px-6 py-3 rounded-xl font-semibold transition-all text-sm sm:text-base ${
+                activeTab === 'leaderboard'
+                  ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg shadow-yellow-500/50 scale-105'
+                  : 'bg-white/10 backdrop-blur-sm text-gray-300 hover:bg-white/20 border border-white/10'
+              }`}
+            >
+              <Trophy className="h-4 w-4 sm:h-5 sm:w-5 inline mr-2" />
+              Classements
+            </button>
+          </div>
+        </div>
         {/* Messages d'erreur */}
         {error && (
           <div className="mb-6 bg-red-500/20 border border-red-500/50 rounded-lg p-4 flex items-center">
@@ -404,33 +406,33 @@ const Challenge = () => {
                 </div>
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <BookOpen className="h-5 w-5 mr-2" />
+                <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-white/10">
+                  <div className="flex items-center text-gray-400 mb-2 text-xs sm:text-sm">
+                    <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Matière
                   </div>
-                    <div className="text-xl font-bold text-white">{weeklyChallenge?.subject || 'Mathématiques'}</div>
+                    <div className="text-lg sm:text-xl font-black text-white">{weeklyChallenge?.subject || 'Mathématiques'}</div>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <Target className="h-5 w-5 mr-2" />
+                <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-white/10">
+                  <div className="flex items-center text-gray-400 mb-2 text-xs sm:text-sm">
+                    <Target className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Difficulté
                   </div>
-                  <div className="text-xl font-bold text-yellow-400">{weeklyChallenge?.difficulty || 'Moyen'}</div>
+                  <div className="text-lg sm:text-xl font-black text-yellow-400">{weeklyChallenge?.difficulty || 'Moyen'}</div>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <Timer className="h-5 w-5 mr-2" />
+                <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-white/10">
+                  <div className="flex items-center text-gray-400 mb-2 text-xs sm:text-sm">
+                    <Timer className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Durée
                   </div>
-                  <div className="text-xl font-bold text-white">{weeklyChallenge?.timeLimit || 20} min</div>
+                  <div className="text-lg sm:text-xl font-black text-white">{weeklyChallenge?.timeLimit || 20} min</div>
                 </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <Award className="h-5 w-5 mr-2" />
+                <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-white/10">
+                  <div className="flex items-center text-gray-400 mb-2 text-xs sm:text-sm">
+                    <Award className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                     Récompense
                   </div>
-                  <div className="text-lg font-bold text-purple-300">{weeklyChallenge?.prize || 'Récompenses à venir'}</div>
+                  <div className="text-base sm:text-lg font-black text-purple-400">{weeklyChallenge?.prize || 'Récompenses à venir'}</div>
                 </div>
               </div>
 
