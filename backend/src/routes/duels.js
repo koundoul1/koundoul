@@ -252,26 +252,33 @@ router.post('/:id/submit', authenticateToken, async (req, res, next) => {
       }
     });
 
+    // Récupérer les participations mises à jour
+    const updatedParticipations = await prisma.duelParticipation.findMany({
+      where: { duelId: id }
+    });
+
     // Vérifier si tous les participants ont terminé
-    const allCompleted = duel.participations.every(p => p.completed || p.userId === userId);
+    const allCompleted = updatedParticipations.every(p => p.completed);
     
+    let winnerId = null;
     if (allCompleted) {
       // Déterminer le gagnant
-      const scores = duel.participations.map(p => ({ userId: p.userId, score: p.score }));
+      const scores = updatedParticipations.map(p => ({ userId: p.userId, score: p.score }));
       const winner = scores.reduce((max, p) => p.score > max.score ? p : max, scores[0]);
+      winnerId = winner.userId;
 
       await prisma.duel.update({
         where: { id },
         data: {
           status: 'completed',
-          winnerId: winner.userId,
+          winnerId,
           completedAt: new Date()
         }
       });
 
       // Ajouter XP au gagnant
       await prisma.user.update({
-        where: { id: winner.userId },
+        where: { id: winnerId },
         data: { xp: { increment: 100 } }
       });
     }
@@ -281,7 +288,7 @@ router.post('/:id/submit', authenticateToken, async (req, res, next) => {
       data: {
         score,
         completed: allCompleted,
-        winnerId: allCompleted ? winner.userId : null
+        winnerId
       }
     });
   } catch (error) {
