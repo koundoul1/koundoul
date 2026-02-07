@@ -7,10 +7,12 @@ import {
   Crown, Rocket
 } from 'lucide-react';
 import api from '../services/api';
+import { useTranslation } from '../hooks/useTranslation';
 
 const NewDashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [dashboard, setDashboard] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,9 +34,9 @@ const NewDashboard = () => {
   // Greeting dynamique
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Bonjour';
-    if (hour < 18) return 'Bon après-midi';
-    return 'Bonsoir';
+    if (hour < 12) return t('newDashboard.greeting.morning');
+    if (hour < 18) return t('newDashboard.greeting.afternoon');
+    return t('newDashboard.greeting.evening');
   };
 
   if (loading) {
@@ -49,12 +51,12 @@ const NewDashboard = () => {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
         <div className="text-center">
-          <p className="text-gray-400 mb-4">Erreur de chargement</p>
+          <p className="text-gray-400 mb-4">{t('newDashboard.error')}</p>
           <Link
             to="/login"
             className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold"
           >
-            Se connecter
+            {t('newDashboard.login')}
           </Link>
         </div>
       </div>
@@ -70,28 +72,28 @@ const NewDashboard = () => {
     {
       icon: <Star className="w-5 h-5 text-blue-400" />,
       value: profile?.xp || 2450,
-      label: 'XP Total',
+      label: t('newDashboard.stats.xp'),
       progress: 70,
       gradient: 'from-blue-500 to-cyan-500'
     },
     {
       icon: <TrendingUp className="w-5 h-5 text-purple-400" />,
-      value: `Niveau ${profile?.level || 5}`,
-      label: 'Niveau Actuel',
+      value: `${t('newDashboard.stats.level')} ${profile?.level || 5}`,
+      label: t('newDashboard.stats.level'),
       progress: (profile?.xp / profile?.nextLevelXp) * 100 || 65,
       gradient: 'from-purple-500 to-pink-500'
     },
     {
       icon: <Target className="w-5 h-5 text-green-400" />,
       value: stats?.lessonsCompleted || 42,
-      label: 'Exercices',
+      label: t('newDashboard.stats.exercises'),
       progress: 85,
       gradient: 'from-green-500 to-emerald-500'
     },
     {
       icon: <Award className="w-5 h-5 text-amber-400" />,
       value: `${stats?.successRate || 87}%`,
-      label: 'Score Moyen',
+      label: t('newDashboard.stats.score'),
       progress: stats?.successRate || 87,
       gradient: 'from-amber-500 to-orange-500'
     }
@@ -99,27 +101,27 @@ const NewDashboard = () => {
 
   const quickActions = [
     {
-      name: 'Résolveur IA',
+      name: t('newDashboard.quickActions.solver'),
       href: '/solver',
       icon: <Brain className="w-6 h-6" />,
       gradient: 'from-blue-500 to-purple-500',
-      badge: 'Populaire'
+      badge: t('common.popular')
     },
     {
-      name: 'Défi',
+      name: t('newDashboard.quickActions.challenge'),
       href: '/challenge',
       icon: <Trophy className="w-6 h-6" />,
       gradient: 'from-amber-500 to-orange-500',
-      badge: 'Nouveau'
+      badge: t('common.new')
     },
     {
-      name: 'Exercices',
+      name: t('newDashboard.quickActions.exercises'),
       href: '/exercices',
       icon: <BookOpen className="w-6 h-6" />,
       gradient: 'from-green-500 to-emerald-500'
     },
     {
-      name: 'Quiz',
+      name: t('newDashboard.quickActions.quiz'),
       href: '/quiz',
       icon: <Zap className="w-6 h-6" />,
       gradient: 'from-pink-500 to-purple-500'
@@ -141,10 +143,10 @@ const NewDashboard = () => {
         <div className="mb-6">
           <h1 className="text-3xl sm:text-4xl font-black mb-2">
             {getGreeting()}, <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              {profile?.firstName || profile?.username || 'Élève'}
+              {profile?.firstName || profile?.username || t('common.student')}
             </span> 👋
           </h1>
-          <p className="text-gray-400">Prêt à continuer ta progression ?</p>
+          <p className="text-gray-400">{t('newDashboard.ready')}</p>
         </div>
 
         {/* Streak Card Proéminente */}
@@ -156,14 +158,14 @@ const NewDashboard = () => {
               </div>
               <div>
                 <div className="text-3xl sm:text-4xl font-black text-white mb-1">
-                  {streak} Jours
+                  {streak} {t('newDashboard.streak.days')}
                 </div>
-                <div className="text-sm text-white/90">Série en cours ! Continue 🚀</div>
+                <div className="text-sm text-white/90">{t('newDashboard.streak.continue')}</div>
               </div>
             </div>
             <div className="flex-1 w-full sm:w-auto">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-white/90 font-medium">Objectif quotidien</span>
+                <span className="text-sm text-white/90 font-medium">{t('newDashboard.streak.dailyGoal')}</span>
                 <span className="text-sm text-white font-bold">{dailyProgress}/{dailyGoal}</span>
               </div>
               <div className="w-full sm:w-48 h-3 bg-white/20 rounded-full overflow-hidden">
@@ -202,7 +204,7 @@ const NewDashboard = () => {
         <div className="mb-6">
           <h2 className="text-xl sm:text-2xl font-black mb-4 flex items-center gap-2">
             <Rocket className="w-6 h-6 text-purple-400" />
-            Actions Rapides
+            {t('newDashboard.quickActions.title')}
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {quickActions.map((action, index) => (
@@ -235,7 +237,7 @@ const NewDashboard = () => {
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
               <h2 className="text-xl font-black mb-4 flex items-center gap-2">
                 <Activity className="w-6 h-6 text-blue-400" />
-                Activité Récente
+                {t('newDashboard.recentActivity.title')}
               </h2>
               <div className="space-y-3">
                 {recentActivity.map((activity, index) => (
@@ -261,7 +263,7 @@ const NewDashboard = () => {
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
                 <h2 className="text-xl font-black mb-4 flex items-center gap-2">
                   <Brain className="w-6 h-6 text-pink-400" />
-                  Recommandations IA
+                  {t('newDashboard.recommendations.title')}
                 </h2>
                 <div className="space-y-3">
                   {dashboard.recommendations.slice(0, 3).map((rec, index) => (
@@ -296,7 +298,7 @@ const NewDashboard = () => {
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
               <h2 className="text-xl font-black mb-4 flex items-center gap-2">
                 <Crown className="w-6 h-6 text-yellow-400" />
-                Badges
+                {t('newDashboard.badges.title')}
               </h2>
               <div className="grid grid-cols-3 gap-3 mb-4">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -312,7 +314,7 @@ const NewDashboard = () => {
                 to="/badges"
                 className="block text-center text-sm text-purple-400 font-semibold hover:text-purple-300 transition-colors"
               >
-                Voir tous les badges →
+                {t('newDashboard.badges.seeAll')}
               </Link>
             </div>
 
@@ -320,12 +322,12 @@ const NewDashboard = () => {
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
               <h2 className="text-xl font-black mb-4 flex items-center gap-2">
                 <Clock className="w-6 h-6 text-green-400" />
-                Temps d'étude
+                {t('newDashboard.studyTime.title')}
               </h2>
               <div className="text-4xl font-black mb-2 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
                 {stats?.totalTimeSpent || '2h 30'}
               </div>
-              <div className="text-sm text-gray-400">Cette semaine</div>
+              <div className="text-sm text-gray-400">{t('newDashboard.studyTime.thisWeek')}</div>
             </div>
 
             {/* Lien Profil */}
@@ -333,7 +335,7 @@ const NewDashboard = () => {
               to="/profile"
               className="block bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-center font-bold hover:scale-105 transition-all duration-300"
             >
-              Voir mon Profil Complet
+              {t('newDashboard.profileLink')}
             </Link>
           </div>
         </div>

@@ -148,7 +148,7 @@ const Profile = () => {
 
   const handleChangePassword = async () => {
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setError('Les nouveaux mots de passe ne correspondent pas')
+      setError(t('profile.passwordsNotMatch'))
       return
     }
 
@@ -171,10 +171,10 @@ const Profile = () => {
         setIsChangingPassword(false)
         setTimeout(() => setSuccess(''), 3000)
       } else {
-        setError(result.error || 'Erreur lors du changement de mot de passe')
+        setError(result.error || t('profile.passwordChangeError'))
       }
     } catch (error) {
-      setError('Erreur lors du changement de mot de passe')
+      setError(t('profile.passwordChangeError'))
     } finally {
       setLoading(false)
     }
@@ -386,7 +386,7 @@ const Profile = () => {
                       className="flex items-center px-3 py-2 text-blue-600 hover:text-blue-700 transition-colors"
                     >
                       <Settings className="h-4 w-4 mr-1" />
-                      Changer le mot de passe
+                      {t('profile.changePassword')}
                     </button>
                   )}
                 </div>
@@ -410,7 +410,7 @@ const Profile = () => {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-800 mb-2">
-                      Nouveau mot de passe
+                      {t('profile.newPassword')}
                     </label>
                     <input
                       type="password"
@@ -423,7 +423,7 @@ const Profile = () => {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-800 mb-2">
-                      Confirmer le nouveau mot de passe
+                      {t('profile.confirmPassword')}
                     </label>
                     <input
                       type="password"
@@ -441,7 +441,7 @@ const Profile = () => {
                         className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <Save className="h-4 w-4 mr-2" />
-                        {loading ? 'Changement...' : 'Changer le mot de passe'}
+                        {loading ? t('common.changing') : t('profile.changePassword')}
                       </button>
                       <button
                         onClick={cancelPasswordChange}

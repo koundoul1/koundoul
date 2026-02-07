@@ -595,6 +595,164 @@ export default {
       hide: 'Masquer',
       copy: 'Copier',
       share: 'Partager'
+    },
+    
+    // NewHome - Page d'accueil moderne
+    newHome: {
+      badge: 'Nouvelle plateforme 2026',
+      title: 'Réussis en Sciences',
+      titleWith: 'Avec l\'IA',
+      subtitle: '1800 exercices + IA personnalisée + 450 micro-leçons',
+      subtitleFree: '100% Gratuit · De la 2nde à la Terminale',
+      startButton: 'Commencer Gratuitement',
+      seeExercises: 'Voir les 1800 Exercices',
+      stats: {
+        exercises: 'Exercices',
+        microLessons: 'Micro-Leçons',
+        chapters: 'Chapitres',
+        free: 'Gratuit'
+      },
+      whyTitle: 'Pourquoi Koundoul ?',
+      whySubtitle: 'Une expérience d\'apprentissage révolutionnaire',
+      features: {
+        ai: {
+          title: 'IA Personnalisée',
+          desc: 'S\'adapte à ton niveau et ton style d\'apprentissage',
+          stats: '4 profils cognitifs'
+        },
+        progress: {
+          title: 'Progression Rapide',
+          desc: 'Des résultats visibles en 7 jours',
+          stats: 'Résultats garantis'
+        },
+        gamification: {
+          title: 'Gamification',
+          desc: 'Apprendre en s\'amusant avec des badges et défis',
+          stats: '50+ badges à débloquer'
+        }
+      },
+      allModulesTitle: 'Tous les Modules',
+      allModulesSubtitle: 'Explore toutes les fonctionnalités de Koundoul',
+      modules: {
+        solver: { name: 'Résolveur IA', desc: 'Résous tes problèmes avec l\'IA', badge: 'Populaire' },
+        courses: { name: 'Cours', desc: 'Tous les cours par matière' },
+        quiz: { name: 'Quiz', desc: 'Teste tes connaissances' },
+        challenge: { name: 'Défi', desc: 'Défis quotidiens', badge: 'Nouveau' },
+        exercises: { name: 'Exercices', desc: '1800+ exercices corrigés' },
+        flashcards: { name: 'Flashcards', desc: 'Révision espacée' },
+        forum: { name: 'Forum', desc: 'Communauté d\'entraide' },
+        badges: { name: 'Badges', desc: 'Collection de badges' },
+        microLessons: { name: 'Micro-Leçons', desc: '450+ micro-leçons' },
+        visualizations: { name: 'Visualisations', desc: 'Graphiques interactifs' },
+        coach: { name: 'Coach IA', desc: 'Assistant personnel' },
+        resources: { name: 'Ressources', desc: 'Ressources pédagogiques' }
+      },
+      subjectsTitle: 'Trois Matières, Un Objectif :',
+      subjectsSubtitle: 'Ta Réussite',
+      subjects: {
+        math: { name: 'Maths', count: '600+' },
+        physics: { name: 'Physique', count: '600+' },
+        chemistry: { name: 'Chimie', count: '600+' }
+      },
+      subjectStart: 'Commencer',
+      finalCtaTitle: 'Prêt à Exceller',
+      finalCtaTitleWith: 'En Sciences ?',
+      finalCtaSubtitle: 'Rejoins des milliers d\'élèves qui progressent chaque jour',
+      finalCtaCreate: 'Créer Mon Compte Gratuit',
+      finalCtaLogin: 'Se Connecter',
+      finalCtaFeatures: {
+        free: '100% Gratuit',
+        students: 'Des milliers d\'élèves',
+        guaranteed: 'Résultats garantis'
+      },
+      footer: {
+        tagline: 'La plateforme d\'apprentissage scientifique alimentée par l\'IA',
+        copyright: '© 2026 Koundoul · Fait avec ❤️ en France'
+      }
+    },
+    
+    // NewDashboard - Dashboard gamifié
+    newDashboard: {
+      greeting: {
+        morning: 'Bonjour',
+        afternoon: 'Bon après-midi',
+        evening: 'Bonsoir'
+      },
+      ready: 'Prêt à continuer ta progression ?',
+      streak: {
+        days: 'Jours',
+        continue: 'Série en cours ! Continue 🚀',
+        dailyGoal: 'Objectif quotidien'
+      },
+      stats: {
+        xp: 'XP Total',
+        level: 'Niveau Actuel',
+        exercises: 'Exercices',
+        score: 'Score Moyen'
+      },
+      quickActions: {
+        title: 'Actions Rapides',
+        solver: 'Résolveur IA',
+        challenge: 'Défi',
+        exercises: 'Exercices',
+        quiz: 'Quiz'
+      },
+      recentActivity: {
+        title: 'Activité Récente'
+      },
+      recommendations: {
+        title: 'Recommandations IA'
+      },
+      badges: {
+        title: 'Badges',
+        seeAll: 'Voir tous les badges →'
+      },
+      studyTime: {
+        title: 'Temps d\'étude',
+        thisWeek: 'Cette semaine'
+      },
+      profileLink: 'Voir mon Profil Complet',
+      loading: 'Chargement...',
+      error: 'Erreur de chargement',
+      login: 'Se connecter'
+    },
+    
+    // MobileNavBar - Navigation
+    mobileNav: {
+      home: 'Accueil',
+      courses: 'Cours',
+      ai: 'IA',
+      challenge: 'Défi',
+      profile: 'Profil',
+      login: 'Connexion'
+    },
+    
+    // Common labels and badges
+    common: {
+      student: 'Élève',
+      popular: 'Populaire',
+      new: 'Nouveau',
+      newBadge: 'Nouveau Badge !',
+      noSolution: 'Aucune solution affichée',
+      changing: 'Changement...',
+      changePassword: 'Changer le mot de passe',
+      newPassword: 'Nouveau mot de passe',
+      confirmNewPassword: 'Confirmer le nouveau mot de passe',
+      passwordChanged: 'Mot de passe modifié avec succès',
+      passwordsNotMatch: 'Les nouveaux mots de passe ne correspondent pas',
+      passwordChangeError: 'Erreur lors du changement de mot de passe',
+      passwordChangeErrorGeneric: 'Erreur lors du changement de mot de passe'
+    },
+    
+    // Profile page
+    profile: {
+      changePassword: 'Changer le mot de passe',
+      currentPassword: 'Mot de passe actuel',
+      newPassword: 'Nouveau mot de passe',
+      confirmPassword: 'Confirmer le nouveau mot de passe',
+      passwordChanged: 'Mot de passe modifié avec succès',
+      passwordChangeError: 'Erreur lors du changement de mot de passe',
+      passwordsNotMatch: 'Les nouveaux mots de passe ne correspondent pas'
     }
   },
   
@@ -1194,6 +1352,164 @@ export default {
       hide: 'Hide',
       copy: 'Copy',
       share: 'Share'
+    },
+    
+    // NewHome - Modern homepage
+    newHome: {
+      badge: 'New Platform 2026',
+      title: 'Succeed in Sciences',
+      titleWith: 'With AI',
+      subtitle: '1800 exercises + personalized AI + 450 micro-lessons',
+      subtitleFree: '100% Free · From 10th to 12th Grade',
+      startButton: 'Start for Free',
+      seeExercises: 'See 1800 Exercises',
+      stats: {
+        exercises: 'Exercises',
+        microLessons: 'Micro-Lessons',
+        chapters: 'Chapters',
+        free: 'Free'
+      },
+      whyTitle: 'Why Koundoul?',
+      whySubtitle: 'A revolutionary learning experience',
+      features: {
+        ai: {
+          title: 'Personalized AI',
+          desc: 'Adapts to your level and learning style',
+          stats: '4 cognitive profiles'
+        },
+        progress: {
+          title: 'Rapid Progress',
+          desc: 'Visible results in 7 days',
+          stats: 'Guaranteed results'
+        },
+        gamification: {
+          title: 'Gamification',
+          desc: 'Learn while having fun with badges and challenges',
+          stats: '50+ badges to unlock'
+        }
+      },
+      allModulesTitle: 'All Modules',
+      allModulesSubtitle: 'Explore all Koundoul features',
+      modules: {
+        solver: { name: 'AI Solver', desc: 'Solve your problems with AI', badge: 'Popular' },
+        courses: { name: 'Courses', desc: 'All courses by subject' },
+        quiz: { name: 'Quiz', desc: 'Test your knowledge' },
+        challenge: { name: 'Challenge', desc: 'Daily challenges', badge: 'New' },
+        exercises: { name: 'Exercises', desc: '1800+ corrected exercises' },
+        flashcards: { name: 'Flashcards', desc: 'Spaced repetition' },
+        forum: { name: 'Forum', desc: 'Help community' },
+        badges: { name: 'Badges', desc: 'Badge collection' },
+        microLessons: { name: 'Micro-Lessons', desc: '450+ micro-lessons' },
+        visualizations: { name: 'Visualizations', desc: 'Interactive graphs' },
+        coach: { name: 'AI Coach', desc: 'Personal assistant' },
+        resources: { name: 'Resources', desc: 'Educational resources' }
+      },
+      subjectsTitle: 'Three Subjects, One Goal:',
+      subjectsSubtitle: 'Your Success',
+      subjects: {
+        math: { name: 'Math', count: '600+' },
+        physics: { name: 'Physics', count: '600+' },
+        chemistry: { name: 'Chemistry', count: '600+' }
+      },
+      subjectStart: 'Start',
+      finalCtaTitle: 'Ready to Excel',
+      finalCtaTitleWith: 'In Sciences?',
+      finalCtaSubtitle: 'Join thousands of students progressing every day',
+      finalCtaCreate: 'Create My Free Account',
+      finalCtaLogin: 'Login',
+      finalCtaFeatures: {
+        free: '100% Free',
+        students: 'Thousands of students',
+        guaranteed: 'Guaranteed results'
+      },
+      footer: {
+        tagline: 'The AI-powered scientific learning platform',
+        copyright: '© 2026 Koundoul · Made with ❤️ in France'
+      }
+    },
+    
+    // NewDashboard - Gamified dashboard
+    newDashboard: {
+      greeting: {
+        morning: 'Good morning',
+        afternoon: 'Good afternoon',
+        evening: 'Good evening'
+      },
+      ready: 'Ready to continue your progress?',
+      streak: {
+        days: 'Days',
+        continue: 'Streak in progress! Keep going 🚀',
+        dailyGoal: 'Daily goal'
+      },
+      stats: {
+        xp: 'Total XP',
+        level: 'Current Level',
+        exercises: 'Exercises',
+        score: 'Average Score'
+      },
+      quickActions: {
+        title: 'Quick Actions',
+        solver: 'AI Solver',
+        challenge: 'Challenge',
+        exercises: 'Exercises',
+        quiz: 'Quiz'
+      },
+      recentActivity: {
+        title: 'Recent Activity'
+      },
+      recommendations: {
+        title: 'AI Recommendations'
+      },
+      badges: {
+        title: 'Badges',
+        seeAll: 'See all badges →'
+      },
+      studyTime: {
+        title: 'Study Time',
+        thisWeek: 'This week'
+      },
+      profileLink: 'View My Complete Profile',
+      loading: 'Loading...',
+      error: 'Loading error',
+      login: 'Login'
+    },
+    
+    // MobileNavBar - Navigation
+    mobileNav: {
+      home: 'Home',
+      courses: 'Courses',
+      ai: 'AI',
+      challenge: 'Challenge',
+      profile: 'Profile',
+      login: 'Login'
+    },
+    
+    // Common labels and badges
+    common: {
+      student: 'Student',
+      popular: 'Popular',
+      new: 'New',
+      newBadge: 'New Badge!',
+      noSolution: 'No solution displayed',
+      changing: 'Changing...',
+      changePassword: 'Change password',
+      newPassword: 'New password',
+      confirmNewPassword: 'Confirm new password',
+      passwordChanged: 'Password changed successfully',
+      passwordsNotMatch: 'New passwords do not match',
+      passwordChangeError: 'Error changing password',
+      passwordChangeErrorGeneric: 'Error changing password'
+    },
+    
+    // Profile page
+    profile: {
+      changePassword: 'Change password',
+      currentPassword: 'Current password',
+      newPassword: 'New password',
+      confirmPassword: 'Confirm new password',
+      passwordChanged: 'Password changed successfully',
+      passwordChangeError: 'Error changing password',
+      passwordsNotMatch: 'New passwords do not match'
     }
   }
 };

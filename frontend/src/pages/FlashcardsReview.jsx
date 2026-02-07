@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, RotateCcw, Check, X, Eye, EyeOff, Lightbulb } from 'lucide-react';
 import api from '../services/api';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function FlashcardsReview() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [flashcards, setFlashcards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -133,7 +135,7 @@ export default function FlashcardsReview() {
             </div>
             {currentCard.isNew && (
               <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-bold rounded-full">
-                NOUVEAU
+                {t('common.new')}
               </span>
             )}
           </div>

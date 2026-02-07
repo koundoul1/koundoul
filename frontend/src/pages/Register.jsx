@@ -72,7 +72,7 @@ const Register = () => {
       if (!response.data.available) {
         setErrors(prev => ({
           ...prev,
-          email: 'Cet email est déjà utilisé'
+          email: t('auth.register.errors.emailTaken')
         }))
       }
     } catch (error) {
@@ -92,7 +92,7 @@ const Register = () => {
       if (!response.data.available) {
         setErrors(prev => ({
           ...prev,
-          username: 'Ce nom d\'utilisateur est déjà pris'
+          username: t('auth.register.errors.usernameTaken')
         }))
       }
     } catch (error) {
@@ -108,44 +108,44 @@ const Register = () => {
 
     // Prénom
     if (!formData.firstName.trim()) {
-      newErrors.firstName = 'Le prénom est requis'
+      newErrors.firstName = t('auth.register.errors.firstNameRequired')
     }
 
     // Nom
     if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Le nom est requis'
+      newErrors.lastName = t('auth.register.errors.lastNameRequired')
     }
 
     // Nom d'utilisateur
     if (!formData.username.trim()) {
-      newErrors.username = 'Le nom d\'utilisateur est requis'
+      newErrors.username = t('auth.register.errors.usernameRequired')
     } else if (formData.username.length < 3) {
-      newErrors.username = 'Le nom d\'utilisateur doit contenir au moins 3 caractères'
+      newErrors.username = t('auth.register.errors.usernameMinLength')
     } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
-      newErrors.username = 'Le nom d\'utilisateur ne peut contenir que des lettres, chiffres et underscores'
+      newErrors.username = t('auth.register.errors.usernameInvalid')
     }
 
     // Email
     if (!formData.email) {
-      newErrors.email = 'L\'email est requis'
+      newErrors.email = t('auth.register.errors.emailRequired')
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Format d\'email invalide'
+      newErrors.email = t('auth.register.errors.emailInvalid')
     }
 
     // Mot de passe
     if (!formData.password) {
-      newErrors.password = 'Le mot de passe est requis'
+      newErrors.password = t('auth.register.errors.passwordRequired')
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Le mot de passe doit contenir au moins 6 caractères'
+      newErrors.password = t('auth.register.errors.passwordMinLength')
     } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
-      newErrors.password = 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre'
+      newErrors.password = t('auth.register.errors.passwordComplexity')
     }
 
     // Confirmation du mot de passe
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'La confirmation du mot de passe est requise'
+      newErrors.confirmPassword = t('auth.register.errors.confirmPasswordRequired')
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Les mots de passe ne correspondent pas'
+      newErrors.confirmPassword = t('auth.register.errors.passwordsNotMatch')
     }
 
     setErrors(newErrors)
@@ -324,7 +324,7 @@ const Register = () => {
             {/* Mot de passe */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Mot de passe
+                {t('auth.register.passwordLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -358,7 +358,7 @@ const Register = () => {
             {/* Confirmation du mot de passe */}
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-                Confirmer le mot de passe
+                {t('auth.register.confirmPasswordLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

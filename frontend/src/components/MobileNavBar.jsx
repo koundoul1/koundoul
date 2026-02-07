@@ -1,40 +1,42 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, BookOpen, Brain, Trophy, User, Sparkles, Search, Bell } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 const MobileNavBar = () => {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const navItems = [
     { 
       path: '/', 
       icon: Home, 
-      label: 'Accueil',
+      label: t('mobileNav.home'),
       color: 'blue'
     },
     { 
       path: '/courses', 
       icon: BookOpen, 
-      label: 'Cours',
+      label: t('mobileNav.courses'),
       color: 'purple'
     },
     { 
       path: '/solver', 
       icon: Brain, 
-      label: 'IA',
+      label: t('mobileNav.ai'),
       color: 'pink',
       special: true
     },
     { 
       path: '/challenge', 
       icon: Trophy, 
-      label: 'Défi',
+      label: t('mobileNav.challenge'),
       color: 'amber'
     },
     { 
       path: '/profile', 
       icon: User, 
-      label: 'Profil',
+      label: t('mobileNav.profile'),
       color: 'green'
     }
   ];
@@ -174,7 +176,7 @@ const MobileNavBar = () => {
                   }`}
                 >
                   <Brain className="w-5 h-5" />
-                  <span>IA</span>
+                  <span>{t('mobileNav.ai')}</span>
                   <Sparkles className="w-4 h-4" />
                 </Link>
               </nav>
@@ -198,7 +200,7 @@ const MobileNavBar = () => {
                   }`}
                 >
                   <User className="w-5 h-5" />
-                  <span>Profil</span>
+                  <span>{t('mobileNav.profile')}</span>
                 </Link>
               </div>
             </div>

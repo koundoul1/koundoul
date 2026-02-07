@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Brain, Calendar, TrendingUp, Target, Clock, Flame, Play, Plus } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function Flashcards() {
   const { user, isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [dueFlashcards, setDueFlashcards] = useState([]);
@@ -183,7 +185,7 @@ export default function Flashcards() {
                             </span>
                             {flashcard.isNew && (
                               <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">
-                                NOUVEAU
+                                {t('common.new')}
                               </span>
                             )}
                           </div>

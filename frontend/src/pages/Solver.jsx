@@ -42,7 +42,8 @@ import { loadProfileFromStorage, saveProfileToStorage } from '../utils/learningP
 
 // Composant pour afficher la solution avec support LaTeX
 const SolutionDisplay = ({ content }) => {
-  if (!content) return <p className="text-gray-100">Aucune solution affichée</p>;
+  const { t } = useTranslation();
+  if (!content) return <p className="text-gray-100">{t('common.noSolution')}</p>;
   
   // Extraire les blocs LaTeX $$...$$ et inline $...$
   const latexBlocks = [];
@@ -608,7 +609,7 @@ const Solver = () => {
                       Solution trouvée
                     </h4>
                     <div className="bg-black/20 rounded-lg p-4 border border-green-400/30">
-                      <SolutionDisplay content={solution.solution || 'Aucune solution affichée'} />
+                      <SolutionDisplay content={solution.solution || t('common.noSolution')} t={t} />
                     </div>
                   </div>
 

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { X, Award } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function BadgeToast({ badge, onClose }) {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function BadgeToast({ badge, onClose }) {
             <div className="flex items-center gap-2 mb-1">
               <Award className="w-5 h-5 text-yellow-600" />
               <h3 className="font-bold text-gray-900">
-                Nouveau Badge !
+                {t('common.newBadge')}
               </h3>
             </div>
             <p className="font-bold text-lg text-gray-900 mb-1">

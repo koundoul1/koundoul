@@ -6,8 +6,10 @@ import {
   Brain, Trophy, Zap, Target, MessageSquare,
   Repeat, Globe, Lightbulb, Rocket
 } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 const NewHome = () => {
+  const { t } = useTranslation();
   const [activeFeature, setActiveFeature] = useState(0);
 
   useEffect(() => {
@@ -20,31 +22,31 @@ const NewHome = () => {
   const features = [
     {
       icon: '🧠',
-      title: "IA Personnalisée",
-      description: "S'adapte à ton niveau et ton style d'apprentissage",
+      title: t('newHome.features.ai.title'),
+      description: t('newHome.features.ai.desc'),
       gradient: "from-purple-500 to-pink-500",
-      stats: "4 profils cognitifs"
+      stats: t('newHome.features.ai.stats')
     },
     {
       icon: '⚡',
-      title: "Progression Rapide",
-      description: "Des résultats visibles en 7 jours",
+      title: t('newHome.features.progress.title'),
+      description: t('newHome.features.progress.desc'),
       gradient: "from-amber-500 to-orange-500",
-      stats: "Résultats garantis"
+      stats: t('newHome.features.progress.stats')
     },
     {
       icon: '🏆',
-      title: "Gamification",
-      description: "Apprendre en s'amusant avec des badges et défis",
+      title: t('newHome.features.gamification.title'),
+      description: t('newHome.features.gamification.desc'),
       gradient: "from-blue-500 to-cyan-500",
-      stats: "50+ badges à débloquer"
+      stats: t('newHome.features.gamification.stats')
     }
   ];
 
   const subjects = [
-    { name: "Maths", icon: "📐", gradient: "from-blue-500 to-blue-600", count: "600+" },
-    { name: "Physique", icon: "⚛️", gradient: "from-purple-500 to-purple-600", count: "600+" },
-    { name: "Chimie", icon: "🧪", gradient: "from-emerald-500 to-emerald-600", count: "600+" }
+    { name: t('newHome.subjects.math.name'), icon: "📐", gradient: "from-blue-500 to-blue-600", count: t('newHome.subjects.math.count') },
+    { name: t('newHome.subjects.physics.name'), icon: "⚛️", gradient: "from-purple-500 to-purple-600", count: t('newHome.subjects.physics.count') },
+    { name: t('newHome.subjects.chemistry.name'), icon: "🧪", gradient: "from-emerald-500 to-emerald-600", count: t('newHome.subjects.chemistry.count') }
   ];
 
   return (
@@ -64,7 +66,7 @@ const NewHome = () => {
           {/* Badge Nouveau */}
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full border border-purple-500/30 backdrop-blur-sm mb-8 animate-bounce">
             <Sparkles className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm font-medium">Nouvelle plateforme 2026</span>
+            <span className="text-sm font-medium">{t('newHome.badge')}</span>
             <Sparkles className="w-4 h-4 text-yellow-400" />
           </div>
 
@@ -73,17 +75,17 @@ const NewHome = () => {
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient" style={{
               backgroundSize: '200% 200%'
             }}>
-              Réussis en Sciences
+              {t('newHome.title')}
             </span>
             <br />
-            <span className="text-white">Avec l'IA</span>
+            <span className="text-white">{t('newHome.titleWith')}</span>
           </h1>
 
           <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light">
-            1800 exercices + IA personnalisée + 450 micro-leçons
+            {t('newHome.subtitle')}
             <br />
             <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text font-semibold">
-              100% Gratuit · De la 2nde à la Terminale
+              {t('newHome.subtitleFree')}
             </span>
           </p>
 
@@ -94,7 +96,7 @@ const NewHome = () => {
               className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold text-lg shadow-2xl shadow-blue-500/50 hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105"
             >
               <span className="flex items-center justify-center gap-2">
-                Commencer Gratuitement
+                {t('newHome.startButton')}
                 <span className="group-hover:translate-x-1 transition-transform">🚀</span>
               </span>
             </Link>
@@ -104,7 +106,7 @@ const NewHome = () => {
               className="group px-8 py-4 bg-white/10 backdrop-blur-sm rounded-2xl font-semibold text-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
             >
               <span className="flex items-center justify-center gap-2">
-                Voir les 1800 Exercices
+                {t('newHome.seeExercises')}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
@@ -113,10 +115,10 @@ const NewHome = () => {
           {/* Stats Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {[
-              { icon: <BookOpen className="w-6 h-6" />, value: "1,800+", label: "Exercices" },
-              { icon: <Sparkles className="w-6 h-6" />, value: "450+", label: "Micro-Leçons" },
-              { icon: <Award className="w-6 h-6" />, value: "18", label: "Chapitres" },
-              { icon: <Heart className="w-6 h-6" />, value: "100%", label: "Gratuit" }
+              { icon: <BookOpen className="w-6 h-6" />, value: "1,800+", label: t('newHome.stats.exercises') },
+              { icon: <Sparkles className="w-6 h-6" />, value: "450+", label: t('newHome.stats.microLessons') },
+              { icon: <Award className="w-6 h-6" />, value: "18", label: t('newHome.stats.chapters') },
+              { icon: <Heart className="w-6 h-6" />, value: "100%", label: t('newHome.stats.free') }
             ].map((stat, idx) => (
               <div 
                 key={idx}
@@ -146,10 +148,10 @@ const NewHome = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-black mb-4">
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Pourquoi Koundoul ?
+                {t('newHome.whyTitle')}
               </span>
             </h2>
-            <p className="text-xl text-gray-400">Une expérience d'apprentissage révolutionnaire</p>
+            <p className="text-xl text-gray-400">{t('newHome.whySubtitle')}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -201,99 +203,99 @@ const NewHome = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-black mb-4">
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Tous les Modules
+                {t('newHome.allModulesTitle')}
               </span>
             </h2>
-            <p className="text-xl text-gray-400">Explore toutes les fonctionnalités de Koundoul</p>
+            <p className="text-xl text-gray-400">{t('newHome.allModulesSubtitle')}</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
             {[
               { 
-                name: 'Résolveur IA', 
+                name: t('newHome.modules.solver.name'), 
                 href: '/solver', 
                 icon: Brain, 
                 gradient: 'from-blue-500 to-purple-500',
-                badge: 'Populaire',
-                desc: 'Résous tes problèmes avec l\'IA'
+                badge: t('common.popular'),
+                desc: t('newHome.modules.solver.desc')
               },
               { 
-                name: 'Cours', 
+                name: t('newHome.modules.courses.name'), 
                 href: '/courses', 
                 icon: BookOpen, 
                 gradient: 'from-purple-500 to-pink-500',
-                desc: 'Tous les cours par matière'
+                desc: t('newHome.modules.courses.desc')
               },
               { 
-                name: 'Quiz', 
+                name: t('newHome.modules.quiz.name'), 
                 href: '/quiz', 
                 icon: Zap, 
                 gradient: 'from-yellow-500 to-orange-500',
-                desc: 'Teste tes connaissances'
+                desc: t('newHome.modules.quiz.desc')
               },
               { 
-                name: 'Défi', 
+                name: t('newHome.modules.challenge.name'), 
                 href: '/challenge', 
                 icon: Trophy, 
                 gradient: 'from-amber-500 to-red-500',
-                badge: 'Nouveau',
-                desc: 'Défis quotidiens'
+                badge: t('common.new'),
+                desc: t('newHome.modules.challenge.desc')
               },
               { 
-                name: 'Exercices', 
+                name: t('newHome.modules.exercises.name'), 
                 href: '/exercices', 
                 icon: Target, 
                 gradient: 'from-green-500 to-emerald-500',
-                desc: '1800+ exercices corrigés'
+                desc: t('newHome.modules.exercises.desc')
               },
               { 
-                name: 'Flashcards', 
+                name: t('newHome.modules.flashcards.name'), 
                 href: '/flashcards', 
                 icon: Repeat, 
                 gradient: 'from-cyan-500 to-blue-500',
-                desc: 'Révision espacée'
+                desc: t('newHome.modules.flashcards.desc')
               },
               { 
-                name: 'Forum', 
+                name: t('newHome.modules.forum.name'), 
                 href: '/forum', 
                 icon: MessageSquare, 
                 gradient: 'from-pink-500 to-rose-500',
-                desc: 'Communauté d\'entraide'
+                desc: t('newHome.modules.forum.desc')
               },
               { 
-                name: 'Badges', 
+                name: t('newHome.modules.badges.name'), 
                 href: '/badges', 
                 icon: Award, 
                 gradient: 'from-purple-500 to-indigo-500',
-                desc: 'Collection de badges'
+                desc: t('newHome.modules.badges.desc')
               },
               { 
-                name: 'Micro-Leçons', 
+                name: t('newHome.modules.microLessons.name'), 
                 href: '/micro-lessons', 
                 icon: BookOpen, 
                 gradient: 'from-indigo-500 to-purple-500',
-                desc: '450+ micro-leçons'
+                desc: t('newHome.modules.microLessons.desc')
               },
               { 
-                name: 'Visualisations', 
+                name: t('newHome.modules.visualizations.name'), 
                 href: '/visualizations', 
                 icon: Globe, 
                 gradient: 'from-blue-500 to-cyan-500',
-                desc: 'Graphiques interactifs'
+                desc: t('newHome.modules.visualizations.desc')
               },
               { 
-                name: 'Coach IA', 
+                name: t('newHome.modules.coach.name'), 
                 href: '/coach', 
                 icon: Brain, 
                 gradient: 'from-purple-500 to-pink-500',
-                desc: 'Assistant personnel'
+                desc: t('newHome.modules.coach.desc')
               },
               { 
-                name: 'Ressources', 
+                name: t('newHome.modules.resources.name'), 
                 href: '/resources', 
                 icon: Lightbulb, 
                 gradient: 'from-amber-500 to-yellow-500',
-                desc: 'Ressources pédagogiques'
+                desc: t('newHome.modules.resources.desc')
               }
             ].map((module, idx) => {
               const Icon = module.icon;
@@ -316,7 +318,7 @@ const NewHome = () => {
                   </h3>
                   <p className="text-sm text-gray-400 mb-3">{module.desc}</p>
                   <div className="flex items-center text-purple-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                    Accéder
+                    {t('actions.view')}
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </Link>
@@ -331,9 +333,9 @@ const NewHome = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-black mb-4">
-              Trois Matières, Un Objectif :
+              {t('newHome.subjectsTitle')}
               <span className="block bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
-                Ta Réussite
+                {t('newHome.subjectsSubtitle')}
               </span>
             </h2>
           </div>
@@ -364,7 +366,7 @@ const NewHome = () => {
                     </div>
                     
                     <div className="mt-6 flex items-center justify-center gap-2 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                      Commencer
+                      {t('newHome.subjectStart')}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -382,14 +384,14 @@ const NewHome = () => {
             <div className="text-6xl mb-6 animate-pulse">🔥</div>
             
             <h2 className="text-4xl sm:text-5xl font-black mb-6">
-              Prêt à Exceller
+              {t('newHome.finalCtaTitle')}
               <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                En Sciences ?
+                {t('newHome.finalCtaTitleWith')}
               </span>
             </h2>
 
             <p className="text-xl text-gray-300 mb-8">
-              Rejoins des milliers d'élèves qui progressent chaque jour
+              {t('newHome.finalCtaSubtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -398,7 +400,7 @@ const NewHome = () => {
                 className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105"
               >
                 <span className="flex items-center justify-center gap-2">
-                  Créer Mon Compte Gratuit
+                  {t('newHome.finalCtaCreate')}
                   <span className="group-hover:rotate-12 transition-transform">⚡</span>
                 </span>
               </Link>
@@ -407,22 +409,22 @@ const NewHome = () => {
                 to="/login"
                 className="px-8 py-4 bg-white/10 backdrop-blur-sm rounded-2xl font-semibold text-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
               >
-                Se Connecter
+                {t('newHome.finalCtaLogin')}
               </Link>
             </div>
 
             <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-green-400" />
-                <span>100% Gratuit</span>
+                <span>{t('newHome.finalCtaFeatures.free')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-blue-400" />
-                <span>Des milliers d'élèves</span>
+                <span>{t('newHome.finalCtaFeatures.students')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Crown className="w-4 h-4 text-purple-400" />
-                <span>Résultats garantis</span>
+                <span>{t('newHome.finalCtaFeatures.guaranteed')}</span>
               </div>
             </div>
           </div>
@@ -436,10 +438,10 @@ const NewHome = () => {
             Koundoul
           </div>
           <p className="text-gray-400 mb-6">
-            La plateforme d'apprentissage scientifique alimentée par l'IA
+            {t('newHome.footer.tagline')}
           </p>
           <div className="mt-8 text-sm text-gray-600">
-            © 2026 Koundoul · Fait avec <Heart className="w-4 h-4 inline text-red-500" /> en France
+            {t('newHome.footer.copyright')}
           </div>
         </div>
       </footer>
