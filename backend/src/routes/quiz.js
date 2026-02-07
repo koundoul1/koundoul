@@ -10,10 +10,32 @@ router.get('/', optionalAuth, async (req, res, next) => {
   try {
     const { subject, level, type } = req.query;
 
-    // Placeholder - retourner des banques de questions
-    const questionBanks = [];
+    const where = {};
+    if (subject && subject !== 'Toutes les matières') where.subject = subject;
+    if (level && level !== 'Tous les niveaux') where.level = level;
+    if (type) where.type = type;
 
-    res.json({ success: true, data: questionBanks });
+    const banks = await prisma.questionBank.findMany({
+      where,
+      include: {
+        _count: {
+          select: { questions: true }
+        }
+      },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    const formatted = banks.map(bank => ({
+      id: bank.id,
+      title: bank.title,
+      subject: bank.subject,
+      level: bank.level,
+      type: bank.type,
+      description: bank.description,
+      totalQuestions: bank._count.questions || 0
+    }));
+
+    res.json({ success: true, data: formatted });
   } catch (error) {
     next(error);
   }
@@ -24,8 +46,20 @@ router.get('/:id', optionalAuth, async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    // Placeholder
-    res.json({ success: true, data: null });
+    const bank = await prisma.questionBank.findUnique({
+      where: { id },
+      include: {
+        _count: {
+          select: { questions: true }
+        }
+      }
+    });
+
+    if (!bank) {
+      return res.status(404).json({ error: 'Banque de questions non trouvée' });
+    }
+
+    res.json({ success: true, data: bank });
   } catch (error) {
     next(error);
   }
@@ -37,13 +71,23 @@ router.post('/:id/start', authenticateToken, async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user.userId;
 
-    // Placeholder
-    const attempt = {
-      id: Date.now().toString(),
-      quizId: id,
-      userId,
-      startedAt: new Date()
-    };
+    const bank = await prisma.questionBank.findUnique({
+      where: { id }
+    });
+
+    if (!bank) {
+      return res.status(404).json({ error: 'Banque de questions non trouvée' });
+    }
+
+    const attempt = await prisma.quizAttempt.create({
+      data: {
+        userId,
+        bankId: id,
+        score: 0,
+        total: 0,
+        answers: {}
+      }
+    });
 
     res.json({ success: true, data: attempt });
   } catch (error) {
@@ -58,15 +102,68 @@ router.post('/attempt/:attemptId/submit', authenticateToken, async (req, res, ne
     const { answers } = req.body;
     const userId = req.user.userId;
 
-    // Placeholder - calculer le score
-    const result = {
-      attemptId,
-      score: 0,
-      total: 0,
-      correct: 0
-    };
+    const attempt = await prisma.quizAttempt.findUnique({
+      where: { id: attemptId },
+      include: {
+        bank: {
+          include: {
+            questions: true
+          }
+        }
+      }
+    });
 
-    res.json({ success: true, data: result });
+    if (!attempt || attempt.userId !== userId) {
+      return res.status(404).json({ error: 'Tentative non trouvée' });
+    }
+
+    if (attempt.completedAt) {
+      return res.status(400).json({ error: 'Cette tentative est déjà complétée' });
+    }
+
+    // Calculer le score
+    let correct = 0;
+    let total = attempt.bank.questions.length;
+
+    for (const question of attempt.bank.questions) {
+      const userAnswer = answers[question.id];
+      if (userAnswer !== undefined) {
+        if (question.type === 'QCM') {
+          if (userAnswer === question.correctAnswer) {
+            correct++;
+          }
+        }
+      }
+    }
+
+    const score = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+    // Mettre à jour la tentative
+    const updated = await prisma.quizAttempt.update({
+      where: { id: attemptId },
+      data: {
+        score,
+        total,
+        answers,
+        completedAt: new Date()
+      }
+    });
+
+    // Ajouter XP (10 XP par question correcte)
+    const xpEarned = correct * 10;
+    await prisma.user.update({
+      where: { id: userId },
+      data: { xp: { increment: xpEarned } }
+    });
+
+    res.json({
+      success: true,
+      data: {
+        ...updated,
+        correct,
+        xpEarned
+      }
+    });
   } catch (error) {
     next(error);
   }
@@ -76,7 +173,21 @@ router.post('/attempt/:attemptId/submit', authenticateToken, async (req, res, ne
 router.get('/attempts/history', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
-    const attempts = [];
+    const attempts = await prisma.quizAttempt.findMany({
+      where: { userId, completedAt: { not: null } },
+      include: {
+        bank: {
+          select: {
+            id: true,
+            title: true,
+            subject: true,
+            level: true
+          }
+        }
+      },
+      orderBy: { startedAt: 'desc' },
+      take: 20
+    });
 
     res.json({ success: true, data: attempts });
   } catch (error) {
@@ -87,17 +198,34 @@ router.get('/attempts/history', authenticateToken, async (req, res, next) => {
 // Get user quiz stats
 router.get('/stats/user', authenticateToken, async (req, res, next) => {
   try {
-    const stats = {
-      totalAttempts: 0,
-      averageScore: 0,
-      bestScore: 0
-    };
+    const userId = req.user.userId;
 
-    res.json({ success: true, data: stats });
+    const [totalAttempts, avgScore, bestScore] = await Promise.all([
+      prisma.quizAttempt.count({
+        where: { userId, completedAt: { not: null } }
+      }),
+      prisma.quizAttempt.aggregate({
+        where: { userId, completedAt: { not: null } },
+        _avg: { score: true }
+      }),
+      prisma.quizAttempt.findFirst({
+        where: { userId, completedAt: { not: null } },
+        orderBy: { score: 'desc' },
+        select: { score: true }
+      })
+    ]);
+
+    res.json({
+      success: true,
+      data: {
+        totalAttempts,
+        averageScore: avgScore._avg.score ? Math.round(avgScore._avg.score) : 0,
+        bestScore: bestScore?.score || 0
+      }
+    });
   } catch (error) {
     next(error);
   }
 });
 
 module.exports = router;
-
