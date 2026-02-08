@@ -15,8 +15,13 @@ Backend API pour la plateforme éducative Koundoul.
 
 ### Build Command
 ```
-cd backend && npm install && npx prisma generate
+cd backend && npm install && npx prisma generate && npx prisma migrate deploy
 ```
+
+**Note importante** : La première fois, vous devrez peut-être exécuter manuellement la migration dans Render :
+1. Aller dans le service backend sur Render
+2. Ouvrir le shell
+3. Exécuter : `npx prisma migrate deploy`
 
 ### Start Command
 ```
