@@ -6,6 +6,10 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "migrate": "npx prisma migrate deploy",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:status": "npx prisma migrate status",
+    "check-migrations": "node scripts/check-migrations.js",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [
