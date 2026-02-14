@@ -264,7 +264,7 @@ const MobileNavBar = () => {
                 <div className="relative">
                   <button
                     onClick={() => setShowLangMenu(!showLangMenu)}
-                    className="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-all duration-200"
+                    className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/50 text-white transition-all duration-200"
                   >
                     <Globe className="w-5 h-5" />
                     <span className="font-medium">{currentLang?.flag} {currentLang?.name}</span>
@@ -302,45 +302,6 @@ const MobileNavBar = () => {
 
               {/* Actions */}
               <div className="flex items-center space-x-3">
-                {/* Sélecteur de langue */}
-                <div className="relative">
-                  <button
-                    onClick={() => setShowLangMenu(!showLangMenu)}
-                    className="flex items-center gap-2 px-3 py-2 bg-gray-800/80 hover:bg-gray-700 border border-gray-600 rounded-xl text-white font-medium transition-all"
-                  >
-                    <Globe className="w-4 h-4" />
-                    <span className="text-sm">{currentLang?.flag}</span>
-                    <ChevronDown className={`w-3 h-3 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {showLangMenu && (
-                    <>
-                      <div 
-                        className="fixed inset-0 z-[9998]" 
-                        onClick={() => setShowLangMenu(false)}
-                      ></div>
-                      <div className="absolute top-full right-0 mt-2 w-48 bg-gray-800 border border-gray-600 rounded-xl shadow-2xl z-[9999] overflow-hidden">
-                        {languages.map((lang) => (
-                          <button
-                            key={lang.code}
-                            onClick={() => {
-                              changeLanguage(lang.code);
-                              setShowLangMenu(false);
-                            }}
-                            className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-700 transition-colors ${
-                              lang.code === language ? 'bg-gray-700 text-white' : 'text-gray-200'
-                            }`}
-                          >
-                            <span className="text-xl">{lang.flag}</span>
-                            <span className="font-medium flex-1">{lang.name}</span>
-                            {lang.code === language && <span className="text-white">✓</span>}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-
                 <button className="p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
                   <Search className="w-5 h-5" />
                 </button>
