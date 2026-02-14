@@ -26,7 +26,7 @@ const MobileNavBar = () => {
   const { isAuthenticated } = useAuth()
   const { language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
-  const currentLang = languages.find(lang => lang.code === language)
+  const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
   const [showLangMenu, setShowLangMenu] = useState(false)
 
   const navItems = [
@@ -265,10 +265,11 @@ const MobileNavBar = () => {
                   <button
                     onClick={() => setShowLangMenu(!showLangMenu)}
                     className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 text-white font-semibold shadow-lg transition-all duration-200"
+                    style={{ minWidth: '140px' }}
                   >
-                    <Globe className="w-5 h-5" />
-                    <span className="font-medium">{currentLang?.flag} {currentLang?.name}</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
+                    <Globe className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium whitespace-nowrap">{currentLang.flag} {currentLang.name}</span>
+                    <ChevronDown className={`w-4 h-4 flex-shrink-0 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
                   </button>
 
                   {showLangMenu && (
