@@ -260,12 +260,12 @@ const MobileNavBar = () => {
                   </Link>
                 )}
 
-                {/* Sélecteur de langue - À la place du Profil en double */}
-                <div className="relative">
+                {/* Sélecteur de langue - À la place du Profil en double - TOUJOURS VISIBLE */}
+                <div className="relative" style={{ display: 'block', visibility: 'visible', opacity: 1 }}>
                   <button
                     onClick={() => setShowLangMenu(!showLangMenu)}
                     className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 text-white font-semibold shadow-lg transition-all duration-200"
-                    style={{ minWidth: '140px' }}
+                    style={{ minWidth: '140px', display: 'flex' }}
                   >
                     <Globe className="w-5 h-5 flex-shrink-0" />
                     <span className="font-medium whitespace-nowrap">{currentLang.flag} {currentLang.name}</span>
