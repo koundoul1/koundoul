@@ -110,9 +110,9 @@ const NewHome = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {/* Language Switcher - Fixed top right */}
-      <div className="fixed top-4 right-4 z-50">
+    <div className="min-h-screen bg-gray-900 text-white relative">
+      {/* Language Switcher - Fixed top right - Always visible above everything */}
+      <div className="fixed top-2 right-2 sm:top-4 sm:right-4 z-[9999]">
         <LanguageSwitcher dark={true} />
       </div>
 
