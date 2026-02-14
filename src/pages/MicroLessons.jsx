@@ -3,8 +3,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../services/api';
 import { BookOpen, Clock, Star, Target, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from '../hooks/useTranslation';
 
 const MicroLessons = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { user } = useAuth();
@@ -146,17 +148,17 @@ const MicroLessons = () => {
   };
 
   const subjects = [
-    { name: 'Tous', value: 'all', icon: '📚', color: 'indigo' },
-    { name: 'Mathématiques', value: 'Mathématiques', icon: '📐', color: 'blue' },
-    { name: 'Physique', value: 'Physique', icon: '⚛️', color: 'green' },
-    { name: 'Chimie', value: 'Chimie', icon: '🧪', color: 'purple' }
+    { name: t('microLessons.filters.all'), value: 'all', icon: '📚', color: 'indigo' },
+    { name: t('courses.math'), value: 'Mathématiques', icon: '📐', color: 'blue' },
+    { name: t('courses.physics'), value: 'Physique', icon: '⚛️', color: 'green' },
+    { name: t('courses.chemistry'), value: 'Chimie', icon: '🧪', color: 'purple' }
   ];
 
   const levels = [
-    { name: 'Tous', value: 'all' },
-    { name: 'Seconde', value: 'Seconde' },
-    { name: 'Première', value: 'Première' },
-    { name: 'Terminale', value: 'Terminale' }
+    { name: t('microLessons.filters.all'), value: 'all' },
+    { name: t('home.levels.seconde.name'), value: 'Seconde' },
+    { name: t('home.levels.premiere.name'), value: 'Première' },
+    { name: t('home.levels.terminale.name'), value: 'Terminale' }
   ];
 
   const getDifficultyColor = (difficulty) => {
@@ -187,10 +189,10 @@ const MicroLessons = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            📚 Micro-Leçons
+            📚 {t('microLessons.title')}
           </h1>
           <p className="text-xl text-gray-600">
-            {lessons.length} leçons disponibles • 8 minutes par leçon
+            {lessons.length} {t('courses.lessons')} {t('microLessons.subtitle')}
           </p>
         </div>
 
@@ -199,7 +201,7 @@ const MicroLessons = () => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Total</p>
+                <p className="text-gray-600 text-sm">{t('microLessons.stats.total')}</p>
                 <p className="text-3xl font-bold text-blue-600">{lessons.length}</p>
               </div>
               <BookOpen className="h-12 w-12 text-blue-500" />
@@ -208,7 +210,7 @@ const MicroLessons = () => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Complétées</p>
+                <p className="text-gray-600 text-sm">{t('microLessons.stats.completed')}</p>
                 <p className="text-3xl font-bold text-green-600">
                   {stats?.total_completed || Object.keys(completions).filter(id => completions[id]?.completed).length}
                 </p>
@@ -219,7 +221,7 @@ const MicroLessons = () => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">XP Gagné</p>
+                <p className="text-gray-600 text-sm">{t('profile.stats.totalXp')}</p>
                 <p className="text-3xl font-bold text-purple-600">
                   {stats?.total_xp_earned ? Math.round(stats.total_xp_earned).toLocaleString() : '0'}
                 </p>
@@ -230,7 +232,7 @@ const MicroLessons = () => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Taux de réussite</p>
+                <p className="text-gray-600 text-sm">{t('dashboard.stats.successRate')}</p>
                 <p className="text-3xl font-bold text-indigo-600">
                   {stats?.average_score ? `${Math.round(stats.average_score)}%` : '—'}
                 </p>
@@ -242,11 +244,11 @@ const MicroLessons = () => {
 
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-bold mb-4 text-blue-700">Filtres</h2>
+          <h2 className="text-xl font-bold mb-4 text-blue-700">{t('actions.filter')}</h2>
           
           {/* Subjects */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold mb-2 text-blue-600">Matière</label>
+            <label className="block text-sm font-semibold mb-2 text-blue-600">{t('microLessons.filters.subject')}</label>
             <div className="flex flex-wrap gap-2">
               {subjects.map(subject => (
                 <button
@@ -268,7 +270,7 @@ const MicroLessons = () => {
 
           {/* Levels */}
           <div>
-            <label className="block text-sm font-semibold mb-2 text-purple-600">Niveau</label>
+            <label className="block text-sm font-semibold mb-2 text-purple-600">{t('microLessons.filters.level')}</label>
             <div className="flex flex-wrap gap-2">
             {levels.map(level => (
                 <button
@@ -290,12 +292,12 @@ const MicroLessons = () => {
         {/* Lessons Grid */}
         {filteredLessons.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600 text-lg mb-4">Aucune leçon trouvée avec les filtres sélectionnés</p>
+            <p className="text-gray-600 text-lg mb-4">{t('microLessons.noLessons')}</p>
             <p className="text-gray-500 text-sm">
               {lessons.length === 0 ? (
-                <span>Chargement des leçons en cours...</span>
+                <span>{t('loading')}</span>
               ) : (
-                <span>Essayez de changer les filtres pour voir plus de résultats</span>
+                <span>{t('actions.retry')}</span>
               )}
             </p>
           </div>

@@ -5,8 +5,10 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import api from '../services/api';
 import { useBadgeContext } from '../components/Layout';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function Exercise() {
+  const { t } = useTranslation();
   const { exerciseId } = useParams();
   const navigate = useNavigate();
   const { showBadges } = useBadgeContext() || {};
@@ -37,7 +39,7 @@ export default function Exercise() {
 
   const handleSubmit = async () => {
     if (!userAnswer.trim()) {
-      alert('Veuillez entrer une réponse');
+      alert(t('exercise.enterAnswer'));
       return;
     }
 
@@ -59,7 +61,7 @@ export default function Exercise() {
       setSubmitted(true);
     } catch (error) {
       console.error('Erreur:', error);
-      alert('Erreur lors de la soumission');
+      alert(t('exercise.submitError'));
     }
   };
 
@@ -88,7 +90,7 @@ export default function Exercise() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-600 font-semibold">Exercice non trouvé</p>
+          <p className="text-red-600 font-semibold">{t('exercise.notFound')}</p>
         </div>
       </div>
     );
@@ -113,7 +115,7 @@ export default function Exercise() {
               className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold"
             >
               <ArrowLeft className="w-5 h-5" />
-              Retour
+              {t('actions.back')}
             </button>
             
             <div className="flex items-center gap-4">
@@ -178,12 +180,12 @@ export default function Exercise() {
             <div className="bg-yellow-50 rounded-xl p-6 border-2 border-yellow-200 mb-8">
               <h3 className="flex items-center gap-2 text-lg font-bold text-yellow-900 mb-3">
                 <Lightbulb className="w-5 h-5" />
-                Indices ({hintsUsed}/{exercise.hints.length})
+                {t('exercise.hints')} ({hintsUsed}/{exercise.hints.length})
               </h3>
               {exercise.hints.slice(0, hintsUsed).map((hint, index) => (
                 <div key={index} className="bg-white rounded-lg p-4 mb-2 border border-yellow-300">
                   <p className="text-gray-700">
-                    <strong>Indice {index + 1}:</strong> {hint}
+                    <strong>{t('exercise.hints')} {index + 1}:</strong> {hint}
                   </p>
                 </div>
               ))}
@@ -212,7 +214,7 @@ export default function Exercise() {
                       className="flex items-center gap-2 px-4 py-2 bg-yellow-100 text-yellow-700 rounded-lg font-semibold hover:bg-yellow-200 transition-all"
                     >
                       <Lightbulb className="w-5 h-5" />
-                      Besoin d'un indice ?
+                      {t('exercise.useHint')}
                     </button>
                   )}
                   {showHints && hintsUsed < exercise.hints.length && (
@@ -221,7 +223,7 @@ export default function Exercise() {
                       className="flex items-center gap-2 px-4 py-2 bg-yellow-100 text-yellow-700 rounded-lg font-semibold hover:bg-yellow-200 transition-all"
                     >
                       <Lightbulb className="w-5 h-5" />
-                      Indice suivant ({hintsUsed}/{exercise.hints.length})
+                      {t('exercise.hints')} ({hintsUsed}/{exercise.hints.length})
                     </button>
                   )}
                 </div>
@@ -232,7 +234,7 @@ export default function Exercise() {
                   className="flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg"
                 >
                   <Send className="w-5 h-5" />
-                  Soumettre ma réponse
+                  {t('exercise.submit')}
                 </button>
               </div>
             </div>
@@ -249,14 +251,14 @@ export default function Exercise() {
                     <>
                       <CheckCircle className="w-8 h-8 text-green-600" />
                       <h2 className="text-2xl font-bold text-green-900">
-                        🎉 Bravo ! Réponse correcte !
+                        🎉 {t('exercise.correct')}
                       </h2>
                     </>
                   ) : (
                     <>
                       <XCircle className="w-8 h-8 text-red-600" />
                       <h2 className="text-2xl font-bold text-red-900">
-                        Réponse incorrecte
+                        {t('exercise.incorrect')}
                       </h2>
                     </>
                   )}
@@ -277,7 +279,7 @@ export default function Exercise() {
               {/* Solution détaillée */}
               <div className="bg-white rounded-xl p-8 border-2 border-gray-200 mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  📖 Solution détaillée
+                  📖 {t('exercise.solution')}
                 </h2>
                 
                 <div className="prose prose-lg max-w-none mb-6">
@@ -315,14 +317,14 @@ export default function Exercise() {
                     onClick={handleRetry}
                     className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all"
                   >
-                    Réessayer
+                    {t('exercise.retry')}
                   </button>
                 )}
                 <button
                   onClick={() => navigate(-1)}
                   className="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-all"
                 >
-                  Retour aux exercices
+                  {t('actions.back')}
                 </button>
               </div>
             </>
