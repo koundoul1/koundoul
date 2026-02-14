@@ -11,12 +11,12 @@ export default function LanguageSwitcher({ dark = false }) {
 
   // Styles selon le thème (clair ou sombre)
   const buttonStyles = dark
-    ? "flex items-center gap-2 px-4 py-2 bg-gray-700 border-2 border-gray-600 rounded-lg font-semibold text-gray-200 hover:border-gray-500 hover:bg-gray-600 transition-colors disabled:opacity-50"
+    ? "flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-gray-800/95 backdrop-blur-xl border-2 border-gray-600 rounded-lg font-semibold text-white hover:border-purple-500 hover:bg-gray-700 transition-colors disabled:opacity-50 shadow-lg"
     : "flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-200 rounded-lg font-semibold text-gray-700 hover:border-koundoul-button-primary transition-colors disabled:opacity-50";
 
   const dropdownStyles = dark
-    ? "absolute top-full left-0 mt-2 w-48 bg-gray-700 border border-gray-600 rounded-lg shadow-lg z-50"
-    : "absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50";
+    ? "absolute top-full left-0 mt-2 w-48 bg-gray-800/95 backdrop-blur-xl border border-gray-600 rounded-lg shadow-2xl z-[10000]"
+    : "absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-[10000]";
 
   const itemStyles = (lang) => {
     if (dark) {
@@ -38,10 +38,11 @@ export default function LanguageSwitcher({ dark = false }) {
         onClick={() => setIsOpen(!isOpen)}
         disabled={isLoading}
         className={buttonStyles}
+        aria-label="Changer de langue"
       >
-        <Globe className="w-5 h-5" />
-        <span>{currentLang?.flag} {currentLang?.name}</span>
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <Globe className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+        <span className="text-xs sm:text-sm whitespace-nowrap">{currentLang?.flag} {currentLang?.name}</span>
+        <ChevronDown className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
