@@ -645,6 +645,94 @@ export default {
       }
     },
     
+    // Badges
+    badges: {
+      title: 'Badges',
+      subtitle: 'Débloquez des badges en progressant dans votre apprentissage',
+      stats: {
+        unlocked: 'Badges',
+        percentage: '% de collection complétée'
+      },
+      filters: {
+        all: 'Tous',
+        unlocked: 'Débloqués',
+        locked: 'Verrouillés'
+      },
+      unlocked: 'Débloqué le',
+      locked: 'Verrouillé',
+      noBadges: 'Aucun badge dans cette catégorie',
+      encouragement: {
+        title: 'Continue à progresser !',
+        message: 'Il te reste {count} badge{plural} à débloquer. Continue à apprendre pour tous les collectionner !'
+      }
+    },
+    
+    // Flashcards
+    flashcards: {
+      title: 'Révision Espacée',
+      subtitle: 'Mémorisez durablement avec l\'algorithme scientifique SM-2',
+      stats: {
+        total: 'Total',
+        due: 'À réviser',
+        mastered: 'Maîtrisées',
+        learning: 'En apprentissage'
+      },
+      due: 'À réviser maintenant',
+      noDue: 'Aucune carte à réviser pour le moment',
+      startReview: 'Commencer la révision',
+      createFlashcard: 'Créer une carte',
+      error: 'Erreur lors du chargement des données',
+      retry: 'Réessayer',
+      noData: 'Aucune donnée',
+      noStats: 'Aucune statistique disponible'
+    },
+    
+    // MicroLessons
+    microLessons: {
+      title: 'Micro-Leçons',
+      subtitle: 'Capsules de 5-10 minutes pour maîtriser tous les concepts',
+      filters: {
+        all: 'Toutes',
+        subject: 'Matière',
+        level: 'Niveau'
+      },
+      stats: {
+        total: 'Total',
+        completed: 'Complétées',
+        inProgress: 'En cours',
+        notStarted: 'Non commencées'
+      },
+      duration: 'Durée',
+      minutes: 'min',
+      start: 'Commencer',
+      continue: 'Continuer',
+      completed: 'Complétée',
+      inProgress: 'En cours',
+      notStarted: 'Non commencée',
+      noLessons: 'Aucune leçon disponible'
+    },
+    
+    // Exercise
+    exercise: {
+      title: 'Exercice',
+      difficulty: {
+        easy: 'Facile',
+        medium: 'Moyen',
+        hard: 'Difficile'
+      },
+      submit: 'Soumettre',
+      retry: 'Réessayer',
+      useHint: 'Utiliser un indice',
+      hints: 'Indices',
+      correct: 'Correct !',
+      incorrect: 'Incorrect',
+      solution: 'Solution',
+      explanation: 'Explication',
+      notFound: 'Exercice non trouvé',
+      enterAnswer: 'Veuillez entrer une réponse',
+      submitError: 'Erreur lors de la soumission'
+    },
+    
     // Actions communes
     actions: {
       save: 'Enregistrer',
@@ -1315,6 +1403,94 @@ export default {
         BUG: 'Bug Report',
         OTHER: 'Other'
       }
+    },
+    
+    // Badges
+    badges: {
+      title: 'Badges',
+      subtitle: 'Unlock badges by progressing in your learning',
+      stats: {
+        unlocked: 'Badges',
+        percentage: '% collection completed'
+      },
+      filters: {
+        all: 'All',
+        unlocked: 'Unlocked',
+        locked: 'Locked'
+      },
+      unlocked: 'Unlocked on',
+      locked: 'Locked',
+      noBadges: 'No badges in this category',
+      encouragement: {
+        title: 'Keep progressing!',
+        message: 'You have {count} badge{plural} left to unlock. Keep learning to collect them all!'
+      }
+    },
+    
+    // Flashcards
+    flashcards: {
+      title: 'Spaced Repetition',
+      subtitle: 'Memorize effectively with the scientific SM-2 algorithm',
+      stats: {
+        total: 'Total',
+        due: 'Due',
+        mastered: 'Mastered',
+        learning: 'Learning'
+      },
+      due: 'Due for review',
+      noDue: 'No cards to review at the moment',
+      startReview: 'Start Review',
+      createFlashcard: 'Create Card',
+      error: 'Error loading data',
+      retry: 'Retry',
+      noData: 'No data',
+      noStats: 'No statistics available'
+    },
+    
+    // MicroLessons
+    microLessons: {
+      title: 'Micro-Lessons',
+      subtitle: '5-10 minute capsules to master all concepts',
+      filters: {
+        all: 'All',
+        subject: 'Subject',
+        level: 'Level'
+      },
+      stats: {
+        total: 'Total',
+        completed: 'Completed',
+        inProgress: 'In Progress',
+        notStarted: 'Not Started'
+      },
+      duration: 'Duration',
+      minutes: 'min',
+      start: 'Start',
+      continue: 'Continue',
+      completed: 'Completed',
+      inProgress: 'In Progress',
+      notStarted: 'Not Started',
+      noLessons: 'No lessons available'
+    },
+    
+    // Exercise
+    exercise: {
+      title: 'Exercise',
+      difficulty: {
+        easy: 'Easy',
+        medium: 'Medium',
+        hard: 'Hard'
+      },
+      submit: 'Submit',
+      retry: 'Retry',
+      useHint: 'Use a hint',
+      hints: 'Hints',
+      correct: 'Correct!',
+      incorrect: 'Incorrect',
+      solution: 'Solution',
+      explanation: 'Explanation',
+      notFound: 'Exercise not found',
+      enterAnswer: 'Please enter an answer',
+      submitError: 'Error submitting'
     },
     
     // Common actions

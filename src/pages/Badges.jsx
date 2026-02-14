@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Award, Trophy, Lock, TrendingUp, CheckCircle } from 'lucide-react';
 import api from '../services/api';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function Badges() {
+  const { t } = useTranslation();
   const [badges, setBadges] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -53,10 +55,10 @@ export default function Badges() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            🏆 Badges
+            🏆 {t('badges.title')}
           </h1>
           <p className="text-gray-600 text-lg">
-            Débloquez des badges en progressant dans votre apprentissage
+            {t('badges.subtitle')}
           </p>
         </div>
 
@@ -65,10 +67,10 @@ export default function Badges() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-3xl font-bold mb-2">
-                {stats.unlocked} / {stats.total} Badges
+                {stats.unlocked} / {stats.total} {t('badges.stats.unlocked')}
               </h2>
               <p className="text-xl opacity-90">
-                {stats.percentage}% de collection complétée
+                {stats.percentage}{t('badges.stats.percentage')}
               </p>
             </div>
             <Trophy className="w-24 h-24 opacity-50" />
@@ -93,7 +95,7 @@ export default function Badges() {
                 : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200'
             }`}
           >
-            Tous ({badges.length})
+            {t('badges.filters.all')} ({badges.length})
           </button>
           <button
             onClick={() => setFilter('unlocked')}
@@ -103,7 +105,7 @@ export default function Badges() {
                 : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200'
             }`}
           >
-            Débloqués ({unlockedBadges.length})
+            {t('badges.filters.unlocked')} ({unlockedBadges.length})
           </button>
           <button
             onClick={() => setFilter('locked')}
@@ -113,7 +115,7 @@ export default function Badges() {
                 : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200'
             }`}
           >
-            Verrouillés ({lockedBadges.length})
+            {t('badges.filters.locked')} ({lockedBadges.length})
           </button>
         </div>
 
@@ -168,14 +170,14 @@ export default function Badges() {
                 {/* Date de déblocage */}
                 {badge.unlocked && badge.unlockedAt && (
                   <p className="text-xs text-green-600 font-semibold">
-                    Débloqué le {new Date(badge.unlockedAt).toLocaleDateString('fr-FR')}
+                    {t('badges.unlocked')} {new Date(badge.unlockedAt).toLocaleDateString()}
                   </p>
                 )}
 
                 {!badge.unlocked && (
                   <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
                     <Lock className="w-3 h-3" />
-                    <span>Verrouillé</span>
+                    <span>{t('badges.locked')}</span>
                   </div>
                 )}
               </div>
@@ -188,7 +190,7 @@ export default function Badges() {
           <div className="text-center py-12">
             <Award className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <p className="text-gray-600 text-lg">
-              Aucun badge dans cette catégorie
+              {t('badges.noBadges')}
             </p>
           </div>
         )}
@@ -198,11 +200,10 @@ export default function Badges() {
           <div className="mt-12 bg-blue-50 rounded-xl p-8 border-2 border-blue-200 text-center">
             <TrendingUp className="w-12 h-12 text-blue-600 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Continue à progresser !
+              {t('badges.encouragement.title')}
             </h3>
             <p className="text-gray-700 text-lg">
-              Il te reste {lockedBadges.length} badge{lockedBadges.length > 1 ? 's' : ''} à débloquer.
-              Continue à apprendre pour tous les collectionner !
+              {t('badges.encouragement.message', { count: lockedBadges.length, plural: lockedBadges.length > 1 ? 's' : '' })}
             </p>
           </div>
         )}
