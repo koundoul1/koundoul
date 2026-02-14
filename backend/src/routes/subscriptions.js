@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
-const auth = require('../middlewares/auth');
+const { authenticateToken } = require('../middlewares/auth');
 
 const prisma = new PrismaClient();
 
@@ -27,11 +27,11 @@ router.get('/plans', async (req, res) => {
 });
 
 // Obtenir l'abonnement actuel de l'utilisateur
-router.get('/my-subscription', auth, async (req, res) => {
+router.get('/my-subscription', authenticateToken, async (req, res) => {
   try {
     const subscription = await prisma.subscription.findFirst({
       where: {
-        userId: req.user.id,
+        userId: req.user.userId,
         status: 'active'
       },
       include: {
@@ -54,10 +54,10 @@ router.get('/my-subscription', auth, async (req, res) => {
 });
 
 // Obtenir l'historique des abonnements
-router.get('/history', auth, async (req, res) => {
+router.get('/history', authenticateToken, async (req, res) => {
   try {
     const subscriptions = await prisma.subscription.findMany({
-      where: { userId: req.user.id },
+      where: { userId: req.user.userId },
       include: {
         plan: true,
         payments: {
@@ -82,7 +82,7 @@ router.get('/history', auth, async (req, res) => {
 });
 
 // Créer un nouvel abonnement (après paiement)
-router.post('/create', auth, async (req, res) => {
+router.post('/create', authenticateToken, async (req, res) => {
   try {
     const { planId, paymentId } = req.body;
 
@@ -108,7 +108,7 @@ router.post('/create', auth, async (req, res) => {
     // Annuler l'abonnement actuel s'il existe
     await prisma.subscription.updateMany({
       where: {
-        userId: req.user.id,
+        userId: req.user.userId,
         status: 'active'
       },
       data: {
@@ -130,7 +130,7 @@ router.post('/create', auth, async (req, res) => {
     // Créer le nouvel abonnement
     const subscription = await prisma.subscription.create({
       data: {
-        userId: req.user.id,
+        userId: req.user.userId,
         planId: planId,
         status: 'active',
         startDate,
@@ -164,12 +164,12 @@ router.post('/create', auth, async (req, res) => {
 });
 
 // Annuler un abonnement
-router.post('/:id/cancel', auth, async (req, res) => {
+router.post('/:id/cancel', authenticateToken, async (req, res) => {
   try {
     const subscription = await prisma.subscription.findFirst({
       where: {
         id: req.params.id,
-        userId: req.user.id
+        userId: req.user.userId
       }
     });
 

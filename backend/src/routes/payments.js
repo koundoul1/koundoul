@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
-const auth = require('../middlewares/auth');
+const { authenticateToken } = require('../middlewares/auth');
 const axios = require('axios');
 
 const prisma = new PrismaClient();
@@ -10,7 +10,7 @@ const WAVE_BASE_URL = 'https://api.wave.com/v1';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 // Créer un paiement Wave
-router.post('/wave/create', auth, async (req, res) => {
+router.post('/wave/create', authenticateToken, async (req, res) => {
   try {
     const { planId, amount, currency = 'XOF' } = req.body;
 
@@ -39,7 +39,7 @@ router.post('/wave/create', auth, async (req, res) => {
     // Créer le paiement en base de données
     const payment = await prisma.payment.create({
       data: {
-        userId: req.user.id,
+        userId: req.user.userId,
         amount: paymentAmount,
         currency: paymentCurrency,
         status: 'pending',
@@ -210,12 +210,12 @@ router.post('/wave/webhook', async (req, res) => {
 });
 
 // Vérifier le statut d'un paiement
-router.get('/:id/status', auth, async (req, res) => {
+router.get('/:id/status', authenticateToken, async (req, res) => {
   try {
     const payment = await prisma.payment.findFirst({
       where: {
         id: req.params.id,
-        userId: req.user.id
+        userId: req.user.userId
       },
       include: {
         subscription: {
@@ -247,10 +247,10 @@ router.get('/:id/status', auth, async (req, res) => {
 });
 
 // Obtenir l'historique des paiements de l'utilisateur
-router.get('/my-payments', auth, async (req, res) => {
+router.get('/my-payments', authenticateToken, async (req, res) => {
   try {
     const payments = await prisma.payment.findMany({
-      where: { userId: req.user.id },
+      where: { userId: req.user.userId },
       include: {
         subscription: {
           include: {
