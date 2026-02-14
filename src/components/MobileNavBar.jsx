@@ -77,6 +77,47 @@ const MobileNavBar = () => {
       <nav className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
         <div className="bg-gray-900/95 backdrop-blur-xl border-t border-white/10 px-2 py-2 safe-bottom">
           <div className="flex justify-around items-center relative">
+            {/* Sélecteur de langue mobile - à gauche */}
+            <div className="relative">
+              <button
+                onClick={() => setShowLangMenu(!showLangMenu)}
+                className="flex items-center gap-1 px-2 py-2 bg-purple-600 hover:bg-purple-700 rounded-xl text-white transition-all"
+              >
+                <Globe className="w-4 h-4" />
+                <span className="text-xs font-bold">{currentLang?.flag}</span>
+              </button>
+
+              {showLangMenu && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-[9998] bg-black/50" 
+                    onClick={() => setShowLangMenu(false)}
+                  ></div>
+                  <div className="fixed bottom-20 left-2 right-2 bg-gray-800 border border-purple-500 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+                    <div className="p-2">
+                      <div className="text-xs text-gray-400 mb-2 px-2">Choisir la langue</div>
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            changeLanguage(lang.code);
+                            setShowLangMenu(false);
+                          }}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors ${
+                            lang.code === language ? 'bg-purple-600 text-white' : 'text-gray-200'
+                          }`}
+                        >
+                          <span className="text-xl">{lang.flag}</span>
+                          <span className="font-medium flex-1">{lang.name}</span>
+                          {lang.code === language && <span className="text-white">✓</span>}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
             {visibleItems.map((item, index) => {
               const active = isActive(item.href)
               const isSpecial = item.special
@@ -218,6 +259,45 @@ const MobileNavBar = () => {
                     <Sparkles className="w-4 h-4" />
                   </Link>
                 )}
+
+                {/* Sélecteur de langue - À la place du Profil en double */}
+                <div className="relative">
+                  <button
+                    onClick={() => setShowLangMenu(!showLangMenu)}
+                    className="flex items-center space-x-2 px-4 py-2 rounded-xl text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-all duration-200"
+                  >
+                    <Globe className="w-5 h-5" />
+                    <span className="font-medium">{currentLang?.flag} {currentLang?.name}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {showLangMenu && (
+                    <>
+                      <div 
+                        className="fixed inset-0 z-[9998]" 
+                        onClick={() => setShowLangMenu(false)}
+                      ></div>
+                      <div className="absolute top-full right-0 mt-2 w-48 bg-gray-800 border border-gray-600 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+                        {languages.map((lang) => (
+                          <button
+                            key={lang.code}
+                            onClick={() => {
+                              changeLanguage(lang.code);
+                              setShowLangMenu(false);
+                            }}
+                            className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-700 transition-colors ${
+                              lang.code === language ? 'bg-gray-700 text-white' : 'text-gray-200'
+                            }`}
+                          >
+                            <span className="text-xl">{lang.flag}</span>
+                            <span className="font-medium flex-1">{lang.name}</span>
+                            {lang.code === language && <span className="text-white">✓</span>}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
               </nav>
 
               {/* Actions */}

@@ -117,40 +117,6 @@ const NewHome = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative">
-      {/* Language Switcher - Fixed top right - Always visible above everything */}
-      <div className="fixed top-2 right-2 sm:top-4 sm:right-4 z-[9999]">
-        <div className="relative">
-          <button
-            onClick={() => setShowLangMenu(!showLangMenu)}
-            className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 rounded-lg font-bold text-white shadow-2xl transition-all"
-          >
-            <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="text-xs sm:text-sm font-bold">{currentLang?.flag} {currentLang?.name}</span>
-            <ChevronDown className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
-          </button>
-
-          {showLangMenu && (
-            <div className="absolute top-full right-0 mt-2 w-48 bg-gray-800 border border-purple-500 rounded-lg shadow-2xl z-[10000] overflow-hidden">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => {
-                    changeLanguage(lang.code);
-                    setShowLangMenu(false);
-                  }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-purple-600 transition-colors ${
-                    lang.code === language ? 'bg-purple-600 text-white' : 'text-gray-200'
-                  }`}
-                >
-                  <span className="text-xl">{lang.flag}</span>
-                  <span className="font-medium flex-1">{lang.name}</span>
-                  {lang.code === language && <span className="text-white">✓</span>}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-20 pb-32">
