@@ -21,6 +21,7 @@ import {
   Users,
   Award
 } from 'lucide-react'
+import LanguageSwitcher from '../components/LanguageSwitcher'
 
 const NewHome = () => {
   const [currentFeature, setCurrentFeature] = useState(0)
@@ -108,6 +109,11 @@ const NewHome = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      {/* Language Switcher - Fixed top right */}
+      <div className="fixed top-4 right-4 z-50">
+        <LanguageSwitcher dark={true} />
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-20 pb-32">
         {/* Animated background circles */}
