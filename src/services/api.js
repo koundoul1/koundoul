@@ -190,7 +190,9 @@ const api = {
       body: JSON.stringify(data),
     }),
     
-    getMyPayments: () => request('/payments/my-payments')
+    getMyPayments: () => request('/payments/my-payments'),
+    
+    getStatus: (paymentId) => request(`/payments/${paymentId}/status`)
   },
 
   // 📦 ABONNEMENTS

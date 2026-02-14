@@ -132,6 +132,8 @@ const forumRoutes = require('./routes/forum');
 const microlessonsRoutes = require('./routes/microlessons');
 const coachRoutes = require('./routes/coach');
 const usersRoutes = require('./routes/users');
+const subscriptionsRoutes = require('./routes/subscriptions');
+const paymentsRoutes = require('./routes/payments');
 const errorHandler = require('./middlewares/errorHandler');
 
 // API Routes
@@ -172,6 +174,8 @@ app.use('/api/forum', forumRoutes);
 app.use('/api/microlessons', microlessonsRoutes);
 app.use('/api/coach', coachRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/subscriptions', subscriptionsRoutes);
+app.use('/api/payments', paymentsRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

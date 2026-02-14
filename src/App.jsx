@@ -50,6 +50,7 @@ import QuestionBankDetail from './pages/QuestionBankDetail'
 import TestHintSystem from './pages/TestHintSystem'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
+import Subscriptions from './pages/Subscriptions'
 
 function NotFoundPage() {
   const { t } = useTranslation()
@@ -142,7 +143,15 @@ function App() {
                   <ProtectedRoute>
                     <Profile />
                   </ProtectedRoute>
-                } 
+                }
+              />
+              <Route 
+                path="/subscriptions" 
+                element={
+                  <ProtectedRoute>
+                    <Subscriptions />
+                  </ProtectedRoute>
+                }
               />
               <Route
                 path="/resources"

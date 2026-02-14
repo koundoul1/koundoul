@@ -756,8 +756,44 @@ export default {
       hide: 'Masquer',
       copy: 'Copier',
       share: 'Partager'
-    }
-  },
+    },
+    
+    // Subscriptions
+    subscriptions: {
+      title: 'Choisissez Votre Plan',
+      subtitle: 'Débloquez tout le potentiel de Koundoul',
+      monthly: 'par mois',
+      yearly: 'par an',
+      subscribe: 'S\'abonner',
+      processing: 'Traitement...',
+      loginRequired: 'Vous devez être connecté pour vous abonner',
+      current: {
+        title: 'Abonnement Actif',
+        active: 'Actif',
+        validUntil: 'Valide jusqu\'au'
+      },
+      payment: {
+        success: 'Paiement réussi ! Votre abonnement est maintenant actif.',
+        error: 'Erreur lors du paiement. Veuillez réessayer.',
+        createError: 'Erreur lors de la création du paiement'
+      },
+      why: {
+        title: 'Pourquoi S\'abonner ?',
+        unlimited: {
+          title: 'Résolution Illimitée',
+          desc: 'Résolvez autant de problèmes que vous voulez avec l\'IA'
+        },
+        support: {
+          title: 'Support Prioritaire',
+          desc: 'Obtenez de l\'aide rapidement avec notre support dédié'
+        },
+        progress: {
+          title: 'Progression Accélérée',
+          desc: 'Accédez à des outils avancés pour progresser plus vite'
+        }
+      },
+      security: 'Paiements sécurisés via Wave. Vos données sont protégées.'
+    },
   
   en: {
     // Navigation
@@ -1516,6 +1552,43 @@ export default {
       hide: 'Hide',
       copy: 'Copy',
       share: 'Share'
+    },
+    
+    // Subscriptions
+    subscriptions: {
+      title: 'Choose Your Plan',
+      subtitle: 'Unlock the full potential of Koundoul',
+      monthly: 'per month',
+      yearly: 'per year',
+      subscribe: 'Subscribe',
+      processing: 'Processing...',
+      loginRequired: 'You must be logged in to subscribe',
+      current: {
+        title: 'Active Subscription',
+        active: 'Active',
+        validUntil: 'Valid until'
+      },
+      payment: {
+        success: 'Payment successful! Your subscription is now active.',
+        error: 'Payment error. Please try again.',
+        createError: 'Error creating payment'
+      },
+      why: {
+        title: 'Why Subscribe?',
+        unlimited: {
+          title: 'Unlimited Resolution',
+          desc: 'Solve as many problems as you want with AI'
+        },
+        support: {
+          title: 'Priority Support',
+          desc: 'Get help quickly with our dedicated support'
+        },
+        progress: {
+          title: 'Accelerated Progress',
+          desc: 'Access advanced tools to progress faster'
+        }
+      },
+      security: 'Secure payments via Wave. Your data is protected.'
     }
   }
 };

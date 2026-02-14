@@ -36,6 +36,8 @@ model User {
   duelParticipations DuelParticipation[]
   microLessonCompletions MicroLessonCompletion[]
   coachSessions CoachSession[]
+  subscriptions Subscription[]
+  payments     Payment[]
 
   @@index([email])
   @@index([username])
@@ -319,4 +321,74 @@ model CoachSession {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+// Subscription Plans
+model SubscriptionPlan {
+  id          String   @id @default(cuid())
+  name        String   // FREE, PREMIUM, FAMILY
+  displayName String
+  description String
+  price       Int      // En centimes (XOF)
+  currency    String   @default("XOF")
+  interval    String   // monthly, yearly
+  features    Json     // Array of features
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  subscriptions Subscription[]
+
+  @@index([isActive])
+  @@index([name])
+}
+
+// Subscriptions
+model Subscription {
+  id          String   @id @default(cuid())
+  userId      String
+  planId      String
+  status      String   // active, cancelled, expired, pending
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+  cancelledAt DateTime?
+  autoRenew   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan        SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
+  payments    Payment[]
+
+  @@unique([userId, status])
+  @@index([userId])
+  @@index([status])
+  @@index([endDate])
+}
+
+// Payments
+model Payment {
+  id              String   @id @default(cuid())
+  userId          String
+  subscriptionId  String?
+  amount          Int      // En centimes
+  currency        String   @default("XOF")
+  status          String   // pending, completed, failed, cancelled
+  paymentMethod   String   // wave, stripe, orange_money
+  waveCheckoutId  String?  // ID de session Wave
+  waveTransactionId String? // ID transaction Wave
+  metadata        Json?    // Données supplémentaires
+  errorMessage    String?
+  completedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([status])
+  @@index([waveCheckoutId])
+  @@index([waveTransactionId])
 }
