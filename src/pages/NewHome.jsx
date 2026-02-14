@@ -22,27 +22,29 @@ import {
   Award
 } from 'lucide-react'
 import LanguageSwitcher from '../components/LanguageSwitcher'
+import { useTranslation } from '../hooks/useTranslation'
 
 const NewHome = () => {
+  const { t } = useTranslation()
   const [currentFeature, setCurrentFeature] = useState(0)
 
   const features = [
     {
       icon: <Brain className="w-8 h-8" />,
-      title: "Résolveur IA Révolutionnaire",
-      desc: "Résolvez vos problèmes avec l'IA la plus avancée. Mode guidé avec indices progressifs.",
+      title: t('newHome.features.ai.title'),
+      desc: t('newHome.features.ai.desc'),
       gradient: "from-blue-500 to-purple-500"
     },
     {
       icon: <BookOpen className="w-8 h-8" />,
-      title: "450 Micro-Leçons",
-      desc: "Capsules de 5-10 min pour maîtriser tous les concepts. Structurées et progressives.",
+      title: t('newHome.features.microLessons.title'),
+      desc: t('newHome.features.microLessons.desc'),
       gradient: "from-purple-500 to-pink-500"
     },
     {
       icon: <Trophy className="w-8 h-8" />,
-      title: "1800 Exercices Corrigés",
-      desc: "900 QCM + 900 Exercices avec corrections détaillées. Tous les chapitres du programme.",
+      title: t('newHome.features.exercises.title'),
+      desc: t('newHome.features.exercises.desc'),
       gradient: "from-pink-500 to-orange-500"
     }
   ]
@@ -56,52 +58,52 @@ const NewHome = () => {
   }, [])
 
   const stats = [
-    { value: '1800+', label: 'Exercices', icon: '📝', color: 'blue' },
-    { value: '450+', label: 'Micro-Leçons', icon: '📚', color: 'purple' },
-    { value: '18', label: 'Chapitres', icon: '🎯', color: 'pink' },
-    { value: '100%', label: 'Gratuit', icon: '✨', color: 'amber' }
+    { value: '1800+', label: t('newHome.stats.exercises'), icon: '📝', color: 'blue' },
+    { value: '450+', label: t('newHome.stats.microLessons'), icon: '📚', color: 'purple' },
+    { value: '18', label: t('newHome.stats.chapters'), icon: '🎯', color: 'pink' },
+    { value: '100%', label: t('newHome.stats.free'), icon: '✨', color: 'amber' }
   ]
 
   const subjects = [
     { 
-      name: 'Mathématiques', 
+      name: t('newHome.subjects.math.name'), 
       icon: '📐', 
       gradient: 'from-blue-500 to-cyan-500',
-      topics: 'Algèbre, Géométrie, Analyse'
+      topics: t('newHome.subjects.math.topics')
     },
     { 
-      name: 'Physique', 
+      name: t('newHome.subjects.physics.name'), 
       icon: '⚛️', 
       gradient: 'from-purple-500 to-pink-500',
-      topics: 'Mécanique, Électricité, Optique'
+      topics: t('newHome.subjects.physics.topics')
     },
     { 
-      name: 'Chimie', 
+      name: t('newHome.subjects.chemistry.name'), 
       icon: '🧪', 
       gradient: 'from-pink-500 to-orange-500',
-      topics: 'Atomes, Réactions, Organique'
+      topics: t('newHome.subjects.chemistry.topics')
     }
   ]
 
   const testimonials = [
     {
-      name: 'Marie L.',
-      level: 'Terminale S',
-      text: "Le résolveur IA avec le mode guidé m'a sauvé la vie ! J'ai gagné 3 points en maths !",
+      name: t('newHome.testimonials.marie.name'),
+      level: t('newHome.testimonials.marie.level'),
+      text: t('newHome.testimonials.marie.text'),
       avatar: 'M',
       rating: 5
     },
     {
-      name: 'Lucas D.',
-      level: 'Première STI2D',
-      text: "Les 1800 exercices corrigés sont une mine d'or. C'est comme avoir un prof particulier 24/7.",
+      name: t('newHome.testimonials.lucas.name'),
+      level: t('newHome.testimonials.lucas.level'),
+      text: t('newHome.testimonials.lucas.text'),
       avatar: 'L',
       rating: 5
     },
     {
-      name: 'Sarah K.',
-      level: 'Seconde',
-      text: "Le profil d'apprentissage visuel change tout ! Les graphiques interactifs m'aident vraiment.",
+      name: t('newHome.testimonials.sarah.name'),
+      level: t('newHome.testimonials.sarah.level'),
+      text: t('newHome.testimonials.sarah.text'),
       avatar: 'S',
       rating: 5
     }
@@ -128,22 +130,21 @@ const NewHome = () => {
           {/* Badge Nouveau */}
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full border border-purple-500/30 mb-6 animate-float">
             <Sparkles className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm font-semibold">Nouvelle plateforme 2026</span>
+            <span className="text-sm font-semibold">{t('newHome.platformBadge')}</span>
           </div>
 
           {/* Titre principal avec gradient */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight">
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
-              Réussis en Sciences
+              {t('newHome.title')}
             </span>
             <br />
-            <span className="text-white">Avec l'IA</span>
+            <span className="text-white">{t('newHome.titleWith')}</span>
           </h1>
 
           {/* Sous-titre */}
           <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            1800 exercices corrigés + 450 micro-leçons + Explications détaillées. 
-            Progressez à votre rythme de la Seconde à la Terminale.
+            {t('newHome.subtitle')}
           </p>
 
           {/* CTAs */}
@@ -153,14 +154,14 @@ const NewHome = () => {
               className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Zap className="w-5 h-5" />
-              Commencer Gratuitement
+              {t('newHome.startButton')}
             </Link>
             <Link
               to="/exercices"
               className="px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl font-bold hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Target className="w-5 h-5" />
-              Voir les Exercices
+              {t('newHome.seeExercises')}
             </Link>
           </div>
 
@@ -196,10 +197,10 @@ const NewHome = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-black mb-4">
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Fonctionnalités Révolutionnaires
+                {t('newHome.features.title')}
               </span>
             </h2>
-            <p className="text-gray-400 text-lg">Tout ce dont vous avez besoin pour réussir</p>
+            <p className="text-gray-400 text-lg">{t('newHome.features.subtitle')}</p>
           </div>
 
           <div className="relative h-64 sm:h-80">
@@ -246,10 +247,10 @@ const NewHome = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-black mb-4">
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Trois Matières, Un Objectif
+                {t('newHome.subjects.title')}
               </span>
             </h2>
-            <p className="text-gray-400 text-lg">Mathématiques, Physique et Chimie au programme</p>
+            <p className="text-gray-400 text-lg">{t('newHome.subjects.subtitle')}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -265,7 +266,7 @@ const NewHome = () => {
                 </h3>
                 <p className="text-gray-400 mb-4">{subject.topics}</p>
                 <div className="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
-                  <span>Explorer</span>
+                  <span>{t('newHome.subjects.explore')}</span>
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </div>
               </Link>
@@ -280,7 +281,7 @@ const NewHome = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-black mb-4">
               <span className="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">
-                Ils Ont Réussi Avec Koundoul
+                {t('newHome.testimonials.title')}
               </span>
             </h2>
           </div>
@@ -320,17 +321,17 @@ const NewHome = () => {
             <div className="relative z-10">
               <Flame className="w-16 h-16 mx-auto mb-6 text-yellow-400 animate-pulse" />
               <h2 className="text-4xl sm:text-5xl font-black mb-4">
-                Prêt à Réussir ?
+                {t('newHome.finalCta.title')}
               </h2>
               <p className="text-xl text-white/90 mb-8">
-                Rejoignez des milliers d'élèves qui progressent chaque jour
+                {t('newHome.finalCta.subtitle')}
               </p>
               <Link
                 to="/register"
                 className="inline-flex items-center gap-2 px-10 py-5 bg-white text-purple-600 rounded-2xl font-black text-lg hover:scale-105 transition-all duration-300 shadow-2xl"
               >
                 <Zap className="w-6 h-6" />
-                Commencer Maintenant
+                {t('newHome.finalCta.button')}
                 <ArrowRight className="w-6 h-6" />
               </Link>
             </div>
@@ -341,7 +342,7 @@ const NewHome = () => {
       {/* Footer Minimal */}
       <footer className="py-8 px-4 border-t border-white/10">
         <div className="max-w-6xl mx-auto text-center text-gray-400">
-          <p>© 2026 Koundoul. Fait avec ❤️ pour votre réussite.</p>
+          <p>{t('newHome.footer')}</p>
         </div>
       </footer>
     </div>

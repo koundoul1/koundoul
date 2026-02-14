@@ -249,6 +249,79 @@ export default {
       continue: 'Commencer'
     },
     
+    // NewHome - Page d'accueil moderne
+    newHome: {
+      platformBadge: 'Nouvelle plateforme 2026',
+      title: 'Réussis en Sciences',
+      titleWith: 'Avec l\'IA',
+      subtitle: '1800 exercices corrigés + 450 micro-leçons + Explications détaillées. Progressez à votre rythme de la Seconde à la Terminale.',
+      startButton: 'Commencer Gratuitement',
+      seeExercises: 'Voir les Exercices',
+      stats: {
+        exercises: 'Exercices',
+        microLessons: 'Micro-Leçons',
+        chapters: 'Chapitres',
+        free: 'Gratuit'
+      },
+      features: {
+        title: 'Fonctionnalités Révolutionnaires',
+        subtitle: 'Tout ce dont vous avez besoin pour réussir',
+        ai: {
+          title: 'Résolveur IA Révolutionnaire',
+          desc: 'Résolvez vos problèmes avec l\'IA la plus avancée. Mode guidé avec indices progressifs.'
+        },
+        microLessons: {
+          title: '450 Micro-Leçons',
+          desc: 'Capsules de 5-10 min pour maîtriser tous les concepts. Structurées et progressives.'
+        },
+        exercises: {
+          title: '1800 Exercices Corrigés',
+          desc: '900 QCM + 900 Exercices avec corrections détaillées. Tous les chapitres du programme.'
+        }
+      },
+      subjects: {
+        title: 'Trois Matières, Un Objectif',
+        subtitle: 'Mathématiques, Physique et Chimie au programme',
+        math: {
+          name: 'Mathématiques',
+          topics: 'Algèbre, Géométrie, Analyse'
+        },
+        physics: {
+          name: 'Physique',
+          topics: 'Mécanique, Électricité, Optique'
+        },
+        chemistry: {
+          name: 'Chimie',
+          topics: 'Atomes, Réactions, Organique'
+        },
+        explore: 'Explorer'
+      },
+      testimonials: {
+        title: 'Ils Ont Réussi Avec Koundoul',
+        marie: {
+          name: 'Marie L.',
+          level: 'Terminale S',
+          text: 'Le résolveur IA avec le mode guidé m\'a sauvé la vie ! J\'ai gagné 3 points en maths !'
+        },
+        lucas: {
+          name: 'Lucas D.',
+          level: 'Première STI2D',
+          text: 'Les 1800 exercices corrigés sont une mine d\'or. C\'est comme avoir un prof particulier 24/7.'
+        },
+        sarah: {
+          name: 'Sarah K.',
+          level: 'Seconde',
+          text: 'Le profil d\'apprentissage visuel change tout ! Les graphiques interactifs m\'aident vraiment.'
+        }
+      },
+      finalCta: {
+        title: 'Prêt à Réussir ?',
+        subtitle: 'Rejoignez des milliers d\'élèves qui progressent chaque jour',
+        button: 'Commencer Maintenant'
+      },
+      footer: '© 2026 Koundoul. Fait avec ❤️ pour votre réussite.'
+    },
+    
     dashboard: {
       title: 'Bonjour {name} ! 👋',
       subtitle: 'Prêt à continuer ton apprentissage ?',
@@ -846,6 +919,79 @@ export default {
       discover: 'Discover',
       exploreAdvanced: 'Explore All Advanced Features',
       continue: 'Start'
+    },
+    
+    // NewHome - Modern home page
+    newHome: {
+      platformBadge: 'New Platform 2026',
+      title: 'Succeed in Science',
+      titleWith: 'With AI',
+      subtitle: '1800 solved exercises + 450 micro-lessons + Detailed explanations. Progress at your own pace from 10th to 12th grade.',
+      startButton: 'Start for Free',
+      seeExercises: 'View Exercises',
+      stats: {
+        exercises: 'Exercises',
+        microLessons: 'Micro-Lessons',
+        chapters: 'Chapters',
+        free: 'Free'
+      },
+      features: {
+        title: 'Revolutionary Features',
+        subtitle: 'Everything you need to succeed',
+        ai: {
+          title: 'Revolutionary AI Solver',
+          desc: 'Solve your problems with the most advanced AI. Guided mode with progressive hints.'
+        },
+        microLessons: {
+          title: '450 Micro-Lessons',
+          desc: '5-10 min capsules to master all concepts. Structured and progressive.'
+        },
+        exercises: {
+          title: '1800 Solved Exercises',
+          desc: '900 MCQ + 900 Exercises with detailed corrections. All curriculum chapters.'
+        }
+      },
+      subjects: {
+        title: 'Three Subjects, One Goal',
+        subtitle: 'Mathematics, Physics and Chemistry in the curriculum',
+        math: {
+          name: 'Mathematics',
+          topics: 'Algebra, Geometry, Analysis'
+        },
+        physics: {
+          name: 'Physics',
+          topics: 'Mechanics, Electricity, Optics'
+        },
+        chemistry: {
+          name: 'Chemistry',
+          topics: 'Atoms, Reactions, Organic'
+        },
+        explore: 'Explore'
+      },
+      testimonials: {
+        title: 'They Succeeded With Koundoul',
+        marie: {
+          name: 'Marie L.',
+          level: '12th Grade Science',
+          text: 'The AI solver with guided mode saved my life! I gained 3 points in math!'
+        },
+        lucas: {
+          name: 'Lucas D.',
+          level: '11th Grade STI2D',
+          text: 'The 1800 solved exercises are a gold mine. It\'s like having a private tutor 24/7.'
+        },
+        sarah: {
+          name: 'Sarah K.',
+          level: '10th Grade',
+          text: 'The visual learning profile changes everything! Interactive graphs really help me.'
+        }
+      },
+      finalCta: {
+        title: 'Ready to Succeed?',
+        subtitle: 'Join thousands of students who progress every day',
+        button: 'Start Now'
+      },
+      footer: '© 2026 Koundoul. Made with ❤️ for your success.'
     },
     
     dashboard: {
