@@ -264,7 +264,7 @@ const MobileNavBar = () => {
                 <div className="relative">
                   <button
                     onClick={() => setShowLangMenu(!showLangMenu)}
-                    className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 border border-gray-600/50 text-white transition-all duration-200"
+                    className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 text-white font-semibold shadow-lg transition-all duration-200"
                   >
                     <Globe className="w-5 h-5" />
                     <span className="font-medium">{currentLang?.flag} {currentLang?.name}</span>
