@@ -3,8 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Brain, Calendar, TrendingUp, Target, Clock, Flame, Play, Plus } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function Flashcards() {
+  const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
@@ -40,7 +42,7 @@ export default function Flashcards() {
         // Token expiré, rediriger vers la connexion
         navigate('/login');
       } else {
-        setError('Erreur lors du chargement des données');
+        setError(t('flashcards.error'));
       }
     } finally {
       setLoading(false);
@@ -60,13 +62,13 @@ export default function Flashcards() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="text-6xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Erreur de chargement</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('flashcards.error')}</h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
             onClick={() => fetchData()}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
-            Réessayer
+            {t('flashcards.retry')}
           </button>
         </div>
       </div>
@@ -78,8 +80,8 @@ export default function Flashcards() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="text-6xl mb-4">📊</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Aucune donnée</h2>
-          <p className="text-gray-600">Aucune statistique disponible</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('flashcards.noData')}</h2>
+          <p className="text-gray-600">{t('flashcards.noStats')}</p>
         </div>
       </div>
     );
@@ -93,10 +95,10 @@ export default function Flashcards() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
             <Brain className="w-10 h-10 text-blue-600" />
-            Révision Espacée
+            {t('flashcards.title')}
           </h1>
           <p className="text-gray-600 text-lg">
-            Mémorisez durablement avec l'algorithme scientifique SM-2
+            {t('flashcards.subtitle')}
           </p>
         </div>
 
@@ -107,7 +109,7 @@ export default function Flashcards() {
               <Target className="w-8 h-8 text-blue-600" />
               <span className="text-3xl font-bold text-gray-900">{stats.dueCount}</span>
             </div>
-            <p className="text-gray-600 font-semibold">À réviser aujourd'hui</p>
+            <p className="text-gray-600 font-semibold">{t('flashcards.stats.due')}</p>
           </div>
 
           <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
@@ -115,7 +117,7 @@ export default function Flashcards() {
               <Plus className="w-8 h-8 text-green-600" />
               <span className="text-3xl font-bold text-gray-900">{stats.newCount}</span>
             </div>
-            <p className="text-gray-600 font-semibold">Nouvelles cartes</p>
+            <p className="text-gray-600 font-semibold">{t('flashcards.stats.learning')}</p>
           </div>
 
           <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
@@ -123,7 +125,7 @@ export default function Flashcards() {
               <TrendingUp className="w-8 h-8 text-purple-600" />
               <span className="text-3xl font-bold text-gray-900">{stats.retentionRate}%</span>
             </div>
-            <p className="text-gray-600 font-semibold">Taux de rétention</p>
+            <p className="text-gray-600 font-semibold">{t('flashcards.stats.mastered')}</p>
           </div>
 
           <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
@@ -131,7 +133,7 @@ export default function Flashcards() {
               <Flame className="w-8 h-8 text-orange-600" />
               <span className="text-3xl font-bold text-gray-900">{stats.streak}</span>
             </div>
-            <p className="text-gray-600 font-semibold">Jours consécutifs</p>
+            <p className="text-gray-600 font-semibold">{t('dashboard.stats.streak')}</p>
           </div>
         </div>
 
@@ -144,7 +146,7 @@ export default function Flashcards() {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                   <Calendar className="w-7 h-7 text-blue-600" />
-                  Révisions du jour
+                  {t('flashcards.due')}
                 </h2>
                 {dueFlashcards.length > 0 && (
                   <Link
@@ -152,7 +154,7 @@ export default function Flashcards() {
                     className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
                   >
                     <Play className="w-5 h-5" />
-                    Commencer ({dueFlashcards.length})
+                    {t('flashcards.startReview')} ({dueFlashcards.length})
                   </Link>
                 )}
               </div>
@@ -161,10 +163,10 @@ export default function Flashcards() {
                 <div className="text-center py-12">
                   <div className="text-6xl mb-4">🎉</div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Bravo ! Aucune révision aujourd'hui
+                    {t('flashcards.noDue')}
                   </h3>
                   <p className="text-gray-600">
-                    Revenez demain pour continuer votre apprentissage
+                    {t('actions.continue')}
                   </p>
                 </div>
               ) : (
@@ -183,7 +185,7 @@ export default function Flashcards() {
                             </span>
                             {flashcard.isNew && (
                               <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">
-                                NOUVEAU
+                                {t('common.new')}
                               </span>
                             )}
                           </div>
@@ -217,14 +219,14 @@ export default function Flashcards() {
 
             {/* Progression */}
             <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <TrendingUp className="w-7 h-7 text-purple-600" />
-                Votre progression
+                {t('dashboard.subjectProgress.title')}
               </h2>
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-gray-700 font-semibold">Cartes maîtrisées</span>
+                    <span className="text-gray-700 font-semibold">{t('flashcards.stats.mastered')}</span>
                     <span className="text-gray-900 font-bold">
                       {stats.totalReviews - stats.dueCount - stats.newCount} / {stats.totalFlashcards}
                     </span>
