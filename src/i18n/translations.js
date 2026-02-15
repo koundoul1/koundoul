@@ -1406,6 +1406,7 @@ export default {
       chemistry: 'Chemistry',
       exploreMath: 'Explore mathematical concepts from 10th to 12th grade',
       discoverPhysics: 'Discover the laws and principles of physics',
+      explorePhysics: 'Explore the laws and principles of physics',
       exploreChemistry: 'Explore organic and inorganic chemistry',
       lessons: 'lessons',
       strengths: 'Our Strengths',
