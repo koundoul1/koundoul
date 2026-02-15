@@ -1,0 +1,9 @@
+# Fichiers à ignorer pour Vercel
+backend/
+node_modules/
+.git/
+*.md
+!README.md
+render.yaml
+DEPLOIEMENT_BACKEND.md
+
