@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Brain, Trophy, User, Sparkles, Search, Bell } from 'lucide-react';
+import { Home, BookOpen, Brain, Trophy, User, Sparkles, Search, Bell, Globe, ChevronDown } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 
 const MobileNavBar = () => {
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t, language, changeLanguage, getAvailableLanguages } = useTranslation();
+  const languages = getAvailableLanguages();
+  const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' };
+  const [showLangMenu, setShowLangMenu] = useState(false);
 
   const navItems = [
     { 
@@ -174,6 +177,46 @@ const MobileNavBar = () => {
                   <span>{t('mobileNav.ai')}</span>
                   <Sparkles className="w-4 h-4" />
                 </Link>
+
+                {/* Sélecteur de langue - À la place du Profil */}
+                <div className="relative" style={{ display: 'block', visibility: 'visible', opacity: 1 }}>
+                  <button
+                    onClick={() => setShowLangMenu(!showLangMenu)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 border-2 border-purple-500 text-white font-semibold shadow-lg transition-all duration-200"
+                    style={{ minWidth: '140px', display: 'flex' }}
+                  >
+                    <Globe className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium whitespace-nowrap">{currentLang.flag} {currentLang.name}</span>
+                    <ChevronDown className={`w-4 h-4 flex-shrink-0 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {showLangMenu && (
+                    <>
+                      <div 
+                        className="fixed inset-0 z-[9998]" 
+                        onClick={() => setShowLangMenu(false)}
+                      ></div>
+                      <div className="absolute top-full right-0 mt-2 w-48 bg-gray-800 border border-gray-600 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+                        {languages.map((lang) => (
+                          <button
+                            key={lang.code}
+                            onClick={() => {
+                              changeLanguage(lang.code);
+                              setShowLangMenu(false);
+                            }}
+                            className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-gray-700 transition-colors ${
+                              lang.code === language ? 'bg-gray-700 text-white' : 'text-gray-200'
+                            }`}
+                          >
+                            <span className="text-xl">{lang.flag}</span>
+                            <span className="font-medium flex-1">{lang.name}</span>
+                            {lang.code === language && <span className="text-white">✓</span>}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
               </nav>
 
               <div className="flex items-center gap-3">
