@@ -204,7 +204,8 @@ const Profile = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600">{t('profile.loading')}</p>
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
+          <p className="text-gray-600 font-medium">{t('profile.loading') || 'Chargement du profil...'}</p>
         </div>
       </div>
     )
