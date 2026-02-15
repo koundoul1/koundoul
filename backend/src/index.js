@@ -134,6 +134,7 @@ const coachRoutes = require('./routes/coach');
 const usersRoutes = require('./routes/users');
 const subscriptionsRoutes = require('./routes/subscriptions');
 const paymentsRoutes = require('./routes/payments');
+const parentRoutes = require('./routes/parent');
 const errorHandler = require('./middlewares/errorHandler');
 
 // API Routes
@@ -176,6 +177,8 @@ app.use('/api/coach', coachRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/subscriptions', subscriptionsRoutes);
 app.use('/api/payments', paymentsRoutes);
+app.use('/api/parent', parentRoutes);
+app.use('/api/parent', parentRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

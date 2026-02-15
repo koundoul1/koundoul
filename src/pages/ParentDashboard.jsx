@@ -53,10 +53,10 @@ const ParentDashboard = () => {
   const loadChildren = async () => {
     try {
       setLoadingChildren(true);
-      const response = await api.get('/parent/children');
+      const response = await api.parent.getChildren();
       
-      if (response.data.success) {
-        const childrenData = response.data.data;
+      if (response.success) {
+        const childrenData = response.data || [];
         setChildren(childrenData);
         
         // Sélectionner le premier enfant par défaut
@@ -74,10 +74,10 @@ const ParentDashboard = () => {
   const loadDashboard = async (childId) => {
     try {
       setLoadingDashboard(true);
-      const response = await api.get(`/parent/dashboard/${childId}`);
+      const response = await api.parent.getDashboard(childId, timeRange);
       
-      if (response.data.success) {
-        setDashboardData(response.data.data);
+      if (response.success) {
+        setDashboardData(response.data);
       }
     } catch (error) {
       console.error('Erreur chargement dashboard:', error);

@@ -531,6 +531,17 @@ const api = {
       method: 'POST',
       body: JSON.stringify(data)
     })
+  },
+
+  // 👨‍👩‍👧‍👦 PARENT DASHBOARD
+  parent: {
+    getChildren: () => request('/parent/children'),
+    getDashboard: (childId, timeRange = 'week') => request(`/parent/dashboard/${childId}?timeRange=${timeRange}`),
+    getNotifications: (childId) => request(`/parent/notifications/${childId}`),
+    updateNotificationLevel: (childId, level) => request(`/parent/notifications/${childId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ level }),
+    })
   }
 }
 

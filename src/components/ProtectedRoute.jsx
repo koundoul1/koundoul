@@ -1,15 +1,15 @@
 /**
- * 🔓 Route Publique Koundoul
- * Composant permettant l'accès sans authentification requise
- * L'authentification est optionnelle pour améliorer l'expérience utilisateur
+ * 🔒 Route Protégée Koundoul
+ * Composant vérifiant l'authentification avant d'autoriser l'accès
  */
 
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Loader2 } from 'lucide-react'
 
 const ProtectedRoute = ({ children }) => {
-  const { loading } = useAuth()
+  const { loading, isAuthenticated } = useAuth()
 
   // Afficher un loader pendant la vérification de l'authentification
   if (loading) {
@@ -23,8 +23,11 @@ const ProtectedRoute = ({ children }) => {
     )
   }
 
-  // Permettre l'accès même sans authentification
-  // Les composants enfants peuvent vérifier l'authentification si nécessaire
+  // Rediriger vers la page de connexion si non authentifié
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
+  }
+
   return children
 }
 
