@@ -157,4 +157,48 @@ router.get('/badges', authenticateToken, async (req, res, next) => {
   }
 });
 
+// Generate invitation code
+router.post('/generate-invitation-code', authenticateToken, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+    
+    // Générer un code unique (8 caractères alphanumériques)
+    const generateCode = () => {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 8; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return code;
+    };
+
+    let invitationCode;
+    let isUnique = false;
+    
+    // Vérifier l'unicité du code
+    while (!isUnique) {
+      invitationCode = generateCode();
+      const existing = await prisma.user.findUnique({
+        where: { invitationCode }
+      });
+      if (!existing) {
+        isUnique = true;
+      }
+    }
+
+    // Mettre à jour l'utilisateur avec le code
+    await prisma.user.update({
+      where: { id: userId },
+      data: { invitationCode }
+    });
+
+    res.json({
+      success: true,
+      data: { invitationCode }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

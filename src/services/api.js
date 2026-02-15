@@ -154,9 +154,9 @@ const api = {
 
   // 👤 UTILISATEURS
   user: {
-    getProfile: () => request('/user/profile'),
-    getStats: () => request('/user/stats'),
-    generateInvitationCode: () => request('/user/generate-invitation-code', {
+    getProfile: () => request('/users/profile'),
+    getStats: () => request('/users/stats'),
+    generateInvitationCode: () => request('/users/generate-invitation-code', {
       method: 'POST'
     })
   },
