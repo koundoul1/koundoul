@@ -178,7 +178,6 @@ app.use('/api/users', usersRoutes);
 app.use('/api/subscriptions', subscriptionsRoutes);
 app.use('/api/payments', paymentsRoutes);
 app.use('/api/parent', parentRoutes);
-app.use('/api/parent', parentRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
@@ -200,7 +199,12 @@ const server = app.listen(PORT, async () => {
   console.log('');
   
   // Vérifier l'état des migrations au démarrage
-  await checkMigrationsStatus();
+  const migrationStatus = await checkMigrationsStatus();
+  
+  // Initialiser les plans d'abonnement si les migrations sont OK
+  if (migrationStatus.migrated) {
+    await initSubscriptionPlans();
+  }
 });
 
 // Graceful shutdown
