@@ -26,7 +26,8 @@ import {
   Shield,
   Loader2,
   CreditCard,
-  Clock
+  Clock,
+  Settings
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
