@@ -32,13 +32,8 @@ const MobileNavBar = () => {
       icon: Trophy, 
       label: t('mobileNav.challenge'),
       color: 'amber'
-    },
-    { 
-      path: '/profile', 
-      icon: User, 
-      label: t('mobileNav.profile'),
-      color: 'green'
     }
+    // Profile retiré - seulement icône à droite
   ];
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path);
@@ -191,16 +186,13 @@ const MobileNavBar = () => {
                   <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
                 </button>
 
+                {/* Icône Profil uniquement - sans texte */}
                 <Link 
                   to="/profile"
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
-                    isActive('/profile')
-                      ? 'bg-green-500/20 border border-green-500/40 text-green-400'
-                      : 'text-gray-400 hover:bg-white/5 hover:text-white'
-                  }`}
+                  className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center hover:scale-110 transition-transform"
+                  title={t('mobileNav.profile')}
                 >
-                  <User className="w-5 h-5" />
-                  <span>{t('mobileNav.profile')}</span>
+                  <User className="w-5 h-5 text-white" />
                 </Link>
               </div>
             </div>
