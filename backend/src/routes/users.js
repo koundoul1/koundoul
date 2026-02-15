@@ -19,6 +19,7 @@ router.get('/profile', authenticateToken, async (req, res, next) => {
         xp: true,
         level: true,
         streak: true,
+        invitationCode: true,
         createdAt: true,
         updatedAt: true
       }
@@ -108,19 +109,40 @@ router.get('/stats', authenticateToken, async (req, res, next) => {
       }),
       prisma.quizAttempt.count({
         where: { userId, completedAt: { not: null } }
+      }),
+      prisma.challengeAttempt.count({
+        where: { userId, completed: true }
+      }),
+      prisma.flashcardReview.count({
+        where: { userId }
       })
     ]);
 
     const calculatedLevel = Math.floor((user?.xp || 0) / 1000) + 1;
+    
+    // Calculer les jours depuis l'inscription
+    const daysSinceJoined = user?.createdAt 
+      ? Math.floor((new Date() - new Date(user.createdAt)) / (1000 * 60 * 60 * 24))
+      : 0;
+    
+    // Calculer le temps d'étude estimé (en heures)
+    const estimatedStudyTimeHours = Math.round(
+      (exercisesCompleted * 0.25 + quizAttempts * 0.25 + challengesCompleted * 0.33 + flashcardsCount * 0.05) * 10
+    ) / 10;
 
     res.json({
       success: true,
       data: {
-        xp: user?.xp || 0,
+        totalXp: user?.xp || 0,
         level: calculatedLevel,
-        exercisesCompleted,
-        badgesUnlocked: badgesCount,
-        quizAttempts
+        streak: user?.streak || 0,
+        problemsSolved: exercisesCompleted + challengesCompleted,
+        quizzesCompleted: quizAttempts,
+        badgesEarned: badgesCount,
+        daysSinceJoined,
+        daysActiveLast30Days: daysSinceJoined, // Approximation
+        estimatedStudyTimeHours,
+        quizAverageScore: 0 // À calculer si nécessaire
       }
     });
   } catch (error) {
