@@ -38,7 +38,33 @@ coverage/
 .cache/
 .parcel-cache/
 
+# Dossiers temporaires et doublons
+frontend/
+frontendprocedure/
+PEAK_HTML_SYSTEM/
+__mocks__/
+docs/
+scripts/
 
+# Fichiers de documentation temporaires
+*_DEPLOIEMENT*.md
+*_CORRECTION*.md
+*_SOLUTION*.md
+*_INSTRUCTIONS*.md
+*_VERIFICATION*.md
+*_STATUS*.md
+*_ACTION*.md
+*_FORCER*.md
+*_EXPLICATION*.md
+*_ERREUR*.md
+*_REFONTE*.md
+*_PLANS*.md
+*_IDENTIFIANTS*.md
+*_REDEPLOYER*.md
+*_DEPLOYER*.md
+*_VERCEL*.md
 
-
+# Backend - fichiers temporaires
+backend/frontend/
+backend/pr循isma/
 
