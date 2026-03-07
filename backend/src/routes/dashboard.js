@@ -48,14 +48,14 @@ router.get('/', authenticateToken, async (req, res, next) => {
         select: {
           id: true,
           score: true,
-          total: true,
+          passed: true,
           startedAt: true
         }
       })
     ]);
 
     // Vérifier et mettre à jour la série
-    let streak = user.streak;
+    let streak = user.streak || 0;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
@@ -113,7 +113,7 @@ router.get('/', authenticateToken, async (req, res, next) => {
         id: attempt.id,
         type: 'quiz',
         score: attempt.score,
-        total: attempt.total,
+        passed: attempt.passed,
         date: attempt.startedAt
       })),
       recommendations: [

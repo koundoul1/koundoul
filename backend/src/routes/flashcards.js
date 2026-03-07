@@ -46,12 +46,11 @@ function calculateNextReview(quality, interval, easeFactor, repetitions) {
 // Get all flashcards
 router.get('/', authenticateToken, async (req, res, next) => {
   try {
-    const { subject, level } = req.query;
+    const { subject } = req.query;
     const userId = req.user.userId;
 
-    const where = { userId };
-    if (subject) where.subject = subject;
-    if (level) where.level = level;
+    const where = {};
+    if (subject) where.subjectId = subject;
 
     const flashcards = await prisma.flashcard.findMany({
       where,
@@ -69,8 +68,8 @@ router.get('/', authenticateToken, async (req, res, next) => {
       id: card.id,
       front: card.front,
       back: card.back,
-      subject: card.subject,
-      level: card.level,
+      subject: card.subjectId,
+      difficulty: card.difficulty,
       nextReview: card.reviews[0]?.nextReview || new Date(),
       mastered: card.reviews[0]?.repetitions >= 5
     }));
@@ -123,20 +122,20 @@ router.get('/due', authenticateToken, async (req, res, next) => {
 // Create flashcard
 router.post('/', authenticateToken, async (req, res, next) => {
   try {
-    const { front, back, subject, level } = req.body;
+    const { front, back, subjectId, explanation } = req.body;
     const userId = req.user.userId;
 
-    if (!front || !back) {
-      return res.status(400).json({ error: 'Front et back requis' });
+    if (!front || !back || !subjectId) {
+      return res.status(400).json({ error: 'Front, back et subjectId requis' });
     }
 
     const flashcard = await prisma.flashcard.create({
       data: {
-        userId,
         front,
         back,
-        subject: subject || null,
-        level: level || null
+        subjectId,
+        explanation: explanation || null,
+        updatedAt: new Date()
       }
     });
 
@@ -264,7 +263,7 @@ router.get('/stats', authenticateToken, async (req, res, next) => {
     const userId = req.user.userId;
 
     const [total, due, mastered] = await Promise.all([
-      prisma.flashcard.count({ where: { userId } }),
+      prisma.flashcardReview.count({ where: { userId } }),
       prisma.flashcardReview.count({
         where: {
           userId,

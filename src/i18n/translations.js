@@ -755,9 +755,10 @@ export default {
       show: 'Afficher',
       hide: 'Masquer',
       copy: 'Copier',
-      share: 'Partager'
+      share: 'Partager',
+      filter: 'Filtrer'
     },
-    
+
     // Subscriptions
     subscriptions: {
       title: 'Choisissez Votre Plan',
@@ -1554,9 +1555,10 @@ export default {
       show: 'Show',
       hide: 'Hide',
       copy: 'Copy',
-      share: 'Share'
+      share: 'Share',
+      filter: 'Filter'
     },
-    
+
     // Subscriptions
     subscriptions: {
       title: 'Choose Your Plan',

@@ -158,7 +158,6 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
         completed: true,
         score: score || null,
         timeSpent: timeSpent || 0,
-        xpEarned,
         completedAt: new Date()
       },
       create: {
@@ -167,7 +166,6 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
         completed: true,
         score: score || null,
         timeSpent: timeSpent || 0,
-        xpEarned,
         completedAt: new Date()
       }
     });
@@ -244,13 +242,9 @@ router.get('/stats/me', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
-    const [totalCompleted, totalXp, avgScore] = await Promise.all([
+    const [totalCompleted, avgScore] = await Promise.all([
       prisma.microLessonCompletion.count({
         where: { userId, completed: true }
-      }),
-      prisma.microLessonCompletion.aggregate({
-        where: { userId, completed: true },
-        _sum: { xpEarned: true }
       }),
       prisma.microLessonCompletion.aggregate({
         where: { userId, completed: true, score: { not: null } },
@@ -258,11 +252,14 @@ router.get('/stats/me', authenticateToken, async (req, res, next) => {
       })
     ]);
 
+    // Estimer l'XP gagné (50 XP par micro-leçon complétée)
+    const estimatedXp = totalCompleted * 50;
+
     res.json({
       success: true,
       data: {
         total_completed: totalCompleted,
-        total_xp_earned: totalXp._sum.xpEarned || 0,
+        total_xp_earned: estimatedXp,
         average_score: avgScore._avg.score ? Math.round(avgScore._avg.score) : null
       }
     });
