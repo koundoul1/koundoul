@@ -113,8 +113,8 @@ async function initPlans() {
 
     console.log('\n✨ Initialisation terminée !');
   } catch (error) {
-    console.error('❌ Erreur lors de l\'initialisation:', error);
-    process.exit(1);
+    console.error('❌ Erreur lors de l\'initialisation:', error.message);
+    throw error;
   } finally {
     await prisma.$disconnect();
   }
