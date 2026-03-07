@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,400 +7,743 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// User model
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String?
-  firstName String?
-  lastName  String?
-  username  String?
-  xp        Int      @default(0)
-  level     Int      @default(1)
-  streak    Int      @default(0)
-  lastStreakDate DateTime?
-  invitationCode String? @unique
-  parentInvitationCode String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  badges        UserBadge[]
-  quizAttempts  QuizAttempt[]
-  flashcardReviews FlashcardReview[]
-  solverHistory SolverHistory[]
-  forumDiscussions ForumDiscussion[]
-  forumReplies  ForumReply[]
-  challengeAttempts ChallengeAttempt[]
-  duelParticipations DuelParticipation[]
-  microLessonCompletions MicroLessonCompletion[]
-  coachSessions CoachSession[]
-  subscriptions Subscription[]
-  payments     Payment[]
+  id                                                     String               @id @default(cuid())
+  email                                                  String               @unique
+  username                                               String               @unique
+  password                                               String
+  firstName                                              String?
+  lastName                                               String?
+  avatar                                                 String?
+  xp                                                     Int                  @default(0)
+  level                                                  Int                  @default(1)
+  isActive                                               Boolean              @default(true)
+  createdAt                                              DateTime             @default(now())
+  updatedAt                                              DateTime             @updatedAt
+  preferences                                            Json?
+  invitationCode                                         String?              @unique
+  invitation_code                                        String?              @unique @db.VarChar(10)
+  streak                                                 Int?                 @default(0)
+  is_admin                                               Boolean?             @default(false)
+  lastStreakDate                                         DateTime?            @db.Timestamp(6)
+  streakCount                                            Int?                 @default(0)
+  totalXp                                                Int?                 @default(0)
+  parentInvitationCode                                   String?
+  parentId                                               String?
+  isParent                                               Boolean?             @default(false)
+  isEmailVerified                                        Boolean?             @default(false)
+  bio                                                    String?
+  phone                                                  String?
+  country                                                String?              @default("SN")
+  language                                               String?              @default("fr")
+  timezone                                               String?              @default("Africa/Dakar")
+  notificationsEnabled                                   Boolean?             @default(true)
+  lastLoginAt                                            DateTime?            @db.Timestamp(6)
+  loginCount                                             Int?                 @default(0)
+  resetPasswordToken                                     String?
+  resetPasswordExpires                                   DateTime?            @db.Timestamp(6)
+  emailVerificationToken                                 String?
+  coachSessions                                          CoachSession[]
+  discussion_votes                                       discussion_votes[]
+  forumDiscussions                                       ForumDiscussion[]
+  exercise_attempts                                      exercise_attempts[]
+  flashcardReviews                                       FlashcardReview[]
+  lesson_completions                                     lesson_completions[]
+  parent_child_links_parent_child_links_child_idTousers  parent_child_links[] @relation("parent_child_links_child_idTousers")
+  parent_child_links_parent_child_links_parent_idTousers parent_child_links[] @relation("parent_child_links_parent_idTousers")
+  payments                                               Payment[]
+  problems                                               problems[]
+  quizAttempts                                           QuizAttempt[]
+  forumReplies                                           ForumReply[]
+  reply_votes                                            reply_votes[]
+  solutions                                              solutions[]
+  subscriptions                                          Subscription[]
+  badges                                                 UserBadge[]
+  user_masteries                                         user_masteries[]
 
   @@map("users")
-  @@index([email])
-  @@index([username])
 }
 
-// Badges
 model Badge {
-  id          String   @id @default(cuid())
-  name        String
+  id          String      @id @default(cuid())
+  name        String      @unique
   description String
   icon        String
-  color       String
-  category    String
-  requirement String
-  createdAt   DateTime @default(now())
-
-  userBadges UserBadge[]
+  condition   String
+  points      Int         @default(0)
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  userBadges  UserBadge[]
 
   @@map("badges")
-  @@index([category])
 }
 
 model UserBadge {
   id         String   @id @default(cuid())
+  unlockedAt DateTime @default(now()) @map("earnedAt")
   userId     String
   badgeId    String
-  unlockedAt DateTime @default(now()) @map("earnedAt")
+  badge      Badge    @relation(fields: [badgeId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  badge Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
-
-  @@map("user_badges")
   @@unique([userId, badgeId])
-  @@index([userId])
+  @@map("user_badges")
 }
 
-// Quiz & Question Banks
 model QuestionBank {
-  id             String   @id @default(cuid())
-  title          String
-  subject        String
-  level          String
-  type           String
-  description    String?
-  totalQuestions Int      @default(0) @map("total_questions")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
+  id                      String              @id @default(cuid()) @db.VarChar(20)
+  title                   String              @db.VarChar(200)
+  level                   String              @db.VarChar(20)
+  subject                 String              @db.VarChar(50)
+  type                    String              @db.VarChar(20)
+  totalQuestions          Int                 @map("total_questions")
+  chapters_covered        Json?
+  difficulty_distribution Json?
+  is_active               Boolean?            @default(true)
+  createdAt               DateTime?           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt               DateTime?           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  exercise_problems       exercise_problems[]
+  qcm_questions           qcm_questions[]
 
-  questions    Question[]
-  quizAttempts QuizAttempt[]
-
+  @@index([level, subject], map: "idx_banks_level_subject")
+  @@index([type], map: "idx_banks_type")
   @@map("question_banks")
-  @@index([subject, level])
-  @@index([type])
-}
-
-model Question {
-  id            String   @id @default(cuid())
-  bankId        String
-  question      String
-  type          String
-  difficulty    Int      @default(3)
-  subject       String?
-  level         String?
-  options       Json?
-  correctAnswer Int?
-  explanation   String?
-  createdAt     DateTime @default(now())
-
-  bank QuestionBank @relation(fields: [bankId], references: [id], onDelete: Cascade)
-
-  @@index([bankId])
-  @@index([subject, level])
 }
 
 model QuizAttempt {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
   userId      String
-  bankId      String?  @map("quizId")
-  score       Int
-  total       Int      @default(0)
+  bankId      String     @map("quizId")
+  status      QuizStatus @default(IN_PROGRESS)
+  score       Int        @default(0)
   answers     Json
-  startedAt   DateTime @default(now())
+  passed      Boolean    @default(false)
+  startedAt   DateTime   @default(now())
   completedAt DateTime?
-
-  user User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bank QuestionBank? @relation(fields: [bankId], references: [id], onDelete: SetNull)
+  timeSpent   Int?
+  createdAt   DateTime   @default(now())
+  bank        quizzes    @relation(fields: [bankId], references: [id])
+  user        User       @relation(fields: [userId], references: [id])
 
   @@map("quiz_attempts")
-  @@index([userId])
-  @@index([bankId])
 }
 
-// Flashcards
 model Flashcard {
-  id        String   @id @default(cuid())
-  userId    String?
-  front     String   @map("question")
-  back      String   @map("answer")
-  subject   String?
-  level     String?
-  createdAt DateTime @default(now())
-
-  reviews FlashcardReview[]
+  id          String            @id @default(cuid())
+  front       String            @map("question")
+  back        String            @map("answer")
+  explanation String?
+  lessonId    String?
+  chapterId   String?
+  subjectId   String
+  difficulty  Difficulty        @default(FACILE)
+  tags        String[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime
+  reviews     FlashcardReview[]
+  chapters    chapters?         @relation(fields: [chapterId], references: [id])
+  lessons     lessons?          @relation(fields: [lessonId], references: [id])
+  subjects    subjects          @relation(fields: [subjectId], references: [id])
 
   @@map("flashcards")
-  @@index([userId])
 }
 
 model FlashcardReview {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
+  userId      String
   flashcardId String
-  userId      String
   quality     Int
+  interval    Int
+  easeFactor  Float
+  repetitions Int       @default(0)
+  reviewedAt  DateTime  @default(now())
   nextReview  DateTime
-  interval    Int      @default(1)
-  easeFactor  Float    @default(2.5)
-  repetitions Int      @default(0)
-  reviewedAt  DateTime @default(now())
+  timeSpent   Int?
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id])
 
-  flashcard Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("flashcard_reviews")
-  @@unique([flashcardId, userId])
   @@index([userId, nextReview])
+  @@map("flashcard_reviews")
 }
 
-// Challenges
-model Challenge {
-  id           String   @id @default(cuid())
-  title        String
-  description  String
-  subject      String
-  level        String
-  difficulty   String
-  timeLimit    Int
-  questions    Json
-  isActive     Boolean  @default(true)
-  startDate    DateTime
-  endDate      DateTime
-  participants Int      @default(0)
-  createdAt    DateTime @default(now())
-
-  attempts ChallengeAttempt[]
-
-  @@index([isActive, startDate, endDate])
-}
-
-model ChallengeAttempt {
-  id          String   @id @default(cuid())
-  challengeId String
-  userId      String
-  score       Int
-  rank        Int?
-  answers     Json
-  timeSpent   Int
-  startedAt   DateTime @default(now())
-  completedAt DateTime?
-
-  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([challengeId, score])
-  @@index([userId])
-}
-
-// Duels
-model Duel {
-  id           String   @id @default(cuid())
-  challengerId String
-  opponentId   String?
-  isPublic     Boolean  @default(false)
-  status       String   @default("pending")
-  questions    Json?
-  winnerId     String?
-  startedAt    DateTime?
-  completedAt  DateTime?
-
-  participations DuelParticipation[]
-
-  @@index([challengerId, opponentId])
-  @@index([status])
-}
-
-model DuelParticipation {
-  id        String  @id @default(cuid())
-  duelId    String
-  userId    String
-  score     Int     @default(0)
-  answers   Json?
-  completed Boolean @default(false)
-
-  duel Duel @relation(fields: [duelId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([duelId, userId])
-  @@index([userId])
-}
-
-// Solver (IA)
-model SolverHistory {
-  id        String   @id @default(cuid())
-  userId    String
-  problem   String
-  subject   String?
-  level     String?
-  solution  Json
-  createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([subject, level])
-}
-
-// Forum
 model ForumDiscussion {
-  id           String   @id @default(cuid())
-  userId       String
-  title        String
-  content      String
-  subject      String?
-  level        String?
-  views        Int      @default(0)
-  votes        Int      @default(0) @map("upvotes")
-  bestAnswerId String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id               String             @id @default(cuid())
+  title            String
+  content          String
+  category         DiscussionCategory @default(QUESTION)
+  lessonId         String?
+  exerciseId       String?
+  subjectId        String?
+  userId           String
+  votes            Int                @default(0) @map("upvotes")
+  views            Int                @default(0)
+  solved           Boolean            @default(false)
+  isPinned         Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  discussion_votes discussion_votes[]
+  exercises        exercises?         @relation(fields: [exerciseId], references: [id])
+  lessons          lessons?           @relation(fields: [lessonId], references: [id])
+  subjects         subjects?          @relation(fields: [subjectId], references: [id])
+  user             User               @relation(fields: [userId], references: [id])
+  replies          ForumReply[]
 
-  user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  replies ForumReply[]
-
-  @@map("discussions")
   @@index([userId])
-  @@index([subject, level])
-  @@index([createdAt])
+  @@index([category, createdAt])
+  @@map("discussions")
 }
 
 model ForumReply {
-  id           String   @id @default(cuid())
+  id           String          @id @default(cuid())
   discussionId String
   userId       String
   content      String
-  votes        Int      @default(0) @map("upvotes")
-  isBestAnswer Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  votes        Int             @default(0) @map("upvotes")
+  isBestAnswer Boolean         @default(false)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  discussion   ForumDiscussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  user         User            @relation(fields: [userId], references: [id])
+  reply_votes  reply_votes[]
 
-  discussion ForumDiscussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
-  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("replies")
   @@index([discussionId])
-  @@index([userId])
+  @@map("replies")
 }
 
-// Micro-lessons
 model MicroLessonCompletion {
-  id          String    @id @default(cuid())
-  userId      String    @map("user_id")
-  lessonId    String    @map("microlesson_id")
-  completed   Boolean   @default(false)
-  score       Float?
-  timeSpent   Int       @default(0) @map("time_spent")
-  xpEarned    Int       @default(0)
-  completedAt DateTime? @map("first_completed_at")
+  id               String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId           String    @map("user_id")
+  lessonId         String    @map("microlesson_id") @db.VarChar(10)
+  completed        Boolean?  @default(false)
+  score            Int?
+  timeSpent        Int?      @default(0) @map("time_spent")
+  completedAt      DateTime? @map("first_completed_at") @db.Timestamptz(6)
+  last_reviewed_at DateTime? @db.Timestamptz(6)
+  attempts         Int?      @default(0)
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime? @default(now()) @db.Timestamptz(6)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("microlesson_completions")
   @@unique([userId, lessonId])
-  @@index([userId])
-  @@index([lessonId])
+  @@index([lessonId], map: "idx_microlesson_completions_microlesson_id")
+  @@index([userId], map: "idx_microlesson_completions_user_id")
+  @@index([userId, lessonId], map: "idx_microlesson_completions_user_microlesson")
+  @@map("microlesson_completions")
 }
 
-// Coach Virtual
 model CoachSession {
-  id            String   @id @default(cuid())
-  userId        String
-  equation      String?
-  guidanceLevel String?
-  steps         Json?
-  currentStep   Int      @default(0)
-  completed     Boolean  @default(false)
-  score         Float?
-  startedAt     DateTime @default(now())
-  completedAt   DateTime?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id               String             @id @default(cuid())
+  userId           String?
+  exerciseAnalysis Json
+  status           CoachSessionStatus @default(IN_PROGRESS)
+  currentStep      Int                @default(0)
+  score            Int?
+  totalTime        Int?
+  xpEarned         Int                @default(0)
+  summary          Json?
+  startedAt        DateTime           @default(now())
+  completedAt      DateTime?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime
+  coach_answers    coach_answers[]
+  user             User?              @relation(fields: [userId], references: [id])
 
   @@map("coach_sessions")
-  @@index([userId])
 }
 
-// Subscription Plans
 model SubscriptionPlan {
-  id          String   @id @default(cuid())
-  name        String
-  displayName String   @default("")
-  description String
-  price       Int
-  currency    String   @default("XOF")
-  interval    String   @default("monthly")
-  features    Json
-  isActive    Boolean  @default(true)
-  sortOrder   Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
+  id            String         @id @default(dbgenerated("(gen_random_uuid())::text"))
+  name          String         @unique @db.VarChar(100)
+  description   String?
+  price         Int            @default(0)
+  currency      String?        @default("xof") @db.VarChar(10)
+  duration      Int            @default(30)
+  features      Json?
+  isActive      Boolean?       @default(true)
+  createdAt     DateTime?      @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime?      @default(now()) @updatedAt @db.Timestamptz(6)
+  displayName   String         @default("")
+  interval      String         @default("monthly")
+  sortOrder     Int            @default(0)
   subscriptions Subscription[]
 
   @@map("subscription_plans")
-  @@index([isActive])
-  @@index([name])
 }
 
-// Subscriptions
 model Subscription {
-  id          String    @id @default(cuid())
+  id          String           @id @default(dbgenerated("(gen_random_uuid())::text"))
   userId      String
   planId      String
-  status      String
-  startDate   DateTime  @default(now())
-  endDate     DateTime?
-  cancelledAt DateTime?
-  autoRenew   Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  status      String           @default("ACTIVE") @db.VarChar(20)
+  startDate   DateTime?        @default(now()) @db.Timestamptz(6)
+  endDate     DateTime         @db.Timestamptz(6)
+  autoRenew   Boolean?         @default(false)
+  cancelledAt DateTime?        @db.Timestamptz(6)
+  createdAt   DateTime?        @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime?        @default(now()) @updatedAt @db.Timestamptz(6)
+  payments    Payment[]
+  plan        SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "subscriptions_plan_id_fkey")
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "subscriptions_user_id_fkey")
 
-  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  plan     SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
-  payments Payment[]
-
+  @@index([endDate], map: "idx_subscriptions_end_date")
+  @@index([planId], map: "idx_subscriptions_plan_id")
+  @@index([status], map: "idx_subscriptions_status")
+  @@index([userId], map: "idx_subscriptions_user_id")
+  @@index([userId, status], map: "idx_subscriptions_user_status")
   @@map("subscriptions")
-  @@unique([userId, status])
-  @@index([userId])
-  @@index([status])
-  @@index([endDate])
 }
 
-// Payments
 model Payment {
-  id                String    @id @default(cuid())
-  userId            String    @map("user_id")
-  subscriptionId    String?   @map("subscription_id")
-  amount            Int
-  currency          String    @default("XOF")
-  status            String
-  paymentMethod     String    @map("payment_type")
-  waveCheckoutId    String?   @map("wave_id")
-  waveTransactionId String?
-  metadata          Json?
-  errorMessage      String?
-  completedAt       DateTime?
-  createdAt         DateTime  @default(now()) @map("created_at")
-  updatedAt         DateTime  @updatedAt @map("updated_at")
+  id              String        @id @default(dbgenerated("(gen_random_uuid())::text"))
+  userId          String        @map("user_id")
+  subscriptionId  String?       @map("subscription_id")
+  amount          Int
+  currency        String?       @default("xof") @db.VarChar(10)
+  status          String        @default("PENDING") @db.VarChar(20)
+  paymentMethod   String        @default("STRIPE") @map("payment_type") @db.VarChar(20)
+  stripe_id       String?       @unique @db.VarChar(255)
+  waveCheckoutId  String?       @unique @map("wave_id") @db.VarChar(255)
+  orange_money_id String?       @unique @db.VarChar(255)
+  description     String?
+  metadata        Json?
+  createdAt       DateTime?     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime?     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  subscription    Subscription? @relation(fields: [subscriptionId], references: [id], onUpdate: NoAction)
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
-
+  @@index([paymentMethod], map: "idx_payments_payment_type")
+  @@index([status], map: "idx_payments_status")
+  @@index([subscriptionId], map: "idx_payments_subscription_id")
+  @@index([userId], map: "idx_payments_user_id")
   @@map("payments")
-  @@index([userId])
-  @@index([status])
-  @@index([waveCheckoutId])
+}
+
+model chapters {
+  id               String      @id
+  subjectId        String
+  title            String
+  slug             String
+  description      String
+  level            Level
+  order            Int         @default(0)
+  requiredChapters String[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime
+  subjects         subjects    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  exercises        exercises[]
+  flashcards       Flashcard[]
+  lessons          lessons[]
+  quizzes          quizzes[]
+
+  @@unique([subjectId, slug])
+}
+
+model coach_answers {
+  id             String       @id
+  sessionId      String
+  question       Json
+  userAnswer     String
+  helpLevel      Int          @default(0)
+  isCorrect      Boolean
+  feedback       String?
+  points         Int          @default(0)
+  timeSpent      Int?
+  createdAt      DateTime     @default(now())
+  coach_sessions CoachSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model companies {
+  id                 String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name               String               @db.VarChar(255)
+  subscription_plan  String?              @default("starter") @db.VarChar(50)
+  status             String?              @default("approved") @db.VarChar(50)
+  sector             String?              @db.VarChar(50)
+  company_type       String?              @db.VarChar(100)
+  created_at         DateTime?            @default(now()) @db.Timestamp(6)
+  expense_categories expense_categories[]
+  leave_types        leave_types[]
+}
+
+model concept_nodes {
+  id              String           @id
+  conceptId       String           @unique
+  name            String
+  domain          String
+  level           Level
+  description     String?
+  prerequisites   String[]
+  masteryRequired Float
+  microLessonId   String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime
+  user_masteries  user_masteries[]
+
+  @@index([domain, level])
+}
+
+model discussion_votes {
+  id           String          @id
+  discussionId String
+  userId       String
+  value        Int
+  createdAt    DateTime        @default(now())
+  discussions  ForumDiscussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  users        User            @relation(fields: [userId], references: [id])
+
+  @@unique([discussionId, userId])
+}
+
+model exercise_attempts {
+  id         String    @id
+  userId     String
+  exerciseId String
+  userAnswer String
+  isCorrect  Boolean
+  score      Int       @default(0)
+  timeSpent  Int
+  hintsUsed  Int       @default(0)
+  createdAt  DateTime  @default(now())
+  exercises  exercises @relation(fields: [exerciseId], references: [id])
+  users      User      @relation(fields: [userId], references: [id])
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model exercise_problems {
+  id                 String        @id @db.VarChar(30)
+  bank_id            String?       @db.VarChar(20)
+  chapter            String?       @db.VarChar(100)
+  difficulty         Int?
+  points             Int?          @default(10)
+  time_limit_minutes Int?
+  problem            String
+  solution           Json?
+  hints              Json?
+  related_lesson     String?       @db.VarChar(20)
+  order_index        Int?          @default(0)
+  created_at         DateTime?     @default(now()) @db.Timestamptz(6)
+  question_banks     QuestionBank? @relation(fields: [bank_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([bank_id], map: "idx_ex_bank_id")
+  @@index([chapter], map: "idx_ex_chapter")
+  @@index([difficulty], map: "idx_ex_difficulty")
+  @@index([related_lesson], map: "idx_ex_related_lesson")
+}
+
+model exercises {
+  id                String              @id
+  subjectId         String
+  chapterId         String?
+  title             String
+  difficulty        Difficulty
+  level             Level
+  type              ExerciseType
+  statement         String
+  hints             String[]
+  solution          String
+  steps             Json
+  correctAnswer     String?
+  points            Int                 @default(10)
+  timeEstimate      Int                 @default(10)
+  tags              String[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime
+  discussions       ForumDiscussion[]
+  exercise_attempts exercise_attempts[]
+  chapters          chapters?           @relation(fields: [chapterId], references: [id])
+  subjects          subjects            @relation(fields: [subjectId], references: [id])
+}
+
+model expense_categories {
+  id               String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  company_id       String    @db.Uuid
+  name             String    @db.VarChar(100)
+  description      String?
+  daily_limit      Decimal?  @db.Decimal(10, 2)
+  monthly_limit    Decimal?  @db.Decimal(10, 2)
+  requires_receipt Boolean?  @default(true)
+  is_active        Boolean?  @default(true)
+  created_at       DateTime? @default(now()) @db.Timestamp(6)
+  updated_at       DateTime? @default(now()) @db.Timestamp(6)
+  companies        companies @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([company_id, name])
+  @@index([company_id, is_active], map: "idx_expense_categories_active")
+  @@index([company_id], map: "idx_expense_categories_company")
+}
+
+model leave_types {
+  id                   String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  company_id           String    @db.Uuid
+  name                 String    @db.VarChar(255)
+  description          String?
+  max_days_per_year    Int?      @default(25)
+  is_paid              Boolean?  @default(true)
+  requires_approval    Boolean?  @default(true)
+  max_consecutive_days Int?
+  requires_document    Boolean?  @default(false)
+  color                String?   @default("#3498db") @db.VarChar(7)
+  is_active            Boolean?  @default(true)
+  created_at           DateTime? @default(now()) @db.Timestamp(6)
+  updated_at           DateTime? @default(now()) @db.Timestamp(6)
+  companies            companies @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([company_id], map: "idx_leave_types_company")
+}
+
+model lesson_completions {
+  id        String   @id
+  userId    String
+  lessonId  String
+  completed Boolean  @default(true)
+  timeSpent Int      @default(0)
+  createdAt DateTime @default(now())
+  lessons   lessons  @relation(fields: [lessonId], references: [id])
+  users     User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, lessonId])
+}
+
+model lessons {
+  id                 String               @id
+  chapterId          String
+  title              String
+  slug               String
+  order              Int                  @default(0)
+  duration           Int                  @default(15)
+  content            String
+  summary            String
+  objectives         String[]
+  videoUrl           String?
+  images             String[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime
+  discussions        ForumDiscussion[]
+  flashcards         Flashcard[]
+  lesson_completions lesson_completions[]
+  chapters           chapters             @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@unique([chapterId, slug])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model microlessons {
+  id               String    @id @db.VarChar(10)
+  level            String    @db.VarChar(20)
+  subject          String    @db.VarChar(50)
+  chapter          String    @db.VarChar(100)
+  title            String    @db.VarChar(200)
+  duration_min     Int
+  objectives       Json
+  prerequisites    Json
+  content_types    Json
+  difficulty       Int
+  xp_reward        Int
+  tags             Json
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime? @default(now()) @db.Timestamptz(6)
+  content_sections Json?
+
+  @@index([chapter], map: "idx_microlessons_chapter")
+  @@index([difficulty], map: "idx_microlessons_difficulty")
+  @@index([level], map: "idx_microlessons_level")
+  @@index([subject], map: "idx_microlessons_subject")
+  @@index([tags], map: "idx_microlessons_tags", type: Gin)
+}
+
+model parent_child_links {
+  id                                        String    @id @default(dbgenerated("(gen_random_uuid())::text"))
+  parent_id                                 String
+  child_id                                  String
+  approved                                  Boolean?  @default(true)
+  created_at                                DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at                                DateTime? @default(now()) @db.Timestamptz(6)
+  users_parent_child_links_child_idTousers  User      @relation("parent_child_links_child_idTousers", fields: [child_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users_parent_child_links_parent_idTousers User      @relation("parent_child_links_parent_idTousers", fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([parent_id, child_id])
+  @@index([child_id], map: "idx_parent_child_links_child_id")
+  @@index([parent_id], map: "idx_parent_child_links_parent_id")
+}
+
+model problems {
+  id          String      @id
+  title       String
+  description String
+  category    String
+  difficulty  String
+  subject     String
+  points      Int         @default(10)
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime
+  userId      String
+  users       User        @relation(fields: [userId], references: [id])
+  solutions   solutions[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model qcm_questions {
+  id                 String        @id @db.VarChar(30)
+  bank_id            String?       @db.VarChar(20)
+  chapter            String?       @db.VarChar(100)
+  difficulty         Int?
+  points             Int?          @default(10)
+  time_limit_seconds Int?
+  question           String
+  options            Json
+  explanation        String?
+  related_lesson     String?       @db.VarChar(20)
+  order_index        Int?          @default(0)
+  created_at         DateTime?     @default(now()) @db.Timestamptz(6)
+  correct_answer     Int?
+  question_banks     QuestionBank? @relation(fields: [bank_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_bank")
+
+  @@index([bank_id], map: "idx_qcm_bank_id")
+  @@index([chapter], map: "idx_qcm_chapter")
+  @@index([difficulty], map: "idx_qcm_difficulty")
+  @@index([related_lesson], map: "idx_qcm_related_lesson")
+}
+
+model quiz_questions {
+  id            String       @id
+  quizId        String
+  questionText  String
+  type          QuestionType @default(MULTIPLE_CHOICE)
+  options       String[]
+  correctAnswer String
+  explanation   String
+  points        Int          @default(10)
+  order         Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime
+  quizzes       quizzes      @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+model quizzes {
+  id             String           @id
+  title          String
+  description    String?
+  subjectId      String
+  chapterId      String?
+  level          Level
+  difficulty     Difficulty
+  timeLimit      Int?             @default(15)
+  passingScore   Int              @default(60)
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  quizAttempts   QuizAttempt[]
+  quiz_questions quiz_questions[]
+  chapters       chapters?        @relation(fields: [chapterId], references: [id])
+  subjects       subjects         @relation(fields: [subjectId], references: [id])
+}
+
+model reply_votes {
+  id        String     @id
+  replyId   String
+  userId    String
+  value     Int
+  createdAt DateTime   @default(now())
+  replies   ForumReply @relation(fields: [replyId], references: [id], onDelete: Cascade)
+  users     User       @relation(fields: [userId], references: [id])
+
+  @@unique([replyId, userId])
+}
+
+model solutions {
+  id          String   @id
+  content     String
+  explanation String?
+  isCorrect   Boolean  @default(false)
+  points      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  userId      String
+  problemId   String
+  problems    problems @relation(fields: [problemId], references: [id])
+  users       User     @relation(fields: [userId], references: [id])
+}
+
+model subjects {
+  id          String            @id
+  name        String
+  slug        String            @unique
+  icon        String
+  description String
+  color       String
+  order       Int               @default(0)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime
+  chapters    chapters[]
+  discussions ForumDiscussion[]
+  exercises   exercises[]
+  flashcards  Flashcard[]
+  quizzes     quizzes[]
+}
+
+model user_masteries {
+  id             String        @id
+  userId         String
+  conceptId      String
+  masteryScore   Float         @default(0.0)
+  lastTested     DateTime
+  nextReviewDate DateTime?
+  reviewCount    Int           @default(0)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime
+  concept_nodes  concept_nodes @relation(fields: [conceptId], references: [id], onDelete: Cascade)
+  users          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, conceptId])
+  @@index([userId, nextReviewDate])
+}
+
+enum CoachSessionStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
+}
+
+enum Difficulty {
+  FACILE
+  MOYEN
+  DIFFICILE
+  EXPERT
+}
+
+enum DiscussionCategory {
+  QUESTION
+  EXPLANATION
+  RESOURCE
+  BUG
+  OTHER
+}
+
+enum ExerciseType {
+  QCM
+  CALCUL
+  DEMONSTRATION
+  REDACTION
+}
+
+enum Level {
+  SECONDE
+  PREMIERE
+  TERMINALE
+  SUPERIEUR
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+}
+
+enum QuizStatus {
+  IN_PROGRESS
+  COMPLETED
+  ABANDONED
 }
