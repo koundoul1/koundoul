@@ -120,5 +120,14 @@ async function initPlans() {
   }
 }
 
-initPlans();
+// Export pour pouvoir être appelé depuis le serveur
+module.exports = {
+  initPlans
+};
+
+// Exécution directe uniquement si le fichier est lancé en script
+if (require.main === module) {
+  initPlans();
+}
+
 

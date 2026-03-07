@@ -11,3 +11,4 @@ npx prisma migrate deploy
 
 echo "✅ Migrations terminées"
 
+

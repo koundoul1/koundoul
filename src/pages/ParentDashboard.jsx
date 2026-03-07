@@ -77,7 +77,23 @@ const ParentDashboard = () => {
       const response = await api.parent.getDashboard(childId, timeRange);
       
       if (response.success) {
-        setDashboardData(response.data);
+        const data = response.data || {};
+        // Construire un résumé hebdomadaire simple à partir des données back
+        const derivedWeeklySummary = {
+          studyTime: `${data.estimatedStudyTimeHours ?? 0} h`,
+          exercisesCompleted: (data.quizAttempts || 0) + (data.challenges || 0),
+          progression: 0,
+          weeklyGoal: 0,
+          daysActive: data.stats?.streak || 0,
+          consecutiveDays: data.stats?.streak || 0,
+          quizzesCompleted: data.quizAttempts || 0,
+          lessonsCompleted: 0
+        };
+
+        setDashboardData({
+          ...data,
+          weeklySummary: data.weeklySummary || derivedWeeklySummary
+        });
       }
     } catch (error) {
       console.error('Erreur chargement dashboard:', error);
@@ -177,7 +193,11 @@ const ParentDashboard = () => {
                   Dashboard Parents
                 </h1>
                 <p className="text-gray-800 font-semibold mt-2">
-                  Suivi bienveillant de {selectedChild?.name || 'votre enfant'}
+                  Suivi bienveillant de{' '}
+                  {selectedChild?.firstName ||
+                    selectedChild?.lastName ||
+                    selectedChild?.email ||
+                    'votre enfant'}
                 </p>
               </div>
               <div className="flex items-center space-x-4">
@@ -190,11 +210,17 @@ const ParentDashboard = () => {
                     setSelectedChild(child);
                   }}
                 >
-                  {children.map(child => (
-                    <option key={child.id} value={child.id}>
-                      {child.name} - Niveau {child.level}
-                    </option>
-                  ))}
+                  {children.map(child => {
+                    const label =
+                      child.firstName || child.lastName
+                        ? `${child.firstName || ''} ${child.lastName || ''}`.trim()
+                        : child.email;
+                    return (
+                      <option key={child.id} value={child.id}>
+                        {label} - Niveau {child.level || 1}
+                      </option>
+                    );
+                  })}
                 </select>
                 <button className="p-2 text-gray-800 hover:text-gray-900 font-semibold">
                   <Settings className="h-5 w-5" />
@@ -554,7 +580,6 @@ const ParentDashboard = () => {
               Générer le Rapport Mensuel
             </button>
           </div>
-        )}
         )}
       </div>
     </div>

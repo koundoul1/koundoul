@@ -95,7 +95,7 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res) => {
     }
 
     // Récupérer les statistiques
-    const [stats, badges, quizAttempts, challenges, flashcards] = await Promise.all([
+    const [stats, userBadges, quizAttempts, challenges, flashcards] = await Promise.all([
       // Stats générales
       prisma.user.findUnique({
         where: { id: childId },
@@ -107,13 +107,16 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res) => {
         }
       }),
 
-      // Badges obtenus
-      prisma.badge.findMany({
+      // Badges obtenus (via UserBadge)
+      prisma.userBadge.findMany({
         where: {
           userId: childId,
-          earnedAt: { gte: startDate }
+          unlockedAt: { gte: startDate }
         },
-        orderBy: { earnedAt: 'desc' },
+        include: {
+          badge: true
+        },
+        orderBy: { unlockedAt: 'desc' },
         take: 10
       }),
 
@@ -127,8 +130,8 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res) => {
         take: 10
       }),
 
-      // Challenges
-      prisma.challenge.findMany({
+      // Challenges (tentatives de challenge de l'enfant)
+      prisma.challengeAttempt.findMany({
         where: {
           userId: childId,
           completedAt: { gte: startDate }
@@ -137,13 +140,16 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res) => {
         take: 10
       }),
 
-      // Flashcards
-      prisma.flashcard.findMany({
+      // Flashcards (révisions de l'enfant)
+      prisma.flashcardReview.findMany({
         where: {
           userId: childId,
-          lastReviewedAt: { gte: startDate }
+          reviewedAt: { gte: startDate }
         },
-        orderBy: { lastReviewedAt: 'desc' },
+        include: {
+          flashcard: true
+        },
+        orderBy: { reviewedAt: 'desc' },
         take: 10
       })
     ]);
@@ -162,10 +168,12 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res) => {
           xp: stats?.xp || 0,
           level: stats?.level || 1,
           streak: stats?.streak || 0,
-          daysSinceJoined: Math.floor((now - new Date(stats?.createdAt || now)) / (1000 * 60 * 60 * 24))
+          daysSinceJoined: Math.floor(
+            (now - new Date(stats?.createdAt || now)) / (1000 * 60 * 60 * 24)
+          )
         },
-        badges: badges.length,
-        recentBadges: badges.slice(0, 5),
+        badges: userBadges.length,
+        recentBadges: userBadges.slice(0, 5),
         quizAttempts: quizAttempts.length,
         recentQuizAttempts: quizAttempts.slice(0, 5),
         challenges: challenges.length,
@@ -260,4 +268,5 @@ router.put('/notifications/:childId', authenticateToken, async (req, res) => {
 });
 
 module.exports = router;
+
 

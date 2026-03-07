@@ -399,3 +399,4 @@ ALTER TABLE "MicroLessonCompletion" ADD CONSTRAINT "MicroLessonCompletion_userId
 -- AddForeignKey
 ALTER TABLE "CoachSession" ADD CONSTRAINT "CoachSession_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+

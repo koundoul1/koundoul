@@ -92,13 +92,21 @@ router.get('/stats', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
-    const [user, badgesCount, exercisesCompleted, quizAttempts] = await Promise.all([
+    const [
+      user,
+      badgesCount,
+      exercisesCompleted,
+      quizAttempts,
+      challengesCompleted,
+      flashcardsCount
+    ] = await Promise.all([
       prisma.user.findUnique({
         where: { id: userId },
         select: {
           xp: true,
           level: true,
-          streak: true
+          streak: true,
+          createdAt: true
         }
       }),
       prisma.userBadge.count({
@@ -127,7 +135,10 @@ router.get('/stats', authenticateToken, async (req, res, next) => {
     
     // Calculer le temps d'étude estimé (en heures)
     const estimatedStudyTimeHours = Math.round(
-      (exercisesCompleted * 0.25 + quizAttempts * 0.25 + challengesCompleted * 0.33 + flashcardsCount * 0.05) * 10
+      (exercisesCompleted * 0.25 +
+        quizAttempts * 0.25 +
+        challengesCompleted * 0.33 +
+        flashcardsCount * 0.05) * 10
     ) / 10;
 
     res.json({

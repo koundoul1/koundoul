@@ -26,7 +26,7 @@ export function I18nProvider({ children }) {
         if (token) {
           setIsLoading(true);
           // Récupérer les préférences utilisateur depuis le backend
-          const userData = await api.users.getProfile();
+          const userData = await api.user.getProfile();
           if (userData.data?.preferences?.language) {
             setLanguage(userData.data.preferences.language);
           }
@@ -53,8 +53,8 @@ export function I18nProvider({ children }) {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          await api.users.updateProfile({ 
-            preferences: { language } 
+          await api.user.updateProfile({
+            preferences: { language }
           });
         }
       } catch (error) {

@@ -15,3 +15,4 @@ prisma.$connect()
 
 module.exports = prisma;
 
+

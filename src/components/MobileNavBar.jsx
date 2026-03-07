@@ -58,6 +58,13 @@ const MobileNavBar = () => {
       icon: Trophy,
       color: 'amber',
       protected: true
+    },
+    {
+      name: 'Profil',
+      href: '/profile',
+      icon: User,
+      color: 'green',
+      protected: true
     }
   ]
 

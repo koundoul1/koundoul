@@ -43,3 +43,4 @@ koundoul/
 
 Le frontend est **à la racine**, pas dans un dossier `frontend/`.
 
+

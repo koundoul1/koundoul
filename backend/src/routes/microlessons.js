@@ -2,22 +2,64 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const { PrismaClient } = require('@prisma/client');
+const { getSupabase, isSupabaseConfigured } = require('../config/supabase');
+const { filterStatic, getStaticById } = require('../data/microLessonsFallback');
 
 const prisma = new PrismaClient();
+const TABLE_MICRO_LESSONS = 'micro_lessons';
 
-// Get all micro-lessons
+function mapSupabaseRow(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    title: row.title,
+    subject: row.subject,
+    chapter: row.chapter,
+    level: row.level,
+    difficulty: row.difficulty ?? 1,
+    duration_min: row.duration_min ?? 10,
+    xp_reward: row.xp_reward ?? 50,
+    content_sections: row.content_sections ?? []
+  };
+}
+
+// Get all micro-lessons (Supabase en priorité, fallback statique)
 router.get('/', optionalAuth, async (req, res, next) => {
   try {
     const { subject, level, limit = 1000, offset = 0 } = req.query;
     const userId = req.user?.userId;
+    const limitNum = Math.min(Number(limit) || 1000, 500);
+    const offsetNum = Math.max(0, Number(offset) || 0);
 
-    // Note: Les micro-leçons sont stockées dans Supabase
-    // Cette route sert de proxy/placeholder
-    // En production, vous devrez connecter à Supabase ici
-    
-    const lessons = [];
+    let paginatedLessons = [];
 
-    // Si utilisateur connecté, récupérer les complétions
+    if (isSupabaseConfigured()) {
+      const supabase = getSupabase();
+      if (supabase) {
+        try {
+          let query = supabase
+            .from(TABLE_MICRO_LESSONS)
+            .select('id, title, subject, chapter, level, difficulty, duration_min, xp_reward, content_sections');
+          if (subject && subject !== 'all') query = query.eq('subject', subject);
+          if (level && level !== 'all') query = query.eq('level', level);
+          const { data, error } = await query
+            .order('id', { ascending: true })
+            .range(offsetNum, offsetNum + limitNum - 1);
+
+          if (!error && data && data.length > 0) {
+            paginatedLessons = data.map(mapSupabaseRow);
+          }
+        } catch (err) {
+          console.warn('[microlessons] Supabase list error, using fallback:', err.message);
+        }
+      }
+    }
+
+    if (paginatedLessons.length === 0) {
+      const filtered = filterStatic(subject, level);
+      paginatedLessons = filtered.slice(offsetNum, offsetNum + limitNum);
+    }
+
     let completions = {};
     if (userId) {
       const userCompletions = await prisma.microLessonCompletion.findMany({
@@ -39,22 +81,42 @@ router.get('/', optionalAuth, async (req, res, next) => {
       }, {});
     }
 
-    res.json({ success: true, data: lessons, completions });
+    res.json({ success: true, data: paginatedLessons, completions });
   } catch (error) {
     next(error);
   }
 });
 
-// Get micro-lesson by ID
+// Get micro-lesson by ID (Supabase en priorité, fallback statique)
 router.get('/:id', optionalAuth, async (req, res, next) => {
   try {
     const { id } = req.params;
     const userId = req.user?.userId;
+    let lesson = null;
 
-    // Récupérer depuis Supabase ou retourner placeholder
-    const lesson = null; // À implémenter avec Supabase
+    if (isSupabaseConfigured()) {
+      const supabase = getSupabase();
+      if (supabase) {
+        try {
+          const { data, error } = await supabase
+            .from(TABLE_MICRO_LESSONS)
+            .select('id, title, subject, chapter, level, difficulty, duration_min, xp_reward, content_sections')
+            .eq('id', id)
+            .maybeSingle();
 
-    // Récupérer la complétion si utilisateur connecté
+          if (!error && data) {
+            lesson = mapSupabaseRow(data);
+          }
+        } catch (err) {
+          console.warn('[microlessons] Supabase get error, using fallback:', err.message);
+        }
+      }
+    }
+
+    if (!lesson) {
+      lesson = getStaticById(id);
+    }
+
     let completion = null;
     if (userId) {
       completion = await prisma.microLessonCompletion.findUnique({
@@ -80,13 +142,11 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
     const { timeSpent, score } = req.body;
     const userId = req.user.userId;
 
-    // Calculer XP (base: 50 XP, bonus selon score)
     let xpEarned = 50;
     if (score !== undefined) {
-      xpEarned = 50 + Math.round((score / 100) * 50); // Jusqu'à 100 XP pour 100%
+      xpEarned = 50 + Math.round((score / 100) * 50);
     }
 
-    // Créer ou mettre à jour la complétion
     const completion = await prisma.microLessonCompletion.upsert({
       where: {
         userId_lessonId: {
@@ -112,18 +172,15 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
       }
     });
 
-    // Ajouter XP à l'utilisateur
     await prisma.user.update({
       where: { id: userId },
       data: { xp: { increment: xpEarned } }
     });
 
-    // Vérifier les badges
     const completionsCount = await prisma.microLessonCompletion.count({
       where: { userId, completed: true }
     });
 
-    // Débloquer badge "Premier Pas" si première leçon
     if (completionsCount === 1) {
       const firstStepBadge = await prisma.badge.findUnique({
         where: { id: 'first-step' }

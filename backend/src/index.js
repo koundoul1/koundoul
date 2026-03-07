@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { PrismaClient } = require('@prisma/client');
+const { initPlans } = require('./scripts/initPlans');
 
 const app = express();
 const prisma = new PrismaClient();
@@ -91,7 +92,8 @@ app.use(cors({
       'https://koundoul.com',
       'https://koundoul-frontend.vercel.app',
       'http://localhost:5173',
-      'http://localhost:3000'
+      'http://localhost:3000',
+      'http://localhost:3002'
     ];
     
     // En développement ou si pas d'origine (ex: Postman), autoriser
@@ -231,7 +233,12 @@ const server = app.listen(PORT, async () => {
   
   // Initialiser les plans d'abonnement si les migrations sont OK
   if (migrationStatus.migrated) {
-    await initSubscriptionPlans();
+    try {
+      await initPlans();
+      console.log('✅ Plans d’abonnement initialisés');
+    } catch (error) {
+      console.error('❌ Erreur lors de l’initialisation des plans d’abonnement:', error.message);
+    }
   }
 });
 
