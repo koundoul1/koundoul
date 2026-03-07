@@ -235,7 +235,7 @@ export default {
         sarah: {
           name: 'Sarah K.',
           level: 'Seconde',
-          text: 'Le profil d\'apprentissage visuel change tout ! Les graphiques interactifs m\'aident vraiment à comprendre les fonctions. Et le dashboard parents rassure mes parents 😊'
+          text: 'Le profil d\'apprentissage visuel change tout ! Les graphiques interactifs m\'aident vraiment à comprendre les fonctions. Et le dashboard parents rassure mes parents \uD83D\uDE0A'
         }
       },
       ctaTitle: 'Prêt à Exceller en Sciences ?',
@@ -323,7 +323,7 @@ export default {
     },
     
     dashboard: {
-      title: 'Bonjour {name} ! 👋',
+      title: 'Bonjour {name} ! \uD83D\uDC4B',
       subtitle: 'Prêt à continuer ton apprentissage ?',
       level: 'Niveau {level}',
       xp: '{xp} / {nextXp} XP',
@@ -352,7 +352,7 @@ export default {
         title: 'Activité récente'
       },
       dailyGoal: {
-        title: '🎯 Objectif du jour',
+        title: '\uD83C\uDFAF Objectif du jour',
         desc: 'Complète 1 leçon et 2 exercices pour maintenir ton streak !',
         startButton: 'Commencer maintenant'
       }
@@ -793,7 +793,9 @@ export default {
         }
       },
       security: 'Paiements sécurisés via Wave. Vos données sont protégées.'
+    }
     },
+    
   
   en: {
     // Navigation
@@ -1031,7 +1033,7 @@ export default {
         sarah: {
           name: 'Sarah K.',
           level: '10th Grade',
-          text: 'The visual learning profile changes everything! Interactive graphs really help me understand functions. And the parent dashboard reassures my parents 😊'
+          text: 'The visual learning profile changes everything! Interactive graphs really help me understand functions. And the parent dashboard reassures my parents \uD83D\uDE0A'
         }
       },
       ctaTitle: 'Ready to Excel in Science?',
@@ -1119,7 +1121,7 @@ export default {
     },
     
     dashboard: {
-      title: 'Hello {name}! 👋',
+      title: 'Hello {name}! \uD83D\uDC4B',
       subtitle: 'Ready to continue your learning?',
       level: 'Level {level}',
       xp: '{xp} / {nextXp} XP',
@@ -1148,7 +1150,7 @@ export default {
         title: 'Recent activity'
       },
       dailyGoal: {
-        title: '🎯 Daily Goal',
+        title: '\uD83C\uDFAF Daily Goal',
         desc: 'Complete 1 lesson and 2 exercises to maintain your streak!',
         startButton: 'Start now'
       }
