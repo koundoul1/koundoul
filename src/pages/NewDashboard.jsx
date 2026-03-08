@@ -1,5 +1,5 @@
 /**
- * Dashboard élève complet — données réelles depuis l'API
+ * Dashboard élève — Premium design with violet/turquoise palette
  */
 
 import React, { useState, useEffect } from 'react'
@@ -15,9 +15,66 @@ import api from '../services/api'
 
 const SUBJECT_ICONS = { 'Mathématiques': '📐', 'Physique': '⚛️', 'Chimie': '🧪' }
 const SUBJECT_COLORS = {
-  'Mathématiques': 'from-blue-500 to-cyan-500',
-  'Physique': 'from-green-500 to-emerald-500',
-  'Chimie': 'from-purple-500 to-pink-500'
+  'Mathématiques': { ring: '#3B82F6', bg: 'rgba(59,130,246,0.15)' },
+  'Physique': { ring: '#6C63FF', bg: 'rgba(108,99,255,0.15)' },
+  'Chimie': { ring: '#00D9A3', bg: 'rgba(0,217,163,0.15)' }
+}
+
+// Circular progress ring component
+const CircularProgress = ({ percentage, color, size = 80, strokeWidth = 6, children }) => {
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const offset = circumference - (percentage / 100) * circumference
+
+  return (
+    <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size} height={size} className="-rotate-90">
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={strokeWidth}
+        />
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none" stroke={color} strokeWidth={strokeWidth}
+          strokeDasharray={circumference} strokeDashoffset={offset}
+          strokeLinecap="round"
+          className="transition-all duration-1000 ease-out"
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        {children}
+      </div>
+    </div>
+  )
+}
+
+// 7-day activity grid
+const WeekActivityGrid = ({ recentActivity }) => {
+  const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
+  const today = new Date()
+  const dayOfWeek = (today.getDay() + 6) % 7 // Monday=0
+
+  return (
+    <div className="flex items-center gap-2">
+      {days.map((day, i) => {
+        const hasActivity = recentActivity && i <= dayOfWeek && recentActivity.length > (dayOfWeek - i)
+        return (
+          <div key={i} className="flex flex-col items-center gap-1">
+            <span className="text-[10px] text-gray-500 font-medium">{day}</span>
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold transition-all ${
+              hasActivity
+                ? 'bg-gradient-to-br from-kprimary to-ksecondary text-white shadow-md shadow-kprimary/20'
+                : i <= dayOfWeek
+                  ? 'bg-white/5 text-gray-600'
+                  : 'bg-white/[0.02] text-gray-700'
+            }`}>
+              {hasActivity ? '✓' : ''}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 const NewDashboard = () => {
@@ -60,18 +117,18 @@ const NewDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kprimary"></div>
       </div>
     )
   }
 
   if (!dashboard) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
+      <div className="min-h-screen flex items-center justify-center px-4">
         <div className="text-center">
           <p className="text-gray-400 mb-4">{t('dashboard.loadingError')}</p>
-          <button onClick={fetchDashboard} className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-white">
+          <button onClick={fetchDashboard} className="px-6 py-3 bg-gradient-to-r from-kprimary to-ksecondary rounded-xl font-bold text-white">
             {t('actions.retry')}
           </button>
         </div>
@@ -90,193 +147,253 @@ const NewDashboard = () => {
   const totalLessons = stats?.totalLessons || 395
   const avgScore = stats?.averageScore || 0
 
-  const statCards = [
-    {
-      icon: <Star className="w-5 h-5 text-blue-400" />,
-      value: xp.toLocaleString(),
-      label: 'XP Total',
-      progress: Math.min(100, (xpInLevel / xpForNext) * 100),
-      gradient: 'from-blue-500 to-cyan-500'
-    },
-    {
-      icon: <TrendingUp className="w-5 h-5 text-purple-400" />,
-      value: `${t('dashboard.level')} ${level}`,
-      label: t('dashboard.currentLevel'),
-      progress: (xpInLevel / xpForNext) * 100,
-      gradient: 'from-purple-500 to-pink-500'
-    },
-    {
-      icon: <Target className="w-5 h-5 text-green-400" />,
-      value: `${lessonsCompleted}/${totalLessons}`,
-      label: t('dashboard.lessons'),
-      progress: totalLessons > 0 ? (lessonsCompleted / totalLessons) * 100 : 0,
-      gradient: 'from-green-500 to-emerald-500'
-    },
-    {
-      icon: <Award className="w-5 h-5 text-amber-400" />,
-      value: `${avgScore}%`,
-      label: t('dashboard.avgScore'),
-      progress: avgScore,
-      gradient: 'from-amber-500 to-orange-500'
-    }
-  ]
-
   const quickActions = [
-    { name: t('dashboard.actions.solver'), href: '/solver', icon: <Brain className="w-6 h-6" />, gradient: 'from-blue-500 to-purple-500' },
+    { name: t('dashboard.actions.solver'), href: '/solver', icon: <Brain className="w-6 h-6" />, gradient: 'from-kprimary to-ksecondary' },
     { name: t('dashboard.actions.challenge'), href: '/challenge', icon: <Trophy className="w-6 h-6" />, gradient: 'from-amber-500 to-orange-500' },
-    { name: t('dashboard.actions.microLessons'), href: '/micro-lessons', icon: <BookOpen className="w-6 h-6" />, gradient: 'from-green-500 to-emerald-500' },
-    { name: 'Quiz', href: '/quiz', icon: <Zap className="w-6 h-6" />, gradient: 'from-pink-500 to-purple-500' }
+    { name: t('dashboard.actions.microLessons'), href: '/micro-lessons', icon: <BookOpen className="w-6 h-6" />, gradient: 'from-emerald-500 to-teal-500' },
+    { name: 'Quiz', href: '/quiz', icon: <Zap className="w-6 h-6" />, gradient: 'from-pink-500 to-rose-500' }
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white pb-20 lg:pb-0">
+    <div className="min-h-screen text-white pb-20 lg:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
-        {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-3xl sm:text-4xl font-black mb-2">
-            {getGreeting()}, <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              {profile?.firstName || profile?.username || t('dashboard.student')}
-            </span> 👋
-          </h1>
-          <p className="text-gray-400">{t('dashboard.subtitle')}</p>
-        </div>
-
-        {/* Streak Card */}
-        <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl p-6 mb-6 shadow-2xl shadow-orange-500/50">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                <Flame className="w-10 h-10 text-white animate-pulse" />
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl font-black text-white mb-1">
-                  {streak} {t('dashboard.days')}
+        {/* Hero Card — gradient violet→turquoise */}
+        <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 mb-6 bg-gradient-to-r from-kprimary to-ksecondary shadow-2xl shadow-kprimary/30">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIj48cGF0aCBkPSJNMCAyMGgyME0yMCAwdjIwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InVybCgjYSkiLz48L3N2Zz4=')] opacity-50"></div>
+          <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <p className="text-white/80 text-sm font-medium mb-1">{getGreeting()}</p>
+              <h1 className="text-3xl sm:text-4xl font-black text-white mb-2">
+                {profile?.firstName || profile?.username || t('dashboard.student')}
+              </h1>
+              <div className="flex items-center gap-4 text-white/90">
+                <div className="flex items-center gap-1.5">
+                  <Flame className="w-5 h-5 text-orange-300" />
+                  <span className="font-bold">{streak} {t('dashboard.days')}</span>
                 </div>
-                <div className="text-sm text-white/90">
-                  {streak > 0 ? t('dashboard.streakActive') : t('dashboard.streakStart')}
+                <div className="flex items-center gap-1.5">
+                  <Star className="w-5 h-5 text-yellow-300" />
+                  <span className="font-bold">{xp.toLocaleString()} XP</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <TrendingUp className="w-5 h-5 text-white" />
+                  <span className="font-bold">{t('dashboard.level')} {level}</span>
                 </div>
               </div>
             </div>
-            <div className="flex-1 w-full sm:w-auto">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-white/90 font-medium">{t('dashboard.levelProgress')}</span>
-                <span className="text-sm text-white font-bold">{xpInLevel}/{xpForNext} XP</span>
-              </div>
-              <div className="w-full sm:w-48 h-3 bg-white/20 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-white rounded-full transition-all duration-500"
-                  style={{ width: `${(xpInLevel / xpForNext) * 100}%` }}
-                ></div>
-              </div>
+            <div className="flex-shrink-0">
+              <CircularProgress percentage={(xpInLevel / xpForNext) * 100} color="#FFD700" size={90} strokeWidth={7}>
+                <div className="text-center">
+                  <div className="text-lg font-black text-white">{level}</div>
+                  <div className="text-[9px] text-white/70 font-medium">LEVEL</div>
+                </div>
+              </CircularProgress>
+            </div>
+          </div>
+
+          {/* XP Progress bar — gold gradient */}
+          <div className="relative z-10 mt-5">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs text-white/70 font-medium">{t('dashboard.levelProgress')}</span>
+              <span className="text-xs text-white font-bold">{xpInLevel}/{xpForNext} XP</span>
+            </div>
+            <div className="w-full h-3 bg-white/15 rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-700"
+                style={{
+                  width: `${Math.min(100, (xpInLevel / xpForNext) * 100)}%`,
+                  background: 'linear-gradient(90deg, #FFD700, #FFA500)'
+                }}
+              ></div>
             </div>
           </div>
         </div>
 
+        {/* 7-Day Activity Grid */}
+        <div className="k-card p-5 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-bold text-gray-300 uppercase tracking-wide flex items-center gap-2">
+              <Activity className="w-4 h-4 text-ksecondary" />
+              {t('dashboard.recentActivity')}
+            </h2>
+            <span className="text-xs text-gray-500">{streak > 0 ? t('dashboard.streakActive') : t('dashboard.streakStart')}</span>
+          </div>
+          <WeekActivityGrid recentActivity={recentActivity} />
+        </div>
+
+        {/* Subject Progress — Circular rings */}
+        {subjectProgress && subjectProgress.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+            {subjectProgress.map((sp) => {
+              const colors = SUBJECT_COLORS[sp.name] || { ring: '#6C63FF', bg: 'rgba(108,99,255,0.15)' }
+              return (
+                <div key={sp.name} className="k-card k-card-glow p-5 flex flex-col items-center text-center">
+                  <CircularProgress percentage={sp.percentage} color={colors.ring} size={90} strokeWidth={6}>
+                    <span className="text-2xl">{SUBJECT_ICONS[sp.name] || '📖'}</span>
+                  </CircularProgress>
+                  <h3 className="font-bold text-sm mt-3 text-white">{t(`common.subjects.${sp.name}`) || sp.name}</h3>
+                  <p className="text-xs text-gray-400 mt-0.5">{sp.completed}/{sp.total} ({sp.percentage}%)</p>
+                  <span className="text-[10px] mt-1 px-2 py-0.5 rounded-full font-medium" style={{ background: colors.bg, color: colors.ring }}>
+                    {sp.mastery === 'advanced' && t('dashboard.mastery.advanced')}
+                    {sp.mastery === 'intermediate' && t('dashboard.mastery.intermediate')}
+                    {sp.mastery === 'beginner' && t('dashboard.mastery.beginner')}
+                    {sp.mastery === 'none' && t('dashboard.mastery.none')}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        )}
+
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          {statCards.map((stat, i) => (
-            <div key={i} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border border-white/10 hover:border-purple-500/50 transition-all duration-300">
-              <div className={`w-12 h-12 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center mb-4`}>
+          {[
+            { icon: <Star className="w-5 h-5" />, value: xp.toLocaleString(), label: 'XP Total', color: 'text-yellow-400', bg: 'bg-yellow-500/15' },
+            { icon: <Target className="w-5 h-5" />, value: `${lessonsCompleted}/${totalLessons}`, label: t('dashboard.lessons'), color: 'text-ksecondary', bg: 'bg-ksecondary/15' },
+            { icon: <Award className="w-5 h-5" />, value: `${avgScore}%`, label: t('dashboard.avgScore'), color: 'text-kprimary', bg: 'bg-kprimary/15' },
+            { icon: <Clock className="w-5 h-5" />, value: formatTime(stats?.totalStudyTimeMinutes || 0), label: t('dashboard.studyTime'), color: 'text-emerald-400', bg: 'bg-emerald-500/15' }
+          ].map((stat, i) => (
+            <div key={i} className="k-card p-4 sm:p-5">
+              <div className={`w-10 h-10 ${stat.bg} rounded-xl flex items-center justify-center mb-3 ${stat.color}`}>
                 {stat.icon}
               </div>
-              <div className="text-2xl sm:text-3xl font-black mb-1">{stat.value}</div>
-              <div className="text-xs sm:text-sm text-gray-400 mb-3">{stat.label}</div>
-              <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
-                <div className={`h-full bg-gradient-to-r ${stat.gradient} rounded-full transition-all duration-500`} style={{ width: `${Math.min(100, stat.progress)}%` }}></div>
-              </div>
+              <div className="text-xl sm:text-2xl font-black mb-0.5">{stat.value}</div>
+              <div className="text-xs text-gray-500">{stat.label}</div>
             </div>
           ))}
         </div>
 
-        {/* Subject Progress */}
-        {subjectProgress && subjectProgress.length > 0 && (
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10 mb-6">
-            <h2 className="text-xl font-black mb-4 flex items-center gap-2">
-              <BookMarked className="w-6 h-6 text-blue-400" />
-              {t('dashboard.subjectProgress')}
-            </h2>
-            <div className="space-y-4">
-              {subjectProgress.map((sp) => (
-                <div key={sp.name} className="flex items-center gap-4">
-                  <span className="text-2xl w-8">{SUBJECT_ICONS[sp.name] || '📖'}</span>
-                  <div className="flex-1">
-                    <div className="flex justify-between mb-1">
-                      <span className="font-semibold text-sm">{t(`common.subjects.${sp.name}`) || sp.name}</span>
-                      <span className="text-xs text-gray-400">{sp.completed}/{sp.total} ({sp.percentage}%)</span>
-                    </div>
-                    <div className="w-full h-2.5 bg-gray-700 rounded-full overflow-hidden">
-                      <div className={`h-full bg-gradient-to-r ${SUBJECT_COLORS[sp.name] || 'from-gray-500 to-gray-400'} rounded-full transition-all duration-700`} style={{ width: `${sp.percentage}%` }}></div>
-                    </div>
-                    <div className="text-xs text-gray-500 mt-1">
-                      {sp.mastery === 'advanced' && t('dashboard.mastery.advanced')}
-                      {sp.mastery === 'intermediate' && t('dashboard.mastery.intermediate')}
-                      {sp.mastery === 'beginner' && t('dashboard.mastery.beginner')}
-                      {sp.mastery === 'none' && t('dashboard.mastery.none')}
-                    </div>
-                  </div>
+        {/* CTA — Continue last lesson */}
+        {recommendations && recommendations.length > 0 && (
+          <Link
+            to={`/micro-lessons/${recommendations[0].lessonId}`}
+            className="block mb-6 p-5 rounded-2xl bg-gradient-to-r from-kaccent to-orange-500 shadow-lg shadow-kaccent/30 hover:scale-[1.02] transition-transform"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                  <Play className="w-6 h-6 text-white" />
                 </div>
-              ))}
+                <div>
+                  <div className="font-bold text-white">{t('dashboard.resume') || 'Continuer'}</div>
+                  <div className="text-sm text-white/80 truncate max-w-[200px]">{recommendations[0].title}</div>
+                </div>
+              </div>
+              <ChevronRight className="w-6 h-6 text-white/80" />
             </div>
-          </div>
+          </Link>
         )}
 
         {/* Quick Actions */}
         <div className="mb-6">
-          <h2 className="text-xl sm:text-2xl font-black mb-4 flex items-center gap-2">
-            <Rocket className="w-6 h-6 text-purple-400" />
+          <h2 className="text-lg font-black mb-4 flex items-center gap-2">
+            <Rocket className="w-5 h-5 text-kprimary" />
             {t('dashboard.quickActions')}
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {quickActions.map((action, i) => (
-              <Link key={i} to={action.href} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group">
-                <div className={`w-14 h-14 bg-gradient-to-br ${action.gradient} rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
+              <Link key={i} to={action.href} className="k-card p-5 hover:scale-105 transition-transform group">
+                <div className={`w-12 h-12 bg-gradient-to-br ${action.gradient} rounded-xl flex items-center justify-center mb-3 shadow-lg group-hover:scale-110 transition-transform`}>
                   <div className="text-white">{action.icon}</div>
                 </div>
-                <div className="font-bold text-sm sm:text-base">{action.name}</div>
+                <div className="font-bold text-sm">{action.name}</div>
               </Link>
             ))}
           </div>
         </div>
 
+        {/* Badges Row */}
+        <div className="k-card p-5 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-black flex items-center gap-2">
+              <Crown className="w-5 h-5 text-yellow-400" />
+              {t('dashboard.badges')} ({badges?.unlocked || 0}/{badges?.total || 15})
+            </h2>
+            <Link to="/badges" className="text-sm text-kprimary font-semibold hover:text-kprimary-300 transition-colors">
+              {t('dashboard.viewAllBadges')} →
+            </Link>
+          </div>
+
+          {badges?.recent && badges.recent.length > 0 ? (
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
+              {badges.recent.map((b, i) => (
+                <div key={i} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/5 border border-yellow-500/20 min-w-[80px]">
+                  <span className="text-2xl">{b.icon}</span>
+                  <span className="text-[10px] font-semibold text-yellow-400 text-center leading-tight">{b.name}</span>
+                </div>
+              ))}
+              {/* Locked badges placeholder */}
+              {Array.from({ length: Math.max(0, 4 - (badges.recent?.length || 0)) }).map((_, i) => (
+                <div key={`locked-${i}`} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/[0.02] border border-white/5 min-w-[80px] opacity-40">
+                  <span className="text-2xl">🔒</span>
+                  <span className="text-[10px] font-semibold text-gray-600 text-center">???</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex gap-3">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/[0.02] border border-white/5 min-w-[80px] opacity-40">
+                  <span className="text-2xl">🔒</span>
+                  <span className="text-[10px] font-semibold text-gray-600 text-center">???</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {badges?.next && (
+            <div className="mt-4 p-3 rounded-xl bg-white/5 border border-dashed border-yellow-500/20">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-xl opacity-60">{badges.next.icon}</span>
+                <div className="flex-1">
+                  <div className="text-xs font-semibold text-yellow-400">{t('dashboard.nextBadge')}</div>
+                  <div className="text-xs text-gray-400">{badges.next.name}</div>
+                </div>
+                <span className="text-xs text-gray-500">{badges.next.current}/{badges.next.target}</span>
+              </div>
+              <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                <div className="h-full rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 transition-all" style={{ width: `${badges.next.target > 0 ? (badges.next.current / badges.next.target) * 100 : 0}%` }}></div>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Two Column Layout */}
         <div className="grid lg:grid-cols-3 gap-6">
-
-          {/* Main Column */}
-          <div className="lg:col-span-2 space-y-6">
-
-            {/* Recent Activity */}
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
-              <h2 className="text-xl font-black mb-4 flex items-center gap-2">
-                <Activity className="w-6 h-6 text-blue-400" />
+          {/* Main Column — Recent Activity */}
+          <div className="lg:col-span-2">
+            <div className="k-card p-5">
+              <h2 className="text-lg font-black mb-4 flex items-center gap-2">
+                <Activity className="w-5 h-5 text-ksecondary" />
                 {t('dashboard.recentActivity')}
               </h2>
               {recentActivity && recentActivity.length > 0 ? (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {recentActivity.map((item, i) => (
-                    <div key={i} className="flex items-center gap-4 p-4 bg-gray-900/50 rounded-xl hover:bg-gray-900 transition-colors group cursor-pointer" onClick={() => navigate(`/micro-lessons/${item.lessonId}`)}>
-                      <div className="text-3xl">{SUBJECT_ICONS[item.subject] || '📖'}</div>
+                    <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors cursor-pointer group" onClick={() => navigate(`/micro-lessons/${item.lessonId}`)}>
+                      <div className="text-2xl">{SUBJECT_ICONS[item.subject] || '📖'}</div>
                       <div className="flex-1 min-w-0">
                         <div className="font-semibold text-sm truncate">{item.title}</div>
-                        <div className="text-xs text-gray-400">{t(`common.subjects.${item.subject}`) || item.subject}</div>
+                        <div className="text-xs text-gray-500">{t(`common.subjects.${item.subject}`) || item.subject}</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        {item.score !== null && <span className="text-xs text-green-400">{item.score}%</span>}
+                        {item.score !== null && <span className="text-xs text-emerald-400 font-bold">{item.score}%</span>}
                         {!item.completed && (
-                          <button className="px-3 py-1 bg-purple-600 rounded-lg text-xs font-bold hover:bg-purple-500 transition-colors flex items-center gap-1">
+                          <button className="px-3 py-1 bg-kprimary/20 text-kprimary rounded-lg text-xs font-bold hover:bg-kprimary/30 transition-colors flex items-center gap-1">
                             <Play className="w-3 h-3" /> {t('dashboard.resume')}
                           </button>
                         )}
-                        {item.completed && <span className="text-xs text-green-400">✓</span>}
+                        {item.completed && <span className="text-emerald-400 text-sm">✓</span>}
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="text-center py-8 text-gray-500">
-                  <BookOpen className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                  <BookOpen className="w-12 h-12 mx-auto mb-3 opacity-30" />
                   <p>{t('dashboard.noActivity')}</p>
-                  <Link to="/micro-lessons" className="mt-3 inline-block px-4 py-2 bg-purple-600 rounded-lg text-sm font-bold">
+                  <Link to="/micro-lessons" className="mt-3 inline-block px-4 py-2 bg-kprimary rounded-lg text-sm font-bold text-white">
                     {t('dashboard.startLearning')}
                   </Link>
                 </div>
@@ -284,26 +401,26 @@ const NewDashboard = () => {
             </div>
 
             {/* Recommendations */}
-            {recommendations && recommendations.length > 0 && (
-              <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
-                <h2 className="text-xl font-black mb-4 flex items-center gap-2">
-                  <Brain className="w-6 h-6 text-pink-400" />
+            {recommendations && recommendations.length > 1 && (
+              <div className="k-card p-5 mt-6">
+                <h2 className="text-lg font-black mb-4 flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-kprimary" />
                   {t('dashboard.recommendations')}
                 </h2>
-                <div className="space-y-3">
-                  {recommendations.map((rec, i) => (
-                    <Link key={i} to={`/micro-lessons/${rec.lessonId}`} className="block p-4 bg-gray-900/50 rounded-xl hover:bg-gray-900 transition-all group">
+                <div className="space-y-2">
+                  {recommendations.slice(1).map((rec, i) => (
+                    <Link key={i} to={`/micro-lessons/${rec.lessonId}`} className="block p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-all group">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="text-2xl">{SUBJECT_ICONS[rec.subject] || '📖'}</div>
+                          <div className="text-xl">{SUBJECT_ICONS[rec.subject] || '📖'}</div>
                           <div>
-                            <div className="font-semibold text-sm group-hover:text-purple-400 transition-colors truncate">{rec.title}</div>
-                            <div className="text-xs text-gray-400">
+                            <div className="font-semibold text-sm group-hover:text-kprimary transition-colors truncate">{rec.title}</div>
+                            <div className="text-xs text-gray-500">
                               {t(`common.subjects.${rec.subject}`) || rec.subject} • {t(`common.levels.${rec.level}`) || rec.level}
                             </div>
                           </div>
                         </div>
-                        <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                        <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-kprimary group-hover:translate-x-1 transition-all flex-shrink-0" />
                       </div>
                     </Link>
                   ))}
@@ -314,66 +431,20 @@ const NewDashboard = () => {
 
           {/* Sidebar */}
           <div className="space-y-6">
-
-            {/* Badges */}
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
-              <h2 className="text-xl font-black mb-4 flex items-center gap-2">
-                <Crown className="w-6 h-6 text-yellow-400" />
-                {t('dashboard.badges')} ({badges?.unlocked || 0}/{badges?.total || 15})
-              </h2>
-
-              {badges?.recent && badges.recent.length > 0 ? (
-                <div className="space-y-3 mb-4">
-                  {badges.recent.map((b, i) => (
-                    <div key={i} className="flex items-center gap-3 p-3 bg-gray-900/50 rounded-xl">
-                      <span className="text-2xl">{b.icon}</span>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-semibold truncate">{b.name}</div>
-                        <div className="text-xs text-gray-500">{b.description}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-sm text-gray-500 mb-4">{t('dashboard.noBadgesYet')}</p>
-              )}
-
-              {/* Next badge */}
-              {badges?.next && (
-                <div className="p-3 bg-gray-900/50 rounded-xl border border-dashed border-yellow-500/30 mb-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-2xl opacity-50">{badges.next.icon}</span>
-                    <div className="flex-1">
-                      <div className="text-sm font-semibold text-yellow-400">{t('dashboard.nextBadge')}</div>
-                      <div className="text-xs text-gray-400">{badges.next.name}</div>
-                    </div>
-                  </div>
-                  <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full transition-all" style={{ width: `${badges.next.target > 0 ? (badges.next.current / badges.next.target) * 100 : 0}%` }}></div>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1 text-right">{badges.next.current}/{badges.next.target}</div>
-                </div>
-              )}
-
-              <Link to="/badges" className="block text-center text-sm text-purple-400 font-semibold hover:text-purple-300 transition-colors">
-                {t('dashboard.viewAllBadges')} →
-              </Link>
-            </div>
-
             {/* Study Time */}
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-white/10">
-              <h2 className="text-xl font-black mb-4 flex items-center gap-2">
-                <Clock className="w-6 h-6 text-green-400" />
+            <div className="k-card p-5">
+              <h2 className="text-sm font-bold text-gray-400 uppercase tracking-wide mb-3 flex items-center gap-2">
+                <Clock className="w-4 h-4 text-emerald-400" />
                 {t('dashboard.studyTime')}
               </h2>
-              <div className="text-4xl font-black mb-2 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+              <div className="text-3xl font-black gradient-text">
                 {formatTime(stats?.totalStudyTimeMinutes || 0)}
               </div>
-              <div className="text-sm text-gray-400">{t('dashboard.totalEstimated')}</div>
+              <div className="text-xs text-gray-500 mt-1">{t('dashboard.totalEstimated')}</div>
             </div>
 
             {/* Profile Link */}
-            <Link to="/profile" className="block bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-center font-bold hover:scale-105 transition-all duration-300">
+            <Link to="/profile" className="block bg-gradient-to-r from-kprimary to-ksecondary rounded-2xl p-5 text-center font-bold hover:scale-105 transition-all duration-300 shadow-lg shadow-kprimary/20">
               {t('dashboard.viewProfile')}
             </Link>
           </div>

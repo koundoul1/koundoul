@@ -1,6 +1,5 @@
 /**
- * 👤 Page de Profil Koundoul
- * Gestion du profil utilisateur et des paramètres
+ * Page de Profil Koundoul — Premium dark theme
  */
 
 import React, { useState, useEffect } from 'react'
@@ -9,12 +8,12 @@ import { useTranslation } from '../hooks/useTranslation'
 import api from '../services/api'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import SubscriptionSection from '../components/subscriptions/SubscriptionSection'
-import { 
-  User, 
-  Mail, 
-  Calendar, 
-  Award, 
-  Target, 
+import {
+  User,
+  Mail,
+  Calendar,
+  Award,
+  Target,
   Edit3,
   Save,
   X,
@@ -66,7 +65,6 @@ const Profile = () => {
   const [parentChildren, setParentChildren] = useState([])
   const [unlinkingChild, setUnlinkingChild] = useState(null)
 
-  // Initialiser les données du formulaire
   useEffect(() => {
     if (user) {
       setFormData({
@@ -77,13 +75,12 @@ const Profile = () => {
     }
   }, [user])
 
-  // Charger les statistiques utilisateur et le profil
   useEffect(() => {
     loadUserStats()
     loadProfileData()
     loadParentData()
   }, [])
-  
+
   const loadProfileData = async () => {
     try {
       const response = await api.user.getProfile()
@@ -91,25 +88,21 @@ const Profile = () => {
       if (data) {
         setProfileData(data)
         setInvitationCode(data.invitationCode)
-        if (data.parentId) {
-          setLinkedParent(data.parentId)
-        }
+        if (data.parentId) setLinkedParent(data.parentId)
       }
     } catch (error) {
       console.error('Erreur chargement profil:', error)
     }
   }
-  
 
   const loadParentData = async () => {
     try {
-      // Charger les enfants liés (si parent)
       const childrenRes = await api.parent.getChildren()
       if (childrenRes.success || childrenRes.data?.success) {
         setParentChildren(childrenRes.data?.data || childrenRes.data || [])
       }
     } catch (err) {
-      // Pas un parent ou pas de children, c'est normal
+      // Not a parent or no children
     }
   }
 
@@ -186,21 +179,14 @@ const Profile = () => {
     try {
       setLoadingStats(true)
       const response = await api.user.getStats()
-      
       if (response.success || response.data?.success) {
         setUserStats(response.data?.data || response.data)
       }
     } catch (error) {
       console.error('Erreur chargement stats:', error)
-      // Fallback sur stats par défaut
       setUserStats({
-        totalXp: 0,
-        level: 1,
-        streak: 0,
-        problemsSolved: 0,
-        quizzesCompleted: 0,
-        badgesEarned: 0,
-        daysSinceJoined: 0
+        totalXp: 0, level: 1, streak: 0, problemsSolved: 0,
+        quizzesCompleted: 0, badgesEarned: 0, daysSinceJoined: 0
       })
     } finally {
       setLoadingStats(false)
@@ -209,27 +195,19 @@ const Profile = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target
-    setPasswordData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+    setPasswordData(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSaveProfile = async () => {
     try {
       setLoading(true)
       setError('')
-      
       const result = await updateProfile(formData)
-      
       if (result.success) {
         setSuccess('Profil mis à jour avec succès')
         setIsEditing(false)
@@ -249,23 +227,16 @@ const Profile = () => {
       setError('Les nouveaux mots de passe ne correspondent pas')
       return
     }
-
     try {
       setLoading(true)
       setError('')
-      
       const result = await changePassword({
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       })
-      
       if (result.success) {
         setSuccess(t('profile.passwordChanged'))
-        setPasswordData({
-          currentPassword: '',
-          newPassword: '',
-          confirmPassword: ''
-        })
+        setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' })
         setIsChangingPassword(false)
         setTimeout(() => setSuccess(''), 3000)
       } else {
@@ -289,37 +260,35 @@ const Profile = () => {
   }
 
   const cancelPasswordChange = () => {
-    setPasswordData({
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: ''
-    })
+    setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' })
     setIsChangingPassword(false)
     setError('')
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600 font-medium">{t('profile.loading') || 'Chargement du profil...'}</p>
+          <Loader2 className="h-8 w-8 animate-spin text-kprimary mx-auto mb-4" />
+          <p className="text-gray-400 font-medium">{t('profile.loading') || 'Chargement du profil...'}</p>
         </div>
       </div>
     )
   }
 
+  const inputClasses = "w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-kprimary focus:border-transparent disabled:opacity-50 disabled:bg-white/[0.02] font-medium"
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen text-white pb-20 lg:pb-0">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-gray-200">
+      <div className="border-b border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-6">
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center">
-              <User className="h-8 w-8 text-blue-600 mr-3" />
+            <h1 className="text-2xl font-bold text-white flex items-center">
+              <User className="h-7 w-7 text-kprimary mr-3" />
               {t('profile.title')}
             </h1>
-            <p className="text-gray-800 font-medium mt-1">
+            <p className="text-gray-400 mt-1">
               {t('profile.description')}
             </p>
           </div>
@@ -328,61 +297,61 @@ const Profile = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Profil principal */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-gray-900">{t('profile.personalInfo')}</h2>
-                  {!isEditing && (
-                    <button
-                      onClick={() => setIsEditing(true)}
-                      className="flex items-center px-3 py-2 text-blue-600 hover:text-blue-700 transition-colors"
-                    >
-                      <Edit3 className="h-4 w-4 mr-1" />
-                      {t('profile.editProfile')}
-                    </button>
-                  )}
-                </div>
+          {/* Main content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Personal Info Card */}
+            <div className="k-card overflow-hidden">
+              <div className="p-5 border-b border-white/8 flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-white">{t('profile.personalInfo')}</h2>
+                {!isEditing && (
+                  <button
+                    onClick={() => setIsEditing(true)}
+                    className="flex items-center px-3 py-2 text-kprimary hover:text-kprimary-300 transition-colors text-sm"
+                  >
+                    <Edit3 className="h-4 w-4 mr-1" />
+                    {t('profile.editProfile')}
+                  </button>
+                )}
               </div>
 
-              <div className="p-6">
+              <div className="p-5">
                 {/* Messages */}
                 {error && (
-                  <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-4">
-                    <p className="text-sm text-red-600">{error}</p>
+                  <div className="mb-4 bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+                    <p className="text-sm text-red-400">{error}</p>
                   </div>
                 )}
                 {success && (
-                  <div className="mb-4 bg-green-50 border border-green-200 rounded-lg p-4">
-                    <p className="text-sm text-green-600">{success}</p>
+                  <div className="mb-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-4">
+                    <p className="text-sm text-emerald-400">{success}</p>
                   </div>
                 )}
 
-                {/* Formulaire */}
                 <div className="space-y-6">
-                  {/* Avatar */}
+                  {/* Avatar with gradient ring */}
                   <div className="flex items-center space-x-6">
                     <div className="relative">
-                      <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-md">
-                        {user.firstName?.charAt(0) || 'U'}
+                      <div className="p-1 rounded-full bg-gradient-to-br from-kprimary to-ksecondary">
+                        <div className="w-20 h-20 bg-[#1A1A2E] rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                          {user.firstName?.charAt(0) || 'U'}
+                        </div>
                       </div>
-                      <button className="absolute -bottom-1 -right-1 w-8 h-8 bg-white border-2 border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 shadow-sm">
-                        <Camera className="h-4 w-4 text-gray-700" />
+                      <button className="absolute -bottom-1 -right-1 w-8 h-8 bg-kprimary rounded-full flex items-center justify-center hover:bg-kprimary-500 shadow-lg transition-colors">
+                        <Camera className="h-4 w-4 text-white" />
                       </button>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900">
+                      <h3 className="text-xl font-bold text-white">
                         {user.firstName} {user.lastName}
                       </h3>
-                      <p className="text-gray-700 font-medium">{user.email}</p>
+                      <p className="text-gray-400">{user.email}</p>
                     </div>
                   </div>
 
-                  {/* Champs du formulaire */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Form fields */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">
                         {t('profile.firstName')}
                       </label>
                       <input
@@ -391,12 +360,12 @@ const Profile = () => {
                         value={formData.firstName}
                         onChange={handleInputChange}
                         disabled={!isEditing}
-                        className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-700 font-medium"
+                        className={inputClasses}
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">
                         {t('profile.lastName')}
                       </label>
                       <input
@@ -405,12 +374,12 @@ const Profile = () => {
                         value={formData.lastName}
                         onChange={handleInputChange}
                         disabled={!isEditing}
-                        className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-700 font-medium"
+                        className={inputClasses}
                       />
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">
                         {t('profile.email')}
                       </label>
                       <input
@@ -419,25 +388,24 @@ const Profile = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         disabled={!isEditing}
-                        className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:text-gray-700 font-medium"
+                        className={inputClasses}
                       />
                     </div>
                   </div>
 
-                  {/* Boutons d'action */}
                   {isEditing && (
                     <div className="flex space-x-4">
                       <button
                         onClick={handleSaveProfile}
                         disabled={loading}
-                        className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center px-4 py-2 bg-kprimary text-white rounded-xl hover:bg-kprimary-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                       >
                         <Save className="h-4 w-4 mr-2" />
                         {loading ? t('common.saving') : t('actions.save')}
                       </button>
                       <button
                         onClick={cancelEdit}
-                        className="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                        className="flex items-center px-4 py-2 border border-white/10 text-gray-300 rounded-xl hover:bg-white/5"
                       >
                         <X className="h-4 w-4 mr-2" />
                         {t('actions.cancel')}
@@ -448,103 +416,98 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Préférences de langue */}
-            <div className="mt-8 bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-                    <Globe className="h-5 w-5 text-koundoul-button-primary mr-2" />
-                    Langue et Localisation
-                  </h2>
-                </div>
+            {/* Language */}
+            <div className="k-card overflow-hidden">
+              <div className="p-5 border-b border-white/8">
+                <h2 className="text-lg font-semibold text-white flex items-center">
+                  <Globe className="h-5 w-5 text-kprimary mr-2" />
+                  Langue et Localisation
+                </h2>
               </div>
-
-              <div className="p-6">
+              <div className="p-5">
                 <div className="space-y-4">
-                                      <div>
-                      <label className="block text-sm font-semibold text-gray-800 mb-3">
-                        Choisissez votre langue préférée
-                      </label>
-                      <LanguageSwitcher />
-                      <p className="text-sm text-gray-700 mt-2 font-medium">
-                        Cette préférence sera sauvegardée et synchronisée sur tous vos appareils.
-                      </p>
-                    </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-300 mb-3">
+                      Choisissez votre langue préférée
+                    </label>
+                    <LanguageSwitcher />
+                    <p className="text-sm text-gray-500 mt-2">
+                      Cette préférence sera sauvegardée et synchronisée sur tous vos appareils.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Changement de mot de passe */}
-            <div className="mt-8 bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-gray-900">Sécurité</h2>
-                  {!isChangingPassword && (
-                    <button
-                      onClick={() => setIsChangingPassword(true)}
-                      className="flex items-center px-3 py-2 text-blue-600 hover:text-blue-700 transition-colors"
-                    >
-                      <Settings className="h-4 w-4 mr-1" />
-                      Changer le mot de passe
-                    </button>
-                  )}
-                </div>
+            {/* Security */}
+            <div className="k-card overflow-hidden">
+              <div className="p-5 border-b border-white/8 flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-white">Sécurité</h2>
+                {!isChangingPassword && (
+                  <button
+                    onClick={() => setIsChangingPassword(true)}
+                    className="flex items-center px-3 py-2 text-kprimary hover:text-kprimary-300 transition-colors text-sm"
+                  >
+                    <Settings className="h-4 w-4 mr-1" />
+                    Changer le mot de passe
+                  </button>
+                )}
               </div>
 
               {isChangingPassword && (
-                <div className="p-6">
+                <div className="p-5">
                   <div className="space-y-4">
                     <div>
-                                          <label className="block text-sm font-semibold text-gray-800 mb-2">
-                      {t('profile.currentPassword')}
-                    </label>
-                    <input
-                      type="password"
-                      name="currentPassword"
-                      value={passwordData.currentPassword}
-                      onChange={handlePasswordChange}
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-medium"
-                    />
-                  </div>
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">
+                        {t('profile.currentPassword')}
+                      </label>
+                      <input
+                        type="password"
+                        name="currentPassword"
+                        value={passwordData.currentPassword}
+                        onChange={handlePasswordChange}
+                        className={inputClasses}
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-800 mb-2">
-                      Nouveau mot de passe
-                    </label>
-                    <input
-                      type="password"
-                      name="newPassword"
-                      value={passwordData.newPassword}
-                      onChange={handlePasswordChange}
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-medium"
-                    />
-                  </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">
+                        Nouveau mot de passe
+                      </label>
+                      <input
+                        type="password"
+                        name="newPassword"
+                        value={passwordData.newPassword}
+                        onChange={handlePasswordChange}
+                        className={inputClasses}
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-800 mb-2">
-                      Confirmer le nouveau mot de passe
-                    </label>
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      value={passwordData.confirmPassword}
-                      onChange={handlePasswordChange}
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-medium"
-                    />
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-300 mb-2">
+                        Confirmer le nouveau mot de passe
+                      </label>
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        value={passwordData.confirmPassword}
+                        onChange={handlePasswordChange}
+                        className={inputClasses}
+                      />
                     </div>
 
                     <div className="flex space-x-4">
                       <button
                         onClick={handleChangePassword}
                         disabled={loading}
-                        className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center px-4 py-2 bg-kprimary text-white rounded-xl hover:bg-kprimary-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                       >
                         <Save className="h-4 w-4 mr-2" />
                         {loading ? 'Changement...' : 'Changer le mot de passe'}
                       </button>
                       <button
                         onClick={cancelPasswordChange}
-                        className="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                        className="flex items-center px-4 py-2 border border-white/10 text-gray-300 rounded-xl hover:bg-white/5"
                       >
                         <X className="h-4 w-4 mr-2" />
                         {t('actions.cancel')}
@@ -556,31 +519,31 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Sidebar - Statistiques */}
-          <div className="lg:col-span-1">
-            {/* Espace Parents — Mode Parent */}
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-sm border border-blue-200 mb-6">
-              <div className="p-6">
+          {/* Sidebar */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Parent Section — violet-tinted card */}
+            <div className="k-card overflow-hidden" style={{ background: 'rgba(108,99,255,0.08)', borderColor: 'rgba(108,99,255,0.2)' }}>
+              <div className="p-5">
                 <div className="flex items-center mb-3">
-                  <Shield className="h-6 w-6 text-blue-600 mr-2" />
-                  <h3 className="text-lg font-semibold text-gray-900">{t('parent.title')}</h3>
+                  <Shield className="h-6 w-6 text-kprimary mr-2" />
+                  <h3 className="text-lg font-semibold text-white">{t('parent.title')}</h3>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-sm text-gray-400 mb-4">
                   {t('parent.codeDesc')}
                 </p>
 
-                {/* Générer / Afficher code parent */}
-                <div className="mb-4 p-4 bg-white rounded-lg border-2 border-blue-300">
+                {/* Generate/show parent code */}
+                <div className="mb-4 p-4 bg-white/5 rounded-xl border border-white/10">
                   {invitationCode ? (
                     <div>
-                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                      <label className="block text-xs font-semibold text-gray-400 mb-1">
                         {t('parent.yourCode')}
                       </label>
                       <p className="text-xs text-gray-500 mb-3">
                         {t('parent.shareCodeDesc')}
                       </p>
                       <div className="flex items-center space-x-2">
-                        <code className="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-lg font-bold text-gray-900 text-center tracking-widest">
+                        <code className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg font-mono text-lg font-bold text-white text-center tracking-widest">
                           {invitationCode}
                         </code>
                         <button
@@ -589,7 +552,7 @@ const Profile = () => {
                             setSuccess(t('common.copiedToClipboard'))
                             setTimeout(() => setSuccess(''), 2000)
                           }}
-                          className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                          className="px-3 py-2 bg-kprimary text-white rounded-lg hover:bg-kprimary-500 transition-colors"
                           title={t('actions.copy')}
                         >
                           <Copy className="h-4 w-4" />
@@ -601,7 +564,7 @@ const Profile = () => {
                       <button
                         onClick={handleGenerateParentCode}
                         disabled={generatingCode}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
+                        className="px-4 py-2 bg-kprimary text-white rounded-xl hover:bg-kprimary-500 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
                       >
                         {generatingCode ? (
                           <><Loader2 className="h-4 w-4 animate-spin mr-2" /> {t('parent.generating')}</>
@@ -613,17 +576,17 @@ const Profile = () => {
                   )}
                 </div>
 
-                {/* Liste des enfants liés */}
+                {/* Linked children */}
                 {parentChildren.length > 0 && (
                   <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                    <h4 className="text-sm font-semibold text-gray-300 mb-2 flex items-center">
                       <Users className="h-4 w-4 mr-1" /> {t('parent.linkedChildren')} ({parentChildren.length}/5)
                     </h4>
                     <div className="space-y-2">
                       {parentChildren.map(child => (
-                        <div key={child.id} className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                        <div key={child.id} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/8">
                           <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-900">
+                            <p className="text-sm font-medium text-white">
                               {child.firstName || ''} {child.lastName || child.email}
                             </p>
                             <div className="flex items-center gap-3 text-xs text-gray-500 mt-1">
@@ -638,7 +601,7 @@ const Profile = () => {
                           <button
                             onClick={() => handleUnlinkChild(child.id)}
                             disabled={unlinkingChild === child.id}
-                            className="ml-2 p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                            className="ml-2 p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
                             title={t('parent.unlinkChild')}
                           >
                             {unlinkingChild === child.id ? (
@@ -655,7 +618,7 @@ const Profile = () => {
 
                 <Link
                   to="/parent-dashboard"
-                  className="flex items-center justify-center px-4 py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm"
+                  className="flex items-center justify-center px-4 py-2 bg-white/5 text-kprimary border border-kprimary/30 rounded-xl hover:bg-kprimary/10 transition-colors font-medium text-sm"
                 >
                   <Shield className="h-4 w-4 mr-2" />
                   {t('parent.dashboard')}
@@ -663,32 +626,32 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Espace Enfant — Se lier à un parent */}
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-sm border border-green-200 mb-6">
-              <div className="p-6">
+            {/* Link to parent — child section */}
+            <div className="k-card overflow-hidden" style={{ background: 'rgba(0,217,163,0.06)', borderColor: 'rgba(0,217,163,0.2)' }}>
+              <div className="p-5">
                 <div className="flex items-center mb-3">
-                  <Link2 className="h-6 w-6 text-green-600 mr-2" />
-                  <h3 className="text-lg font-semibold text-gray-900">{t('parent.linkParent')}</h3>
+                  <Link2 className="h-6 w-6 text-ksecondary mr-2" />
+                  <h3 className="text-lg font-semibold text-white">{t('parent.linkParent')}</h3>
                 </div>
 
                 {linkedParent ? (
-                  <div className="p-4 bg-white rounded-lg border-2 border-green-300">
-                    <p className="text-sm text-gray-700 mb-2">
-                      {t('parent.linkedTo')} <strong className="text-green-700">{linkedParent}</strong>
+                  <div className="p-4 bg-white/5 rounded-xl border border-ksecondary/20">
+                    <p className="text-sm text-gray-300 mb-2">
+                      {t('parent.linkedTo')} <strong className="text-ksecondary">{linkedParent}</strong>
                     </p>
                     <p className="text-xs text-gray-500 mb-3">
                       {t('parent.parentCanTrack')}
                     </p>
                     <button
                       onClick={handleUnlinkSelf}
-                      className="px-3 py-1.5 text-red-600 border border-red-300 rounded hover:bg-red-50 transition-colors text-xs font-medium flex items-center"
+                      className="px-3 py-1.5 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/10 transition-colors text-xs font-medium flex items-center"
                     >
                       <Unlink className="h-3 w-3 mr-1" /> {t('parent.unlinkSelf')}
                     </button>
                   </div>
                 ) : (
-                  <div className="p-4 bg-white rounded-lg border-2 border-green-300">
-                    <p className="text-sm text-gray-600 mb-3">
+                  <div className="p-4 bg-white/5 rounded-xl border border-ksecondary/20">
+                    <p className="text-sm text-gray-400 mb-3">
                       {t('parent.enterCodeDesc')}
                     </p>
                     <div className="flex items-center space-x-2">
@@ -698,12 +661,12 @@ const Profile = () => {
                         onChange={(e) => setParentCode(e.target.value.toUpperCase().slice(0, 8))}
                         placeholder={t('parent.codePlaceholder')}
                         maxLength={8}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded font-mono text-center text-lg tracking-widest uppercase bg-white text-gray-900"
+                        className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg font-mono text-center text-lg tracking-widest uppercase text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-ksecondary focus:border-transparent"
                       />
                       <button
                         onClick={handleLinkToParent}
                         disabled={linkingToParent || parentCode.length !== 8}
-                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm font-medium disabled:opacity-50 flex items-center"
+                        className="px-4 py-2 bg-ksecondary text-white rounded-lg hover:bg-ksecondary-500 transition-colors text-sm font-medium disabled:opacity-50 flex items-center"
                       >
                         {linkingToParent ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -717,123 +680,101 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Section Abonnements */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
+            {/* Subscriptions */}
+            <div className="k-card overflow-hidden">
+              <div className="p-5 border-b border-white/8">
                 <div className="flex items-center">
-                  <CreditCard className="h-5 w-5 text-blue-600 mr-2" />
-                  <h3 className="text-lg font-semibold text-gray-900">Abonnements</h3>
+                  <CreditCard className="h-5 w-5 text-kprimary mr-2" />
+                  <h3 className="text-lg font-semibold text-white">Abonnements</h3>
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-5">
                 <SubscriptionSection />
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Statistiques</h3>
+            {/* Stats — 2x2 grid */}
+            <div className="k-card overflow-hidden">
+              <div className="p-5 border-b border-white/8">
+                <h3 className="text-lg font-semibold text-white">Statistiques</h3>
               </div>
 
-              <div className="p-6 space-y-6">
+              <div className="p-5">
                 {loadingStats ? (
                   <div className="animate-pulse space-y-4">
-                    <div className="h-24 bg-gray-200 rounded-lg"></div>
-                    <div className="h-16 bg-gray-200 rounded-lg"></div>
-                    <div className="h-16 bg-gray-200 rounded-lg"></div>
-                    <div className="h-16 bg-gray-200 rounded-lg"></div>
+                    <div className="h-24 bg-white/5 rounded-xl"></div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="h-20 bg-white/5 rounded-xl"></div>
+                      <div className="h-20 bg-white/5 rounded-xl"></div>
+                      <div className="h-20 bg-white/5 rounded-xl"></div>
+                      <div className="h-20 bg-white/5 rounded-xl"></div>
+                    </div>
                   </div>
                 ) : (
                   <>
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Trophy className="h-8 w-8 text-white" />
+                    <div className="text-center mb-5">
+                      <div className="p-1 rounded-full bg-gradient-to-br from-kprimary to-ksecondary inline-block mb-3">
+                        <div className="w-16 h-16 bg-[#1A1A2E] rounded-full flex items-center justify-center">
+                          <Trophy className="h-8 w-8 text-yellow-400" />
+                        </div>
                       </div>
-                      <h4 className="text-3xl font-bold text-gray-900">
+                      <h4 className="text-2xl font-black text-white">
                         Niveau {userStats?.level || user.level || 1}
                       </h4>
-                      <p className="text-gray-800 font-semibold">
+                      <p className="text-gray-400 font-medium text-sm">
                         {userStats?.totalXp || user.xp || 0} points d'expérience
                       </p>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <Target className="h-5 w-5 text-blue-600 mr-2" />
-                          <span className="text-gray-800 font-medium">Problèmes résolus</span>
-                        </div>
-                        <span className="font-bold text-gray-900 text-lg">
-                          {userStats?.problemsSolved || 0}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <Star className="h-5 w-5 text-yellow-600 mr-2" />
-                          <span className="text-gray-800 font-medium">Quiz complétés</span>
-                        </div>
-                        <span className="font-bold text-gray-900 text-lg">
-                          {userStats?.quizzesCompleted || 0}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <Award className="h-5 w-5 text-purple-600 mr-2" />
-                          <span className="text-gray-800 font-medium">Badges obtenus</span>
-                        </div>
-                        <span className="font-bold text-gray-900 text-lg">
-                          {userStats?.badgesEarned || 0}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <TrendingUp className="h-5 w-5 text-green-600 mr-2" />
-                          <span className="text-gray-800 font-medium">Série actuelle</span>
-                        </div>
-                        <span className="font-bold text-gray-900 text-lg">
-                          {userStats?.streak || user.streak || 0} jours
-                        </span>
-                      </div>
-
-                      {userStats && (
-                        <>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <Calendar className="h-5 w-5 text-purple-600 mr-2" />
-                              <span className="text-gray-800 font-medium">Jours actifs (30j)</span>
-                            </div>
-                            <span className="font-bold text-gray-900 text-lg">
-                              {userStats.daysActiveLast30Days || 0}
-                            </span>
+                    {/* 2x2 stats grid */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { icon: <Target className="h-5 w-5" />, label: 'Problèmes résolus', value: userStats?.problemsSolved || 0, color: 'text-kprimary', bg: 'bg-kprimary/15' },
+                        { icon: <Star className="h-5 w-5" />, label: 'Quiz complétés', value: userStats?.quizzesCompleted || 0, color: 'text-yellow-400', bg: 'bg-yellow-500/15' },
+                        { icon: <Award className="h-5 w-5" />, label: 'Badges obtenus', value: userStats?.badgesEarned || 0, color: 'text-ksecondary', bg: 'bg-ksecondary/15' },
+                        { icon: <TrendingUp className="h-5 w-5" />, label: 'Série actuelle', value: `${userStats?.streak || user.streak || 0}j`, color: 'text-orange-400', bg: 'bg-orange-500/15' }
+                      ].map((stat, i) => (
+                        <div key={i} className="p-3 rounded-xl bg-white/[0.03] border border-white/5 text-center">
+                          <div className={`w-9 h-9 ${stat.bg} rounded-lg flex items-center justify-center mx-auto mb-2 ${stat.color}`}>
+                            {stat.icon}
                           </div>
-
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <Clock className="h-5 w-5 text-indigo-600 mr-2" />
-                              <span className="text-gray-800 font-medium">Temps d'étude</span>
-                            </div>
-                            <span className="font-bold text-gray-900 text-lg">
-                              {userStats.estimatedStudyTimeHours || 0}h
-                            </span>
-                          </div>
-
-                          {userStats.quizAverageScore > 0 && (
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center">
-                                <Star className="h-5 w-5 text-yellow-600 mr-2" />
-                                <span className="text-gray-800 font-medium">Score moyen quiz</span>
-                              </div>
-                              <span className="font-bold text-gray-900 text-lg">
-                                {userStats.quizAverageScore}%
-                              </span>
-                            </div>
-                          )}
-                        </>
-                      )}
+                          <div className="text-lg font-black text-white">{stat.value}</div>
+                          <div className="text-[10px] text-gray-500 leading-tight">{stat.label}</div>
+                        </div>
+                      ))}
                     </div>
+
+                    {userStats && (
+                      <div className="mt-4 space-y-2">
+                        {userStats.daysActiveLast30Days > 0 && (
+                          <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                            <div className="flex items-center text-gray-400 text-xs">
+                              <Calendar className="h-3.5 w-3.5 mr-1.5" />
+                              Jours actifs (30j)
+                            </div>
+                            <span className="font-bold text-white text-sm">{userStats.daysActiveLast30Days}</span>
+                          </div>
+                        )}
+                        {userStats.estimatedStudyTimeHours > 0 && (
+                          <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                            <div className="flex items-center text-gray-400 text-xs">
+                              <Clock className="h-3.5 w-3.5 mr-1.5" />
+                              Temps d'étude
+                            </div>
+                            <span className="font-bold text-white text-sm">{userStats.estimatedStudyTimeHours}h</span>
+                          </div>
+                        )}
+                        {userStats.quizAverageScore > 0 && (
+                          <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02]">
+                            <div className="flex items-center text-gray-400 text-xs">
+                              <Star className="h-3.5 w-3.5 mr-1.5" />
+                              Score moyen quiz
+                            </div>
+                            <span className="font-bold text-white text-sm">{userStats.quizAverageScore}%</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </>
                 )}
               </div>
@@ -846,4 +787,3 @@ const Profile = () => {
 }
 
 export default Profile
-

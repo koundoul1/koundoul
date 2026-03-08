@@ -13,68 +13,96 @@
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
-    overflow-x: hidden; /* Empêche le défilement horizontal */
+    overflow-x: hidden;
   }
-  
+
   body {
-    background: #111827; /* bg-gray-900 pour le nouveau design */
+    background: linear-gradient(135deg, #0D0D1A, #1A0D2E, #0D1A2E);
     min-height: 100vh;
-    overflow-x: hidden; /* Empêche le défilement horizontal */
-    width: 100%; /* Assure que le body prend toute la largeur */
-    color: white; /* Texte blanc par défaut pour le thème sombre */
+    overflow-x: hidden;
+    width: 100%;
+    color: white;
   }
-  
-  /* Empêche le défilement horizontal sur tous les éléments */
+
   * {
     max-width: 100%;
     box-sizing: border-box;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', 'Inter', system-ui, sans-serif;
-    color: #34495E; /* Texte principal */
+    color: #ffffff;
+  }
+
+  /* Smooth transitions on interactive elements */
+  button, a, input, select, textarea {
+    transition: all 0.2s ease;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-kprimary hover:bg-kprimary-500 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg;
   }
-  
+
   .btn-secondary {
-    @apply bg-primary-400 hover:bg-primary-500 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-ksecondary hover:bg-ksecondary-500 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg;
   }
-  
+
   .btn-accent {
-    @apply bg-accent-400 hover:bg-accent-500 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-kaccent hover:bg-kaccent-500 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg;
   }
-  
+
+  /* Premium glass card */
+  .k-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .k-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .k-card-glow {
+    box-shadow: 0 8px 32px rgba(108, 99, 255, 0.2);
+  }
+
+  .k-card-glow:hover {
+    box-shadow: 0 12px 40px rgba(108, 99, 255, 0.3);
+  }
+
+  /* Gradient text violet→turquoise */
+  .gradient-text {
+    background: linear-gradient(135deg, #6C63FF 0%, #3ECFCF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .card {
     @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 backdrop-blur-sm;
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   }
-  
+
   .card-gradient {
     @apply rounded-xl shadow-lg p-6;
-    background: linear-gradient(135deg, #68A8AD 0%, #4DA6B3 100%);
+    background: linear-gradient(135deg, #6C63FF 0%, #3ECFCF 100%);
   }
-  
+
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent transition-all duration-200;
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-kprimary focus:border-transparent;
   }
-  
-  .text-primary {
-    @apply text-secondary-700; /* #34495E */
-  }
-  
-  .text-secondary {
-    @apply text-secondary-500; /* #7F8C8D */
-  }
-  
+
   .bg-educational {
     background: linear-gradient(180deg, #68A8AD 0%, #DDE5E8 100%);
   }
-  
+
   .bg-card {
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   }
@@ -152,42 +180,37 @@
 
 /* Mobile-first improvements */
 @layer utilities {
-  /* Touch-friendly tap targets */
   .tap-target {
     @apply min-h-[44px] min-w-[44px];
   }
-  
-  /* Smooth scrolling */
+
   html {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
-  
-  /* Prevent text selection on buttons */
+
   button, a {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
   }
-  
-  /* Better focus states for accessibility */
+
   *:focus-visible {
-    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+    @apply outline-none ring-2 ring-kprimary ring-offset-2;
   }
-  
-  /* Safe area insets for mobile devices */
+
   @supports (padding: max(0px)) {
     .safe-top {
       padding-top: max(1rem, env(safe-area-inset-top));
     }
-    
+
     .safe-bottom {
       padding-bottom: max(1rem, env(safe-area-inset-bottom));
     }
-    
+
     .safe-left {
       padding-left: max(1rem, env(safe-area-inset-left));
     }
-    
+
     .safe-right {
       padding-right: max(1rem, env(safe-area-inset-right));
     }
@@ -223,19 +246,10 @@
   animation: fade-in 0.3s ease-out;
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #367C89 0%, #4DA6B3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 /* ========================================
    KOUNDOUL 2.0 - STYLES MODERNES
    ======================================== */
 
-/* Animations personnalisées */
 @keyframes gradient {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -246,12 +260,6 @@
   50% { transform: translateY(-20px); }
 }
 
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
-}
-
-/* Classes utilitaires */
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient 3s ease infinite;
@@ -259,10 +267,6 @@
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
 }
 
 /* Glassmorphism */
@@ -297,15 +301,15 @@ html {
   .safe-top {
     padding-top: max(0.5rem, env(safe-area-inset-top));
   }
-  
+
   .safe-bottom {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
-  
+
   .safe-left {
     padding-left: max(1rem, env(safe-area-inset-left));
   }
-  
+
   .safe-right {
     padding-right: max(1rem, env(safe-area-inset-right));
   }

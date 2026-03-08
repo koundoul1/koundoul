@@ -13,10 +13,9 @@ const MicroLessons = () => {
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [completions, setCompletions] = useState({}); // { lessonId: { completed, score } }
+  const [completions, setCompletions] = useState({});
   const [stats, setStats] = useState(null);
-  
-  // Initialiser le filtre depuis les paramètres d'URL
+
   const getInitialFilter = () => {
     const urlSubject = searchParams.get('subject');
     const urlLevel = searchParams.get('level');
@@ -28,41 +27,31 @@ const MicroLessons = () => {
 
   const [filter, setFilter] = useState(() => getInitialFilter());
 
-  // Mettre à jour le filtre si l'URL change (arrivée depuis Courses par exemple)
   useEffect(() => {
     const urlSubject = searchParams.get('subject');
     const urlLevel = searchParams.get('level');
-    
-    console.log('🔗 URL params changed:', { urlSubject, urlLevel });
-    
+
     setFilter(prev => {
       const newSubject = urlSubject || 'all';
       const newLevel = urlLevel || 'all';
-      
-      // Ne mettre à jour que si les valeurs ont changé
+
       if (prev.subject !== newSubject || prev.level !== newLevel) {
-        console.log('🔄 Updating filter:', { from: prev, to: { subject: newSubject, level: newLevel } });
-        return {
-          subject: newSubject,
-          level: newLevel
-        };
+        return { subject: newSubject, level: newLevel };
       }
       return prev;
     });
   }, [searchParams]);
 
-  // Mettre à jour l'URL quand le filtre change (mais éviter les boucles)
   useEffect(() => {
     const currentSubject = searchParams.get('subject') || 'all';
     const currentLevel = searchParams.get('level') || 'all';
-    
-    // Ne mettre à jour l'URL que si le filtre diffère de l'URL actuelle
+
     if (filter.subject !== currentSubject || filter.level !== currentLevel) {
       const params = new URLSearchParams();
       if (filter.subject !== 'all') params.set('subject', filter.subject);
       if (filter.level !== 'all') params.set('level', filter.level);
-      
-      const newUrl = params.toString() 
+
+      const newUrl = params.toString()
         ? `${window.location.pathname}?${params.toString()}`
         : window.location.pathname;
       window.history.replaceState({}, '', newUrl);
@@ -83,30 +72,19 @@ const MicroLessons = () => {
     try {
       setLoading(true);
       setError(null);
-      const params = {
-        limit: 1000,  // S'assurer qu'on récupère toutes les leçons
-        offset: 0
-      }
-      if (filter.subject !== 'all') params.subject = filter.subject
-      if (filter.level !== 'all') params.level = filter.level
-      
-      console.log('🔍 Fetching lessons with filter:', filter, 'params:', params);
-      
+      const params = { limit: 1000, offset: 0 };
+      if (filter.subject !== 'all') params.subject = filter.subject;
+      if (filter.level !== 'all') params.level = filter.level;
+
       const response = await api.microlessons.list(params);
       const lessonsData = response.data || response || [];
-      
-      console.log('📦 API Response:', response);
-      console.log('✅ Loaded lessons:', lessonsData.length);
-      
       setLessons(lessonsData);
-      
-      // Charger les complétions si utilisateur connecté
+
       if (user && lessonsData.length > 0) {
         fetchCompletions(lessonsData);
       }
     } catch (error) {
-      console.error('❌ Erreur lors du chargement des leçons:', error);
-      console.error('❌ Détails de l\'erreur:', error.message, error.stack);
+      console.error('Erreur lors du chargement des leçons:', error);
       setError(error.message || 'Erreur lors du chargement des leçons');
       setLessons([]);
     } finally {
@@ -116,18 +94,15 @@ const MicroLessons = () => {
 
   const fetchCompletions = async (lessonList) => {
     try {
-      const completionPromises = lessonList.slice(0, 50).map(lesson => 
+      const completionPromises = lessonList.slice(0, 50).map(lesson =>
         api.microlessons.getCompletion(lesson.id)
           .catch(error => {
-            // Ignorer silencieusement les erreurs 401 (non authentifié)
-            if (error.status === 401) {
-              return { success: true, data: null };
-            }
+            if (error.status === 401) return { success: true, data: null };
             return null;
           })
       );
       const results = await Promise.all(completionPromises);
-      
+
       const completionMap = {};
       results.forEach((result, index) => {
         if (result?.success && result?.data) {
@@ -136,7 +111,6 @@ const MicroLessons = () => {
       });
       setCompletions(completionMap);
     } catch (error) {
-      // Ignorer les erreurs silencieusement
       console.debug('Chargement des complétions:', error.message);
     }
   };
@@ -151,10 +125,10 @@ const MicroLessons = () => {
   };
 
   const subjects = [
-    { name: t('microLessons.filters.all'), value: 'all', icon: '📚', color: 'indigo' },
-    { name: t('courses.math'), value: 'Mathématiques', icon: '📐', color: 'blue' },
-    { name: t('courses.physics'), value: 'Physique', icon: '⚛️', color: 'green' },
-    { name: t('courses.chemistry'), value: 'Chimie', icon: '🧪', color: 'purple' }
+    { name: t('microLessons.filters.all'), value: 'all', icon: '📚' },
+    { name: t('courses.math'), value: 'Mathématiques', icon: '📐' },
+    { name: t('courses.physics'), value: 'Physique', icon: '⚛️' },
+    { name: t('courses.chemistry'), value: 'Chimie', icon: '🧪' }
   ];
 
   const levels = [
@@ -164,108 +138,85 @@ const MicroLessons = () => {
     { name: t('home.levels.terminale.name'), value: 'Terminale' }
   ];
 
-  const getDifficultyColor = (difficulty) => {
-    const colors = {
-      1: 'bg-green-500',
-      2: 'bg-yellow-500',
-      3: 'bg-orange-500',
-      4: 'bg-red-500',
-      5: 'bg-purple-500'
-    };
-    return colors[difficulty] || 'bg-gray-500';
+  // Difficulty dots: green/orange/red
+  const getDifficultyDots = (difficulty) => {
+    const level = difficulty || 1;
+    const colors = ['bg-emerald-400', 'bg-emerald-400', 'bg-amber-400', 'bg-orange-500', 'bg-red-500'];
+    return (
+      <div className="flex items-center gap-0.5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div
+            key={i}
+            className={`w-1.5 h-1.5 rounded-full ${i < level ? colors[Math.min(level - 1, 4)] : 'bg-white/10'}`}
+          />
+        ))}
+      </div>
+    );
   };
 
-  // Les leçons sont déjà filtrées côté serveur via l'API
   const filteredLessons = lessons;
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kprimary"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="min-h-screen text-white pb-20 lg:pb-0">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            📚 {t('microLessons.title')}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl sm:text-5xl font-black mb-3 gradient-text">
+            {t('microLessons.title')}
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-gray-400 text-lg">
             {error ? t('microLessons.subtitle') : `${lessons.length} ${t('courses.lessons')} ${t('microLessons.subtitle')}`}
           </p>
         </div>
 
         {/* Stats */}
-        <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">{t('microLessons.stats.total')}</p>
-                <p className="text-3xl font-bold text-blue-600">{lessons.length}</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {[
+            { label: t('microLessons.stats.total'), value: lessons.length, icon: <BookOpen className="w-6 h-6" />, color: 'text-kprimary', bg: 'bg-kprimary/15' },
+            { label: t('microLessons.stats.completed'), value: stats?.total_completed || Object.keys(completions).filter(id => completions[id]?.completed).length, icon: <CheckCircle2 className="w-6 h-6" />, color: 'text-emerald-400', bg: 'bg-emerald-500/15' },
+            { label: t('profile.stats.totalXp'), value: stats?.total_xp_earned ? Math.round(stats.total_xp_earned).toLocaleString() : '0', icon: <Star className="w-6 h-6" />, color: 'text-yellow-400', bg: 'bg-yellow-500/15' },
+            { label: t('dashboard.stats.successRate'), value: stats?.average_score ? `${Math.round(stats.average_score)}%` : '—', icon: <TrendingUp className="w-6 h-6" />, color: 'text-ksecondary', bg: 'bg-ksecondary/15' }
+          ].map((stat, i) => (
+            <div key={i} className="k-card p-5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-500 text-xs font-medium mb-1">{stat.label}</p>
+                  <p className={`text-2xl font-black ${stat.color}`}>{stat.value}</p>
+                </div>
+                <div className={`w-12 h-12 ${stat.bg} rounded-xl flex items-center justify-center ${stat.color}`}>
+                  {stat.icon}
+                </div>
               </div>
-              <BookOpen className="h-12 w-12 text-blue-500" />
             </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">{t('microLessons.stats.completed')}</p>
-                <p className="text-3xl font-bold text-green-600">
-                  {stats?.total_completed || Object.keys(completions).filter(id => completions[id]?.completed).length}
-                </p>
-              </div>
-              <CheckCircle2 className="h-12 w-12 text-green-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">{t('profile.stats.totalXp')}</p>
-                <p className="text-3xl font-bold text-purple-600">
-                  {stats?.total_xp_earned ? Math.round(stats.total_xp_earned).toLocaleString() : '0'}
-                </p>
-              </div>
-              <Star className="h-12 w-12 text-yellow-500" />
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">{t('dashboard.stats.successRate')}</p>
-                <p className="text-3xl font-bold text-indigo-600">
-                  {stats?.average_score ? `${Math.round(stats.average_score)}%` : '—'}
-                </p>
-              </div>
-              <TrendingUp className="h-12 w-12 text-indigo-500" />
-            </div>
-          </div>
+          ))}
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-bold mb-4 text-blue-700">{t('actions.filter')}</h2>
-          
+        {/* Filter pills */}
+        <div className="k-card p-5 mb-8">
           {/* Subjects */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold mb-2 text-blue-600">{t('microLessons.filters.subject')}</label>
+            <label className="block text-xs font-bold mb-2 text-gray-400 uppercase tracking-wide">{t('microLessons.filters.subject')}</label>
             <div className="flex flex-wrap gap-2">
               {subjects.map(subject => (
                 <button
                   key={subject.value}
                   onClick={() => setFilter({ ...filter, subject: subject.value })}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all ${
                     filter.subject === subject.value
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-kprimary text-white shadow-lg shadow-kprimary/30'
+                      : 'bg-transparent border border-white/10 text-gray-400 hover:border-kprimary/50 hover:text-white'
                   }`}
                 >
-                  <span className="mr-2">{subject.icon}</span>
+                  <span className="mr-1.5">{subject.icon}</span>
                   {subject.name}
-                  {subject.count && <span className="ml-2 text-xs">({subject.count})</span>}
                 </button>
               ))}
             </div>
@@ -273,16 +224,16 @@ const MicroLessons = () => {
 
           {/* Levels */}
           <div>
-            <label className="block text-sm font-semibold mb-2 text-purple-600">{t('microLessons.filters.level')}</label>
+            <label className="block text-xs font-bold mb-2 text-gray-400 uppercase tracking-wide">{t('microLessons.filters.level')}</label>
             <div className="flex flex-wrap gap-2">
-            {levels.map(level => (
+              {levels.map(level => (
                 <button
                   key={level.value}
                   onClick={() => setFilter({ ...filter, level: level.value })}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all ${
                     filter.level === level.value
-                      ? 'bg-purple-600 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-kprimary text-white shadow-lg shadow-kprimary/30'
+                      : 'bg-transparent border border-white/10 text-gray-400 hover:border-kprimary/50 hover:text-white'
                   }`}
                 >
                   {level.name}
@@ -294,82 +245,80 @@ const MicroLessons = () => {
 
         {/* Lessons Grid */}
         {error ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <p className="text-red-600 text-lg font-semibold mb-2">
-              {t('microLessons.noLessons')}
-            </p>
+          <div className="k-card p-12 text-center">
+            <AlertTriangle className="h-12 w-12 text-kaccent mx-auto mb-4" />
+            <p className="text-kaccent text-lg font-semibold mb-2">{t('microLessons.noLessons')}</p>
             <p className="text-gray-500 text-sm mb-6">{error}</p>
             <button
               onClick={() => fetchLessons()}
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-6 py-3 bg-kprimary text-white font-semibold rounded-xl hover:bg-kprimary-500 transition-colors"
             >
               <RefreshCw className="h-4 w-4 mr-2" />
               {t('actions.retry')}
             </button>
           </div>
         ) : filteredLessons.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600 text-lg mb-2">{t('microLessons.noLessons')}</p>
+          <div className="k-card p-12 text-center">
+            <BookOpen className="h-12 w-12 text-gray-600 mx-auto mb-4" />
+            <p className="text-gray-400 text-lg mb-2">{t('microLessons.noLessons')}</p>
             {(filter.subject !== 'all' || filter.level !== 'all') && (
-              <p className="text-gray-500 text-sm">
-                {t('actions.filter')} — {t('actions.retry')}
-              </p>
+              <p className="text-gray-600 text-sm">{t('actions.filter')} — {t('actions.retry')}</p>
             )}
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredLessons.map((lesson) => (
-              <div
-                key={lesson.id}
-                onClick={() => navigate(`/microlessons/${lesson.id}`)}
-                className={`bg-white rounded-lg shadow-md hover:shadow-xl transition-all cursor-pointer transform hover:scale-105 border-2 ${
-                  completions[lesson.id]?.completed 
-                    ? 'border-green-300 hover:border-green-500' 
-                    : 'border-gray-200 hover:border-blue-500'
-                }`}
-              >
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-1">
-                    <h3 className="text-xl font-bold text-blue-900">{lesson.title}</h3>
-                    <div className="flex items-center gap-2">
-                      {completions[lesson.id]?.completed && (
-                        <CheckCircle2 className="h-5 w-5 text-green-500" title="Complétée" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filteredLessons.map((lesson) => {
+              const isCompleted = completions[lesson.id]?.completed;
+              return (
+                <div
+                  key={lesson.id}
+                  onClick={() => navigate(`/microlessons/${lesson.id}`)}
+                  className={`k-card cursor-pointer hover:scale-[1.02] transition-all p-5 ${
+                    isCompleted ? 'border-emerald-500/30' : ''
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-base font-bold text-white leading-tight flex-1 mr-2">{lesson.title}</h3>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      {isCompleted && (
+                        <CheckCircle2 className="h-5 w-5 text-emerald-400" />
                       )}
-                      <span className="bg-gray-200 text-gray-700 text-xs font-bold px-2 py-1 rounded">
-                        {lesson.id}
-                      </span>
-                      <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                        {lesson.difficulty || 1}/5
-                      </span>
                     </div>
                   </div>
-                  <p className="text-xs text-blue-700 mb-3">{t(`common.subjects.${lesson.subject}`) || lesson.subject} • {lesson.chapter}</p>
-                  
-                  <p className="text-gray-700 text-sm mb-4 line-clamp-2">{t(`common.levels.${lesson.level}`) || lesson.level}</p>
-                  
-                  <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
-                    <span className="flex items-center">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {lesson.duration_min || 8} min
-                    </span>
-                    <span className="flex items-center">
-                      <Star className="h-4 w-4 mr-1 text-yellow-500" />
-                      +{lesson.xp_reward || 50} XP
+
+                  <p className="text-xs text-kprimary font-medium mb-3">
+                    {t(`common.subjects.${lesson.subject}`) || lesson.subject} • {lesson.chapter}
+                  </p>
+
+                  <p className="text-gray-500 text-sm mb-4 line-clamp-2">
+                    {t(`common.levels.${lesson.level}`) || lesson.level}
+                  </p>
+
+                  <div className="flex items-center justify-between text-sm mb-4">
+                    <div className="flex items-center gap-3">
+                      <span className="flex items-center text-gray-400">
+                        <Clock className="h-3.5 w-3.5 mr-1" />
+                        <span className="text-xs">{lesson.duration_min || 8} min</span>
+                      </span>
+                      {getDifficultyDots(lesson.difficulty)}
+                    </div>
+                    {/* XP gold badge */}
+                    <span className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-yellow-500/15 text-yellow-400 text-xs font-bold">
+                      <Star className="h-3 w-3" />
+                      +{lesson.xp_reward || 50}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <span className="text-xs text-purple-700 capitalize">{t(`common.levels.${lesson.level}`) || lesson.level}</span>
-                    <button className="text-blue-700 hover:text-blue-800 font-semibold text-sm flex items-center">
-                      Commencer
+                  <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                    <span className="text-xs text-gray-500 capitalize">{t(`common.levels.${lesson.level}`) || lesson.level}</span>
+                    <span className="text-kprimary font-semibold text-xs flex items-center">
+                      {isCompleted ? t('dashboard.resume') || 'Revoir' : 'Commencer'}
                       <span className="ml-1">→</span>
-                    </button>
+                    </span>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
