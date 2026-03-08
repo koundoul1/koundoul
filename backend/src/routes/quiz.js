@@ -19,7 +19,7 @@ router.get('/', optionalAuth, async (req, res, next) => {
       where,
       include: {
         _count: {
-          select: { questions: true }
+          select: { qcm_questions: true }
         }
       },
       orderBy: { createdAt: 'desc' }
@@ -31,8 +31,7 @@ router.get('/', optionalAuth, async (req, res, next) => {
       subject: bank.subject,
       level: bank.level,
       type: bank.type,
-      description: bank.description,
-      totalQuestions: bank._count.questions || 0
+      totalQuestions: bank._count.qcm_questions || 0
     }));
 
     res.json({ success: true, data: formatted });
@@ -50,7 +49,7 @@ router.get('/:id', optionalAuth, async (req, res, next) => {
       where: { id },
       include: {
         _count: {
-          select: { questions: true }
+          select: { qcm_questions: true }
         }
       }
     });
@@ -59,7 +58,13 @@ router.get('/:id', optionalAuth, async (req, res, next) => {
       return res.status(404).json({ error: 'Banque de questions non trouvée' });
     }
 
-    res.json({ success: true, data: bank });
+    res.json({
+      success: true,
+      data: {
+        ...bank,
+        totalQuestions: bank._count.qcm_questions || 0
+      }
+    });
   } catch (error) {
     next(error);
   }
@@ -84,7 +89,6 @@ router.post('/:id/start', authenticateToken, async (req, res, next) => {
         userId,
         bankId: id,
         score: 0,
-        total: 0,
         answers: {}
       }
     });
@@ -107,7 +111,7 @@ router.post('/attempt/:attemptId/submit', authenticateToken, async (req, res, ne
       include: {
         bank: {
           include: {
-            questions: true
+            quiz_questions: true
           }
         }
       }
@@ -123,15 +127,14 @@ router.post('/attempt/:attemptId/submit', authenticateToken, async (req, res, ne
 
     // Calculer le score
     let correct = 0;
-    let total = attempt.bank.questions.length;
+    const questions = attempt.bank.quiz_questions;
+    let total = questions.length;
 
-    for (const question of attempt.bank.questions) {
+    for (const question of questions) {
       const userAnswer = answers[question.id];
       if (userAnswer !== undefined) {
-        if (question.type === 'QCM') {
-          if (userAnswer === question.correctAnswer) {
-            correct++;
-          }
+        if (userAnswer === question.correctAnswer) {
+          correct++;
         }
       }
     }
@@ -143,7 +146,6 @@ router.post('/attempt/:attemptId/submit', authenticateToken, async (req, res, ne
       where: { id: attemptId },
       data: {
         score,
-        total,
         answers,
         completedAt: new Date()
       }
@@ -179,9 +181,7 @@ router.get('/attempts/history', authenticateToken, async (req, res, next) => {
         bank: {
           select: {
             id: true,
-            title: true,
-            subject: true,
-            level: true
+            title: true
           }
         }
       },

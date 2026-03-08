@@ -118,9 +118,7 @@ router.get('/stats', authenticateToken, async (req, res, next) => {
       prisma.quizAttempt.count({
         where: { userId, completedAt: { not: null } }
       }),
-      prisma.challengeAttempt.count({
-        where: { userId, completed: true }
-      }),
+      Promise.resolve(0),
       prisma.flashcardReview.count({
         where: { userId }
       })
@@ -179,7 +177,6 @@ router.get('/badges', authenticateToken, async (req, res, next) => {
       name: ub.badge.name,
       description: ub.badge.description,
       icon: ub.badge.icon,
-      color: ub.badge.color,
       unlocked: true,
       unlockedAt: ub.unlockedAt
     }));

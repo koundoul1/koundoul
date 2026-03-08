@@ -19,7 +19,7 @@ router.get('/', optionalAuth, async (req, res, next) => {
       where,
       include: {
         _count: {
-          select: { questions: true }
+          select: { qcm_questions: true, exercise_problems: true }
         }
       },
       orderBy: { createdAt: 'desc' }
@@ -31,8 +31,7 @@ router.get('/', optionalAuth, async (req, res, next) => {
       subject: bank.subject,
       level: bank.level,
       type: bank.type,
-      description: bank.description,
-      totalQuestions: bank._count.questions || 0,
+      totalQuestions: (bank._count.qcm_questions || 0) + (bank._count.exercise_problems || 0),
       createdAt: bank.createdAt
     }));
 
@@ -51,7 +50,7 @@ router.get('/:id', optionalAuth, async (req, res, next) => {
       where: { id },
       include: {
         _count: {
-          select: { questions: true }
+          select: { qcm_questions: true, exercise_problems: true }
         }
       }
     });
@@ -60,7 +59,13 @@ router.get('/:id', optionalAuth, async (req, res, next) => {
       return res.status(404).json({ error: 'Banque de questions non trouvée' });
     }
 
-    res.json({ success: true, data: bank });
+    res.json({
+      success: true,
+      data: {
+        ...bank,
+        totalQuestions: (bank._count.qcm_questions || 0) + (bank._count.exercise_problems || 0)
+      }
+    });
   } catch (error) {
     next(error);
   }
@@ -72,7 +77,7 @@ router.get('/:id/qcm', optionalAuth, async (req, res, next) => {
     const { id } = req.params;
     const { limit = 1000, difficulty } = req.query;
 
-    const where = { bankId: id, type: 'QCM' };
+    const where = { bank_id: id };
     if (difficulty) {
       const diffNum = parseInt(difficulty);
       if (!isNaN(diffNum)) {
@@ -80,10 +85,10 @@ router.get('/:id/qcm', optionalAuth, async (req, res, next) => {
       }
     }
 
-    const questions = await prisma.question.findMany({
+    const questions = await prisma.qcm_questions.findMany({
       where,
       take: parseInt(limit),
-      orderBy: { createdAt: 'asc' }
+      orderBy: { created_at: 'asc' }
     });
 
     res.json({ success: true, data: questions });
@@ -98,7 +103,7 @@ router.get('/:id/qcm/random', optionalAuth, async (req, res, next) => {
     const { id } = req.params;
     const { count = 20, difficulty } = req.query;
 
-    const where = { bankId: id, type: 'QCM' };
+    const where = { bank_id: id };
     if (difficulty) {
       const diffNum = parseInt(difficulty);
       if (!isNaN(diffNum)) {
@@ -106,10 +111,7 @@ router.get('/:id/qcm/random', optionalAuth, async (req, res, next) => {
       }
     }
 
-    // Récupérer toutes les questions puis mélanger
-    const allQuestions = await prisma.question.findMany({ where });
-    
-    // Mélanger aléatoirement
+    const allQuestions = await prisma.qcm_questions.findMany({ where });
     const shuffled = allQuestions.sort(() => Math.random() - 0.5);
     const questions = shuffled.slice(0, parseInt(count));
 
@@ -125,7 +127,7 @@ router.get('/:id/exercises', optionalAuth, async (req, res, next) => {
     const { id } = req.params;
     const { limit = 1000, difficulty } = req.query;
 
-    const where = { bankId: id, type: 'EXERCISE' };
+    const where = { bank_id: id };
     if (difficulty) {
       const diffNum = parseInt(difficulty);
       if (!isNaN(diffNum)) {
@@ -133,10 +135,10 @@ router.get('/:id/exercises', optionalAuth, async (req, res, next) => {
       }
     }
 
-    const exercises = await prisma.question.findMany({
+    const exercises = await prisma.exercise_problems.findMany({
       where,
       take: parseInt(limit),
-      orderBy: { createdAt: 'asc' }
+      orderBy: { created_at: 'asc' }
     });
 
     res.json({ success: true, data: exercises });
@@ -151,7 +153,7 @@ router.get('/:id/exercises/random', optionalAuth, async (req, res, next) => {
     const { id } = req.params;
     const { count = 10, difficulty } = req.query;
 
-    const where = { bankId: id, type: 'EXERCISE' };
+    const where = { bank_id: id };
     if (difficulty) {
       const diffNum = parseInt(difficulty);
       if (!isNaN(diffNum)) {
@@ -159,7 +161,7 @@ router.get('/:id/exercises/random', optionalAuth, async (req, res, next) => {
       }
     }
 
-    const allExercises = await prisma.question.findMany({ where });
+    const allExercises = await prisma.exercise_problems.findMany({ where });
     const shuffled = allExercises.sort(() => Math.random() - 0.5);
     const exercises = shuffled.slice(0, parseInt(count));
 
@@ -170,5 +172,3 @@ router.get('/:id/exercises/random', optionalAuth, async (req, res, next) => {
 });
 
 module.exports = router;
-
-

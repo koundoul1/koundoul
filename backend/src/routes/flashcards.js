@@ -104,8 +104,7 @@ router.get('/due', authenticateToken, async (req, res, next) => {
       id: review.flashcard.id,
       front: review.flashcard.front,
       back: review.flashcard.back,
-      subject: review.flashcard.subject,
-      level: review.flashcard.level,
+      subject: review.flashcard.subjectId,
       review: {
         quality: review.quality,
         interval: review.interval,

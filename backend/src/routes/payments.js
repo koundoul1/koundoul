@@ -97,7 +97,10 @@ router.post('/wave/create', authenticateToken, async (req, res) => {
         where: { id: payment.id },
         data: {
           status: 'failed',
-          errorMessage: waveError.response?.data?.message || waveError.message
+          metadata: {
+            ...payment.metadata,
+            errorMessage: waveError.response?.data?.message || waveError.message
+          }
         }
       });
 
@@ -137,8 +140,11 @@ router.post('/wave/webhook', async (req, res) => {
           where: { id: payment.id },
           data: {
             status: 'completed',
-            waveTransactionId: transactionId,
-            completedAt: new Date()
+            metadata: {
+              ...payment.metadata,
+              waveTransactionId: transactionId,
+              completedAt: new Date().toISOString()
+            }
           }
         });
 
