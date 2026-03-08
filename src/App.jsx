@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { I18nProvider, useTranslation } from './hooks/useTranslation.jsx'
 import ProtectedRoute from './components/ProtectedRoute'
-// NOUVEAU : Navigation moderne mobile-first
+// Navigation : mobile bottom nav + desktop sidebar/topbar
 import MobileNavBar from './components/MobileNavBar'
+import Sidebar from './components/Sidebar'
+import TopBar from './components/TopBar'
 // ANCIEN : Header et Footer (commentés pour le nouveau design)
 // import Header from './components/layout/Header'
 // import Footer from './components/layout/Footer'
@@ -79,12 +81,16 @@ function App() {
             <OfflineIndicator />
             <ConnectionStatus />
             <FlashcardsDueNotification />
-            
-            {/* NOUVEAU : Navigation universelle mobile-first */}
+
+            {/* Mobile: bottom nav */}
             <MobileNavBar />
-            
-            {/* MODIFIÉ : Padding pour bottom nav mobile */}
-            <main className="flex-1 pb-20 lg:pb-0">
+
+            {/* Desktop: sidebar + topbar (hidden on mobile via md:) */}
+            <Sidebar />
+            <TopBar />
+
+            {/* Main content: mobile=full width+bottom padding, desktop=offset by sidebar+topbar */}
+            <main className="flex-1 pb-20 md:pb-0 md:ml-60 md:mt-16">
               <Routes>
                 {/* REMPLACÉ : Nouvelle page d'accueil moderne */}
                 <Route path="/" element={<NewHome />} />

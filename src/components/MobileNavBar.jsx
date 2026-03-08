@@ -1,7 +1,6 @@
 /**
- * MobileNavBar - Premium navigation mobile-first
- * Bottom bar for mobile, top nav for desktop
- * 4 tabs: Home, Cours, Défi, Profil — no special IA button
+ * MobileNavBar — Bottom navigation for mobile only (<768px)
+ * Desktop navigation is handled by Sidebar + TopBar
  */
 
 import React, { useState } from 'react'
@@ -13,47 +12,22 @@ import {
   BookOpen,
   Trophy,
   User,
-  Search,
-  Bell,
-  Globe,
-  ChevronDown,
-  Flame,
-  Star
+  Globe
 } from 'lucide-react'
 
 const MobileNavBar = () => {
   const location = useLocation()
-  const { isAuthenticated, user } = useAuth()
+  const { isAuthenticated } = useAuth()
   const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
   const [showLangMenu, setShowLangMenu] = useState(false)
 
   const navItems = [
-    {
-      name: t('nav.home'),
-      href: '/',
-      icon: Home,
-      protected: false
-    },
-    {
-      name: t('nav.courses'),
-      href: '/courses',
-      icon: BookOpen,
-      protected: true
-    },
-    {
-      name: t('nav.defi'),
-      href: '/challenge',
-      icon: Trophy,
-      protected: true
-    },
-    {
-      name: t('nav.profile'),
-      href: '/profile',
-      icon: User,
-      protected: true
-    }
+    { name: t('nav.home'), href: '/', icon: Home, protected: false },
+    { name: t('nav.courses'), href: '/courses', icon: BookOpen, protected: true },
+    { name: t('nav.defi'), href: '/challenge', icon: Trophy, protected: true },
+    { name: t('nav.profile'), href: '/profile', icon: User, protected: true }
   ]
 
   const visibleItems = navItems.filter(item => !item.protected || isAuthenticated)
@@ -65,8 +39,8 @@ const MobileNavBar = () => {
 
   return (
     <>
-      {/* Mobile Bottom Navigation — 4 tabs */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+      {/* Mobile Bottom Navigation — hidden on desktop (md+) */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
         <div className="bg-[#0F0F1E]/95 backdrop-blur-xl border-t border-white/8 px-2 py-2 safe-bottom">
           <div className="flex justify-around items-center">
             {/* Language selector */}
@@ -112,7 +86,6 @@ const MobileNavBar = () => {
 
             {visibleItems.map((item) => {
               const active = isActive(item.href)
-
               return (
                 <Link
                   key={item.href}
@@ -147,122 +120,10 @@ const MobileNavBar = () => {
         </div>
       </nav>
 
-      {/* Desktop Top Navigation */}
-      <header className="hidden lg:block fixed top-0 left-0 right-0 z-50">
-        <div className="bg-[#0F0F1E]/95 backdrop-blur-xl border-b border-white/8">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Logo — gradient violet→turquoise */}
-              <Link to="/" className="flex items-center space-x-3 group">
-                <div className="w-10 h-10 bg-gradient-to-br from-kprimary to-ksecondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-kprimary/30">
-                  <span className="text-white font-black text-lg">K</span>
-                </div>
-                <span className="text-xl font-black gradient-text">
-                  Koundoul
-                </span>
-              </Link>
-
-              {/* Navigation Links */}
-              <nav className="flex items-center space-x-1">
-                {visibleItems.map((item) => {
-                  const active = isActive(item.href)
-                  return (
-                    <Link
-                      key={item.href}
-                      to={item.href}
-                      className={`
-                        flex items-center space-x-2 px-4 py-2 rounded-xl
-                        transition-all duration-200
-                        ${active
-                          ? 'bg-kprimary/20 text-kprimary'
-                          : 'text-gray-400 hover:text-gray-300 hover:bg-white/5'
-                        }
-                      `}
-                    >
-                      <item.icon className="w-5 h-5" />
-                      <span className="font-medium">{item.name}</span>
-                    </Link>
-                  )
-                })}
-
-                {/* Streak & XP badges */}
-                {isAuthenticated && (
-                  <div className="flex items-center space-x-2 ml-2">
-                    <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 text-sm font-bold">
-                      <Flame className="w-4 h-4" />
-                      <span>{user?.streak || 0}</span>
-                    </div>
-                    <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 text-sm font-bold">
-                      <Star className="w-4 h-4" />
-                      <span>{user?.xp?.toLocaleString() || 0}</span>
-                    </div>
-                  </div>
-                )}
-
-                {/* Language selector */}
-                <div className="relative ml-2">
-                  <button
-                    onClick={() => setShowLangMenu(!showLangMenu)}
-                    className="flex items-center space-x-2 px-3 py-2 rounded-xl bg-kprimary/15 hover:bg-kprimary/25 border border-kprimary/30 text-white font-medium transition-all duration-200"
-                  >
-                    <span className="text-sm">{currentLang.flag} {language.toUpperCase()}</span>
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showLangMenu ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {showLangMenu && (
-                    <>
-                      <div
-                        className="fixed inset-0 z-[9998]"
-                        onClick={() => setShowLangMenu(false)}
-                      ></div>
-                      <div className="absolute top-full right-0 mt-2 w-48 bg-[#1A1A2E] border border-kprimary/20 rounded-xl shadow-2xl z-[9999] overflow-hidden">
-                        {languages.map((lang) => (
-                          <button
-                            key={lang.code}
-                            onClick={() => {
-                              changeLanguage(lang.code);
-                              setShowLangMenu(false);
-                            }}
-                            className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-white/10 transition-colors ${
-                              lang.code === language ? 'bg-kprimary/20 text-white' : 'text-gray-200'
-                            }`}
-                          >
-                            <span className="text-xl">{lang.flag}</span>
-                            <span className="font-medium flex-1">{lang.name}</span>
-                            {lang.code === language && <span className="text-kprimary">✓</span>}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              </nav>
-
-              {/* Actions */}
-              <div className="flex items-center space-x-3">
-                <button className="p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
-                  <Search className="w-5 h-5" />
-                </button>
-                <button className="relative p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
-                  <Bell className="w-5 h-5" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-kaccent rounded-full"></span>
-                </button>
-                <Link
-                  to={isAuthenticated ? '/profile' : '/login'}
-                  className="w-10 h-10 bg-gradient-to-br from-kprimary to-ksecondary rounded-xl flex items-center justify-center hover:scale-110 transition-transform"
-                  title={isAuthenticated ? t('nav.profile') : t('nav.login')}
-                >
-                  <User className="w-5 h-5 text-white" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Spacers */}
-      <div className="h-16 lg:h-20"></div>
-      <div className="h-20 lg:hidden"></div>
+      {/* Mobile top spacer — only on mobile */}
+      <div className="h-0 md:hidden"></div>
+      {/* Mobile bottom spacer — only on mobile */}
+      <div className="h-20 md:hidden"></div>
     </>
   )
 }
