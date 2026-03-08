@@ -323,39 +323,47 @@ export default {
     },
     
     dashboard: {
-      title: 'Bonjour {name} ! \uD83D\uDC4B',
-      subtitle: 'Prêt à continuer ton apprentissage ?',
-      level: 'Niveau {level}',
-      xp: '{xp} / {nextXp} XP',
-      loadingError: 'Erreur de chargement du dashboard',
-      connectButton: 'Se connecter',
-      stats: {
-        lessonsCompleted: 'Leçons complétées',
-        successRate: 'Taux de réussite',
-        streak: 'Jours consécutifs',
-        totalTime: 'Minutes d\'étude'
+      greeting: {
+        morning: 'Bonjour',
+        afternoon: 'Bon après-midi',
+        evening: 'Bonsoir'
       },
-      recommendations: {
-        title: 'Recommandations pour toi'
+      subtitle: 'Prêt à continuer ta progression ?',
+      student: 'Élève',
+      level: 'Niveau',
+      currentLevel: 'Niveau Actuel',
+      lessons: 'Leçons',
+      avgScore: 'Score Moyen',
+      days: 'Jours',
+      streakActive: 'Série en cours ! Continue 🚀',
+      streakStart: 'Commence ta première série !',
+      levelProgress: 'Progression niveau',
+      subjectProgress: 'Progression par Matière',
+      mastery: {
+        advanced: 'Avancé',
+        intermediate: 'Intermédiaire',
+        beginner: 'Débutant',
+        none: 'Non commencé'
       },
-      subjectProgress: {
-        title: 'Ta progression par matière',
-        lessons: '{completed}/{total} leçons',
-        exercises: '{attempted}/{total} exercices',
-        progress: '{progress}%'
+      quickActions: 'Actions Rapides',
+      actions: {
+        solver: 'Résolveur IA',
+        challenge: 'Défi',
+        microLessons: 'Micro-Leçons',
       },
-      chaptersInProgress: {
-        title: 'Continue là où tu t\'es arrêté',
-        lessons: '{count} leçons'
-      },
-      recentActivity: {
-        title: 'Activité récente'
-      },
-      dailyGoal: {
-        title: '\uD83C\uDFAF Objectif du jour',
-        desc: 'Complète 1 leçon et 2 exercices pour maintenir ton streak !',
-        startButton: 'Commencer maintenant'
-      }
+      recentActivity: 'Activité Récente',
+      noActivity: 'Aucune activité pour le moment. Commence une leçon !',
+      startLearning: 'Commencer à apprendre',
+      resume: 'Reprendre',
+      recommendations: 'Recommandations',
+      badges: 'Badges',
+      noBadgesYet: 'Aucun badge obtenu. Continue pour en débloquer !',
+      nextBadge: 'Prochain badge',
+      viewAllBadges: 'Voir tous les badges',
+      studyTime: 'Temps d\'étude',
+      totalEstimated: 'Temps total estimé',
+      viewProfile: 'Voir mon Profil Complet',
+      loadingError: 'Erreur de chargement du dashboard'
     },
     
     solver: {
@@ -1166,39 +1174,47 @@ export default {
     },
     
     dashboard: {
-      title: 'Hello {name}! \uD83D\uDC4B',
-      subtitle: 'Ready to continue your learning?',
-      level: 'Level {level}',
-      xp: '{xp} / {nextXp} XP',
-      loadingError: 'Dashboard loading error',
-      connectButton: 'Sign in',
-      stats: {
-        lessonsCompleted: 'Lessons completed',
-        successRate: 'Success rate',
-        streak: 'Consecutive days',
-        totalTime: 'Study minutes'
+      greeting: {
+        morning: 'Good morning',
+        afternoon: 'Good afternoon',
+        evening: 'Good evening'
       },
-      recommendations: {
-        title: 'Recommendations for you'
+      subtitle: 'Ready to continue your progress?',
+      student: 'Student',
+      level: 'Level',
+      currentLevel: 'Current Level',
+      lessons: 'Lessons',
+      avgScore: 'Avg Score',
+      days: 'Days',
+      streakActive: 'Streak going! Keep it up 🚀',
+      streakStart: 'Start your first streak!',
+      levelProgress: 'Level progress',
+      subjectProgress: 'Progress by Subject',
+      mastery: {
+        advanced: 'Advanced',
+        intermediate: 'Intermediate',
+        beginner: 'Beginner',
+        none: 'Not started'
       },
-      subjectProgress: {
-        title: 'Your progress by subject',
-        lessons: '{completed}/{total} lessons',
-        exercises: '{attempted}/{total} exercises',
-        progress: '{progress}%'
+      quickActions: 'Quick Actions',
+      actions: {
+        solver: 'AI Solver',
+        challenge: 'Challenge',
+        microLessons: 'Micro-Lessons',
       },
-      chaptersInProgress: {
-        title: 'Continue where you left off',
-        lessons: '{count} lessons'
-      },
-      recentActivity: {
-        title: 'Recent activity'
-      },
-      dailyGoal: {
-        title: '\uD83C\uDFAF Daily Goal',
-        desc: 'Complete 1 lesson and 2 exercises to maintain your streak!',
-        startButton: 'Start now'
-      }
+      recentActivity: 'Recent Activity',
+      noActivity: 'No activity yet. Start a lesson!',
+      startLearning: 'Start learning',
+      resume: 'Resume',
+      recommendations: 'Recommendations',
+      badges: 'Badges',
+      noBadgesYet: 'No badges yet. Keep going to unlock some!',
+      nextBadge: 'Next badge',
+      viewAllBadges: 'View all badges',
+      studyTime: 'Study Time',
+      totalEstimated: 'Total estimated time',
+      viewProfile: 'View Full Profile',
+      loadingError: 'Dashboard loading error'
     },
     
     solver: {
