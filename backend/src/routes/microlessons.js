@@ -6,6 +6,11 @@ const { filterStatic, getStaticById } = require('../data/microLessonsFallback');
 const prisma = require('../config/database');
 const TABLE_MICRO_LESSONS = 'microlessons';
 
+console.log('[microlessons] SUPABASE_URL:', !!process.env.SUPABASE_URL);
+console.log('[microlessons] SUPABASE_SERVICE_ROLE_KEY:', !!process.env.SUPABASE_SERVICE_ROLE_KEY);
+console.log('[microlessons] SUPABASE_ANON_KEY:', !!process.env.SUPABASE_ANON_KEY);
+console.log('[microlessons] isSupabaseConfigured():', isSupabaseConfigured());
+
 if (!isSupabaseConfigured()) {
   console.warn('[microlessons] ⚠️ SUPABASE_URL/SUPABASE_ANON_KEY not set — using static fallback (3 lessons only)');
 }
