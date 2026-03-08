@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../services/api';
-import { BookOpen, Clock, Star, Target, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Clock, Star, Target, TrendingUp, CheckCircle2, AlertTriangle, RefreshCw } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -12,6 +12,7 @@ const MicroLessons = () => {
   const { user } = useAuth();
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [completions, setCompletions] = useState({}); // { lessonId: { completed, score } }
   const [stats, setStats] = useState(null);
   
@@ -81,6 +82,7 @@ const MicroLessons = () => {
   const fetchLessons = async () => {
     try {
       setLoading(true);
+      setError(null);
       const params = {
         limit: 1000,  // S'assurer qu'on récupère toutes les leçons
         offset: 0
@@ -105,7 +107,8 @@ const MicroLessons = () => {
     } catch (error) {
       console.error('❌ Erreur lors du chargement des leçons:', error);
       console.error('❌ Détails de l\'erreur:', error.message, error.stack);
-      setLessons([]); // Réinitialiser les leçons en cas d'erreur
+      setError(error.message || 'Erreur lors du chargement des leçons');
+      setLessons([]);
     } finally {
       setLoading(false);
     }
@@ -290,16 +293,30 @@ const MicroLessons = () => {
         </div>
 
         {/* Lessons Grid */}
-        {filteredLessons.length === 0 ? (
+        {error ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600 text-lg mb-4">{t('microLessons.noLessons')}</p>
-            <p className="text-gray-500 text-sm">
-              {lessons.length === 0 ? (
-                <span>{t('loading')}</span>
-              ) : (
-                <span>{t('actions.retry')}</span>
-              )}
+            <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+            <p className="text-red-600 text-lg font-semibold mb-2">
+              {t('microLessons.noLessons')}
             </p>
+            <p className="text-gray-500 text-sm mb-6">{error}</p>
+            <button
+              onClick={() => fetchLessons()}
+              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              <RefreshCw className="h-4 w-4 mr-2" />
+              {t('actions.retry')}
+            </button>
+          </div>
+        ) : filteredLessons.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+            <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-600 text-lg mb-2">{t('microLessons.noLessons')}</p>
+            {(filter.subject !== 'all' || filter.level !== 'all') && (
+              <p className="text-gray-500 text-sm">
+                {t('actions.filter')} — {t('actions.retry')}
+              </p>
+            )}
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

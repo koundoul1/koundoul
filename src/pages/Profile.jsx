@@ -54,6 +54,7 @@ const Profile = () => {
   const [loadingStats, setLoadingStats] = useState(true)
   const [invitationCode, setInvitationCode] = useState(null)
   const [profileData, setProfileData] = useState(null)
+  const [generatingCode, setGeneratingCode] = useState(false)
 
   // Initialiser les données du formulaire
   useEffect(() => {
@@ -500,10 +501,34 @@ const Profile = () => {
                     </div>
                   ) : (
                     <div className="text-center py-4">
-                      <Loader2 className="h-5 w-5 animate-spin text-blue-600 mx-auto mb-2" />
-                      <p className="text-sm text-gray-700 font-medium">
-                        Chargement du code...
+                      <p className="text-sm text-gray-700 font-medium mb-3">
+                        Aucun code d'invitation généré pour le moment.
                       </p>
+                      <button
+                        onClick={async () => {
+                          setGeneratingCode(true)
+                          setError('')
+                          try {
+                            const res = await api.user.generateInvitationCode()
+                            setInvitationCode(res.invitationCode || res.invitation_code || res.code)
+                          } catch (err) {
+                            setError(err.message || 'Erreur lors de la génération du code')
+                          } finally {
+                            setGeneratingCode(false)
+                          }
+                        }}
+                        disabled={generatingCode}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
+                      >
+                        {generatingCode ? (
+                          <>
+                            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                            Génération...
+                          </>
+                        ) : (
+                          'Générer mon code'
+                        )}
+                      </button>
                     </div>
                   )}
                 </div>
