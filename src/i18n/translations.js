@@ -733,6 +733,50 @@ export default {
       submitError: 'Erreur lors de la soumission'
     },
     
+    // Commun
+    common: {
+      chooseLanguage: 'Choisir la langue',
+      loading: 'Chargement...',
+      saving: 'Sauvegarde...',
+      error: 'Erreur',
+      success: 'Succès',
+      copiedToClipboard: 'Copié dans le presse-papiers !',
+      subjects: {
+        'Mathématiques': 'Mathématiques',
+        'Physique': 'Physique',
+        'Chimie': 'Chimie'
+      },
+      levels: {
+        'Seconde': 'Seconde',
+        'Première': 'Première',
+        'Terminale': 'Terminale'
+      }
+    },
+
+    // Parent
+    parent: {
+      title: 'Espace Parent',
+      generateCode: 'Générer mon code parent',
+      generating: 'Génération...',
+      yourCode: 'Votre code d\'invitation',
+      shareCodeDesc: 'Partagez ce code avec vos enfants. Ils pourront l\'entrer dans leur profil pour se lier.',
+      linkedChildren: 'Enfants liés',
+      noChildren: 'Aucun enfant lié pour le moment',
+      unlinkChild: 'Délier cet enfant',
+      linkParent: 'Lien Parent',
+      enterCodeDesc: 'Entrez le code de votre parent pour qu\'il puisse suivre votre progression.',
+      linkedTo: 'Vous êtes lié à :',
+      parentCanTrack: 'Votre parent peut suivre votre progression, vos leçons et vos quiz.',
+      unlinkSelf: 'Se délier',
+      linkButton: 'Lier',
+      linkSuccess: 'Lien parent-enfant établi avec succès !',
+      unlinkSuccess: 'Délié avec succès',
+      codePlaceholder: 'CODE8CAR',
+      lessons: 'leçons',
+      dashboard: 'Dashboard Parents',
+      codeDesc: 'Générez un code pour que vos enfants se lient à votre compte et suivez leur progression.'
+    },
+
     // Actions communes
     actions: {
       save: 'Enregistrer',
@@ -1533,6 +1577,50 @@ export default {
       submitError: 'Error submitting'
     },
     
+    // Common
+    common: {
+      chooseLanguage: 'Choose language',
+      loading: 'Loading...',
+      saving: 'Saving...',
+      error: 'Error',
+      success: 'Success',
+      copiedToClipboard: 'Copied to clipboard!',
+      subjects: {
+        'Mathématiques': 'Mathematics',
+        'Physique': 'Physics',
+        'Chimie': 'Chemistry'
+      },
+      levels: {
+        'Seconde': '10th Grade',
+        'Première': '11th Grade',
+        'Terminale': '12th Grade'
+      }
+    },
+
+    // Parent
+    parent: {
+      title: 'Parent Dashboard',
+      generateCode: 'Generate my parent code',
+      generating: 'Generating...',
+      yourCode: 'Your invitation code',
+      shareCodeDesc: 'Share this code with your children. They can enter it in their profile to link.',
+      linkedChildren: 'Linked children',
+      noChildren: 'No linked children yet',
+      unlinkChild: 'Unlink this child',
+      linkParent: 'Parent Link',
+      enterCodeDesc: 'Enter your parent\'s code so they can track your progress.',
+      linkedTo: 'You are linked to:',
+      parentCanTrack: 'Your parent can track your progress, lessons and quizzes.',
+      unlinkSelf: 'Unlink',
+      linkButton: 'Link',
+      linkSuccess: 'Parent-child link established!',
+      unlinkSuccess: 'Successfully unlinked',
+      codePlaceholder: 'CODE8CHR',
+      lessons: 'lessons',
+      dashboard: 'Parent Dashboard',
+      codeDesc: 'Generate a code for your children to link to your account and track their progress.'
+    },
+
     // Common actions
     actions: {
       save: 'Save',

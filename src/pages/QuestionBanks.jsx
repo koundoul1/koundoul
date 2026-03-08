@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
+import { useTranslation } from '../hooks/useTranslation'
 import { BookOpen, Trophy, Clock, Target, Zap } from 'lucide-react'
 
 export default function QuestionBanks() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [banks, setBanks] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState({ subject: 'all', level: 'all', type: 'all' })
@@ -31,17 +33,17 @@ export default function QuestionBanks() {
   }
 
   const subjects = [
-    { id: 'all', name: 'Toutes les matières' },
-    { id: 'Mathématiques', name: 'Mathématiques' },
-    { id: 'Physique', name: 'Physique' },
-    { id: 'Chimie', name: 'Chimie' }
+    { id: 'all', name: t('microLessons.filters.all') },
+    { id: 'Mathématiques', name: t('courses.math') },
+    { id: 'Physique', name: t('courses.physics') },
+    { id: 'Chimie', name: t('courses.chemistry') }
   ]
 
   const levels = [
-    { id: 'all', name: 'Tous les niveaux' },
-    { id: 'Seconde', name: 'Seconde' },
-    { id: 'Première', name: 'Première' },
-    { id: 'Terminale', name: 'Terminale' }
+    { id: 'all', name: t('microLessons.filters.all') },
+    { id: 'Seconde', name: t('home.levels.seconde.name') },
+    { id: 'Première', name: t('home.levels.premiere.name') },
+    { id: 'Terminale', name: t('home.levels.terminale.name') }
   ]
 
   const types = [
@@ -54,7 +56,7 @@ export default function QuestionBanks() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="text-white text-xl">Chargement des banques de questions...</div>
+          <div className="text-white text-xl">{t('common.loading')}</div>
         </div>
       </div>
     )

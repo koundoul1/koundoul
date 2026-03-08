@@ -345,9 +345,9 @@ const MicroLessons = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-blue-700 mb-3">{lesson.subject} • {lesson.chapter}</p>
+                  <p className="text-xs text-blue-700 mb-3">{t(`common.subjects.${lesson.subject}`) || lesson.subject} • {lesson.chapter}</p>
                   
-                  <p className="text-gray-700 text-sm mb-4 line-clamp-2">Niveau: {lesson.level}</p>
+                  <p className="text-gray-700 text-sm mb-4 line-clamp-2">{t(`common.levels.${lesson.level}`) || lesson.level}</p>
                   
                   <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
                     <span className="flex items-center">
@@ -361,7 +361,7 @@ const MicroLessons = () => {
                   </div>
 
                   <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <span className="text-xs text-purple-700 capitalize">{lesson.level}</span>
+                    <span className="text-xs text-purple-700 capitalize">{t(`common.levels.${lesson.level}`) || lesson.level}</span>
                     <button className="text-blue-700 hover:text-blue-800 font-semibold text-sm flex items-center">
                       Commencer
                       <span className="ml-1">→</span>

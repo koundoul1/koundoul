@@ -433,14 +433,14 @@ const Profile = () => {
                         className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <Save className="h-4 w-4 mr-2" />
-                        {loading ? 'Sauvegarde...' : 'Sauvegarder'}
+                        {loading ? t('common.saving') : t('actions.save')}
                       </button>
                       <button
                         onClick={cancelEdit}
                         className="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
                       >
                         <X className="h-4 w-4 mr-2" />
-                        Annuler
+                        {t('actions.cancel')}
                       </button>
                     </div>
                   )}
@@ -547,7 +547,7 @@ const Profile = () => {
                         className="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
                       >
                         <X className="h-4 w-4 mr-2" />
-                        Annuler
+                        {t('actions.cancel')}
                       </button>
                     </div>
                   </div>
@@ -563,10 +563,10 @@ const Profile = () => {
               <div className="p-6">
                 <div className="flex items-center mb-3">
                   <Shield className="h-6 w-6 text-blue-600 mr-2" />
-                  <h3 className="text-lg font-semibold text-gray-900">Espace Parent</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">{t('parent.title')}</h3>
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
-                  Générez un code pour que vos enfants se lient à votre compte et suivez leur progression.
+                  {t('parent.codeDesc')}
                 </p>
 
                 {/* Générer / Afficher code parent */}
@@ -574,10 +574,10 @@ const Profile = () => {
                   {invitationCode ? (
                     <div>
                       <label className="block text-xs font-semibold text-gray-700 mb-1">
-                        Votre code d'invitation
+                        {t('parent.yourCode')}
                       </label>
                       <p className="text-xs text-gray-500 mb-3">
-                        Partagez ce code avec vos enfants. Ils pourront l'entrer dans leur profil pour se lier.
+                        {t('parent.shareCodeDesc')}
                       </p>
                       <div className="flex items-center space-x-2">
                         <code className="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-lg font-bold text-gray-900 text-center tracking-widest">
@@ -586,11 +586,11 @@ const Profile = () => {
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(invitationCode)
-                            setSuccess('Code copié !')
+                            setSuccess(t('common.copiedToClipboard'))
                             setTimeout(() => setSuccess(''), 2000)
                           }}
                           className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                          title="Copier le code"
+                          title={t('actions.copy')}
                         >
                           <Copy className="h-4 w-4" />
                         </button>
@@ -604,9 +604,9 @@ const Profile = () => {
                         className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
                       >
                         {generatingCode ? (
-                          <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Génération...</>
+                          <><Loader2 className="h-4 w-4 animate-spin mr-2" /> {t('parent.generating')}</>
                         ) : (
-                          <><UserPlus className="h-4 w-4 mr-2" /> Générer mon code parent</>
+                          <><UserPlus className="h-4 w-4 mr-2" /> {t('parent.generateCode')}</>
                         )}
                       </button>
                     </div>
@@ -617,7 +617,7 @@ const Profile = () => {
                 {parentChildren.length > 0 && (
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center">
-                      <Users className="h-4 w-4 mr-1" /> Enfants liés ({parentChildren.length}/5)
+                      <Users className="h-4 w-4 mr-1" /> {t('parent.linkedChildren')} ({parentChildren.length}/5)
                     </h4>
                     <div className="space-y-2">
                       {parentChildren.map(child => (
@@ -628,10 +628,10 @@ const Profile = () => {
                             </p>
                             <div className="flex items-center gap-3 text-xs text-gray-500 mt-1">
                               <span>{child.xp || 0} XP</span>
-                              <span>Nv. {child.level || 1}</span>
-                              <span>{child.streak || 0}j streak</span>
+                              <span>Lv. {child.level || 1}</span>
+                              <span>{child.streak || 0}d streak</span>
                               {child.lessonsCompleted !== undefined && (
-                                <span>{child.lessonsCompleted} leçons</span>
+                                <span>{child.lessonsCompleted} {t('parent.lessons')}</span>
                               )}
                             </div>
                           </div>
@@ -639,7 +639,7 @@ const Profile = () => {
                             onClick={() => handleUnlinkChild(child.id)}
                             disabled={unlinkingChild === child.id}
                             className="ml-2 p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
-                            title="Délier cet enfant"
+                            title={t('parent.unlinkChild')}
                           >
                             {unlinkingChild === child.id ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
@@ -658,7 +658,7 @@ const Profile = () => {
                   className="flex items-center justify-center px-4 py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm"
                 >
                   <Shield className="h-4 w-4 mr-2" />
-                  Dashboard Parents
+                  {t('parent.dashboard')}
                 </Link>
               </div>
             </div>
@@ -668,35 +668,35 @@ const Profile = () => {
               <div className="p-6">
                 <div className="flex items-center mb-3">
                   <Link2 className="h-6 w-6 text-green-600 mr-2" />
-                  <h3 className="text-lg font-semibold text-gray-900">Lien Parent</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">{t('parent.linkParent')}</h3>
                 </div>
 
                 {linkedParent ? (
                   <div className="p-4 bg-white rounded-lg border-2 border-green-300">
                     <p className="text-sm text-gray-700 mb-2">
-                      Vous êtes lié à : <strong className="text-green-700">{linkedParent}</strong>
+                      {t('parent.linkedTo')} <strong className="text-green-700">{linkedParent}</strong>
                     </p>
                     <p className="text-xs text-gray-500 mb-3">
-                      Votre parent peut suivre votre progression, vos leçons et vos quiz.
+                      {t('parent.parentCanTrack')}
                     </p>
                     <button
                       onClick={handleUnlinkSelf}
                       className="px-3 py-1.5 text-red-600 border border-red-300 rounded hover:bg-red-50 transition-colors text-xs font-medium flex items-center"
                     >
-                      <Unlink className="h-3 w-3 mr-1" /> Se délier
+                      <Unlink className="h-3 w-3 mr-1" /> {t('parent.unlinkSelf')}
                     </button>
                   </div>
                 ) : (
                   <div className="p-4 bg-white rounded-lg border-2 border-green-300">
                     <p className="text-sm text-gray-600 mb-3">
-                      Entrez le code de votre parent pour qu'il puisse suivre votre progression.
+                      {t('parent.enterCodeDesc')}
                     </p>
                     <div className="flex items-center space-x-2">
                       <input
                         type="text"
                         value={parentCode}
                         onChange={(e) => setParentCode(e.target.value.toUpperCase().slice(0, 8))}
-                        placeholder="CODE8CAR"
+                        placeholder={t('parent.codePlaceholder')}
                         maxLength={8}
                         className="flex-1 px-3 py-2 border border-gray-300 rounded font-mono text-center text-lg tracking-widest uppercase bg-white text-gray-900"
                       />
@@ -708,7 +708,7 @@ const Profile = () => {
                         {linkingToParent ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
                         ) : (
-                          <><Link2 className="h-4 w-4 mr-1" /> Lier</>
+                          <><Link2 className="h-4 w-4 mr-1" /> {t('parent.linkButton')}</>
                         )}
                       </button>
                     </div>

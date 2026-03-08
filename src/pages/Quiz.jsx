@@ -9,8 +9,8 @@ const Quiz = () => {
   const [filteredBanks, setFilteredBanks] = useState([])
   const [loading, setLoading] = useState(true)
   const [filters, setFilters] = useState({
-    subject: t('quiz.allSubjects'),
-    level: t('quiz.allLevels')
+    subject: 'all',
+    level: 'all'
   })
 
   // État pour le quiz en cours
@@ -62,11 +62,11 @@ const Quiz = () => {
   useEffect(() => {
     let filtered = [...questionBanks]
     
-    if (filters.subject !== 'Toutes les matières') {
+    if (filters.subject !== 'all') {
       filtered = filtered.filter(bank => bank.subject === filters.subject)
     }
-    
-    if (filters.level !== 'Tous les niveaux') {
+
+    if (filters.level !== 'all') {
       filtered = filtered.filter(bank => bank.level === filters.level)
     }
     
@@ -1177,10 +1177,10 @@ const Quiz = () => {
                 paddingRight: '2.5rem'
               }}
             >
-              <option value="Toutes les matières" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Toutes les matières</option>
-              <option value="Mathématiques" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Mathématiques</option>
-              <option value="Physique" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Physique</option>
-              <option value="Chimie" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Chimie</option>
+              <option value="all" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('quiz.allSubjects')}</option>
+              <option value="Mathématiques" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('courses.math')}</option>
+              <option value="Physique" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('courses.physics')}</option>
+              <option value="Chimie" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('courses.chemistry')}</option>
             </select>
             <select 
               value={filters.level}
@@ -1194,10 +1194,10 @@ const Quiz = () => {
                 paddingRight: '2.5rem'
               }}
             >
-              <option value="Tous les niveaux" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Tous les niveaux</option>
-              <option value="Seconde" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Seconde</option>
-              <option value="Première" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Première</option>
-              <option value="Terminale" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>Terminale</option>
+              <option value="all" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('quiz.allLevels')}</option>
+              <option value="Seconde" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('home.levels.seconde.name')}</option>
+              <option value="Première" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('home.levels.premiere.name')}</option>
+              <option value="Terminale" style={{ backgroundColor: '#1f2937', color: '#ffffff' }}>{t('home.levels.terminale.name')}</option>
             </select>
           </div>
         </div>
@@ -1226,7 +1226,7 @@ const Quiz = () => {
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-white">{bank.title}</h3>
-                        <p className="text-sm text-blue-100">{bank.subject} • {bank.level}</p>
+                        <p className="text-sm text-blue-100">{t(`common.subjects.${bank.subject}`) || bank.subject} • {t(`common.levels.${bank.level}`) || bank.level}</p>
                       </div>
                     </div>
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-200 border border-blue-400/30">

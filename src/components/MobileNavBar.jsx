@@ -24,43 +24,43 @@ import {
 const MobileNavBar = () => {
   const location = useLocation()
   const { isAuthenticated } = useAuth()
-  const { language, changeLanguage, getAvailableLanguages } = useTranslation()
+  const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
   const [showLangMenu, setShowLangMenu] = useState(false)
 
   const navItems = [
-    { 
-      name: 'Accueil', 
-      href: '/', 
+    {
+      name: t('nav.home'),
+      href: '/',
       icon: Home,
       color: 'blue',
       protected: false
     },
-    { 
-      name: 'Cours', 
-      href: '/courses', 
+    {
+      name: t('nav.courses'),
+      href: '/courses',
       icon: BookOpen,
       color: 'purple',
       protected: true
     },
-    { 
-      name: 'IA', 
-      href: '/solver', 
+    {
+      name: 'IA',
+      href: '/solver',
       icon: Brain,
       color: 'pink',
       protected: true,
-      special: true // Bouton central spécial
+      special: true
     },
-    { 
-      name: 'Défi', 
-      href: '/challenge', 
+    {
+      name: t('nav.defi'),
+      href: '/challenge',
       icon: Trophy,
       color: 'amber',
       protected: true
     },
     {
-      name: 'Profil',
+      name: t('nav.profile'),
       href: '/profile',
       icon: User,
       color: 'green',
@@ -102,7 +102,7 @@ const MobileNavBar = () => {
                   ></div>
                   <div className="fixed bottom-20 left-2 right-2 bg-gray-800 border border-purple-500 rounded-xl shadow-2xl z-[9999] overflow-hidden">
                     <div className="p-2">
-                      <div className="text-xs text-gray-400 mb-2 px-2">Choisir la langue</div>
+                      <div className="text-xs text-gray-400 mb-2 px-2">{t('common.chooseLanguage')}</div>
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
@@ -320,7 +320,7 @@ const MobileNavBar = () => {
                 <Link
                   to={isAuthenticated ? '/profile' : '/login'}
                   className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center hover:scale-110 transition-transform"
-                  title={isAuthenticated ? 'Profil' : 'Connexion'}
+                  title={isAuthenticated ? t('nav.profile') : t('nav.login')}
                 >
                   <User className="w-5 h-5 text-white" />
                 </Link>
