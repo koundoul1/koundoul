@@ -4,7 +4,7 @@ const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const { getSupabase, isSupabaseConfigured } = require('../config/supabase');
 const { filterStatic, getStaticById } = require('../data/microLessonsFallback');
 const prisma = require('../config/database');
-const TABLE_MICRO_LESSONS = 'micro_lessons';
+const TABLE_MICRO_LESSONS = 'microlessons';
 
 function mapSupabaseRow(row) {
   if (!row) return null;
