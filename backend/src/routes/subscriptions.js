@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
 const { authenticateToken } = require('../middlewares/auth');
-
-const prisma = new PrismaClient();
+const prisma = require('../config/database');
 
 // Obtenir tous les plans disponibles
 router.get('/plans', async (req, res) => {

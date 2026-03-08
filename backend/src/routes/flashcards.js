@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+const prisma = require('../config/database');
 
 // SuperMemo 2 algorithm
 function calculateNextReview(quality, interval, easeFactor, repetitions) {

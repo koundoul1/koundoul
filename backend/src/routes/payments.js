@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
 const { authenticateToken } = require('../middlewares/auth');
 const axios = require('axios');
-
-const prisma = new PrismaClient();
+const prisma = require('../config/database');
 const WAVE_API_KEY = process.env.WAVE_API_KEY;
 const WAVE_BASE_URL = 'https://api.wave.com/v1';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';

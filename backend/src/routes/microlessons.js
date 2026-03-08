@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken, optionalAuth } = require('../middlewares/auth');
-const { PrismaClient } = require('@prisma/client');
 const { getSupabase, isSupabaseConfigured } = require('../config/supabase');
 const { filterStatic, getStaticById } = require('../data/microLessonsFallback');
-
-const prisma = new PrismaClient();
+const prisma = require('../config/database');
 const TABLE_MICRO_LESSONS = 'micro_lessons';
 
 function mapSupabaseRow(row) {

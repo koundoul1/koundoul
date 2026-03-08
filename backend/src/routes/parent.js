@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
 const { authenticateToken } = require('../middlewares/auth');
-
-const prisma = new PrismaClient();
+const prisma = require('../config/database');
 
 // Obtenir la liste des enfants liés à un parent (via invitationCode)
 router.get('/children', authenticateToken, async (req, res) => {

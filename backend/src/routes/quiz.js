@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken, optionalAuth } = require('../middlewares/auth');
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+const prisma = require('../config/database');
 
 // Get all quizzes (question banks)
 router.get('/', optionalAuth, async (req, res, next) => {

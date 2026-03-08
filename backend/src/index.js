@@ -3,11 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const { PrismaClient } = require('@prisma/client');
 const { initPlans } = require('./scripts/initPlans');
+const prisma = require('./config/database');
 
 const app = express();
-const prisma = new PrismaClient();
 const PORT = process.env.PORT || 5000;
 
 // Fonction pour vérifier l'état des migrations
