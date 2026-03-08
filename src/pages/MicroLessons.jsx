@@ -195,7 +195,7 @@ const MicroLessons = () => {
             📚 {t('microLessons.title')}
           </h1>
           <p className="text-xl text-gray-600">
-            {lessons.length} {t('courses.lessons')} {t('microLessons.subtitle')}
+            {error ? t('microLessons.subtitle') : `${lessons.length} ${t('courses.lessons')} ${t('microLessons.subtitle')}`}
           </p>
         </div>
 
