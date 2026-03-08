@@ -6,6 +6,10 @@ const { filterStatic, getStaticById } = require('../data/microLessonsFallback');
 const prisma = require('../config/database');
 const TABLE_MICRO_LESSONS = 'microlessons';
 
+if (!isSupabaseConfigured()) {
+  console.warn('[microlessons] ⚠️ SUPABASE_URL/SUPABASE_ANON_KEY not set — using static fallback (3 lessons only)');
+}
+
 function mapSupabaseRow(row) {
   if (!row) return null;
   return {
@@ -44,7 +48,11 @@ router.get('/', optionalAuth, async (req, res, next) => {
             .order('id', { ascending: true })
             .range(offsetNum, offsetNum + limitNum - 1);
 
-          if (!error && data && data.length > 0) {
+          if (error) {
+            console.error('[microlessons] Supabase query error:', error.message);
+          } else if (!data || data.length === 0) {
+            console.warn('[microlessons] Supabase returned empty data for filters:', { subject, level });
+          } else {
             paginatedLessons = data.map(mapSupabaseRow);
           }
         } catch (err) {

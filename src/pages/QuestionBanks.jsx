@@ -91,7 +91,7 @@ export default function QuestionBanks() {
               <div>
                 <p className="text-green-200 text-sm">Total QCM</p>
                 <p className="text-4xl font-bold text-white">
-                  {banks.filter(b => b.type === 'QCM').reduce((sum, b) => sum + (b.total_questions || 0), 0)}
+                  {banks.filter(b => b.type === 'QCM').reduce((sum, b) => sum + (b.totalQuestions || 0), 0)}
                 </p>
               </div>
               <Target className="h-12 w-12 text-green-400" />
@@ -103,7 +103,7 @@ export default function QuestionBanks() {
               <div>
                 <p className="text-purple-200 text-sm">Exercices</p>
                 <p className="text-4xl font-bold text-white">
-                  {banks.filter(b => b.type === 'Exercices').reduce((sum, b) => sum + (b.total_questions || 0), 0)}
+                  {banks.filter(b => b.type === 'Exercices').reduce((sum, b) => sum + (b.totalQuestions || 0), 0)}
                 </p>
               </div>
               <Zap className="h-12 w-12 text-purple-400" />
@@ -115,7 +115,7 @@ export default function QuestionBanks() {
               <div>
                 <p className="text-yellow-200 text-sm">Total</p>
                 <p className="text-4xl font-bold text-white">
-                  {banks.reduce((sum, b) => sum + (b.total_questions || 0), 0)}
+                  {banks.reduce((sum, b) => sum + (b.totalQuestions || 0), 0)}
                 </p>
               </div>
               <Trophy className="h-12 w-12 text-yellow-400" />
@@ -193,7 +193,7 @@ export default function QuestionBanks() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Target className="h-4 w-4" />
-                  <span>{bank.total_questions} questions</span>
+                  <span>{bank.totalQuestions} questions</span>
                 </div>
               </div>
               
