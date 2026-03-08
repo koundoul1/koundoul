@@ -10,6 +10,7 @@
     "migrate:dev": "npx prisma migrate dev",
     "migrate:status": "npx prisma migrate status",
     "check-migrations": "node scripts/check-migrations.js",
+    "seed": "node src/seeds/seedAll.js",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [

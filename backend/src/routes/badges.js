@@ -2,63 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const prisma = require('../config/database');
-
-// Badges prédéfinis
-const PREDEFINED_BADGES = [
-  {
-    name: 'Premier Pas',
-    description: 'Compléter votre première leçon',
-    icon: '🎯',
-    condition: 'complete_lesson:1',
-    points: 50
-  },
-  {
-    name: 'Étudiant Assidu',
-    description: 'Compléter 10 leçons',
-    icon: '📚',
-    condition: 'complete_lesson:10',
-    points: 100
-  },
-  {
-    name: 'Maître des Quiz',
-    description: 'Réussir 5 quiz',
-    icon: '🏆',
-    condition: 'complete_quiz:5',
-    points: 100
-  },
-  {
-    name: 'Série de 7',
-    description: 'Maintenir une série de 7 jours',
-    icon: '🔥',
-    condition: 'streak:7',
-    points: 75
-  },
-  {
-    name: 'Niveau 5',
-    description: 'Atteindre le niveau 5',
-    icon: '⭐',
-    condition: 'level:5',
-    points: 150
-  }
-];
-
-// Initialize badges in database
-async function initializeBadges() {
-  for (const badge of PREDEFINED_BADGES) {
-    await prisma.badge.upsert({
-      where: { name: badge.name },
-      update: {},
-      create: badge
-    });
-  }
-}
+const { getSupabase, isSupabaseConfigured } = require('../config/supabase');
 
 // Get all badges
 router.get('/all', optionalAuth, async (req, res, next) => {
   try {
     const userId = req.user?.userId;
-
-    await initializeBadges();
 
     const allBadges = await prisma.badge.findMany({
       orderBy: { name: 'asc' }
@@ -94,8 +43,6 @@ router.get('/', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
-    await initializeBadges();
-
     const userBadges = await prisma.userBadge.findMany({
       where: { userId },
       include: {
@@ -125,8 +72,6 @@ router.get('/stats', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
-    await initializeBadges();
-
     const [total, unlocked] = await Promise.all([
       prisma.badge.count(),
       prisma.userBadge.count({
@@ -149,12 +94,44 @@ router.get('/stats', authenticateToken, async (req, res, next) => {
   }
 });
 
+/**
+ * Helper: get count of user's completed microlessons matching a Supabase filter.
+ * Returns the count, or 0 if Supabase is not configured.
+ */
+async function getFilteredLessonCount(userId, filterField, filterValue) {
+  // Get all completed lesson IDs from Prisma
+  const completions = await prisma.microLessonCompletion.findMany({
+    where: { userId, completed: true },
+    select: { lessonId: true }
+  });
+
+  if (completions.length === 0) return 0;
+
+  const lessonIds = completions.map(c => c.lessonId);
+
+  if (!isSupabaseConfigured()) return 0;
+
+  const supabase = getSupabase();
+  if (!supabase) return 0;
+
+  const { count, error } = await supabase
+    .from('microlessons')
+    .select('id', { count: 'exact', head: true })
+    .in('id', lessonIds)
+    .eq(filterField, filterValue);
+
+  if (error) {
+    console.error(`[Badges] Supabase query error (${filterField}=${filterValue}):`, error.message);
+    return 0;
+  }
+
+  return count || 0;
+}
+
 // Check badges (trigger badge check)
 router.post('/check', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
-
-    await initializeBadges();
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -169,55 +146,86 @@ router.post('/check', authenticateToken, async (req, res, next) => {
       return res.status(404).json({ error: 'Utilisateur non trouvé' });
     }
 
-    const unlockedBadgeNames = user.badges.map(ub => ub.badge.name);
+    const unlockedBadgeIds = new Set(user.badges.map(ub => ub.badge.id));
+
+    // Load all active badges from DB
+    const allBadges = await prisma.badge.findMany({
+      where: { isActive: true }
+    });
+
     const newlyUnlocked = [];
 
-    for (const badge of PREDEFINED_BADGES) {
-      if (unlockedBadgeNames.includes(badge.name)) continue;
+    for (const badge of allBadges) {
+      if (unlockedBadgeIds.has(badge.id)) continue;
 
       let shouldUnlock = false;
+      const condition = badge.condition;
 
-      if (badge.condition.startsWith('complete_lesson:')) {
-        const count = parseInt(badge.condition.split(':')[1]);
+      if (condition.startsWith('complete_lesson:')) {
+        const count = parseInt(condition.split(':')[1]);
         const completions = await prisma.microLessonCompletion.count({
           where: { userId, completed: true }
         });
         shouldUnlock = completions >= count;
-      } else if (badge.condition.startsWith('complete_quiz:')) {
-        const count = parseInt(badge.condition.split(':')[1]);
+
+      } else if (condition.startsWith('complete_quiz:')) {
+        const count = parseInt(condition.split(':')[1]);
         const attempts = await prisma.quizAttempt.count({
           where: { userId, completedAt: { not: null } }
         });
         shouldUnlock = attempts >= count;
-      } else if (badge.condition.startsWith('streak:')) {
-        const days = parseInt(badge.condition.split(':')[1]);
+
+      } else if (condition.startsWith('streak:')) {
+        const days = parseInt(condition.split(':')[1]);
         shouldUnlock = (user.streak || 0) >= days;
-      } else if (badge.condition.startsWith('level:')) {
-        const level = parseInt(badge.condition.split(':')[1]);
+
+      } else if (condition.startsWith('level:')) {
+        const level = parseInt(condition.split(':')[1]);
         shouldUnlock = user.level >= level;
+
+      } else if (condition.startsWith('subject:')) {
+        // Format: subject:SubjectName:N
+        const parts = condition.split(':');
+        const subjectName = parts[1];
+        const count = parseInt(parts[2]);
+        const completed = await getFilteredLessonCount(userId, 'subject', subjectName);
+        shouldUnlock = completed >= count;
+
+      } else if (condition.startsWith('level_mastery:')) {
+        // Format: level_mastery:LevelName:N
+        const parts = condition.split(':');
+        const levelName = parts[1];
+        const count = parseInt(parts[2]);
+        const completed = await getFilteredLessonCount(userId, 'level', levelName);
+        shouldUnlock = completed >= count;
+
+      } else if (condition.startsWith('perfect_quiz:')) {
+        const count = parseInt(condition.split(':')[1]);
+        const perfectQuizzes = await prisma.quizAttempt.count({
+          where: { userId, score: 100, completedAt: { not: null } }
+        });
+        shouldUnlock = perfectQuizzes >= count;
       }
 
       if (shouldUnlock) {
-        // Find the badge by name to get its DB id
-        const dbBadge = await prisma.badge.findUnique({
-          where: { name: badge.name }
+        await prisma.userBadge.create({
+          data: {
+            userId,
+            badgeId: badge.id
+          }
         });
 
-        if (dbBadge) {
-          await prisma.userBadge.create({
-            data: {
-              userId,
-              badgeId: dbBadge.id
-            }
-          });
+        await prisma.user.update({
+          where: { id: userId },
+          data: { xp: { increment: badge.points || 50 } }
+        });
 
-          await prisma.user.update({
-            where: { id: userId },
-            data: { xp: { increment: badge.points || 50 } }
-          });
-
-          newlyUnlocked.push(badge);
-        }
+        newlyUnlocked.push({
+          name: badge.name,
+          description: badge.description,
+          icon: badge.icon,
+          points: badge.points
+        });
       }
     }
 
