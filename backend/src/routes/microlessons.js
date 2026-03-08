@@ -30,7 +30,7 @@ router.get('/', optionalAuth, async (req, res, next) => {
   try {
     const { subject, level, limit = 1000, offset = 0 } = req.query;
     const userId = req.user?.userId;
-    const limitNum = Math.min(Number(limit) || 1000, 500);
+    const limitNum = Math.min(Number(limit) || 1000, 1000);
     const offsetNum = Math.max(0, Number(offset) || 0);
 
     let paginatedLessons = [];
