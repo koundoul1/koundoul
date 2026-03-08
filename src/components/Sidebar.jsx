@@ -1,6 +1,6 @@
 /**
  * Sidebar — Desktop only (hidden on mobile <768px)
- * Fixed 240px sidebar with logo, nav items, user card
+ * Fixed 240px sidebar with logo, all app modules, user card
  */
 
 import React from 'react'
@@ -18,7 +18,17 @@ import {
   BookMarked,
   Award,
   BarChart3,
-  Settings
+  Settings,
+  Dumbbell,
+  Lightbulb,
+  Eye,
+  Bot,
+  BookOpenCheck,
+  CreditCard,
+  Shield,
+  ShieldCheck,
+  Sparkles,
+  Star
 } from 'lucide-react'
 
 const Sidebar = () => {
@@ -28,33 +38,103 @@ const Sidebar = () => {
 
   const isActive = (path) => {
     if (path === '/') return location.pathname === '/'
-    return location.pathname.startsWith(path)
+    return location.pathname === path || location.pathname.startsWith(path + '/')
   }
 
+  // ── Section: Principal ──
   const mainNav = [
-    { name: t('nav.home'), href: '/', icon: Home, protected: false },
-    { name: t('nav.courses'), href: '/courses', icon: BookOpen, protected: true },
-    { name: t('dashboard.actions.microLessons') || 'Leçons', href: '/micro-lessons', icon: BookMarked, protected: true },
-    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain, protected: true },
-    { name: 'Quiz', href: '/quiz', icon: Zap, protected: true },
-    { name: t('nav.defi'), href: '/challenge', icon: Trophy, protected: true },
+    { name: t('nav.home'), href: '/', icon: Home, auth: false },
+    { name: 'Dashboard', href: '/dashboard', icon: BarChart3, auth: true },
+    { name: t('nav.courses'), href: '/courses', icon: BookOpen, auth: true },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked, auth: true },
   ]
 
-  const secondaryNav = [
-    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, protected: true },
-    { name: 'Flashcards', href: '/flashcards', icon: BarChart3, protected: true },
-    { name: 'Forum', href: '/forum', icon: MessageSquare, protected: false },
+  // ── Section: Outils ──
+  const toolsNav = [
+    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain, auth: true },
+    { name: 'Quiz', href: '/quiz', icon: Zap, auth: true },
+    { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy, auth: true },
+    { name: 'Exercices', href: '/exercices', icon: Dumbbell, auth: true },
+    { name: 'Défi Smart', href: '/defi', icon: Sparkles, auth: true },
   ]
 
-  const visibleMain = mainNav.filter(item => !item.protected || isAuthenticated)
-  const visibleSecondary = secondaryNav.filter(item => !item.protected || isAuthenticated)
+  // ── Section: Apprentissage ──
+  const learnNav = [
+    { name: 'Coach Virtuel', href: '/coach', icon: Bot, auth: true },
+    { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, auth: true },
+    { name: 'Ressources', href: '/resources', icon: Lightbulb, auth: true },
+    { name: 'Visualisations', href: '/visualizations', icon: Eye, auth: true },
+  ]
+
+  // ── Section: Communauté ──
+  const communityNav = [
+    { name: 'Forum', href: '/forum', icon: MessageSquare, auth: false },
+    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, auth: true },
+  ]
+
+  // ── Section: Compte ──
+  const accountNav = [
+    { name: t('nav.profile') || 'Profil', href: '/profile', icon: User, auth: true },
+    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, auth: true },
+    { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield, auth: true },
+  ]
+
+  // ── Section: Admin (visible only to admin) ──
+  const adminNav = [
+    { name: 'Admin', href: '/admin', icon: ShieldCheck, auth: true, adminOnly: true },
+  ]
+
+  const filterItems = (items) =>
+    items.filter(item => {
+      if (item.adminOnly && user?.role !== 'admin') return false
+      if (item.auth && !isAuthenticated) return false
+      return true
+    })
+
+  const renderSection = (label, items) => {
+    const visible = filterItems(items)
+    if (visible.length === 0) return null
+    return (
+      <div>
+        <div className="px-3 mb-1 mt-4 first:mt-0">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-white/25">{label}</span>
+        </div>
+        <div className="space-y-0.5">
+          {visible.map((item) => {
+            const active = isActive(item.href)
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={`
+                  flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] font-medium
+                  transition-all duration-200
+                  ${active
+                    ? 'text-kprimary'
+                    : 'text-white/50 hover:text-white/80 hover:bg-white/5'
+                  }
+                `}
+                style={active ? { background: 'rgba(108,99,255,0.15)' } : {}}
+              >
+                <item.icon className="w-[18px] h-[18px] flex-shrink-0" />
+                <span className="truncate">{item.name}</span>
+                {active && (
+                  <div className="ml-auto w-1.5 h-1.5 rounded-full bg-kprimary flex-shrink-0"></div>
+                )}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <aside className="hidden md:flex fixed top-0 left-0 bottom-0 w-60 flex-col z-40"
       style={{ background: '#0F0F1E' }}
     >
       {/* Logo */}
-      <div className="p-5 pb-3">
+      <div className="p-5 pb-2">
         <Link to="/" className="flex items-center space-x-3 group">
           <div className="w-10 h-10 bg-gradient-to-br from-kprimary to-ksecondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-kprimary/30">
             <span className="text-white font-black text-lg">K</span>
@@ -65,62 +145,14 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      {/* Main navigation */}
-      <nav className="flex-1 px-3 py-2 overflow-y-auto scrollbar-hide">
-        <div className="space-y-1">
-          {visibleMain.map((item) => {
-            const active = isActive(item.href)
-            return (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
-                  transition-all duration-200
-                  ${active
-                    ? 'text-kprimary'
-                    : 'text-white/50 hover:text-white/80 hover:bg-white/5'
-                  }
-                `}
-                style={active ? { background: 'rgba(108,99,255,0.15)' } : {}}
-              >
-                <item.icon className="w-5 h-5 flex-shrink-0" />
-                <span>{item.name}</span>
-                {active && (
-                  <div className="ml-auto w-1.5 h-1.5 rounded-full bg-kprimary"></div>
-                )}
-              </Link>
-            )
-          })}
-        </div>
-
-        {/* Divider */}
-        <div className="my-4 mx-3 border-t border-white/5"></div>
-
-        {/* Secondary nav */}
-        <div className="space-y-1">
-          {visibleSecondary.map((item) => {
-            const active = isActive(item.href)
-            return (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
-                  transition-all duration-200
-                  ${active
-                    ? 'text-kprimary'
-                    : 'text-white/50 hover:text-white/80 hover:bg-white/5'
-                  }
-                `}
-                style={active ? { background: 'rgba(108,99,255,0.15)' } : {}}
-              >
-                <item.icon className="w-5 h-5 flex-shrink-0" />
-                <span>{item.name}</span>
-              </Link>
-            )
-          })}
-        </div>
+      {/* Navigation sections */}
+      <nav className="flex-1 px-2 py-1 overflow-y-auto scrollbar-hide">
+        {renderSection('Navigation', mainNav)}
+        {renderSection('Outils', toolsNav)}
+        {renderSection('Apprentissage', learnNav)}
+        {renderSection('Communauté', communityNav)}
+        {renderSection('Compte', accountNav)}
+        {renderSection('Administration', adminNav)}
       </nav>
 
       {/* User card at bottom */}
@@ -128,7 +160,7 @@ const Sidebar = () => {
         <div className="p-3 border-t border-white/5">
           <Link
             to="/profile"
-            className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group"
+            className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-colors group"
           >
             <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-kprimary to-ksecondary flex items-center justify-center flex-shrink-0">
               <span className="text-white font-bold text-sm">
@@ -139,8 +171,9 @@ const Sidebar = () => {
               <div className="text-sm font-semibold text-white truncate">
                 {user.firstName || user.email}
               </div>
-              <div className="text-xs text-white/40 truncate">
-                {t('dashboard.level')} {user.level || 1}
+              <div className="text-[11px] text-white/40 flex items-center gap-1">
+                <Star className="w-3 h-3 text-yellow-500" />
+                {user.xp?.toLocaleString() || 0} XP
               </div>
             </div>
             <Settings className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors flex-shrink-0" />
