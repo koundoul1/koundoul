@@ -27,7 +27,12 @@ import {
   Loader2,
   CreditCard,
   Clock,
-  Settings
+  Settings,
+  UserPlus,
+  Link2,
+  Unlink,
+  Copy,
+  Users
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -55,6 +60,11 @@ const Profile = () => {
   const [invitationCode, setInvitationCode] = useState(null)
   const [profileData, setProfileData] = useState(null)
   const [generatingCode, setGeneratingCode] = useState(false)
+  const [parentCode, setParentCode] = useState('')
+  const [linkingToParent, setLinkingToParent] = useState(false)
+  const [linkedParent, setLinkedParent] = useState(null)
+  const [parentChildren, setParentChildren] = useState([])
+  const [unlinkingChild, setUnlinkingChild] = useState(null)
 
   // Initialiser les données du formulaire
   useEffect(() => {
@@ -71,20 +81,106 @@ const Profile = () => {
   useEffect(() => {
     loadUserStats()
     loadProfileData()
+    loadParentData()
   }, [])
   
   const loadProfileData = async () => {
     try {
       const response = await api.user.getProfile()
-      if (response.data.success) {
-        setProfileData(response.data.data)
-        setInvitationCode(response.data.data.invitationCode)
+      const data = response.data?.data || response.data || response
+      if (data) {
+        setProfileData(data)
+        setInvitationCode(data.invitationCode)
+        if (data.parentId) {
+          setLinkedParent(data.parentId)
+        }
       }
     } catch (error) {
       console.error('Erreur chargement profil:', error)
     }
   }
   
+
+  const loadParentData = async () => {
+    try {
+      // Charger les enfants liés (si parent)
+      const childrenRes = await api.parent.getChildren()
+      if (childrenRes.success || childrenRes.data?.success) {
+        setParentChildren(childrenRes.data?.data || childrenRes.data || [])
+      }
+    } catch (err) {
+      // Pas un parent ou pas de children, c'est normal
+    }
+  }
+
+  const handleLinkToParent = async () => {
+    if (!parentCode || parentCode.length !== 8) {
+      setError('Le code doit contenir 8 caractères')
+      setTimeout(() => setError(''), 3000)
+      return
+    }
+    setLinkingToParent(true)
+    setError('')
+    try {
+      const res = await api.parent.linkToParent(parentCode.toUpperCase())
+      if (res.success || res.data?.success) {
+        const data = res.data?.data || res.data || res
+        setLinkedParent(data.parentName || 'Parent')
+        setSuccess('Lien parent-enfant établi avec succès !')
+        setParentCode('')
+        setTimeout(() => setSuccess(''), 3000)
+      }
+    } catch (err) {
+      setError(err.message || 'Code invalide ou expiré')
+      setTimeout(() => setError(''), 3000)
+    } finally {
+      setLinkingToParent(false)
+    }
+  }
+
+  const handleUnlinkSelf = async () => {
+    try {
+      await api.parent.unlinkSelf()
+      setLinkedParent(null)
+      setSuccess('Vous avez été délié de votre parent')
+      setTimeout(() => setSuccess(''), 3000)
+    } catch (err) {
+      setError(err.message || 'Erreur lors de la suppression du lien')
+      setTimeout(() => setError(''), 3000)
+    }
+  }
+
+  const handleUnlinkChild = async (childId) => {
+    setUnlinkingChild(childId)
+    try {
+      await api.parent.unlinkChild(childId)
+      setParentChildren(prev => prev.filter(c => c.id !== childId))
+      setSuccess('Enfant délié avec succès')
+      setTimeout(() => setSuccess(''), 3000)
+    } catch (err) {
+      setError(err.message || 'Erreur lors de la suppression du lien')
+      setTimeout(() => setError(''), 3000)
+    } finally {
+      setUnlinkingChild(null)
+    }
+  }
+
+  const handleGenerateParentCode = async () => {
+    setGeneratingCode(true)
+    setError('')
+    try {
+      const res = await api.parent.generateInvite()
+      const data = res.data?.data || res.data || res
+      setInvitationCode(data.invitationCode)
+      setSuccess('Code d\'invitation généré !')
+      setTimeout(() => setSuccess(''), 3000)
+    } catch (err) {
+      setError(err.message || 'Erreur lors de la génération du code')
+      setTimeout(() => setError(''), 3000)
+    } finally {
+      setGeneratingCode(false)
+    }
+  }
 
   const loadUserStats = async () => {
     try {
@@ -462,84 +558,162 @@ const Profile = () => {
 
           {/* Sidebar - Statistiques */}
           <div className="lg:col-span-1">
-            {/* Dashboard Parents */}
+            {/* Espace Parents — Mode Parent */}
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-sm border border-blue-200 mb-6">
               <div className="p-6">
                 <div className="flex items-center mb-3">
                   <Shield className="h-6 w-6 text-blue-600 mr-2" />
-                  <h3 className="text-lg font-semibold text-gray-900">Espace Parents</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Espace Parent</h3>
                 </div>
-                <p className="text-sm text-gray-800 mb-4 font-medium">
-                  Partagez votre code d'invitation avec vos parents pour qu'ils puissent suivre votre progression.
+                <p className="text-sm text-gray-600 mb-4">
+                  Générez un code pour que vos enfants se lient à votre compte et suivez leur progression.
                 </p>
-                
-                {/* Code d'invitation */}
+
+                {/* Générer / Afficher code parent */}
                 <div className="mb-4 p-4 bg-white rounded-lg border-2 border-blue-300">
                   {invitationCode ? (
                     <div>
-                      <label className="block text-xs font-semibold text-gray-700 mb-2">
-                        Code d'invitation pour les parents
+                      <label className="block text-xs font-semibold text-gray-700 mb-1">
+                        Votre code d'invitation
                       </label>
-                      <p className="text-xs text-gray-600 mb-3">
-                        Partagez ce code avec vos parents. Ils pourront l'utiliser pour se connecter et suivre votre progression.
+                      <p className="text-xs text-gray-500 mb-3">
+                        Partagez ce code avec vos enfants. Ils pourront l'entrer dans leur profil pour se lier.
                       </p>
                       <div className="flex items-center space-x-2">
-                        <code className="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-lg font-bold text-gray-900 text-center">
+                        <code className="flex-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded font-mono text-lg font-bold text-gray-900 text-center tracking-widest">
                           {invitationCode}
                         </code>
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(invitationCode)
-                            setSuccess('Code copié dans le presse-papiers !')
+                            setSuccess('Code copié !')
                             setTimeout(() => setSuccess(''), 2000)
                           }}
-                          className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium"
+                          className="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                          title="Copier le code"
                         >
-                          Copier
+                          <Copy className="h-4 w-4" />
                         </button>
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-4">
-                      <p className="text-sm text-gray-700 font-medium mb-3">
-                        Aucun code d'invitation généré pour le moment.
-                      </p>
+                    <div className="text-center py-2">
                       <button
-                        onClick={async () => {
-                          setGeneratingCode(true)
-                          setError('')
-                          try {
-                            const res = await api.user.generateInvitationCode()
-                            setInvitationCode(res.invitationCode || res.invitation_code || res.code)
-                          } catch (err) {
-                            setError(err.message || 'Erreur lors de la génération du code')
-                          } finally {
-                            setGeneratingCode(false)
-                          }
-                        }}
+                        onClick={handleGenerateParentCode}
                         disabled={generatingCode}
                         className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
                       >
                         {generatingCode ? (
-                          <>
-                            <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                            Génération...
-                          </>
+                          <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Génération...</>
                         ) : (
-                          'Générer mon code'
+                          <><UserPlus className="h-4 w-4 mr-2" /> Générer mon code parent</>
                         )}
                       </button>
                     </div>
                   )}
                 </div>
-                
+
+                {/* Liste des enfants liés */}
+                {parentChildren.length > 0 && (
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+                      <Users className="h-4 w-4 mr-1" /> Enfants liés ({parentChildren.length}/5)
+                    </h4>
+                    <div className="space-y-2">
+                      {parentChildren.map(child => (
+                        <div key={child.id} className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-gray-900">
+                              {child.firstName || ''} {child.lastName || child.email}
+                            </p>
+                            <div className="flex items-center gap-3 text-xs text-gray-500 mt-1">
+                              <span>{child.xp || 0} XP</span>
+                              <span>Nv. {child.level || 1}</span>
+                              <span>{child.streak || 0}j streak</span>
+                              {child.lessonsCompleted !== undefined && (
+                                <span>{child.lessonsCompleted} leçons</span>
+                              )}
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => handleUnlinkChild(child.id)}
+                            disabled={unlinkingChild === child.id}
+                            className="ml-2 p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                            title="Délier cet enfant"
+                          >
+                            {unlinkingChild === child.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Unlink className="h-4 w-4" />
+                            )}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <Link
                   to="/parent-dashboard"
-                  className="flex items-center justify-center px-4 py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+                  className="flex items-center justify-center px-4 py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm"
                 >
                   <Shield className="h-4 w-4 mr-2" />
-                  Accéder au Dashboard Parents
+                  Dashboard Parents
                 </Link>
+              </div>
+            </div>
+
+            {/* Espace Enfant — Se lier à un parent */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-sm border border-green-200 mb-6">
+              <div className="p-6">
+                <div className="flex items-center mb-3">
+                  <Link2 className="h-6 w-6 text-green-600 mr-2" />
+                  <h3 className="text-lg font-semibold text-gray-900">Lien Parent</h3>
+                </div>
+
+                {linkedParent ? (
+                  <div className="p-4 bg-white rounded-lg border-2 border-green-300">
+                    <p className="text-sm text-gray-700 mb-2">
+                      Vous êtes lié à : <strong className="text-green-700">{linkedParent}</strong>
+                    </p>
+                    <p className="text-xs text-gray-500 mb-3">
+                      Votre parent peut suivre votre progression, vos leçons et vos quiz.
+                    </p>
+                    <button
+                      onClick={handleUnlinkSelf}
+                      className="px-3 py-1.5 text-red-600 border border-red-300 rounded hover:bg-red-50 transition-colors text-xs font-medium flex items-center"
+                    >
+                      <Unlink className="h-3 w-3 mr-1" /> Se délier
+                    </button>
+                  </div>
+                ) : (
+                  <div className="p-4 bg-white rounded-lg border-2 border-green-300">
+                    <p className="text-sm text-gray-600 mb-3">
+                      Entrez le code de votre parent pour qu'il puisse suivre votre progression.
+                    </p>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        value={parentCode}
+                        onChange={(e) => setParentCode(e.target.value.toUpperCase().slice(0, 8))}
+                        placeholder="CODE8CAR"
+                        maxLength={8}
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded font-mono text-center text-lg tracking-widest uppercase bg-white text-gray-900"
+                      />
+                      <button
+                        onClick={handleLinkToParent}
+                        disabled={linkingToParent || parentCode.length !== 8}
+                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm font-medium disabled:opacity-50 flex items-center"
+                      >
+                        {linkingToParent ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <><Link2 className="h-4 w-4 mr-1" /> Lier</>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 

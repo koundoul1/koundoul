@@ -535,7 +535,15 @@ const api = {
 
   // 👨‍👩‍👧‍👦 PARENT DASHBOARD
   parent: {
+    generateInvite: () => request('/parent/invite', { method: 'POST' }),
+    linkToParent: (code) => request('/parent/link', {
+      method: 'POST',
+      body: JSON.stringify({ code }),
+    }),
+    unlinkChild: (childId) => request(`/parent/unlink/${childId}`, { method: 'DELETE' }),
+    unlinkSelf: () => request('/parent/unlink-self', { method: 'DELETE' }),
     getChildren: () => request('/parent/children'),
+    getChildStats: (childId, timeRange = 'week') => request(`/parent/child/${childId}/stats?timeRange=${timeRange}`),
     getDashboard: (childId, timeRange = 'week') => request(`/parent/dashboard/${childId}?timeRange=${timeRange}`),
     getNotifications: (childId) => request(`/parent/notifications/${childId}`),
     updateNotificationLevel: (childId, level) => request(`/parent/notifications/${childId}`, {

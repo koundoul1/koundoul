@@ -18,6 +18,9 @@ router.get('/profile', authenticateToken, async (req, res, next) => {
         level: true,
         streak: true,
         invitationCode: true,
+        parentId: true,
+        parentInvitationCode: true,
+        isParent: true,
         createdAt: true,
         updatedAt: true
       }
