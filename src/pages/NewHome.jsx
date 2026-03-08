@@ -32,8 +32,8 @@ const NewHome = () => {
   const features = [
     {
       icon: <Brain className="w-8 h-8" />,
-      title: t('newHome.features.ai.title'),
-      desc: t('newHome.features.ai.desc'),
+      title: t('newHome.features.solver.title'),
+      desc: t('newHome.features.solver.desc'),
       gradient: "from-blue-500 to-purple-500"
     },
     {

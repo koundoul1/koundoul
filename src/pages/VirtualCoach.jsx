@@ -183,7 +183,7 @@ const VirtualCoach = () => {
       const problem = inputMode === 'text' ? problemText.trim() : 'Problème depuis image';
       
       // Utiliser l'API solver pour résolution intégrale complète
-      // Domain et level seront détectés automatiquement par Gemini IA
+      // Domain et level seront détectés automatiquement
       const response = await api.solver.solve({
         input: problem,
         domain: 'general', // Détection automatique par l'IA

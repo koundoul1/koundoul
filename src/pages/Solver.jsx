@@ -1,6 +1,6 @@
 /**
  * 🧠 Module de Résolution Koundoul
- * Interface pour résoudre des problèmes scientifiques avec l'IA
+ * Interface pour résoudre des problèmes scientifiques
  */
 
 import React, { useState, useEffect } from 'react'

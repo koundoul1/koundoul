@@ -21,7 +21,7 @@ const request = async (url, options = {}) => {
   }
 
   try {
-    // Timeout augmenté pour les appels IA qui peuvent être longs
+    // Timeout augmenté pour les appels de résolution qui peuvent être longs
     const timeout = url.includes('/solver') || url.includes('/coach') ? 120000 : 30000; // 2 min pour solver, 30s pour autres
     
     const controller = new AbortController();

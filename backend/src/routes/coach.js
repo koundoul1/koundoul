@@ -13,8 +13,8 @@ router.post('/analyze', authenticateToken, async (req, res, next) => {
       return res.status(400).json({ error: 'Image ou texte requis' });
     }
 
-    // Placeholder pour l'analyse IA
-    // Ici vous intégrerez votre service de vision/OCR + IA
+    // Placeholder pour l'analyse
+    // Ici vous intégrerez votre service de vision/OCR
     const analysis = {
       equation: text || 'Équation détectée depuis l\'image',
       steps: [],
@@ -73,8 +73,8 @@ router.post('/steps/validate', authenticateToken, async (req, res, next) => {
       return res.status(400).json({ error: 'Session déjà complétée' });
     }
 
-    // Placeholder - valider avec IA
-    const isValid = true; // À implémenter avec IA
+    // Placeholder - valider la réponse
+    const isValid = true; // À implémenter
     const feedback = 'Bonne réponse !';
 
     // Mettre à jour la session
@@ -106,8 +106,8 @@ router.post('/steps/hint', authenticateToken, async (req, res, next) => {
       return res.status(404).json({ error: 'Session non trouvée' });
     }
 
-    // Placeholder - générer indice avec IA
-    const hint = 'Indice généré par l\'IA selon le niveau';
+    // Placeholder - générer indice
+    const hint = 'Indice adapté selon le niveau';
 
     res.json({ success: true, data: { hint } });
   } catch (error) {

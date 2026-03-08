@@ -20,7 +20,7 @@ router.post('/solve', authenticateToken, async (req, res, next) => {
         { step: 3, description: 'Résoudre étape par étape', content: 'Effectuer les calculs nécessaires de manière progressive.' },
         { step: 4, description: 'Vérifier la solution', content: 'S\'assurer que la réponse est cohérente et complète.' }
       ],
-      answer: 'Solution à calculer avec l\'IA',
+      answer: 'Solution à calculer',
       explanation: 'Explication détaillée de la méthode utilisée et des étapes de résolution.'
     };
 

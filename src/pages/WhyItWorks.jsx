@@ -15,9 +15,9 @@ const WhyItWorks = () => {
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold mb-4">🤖 Intelligence Artificielle</h2>
+          <h2 className="text-2xl font-bold mb-4">🎯 Parcours Personnalisé</h2>
           <p className="text-gray-700">
-            Notre IA analyse vos forces et faiblesses pour vous proposer un parcours 
+            Koundoul analyse vos forces et faiblesses pour vous proposer un parcours
             personnalisé et adapté à votre niveau.
           </p>
         </div>

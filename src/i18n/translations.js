@@ -80,8 +80,8 @@ export default {
       mainFeaturesSubtitle: 'Une plateforme complète avec des outils pédagogiques innovants pour exceller en sciences',
       mainFeatures: {
         solver: {
-          title: 'Résolveur IA Intelligent',
-          desc: 'Résolvez vos problèmes avec l\'IA. Mode guidé avec indices progressifs et espace de travail personnalisé',
+          title: 'Résolveur Intelligent',
+          desc: 'Résolvez vos problèmes pas à pas. Mode guidé avec indices progressifs et espace de travail personnalisé',
           badge: 'RÉVOLUTIONNAIRE'
         },
         microLessons: {
@@ -111,12 +111,12 @@ export default {
         }
       },
       advancedFeaturesTitle: 'Technologies de Pointe Pour Votre Apprentissage',
-      advancedFeaturesSubtitle: 'IA, personnalisation cognitive, analyse d\'erreurs et bien plus encore',
+      advancedFeaturesSubtitle: 'Personnalisation cognitive, analyse d\'erreurs et bien plus encore',
       advancedFeatures: {
         learningProfiles: {
           title: 'Profils d\'Apprentissage',
           desc: '4 profils cognitifs (Visuel, Auditif, Kinesthésique, Équilibré) pour adapter les explications',
-          badge: 'IA'
+          badge: 'ADAPTATIF'
         },
         hints: {
           title: 'Système de Hints',
@@ -182,13 +182,13 @@ export default {
         footer: 'Programme officiel Seconde, Première et Terminale • Corrections pédagogiques'
       },
       solverSection: {
-        badge: 'INTELLIGENCE ARTIFICIELLE',
-        title: 'Résolveur IA avec Mode Guidé Révolutionnaire',
-        subtitle: 'Résolvez vos problèmes avec l\'IA la plus avancée. Le mode guidé vous accompagne étape par étape avec des indices progressifs, un espace de travail et une analyse intelligente de vos erreurs.',
+        badge: 'RÉSOLUTION GUIDÉE',
+        title: 'Résolveur avec Mode Guidé Révolutionnaire',
+        subtitle: 'Résolvez vos problèmes efficacement. Le mode guidé vous accompagne étape par étape avec des indices progressifs, un espace de travail et une analyse intelligente de vos erreurs.',
         points: {
           profiles: {
             title: '4 Profils d\'Apprentissage',
-            desc: 'Visuel, Auditif, Kinesthésique ou Équilibré - L\'IA s\'adapte à vous'
+            desc: 'Visuel, Auditif, Kinesthésique ou Équilibré - Koundoul s\'adapte à vous'
           },
           hints: {
             title: 'Indices Progressifs',
@@ -203,7 +203,7 @@ export default {
             desc: 'Visualisez les fonctions avec Plotly.js'
           }
         },
-        tryButton: 'Essayer le Résolveur IA',
+        tryButton: 'Essayer le Résolveur',
         profiles: {
           visual: { title: 'Profil Visuel', desc: 'Schémas et graphiques' },
           auditory: { title: 'Profil Auditif', desc: 'Explications verbales' },
@@ -217,7 +217,7 @@ export default {
         understand: { step: '1', title: 'Comprendre', desc: 'Explications claires des concepts fondamentaux avec 450 micro-leçons' },
         practice: { step: '2', title: 'Pratiquer', desc: 'Exercices progressifs avec corrections détaillées (1800 exercices)' },
         master: { step: '3', title: 'Maîtriser', desc: 'Tests et quiz pour valider vos connaissances avec feedback immédiat' },
-        progress: { step: '4', title: 'Progresser', desc: 'Suivi personnalisé avec dashboard, badges et recommandations IA' }
+        progress: { step: '4', title: 'Progresser', desc: 'Suivi personnalisé avec dashboard, badges et recommandations adaptées' }
       },
       testimonialsTitle: 'Des Milliers d\'Élèves Progressent Chaque Jour',
       testimonialsSubtitle: 'Découvrez comment Koundoul a transformé leur apprentissage',
@@ -225,7 +225,7 @@ export default {
         marie: {
           name: 'Marie L.',
           level: 'Terminale S',
-          text: 'Le résolveur IA avec le mode guidé m\'a sauvé la vie ! Les indices progressifs m\'ont appris à réfléchir par moi-même. J\'ai gagné 3 points en maths !'
+          text: 'Le résolveur avec le mode guidé m\'a sauvé la vie ! Les indices progressifs m\'ont appris à réfléchir par moi-même. J\'ai gagné 3 points en maths !'
         },
         lucas: {
           name: 'Lucas D.',
@@ -253,7 +253,7 @@ export default {
     newHome: {
       platformBadge: 'Nouvelle plateforme 2026',
       title: 'Réussis en Sciences',
-      titleWith: 'Avec l\'IA',
+      titleWith: 'Avec Koundoul',
       subtitle: '1800 exercices corrigés + 450 micro-leçons + Explications détaillées. Progressez à votre rythme de la Seconde à la Terminale.',
       startButton: 'Commencer Gratuitement',
       seeExercises: 'Voir les Exercices',
@@ -266,9 +266,9 @@ export default {
       features: {
         title: 'Fonctionnalités Révolutionnaires',
         subtitle: 'Tout ce dont vous avez besoin pour réussir',
-        ai: {
-          title: 'Résolveur IA Révolutionnaire',
-          desc: 'Résolvez vos problèmes avec l\'IA la plus avancée. Mode guidé avec indices progressifs.'
+        solver: {
+          title: 'Résolveur Révolutionnaire',
+          desc: 'Résolvez vos problèmes efficacement. Mode guidé avec indices progressifs.'
         },
         microLessons: {
           title: '450 Micro-Leçons',
@@ -301,7 +301,7 @@ export default {
         marie: {
           name: 'Marie L.',
           level: 'Terminale S',
-          text: 'Le résolveur IA avec le mode guidé m\'a sauvé la vie ! J\'ai gagné 3 points en maths !'
+          text: 'Le résolveur avec le mode guidé m\'a sauvé la vie ! J\'ai gagné 3 points en maths !'
         },
         lucas: {
           name: 'Lucas D.',
@@ -347,7 +347,7 @@ export default {
       },
       quickActions: 'Actions Rapides',
       actions: {
-        solver: 'Résolveur IA',
+        solver: 'Résolveur',
         challenge: 'Défi',
         microLessons: 'Micro-Leçons',
       },
@@ -625,8 +625,8 @@ export default {
       microLessonsDesc: 'Contenu complet couvrant tout le programme lycée',
       playfulLearning: 'Apprentissage Ludique',
       playfulLearningDesc: 'Gamification avec badges, XP et niveaux',
-      integratedAI: 'IA Intégrée',
-      integratedAIDesc: 'Coach virtuel et résolution de problèmes assistée',
+      integratedAI: 'Coach Koundoul',
+      integratedAIDesc: 'Coach pédagogique et résolution de problèmes assistée',
       progressTracking: 'Suivi de Progression',
       progressTrackingDesc: 'Visualisation détaillée de vos performances'
     },
@@ -834,7 +834,7 @@ export default {
         title: 'Pourquoi S\'abonner ?',
         unlimited: {
           title: 'Résolution Illimitée',
-          desc: 'Résolvez autant de problèmes que vous voulez avec l\'IA'
+          desc: 'Résolvez autant de problèmes que vous voulez'
         },
         support: {
           title: 'Support Prioritaire',
@@ -931,8 +931,8 @@ export default {
       mainFeaturesSubtitle: 'A complete platform with innovative educational tools to excel in science',
       mainFeatures: {
         solver: {
-          title: 'Intelligent AI Solver',
-          desc: 'Solve your problems with AI. Guided mode with progressive hints and personalized workspace',
+          title: 'Intelligent Solver',
+          desc: 'Solve your problems step by step. Guided mode with progressive hints and personalized workspace',
           badge: 'REVOLUTIONARY'
         },
         microLessons: {
@@ -962,12 +962,12 @@ export default {
         }
       },
       advancedFeaturesTitle: 'Cutting-Edge Technologies for Your Learning',
-      advancedFeaturesSubtitle: 'AI, cognitive personalization, error analysis and much more',
+      advancedFeaturesSubtitle: 'Cognitive personalization, error analysis and much more',
       advancedFeatures: {
         learningProfiles: {
           title: 'Learning Profiles',
           desc: '4 cognitive profiles (Visual, Auditory, Kinesthetic, Balanced) to adapt explanations',
-          badge: 'AI'
+          badge: 'ADAPTIVE'
         },
         hints: {
           title: 'Hints System',
@@ -1033,13 +1033,13 @@ export default {
         footer: 'Official 10th, 11th and 12th Grade Curriculum • Educational Corrections'
       },
       solverSection: {
-        badge: 'ARTIFICIAL INTELLIGENCE',
-        title: 'AI Solver with Revolutionary Guided Mode',
-        subtitle: 'Solve your problems with the most advanced AI. Guided mode accompanies you step by step with progressive hints, a workspace and intelligent analysis of your errors.',
+        badge: 'GUIDED SOLVING',
+        title: 'Solver with Revolutionary Guided Mode',
+        subtitle: 'Solve your problems effectively. Guided mode accompanies you step by step with progressive hints, a workspace and intelligent analysis of your errors.',
         points: {
           profiles: {
             title: '4 Learning Profiles',
-            desc: 'Visual, Auditory, Kinesthetic or Balanced - AI adapts to you'
+            desc: 'Visual, Auditory, Kinesthetic or Balanced - Koundoul adapts to you'
           },
           hints: {
             title: 'Progressive Hints',
@@ -1054,7 +1054,7 @@ export default {
             desc: 'Visualize functions with Plotly.js'
           }
         },
-        tryButton: 'Try the AI Solver',
+        tryButton: 'Try the Solver',
         profiles: {
           visual: { title: 'Visual Profile', desc: 'Diagrams and graphs' },
           auditory: { title: 'Auditory Profile', desc: 'Verbal explanations' },
@@ -1068,7 +1068,7 @@ export default {
         understand: { step: '1', title: 'Understand', desc: 'Clear explanations of fundamental concepts with 450 micro-lessons' },
         practice: { step: '2', title: 'Practice', desc: 'Progressive exercises with detailed corrections (1800 exercises)' },
         master: { step: '3', title: 'Master', desc: 'Tests and quizzes to validate your knowledge with immediate feedback' },
-        progress: { step: '4', title: 'Progress', desc: 'Personalized tracking with dashboard, badges and AI recommendations' }
+        progress: { step: '4', title: 'Progress', desc: 'Personalized tracking with dashboard, badges and tailored recommendations' }
       },
       testimonialsTitle: 'Thousands of Students Progress Every Day',
       testimonialsSubtitle: 'Discover how Koundoul transformed their learning',
@@ -1076,7 +1076,7 @@ export default {
         marie: {
           name: 'Marie L.',
           level: '12th Grade Science',
-          text: 'The AI solver with guided mode saved my life! Progressive hints taught me to think by myself. I gained 3 points in math!'
+          text: 'The solver with guided mode saved my life! Progressive hints taught me to think by myself. I gained 3 points in math!'
         },
         lucas: {
           name: 'Lucas D.',
@@ -1104,7 +1104,7 @@ export default {
     newHome: {
       platformBadge: 'New Platform 2026',
       title: 'Succeed in Science',
-      titleWith: 'With AI',
+      titleWith: 'With Koundoul',
       subtitle: '1800 solved exercises + 450 micro-lessons + Detailed explanations. Progress at your own pace from 10th to 12th grade.',
       startButton: 'Start for Free',
       seeExercises: 'View Exercises',
@@ -1117,9 +1117,9 @@ export default {
       features: {
         title: 'Revolutionary Features',
         subtitle: 'Everything you need to succeed',
-        ai: {
-          title: 'Revolutionary AI Solver',
-          desc: 'Solve your problems with the most advanced AI. Guided mode with progressive hints.'
+        solver: {
+          title: 'Revolutionary Solver',
+          desc: 'Solve your problems effectively. Guided mode with progressive hints.'
         },
         microLessons: {
           title: '450 Micro-Lessons',
@@ -1152,7 +1152,7 @@ export default {
         marie: {
           name: 'Marie L.',
           level: '12th Grade Science',
-          text: 'The AI solver with guided mode saved my life! I gained 3 points in math!'
+          text: 'The solver with guided mode saved my life! I gained 3 points in math!'
         },
         lucas: {
           name: 'Lucas D.',
@@ -1198,7 +1198,7 @@ export default {
       },
       quickActions: 'Quick Actions',
       actions: {
-        solver: 'AI Solver',
+        solver: 'Solver',
         challenge: 'Challenge',
         microLessons: 'Micro-Lessons',
       },
@@ -1477,8 +1477,8 @@ export default {
       microLessonsDesc: 'Complete content covering the entire high school curriculum',
       playfulLearning: 'Playful Learning',
       playfulLearningDesc: 'Gamification with badges, XP and levels',
-      integratedAI: 'Integrated AI',
-      integratedAIDesc: 'Virtual coach and assisted problem solving',
+      integratedAI: 'Koundoul Coach',
+      integratedAIDesc: 'Personal coach and assisted problem solving',
       progressTracking: 'Progress Tracking',
       progressTrackingDesc: 'Detailed visualization of your performance'
     },
@@ -1686,7 +1686,7 @@ export default {
         title: 'Why Subscribe?',
         unlimited: {
           title: 'Unlimited Resolution',
-          desc: 'Solve as many problems as you want with AI'
+          desc: 'Solve as many problems as you want'
         },
         support: {
           title: 'Priority Support',

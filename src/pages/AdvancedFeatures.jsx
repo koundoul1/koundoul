@@ -33,7 +33,7 @@ const AdvancedFeatures = () => {
       path: '/coach',
       color: 'from-blue-600 to-purple-600',
       highlights: [
-        'Analyse IA des exercices',
+        'Analyse personnalisée des exercices',
         'Questions guidées progressives',
         '3 niveaux d\'aide adaptatifs',
         'Validation étape par étape'
@@ -114,7 +114,7 @@ const AdvancedFeatures = () => {
       color: 'from-indigo-600 to-purple-600',
       highlights: [
         'Forum par niveau scolaire',
-        'Modération par IA + tuteurs',
+        'Modération par tuteurs',
         'Système de réputation',
         'Entraide entre pairs'
       ],
@@ -278,7 +278,7 @@ const AdvancedFeatures = () => {
           
           <div className="koundoul-card p-6 text-center">
             <div className="text-3xl font-bold text-orange-400 mb-2">24/7</div>
-            <div className="text-gray-400">Disponibilité IA</div>
+            <div className="text-gray-400">Disponibilité</div>
           </div>
         </div>
       </div>
