@@ -28,7 +28,8 @@ import {
   Shield,
   ShieldCheck,
   Sparkles,
-  Star
+  Star,
+  LogIn
 } from 'lucide-react'
 
 const Sidebar = () => {
@@ -156,7 +157,7 @@ const Sidebar = () => {
       </nav>
 
       {/* User card at bottom */}
-      {isAuthenticated && user && (
+      {isAuthenticated && user ? (
         <div className="p-3 border-t border-white/5">
           <Link
             to="/profile"
@@ -178,6 +179,25 @@ const Sidebar = () => {
             </div>
             <Settings className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors flex-shrink-0" />
           </Link>
+        </div>
+      ) : (
+        <div className="p-3 border-t border-white/5 space-y-2">
+          <Link
+            to="/login"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-kprimary hover:bg-kprimary/80 text-white text-sm font-semibold transition-colors"
+          >
+            <LogIn className="w-4 h-4" />
+            Se connecter
+          </Link>
+          <Link
+            to="/register"
+            className="flex items-center justify-center w-full py-2.5 rounded-xl border border-white/20 hover:border-white/40 text-white/70 hover:text-white text-sm font-medium transition-colors"
+          >
+            S'inscrire
+          </Link>
+          <p className="text-[10px] text-white/30 text-center">
+            Accède à 450 leçons et 1 800 exercices
+          </p>
         </div>
       )}
     </aside>

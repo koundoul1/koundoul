@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
 import {
@@ -61,8 +61,8 @@ const TopBar = () => {
 
       {/* Right side: badges + lang + notifications */}
       <div className="flex items-center gap-3">
-        {/* Streak & XP badges */}
-        {isAuthenticated && (
+        {/* Streak & XP badges (auth) / Login buttons (non-auth) */}
+        {isAuthenticated ? (
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 text-sm font-bold">
               <Flame className="w-4 h-4" />
@@ -72,6 +72,15 @@ const TopBar = () => {
               <Star className="w-4 h-4" />
               <span>{user?.xp?.toLocaleString() || 0}</span>
             </div>
+          </div>
+        ) : (
+          <div className="flex items-center gap-3">
+            <Link to="/login" className="text-sm text-white/70 hover:text-white font-medium transition-colors">
+              Connexion
+            </Link>
+            <Link to="/register" className="px-4 py-1.5 rounded-full bg-kprimary hover:bg-kprimary/80 text-white text-sm font-semibold transition-colors">
+              S'inscrire
+            </Link>
           </div>
         )}
 
