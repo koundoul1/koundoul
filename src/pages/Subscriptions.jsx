@@ -1,22 +1,19 @@
 /**
- * 💳 Page Abonnements - Gestion complète des abonnements et paiements
+ * Page Abonnements - Plans et paiement Wave Checkout
  */
 
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { 
-  Crown, 
-  Users, 
-  Zap, 
-  CheckCircle, 
-  XCircle, 
-  CreditCard,
-  ArrowRight,
+import { useNavigate } from 'react-router-dom';
+import {
+  Crown,
+  Users,
+  Zap,
+  CheckCircle,
   Sparkles,
   Shield,
   TrendingUp,
-  Calendar,
-  Loader2
+  Loader2,
+  Star
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -25,31 +22,16 @@ import { useTranslation } from '../hooks/useTranslation';
 const Subscriptions = () => {
   const { t } = useTranslation();
   const { user, isAuthenticated } = useAuth();
-  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [plans, setPlans] = useState([]);
   const [currentSubscription, setCurrentSubscription] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [processingPayment, setProcessingPayment] = useState(false);
+  const [processingPlanId, setProcessingPlanId] = useState(null);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      return;
-    }
+    if (!isAuthenticated) return;
     loadData();
   }, [isAuthenticated]);
-
-  // Vérifier le statut du paiement depuis l'URL
-  useEffect(() => {
-    const paymentStatus = searchParams.get('payment');
-    const paymentId = searchParams.get('paymentId');
-
-    if (paymentStatus === 'success' && paymentId) {
-      checkPaymentStatus(paymentId);
-    } else if (paymentStatus === 'error') {
-      alert(t('subscriptions.payment.error'));
-    }
-  }, [searchParams]);
 
   const loadData = async () => {
     try {
@@ -59,10 +41,7 @@ const Subscriptions = () => {
         api.subscriptions.getMySubscription()
       ]);
 
-      if (plansRes.success) {
-        setPlans(plansRes.data);
-      }
-
+      if (plansRes.success) setPlans(plansRes.data);
       if (subscriptionRes.success && subscriptionRes.data) {
         setCurrentSubscription(subscriptionRes.data);
       }
@@ -73,82 +52,46 @@ const Subscriptions = () => {
     }
   };
 
-  const checkPaymentStatus = async (paymentId) => {
-    try {
-      const response = await api.payments.getStatus(paymentId);
-      if (response.success && response.data.status === 'completed') {
-        await loadData();
-        alert(t('subscriptions.payment.success'));
-      }
-    } catch (error) {
-      console.error('Erreur vérification paiement:', error);
-    }
-  };
-
   const handleSubscribe = async (plan) => {
     if (!isAuthenticated) {
-      alert(t('subscriptions.loginRequired'));
+      navigate('/login');
       return;
     }
 
     try {
-      setProcessingPayment(true);
-      setSelectedPlan(plan);
+      setProcessingPlanId(plan.id);
 
-      // Créer le paiement Wave
-      const paymentResponse = await api.payments.createWavePayment({
-        planId: plan.id,
-        amount: plan.price,
-        currency: plan.currency
-      });
+      const response = await api.payments.initiateWave({ planId: plan.id });
 
-      if (paymentResponse.success && paymentResponse.data.checkoutUrl) {
-        // Rediriger vers Wave Checkout
-        window.location.href = paymentResponse.data.checkoutUrl;
+      if (response.success && response.data.wave_launch_url) {
+        window.location.href = response.data.wave_launch_url;
       } else {
-        alert(t('subscriptions.payment.createError'));
-        setProcessingPayment(false);
+        alert('Erreur lors de l\'initiation du paiement.');
+        setProcessingPlanId(null);
       }
     } catch (error) {
-      console.error('Erreur:', error);
-      alert(t('subscriptions.payment.createError'));
-      setProcessingPayment(false);
+      console.error('Erreur paiement:', error);
+      alert(error.message || 'Erreur lors du paiement.');
+      setProcessingPlanId(null);
     }
   };
 
-  const formatPrice = (amount, currency = 'XOF') => {
-    if (currency === 'XOF') {
-      return `${amount.toLocaleString('fr-FR')} FCFA`;
-    }
-    return `${(amount / 100).toFixed(2)} €`;
+  const formatPrice = (amount) => {
+    return `${Number(amount).toLocaleString('fr-FR')} FCFA`;
   };
 
   const getPlanIcon = (planName) => {
     switch (planName) {
-      case 'FREE':
-        return <Sparkles className="w-8 h-8" />;
+      case 'FREE': return <Sparkles className="w-8 h-8" />;
       case 'PREMIUM':
-      case 'PREMIUM_YEARLY':
-        return <Crown className="w-8 h-8" />;
-      case 'FAMILY':
-        return <Users className="w-8 h-8" />;
-      default:
-        return <Zap className="w-8 h-8" />;
+      case 'PREMIUM_YEARLY': return <Crown className="w-8 h-8" />;
+      case 'FAMILY': return <Users className="w-8 h-8" />;
+      default: return <Zap className="w-8 h-8" />;
     }
   };
 
-  const getPlanGradient = (planName) => {
-    switch (planName) {
-      case 'FREE':
-        return 'from-gray-500 to-gray-600';
-      case 'PREMIUM':
-      case 'PREMIUM_YEARLY':
-        return 'from-purple-500 to-pink-500';
-      case 'FAMILY':
-        return 'from-blue-500 to-cyan-500';
-      default:
-        return 'from-gray-500 to-gray-600';
-    }
+  const isRecommended = (planName) => {
+    return planName === 'PREMIUM';
   };
 
   if (loading) {
@@ -182,11 +125,9 @@ const Subscriptions = () => {
                 <h2 className="text-2xl font-bold mb-2">
                   {t('subscriptions.current.title')}
                 </h2>
-                <p className="text-lg">
-                  {currentSubscription.plan.displayName}
-                </p>
+                <p className="text-lg">{currentSubscription.plan.displayName}</p>
                 <p className="text-sm opacity-90 mt-2">
-                  {t('subscriptions.current.validUntil')} {new Date(currentSubscription.endDate).toLocaleDateString()}
+                  {t('subscriptions.current.validUntil')} {new Date(currentSubscription.endDate).toLocaleDateString('fr-FR')}
                 </p>
               </div>
               <CheckCircle className="w-12 h-12" />
@@ -201,18 +142,35 @@ const Subscriptions = () => {
           {plans.map((plan) => {
             const isCurrentPlan = currentSubscription?.planId === plan.id;
             const isFree = plan.name === 'FREE';
+            const recommended = isRecommended(plan.name);
+            const isProcessing = processingPlanId === plan.id;
 
             return (
               <div
                 key={plan.id}
-                className={`bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border-2 transition-all duration-300 ${
+                className={`relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border-2 transition-all duration-300 ${
                   isCurrentPlan
                     ? 'border-green-500 scale-105'
+                    : recommended
+                    ? 'border-[#1DC8FF] scale-105 shadow-lg shadow-[#1DC8FF]/20'
                     : 'border-white/10 hover:border-purple-500/50 hover:scale-105'
                 }`}
               >
+                {/* Badge Populaire */}
+                {recommended && !isCurrentPlan && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-[#1DC8FF] text-black text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
+                      <Star className="w-3 h-3" /> Populaire
+                    </span>
+                  </div>
+                )}
+
                 {/* Header du plan */}
-                <div className={`w-16 h-16 bg-gradient-to-br ${getPlanGradient(plan.name)} rounded-xl flex items-center justify-center mb-4 text-white`}>
+                <div className={`w-16 h-16 bg-gradient-to-br ${
+                  isFree ? 'from-gray-500 to-gray-600' :
+                  plan.name === 'FAMILY' ? 'from-blue-500 to-cyan-500' :
+                  'from-purple-500 to-pink-500'
+                } rounded-xl flex items-center justify-center mb-4 text-white`}>
                   {getPlanIcon(plan.name)}
                 </div>
 
@@ -226,10 +184,10 @@ const Subscriptions = () => {
                   ) : (
                     <>
                       <div className="text-4xl font-black text-white">
-                        {formatPrice(plan.price, plan.currency)}
+                        {formatPrice(plan.price)}
                       </div>
                       <div className="text-sm text-gray-400">
-                        / {plan.interval === 'monthly' ? t('subscriptions.monthly') : t('subscriptions.yearly')}
+                        / {plan.duration} jours
                       </div>
                     </>
                   )}
@@ -237,7 +195,7 @@ const Subscriptions = () => {
 
                 {/* Features */}
                 <ul className="space-y-3 mb-6">
-                  {plan.features.map((feature, index) => (
+                  {(Array.isArray(plan.features) ? plan.features : []).map((feature, index) => (
                     <li key={index} className="flex items-start gap-2">
                       <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-gray-300">{feature}</span>
@@ -258,23 +216,27 @@ const Subscriptions = () => {
                     disabled
                     className="w-full py-3 bg-gray-700 text-gray-400 rounded-xl font-bold"
                   >
-                    {t('subscriptions.current.active')}
+                    Plan actuel
                   </button>
                 ) : (
                   <button
                     onClick={() => handleSubscribe(plan)}
-                    disabled={processingPayment}
-                    className={`w-full py-3 bg-gradient-to-r ${getPlanGradient(plan.name)} rounded-xl font-bold hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2`}
+                    disabled={!!processingPlanId}
+                    className="w-full py-3.5 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
+                    style={{ backgroundColor: '#1DC8FF', color: '#000' }}
                   >
-                    {processingPayment && selectedPlan?.id === plan.id ? (
+                    {isProcessing ? (
                       <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        {t('subscriptions.processing')}
+                        Redirection...
                       </>
                     ) : (
                       <>
-                        {t('subscriptions.subscribe')}
-                        <ArrowRight className="w-5 h-5" />
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="10" fill="#1DC8FF"/>
+                          <text x="12" y="16" textAnchor="middle" fill="#000" fontSize="12" fontWeight="bold">W</text>
+                        </svg>
+                        Payer avec Wave
                       </>
                     )}
                   </button>
@@ -314,7 +276,7 @@ const Subscriptions = () => {
       {/* Sécurité des paiements */}
       <div className="max-w-6xl mx-auto px-4 py-8 text-center">
         <p className="text-gray-400 text-sm">
-          {t('subscriptions.security')}
+          Paiements sécurisés par Wave. Vos données sont protégées.
         </p>
       </div>
     </div>
@@ -322,5 +284,3 @@ const Subscriptions = () => {
 };
 
 export default Subscriptions;
-
-

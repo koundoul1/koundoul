@@ -53,6 +53,8 @@ import TestHintSystem from './pages/TestHintSystem'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
 import Subscriptions from './pages/Subscriptions'
+import PaymentSuccess from './pages/PaymentSuccess'
+import PaymentError from './pages/PaymentError'
 
 function NotFoundPage() {
   const { t } = useTranslation()
@@ -98,6 +100,8 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
+              <Route path="/payment/error" element={<PaymentError />} />
               
               {/* Routes protégées */}
               {/* REMPLACÉ : Nouveau dashboard gamifié */}

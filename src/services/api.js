@@ -175,23 +175,17 @@ const api = {
 
   // 💳 PAIEMENTS
   payments: {
-    createStripeIntent: (data) => request('/payments/stripe/create-intent', {
+    initiateWave: (data) => request('/payments/wave/initiate', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-    
-    createWavePayment: (data) => request('/payments/wave/create', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
-    
-    createOrangeMoneyPayment: (data) => request('/payments/orange-money/create', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
-    
+
+    getWaveStatus: (checkoutId) => request(`/payments/wave/status/${checkoutId}`),
+
+    getHistory: () => request('/payments/history'),
+
     getMyPayments: () => request('/payments/my-payments'),
-    
+
     getStatus: (paymentId) => request(`/payments/${paymentId}/status`)
   },
 

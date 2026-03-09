@@ -117,6 +117,11 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(morgan('combined'));
+
+// IMPORTANT: Raw body pour le webhook Wave (AVANT express.json)
+// Nécessaire pour vérifier la signature HMAC
+app.use('/api/payments/wave/webhook', express.raw({ type: 'application/json' }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
