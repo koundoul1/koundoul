@@ -215,7 +215,7 @@ const api = {
 
   // 👨‍💼 ADMIN
   admin: {
-    getDashboard: () => request('/admin/dashboard'),
+    getDashboard: () => request('/admin/stats'),
     
     getUsers: (params = {}) => {
       const queryParams = new URLSearchParams(params).toString()
@@ -260,7 +260,18 @@ const api = {
       body: JSON.stringify(data),
     }),
     
-    getStudentStats: (id) => request(`/admin/students/${id}/stats`)
+    getStudentStats: (id) => request(`/admin/students/${id}/stats`),
+
+    deleteUser: (id) => request(`/admin/users/${id}`, {
+      method: 'DELETE',
+    }),
+
+    getContentStats: () => request('/admin/content/stats'),
+
+    updateSubscription: (id, data) => request(`/admin/subscriptions/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
   },
 
   // 🏆 GAMIFICATION
