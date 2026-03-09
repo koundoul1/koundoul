@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
 import {
@@ -34,7 +34,8 @@ import {
 
 const Sidebar = () => {
   const location = useLocation()
-  const { isAuthenticated, user } = useAuth()
+  const { isAuthenticated, user, logout } = useAuth()
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   const isActive = (path) => {
@@ -179,6 +180,13 @@ const Sidebar = () => {
             </div>
             <Settings className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors flex-shrink-0" />
           </Link>
+          <button
+            onClick={() => { logout(); navigate('/login'); }}
+            className="flex items-center gap-2 w-full mt-2 px-3 py-2 rounded-xl text-red-400 hover:bg-red-500/10 text-[13px] font-medium transition-colors"
+          >
+            <span>🚪</span>
+            <span>Se déconnecter</span>
+          </button>
         </div>
       ) : (
         <div className="p-3 border-t border-white/5 space-y-2">

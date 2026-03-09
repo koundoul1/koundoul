@@ -36,7 +36,7 @@ import {
 const MobileNavBar = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, logout } = useAuth()
   const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
@@ -222,7 +222,7 @@ const MobileNavBar = () => {
             )}
 
             {/* Grid of modules — 3 columns */}
-            <div className="px-4 pb-8 grid grid-cols-3 gap-3">
+            <div className="px-4 pb-2 grid grid-cols-3 gap-3">
               {visibleDrawerItems.map((item) => {
                 const active = isActive(item.href)
                 return (
@@ -260,6 +260,23 @@ const MobileNavBar = () => {
                 )
               })}
             </div>
+
+            {/* Logout button */}
+            {isAuthenticated && (
+              <div className="px-4 pb-8 pt-2">
+                <button
+                  onClick={() => {
+                    logout()
+                    navigate('/login')
+                    setShowDrawer(false)
+                  }}
+                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-semibold transition-colors hover:bg-red-500/20"
+                >
+                  <span>🚪</span>
+                  <span>Se déconnecter</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

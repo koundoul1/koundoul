@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
 import {
@@ -13,16 +13,20 @@ import {
   ChevronDown,
   Flame,
   Star,
-  Search
+  Search,
+  LogOut,
+  User
 } from 'lucide-react'
 
 const TopBar = () => {
   const location = useLocation()
-  const { isAuthenticated, user } = useAuth()
+  const { isAuthenticated, user, logout } = useAuth()
+  const navigate = useNavigate()
   const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
   const [showLangMenu, setShowLangMenu] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
 
   // Derive page title from route
   const getPageTitle = () => {
@@ -132,6 +136,44 @@ const TopBar = () => {
           <Bell className="w-5 h-5" />
           <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-kaccent rounded-full"></span>
         </button>
+
+        {/* User avatar dropdown */}
+        {isAuthenticated && user && (
+          <div className="relative">
+            <button
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-white/5 transition-colors"
+            >
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-kprimary to-ksecondary flex items-center justify-center">
+                <span className="text-white font-bold text-sm">{user.firstName?.charAt(0) || 'U'}</span>
+              </div>
+              <ChevronDown className={`w-3.5 h-3.5 text-white/50 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} />
+            </button>
+
+            {showUserMenu && (
+              <>
+                <div className="fixed inset-0 z-[9998]" onClick={() => setShowUserMenu(false)}></div>
+                <div className="absolute top-full right-0 mt-2 w-48 bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+                  <Link
+                    to="/profile"
+                    onClick={() => setShowUserMenu(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-white/10 transition-colors"
+                  >
+                    <User className="w-4 h-4" />
+                    <span className="text-sm font-medium">Mon Profil</span>
+                  </Link>
+                  <button
+                    onClick={() => { setShowUserMenu(false); logout(); navigate('/login'); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span className="text-sm font-medium">Se déconnecter</span>
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </header>
   )
