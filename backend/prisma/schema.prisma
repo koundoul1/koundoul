@@ -24,7 +24,8 @@ model User {
   invitationCode                                         String?              @unique
   invitation_code                                        String?              @unique @db.VarChar(10)
   streak                                                 Int?                 @default(0)
-  is_admin                                               Boolean?             @default(false)
+  is_admin                                               Boolean              @default(false)
+  is_super_admin                                         Boolean              @default(false)
   lastStreakDate                                         DateTime?            @db.Timestamp(6)
   streakCount                                            Int?                 @default(0)
   totalXp                                                Int?                 @default(0)
