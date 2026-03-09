@@ -1,6 +1,6 @@
 /**
  * TopBar — Desktop only (hidden on mobile <768px)
- * 64px height, page title, streak/XP badges, FR/EN, notifications
+ * Only shown for authenticated users (controlled by App.jsx)
  */
 
 import React, { useState } from 'react'
@@ -9,7 +9,6 @@ import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
 import {
   Bell,
-  Globe,
   ChevronDown,
   Flame,
   Star,
@@ -20,7 +19,7 @@ import {
 
 const TopBar = () => {
   const location = useLocation()
-  const { isAuthenticated, user, logout } = useAuth()
+  const { user, logout } = useAuth()
   const navigate = useNavigate()
   const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
@@ -28,10 +27,8 @@ const TopBar = () => {
   const [showLangMenu, setShowLangMenu] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
 
-  // Derive page title from route
   const getPageTitle = () => {
     const path = location.pathname
-    if (path === '/') return t('nav.home')
     if (path.startsWith('/dashboard')) return 'Dashboard'
     if (path.startsWith('/courses')) return t('nav.courses')
     if (path.startsWith('/micro-lessons')) return t('dashboard.actions.microLessons') || 'Micro-Leçons'
@@ -63,30 +60,19 @@ const TopBar = () => {
         <h1 className="text-lg font-bold text-white">{getPageTitle()}</h1>
       </div>
 
-      {/* Right side: badges + lang + notifications */}
+      {/* Right side */}
       <div className="flex items-center gap-3">
-        {/* Streak & XP badges (auth) / Login buttons (non-auth) */}
-        {isAuthenticated ? (
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 text-sm font-bold">
-              <Flame className="w-4 h-4" />
-              <span>{user?.streak || 0}</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 text-sm font-bold">
-              <Star className="w-4 h-4" />
-              <span>{user?.xp?.toLocaleString() || 0}</span>
-            </div>
+        {/* Streak & XP badges */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 text-sm font-bold">
+            <Flame className="w-4 h-4" />
+            <span>{user?.streak || 0}</span>
           </div>
-        ) : (
-          <div className="flex items-center gap-3">
-            <Link to="/login" className="text-sm text-white/70 hover:text-white font-medium transition-colors">
-              Connexion
-            </Link>
-            <Link to="/register" className="px-4 py-1.5 rounded-full bg-kprimary hover:bg-kprimary/80 text-white text-sm font-semibold transition-colors">
-              S'inscrire
-            </Link>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 text-sm font-bold">
+            <Star className="w-4 h-4" />
+            <span>{user?.xp?.toLocaleString() || 0}</span>
           </div>
-        )}
+        </div>
 
         {/* Language selector */}
         <div className="relative">
@@ -138,7 +124,7 @@ const TopBar = () => {
         </button>
 
         {/* User avatar dropdown */}
-        {isAuthenticated && user && (
+        {user && (
           <div className="relative">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}

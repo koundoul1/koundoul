@@ -159,7 +159,7 @@ const NewHome = () => {
               {t('newHome.startButton')}
             </Link>
             <Link
-              to="/exercices"
+              to="/login"
               className="px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl font-bold hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <Target className="w-5 h-5" />
@@ -259,7 +259,7 @@ const NewHome = () => {
             {subjects.map((subject, index) => (
               <Link
                 key={index}
-                to="/courses"
+                to="/register"
                 className={`bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 group`}
               >
                 <div className={`text-6xl mb-4`}>{subject.icon}</div>

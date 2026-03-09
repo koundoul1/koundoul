@@ -1,6 +1,6 @@
 /**
  * Sidebar — Desktop only (hidden on mobile <768px)
- * Fixed 240px sidebar with logo, all app modules, user card
+ * Only shown for authenticated users (controlled by App.jsx)
  */
 
 import React from 'react'
@@ -28,68 +28,65 @@ import {
   Shield,
   ShieldCheck,
   Sparkles,
-  Star,
-  LogIn
+  Star
 } from 'lucide-react'
 
 const Sidebar = () => {
   const location = useLocation()
-  const { isAuthenticated, user, logout } = useAuth()
+  const { user, logout } = useAuth()
   const navigate = useNavigate()
   const { t } = useTranslation()
 
   const isActive = (path) => {
-    if (path === '/') return location.pathname === '/'
+    if (path === '/dashboard') return location.pathname === '/dashboard'
     return location.pathname === path || location.pathname.startsWith(path + '/')
   }
 
   // ── Section: Principal ──
   const mainNav = [
-    { name: t('nav.home'), href: '/', icon: Home, auth: false },
-    { name: 'Dashboard', href: '/dashboard', icon: BarChart3, auth: true },
-    { name: t('nav.courses'), href: '/courses', icon: BookOpen, auth: true },
-    { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked, auth: true },
+    { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
+    { name: t('nav.courses'), href: '/courses', icon: BookOpen },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked },
   ]
 
   // ── Section: Outils ──
   const toolsNav = [
-    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain, auth: true },
-    { name: 'Quiz', href: '/quiz', icon: Zap, auth: true },
-    { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy, auth: true },
-    { name: 'Exercices', href: '/exercices', icon: Dumbbell, auth: true },
-    { name: 'Défi Smart', href: '/defi', icon: Sparkles, auth: true },
+    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain },
+    { name: 'Quiz', href: '/quiz', icon: Zap },
+    { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy },
+    { name: 'Exercices', href: '/exercices', icon: Dumbbell },
+    { name: 'Défi Smart', href: '/defi', icon: Sparkles },
   ]
 
   // ── Section: Apprentissage ──
   const learnNav = [
-    { name: 'Coach Virtuel', href: '/coach', icon: Bot, auth: true },
-    { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, auth: true },
-    { name: 'Ressources', href: '/resources', icon: Lightbulb, auth: true },
-    { name: 'Visualisations', href: '/visualizations', icon: Eye, auth: true },
+    { name: 'Coach Virtuel', href: '/coach', icon: Bot },
+    { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck },
+    { name: 'Ressources', href: '/resources', icon: Lightbulb },
+    { name: 'Visualisations', href: '/visualizations', icon: Eye },
   ]
 
   // ── Section: Communauté ──
   const communityNav = [
-    { name: 'Forum', href: '/forum', icon: MessageSquare, auth: false },
-    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, auth: true },
+    { name: 'Forum', href: '/forum', icon: MessageSquare },
+    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award },
   ]
 
   // ── Section: Compte ──
   const accountNav = [
-    { name: t('nav.profile') || 'Profil', href: '/profile', icon: User, auth: true },
-    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, auth: true },
-    { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield, auth: true },
+    { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
+    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
+    { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield },
   ]
 
   // ── Section: Admin (visible only to admin) ──
   const adminNav = [
-    { name: 'Admin', href: '/admin', icon: ShieldCheck, auth: true, adminOnly: true },
+    { name: 'Admin', href: '/admin', icon: ShieldCheck, adminOnly: true },
   ]
 
   const filterItems = (items) =>
     items.filter(item => {
       if (item.adminOnly && user?.role !== 'admin') return false
-      if (item.auth && !isAuthenticated) return false
       return true
     })
 
@@ -137,7 +134,7 @@ const Sidebar = () => {
     >
       {/* Logo */}
       <div className="p-5 pb-2">
-        <Link to="/" className="flex items-center space-x-3 group">
+        <Link to="/dashboard" className="flex items-center space-x-3 group">
           <div className="w-10 h-10 bg-gradient-to-br from-kprimary to-ksecondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-kprimary/30">
             <span className="text-white font-black text-lg">K</span>
           </div>
@@ -158,7 +155,7 @@ const Sidebar = () => {
       </nav>
 
       {/* User card at bottom */}
-      {isAuthenticated && user ? (
+      {user && (
         <div className="p-3 border-t border-white/5">
           <Link
             to="/profile"
@@ -187,25 +184,6 @@ const Sidebar = () => {
             <span>🚪</span>
             <span>Se déconnecter</span>
           </button>
-        </div>
-      ) : (
-        <div className="p-3 border-t border-white/5 space-y-2">
-          <Link
-            to="/login"
-            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-kprimary hover:bg-kprimary/80 text-white text-sm font-semibold transition-colors"
-          >
-            <LogIn className="w-4 h-4" />
-            Se connecter
-          </Link>
-          <Link
-            to="/register"
-            className="flex items-center justify-center w-full py-2.5 rounded-xl border border-white/20 hover:border-white/40 text-white/70 hover:text-white text-sm font-medium transition-colors"
-          >
-            S'inscrire
-          </Link>
-          <p className="text-[10px] text-white/30 text-center">
-            Accède à 450 leçons et 1 800 exercices
-          </p>
         </div>
       )}
     </aside>

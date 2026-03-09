@@ -72,7 +72,7 @@ const MobileNavBar = () => {
     { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain, emoji: '🤖', auth: true },
     { name: 'Défi Smart', href: '/defi', icon: Sparkles, emoji: '⚡', auth: true },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏', auth: true },
-    { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬', auth: false },
+    { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬', auth: true },
     { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅', auth: true },
     { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓', auth: true },
     { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚', auth: true },
