@@ -525,11 +525,14 @@ const api = {
   // ⚔️ DUELS
   duels: {
     getAll: (isPublic = false) => request(`/duels${isPublic ? '?public=true' : ''}`),
+    getMy: () => request('/duels/my'),
+    getById: (id) => request(`/duels/${id}`),
     getHistory: () => request('/duels/history'),
     create: (data) => request('/duels', {
       method: 'POST',
       body: JSON.stringify(data)
     }),
+    joinByCode: (inviteCode) => request(`/duels/join/${inviteCode}`, { method: 'POST' }),
     accept: (id) => request(`/duels/${id}/accept`, { method: 'POST' }),
     start: (id) => request(`/duels/${id}/start`, { method: 'POST' }),
     submit: (id, data) => request(`/duels/${id}/submit`, {

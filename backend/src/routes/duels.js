@@ -3,14 +3,15 @@ const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 
-// GET / — Liste des duels (publics ou de l'utilisateur)
+// GET / — Liste des duels publics disponibles
 router.get('/', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;
     const isPublic = req.query.public === 'true';
 
+    const now = new Date();
     const where = isPublic
-      ? { isPublic: true, status: 'PENDING', opponentId: null, challengerId: { not: userId } }
+      ? { isPublic: true, status: 'pending', opponentId: null, challengerId: { not: userId }, expiresAt: { gte: now } }
       : { OR: [{ challengerId: userId }, { opponentId: userId }] };
 
     const duels = await prisma.duel.findMany({
@@ -30,7 +31,42 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-// GET /history — Historique des duels de l'utilisateur
+// GET /my — Mes duels (pending + active + completed)
+router.get('/my', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const duels = await prisma.duel.findMany({
+      where: { OR: [{ challengerId: userId }, { opponentId: userId }] },
+      include: {
+        challenger: { select: { id: true, username: true, level: true, country: true } },
+        opponent: { select: { id: true, username: true, level: true, country: true } }
+      },
+      orderBy: { createdAt: 'desc' },
+      take: 50
+    });
+
+    // Séparer par statut
+    const pending = duels.filter(d => d.status === 'pending');
+    const active = duels.filter(d => d.status === 'active' || d.status === 'in_progress');
+    const completed = duels.filter(d => d.status === 'completed');
+
+    // Stats
+    const wins = completed.filter(d => d.winnerId === userId).length;
+    const losses = completed.filter(d => d.winnerId && d.winnerId !== userId).length;
+    const draws = completed.filter(d => !d.winnerId).length;
+
+    res.json({
+      success: true,
+      data: { pending, active, completed, stats: { wins, losses, draws, total: completed.length } }
+    });
+  } catch (error) {
+    console.error('Erreur GET /duels/my:', error);
+    res.status(500).json({ success: false, error: 'Erreur serveur' });
+  }
+});
+
+// GET /history — Historique des duels terminés
 router.get('/history', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -38,11 +74,11 @@ router.get('/history', authenticateToken, async (req, res) => {
     const duels = await prisma.duel.findMany({
       where: {
         OR: [{ challengerId: userId }, { opponentId: userId }],
-        status: { in: ['COMPLETED', 'EXPIRED'] }
+        status: 'completed'
       },
       include: {
-        challenger: { select: { username: true, level: true } },
-        opponent: { select: { username: true, level: true } }
+        challenger: { select: { id: true, username: true, level: true } },
+        opponent: { select: { id: true, username: true, level: true } }
       },
       orderBy: { completedAt: 'desc' },
       take: 20
@@ -59,19 +95,19 @@ router.get('/history', authenticateToken, async (req, res) => {
 router.post('/', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;
-    const { subject, difficulty, isPublic } = req.body;
+    const { subject, level, difficulty } = req.body;
 
-    // Piocher 5 questions QCM aléatoires
+    // Piocher 10 questions QCM
     const difficultyMap = { 'Facile': 1, 'Moyen': 2, 'Difficile': 3 };
     const diffLevel = difficultyMap[difficulty] || 2;
 
     const questions = await prisma.qcm_questions.findMany({
       where: { difficulty: { in: [diffLevel, diffLevel + 1] } },
-      take: 5,
+      take: 10,
       orderBy: { created_at: 'desc' }
     });
 
-    if (questions.length === 0) {
+    if (questions.length < 5) {
       return res.status(400).json({ success: false, error: 'Pas assez de questions disponibles' });
     }
 
@@ -85,30 +121,144 @@ router.post('/', authenticateToken, async (req, res) => {
       time_limit_seconds: q.time_limit_seconds || 60
     }));
 
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 24);
+
     const duel = await prisma.duel.create({
       data: {
         challengerId: userId,
         subject: subject || 'Mathématiques',
+        level: level || 'Terminale',
         difficulty: difficulty || 'Moyen',
         timeLimit: 10,
         questions: formattedQuestions,
-        xpReward: 50,
-        isPublic: isPublic !== false,
-        status: 'PENDING'
+        xpReward: 200,
+        isPublic: true,
+        status: 'pending',
+        expiresAt
       },
       include: {
         challenger: { select: { username: true, level: true } }
       }
     });
 
-    res.json({ success: true, data: duel });
+    const shareLink = `${process.env.FRONTEND_URL || 'https://koundoul.onrender.com'}/challenge?duel=${duel.inviteCode}`;
+
+    res.json({
+      success: true,
+      data: {
+        duelId: duel.id,
+        inviteCode: duel.inviteCode,
+        shareLink,
+        subject: duel.subject,
+        level: duel.level,
+        difficulty: duel.difficulty,
+        questions: formattedQuestions.length,
+        expiresAt: duel.expiresAt
+      }
+    });
   } catch (error) {
     console.error('Erreur POST /duels:', error);
     res.status(500).json({ success: false, error: 'Erreur serveur' });
   }
 });
 
-// POST /:id/accept — Accepter un duel
+// POST /join/:inviteCode — Rejoindre un duel par code
+router.post('/join/:inviteCode', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const duel = await prisma.duel.findUnique({
+      where: { inviteCode: req.params.inviteCode },
+      include: {
+        challenger: { select: { username: true, level: true } }
+      }
+    });
+
+    if (!duel) {
+      return res.status(404).json({ success: false, error: 'Code de duel invalide' });
+    }
+    if (duel.status !== 'pending') {
+      return res.status(400).json({ success: false, error: 'Ce duel n\'est plus disponible' });
+    }
+    if (new Date() > new Date(duel.expiresAt)) {
+      return res.status(400).json({ success: false, error: 'Ce duel a expiré' });
+    }
+    if (duel.challengerId === userId) {
+      return res.status(400).json({ success: false, error: 'Vous ne pouvez pas rejoindre votre propre duel' });
+    }
+
+    const updated = await prisma.duel.update({
+      where: { id: duel.id },
+      data: { opponentId: userId, status: 'active', startedAt: new Date() }
+    });
+
+    // Retourner les questions sans réponses
+    const questionsArray = Array.isArray(duel.questions) ? duel.questions : [];
+    const questionsWithoutAnswers = questionsArray.map(q => ({
+      id: q.id,
+      question: q.question,
+      options: q.options,
+      points: q.points || 10,
+      time_limit_seconds: q.time_limit_seconds || 60
+    }));
+
+    res.json({
+      success: true,
+      data: {
+        id: updated.id,
+        subject: duel.subject,
+        level: duel.level,
+        difficulty: duel.difficulty,
+        timeLimit: duel.timeLimit,
+        xpReward: duel.xpReward,
+        challenger: duel.challenger,
+        questions: questionsWithoutAnswers
+      }
+    });
+  } catch (error) {
+    console.error('Erreur POST /duels/join:', error);
+    res.status(500).json({ success: false, error: 'Erreur serveur' });
+  }
+});
+
+// GET /:id — Détails d'un duel
+router.get('/:id', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const duel = await prisma.duel.findUnique({
+      where: { id: req.params.id },
+      include: {
+        challenger: { select: { id: true, username: true, level: true, country: true } },
+        opponent: { select: { id: true, username: true, level: true, country: true } }
+      }
+    });
+
+    if (!duel) {
+      return res.status(404).json({ success: false, error: 'Duel non trouvé' });
+    }
+
+    const isParticipant = duel.challengerId === userId || duel.opponentId === userId;
+
+    // Ne pas envoyer les réponses correctes si le duel est en cours
+    const data = { ...duel };
+    if (duel.status !== 'completed') {
+      data.questions = Array.isArray(duel.questions) ? duel.questions.length : 0;
+      if (!isParticipant) {
+        delete data.challengerAnswers;
+        delete data.opponentAnswers;
+      }
+    }
+
+    res.json({ success: true, data });
+  } catch (error) {
+    console.error('Erreur GET /duels/:id:', error);
+    res.status(500).json({ success: false, error: 'Erreur serveur' });
+  }
+});
+
+// POST /:id/accept — Accepter un duel public
 router.post('/:id/accept', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -118,8 +268,11 @@ router.post('/:id/accept', authenticateToken, async (req, res) => {
     if (!duel) {
       return res.status(404).json({ success: false, error: 'Duel non trouvé' });
     }
-    if (duel.status !== 'PENDING') {
+    if (duel.status !== 'pending') {
       return res.status(400).json({ success: false, error: 'Ce duel n\'est plus disponible' });
+    }
+    if (new Date() > new Date(duel.expiresAt)) {
+      return res.status(400).json({ success: false, error: 'Ce duel a expiré' });
     }
     if (duel.challengerId === userId) {
       return res.status(400).json({ success: false, error: 'Vous ne pouvez pas accepter votre propre duel' });
@@ -127,7 +280,7 @@ router.post('/:id/accept', authenticateToken, async (req, res) => {
 
     const updated = await prisma.duel.update({
       where: { id: req.params.id },
-      data: { opponentId: userId, status: 'ACCEPTED' }
+      data: { opponentId: userId, status: 'active', startedAt: new Date() }
     });
 
     res.json({ success: true, data: updated });
@@ -145,8 +298,8 @@ router.post('/:id/start', authenticateToken, async (req, res) => {
     const duel = await prisma.duel.findUnique({
       where: { id: req.params.id },
       include: {
-        challenger: { select: { username: true } },
-        opponent: { select: { username: true } }
+        challenger: { select: { username: true, level: true } },
+        opponent: { select: { username: true, level: true } }
       }
     });
 
@@ -157,11 +310,11 @@ router.post('/:id/start', authenticateToken, async (req, res) => {
       return res.status(403).json({ success: false, error: 'Vous ne participez pas à ce duel' });
     }
 
-    // Mettre en IN_PROGRESS si c'est le premier à démarrer
-    if (duel.status === 'ACCEPTED') {
+    // Mettre en active/in_progress si nécessaire
+    if (duel.status === 'pending' || duel.status === 'active') {
       await prisma.duel.update({
         where: { id: req.params.id },
-        data: { status: 'IN_PROGRESS' }
+        data: { status: 'active', startedAt: duel.startedAt || new Date() }
       });
     }
 
@@ -179,6 +332,7 @@ router.post('/:id/start', authenticateToken, async (req, res) => {
       data: {
         id: duel.id,
         subject: duel.subject,
+        level: duel.level,
         difficulty: duel.difficulty,
         timeLimit: duel.timeLimit,
         xpReward: duel.xpReward,
@@ -199,7 +353,13 @@ router.post('/:id/submit', authenticateToken, async (req, res) => {
     const userId = req.user.userId;
     const { answers, timeSpent } = req.body;
 
-    const duel = await prisma.duel.findUnique({ where: { id: req.params.id } });
+    const duel = await prisma.duel.findUnique({
+      where: { id: req.params.id },
+      include: {
+        challenger: { select: { id: true, username: true } },
+        opponent: { select: { id: true, username: true } }
+      }
+    });
 
     if (!duel) {
       return res.status(404).json({ success: false, error: 'Duel non trouvé' });
@@ -219,43 +379,80 @@ router.post('/:id/submit', authenticateToken, async (req, res) => {
       return res.status(400).json({ success: false, error: 'Vous avez déjà soumis vos réponses' });
     }
 
-    // Calculer le score
+    // Calculer le score : 1 point par bonne réponse
     const questionsArray = Array.isArray(duel.questions) ? duel.questions : [];
     let score = 0;
     const results = [];
 
-    if (answers && typeof answers === 'object') {
+    if (answers && Array.isArray(answers)) {
       for (const q of questionsArray) {
-        const userAnswer = answers[q.id];
+        const userAnswerObj = answers.find(a => a.questionId === q.id);
+        const userAnswer = userAnswerObj?.answer;
         const isCorrect = userAnswer !== undefined && userAnswer === q.correct_answer;
-        if (isCorrect) score += (q.points || 10);
-        results.push({ questionId: q.id, userAnswer, isCorrect, points: isCorrect ? (q.points || 10) : 0 });
+        if (isCorrect) score += 1;
+        results.push({
+          questionId: q.id,
+          userAnswer,
+          isCorrect,
+          points: isCorrect ? 1 : 0,
+          timeSpent: userAnswerObj?.timeSpent || 0
+        });
       }
     }
 
+    const totalTime = timeSpent || results.reduce((sum, r) => sum + (r.timeSpent || 0), 0);
+
     // Mettre à jour le duel
     const updateData = isChallenger
-      ? { challengerScore: score, challengerAnswers: results, challengerTime: timeSpent || null }
-      : { opponentScore: score, opponentAnswers: results, opponentTime: timeSpent || null };
+      ? { challengerScore: score, challengerAnswers: results, challengerTime: totalTime }
+      : { opponentScore: score, opponentAnswers: results, opponentTime: totalTime };
 
-    // Vérifier si les deux ont soumis
+    // Vérifier si les deux ont soumis → déterminer le gagnant
     const otherSubmitted = isChallenger ? duel.opponentAnswers : duel.challengerAnswers;
+    let duelResult = null;
+
     if (otherSubmitted) {
       const cScore = isChallenger ? score : duel.challengerScore;
       const oScore = isChallenger ? duel.opponentScore : score;
-      updateData.status = 'COMPLETED';
-      updateData.completedAt = new Date();
-      if (cScore > oScore) updateData.winnerId = duel.challengerId;
-      else if (oScore > cScore) updateData.winnerId = duel.opponentId;
-      // Égalité: winnerId reste null
+      const cTime = isChallenger ? totalTime : duel.challengerTime;
+      const oTime = isChallenger ? duel.opponentTime : totalTime;
 
-      // Attribuer XP au gagnant
-      if (updateData.winnerId) {
-        await prisma.user.update({
-          where: { id: updateData.winnerId },
-          data: { xp: { increment: duel.xpReward } }
-        });
+      updateData.status = 'completed';
+      updateData.completedAt = new Date();
+
+      // Gagnant = meilleur score, à égalité = plus rapide
+      if (cScore > oScore) {
+        updateData.winnerId = duel.challengerId;
+      } else if (oScore > cScore) {
+        updateData.winnerId = duel.opponentId;
+      } else if (cTime < oTime) {
+        updateData.winnerId = duel.challengerId;
+      } else if (oTime < cTime) {
+        updateData.winnerId = duel.opponentId;
       }
+      // Parfaite égalité : winnerId reste null
+
+      // Attribuer XP : gagnant +200, perdant +50, égalité +100 chacun
+      if (updateData.winnerId) {
+        const loserId = updateData.winnerId === duel.challengerId ? duel.opponentId : duel.challengerId;
+        await prisma.$transaction([
+          prisma.user.update({ where: { id: updateData.winnerId }, data: { xp: { increment: duel.xpReward } } }),
+          prisma.user.update({ where: { id: loserId }, data: { xp: { increment: 50 } } })
+        ]);
+      } else if (duel.opponentId) {
+        await prisma.$transaction([
+          prisma.user.update({ where: { id: duel.challengerId }, data: { xp: { increment: 100 } } }),
+          prisma.user.update({ where: { id: duel.opponentId }, data: { xp: { increment: 100 } } })
+        ]);
+      }
+
+      duelResult = {
+        winnerId: updateData.winnerId,
+        challengerScore: cScore,
+        opponentScore: oScore,
+        challengerTime: cTime,
+        opponentTime: oTime
+      };
     }
 
     const updated = await prisma.duel.update({
@@ -263,17 +460,15 @@ router.post('/:id/submit', authenticateToken, async (req, res) => {
       data: updateData
     });
 
-    const maxScore = questionsArray.reduce((sum, q) => sum + (q.points || 10), 0);
-
     res.json({
       success: true,
       data: {
         score,
-        maxScore,
-        percentage: maxScore > 0 ? Math.round((score / maxScore) * 100) : 0,
+        totalQuestions: questionsArray.length,
+        totalTime,
         results,
         duelStatus: updated.status,
-        winnerId: updated.winnerId
+        duelResult
       }
     });
   } catch (error) {

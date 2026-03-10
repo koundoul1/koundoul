@@ -808,32 +808,37 @@ model ChallengeAttempt {
 }
 
 model Duel {
-  id            String    @id @default(cuid())
-  challengerId  String
-  opponentId    String?
-  subject       String    @default("Mathématiques")
-  difficulty    String    @default("Moyen")
-  timeLimit     Int       @default(10)
-  questions     Json
-  xpReward      Int       @default(50)
-  status        String    @default("PENDING") @db.VarChar(20)
-  isPublic      Boolean   @default(true)
-  challengerScore Int?
-  opponentScore   Int?
+  id                String    @id @default(cuid())
+  challengerId      String
+  opponentId        String?
+  subject           String    @default("Mathématiques")
+  level             String    @default("Terminale")
+  difficulty        String    @default("Moyen")
+  timeLimit         Int       @default(10)
+  questions         Json
+  xpReward          Int       @default(200)
+  status            String    @default("pending") @db.VarChar(20)
+  isPublic          Boolean   @default(true)
+  inviteCode        String    @unique @default(cuid())
+  challengerScore   Int?
+  opponentScore     Int?
   challengerAnswers Json?
   opponentAnswers   Json?
   challengerTime    Int?
   opponentTime      Int?
-  winnerId      String?
-  completedAt   DateTime? @db.Timestamptz(6)
-  createdAt     DateTime  @default(now()) @db.Timestamptz(6)
-  updatedAt     DateTime  @default(now()) @updatedAt @db.Timestamptz(6)
-  challenger    User      @relation("DuelChallenger", fields: [challengerId], references: [id], onDelete: Cascade)
-  opponent      User?     @relation("DuelOpponent", fields: [opponentId], references: [id], onDelete: SetNull)
+  winnerId          String?
+  expiresAt         DateTime  @default(now()) @db.Timestamptz(6)
+  startedAt         DateTime? @db.Timestamptz(6)
+  completedAt       DateTime? @db.Timestamptz(6)
+  createdAt         DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime  @default(now()) @updatedAt @db.Timestamptz(6)
+  challenger        User      @relation("DuelChallenger", fields: [challengerId], references: [id], onDelete: Cascade)
+  opponent          User?     @relation("DuelOpponent", fields: [opponentId], references: [id], onDelete: SetNull)
 
   @@index([status])
   @@index([challengerId])
   @@index([opponentId])
   @@index([isPublic, status])
+  @@index([inviteCode])
   @@map("duels")
 }
