@@ -62,6 +62,7 @@ model User {
   badges                                                 UserBadge[]
   user_masteries                                         user_masteries[]
   adminLogs                                              AdminLog[]       @relation("AdminLogs")
+  challengeAttempts                                      ChallengeAttempt[]
 
   @@map("users")
 }
@@ -763,4 +764,43 @@ model AdminLog {
   admin     User     @relation("AdminLogs", fields: [adminId], references: [id])
 
   @@map("admin_logs")
+}
+
+model Challenge {
+  id          String             @id @default(cuid())
+  title       String
+  description String?
+  subject     String             @default("Mathématiques")
+  difficulty  String             @default("Moyen")
+  timeLimit   Int                @default(20)
+  questions   Json
+  status      String             @default("active") @db.VarChar(20)
+  xpReward    Int                @default(500)
+  prize       String             @default("500 XP + Badge Champion")
+  startDate   DateTime           @default(now()) @db.Timestamptz(6)
+  endDate     DateTime           @db.Timestamptz(6)
+  createdAt   DateTime           @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime           @default(now()) @updatedAt @db.Timestamptz(6)
+  attempts    ChallengeAttempt[]
+
+  @@index([status])
+  @@index([startDate, endDate])
+  @@map("challenges")
+}
+
+model ChallengeAttempt {
+  id          String    @id @default(cuid())
+  userId      String
+  challengeId String
+  score       Int       @default(0)
+  answers     Json?
+  timeSpent   Int?
+  completedAt DateTime? @db.Timestamptz(6)
+  createdAt   DateTime  @default(now()) @db.Timestamptz(6)
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, challengeId])
+  @@index([challengeId, score(sort: Desc)])
+  @@map("challenge_attempts")
 }
