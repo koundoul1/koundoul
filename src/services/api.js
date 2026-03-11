@@ -170,7 +170,12 @@ const api = {
     
     getStats: () => request('/users/stats'),
     
-    getBadges: () => request('/users/badges')
+    getBadges: () => request('/users/badges'),
+
+    updateLocation: (data) => request('/users/location', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    })
   },
 
   // 💳 PAIEMENTS
@@ -539,6 +544,15 @@ const api = {
       method: 'POST',
       body: JSON.stringify(data)
     })
+  },
+
+  // 📊 LEADERBOARD
+  leaderboard: {
+    get: (params = {}) => {
+      const queryStr = new URLSearchParams(params).toString();
+      return request(`/leaderboard?${queryStr}`);
+    },
+    getMyRank: () => request('/leaderboard/my-rank')
   },
 
   // 👨‍👩‍👧‍👦 PARENT DASHBOARD

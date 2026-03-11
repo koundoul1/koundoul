@@ -39,6 +39,7 @@ import SmartExercises from './pages/SmartExercises'
 import WhyItWorks from './pages/WhyItWorks'
 import AdvancedFeatures from './pages/AdvancedFeatures'
 import Challenge from './pages/Challenge'
+import Leaderboard from './pages/Leaderboard'
 import ParentDashboard from './pages/ParentDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import QuestionBanks from './pages/QuestionBanks'
@@ -126,6 +127,7 @@ function AppLayout() {
           <Route path="/advanced-features" element={<ProtectedRoute><AdvancedFeatures /></ProtectedRoute>} />
           <Route path="/test-hints" element={<ProtectedRoute><TestHintSystem /></ProtectedRoute>} />
           <Route path="/challenge" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
+          <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
           <Route path="/badges" element={<ProtectedRoute><Layout><Badges /></Layout></ProtectedRoute>} />
           <Route path="/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
           <Route path="/flashcards/review" element={<ProtectedRoute><FlashcardsReview /></ProtectedRoute>} />

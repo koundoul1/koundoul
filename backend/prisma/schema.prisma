@@ -36,6 +36,9 @@ model User {
   bio                                                    String?
   phone                                                  String?
   country                                                String?              @default("SN")
+  region                                                 String?
+  department                                             String?
+  school                                                 String?
   language                                               String?              @default("fr")
   timezone                                               String?              @default("Africa/Dakar")
   notificationsEnabled                                   Boolean?             @default(true)

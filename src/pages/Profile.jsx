@@ -31,7 +31,8 @@ import {
   Link2,
   Unlink,
   Copy,
-  Users
+  Users,
+  MapPin
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -65,6 +66,16 @@ const Profile = () => {
   const [parentChildren, setParentChildren] = useState([])
   const [unlinkingChild, setUnlinkingChild] = useState(null)
 
+  // Location state
+  const [locationData, setLocationData] = useState({
+    country: 'SN',
+    region: '',
+    department: '',
+    school: ''
+  })
+  const [savingLocation, setSavingLocation] = useState(false)
+  const [locationSuccess, setLocationSuccess] = useState('')
+
   useEffect(() => {
     if (user) {
       setFormData({
@@ -89,6 +100,12 @@ const Profile = () => {
         setProfileData(data)
         setInvitationCode(data.invitationCode)
         if (data.parentId) setLinkedParent(data.parentId)
+        setLocationData({
+          country: data.country || 'SN',
+          region: data.region || '',
+          department: data.department || '',
+          school: data.school || ''
+        })
       }
     } catch (error) {
       console.error('Erreur chargement profil:', error)
@@ -265,6 +282,73 @@ const Profile = () => {
     setError('')
   }
 
+  const AFRICAN_COUNTRIES = [
+    { code: 'SN', name: 'Sénégal' }, { code: 'CI', name: "Côte d'Ivoire" },
+    { code: 'CM', name: 'Cameroun' }, { code: 'ML', name: 'Mali' },
+    { code: 'BF', name: 'Burkina Faso' }, { code: 'GN', name: 'Guinée' },
+    { code: 'TG', name: 'Togo' }, { code: 'BJ', name: 'Bénin' },
+    { code: 'NE', name: 'Niger' }, { code: 'TD', name: 'Tchad' },
+    { code: 'GA', name: 'Gabon' }, { code: 'CG', name: 'Congo' },
+    { code: 'MR', name: 'Mauritanie' }, { code: 'DZ', name: 'Algérie' },
+    { code: 'MA', name: 'Maroc' }, { code: 'TN', name: 'Tunisie' },
+    { code: 'EG', name: 'Égypte' }, { code: 'NG', name: 'Nigeria' },
+    { code: 'GH', name: 'Ghana' }, { code: 'KE', name: 'Kenya' },
+    { code: 'ZA', name: 'Afrique du Sud' }, { code: 'ET', name: 'Éthiopie' },
+    { code: 'TZ', name: 'Tanzanie' }, { code: 'UG', name: 'Ouganda' },
+    { code: 'RW', name: 'Rwanda' }, { code: 'MG', name: 'Madagascar' },
+    { code: 'CD', name: 'RD Congo' }, { code: 'AO', name: 'Angola' },
+    { code: 'MZ', name: 'Mozambique' }, { code: 'ZM', name: 'Zambie' },
+    { code: 'ZW', name: 'Zimbabwe' }, { code: 'BW', name: 'Botswana' },
+    { code: 'NA', name: 'Namibie' }, { code: 'MW', name: 'Malawi' },
+    { code: 'BI', name: 'Burundi' }, { code: 'DJ', name: 'Djibouti' },
+    { code: 'ER', name: 'Érythrée' }, { code: 'GM', name: 'Gambie' },
+    { code: 'GW', name: 'Guinée-Bissau' }, { code: 'GQ', name: 'Guinée équatoriale' },
+    { code: 'KM', name: 'Comores' }, { code: 'CV', name: 'Cabo Verde' },
+    { code: 'LS', name: 'Lesotho' }, { code: 'LR', name: 'Libéria' },
+    { code: 'LY', name: 'Libye' }, { code: 'MU', name: 'Maurice' },
+    { code: 'SC', name: 'Seychelles' }, { code: 'SL', name: 'Sierra Leone' },
+    { code: 'SO', name: 'Somalie' }, { code: 'SD', name: 'Soudan' },
+    { code: 'SS', name: 'Soudan du Sud' }, { code: 'SZ', name: 'Éswatini' },
+    { code: 'CF', name: 'Centrafrique' }, { code: 'ST', name: 'São Tomé-et-Príncipe' }
+  ].sort((a, b) => a.name.localeCompare(b.name))
+
+  const SENEGAL_REGIONS_DEPS = {
+    'Dakar': ['Dakar', 'Guédiawaye', 'Pikine', 'Rufisque'],
+    'Thiès': ['Thiès', 'Mbour', 'Tivaouane'],
+    'Saint-Louis': ['Saint-Louis', 'Dagana', 'Podor'],
+    'Ziguinchor': ['Ziguinchor', 'Bignona', 'Oussouye'],
+    'Diourbel': ['Diourbel', 'Bambey', 'Mbacké'],
+    'Louga': ['Louga', 'Kébémer', 'Linguère'],
+    'Fatick': ['Fatick', 'Foundiougne', 'Gossas'],
+    'Kaolack': ['Kaolack', 'Guinguinéo', 'Nioro du Rip'],
+    'Kolda': ['Kolda', 'Médina Yoro Foulah', 'Vélingara'],
+    'Tambacounda': ['Tambacounda', 'Bakel', 'Goudiry', 'Koumpentoum'],
+    'Kaffrine': ['Kaffrine', 'Birkilane', 'Koungheul', 'Malem Hodar'],
+    'Kédougou': ['Kédougou', 'Salémata', 'Saraya'],
+    'Matam': ['Matam', 'Kanel', 'Ranérou'],
+    'Sédhiou': ['Sédhiou', 'Bounkiling', 'Goudomp']
+  }
+
+  const regionsForCountry = locationData.country === 'SN' ? Object.keys(SENEGAL_REGIONS_DEPS) : []
+  const departmentsForRegion = locationData.country === 'SN' && locationData.region
+    ? (SENEGAL_REGIONS_DEPS[locationData.region] || [])
+    : []
+
+  const handleSaveLocation = async () => {
+    setSavingLocation(true)
+    setError('')
+    try {
+      await api.users.updateLocation(locationData)
+      setLocationSuccess('Localisation mise à jour !')
+      setTimeout(() => setLocationSuccess(''), 3000)
+    } catch (err) {
+      setError(err.message || 'Erreur lors de la sauvegarde')
+      setTimeout(() => setError(''), 3000)
+    } finally {
+      setSavingLocation(false)
+    }
+  }
+
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -436,6 +520,115 @@ const Profile = () => {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Ma localisation */}
+            <div className="k-card overflow-hidden">
+              <div className="p-5 border-b border-white/8">
+                <h2 className="text-lg font-semibold text-white flex items-center">
+                  <MapPin className="h-5 w-5 text-kprimary mr-2" />
+                  Ma localisation
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">
+                  Ta position dans les classements dépend de ces infos
+                </p>
+              </div>
+              <div className="p-5 space-y-4">
+                {locationSuccess && (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-3">
+                    <p className="text-sm text-emerald-400">{locationSuccess}</p>
+                  </div>
+                )}
+
+                {/* Country */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Pays</label>
+                  <select
+                    value={locationData.country}
+                    onChange={(e) => setLocationData(prev => ({ ...prev, country: e.target.value, region: '', department: '' }))}
+                    className={inputClasses}
+                  >
+                    <option value="">Sélectionner un pays</option>
+                    {AFRICAN_COUNTRIES.map(c => (
+                      <option key={c.code} value={c.code}>{c.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Region */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Région</label>
+                  {regionsForCountry.length > 0 ? (
+                    <select
+                      value={locationData.region}
+                      onChange={(e) => setLocationData(prev => ({ ...prev, region: e.target.value, department: '' }))}
+                      className={inputClasses}
+                    >
+                      <option value="">Sélectionner une région</option>
+                      {regionsForCountry.map(r => (
+                        <option key={r} value={r}>{r}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      value={locationData.region}
+                      onChange={(e) => setLocationData(prev => ({ ...prev, region: e.target.value }))}
+                      placeholder="Votre région..."
+                      className={inputClasses}
+                    />
+                  )}
+                </div>
+
+                {/* Department */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">Département</label>
+                  {departmentsForRegion.length > 0 ? (
+                    <select
+                      value={locationData.department}
+                      onChange={(e) => setLocationData(prev => ({ ...prev, department: e.target.value }))}
+                      className={inputClasses}
+                    >
+                      <option value="">Sélectionner un département</option>
+                      {departmentsForRegion.map(d => (
+                        <option key={d} value={d}>{d}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type="text"
+                      value={locationData.department}
+                      onChange={(e) => setLocationData(prev => ({ ...prev, department: e.target.value }))}
+                      placeholder="Votre département..."
+                      className={inputClasses}
+                    />
+                  )}
+                </div>
+
+                {/* School */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-300 mb-2">École / Établissement</label>
+                  <input
+                    type="text"
+                    value={locationData.school}
+                    onChange={(e) => setLocationData(prev => ({ ...prev, school: e.target.value }))}
+                    placeholder="Nom de votre établissement..."
+                    className={inputClasses}
+                  />
+                </div>
+
+                <button
+                  onClick={handleSaveLocation}
+                  disabled={savingLocation}
+                  className="flex items-center px-4 py-2.5 bg-kprimary text-white rounded-xl hover:bg-kprimary-500 disabled:opacity-50 font-medium"
+                >
+                  {savingLocation ? (
+                    <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Sauvegarde...</>
+                  ) : (
+                    <><Save className="h-4 w-4 mr-2" /> Sauvegarder la localisation</>
+                  )}
+                </button>
               </div>
             </div>
 

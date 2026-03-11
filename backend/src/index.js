@@ -170,6 +170,7 @@ const subscriptionsRoutes = require('./routes/subscriptions');
 const paymentsRoutes = require('./routes/payments');
 const parentRoutes = require('./routes/parent');
 const adminRoutes = require('./routes/admin');
+const leaderboardRoutes = require('./routes/leaderboard');
 const errorHandler = require('./middlewares/errorHandler');
 
 // API Routes
@@ -214,6 +215,7 @@ app.use('/api/subscriptions', subscriptionsRoutes);
 app.use('/api/payments', paymentsRoutes);
 app.use('/api/parent', parentRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

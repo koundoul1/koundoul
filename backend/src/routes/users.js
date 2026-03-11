@@ -21,6 +21,10 @@ router.get('/profile', authenticateToken, async (req, res, next) => {
         parentId: true,
         parentInvitationCode: true,
         isParent: true,
+        country: true,
+        region: true,
+        department: true,
+        school: true,
         createdAt: true,
         updatedAt: true
       }
@@ -227,6 +231,34 @@ router.post('/generate-invitation-code', authenticateToken, async (req, res, nex
       success: true,
       data: { invitationCode }
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT /api/users/location — Update user's geographic location
+router.put('/location', authenticateToken, async (req, res, next) => {
+  try {
+    const { country, region, department, school } = req.body;
+
+    const user = await prisma.user.update({
+      where: { id: req.user.userId },
+      data: {
+        ...(country !== undefined && { country }),
+        ...(region !== undefined && { region }),
+        ...(department !== undefined && { department }),
+        ...(school !== undefined && { school })
+      },
+      select: {
+        id: true,
+        country: true,
+        region: true,
+        department: true,
+        school: true
+      }
+    });
+
+    res.json({ success: true, data: user });
   } catch (error) {
     next(error);
   }
