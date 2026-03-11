@@ -109,6 +109,13 @@ router.post('/login', async (req, res, next) => {
       return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
     }
 
+    console.log('LOGIN RESPONSE USER:', JSON.stringify({
+      id: user.id,
+      email: user.email,
+      is_admin: user.is_admin,
+      is_super_admin: user.is_super_admin
+    }));
+
     // Générer le token
     const token = jwt.sign(
       { userId: user.id, email: user.email, is_admin: user.is_admin || false, is_super_admin: user.is_super_admin || false },

@@ -3,7 +3,7 @@
  * Dark theme matching the rest of the app
  */
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
@@ -18,14 +18,17 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
+  const hasNavigated = useRef(false)
 
   const { login, isAuthenticated, user, error, clearError } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
 
+  // Redirect if already authenticated (e.g. user visits /login while logged in)
   useEffect(() => {
-    if (isAuthenticated) {
-      const defaultRoute = user?.is_admin ? '/admin' : '/dashboard'
+    if (isAuthenticated && user && !hasNavigated.current) {
+      hasNavigated.current = true
+      const defaultRoute = user.is_admin ? '/admin' : '/dashboard'
       const from = location.state?.from?.pathname || defaultRoute
       navigate(from, { replace: true })
     }
@@ -71,6 +74,7 @@ const Login = () => {
     try {
       const result = await login(formData)
       if (result.success) {
+        hasNavigated.current = true
         const defaultRoute = result.user?.is_admin ? '/admin' : '/dashboard'
         const from = location.state?.from?.pathname || defaultRoute
         navigate(from, { replace: true })
