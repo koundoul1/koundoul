@@ -111,7 +111,7 @@ router.post('/login', async (req, res, next) => {
 
     // Générer le token
     const token = jwt.sign(
-      { userId: user.id, email: user.email },
+      { userId: user.id, email: user.email, is_admin: user.is_admin || false, is_super_admin: user.is_super_admin || false },
       process.env.JWT_SECRET || 'default-secret',
       { expiresIn: '7d' }
     );
@@ -127,7 +127,9 @@ router.post('/login', async (req, res, next) => {
           username: user.username,
           xp: user.xp,
           level: user.level,
-          streak: user.streak
+          streak: user.streak,
+          is_admin: user.is_admin || false,
+          is_super_admin: user.is_super_admin || false
         },
         token
       }
@@ -151,6 +153,8 @@ router.get('/profile', authenticateToken, async (req, res, next) => {
         xp: true,
         level: true,
         streak: true,
+        is_admin: true,
+        is_super_admin: true,
         createdAt: true,
         updatedAt: true
       }
@@ -303,7 +307,7 @@ router.post('/refresh-token', async (req, res, next) => {
 
     // Générer un nouveau token
     const newToken = jwt.sign(
-      { userId: decoded.userId, email: decoded.email },
+      { userId: decoded.userId, email: decoded.email, is_admin: decoded.is_admin || false, is_super_admin: decoded.is_super_admin || false },
       process.env.JWT_SECRET || 'default-secret',
       { expiresIn: '7d' }
     );
