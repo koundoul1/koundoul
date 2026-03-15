@@ -211,10 +211,11 @@ const Quiz = () => {
     
     if (quizSettings.difficulty !== 'all') {
       filtered = filtered.filter(q => {
-        const diff = q.difficulty || 3
-        if (quizSettings.difficulty === 'easy') return diff <= 2
-        if (quizSettings.difficulty === 'medium') return diff === 3
-        if (quizSettings.difficulty === 'hard') return diff >= 4
+        const diff = q.difficulty
+        if (diff == null) return true // include questions without difficulty
+        if (quizSettings.difficulty === 'easy') return diff === 1
+        if (quizSettings.difficulty === 'medium') return diff === 2
+        if (quizSettings.difficulty === 'hard') return diff >= 3
         return true
       })
       console.log('🔍 Après filtrage difficulté:', filtered.length)
@@ -751,18 +752,36 @@ const Quiz = () => {
                 <div className="grid grid-cols-4 gap-3">
                   {['all', 'easy', 'medium', 'hard'].map((diff) => {
                     const labels = { all: 'Tous', easy: 'Facile', medium: 'Moyen', hard: 'Difficile' }
-                    const colors = { all: 'blue', easy: 'green', medium: 'yellow', hard: 'red' }
+                    const activeStyles = {
+                      all: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white',
+                      easy: 'bg-gradient-to-r from-green-600 to-green-700 text-white',
+                      medium: 'bg-gradient-to-r from-yellow-600 to-yellow-700 text-white',
+                      hard: 'bg-gradient-to-r from-red-600 to-red-700 text-white'
+                    }
+                    // Count questions matching each difficulty filter
+                    const countForDiff = (d) => {
+                      if (d === 'all') return allQuestions.length
+                      return allQuestions.filter(q => {
+                        const v = q.difficulty
+                        if (v == null) return false
+                        if (d === 'easy') return v === 1
+                        if (d === 'medium') return v === 2
+                        if (d === 'hard') return v >= 3
+                        return false
+                      }).length
+                    }
                     return (
-                <button
+                      <button
                         key={diff}
                         onClick={() => setQuizSettings({...quizSettings, difficulty: diff})}
                         className={`px-4 py-3 rounded-lg font-semibold transition-all ${
                           quizSettings.difficulty === diff
-                            ? `bg-gradient-to-r from-${colors[diff]}-600 to-${colors[diff]}-700 text-white`
+                            ? activeStyles[diff]
                             : 'bg-white/10 text-white hover:bg-white/20'
                         }`}
                       >
                         {labels[diff]}
+                        <span className="block text-xs opacity-75 mt-0.5">({countForDiff(diff)})</span>
                       </button>
                     )
                   })}
