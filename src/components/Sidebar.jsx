@@ -1,6 +1,7 @@
 /**
  * Sidebar — Desktop only (hidden on mobile <768px)
- * Only shown for authenticated users (controlled by App.jsx)
+ * Shows for both authenticated and non-authenticated users.
+ * Non-authenticated: all modules visible but locked (redirect to /login on click).
  */
 
 import React from 'react'
@@ -28,22 +29,26 @@ import {
   Shield,
   ShieldCheck,
   Sparkles,
-  Star
+  Star,
+  Lock,
+  LogIn,
+  UserPlus
 } from 'lucide-react'
 
 const Sidebar = () => {
   const location = useLocation()
-  const { user, logout } = useAuth()
+  const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
   const { t } = useTranslation()
 
   const isActive = (path) => {
-    if (path === '/dashboard') return location.pathname === '/dashboard'
+    if (path === '/dashboard' || path === '/') return location.pathname === path
     return location.pathname === path || location.pathname.startsWith(path + '/')
   }
 
   // ── Section: Principal ──
   const mainNav = [
+    { name: 'Accueil', href: '/', icon: Home, public: true },
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
     { name: t('nav.courses'), href: '/courses', icon: BookOpen },
     { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked },
@@ -86,9 +91,16 @@ const Sidebar = () => {
 
   const filterItems = (items) =>
     items.filter(item => {
-      if (item.adminOnly && user?.role !== 'admin') return false
+      if (item.adminOnly && !user?.is_admin) return false
       return true
     })
+
+  const handleNavClick = (e, item) => {
+    if (!isAuthenticated && !item.public) {
+      e.preventDefault()
+      navigate('/login', { state: { message: 'Connecte-toi pour accéder à ce module' } })
+    }
+  }
 
   const renderSection = (label, items) => {
     const visible = filterItems(items)
@@ -101,16 +113,20 @@ const Sidebar = () => {
         <div className="space-y-0.5">
           {visible.map((item) => {
             const active = isActive(item.href)
+            const locked = !isAuthenticated && !item.public
             return (
               <Link
                 key={item.href}
-                to={item.href}
+                to={locked ? '#' : item.href}
+                onClick={(e) => handleNavClick(e, item)}
                 className={`
                   flex items-center gap-3 px-3 py-2 rounded-xl text-[13px] font-medium
                   transition-all duration-200
                   ${active
                     ? 'text-kprimary'
-                    : 'text-white/50 hover:text-white/80 hover:bg-white/5'
+                    : locked
+                      ? 'text-white/30 hover:text-white/40 hover:bg-white/[0.02]'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/5'
                   }
                 `}
                 style={active ? { background: 'rgba(108,99,255,0.15)' } : {}}
@@ -119,6 +135,9 @@ const Sidebar = () => {
                 <span className="truncate">{item.name}</span>
                 {active && (
                   <div className="ml-auto w-1.5 h-1.5 rounded-full bg-kprimary flex-shrink-0"></div>
+                )}
+                {locked && (
+                  <Lock className="ml-auto w-3 h-3 text-white/20 flex-shrink-0" />
                 )}
               </Link>
             )
@@ -134,7 +153,7 @@ const Sidebar = () => {
     >
       {/* Logo */}
       <div className="p-5 pb-2">
-        <Link to="/dashboard" className="flex items-center space-x-3 group">
+        <Link to="/" className="flex items-center space-x-3 group">
           <div className="w-10 h-10 bg-gradient-to-br from-kprimary to-ksecondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-kprimary/30">
             <span className="text-white font-black text-lg">K</span>
           </div>
@@ -150,12 +169,13 @@ const Sidebar = () => {
         {renderSection('Outils', toolsNav)}
         {renderSection('Apprentissage', learnNav)}
         {renderSection('Communauté', communityNav)}
-        {renderSection('Compte', accountNav)}
-        {renderSection('Administration', adminNav)}
+        {isAuthenticated && renderSection('Compte', accountNav)}
+        {isAuthenticated && renderSection('Administration', adminNav)}
       </nav>
 
-      {/* User card at bottom */}
-      {user && (
+      {/* Bottom section */}
+      {isAuthenticated ? (
+        /* User card at bottom */
         <div className="p-3 border-t border-white/5">
           <Link
             to="/profile"
@@ -184,6 +204,24 @@ const Sidebar = () => {
             <span>🚪</span>
             <span>Se déconnecter</span>
           </button>
+        </div>
+      ) : (
+        /* Auth buttons for non-authenticated */
+        <div className="p-3 border-t border-white/5 space-y-2">
+          <Link
+            to="/login"
+            className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-xl border border-kprimary/40 text-kprimary hover:bg-kprimary/10 text-[13px] font-semibold transition-colors"
+          >
+            <LogIn className="w-4 h-4" />
+            Se connecter
+          </Link>
+          <Link
+            to="/register"
+            className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-xl bg-kprimary text-white hover:bg-kprimary/90 text-[13px] font-semibold transition-colors"
+          >
+            <UserPlus className="w-4 h-4" />
+            S'inscrire
+          </Link>
         </div>
       )}
     </aside>

@@ -1,7 +1,7 @@
 /**
  * MobileNavBar — Bottom navigation for mobile only (<768px)
  * 4 main tabs + "Plus" hamburger that opens a drawer with all modules
- * Desktop navigation is handled by Sidebar + TopBar
+ * Non-authenticated: all tabs visible, protected ones redirect to /login with lock icon
  */
 
 import React, { useState, useEffect } from 'react'
@@ -30,7 +30,10 @@ import {
   CreditCard,
   Settings,
   Globe,
-  Sparkles
+  Sparkles,
+  Lock,
+  LogIn,
+  UserPlus
 } from 'lucide-react'
 
 const MobileNavBar = () => {
@@ -53,38 +56,41 @@ const MobileNavBar = () => {
     return location.pathname === path || location.pathname.startsWith(path + '/')
   }
 
-  // 4 main bottom tabs
+  const handleProtectedNav = (e, href, isPublic) => {
+    if (!isAuthenticated && !isPublic) {
+      e.preventDefault()
+      navigate('/login', { state: { message: 'Connecte-toi pour accéder à ce module' } })
+    }
+  }
+
+  // 4 main bottom tabs — always visible
   const mainTabs = [
-    { name: t('nav.home'), href: '/', icon: Home },
-    { name: t('nav.courses'), href: '/courses', icon: BookOpen, auth: true },
-    { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy, auth: true },
-    { name: t('nav.profile') || 'Profil', href: '/profile', icon: User, auth: true },
+    { name: t('nav.home'), href: '/', icon: Home, public: true },
+    { name: t('nav.courses'), href: '/courses', icon: BookOpen },
+    { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy },
+    { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
   ]
 
-  const visibleTabs = mainTabs.filter(item => !item.auth || isAuthenticated)
-
-  // All other modules for the drawer
+  // All other modules for the drawer — always visible
   const drawerItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: BarChart3, emoji: '📊', auth: true },
-    { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯', auth: true },
-    { name: 'Exercices', href: '/exercices', icon: Dumbbell, emoji: '🧩', auth: true },
-    { name: 'Quiz', href: '/quiz', icon: Zap, emoji: '📝', auth: true },
-    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain, emoji: '🤖', auth: true },
-    { name: 'Défi Smart', href: '/defi', icon: Sparkles, emoji: '⚡', auth: true },
-    { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏', auth: true },
-    { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬', auth: true },
-    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅', auth: true },
-    { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓', auth: true },
-    { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚', auth: true },
-    { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '📊', auth: true },
-    { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield, emoji: '👨‍👩‍👧', auth: true },
-    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳', auth: true },
+    { name: 'Dashboard', href: '/dashboard', icon: BarChart3, emoji: '📊' },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯' },
+    { name: 'Exercices', href: '/exercices', icon: Dumbbell, emoji: '🧩' },
+    { name: 'Quiz', href: '/quiz', icon: Zap, emoji: '📝' },
+    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain, emoji: '🤖' },
+    { name: 'Défi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
+    { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏' },
+    { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬' },
+    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
+    { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
+    { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚' },
+    { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '📊' },
+    { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield, emoji: '👨‍👩‍👧' },
+    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
   ]
-
-  const visibleDrawerItems = drawerItems.filter(item => !item.auth || isAuthenticated)
 
   // Check if any drawer item is active (to highlight the "Plus" button)
-  const isDrawerItemActive = visibleDrawerItems.some(item => isActive(item.href))
+  const isDrawerItemActive = drawerItems.some(item => isActive(item.href))
 
   return (
     <>
@@ -92,17 +98,19 @@ const MobileNavBar = () => {
       <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
         <div className="bg-[#0F0F1E]/95 backdrop-blur-xl border-t border-white/8 px-1 py-2 safe-bottom">
           <div className="flex justify-around items-center">
-            {visibleTabs.map((item) => {
+            {mainTabs.map((item) => {
               const active = isActive(item.href)
+              const locked = !isAuthenticated && !item.public
               return (
                 <Link
                   key={item.href}
-                  to={item.href}
+                  to={locked ? '#' : item.href}
+                  onClick={(e) => handleProtectedNav(e, item.href, item.public)}
                   className={`
                     flex flex-col items-center justify-center
                     flex-1 min-w-0 h-14
                     transition-all duration-200
-                    ${active ? 'text-kprimary' : 'text-gray-500 hover:text-gray-300'}
+                    ${active ? 'text-kprimary' : locked ? 'text-gray-600' : 'text-gray-500 hover:text-gray-300'}
                     active:scale-95
                   `}
                 >
@@ -113,6 +121,9 @@ const MobileNavBar = () => {
                     <item.icon className={`w-5 h-5 ${active ? 'scale-110' : ''}`} />
                     {active && (
                       <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-kprimary rounded-full"></span>
+                    )}
+                    {locked && (
+                      <Lock className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 text-white/30" />
                     )}
                   </div>
                   <span className={`
@@ -223,24 +234,34 @@ const MobileNavBar = () => {
 
             {/* Grid of modules — 3 columns */}
             <div className="px-4 pb-2 grid grid-cols-3 gap-3">
-              {visibleDrawerItems.map((item) => {
+              {drawerItems.map((item) => {
                 const active = isActive(item.href)
+                const locked = !isAuthenticated
                 return (
                   <button
                     key={item.href}
                     onClick={() => {
-                      navigate(item.href)
+                      if (locked) {
+                        navigate('/login', { state: { message: 'Connecte-toi pour accéder à ce module' } })
+                      } else {
+                        navigate(item.href)
+                      }
                       setShowDrawer(false)
                     }}
                     className={`
-                      flex flex-col items-center gap-2 p-4 rounded-2xl
+                      relative flex flex-col items-center gap-2 p-4 rounded-2xl
                       transition-all duration-200 active:scale-95
                       ${active
                         ? 'bg-kprimary/15 border border-kprimary/30'
-                        : 'bg-white/[0.03] border border-white/5 hover:bg-white/[0.06]'
+                        : locked
+                          ? 'bg-white/[0.02] border border-white/5'
+                          : 'bg-white/[0.03] border border-white/5 hover:bg-white/[0.06]'
                       }
                     `}
                   >
+                    {locked && (
+                      <Lock className="absolute top-2 right-2 w-3 h-3 text-white/20" />
+                    )}
                     <div className={`
                       w-11 h-11 rounded-xl flex items-center justify-center text-xl
                       ${active
@@ -252,7 +273,7 @@ const MobileNavBar = () => {
                     </div>
                     <span className={`
                       text-[11px] font-medium text-center leading-tight
-                      ${active ? 'text-kprimary' : 'text-white/60'}
+                      ${active ? 'text-kprimary' : locked ? 'text-white/40' : 'text-white/60'}
                     `}>
                       {item.name}
                     </span>
@@ -261,9 +282,9 @@ const MobileNavBar = () => {
               })}
             </div>
 
-            {/* Logout button */}
-            {isAuthenticated && (
-              <div className="px-4 pb-8 pt-2">
+            {/* Bottom actions */}
+            <div className="px-4 pb-8 pt-2">
+              {isAuthenticated ? (
                 <button
                   onClick={() => {
                     logout()
@@ -275,8 +296,27 @@ const MobileNavBar = () => {
                   <span>🚪</span>
                   <span>Se déconnecter</span>
                 </button>
-              </div>
-            )}
+              ) : (
+                <div className="flex gap-3">
+                  <Link
+                    to="/login"
+                    onClick={() => setShowDrawer(false)}
+                    className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-kprimary/40 text-kprimary text-sm font-semibold transition-colors hover:bg-kprimary/10"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    Connexion
+                  </Link>
+                  <Link
+                    to="/register"
+                    onClick={() => setShowDrawer(false)}
+                    className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl bg-kprimary text-white text-sm font-semibold transition-colors hover:bg-kprimary/90"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    S'inscrire
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

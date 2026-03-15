@@ -69,22 +69,24 @@ function NotFoundPage() {
   )
 }
 
-// Routes publiques (sans sidebar, full width)
-const PUBLIC_ROUTES = ['/', '/login', '/register', '/terms', '/privacy', '/payment/success', '/payment/error']
+// Routes sans app shell (login, register, terms — standalone pages)
+const STANDALONE_ROUTES = ['/login', '/register', '/terms', '/privacy', '/payment/success', '/payment/error']
 
 function AppLayout() {
   const { isAuthenticated } = useAuth()
   const location = useLocation()
 
-  const isPublicRoute = PUBLIC_ROUTES.includes(location.pathname)
+  const isStandaloneRoute = STANDALONE_ROUTES.includes(location.pathname)
   const isAdminRoute = location.pathname.startsWith('/admin')
-  const showAppShell = isAuthenticated && !isPublicRoute && !isAdminRoute
+  // Show app shell for all users (authenticated + non-authenticated landing preview)
+  // Non-authenticated users see the same interface but with locked navigation
+  const showAppShell = !isStandaloneRoute && !isAdminRoute
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <OfflineIndicator />
       <ConnectionStatus />
-      {showAppShell && <FlashcardsDueNotification />}
+      {showAppShell && isAuthenticated && <FlashcardsDueNotification />}
 
       {/* Navigation seulement pour les connectés sur routes protégées */}
       {showAppShell && (

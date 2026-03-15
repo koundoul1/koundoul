@@ -1,6 +1,7 @@
 /**
  * TopBar — Desktop only (hidden on mobile <768px)
- * Only shown for authenticated users (controlled by App.jsx)
+ * Shows for both authenticated and non-authenticated users.
+ * Non-authenticated: shows login/register buttons instead of streak/XP.
  */
 
 import React, { useState } from 'react'
@@ -14,12 +15,14 @@ import {
   Star,
   Search,
   LogOut,
-  User
+  User,
+  LogIn,
+  UserPlus
 } from 'lucide-react'
 
 const TopBar = () => {
   const location = useLocation()
-  const { user, logout } = useAuth()
+  const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
   const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
@@ -29,6 +32,7 @@ const TopBar = () => {
 
   const getPageTitle = () => {
     const path = location.pathname
+    if (path === '/') return 'Accueil'
     if (path.startsWith('/dashboard')) return 'Dashboard'
     if (path.startsWith('/courses')) return t('nav.courses')
     if (path.startsWith('/micro-lessons')) return t('dashboard.actions.microLessons') || 'Micro-Leçons'
@@ -62,17 +66,39 @@ const TopBar = () => {
 
       {/* Right side */}
       <div className="flex items-center gap-3">
-        {/* Streak & XP badges */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 text-sm font-bold">
-            <Flame className="w-4 h-4" />
-            <span>{user?.streak || 0}</span>
+        {isAuthenticated ? (
+          <>
+            {/* Streak & XP badges */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 text-sm font-bold">
+                <Flame className="w-4 h-4" />
+                <span>{user?.streak || 0}</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 text-sm font-bold">
+                <Star className="w-4 h-4" />
+                <span>{user?.xp?.toLocaleString() || 0}</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          /* Auth buttons for non-authenticated */
+          <div className="flex items-center gap-2">
+            <Link
+              to="/login"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-kprimary/40 text-kprimary hover:bg-kprimary/10 text-sm font-semibold transition-colors"
+            >
+              <LogIn className="w-4 h-4" />
+              Se connecter
+            </Link>
+            <Link
+              to="/register"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-kprimary text-white hover:bg-kprimary/90 text-sm font-semibold transition-colors"
+            >
+              <UserPlus className="w-4 h-4" />
+              S'inscrire
+            </Link>
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/15 text-yellow-400 text-sm font-bold">
-            <Star className="w-4 h-4" />
-            <span>{user?.xp?.toLocaleString() || 0}</span>
-          </div>
-        </div>
+        )}
 
         {/* Language selector */}
         <div className="relative">
@@ -112,19 +138,23 @@ const TopBar = () => {
           )}
         </div>
 
-        {/* Search */}
-        <button className="p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
-          <Search className="w-5 h-5" />
-        </button>
+        {/* Search — only for authenticated */}
+        {isAuthenticated && (
+          <button className="p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
+            <Search className="w-5 h-5" />
+          </button>
+        )}
 
-        {/* Notifications */}
-        <button className="relative p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
-          <Bell className="w-5 h-5" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-kaccent rounded-full"></span>
-        </button>
+        {/* Notifications — only for authenticated */}
+        {isAuthenticated && (
+          <button className="relative p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
+            <Bell className="w-5 h-5" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-kaccent rounded-full"></span>
+          </button>
+        )}
 
-        {/* User avatar dropdown */}
-        {user && (
+        {/* User avatar dropdown — only for authenticated */}
+        {isAuthenticated && user && (
           <div className="relative">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
