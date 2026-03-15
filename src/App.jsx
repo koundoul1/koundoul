@@ -77,7 +77,8 @@ function AppLayout() {
   const location = useLocation()
 
   const isPublicRoute = PUBLIC_ROUTES.includes(location.pathname)
-  const showAppShell = isAuthenticated && !isPublicRoute
+  const isAdminRoute = location.pathname.startsWith('/admin')
+  const showAppShell = isAuthenticated && !isPublicRoute && !isAdminRoute
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
