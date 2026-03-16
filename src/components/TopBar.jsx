@@ -17,8 +17,10 @@ import {
   LogOut,
   User,
   LogIn,
-  UserPlus
+  UserPlus,
+  Share2
 } from 'lucide-react'
+import ShareModal from './ShareModal'
 
 const TopBar = () => {
   const location = useLocation()
@@ -29,6 +31,7 @@ const TopBar = () => {
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
   const [showLangMenu, setShowLangMenu] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showShareModal, setShowShareModal] = useState(false)
 
   const getPageTitle = () => {
     const path = location.pathname
@@ -145,6 +148,15 @@ const TopBar = () => {
           </button>
         )}
 
+        {/* Share button */}
+        <button
+          onClick={() => setShowShareModal(true)}
+          className="p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all"
+          title="Partager l'app"
+        >
+          <Share2 className="w-5 h-5" />
+        </button>
+
         {/* Notifications — only for authenticated */}
         {isAuthenticated && (
           <button className="relative p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
@@ -191,6 +203,8 @@ const TopBar = () => {
           </div>
         )}
       </div>
+
+      {showShareModal && <ShareModal onClose={() => setShowShareModal(false)} />}
     </header>
   )
 }

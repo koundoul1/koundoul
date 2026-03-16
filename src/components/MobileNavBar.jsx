@@ -33,8 +33,10 @@ import {
   Sparkles,
   Lock,
   LogIn,
-  UserPlus
+  UserPlus,
+  Share2
 } from 'lucide-react'
+import ShareModal from './ShareModal'
 
 const MobileNavBar = () => {
   const location = useLocation()
@@ -45,6 +47,7 @@ const MobileNavBar = () => {
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
   const [showDrawer, setShowDrawer] = useState(false)
   const [showLangMenu, setShowLangMenu] = useState(false)
+  const [showShareModal, setShowShareModal] = useState(false)
 
   // Close drawer on route change
   useEffect(() => {
@@ -282,6 +285,20 @@ const MobileNavBar = () => {
               })}
             </div>
 
+            {/* Share button */}
+            <div className="px-4 pt-2">
+              <button
+                onClick={() => {
+                  setShowDrawer(false)
+                  setShowShareModal(true)
+                }}
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-kprimary/10 border border-kprimary/20 text-kprimary text-sm font-semibold transition-colors hover:bg-kprimary/20"
+              >
+                <Share2 className="w-4 h-4" />
+                Partager l'app
+              </button>
+            </div>
+
             {/* Bottom actions */}
             <div className="px-4 pb-8 pt-2">
               {isAuthenticated ? (
@@ -332,6 +349,8 @@ const MobileNavBar = () => {
           to { opacity: 1; }
         }
       `}</style>
+
+      {showShareModal && <ShareModal onClose={() => setShowShareModal(false)} />}
 
       {/* Mobile bottom spacer — only on mobile */}
       <div className="h-20 md:hidden"></div>

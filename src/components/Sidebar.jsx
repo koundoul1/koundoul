@@ -4,7 +4,7 @@
  * Non-authenticated: all modules visible but locked (redirect to /login on click).
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
@@ -32,14 +32,17 @@ import {
   Star,
   Lock,
   LogIn,
-  UserPlus
+  UserPlus,
+  Share2
 } from 'lucide-react'
+import ShareModal from './ShareModal'
 
 const Sidebar = () => {
   const location = useLocation()
   const { user, isAuthenticated, logout } = useAuth()
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [showShareModal, setShowShareModal] = useState(false)
 
   const isActive = (path) => {
     if (path === '/dashboard' || path === '/') return location.pathname === path
@@ -198,8 +201,15 @@ const Sidebar = () => {
             <Settings className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors flex-shrink-0" />
           </Link>
           <button
+            onClick={() => setShowShareModal(true)}
+            className="flex items-center gap-2 w-full mt-2 px-3 py-2 rounded-xl text-white/50 hover:text-white/80 hover:bg-white/5 text-[13px] font-medium transition-colors"
+          >
+            <Share2 className="w-4 h-4" />
+            <span>Partager l'app</span>
+          </button>
+          <button
             onClick={() => { logout(); navigate('/login'); }}
-            className="flex items-center gap-2 w-full mt-2 px-3 py-2 rounded-xl text-red-400 hover:bg-red-500/10 text-[13px] font-medium transition-colors"
+            className="flex items-center gap-2 w-full mt-1 px-3 py-2 rounded-xl text-red-400 hover:bg-red-500/10 text-[13px] font-medium transition-colors"
           >
             <span>🚪</span>
             <span>Se déconnecter</span>
@@ -208,6 +218,13 @@ const Sidebar = () => {
       ) : (
         /* Auth buttons for non-authenticated */
         <div className="p-3 border-t border-white/5 space-y-2">
+          <button
+            onClick={() => setShowShareModal(true)}
+            className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl text-white/50 hover:text-white/80 hover:bg-white/5 text-[13px] font-medium transition-colors"
+          >
+            <Share2 className="w-4 h-4" />
+            Partager l'app
+          </button>
           <Link
             to="/login"
             className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-xl border border-kprimary/40 text-kprimary hover:bg-kprimary/10 text-[13px] font-semibold transition-colors"
@@ -224,6 +241,7 @@ const Sidebar = () => {
           </Link>
         </div>
       )}
+      {showShareModal && <ShareModal onClose={() => setShowShareModal(false)} />}
     </aside>
   )
 }
