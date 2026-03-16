@@ -6,9 +6,27 @@
 // Configuration de l'URL de l'API
 // En production, utilise VITE_API_URL depuis les variables d'environnement
 // En développement, utilise localhost par défaut
-const API_BASE = import.meta.env.VITE_API_URL 
+const API_BASE = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api`
   : 'http://localhost:3001/api'
+
+// Simple in-memory cache for GET requests (5-minute TTL)
+const CACHE_TTL = 5 * 60 * 1000
+const CACHED_PATHS = ['/subscriptions/plans', '/badges/all', '/content/subjects']
+const cache = new Map()
+
+const getCached = (url) => {
+  const entry = cache.get(url)
+  if (entry && Date.now() - entry.ts < CACHE_TTL) return entry.data
+  if (entry) cache.delete(url)
+  return null
+}
+
+const setCache = (url, data) => {
+  if (CACHED_PATHS.some(p => url.includes(p))) {
+    cache.set(url, { data, ts: Date.now() })
+  }
+}
 
 // Helper pour les requêtes avec gestion d'erreurs
 const request = async (url, options = {}) => {
@@ -18,6 +36,13 @@ const request = async (url, options = {}) => {
     'Content-Type': 'application/json',
     ...(token && { Authorization: `Bearer ${token}` }),
     ...options.headers,
+  }
+
+  // Return cached response for GET requests on cacheable paths
+  const isGet = !options.method || options.method === 'GET'
+  if (isGet) {
+    const cached = getCached(url)
+    if (cached) return cached
   }
 
   try {
@@ -59,7 +84,9 @@ const request = async (url, options = {}) => {
       throw error
     }
 
-    return await response.json()
+    const data = await response.json()
+    if (isGet) setCache(url, data)
+    return data
   } catch (error) {
     console.error('API Error:', error)
     
