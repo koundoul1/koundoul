@@ -68,8 +68,25 @@ model User {
   challengeAttempts                                      ChallengeAttempt[]
   duelsAsChallenger                                      Duel[]               @relation("DuelChallenger")
   duelsAsOpponent                                        Duel[]               @relation("DuelOpponent")
+  notifications                                          Notification[]
 
   @@map("users")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // duel_invite, badge_earned, streak_reminder, challenge_start, level_up, new_message, payment_confirmed
+  title     String
+  message   String
+  data      Json?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, isRead])
+  @@index([userId, createdAt])
+  @@map("notifications")
 }
 
 model Badge {

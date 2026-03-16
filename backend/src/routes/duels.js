@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
+const { sendNotification } = require('../utils/notificationService');
 
 // GET / — Liste des duels publics disponibles
 router.get('/', authenticateToken, async (req, res) => {
@@ -202,6 +203,16 @@ router.post('/join/:inviteCode', authenticateToken, async (req, res) => {
       points: q.points || 10,
       time_limit_seconds: q.time_limit_seconds || 60
     }));
+
+    // Notify the challenger that someone joined
+    const joiner = await prisma.user.findUnique({ where: { id: userId }, select: { username: true } });
+    sendNotification(
+      duel.challengerId,
+      'duel_invite',
+      'Duel accepté !',
+      `${joiner?.username || 'Un joueur'} a rejoint ton duel en ${duel.subject}`,
+      { duelId: duel.id }
+    );
 
     res.json({
       success: true,
@@ -459,6 +470,23 @@ router.post('/:id/submit', authenticateToken, async (req, res) => {
       where: { id: req.params.id },
       data: updateData
     });
+
+    // Send notifications when duel is completed
+    if (updated.status === 'completed' && duelResult) {
+      const [challenger, opponent] = await Promise.all([
+        prisma.user.findUnique({ where: { id: duel.challengerId }, select: { username: true } }),
+        duel.opponentId ? prisma.user.findUnique({ where: { id: duel.opponentId }, select: { username: true } }) : null
+      ]);
+      if (duelResult.winnerId) {
+        const winnerName = duelResult.winnerId === duel.challengerId ? challenger?.username : opponent?.username;
+        const loserId = duelResult.winnerId === duel.challengerId ? duel.opponentId : duel.challengerId;
+        sendNotification(duelResult.winnerId, 'duel_invite', 'Duel gagné !', `Tu as remporté le duel ! +${duel.xpReward} XP`, { duelId: duel.id });
+        if (loserId) sendNotification(loserId, 'duel_invite', 'Duel terminé', `${winnerName} a gagné le duel. +50 XP`, { duelId: duel.id });
+      } else {
+        sendNotification(duel.challengerId, 'duel_invite', 'Duel terminé', 'Match nul ! +100 XP', { duelId: duel.id });
+        if (duel.opponentId) sendNotification(duel.opponentId, 'duel_invite', 'Duel terminé', 'Match nul ! +100 XP', { duelId: duel.id });
+      }
+    }
 
     res.json({
       success: true,

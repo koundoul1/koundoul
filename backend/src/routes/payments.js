@@ -4,6 +4,7 @@ const { authenticateToken } = require('../middlewares/auth');
 const axios = require('axios');
 const crypto = require('crypto');
 const prisma = require('../config/database');
+const { sendNotification } = require('../utils/notificationService');
 
 const WAVE_API_KEY = process.env.WAVE_API_KEY;
 const WAVE_WEBHOOK_SECRET = process.env.WAVE_WEBHOOK_SECRET;
@@ -231,6 +232,15 @@ router.post('/wave/webhook', async (req, res) => {
             where: { id: payment.id },
             data: { subscriptionId: subscription.id }
           });
+
+          // Notify user of successful payment
+          sendNotification(
+            payment.userId,
+            'payment_confirmed',
+            'Abonnement activé !',
+            `Ton abonnement ${plan.name} est maintenant actif. Bon apprentissage !`,
+            { planId: plan.id, subscriptionId: subscription.id }
+          );
 
           console.log(`✅ Abonnement créé pour user ${payment.userId}, plan ${plan.name}, expire le ${endDate.toISOString()}`);
         }

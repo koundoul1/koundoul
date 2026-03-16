@@ -216,6 +216,8 @@ app.use('/api/payments', paymentsRoutes);
 app.use('/api/parent', parentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
+const notificationsRoutes = require('./routes/notifications');
+app.use('/api/notifications', notificationsRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

@@ -9,7 +9,6 @@ import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
 import {
-  Bell,
   ChevronDown,
   Flame,
   Star,
@@ -21,6 +20,7 @@ import {
   Share2
 } from 'lucide-react'
 import ShareModal from './ShareModal'
+import NotificationBell from './NotificationBell'
 
 const TopBar = () => {
   const location = useLocation()
@@ -159,10 +159,9 @@ const TopBar = () => {
 
         {/* Notifications — only for authenticated */}
         {isAuthenticated && (
-          <button className="relative p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
-            <Bell className="w-5 h-5" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-kaccent rounded-full"></span>
-          </button>
+          <div className="relative">
+            <NotificationBell />
+          </div>
         )}
 
         {/* User avatar dropdown — only for authenticated */}
