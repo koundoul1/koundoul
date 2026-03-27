@@ -83,6 +83,7 @@ const Subscriptions = () => {
   const getPlanIcon = (planName) => {
     switch (planName) {
       case 'FREE': return <Sparkles className="w-8 h-8" />;
+      case 'DAILY': return <Zap className="w-8 h-8" />;
       case 'PREMIUM':
       case 'PREMIUM_YEARLY': return <Crown className="w-8 h-8" />;
       case 'FAMILY': return <Users className="w-8 h-8" />;
@@ -168,6 +169,7 @@ const Subscriptions = () => {
                 {/* Header du plan */}
                 <div className={`w-16 h-16 bg-gradient-to-br ${
                   isFree ? 'from-gray-500 to-gray-600' :
+                  plan.name === 'DAILY' ? 'from-yellow-500 to-orange-500' :
                   plan.name === 'FAMILY' ? 'from-blue-500 to-cyan-500' :
                   'from-purple-500 to-pink-500'
                 } rounded-xl flex items-center justify-center mb-4 text-white`}>

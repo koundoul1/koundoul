@@ -119,7 +119,9 @@ router.post('/create', authenticateToken, async (req, res) => {
     const startDate = new Date();
     const endDate = new Date();
     
-    if (plan.interval === 'monthly') {
+    if (plan.interval === 'daily') {
+      endDate.setDate(endDate.getDate() + 1);
+    } else if (plan.interval === 'monthly') {
       endDate.setMonth(endDate.getMonth() + 1);
     } else if (plan.interval === 'yearly') {
       endDate.setFullYear(endDate.getFullYear() + 1);
