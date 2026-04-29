@@ -18,6 +18,19 @@
 
 ---
 
+## Mini-correctifs securite (post-review Phase 1)
+
+### 1. Login password validation supprimee (`e5efcf2`)
+La validation `password.length < 8` cote frontend Login.jsx bloquait les utilisateurs existants avec des passwords de 6-7 chars. Supprimee : le login ne verifie plus que "champ requis". La validation 8 chars reste sur Register et ChangePassword. Le backend `/auth/login` ne valide pas la longueur (bcrypt.compare uniquement).
+
+### 2. JWT_SECRET fail-fast (`d8f35f7`)
+Supprime le fallback `|| 'default-secret'` dans 7 occurrences (auth.js + middlewares/auth.js). Le serveur refuse maintenant de demarrer si `JWT_SECRET` est absent ou < 32 caracteres. Message d'erreur clair avec instructions de generation.
+
+### 3. Rate limiting auth (`a6680d2`)
+Ajoute `express-rate-limit` sur `/auth/login` (5 req/IP/15min) et `/auth/register` (3 req/IP/1h). Retourne 429 avec message FR. Bypass automatique en `NODE_ENV=test`.
+
+---
+
 ## Commits Phase 1
 
 ```
