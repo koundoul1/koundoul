@@ -2,7 +2,31 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Stack
+
+| Couche | Technologie | Version |
+|--------|-------------|---------|
+| **Frontend** | React | 18.2 |
+| Bundler | Vite | 4.3 |
+| Routing | React Router DOM | 6.8 |
+| Styling | Tailwind CSS | 3.2 |
+| Icônes | Lucide React | 0.263 |
+| Maths | KaTeX + react-katex | 0.16 |
+| Graphiques | Plotly.js + react-plotly.js | 3.2 / 2.6 |
+| Markdown | react-markdown + remark-gfm + rehype-raw | 10.1 |
+| QR Code | qrcode.react | 4.2 |
+| Tests | Jest + jsdom + babel-jest | — |
+| Lint | ESLint (react, react-hooks, react-refresh) | 8.38 |
+| **Backend** | Express (Node.js) | 4.18 |
+| ORM / DB | Prisma + Supabase (PostgreSQL) | 5.0 |
+| Auth | jsonwebtoken + bcryptjs | 9.0 / 2.4 |
+| Sécurité | Helmet + CORS | 7.1 / 2.8 |
+| Logging | Morgan | 1.10 |
+| **Déploiement** | Vercel (frontend) / Render (backend) | — |
+
 ## Commands
+
+### Frontend (racine du projet)
 
 ```bash
 npm run dev          # Start dev server on http://localhost:3002
@@ -19,6 +43,18 @@ To run a single test file:
 npx jest src/utils/__tests__/errorAnalyzer.test.js
 ```
 
+### Backend (`backend/`)
+
+```bash
+npm start            # Start server (node src/index.js)
+npm run dev          # Start with nodemon (hot reload)
+npm run migrate      # Apply Prisma migrations (deploy)
+npm run migrate:dev  # Create/apply Prisma migrations (dev)
+npm run migrate:status # Check migration status
+npm run check-migrations # Custom migration check script
+npm run seed         # Seed database (src/seeds/seedAll.js)
+```
+
 ## Environment
 
 Copy `.env.example` to `.env` and set:
@@ -26,7 +62,7 @@ Copy `.env.example` to `.env` and set:
 VITE_API_URL=http://localhost:5000   # or https://koundoul-backend.onrender.com in prod
 ```
 
-The Vite dev server proxies `/api` → `http://localhost:3001`. The `VITE_` prefix is required for Vite to expose variables to the client.
+The Vite dev server proxies `/api` → `http://localhost:5000`. The `VITE_` prefix is required for Vite to expose variables to the client.
 
 ## Architecture
 
