@@ -6,6 +6,18 @@
 
 ---
 
+## EN ATTENTE — A valider plus tard
+
+- [ ] **Wave Payment end-to-end** : tester le flow complet en sandbox des que les cles Wave seront disponibles dans `.env.local`. Verifier :
+  - [ ] Initiation paiement → redirection Wave OK
+  - [ ] Callback `/payment/success` → abonnement actif en DB
+  - [ ] Callback `/payment/error` → message clair + bouton Retry
+  - [ ] Webhook backend recoit bien la confirmation
+  - [ ] `/profile` affiche `subscription.expires_at` et historique
+  - [ ] `/payment/history` liste les transactions
+
+---
+
 ## Commits Phase 1
 
 ```
