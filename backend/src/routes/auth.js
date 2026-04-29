@@ -2,11 +2,31 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const rateLimit = require('express-rate-limit');
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 
+// ── Rate limiters for auth endpoints ──
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: () => process.env.NODE_ENV === 'test',
+  message: { error: 'Trop de tentatives de connexion. Réessayez dans 15 minutes.' }
+});
+
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 3,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: () => process.env.NODE_ENV === 'test',
+  message: { error: 'Trop de tentatives d\'inscription. Réessayez dans 1 heure.' }
+});
+
 // Register
-router.post('/register', async (req, res, next) => {
+router.post('/register', registerLimiter, async (req, res, next) => {
   try {
     const { email, password, firstName, lastName, username } = req.body;
 
@@ -85,7 +105,7 @@ router.post('/register', async (req, res, next) => {
 });
 
 // Login
-router.post('/login', async (req, res, next) => {
+router.post('/login', loginLimiter, async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
