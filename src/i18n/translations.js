@@ -393,11 +393,6 @@ export default {
       }
     },
     
-    quiz: {
-      title: 'Quiz',
-      startQuiz: 'Commencer le quiz'
-    },
-    
     // Authentification
     auth: {
       login: {
@@ -1245,11 +1240,6 @@ export default {
         medium: 'Medium',
         hard: 'Hard'
       }
-    },
-    
-    quiz: {
-      title: 'Quiz',
-      startQuiz: 'Start Quiz'
     },
     
     // Authentication
