@@ -9,6 +9,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.js',
     css: false,
+    include: ['src/__tests__/**/*.{test,spec}.{js,jsx}'],
   },
   server: {
     port: 3002,
