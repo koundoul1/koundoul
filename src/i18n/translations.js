@@ -419,7 +419,7 @@ export default {
           emailRequired: 'L\'email est requis',
           emailInvalid: 'Format d\'email invalide',
           passwordRequired: 'Le mot de passe est requis',
-          passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractères'
+          passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères'
         }
       },
       register: {
@@ -455,7 +455,7 @@ export default {
           emailInvalid: 'Format d\'email invalide',
           emailTaken: 'Cet email est déjà utilisé',
           passwordRequired: 'Le mot de passe est requis',
-          passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractères',
+          passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
           passwordComplexity: 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre',
           confirmPasswordRequired: 'La confirmation du mot de passe est requise',
           passwordsNotMatch: 'Les mots de passe ne correspondent pas'
@@ -1270,7 +1270,7 @@ export default {
           emailRequired: 'Email is required',
           emailInvalid: 'Invalid email format',
           passwordRequired: 'Password is required',
-          passwordMinLength: 'Password must contain at least 6 characters'
+          passwordMinLength: 'Password must contain at least 8 characters'
         }
       },
       register: {
@@ -1306,7 +1306,7 @@ export default {
           emailInvalid: 'Invalid email format',
           emailTaken: 'This email is already in use',
           passwordRequired: 'Password is required',
-          passwordMinLength: 'Password must contain at least 6 characters',
+          passwordMinLength: 'Password must contain at least 8 characters',
           passwordComplexity: 'Password must contain at least one uppercase letter, one lowercase letter and one number',
           confirmPasswordRequired: 'Password confirmation is required',
           passwordsNotMatch: 'Passwords do not match'

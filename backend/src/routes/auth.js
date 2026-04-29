@@ -14,8 +14,8 @@ router.post('/register', async (req, res, next) => {
       return res.status(400).json({ error: 'Email et mot de passe requis' });
     }
 
-    if (password.length < 6) {
-      return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 6 caractères' });
+    if (password.length < 8) {
+      return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractères' });
     }
 
     // Vérifier si l'email existe déjà
@@ -229,8 +229,8 @@ router.put('/change-password', authenticateToken, async (req, res, next) => {
       return res.status(400).json({ error: 'Mot de passe actuel et nouveau mot de passe requis' });
     }
 
-    if (newPassword.length < 6) {
-      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 6 caractères' });
+    if (newPassword.length < 8) {
+      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractères' });
     }
 
     const user = await prisma.user.findUnique({

@@ -57,7 +57,7 @@ const Login = () => {
     }
     if (!formData.password) {
       newErrors.password = t('auth.login.errors.passwordRequired')
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.length < 8) {
       newErrors.password = t('auth.login.errors.passwordMinLength')
     }
     setErrors(newErrors)

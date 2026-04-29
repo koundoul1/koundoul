@@ -74,12 +74,14 @@ const request = async (url, options = {}) => {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         // Ne pas rediriger automatiquement, laisser le composant gérer
-        const error = new Error(errorData.error?.message || errorData.message || 'Session expirée')
+        const errorMsg401 = (typeof errorData.error === 'string' ? errorData.error : errorData.error?.message) || errorData.message || 'Session expirée'
+        const error = new Error(errorMsg401)
         error.status = 401
         throw error
       }
       
-      const error = new Error(errorData.error?.message || errorData.message || 'Une erreur est survenue')
+      const errorMsg = (typeof errorData.error === 'string' ? errorData.error : errorData.error?.message) || errorData.message || 'Une erreur est survenue'
+      const error = new Error(errorMsg)
       error.status = response.status
       throw error
     }
