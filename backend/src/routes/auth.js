@@ -68,7 +68,7 @@ router.post('/register', async (req, res, next) => {
     // Générer le token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
-      process.env.JWT_SECRET || 'default-secret',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -119,7 +119,7 @@ router.post('/login', async (req, res, next) => {
     // Générer le token
     const token = jwt.sign(
       { userId: user.id, email: user.email, is_admin: user.is_admin || false, is_super_admin: user.is_super_admin || false },
-      process.env.JWT_SECRET || 'default-secret',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -310,12 +310,12 @@ router.post('/refresh-token', async (req, res, next) => {
     }
 
     // Vérifier le token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Générer un nouveau token
     const newToken = jwt.sign(
       { userId: decoded.userId, email: decoded.email, is_admin: decoded.is_admin || false, is_super_admin: decoded.is_super_admin || false },
-      process.env.JWT_SECRET || 'default-secret',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 

@@ -6,6 +6,15 @@ const morgan = require('morgan');
 const { initPlans } = require('./scripts/initPlans');
 const prisma = require('./config/database');
 
+// ── Fail-fast: required environment variables ──
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+  console.error('❌ FATAL: JWT_SECRET is missing or too short (minimum 32 characters).');
+  console.error('   Set a strong random secret in your .env file.');
+  console.error('   Example: JWT_SECRET=$(openssl rand -hex 32)');
+  process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
