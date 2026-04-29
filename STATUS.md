@@ -18,6 +18,44 @@
 
 ---
 
+## Fondations — filet de securite lint + tests
+
+### ESLint (`5099b47`)
+- Config : `.eslintrc.cjs` avec `eslint:recommended` + `react/recommended` + `react/jsx-runtime` + `react-hooks/recommended`
+- Resultat : **0 erreurs, 503 warnings**, exit code 0
+- 6 erreurs pre-existantes corrigees : 2 duplicate keys i18n, 1 import manquant (Clock), 3 regex escapes inutiles
+- Regles en warn a durcir en Phase 6 :
+  - `no-undef` (194 warnings — principalement `import.meta.env`)
+  - `no-unused-vars` (169 warnings)
+  - `react/no-unescaped-entities` (106 warnings)
+  - `react-hooks/exhaustive-deps` (31 warnings)
+- `react/prop-types` : desactive (pas de PropTypes dans le projet)
+
+### Vitest (`6abbca6`, `261baac`)
+- Stack : vitest 2.x + @testing-library/react + jest-dom + user-event + jsdom 24
+- Vitest 4.x refuse (rolldown native bindings), jsdom 29 refuse (ESM/CJS compat)
+- 5 fichiers de test, **15 tests baseline**, tous verts
+- Tests de regression Phase 1 :
+  - `api.test.js` (4) : verrouille le fix d'extraction d'erreurs (root cause P0)
+  - `Login.test.jsx` (3) : rendu, champs requis, pas de validation longueur password
+  - `Register.test.jsx` (3) : rendu, champs requis, password min 8 chars
+  - `ProtectedRoute.test.jsx` (3) : redirect /login, render children, loader
+  - `errorAnalyzer.test.js` (2) : smoke tests utility pure
+- 3 fichiers de tests pre-existants exclus (5 echecs non lies a cette branche) :
+  - `src/utils/__tests__/errorAnalyzer.test.js` — 2 assertions obsoletes
+  - `src/utils/__tests__/learningProfiles.test.js` — 2 assertions obsoletes
+  - `src/components/solver/__tests__/HintSystem.test.jsx` — 1 assertion obsolete
+  - A corriger en Phase 6
+
+### CI (`91254ac`)
+- `.github/workflows/ci.yml` : lint + test sur push (main, auto-qa-remediation) et PRs
+- Node 20 LTS, `npm ci`
+
+### Confirmation
+`npm run lint` exit 0, `npm test` exit 0. Filet de securite en place, pret pour Phase 2.
+
+---
+
 ## Mini-correctifs securite (post-review Phase 1)
 
 ### 1. Login password validation supprimee (`e5efcf2`)
