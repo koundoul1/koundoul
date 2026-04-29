@@ -27,6 +27,7 @@ const Subscriptions = () => {
   const [currentSubscription, setCurrentSubscription] = useState(null);
   const [loading, setLoading] = useState(true);
   const [processingPlanId, setProcessingPlanId] = useState(null);
+  const [paymentError, setPaymentError] = useState('');
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -60,18 +61,19 @@ const Subscriptions = () => {
 
     try {
       setProcessingPlanId(plan.id);
+      setPaymentError('');
 
       const response = await api.payments.initiateWave({ planId: plan.id });
 
       if (response.success && response.data.wave_launch_url) {
         window.location.href = response.data.wave_launch_url;
       } else {
-        alert('Erreur lors de l\'initiation du paiement.');
+        setPaymentError(t('subscriptions.errors.initFailed'));
         setProcessingPlanId(null);
       }
     } catch (error) {
       console.error('Erreur paiement:', error);
-      alert(error.message || 'Erreur lors du paiement.');
+      setPaymentError(error.message || t('subscriptions.errors.initFailed'));
       setProcessingPlanId(null);
     }
   };
@@ -139,6 +141,13 @@ const Subscriptions = () => {
 
       {/* Plans disponibles */}
       <div className="max-w-6xl mx-auto px-4 py-8">
+        {/* Payment error banner */}
+        {paymentError && (
+          <div className="mb-6 bg-red-500/10 border border-red-500/30 rounded-xl p-4 flex items-center justify-between">
+            <p className="text-sm text-red-400">{paymentError}</p>
+            <button onClick={() => setPaymentError('')} className="text-red-400 hover:text-red-300 ml-4 text-sm font-medium">✕</button>
+          </div>
+        )}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {plans.map((plan) => {
             const isCurrentPlan = currentSubscription?.planId === plan.id;

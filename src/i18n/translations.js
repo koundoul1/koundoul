@@ -825,6 +825,9 @@ export default {
         active: 'Actif',
         validUntil: 'Valide jusqu\'au'
       },
+      errors: {
+        initFailed: 'Erreur lors de l\'initiation du paiement. Veuillez réessayer.'
+      },
       payment: {
         success: 'Paiement réussi ! Votre abonnement est maintenant actif.',
         error: 'Erreur lors du paiement. Veuillez réessayer.',
@@ -1676,6 +1679,9 @@ export default {
         title: 'Active Subscription',
         active: 'Active',
         validUntil: 'Valid until'
+      },
+      errors: {
+        initFailed: 'Payment initiation failed. Please try again.'
       },
       payment: {
         success: 'Payment successful! Your subscription is now active.',

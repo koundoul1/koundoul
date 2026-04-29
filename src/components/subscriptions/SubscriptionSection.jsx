@@ -1,20 +1,18 @@
 /**
  * 📦 Section Abonnements dans le Profil
- * Gestion des abonnements et paiements
+ * Affiche l'abonnement actuel et l'historique des paiements
  */
 
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import api from '../../services/api'
-import { CreditCard, Loader2, CheckCircle, XCircle, Calendar, Zap } from 'lucide-react'
-import PaymentModal from './PaymentModal'
+import { Loader2, CheckCircle, Calendar, ExternalLink, CreditCard, Clock } from 'lucide-react'
 
 const SubscriptionSection = () => {
-  const [plans, setPlans] = useState([])
+  const navigate = useNavigate()
   const [currentSubscription, setCurrentSubscription] = useState(null)
+  const [payments, setPayments] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [selectedPlan, setSelectedPlan] = useState(null)
-  const [showPaymentModal, setShowPaymentModal] = useState(false)
 
   useEffect(() => {
     loadData()
@@ -23,218 +21,109 @@ const SubscriptionSection = () => {
   const loadData = async () => {
     try {
       setLoading(true)
-      const [plansRes, subscriptionRes] = await Promise.all([
-        api.subscriptions.getPlans(),
-        api.subscriptions.getMySubscription()
+      const [subscriptionRes, paymentsRes] = await Promise.all([
+        api.subscriptions.getMySubscription().catch(() => ({ success: false })),
+        api.payments.getHistory().catch(() => ({ success: false, data: [] }))
       ])
-
-      if (plansRes.success) {
-        setPlans(plansRes.data)
-      }
 
       if (subscriptionRes.success && subscriptionRes.data) {
         setCurrentSubscription(subscriptionRes.data)
       }
+
+      if (paymentsRes.success && paymentsRes.data) {
+        setPayments(Array.isArray(paymentsRes.data) ? paymentsRes.data : [])
+      }
     } catch (err) {
-      setError('Erreur lors du chargement des données')
-      console.error(err)
+      console.error('Erreur chargement abonnement:', err)
     } finally {
       setLoading(false)
     }
   }
 
-  const handleSelectPlan = (plan) => {
-    setSelectedPlan(plan)
-    setShowPaymentModal(true)
-  }
-
-  const handlePaymentSuccess = () => {
-    setShowPaymentModal(false)
-    setSelectedPlan(null)
-    loadData()
-  }
-
-  const formatPrice = (amount, currency = 'xof') => {
-    if (currency === 'xof') {
-      return `${(amount / 1).toLocaleString('fr-FR')} FCFA`
+  const getStatusLabel = (status) => {
+    const labels = {
+      active: 'Actif', pending: 'En attente', completed: 'Complété',
+      failed: 'Échoué', cancelled: 'Annulé', expired: 'Expiré'
     }
-    return `${(amount / 100).toFixed(2)} €`
+    return labels[status?.toLowerCase()] || status
   }
 
   const getStatusColor = (status) => {
-    switch (status) {
-      case 'ACTIVE':
-        return 'text-green-600 bg-green-50'
-      case 'PENDING_PAYMENT':
-        return 'text-yellow-600 bg-yellow-50'
-      case 'EXPIRED':
-        return 'text-red-600 bg-red-50'
-      case 'CANCELLED':
-        return 'text-gray-600 bg-gray-50'
-      default:
-        return 'text-gray-600 bg-gray-50'
-    }
-  }
-
-  const getStatusLabel = (status) => {
-    switch (status) {
-      case 'ACTIVE':
-        return 'Actif'
-      case 'PENDING_PAYMENT':
-        return 'Paiement en attente'
-      case 'EXPIRED':
-        return 'Expiré'
-      case 'CANCELLED':
-        return 'Annulé'
-      default:
-        return status
-    }
+    const s = status?.toLowerCase()
+    if (s === 'active' || s === 'completed') return 'text-green-400 bg-green-500/15'
+    if (s === 'pending') return 'text-yellow-400 bg-yellow-500/15'
+    if (s === 'failed' || s === 'cancelled' || s === 'expired') return 'text-red-400 bg-red-500/15'
+    return 'text-gray-400 bg-gray-500/15'
   }
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+      <div className="flex items-center justify-center py-8">
+        <Loader2 className="h-6 w-6 animate-spin text-kprimary" />
       </div>
     )
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Abonnement actuel */}
-      {currentSubscription && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900">Mon Abonnement</h3>
-            <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(currentSubscription.status)}`}>
-              {getStatusLabel(currentSubscription.status)}
-            </span>
+      {currentSubscription ? (
+        <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold text-green-400">Abonnement actif</span>
+            <CheckCircle className="h-5 w-5 text-green-400" />
           </div>
-
-          <div className="space-y-3">
-            <div>
-              <div className="text-2xl font-bold text-gray-900">{currentSubscription.plan.name}</div>
-              <div className="text-sm text-gray-500">{currentSubscription.plan.description}</div>
-            </div>
-
-            <div className="flex items-center text-sm text-gray-600">
-              <Calendar className="h-4 w-4 mr-2" />
-              <span>
-                Valable jusqu'au {new Date(currentSubscription.endDate).toLocaleDateString('fr-FR', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                })}
-              </span>
-            </div>
-
-            {currentSubscription.plan.features && (
-              <div className="mt-4">
-                <div className="text-sm font-medium text-gray-700 mb-2">Fonctionnalités incluses :</div>
-                <ul className="space-y-1">
-                  {currentSubscription.plan.features.map((feature, index) => (
-                    <li key={index} className="flex items-center text-sm text-gray-600">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+          <div className="text-lg font-bold text-white">
+            {currentSubscription.plan?.displayName || currentSubscription.plan?.name}
           </div>
+          <div className="flex items-center text-sm text-gray-400 mt-1">
+            <Calendar className="h-3.5 w-3.5 mr-1.5" />
+            Valide jusqu'au {new Date(currentSubscription.endDate).toLocaleDateString('fr-FR')}
+          </div>
+        </div>
+      ) : (
+        <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
+          <p className="text-gray-400 text-sm mb-3">Aucun abonnement actif</p>
+          <button
+            onClick={() => navigate('/subscriptions')}
+            className="px-4 py-2 rounded-xl font-medium text-sm transition-colors flex items-center mx-auto gap-2"
+            style={{ backgroundColor: '#1DC8FF', color: '#000' }}
+          >
+            <ExternalLink className="h-4 w-4" />
+            Voir les plans
+          </button>
         </div>
       )}
 
-      {/* Plans disponibles */}
-      <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          {currentSubscription ? 'Changer de plan' : 'Choisir un abonnement'}
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {plans.map((plan) => {
-            const isCurrentPlan = currentSubscription?.planId === plan.id && currentSubscription?.status === 'ACTIVE'
-            const isPopular = plan.name === 'Premium'
-
-            return (
-              <div
-                key={plan.id}
-                className={`bg-white rounded-xl shadow-sm border-2 ${
-                  isPopular ? 'border-blue-500' : 'border-gray-200'
-                } p-6 relative ${isCurrentPlan ? 'opacity-60' : ''}`}
-              >
-                {isPopular && (
-                  <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-medium px-3 py-1 rounded-bl-lg">
-                    Populaire
+      {/* Historique des paiements */}
+      {payments.length > 0 && (
+        <div>
+          <h4 className="text-sm font-semibold text-gray-300 mb-2 flex items-center">
+            <Clock className="h-4 w-4 mr-1.5" />
+            Historique des paiements
+          </h4>
+          <div className="space-y-2">
+            {payments.slice(0, 5).map((payment) => (
+              <div key={payment.id} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/8">
+                <div>
+                  <div className="text-sm font-medium text-white">
+                    {Number(payment.amount).toLocaleString('fr-FR')} FCFA
                   </div>
-                )}
-
-                <div className="mb-4">
-                  <h4 className="text-xl font-bold text-gray-900">{plan.name}</h4>
-                  <div className="mt-2">
-                    <span className="text-3xl font-bold text-gray-900">{formatPrice(plan.price, plan.currency)}</span>
-                    <span className="text-gray-500 text-sm">/mois</span>
+                  <div className="text-xs text-gray-500 mt-0.5">
+                    {new Date(payment.createdAt).toLocaleDateString('fr-FR')}
+                    {payment.subscription?.plan?.displayName && ` • ${payment.subscription.plan.displayName}`}
                   </div>
                 </div>
-
-                {plan.description && (
-                  <p className="text-sm text-gray-600 mb-4">{plan.description}</p>
-                )}
-
-                {plan.features && (
-                  <ul className="space-y-2 mb-6">
-                    {plan.features.map((feature, index) => (
-                      <li key={index} className="flex items-start text-sm text-gray-600">
-                        <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {isCurrentPlan ? (
-                  <button
-                    disabled
-                    className="w-full py-2 px-4 bg-gray-100 text-gray-400 rounded-lg cursor-not-allowed font-medium"
-                  >
-                    Plan actuel
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleSelectPlan(plan)}
-                    className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
-                      isPopular
-                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                        : 'bg-gray-900 text-white hover:bg-gray-800'
-                    }`}
-                  >
-                    <CreditCard className="h-4 w-4 inline mr-2" />
-                    Choisir ce plan
-                  </button>
-                )}
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(payment.status)}`}>
+                  {getStatusLabel(payment.status)}
+                </span>
               </div>
-            )
-          })}
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Modal de paiement */}
-      {showPaymentModal && selectedPlan && (
-        <PaymentModal
-          plan={selectedPlan}
-          subscription={currentSubscription}
-          onClose={() => {
-            setShowPaymentModal(false)
-            setSelectedPlan(null)
-          }}
-          onSuccess={handlePaymentSuccess}
-        />
       )}
     </div>
   )
 }
 
 export default SubscriptionSection
-
-
-
