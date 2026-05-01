@@ -4,6 +4,7 @@ const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const { getSupabase, isSupabaseConfigured } = require('../config/supabase');
 const { filterStatic, getStaticById } = require('../data/microLessonsFallback');
 const prisma = require('../config/database');
+const { processAction } = require('../services/gamification');
 const TABLE_MICRO_LESSONS = 'microlessons';
 
 console.log('[microlessons] SUPABASE_URL:', !!process.env.SUPABASE_URL);
@@ -160,10 +161,7 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
 
     const completion = await prisma.microLessonCompletion.upsert({
       where: {
-        userId_lessonId: {
-          userId,
-          lessonId: id
-        }
+        userId_lessonId: { userId, lessonId: id }
       },
       update: {
         completed: true,
@@ -181,40 +179,13 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
       }
     });
 
-    await prisma.user.update({
-      where: { id: userId },
-      data: { xp: { increment: xpEarned } }
-    });
-
-    const completionsCount = await prisma.microLessonCompletion.count({
-      where: { userId, completed: true }
-    });
-
-    if (completionsCount === 1) {
-      const firstStepBadge = await prisma.badge.findUnique({
-        where: { id: 'first-step' }
-      });
-      if (firstStepBadge) {
-        await prisma.userBadge.upsert({
-          where: {
-            userId_badgeId: {
-              userId,
-              badgeId: 'first-step'
-            }
-          },
-          update: {},
-          create: {
-            userId,
-            badgeId: 'first-step'
-          }
-        });
-      }
-    }
+    const gamification = await processAction(userId, { type: 'complete_lesson', xp: xpEarned });
 
     res.json({
       success: true,
       data: completion,
-      xpEarned
+      xpEarned,
+      gamification
     });
   } catch (error) {
     next(error);

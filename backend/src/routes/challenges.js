@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const prisma = require('../config/database');
+const { processAction } = require('../services/gamification');
 
 // GET / — Tous les challenges actifs
 router.get('/', optionalAuth, async (req, res) => {
@@ -240,13 +241,12 @@ router.post('/:id/submit', authenticateToken, async (req, res) => {
       }
     });
 
-    // Ajouter XP si score > 50%
+    // XP if score > 50%
     const maxScore = questionsArray.reduce((sum, q) => sum + (q.points || 10), 0);
-    if (score > maxScore * 0.5) {
-      await prisma.user.update({
-        where: { id: userId },
-        data: { xp: { increment: challenge.xpReward } }
-      });
+    const xpEarned = score > maxScore * 0.5 ? challenge.xpReward : 0;
+    let gamification = null;
+    if (xpEarned > 0) {
+      gamification = await processAction(userId, { type: 'submit_challenge', xp: xpEarned });
     }
 
     res.json({
@@ -255,8 +255,9 @@ router.post('/:id/submit', authenticateToken, async (req, res) => {
         score,
         maxScore,
         percentage: maxScore > 0 ? Math.round((score / maxScore) * 100) : 0,
-        xpEarned: score > maxScore * 0.5 ? challenge.xpReward : 0,
-        results
+        xpEarned,
+        results,
+        gamification
       }
     });
   } catch (error) {

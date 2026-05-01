@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const prisma = require('../config/database');
+const { processAction } = require('../services/gamification');
 
 // Get all quizzes (question banks)
 router.get('/', optionalAuth, async (req, res, next) => {
@@ -149,19 +150,17 @@ router.post('/attempt/:attemptId/submit', authenticateToken, async (req, res, ne
       }
     });
 
-    // Ajouter XP (10 XP par question correcte)
+    // XP: 10 per correct answer
     const xpEarned = correct * 10;
-    await prisma.user.update({
-      where: { id: userId },
-      data: { xp: { increment: xpEarned } }
-    });
+    const gamification = await processAction(userId, { type: 'submit_quiz', xp: xpEarned });
 
     res.json({
       success: true,
       data: {
         ...updated,
         correct,
-        xpEarned
+        xpEarned,
+        gamification
       }
     });
   } catch (error) {

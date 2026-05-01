@@ -3,6 +3,7 @@ const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 const { sendNotification } = require('../utils/notificationService');
+const { processAction } = require('../services/gamification');
 
 // GET / — Liste des duels publics disponibles
 router.get('/', authenticateToken, async (req, res) => {
@@ -443,18 +444,14 @@ router.post('/:id/submit', authenticateToken, async (req, res) => {
       }
       // Parfaite égalité : winnerId reste null
 
-      // Attribuer XP : gagnant +200, perdant +50, égalité +100 chacun
+      // Award XP via gamification service: winner +200, loser +50, draw +100
       if (updateData.winnerId) {
         const loserId = updateData.winnerId === duel.challengerId ? duel.opponentId : duel.challengerId;
-        await prisma.$transaction([
-          prisma.user.update({ where: { id: updateData.winnerId }, data: { xp: { increment: duel.xpReward } } }),
-          prisma.user.update({ where: { id: loserId }, data: { xp: { increment: 50 } } })
-        ]);
+        await processAction(updateData.winnerId, { type: 'win_duel', xp: duel.xpReward });
+        if (loserId) await processAction(loserId, { type: 'lose_duel', xp: 50 });
       } else if (duel.opponentId) {
-        await prisma.$transaction([
-          prisma.user.update({ where: { id: duel.challengerId }, data: { xp: { increment: 100 } } }),
-          prisma.user.update({ where: { id: duel.opponentId }, data: { xp: { increment: 100 } } })
-        ]);
+        await processAction(duel.challengerId, { type: 'draw_duel', xp: 100 });
+        await processAction(duel.opponentId, { type: 'draw_duel', xp: 100 });
       }
 
       duelResult = {
