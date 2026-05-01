@@ -25,6 +25,7 @@ const AUTH_ACTIONS = {
   REGISTER_FAILURE: 'REGISTER_FAILURE',
   LOGOUT: 'LOGOUT',
   UPDATE_USER: 'UPDATE_USER',
+  UPDATE_USER_STATS: 'UPDATE_USER_STATS',
   SET_LOADING: 'SET_LOADING',
   CLEAR_ERROR: 'CLEAR_ERROR'
 }
@@ -76,6 +77,17 @@ const authReducer = (state, action) => {
       return {
         ...state,
         user: { ...state.user, ...action.payload }
+      }
+
+    case AUTH_ACTIONS.UPDATE_USER_STATS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          xp: action.payload.totalXp ?? state.user?.xp,
+          level: action.payload.newLevel ?? state.user?.level,
+          streak: action.payload.newStreak ?? state.user?.streak
+        }
       }
 
     case AUTH_ACTIONS.SET_LOADING:
@@ -254,6 +266,12 @@ export const AuthProvider = ({ children }) => {
     dispatch({ type: AUTH_ACTIONS.CLEAR_ERROR })
   }
 
+  // Update user stats after gamification action (XP, level, streak)
+  const updateUserStats = (gamification) => {
+    if (!gamification) return
+    dispatch({ type: AUTH_ACTIONS.UPDATE_USER_STATS, payload: gamification })
+  }
+
   // Valeur du contexte
   const value = {
     // État
@@ -269,7 +287,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     updateProfile,
     changePassword,
-    clearError
+    clearError,
+    updateUserStats
   }
 
   return (

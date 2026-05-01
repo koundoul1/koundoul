@@ -3,11 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import { ArrowLeft, Clock, Star, Tag, CheckCircle2, Trophy } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { useGamification } from '../hooks/useGamification'
 
 export default function MicroLessonDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { user } = useAuth()
+  const { processActionResult } = useGamification()
   const [lesson, setLesson] = useState(null)
   const [loading, setLoading] = useState(true)
   const [completed, setCompleted] = useState(false)
@@ -62,23 +64,17 @@ export default function MicroLessonDetail() {
 
   const handleComplete = async () => {
     if (!user) return
-    
+
     try {
-      // Pour l'instant, marquer comme complété sans score (sera amélioré avec les QCM)
       const res = await api.microlessons.complete(id, { score: 100, timeSpent: 0 })
-      
+
       if (res.success) {
         setCompleted(true)
-        setCompletionData(res.data.completion)
-        
-        // Afficher notification d'XP si gagné
-        if (res.data.xpEarned > 0) {
-          alert(`🎉 +${res.data.xpEarned} XP gagnés !`)
-        }
+        setCompletionData(res.data)
+        processActionResult(res.gamification)
       }
     } catch (error) {
       console.error('Erreur lors de la complétion:', error)
-      alert('Erreur lors de l\'enregistrement de la complétion')
     }
   }
 

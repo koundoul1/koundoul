@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Clock, AlertCircle, Trophy } from 'lucide-react';
 import api from '../services/api';
+import { useGamification } from '../hooks/useGamification';
 
 export default function QuizPlay() {
   const { quizId } = useParams();
   const navigate = useNavigate();
+  const { processActionResult } = useGamification();
   
   const [quiz, setQuiz] = useState(null);
   const [attempt, setAttempt] = useState(null);
@@ -89,9 +91,9 @@ export default function QuizPlay() {
     setSubmitting(true);
     try {
       const response = await api.quiz.submit(attempt.id, answers);
-      // Naviguer vers la page de résultats avec les données
-      navigate(`/quiz/${quizId}/results`, { 
-        state: { results: response.data } 
+      processActionResult(response.data?.gamification);
+      navigate(`/quiz/${quizId}/results`, {
+        state: { results: response.data }
       });
     } catch (error) {
       console.error('Erreur:', error);
