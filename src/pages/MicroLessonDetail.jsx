@@ -24,13 +24,12 @@ export default function MicroLessonDetail() {
         // Charger l'état de complétion (optionnel, fonctionne même sans auth)
         try {
           const completionRes = await api.microlessons.getCompletion(id)
-          if (completionRes?.success && completionRes?.data) {
+          if (completionRes?.success && completionRes?.data?.completed === true) {
             setCompletionData(completionRes.data)
             setCompleted(true)
           }
         } catch (e) {
-          // Pas de complétion existante ou non authentifié, c'est normal
-          // Ignorer silencieusement
+          // No completion record or not authenticated — expected
         }
       } catch (e) {
         console.error(e)
