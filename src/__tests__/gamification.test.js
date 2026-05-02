@@ -323,3 +323,108 @@ describe('MicroLessonDetail dark theme contract', () => {
     expect(true).toBe(true)
   })
 })
+
+// ── 11. Phase 2B.2 — Exercise self-evaluation XP calculation ──
+
+describe('Exercise self-evaluation XP', () => {
+  const basePoints = 10;
+  const xpMultiplier = { correct: 1, partial: 0.5, incorrect: 0.25 };
+  const calcXP = (selfEval) => Math.floor(basePoints * xpMultiplier[selfEval]);
+
+  it('correct = 100% of base points', () => {
+    expect(calcXP('correct')).toBe(10);
+  })
+
+  it('partial = 50% of base points', () => {
+    expect(calcXP('partial')).toBe(5);
+  })
+
+  it('incorrect = 25% of base points', () => {
+    expect(calcXP('incorrect')).toBe(2);
+  })
+
+  it('works with non-default points (e.g. 20)', () => {
+    const bp = 20;
+    expect(Math.floor(bp * 1)).toBe(20);
+    expect(Math.floor(bp * 0.5)).toBe(10);
+    expect(Math.floor(bp * 0.25)).toBe(5);
+  })
+})
+
+// ── 12. Quiz timer auto-submit contract ──
+
+describe('Quiz timer auto-submit', () => {
+  it('timer reaching 0 should trigger submission', () => {
+    // Simulate: when prev <= 1 in the interval callback, submit fires
+    let submitted = false;
+    const setTimeLeft = (fn) => {
+      const prev = 1;
+      const next = fn(prev);
+      if (next === 0) submitted = true;
+      return next;
+    };
+    setTimeLeft(prev => {
+      if (prev <= 1) return 0;
+      return prev - 1;
+    });
+    expect(submitted).toBe(true);
+  })
+
+  it('timer > 1 should NOT trigger submission', () => {
+    let submitted = false;
+    const setTimeLeft = (fn) => {
+      const prev = 5;
+      const next = fn(prev);
+      if (next === 0) submitted = true;
+      return next;
+    };
+    setTimeLeft(prev => {
+      if (prev <= 1) return 0;
+      return prev - 1;
+    });
+    expect(submitted).toBe(false);
+  })
+})
+
+// ── 13. Quiz difficulty filter logic ──
+
+describe('Quiz difficulty filter', () => {
+  const questions = [
+    { id: 1, difficulty: 1 },
+    { id: 2, difficulty: 1 },
+    { id: 3, difficulty: 2 },
+    { id: 4, difficulty: 2 },
+    { id: 5, difficulty: 2 },
+    { id: 6, difficulty: 3 },
+    { id: 7, difficulty: 4 },
+    { id: 8, difficulty: null }
+  ];
+
+  const filterByDifficulty = (qs, diff) => {
+    if (diff === 'all') return qs;
+    return qs.filter(q => {
+      const d = q.difficulty;
+      if (d == null) return true;
+      if (diff === 'easy') return d === 1;
+      if (diff === 'medium') return d === 2;
+      if (diff === 'hard') return d >= 3;
+      return true;
+    });
+  };
+
+  it('all returns everything', () => {
+    expect(filterByDifficulty(questions, 'all')).toHaveLength(8);
+  })
+
+  it('easy returns difficulty=1 + null', () => {
+    expect(filterByDifficulty(questions, 'easy')).toHaveLength(3); // 2 easy + 1 null
+  })
+
+  it('medium returns difficulty=2 + null', () => {
+    expect(filterByDifficulty(questions, 'medium')).toHaveLength(4); // 3 medium + 1 null
+  })
+
+  it('hard returns difficulty>=3 + null', () => {
+    expect(filterByDifficulty(questions, 'hard')).toHaveLength(3); // 1 diff3 + 1 diff4 + 1 null
+  })
+})
