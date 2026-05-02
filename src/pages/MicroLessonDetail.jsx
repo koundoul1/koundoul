@@ -71,7 +71,9 @@ export default function MicroLessonDetail() {
       if (res.success) {
         setCompleted(true)
         setCompletionData(res.data)
-        processActionResult(res.gamification)
+        if (!res.alreadyCompleted) {
+          processActionResult(res.gamification)
+        }
       }
     } catch (error) {
       console.error('Erreur lors de la complétion:', error)

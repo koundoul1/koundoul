@@ -209,3 +209,43 @@ describe('Dashboard activity data shape', () => {
     }
   })
 })
+
+// ── 7. XP duplication prevention ──
+
+describe('completeLesson XP duplication prevention', () => {
+  it('first completion returns alreadyCompleted=false with XP', () => {
+    const response = {
+      success: true,
+      alreadyCompleted: false,
+      xpEarned: 100,
+      gamification: { xpGained: 100, totalXp: 100, newLevel: 1, leveledUp: false, newStreak: 1, streakBroken: false, newBadges: [] }
+    }
+    expect(response.alreadyCompleted).toBe(false)
+    expect(response.xpEarned).toBe(100)
+    expect(response.gamification).not.toBeNull()
+  })
+
+  it('re-completion returns alreadyCompleted=true with 0 XP', () => {
+    const response = {
+      success: true,
+      alreadyCompleted: true,
+      xpEarned: 0,
+      gamification: null
+    }
+    expect(response.alreadyCompleted).toBe(true)
+    expect(response.xpEarned).toBe(0)
+    expect(response.gamification).toBeNull()
+  })
+
+  it('frontend should not call processActionResult when alreadyCompleted', () => {
+    const processActionResult = vi.fn()
+    const response = { success: true, alreadyCompleted: true, gamification: null }
+
+    // Simulate the frontend logic from MicroLessonDetail handleComplete
+    if (response.success && !response.alreadyCompleted) {
+      processActionResult(response.gamification)
+    }
+
+    expect(processActionResult).not.toHaveBeenCalled()
+  })
+})

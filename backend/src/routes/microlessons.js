@@ -154,6 +154,21 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
     const { timeSpent, score } = req.body;
     const userId = req.user.userId;
 
+    // Check if already completed — prevent XP duplication
+    const existing = await prisma.microLessonCompletion.findUnique({
+      where: { userId_lessonId: { userId, lessonId: id } }
+    });
+
+    if (existing && existing.completed) {
+      return res.json({
+        success: true,
+        data: existing,
+        alreadyCompleted: true,
+        xpEarned: 0,
+        gamification: null
+      });
+    }
+
     let xpEarned = 50;
     if (score !== undefined) {
       xpEarned = 50 + Math.round((score / 100) * 50);
@@ -184,6 +199,7 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
     res.json({
       success: true,
       data: completion,
+      alreadyCompleted: false,
       xpEarned,
       gamification
     });
