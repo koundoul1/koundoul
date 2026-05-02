@@ -244,17 +244,18 @@ const Solver = () => {
     }
   }
 
-  const handleDownloadSolution = () => {
-    if (solution) {
-      const content = `Problème: ${problem}\n\nSolution:\n${solution.solution}\n\nExplication:\n${solution.explanation}`
-      const blob = new Blob([content], { type: 'text/plain' })
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `solution_${Date.now()}.txt`
-      a.click()
-      URL.revokeObjectURL(url)
-    }
+  const handleDownloadSolution = async () => {
+    if (!solution) return
+    const el = document.querySelector('.koundoul-solution-final')
+    if (!el) return
+    const html2pdf = (await import('html2pdf.js')).default
+    html2pdf().set({
+      margin: [10, 10, 10, 10],
+      filename: `koundoul-solution-${Date.now()}.pdf`,
+      image: { type: 'jpeg', quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }).from(el).save()
   }
 
   const loadFromHistory = (historyItem) => {
