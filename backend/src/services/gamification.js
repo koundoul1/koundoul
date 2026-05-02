@@ -138,11 +138,15 @@ async function evaluateBadges(userId, db) {
     const shouldUnlock = await checkCondition(badge.condition, userId, user, client);
     if (!shouldUnlock) continue;
 
-    await client.userBadge.create({
-      data: { userId, badgeId: badge.id }
+    // upsert instead of create to handle race condition if two actions
+    // evaluate concurrently — the @@unique([userId, badgeId]) constraint
+    // means the second call harmlessly updates nothing
+    await client.userBadge.upsert({
+      where: { userId_badgeId: { userId, badgeId: badge.id } },
+      create: { userId, badgeId: badge.id },
+      update: {}
     });
 
-    // Bonus XP for badge (separate from the action XP)
     await client.user.update({
       where: { id: userId },
       data: { xp: { increment: badge.points || 50 } }
@@ -155,7 +159,6 @@ async function evaluateBadges(userId, db) {
       points: badge.points
     });
 
-    // Notification
     sendNotification(
       userId,
       'badge_earned',
