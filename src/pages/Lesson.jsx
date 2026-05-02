@@ -7,14 +7,14 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 import api from '../services/api';
-import { useBadgeContext } from '../components/Layout';
+import { useGamification } from '../hooks/useGamification';
 
 export default function Lesson() {
   const { lessonId } = useParams();
   const [searchParams] = useSearchParams();
   const chapterId = searchParams.get('chapterId');
   const navigate = useNavigate();
-  const { showBadges } = useBadgeContext() || {};
+  const { processActionResult } = useGamification();
   
   const [lesson, setLesson] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -53,13 +53,10 @@ export default function Lesson() {
       const response = await api.content.completeLesson(lessonId, timeSpent);
       setCompleted(true);
       
-      // Afficher les nouveaux badges
-      if (response.data.newBadges && response.data.newBadges.length > 0 && showBadges) {
-        showBadges(response.data.newBadges);
+      // Gamification feedback (XP toast + badge toast if applicable)
+      if (response.data?.gamification) {
+        processActionResult(response.data.gamification);
       }
-      
-      // Notification succès
-      alert('🎉 Leçon complétée ! +5 XP');
       
       // Redirection après 2 secondes
       setTimeout(() => {
