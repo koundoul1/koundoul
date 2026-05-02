@@ -61,7 +61,7 @@ router.post('/solve', authenticateToken, async (req, res) => {
       role: 'solver',
       systemInstruction: SOLVER_SYSTEM_PROMPT,
       userPrompt,
-      generationConfig: { temperature: 0.4, maxOutputTokens: 2048 }
+      generationConfig: { temperature: 0.4, maxOutputTokens: 4096 }
     })) {
       fullText += chunk;
       sendEvent('chunk', { text: chunk });
@@ -78,7 +78,7 @@ router.post('/solve', authenticateToken, async (req, res) => {
         role: 'solver',
         systemInstruction: 'Tu retournes uniquement du JSON valide. Aucun markdown, aucun backtick, aucun commentaire.',
         userPrompt: jsonPrompt,
-        generationConfig: { temperature: 0.1, maxOutputTokens: 1024, responseMimeType: 'application/json' }
+        generationConfig: { temperature: 0.1, maxOutputTokens: 1024 }
       });
       structured = parseStructured(jsonText);
     } catch (err) {
