@@ -151,10 +151,18 @@ const Solver = () => {
 
   const loadHistory = async () => {
     try {
-      // Si l'utilisateur est connecté, charger depuis l'API
       if (isAuthenticated && user) {
         const response = await api.solver.getHistory()
-        setHistory(response.data || [])
+        // Map backend format to display format
+        const entries = (response.data || []).map(e => ({
+          id: e.id,
+          description: e.problem || '',
+          subject: e.domain || 'math',
+          difficulty: '',
+          createdAt: e.createdAt,
+          status: e.status
+        }))
+        setHistory(entries)
       } else {
         // Sinon, charger depuis le localStorage
         const localHistory = localStorage.getItem('solverHistory')
@@ -281,10 +289,10 @@ const Solver = () => {
   }
 
   const loadFromHistory = (historyItem) => {
-    setProblem(historyItem.description)
-    setSubject(historyItem.subject)
-    setDifficulty(historyItem.difficulty)
-    setSolution(historyItem)
+    setProblem(historyItem.description || historyItem.problem || '')
+    setSubject(historyItem.subject || historyItem.domain || 'math')
+    setDifficulty(historyItem.difficulty || 'easy')
+    setSolution(null) // Don't load old solution — user re-solves
     setShowHistory(false)
   }
 
@@ -755,14 +763,12 @@ const Solver = () => {
                         className="p-3 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 cursor-pointer transition-colors border border-gray-700 hover:border-gray-600"
                       >
                         <p className="text-sm font-medium text-gray-200 line-clamp-2">
-                          {item.description}
+                          {item.description || item.problem || 'Probleme'}
                         </p>
                         <div className="flex items-center mt-2 text-xs text-gray-400">
-                          <span className="capitalize">{item.subject}</span>
+                          <span className="capitalize">{item.subject || item.domain || ''}</span>
                           <span className="mx-1">•</span>
-                          <span className="capitalize">{item.difficulty}</span>
-                          <span className="mx-1">•</span>
-                          <span>{new Date(item.createdAt).toLocaleDateString()}</span>
+                          <span>{item.createdAt ? new Date(item.createdAt).toLocaleDateString() : ''}</span>
                         </div>
                       </div>
                     ))}
