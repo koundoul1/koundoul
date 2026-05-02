@@ -474,4 +474,68 @@ Ajout cle `courses.subtitle` FR+EN. Toutes les cles courses existantes couvrent 
 - [ ] Page /register → dark theme, formulaire lisible sur fond sombre
 - [ ] Switcher langue FR→EN → labels "Mark as completed", "Next lesson", "Content coming soon" traduits
 
-**Phase 2B.1 terminée. Phase 2B.2 non démarrée — en attente d'instructions.**
+---
+
+## Phase 2B.2 — Quiz + Exercises submit + branchement gamification
+
+**Date** : 2026-05-02
+
+### Commits
+
+```
+623d470 fix(quiz): fix timer stale closure and start endpoint missing questions
+9b610ce fix(quiz): rewrite QuizResults with dark theme, XP display, useGamification
+f1c4a56 feat(exercises): create POST /content/exercises/:id/submit endpoint
+ea57e0a feat(exercises): rewrite Exercise.jsx for self-evaluation flow
+c18cce1 fix(lesson): replace useBadgeContext with useGamification
+b181967 feat(content): add GET /content/counts endpoint with 5min server cache
+2f8c397 test(quiz-exercises): add 10 tests for Phase 2B.2
+```
+
+### Resume
+
+#### Quiz
+- **Filtres difficulte** : existaient deja dans Quiz.jsx (panneau de reglages apres selection d'une banque). Fonctionnels — 1=Easy, 2=Medium, 3+=Hard. Le QA ne les voyait probablement pas car ils sont dans le panneau de config, pas sur la liste de banques.
+- **Timer auto-end** : QuizPlay.jsx avait un stale closure sur `handleAutoSubmit` — fixe avec refs. Backend `POST /quiz/:id/start` ne retournait pas les questions — fixe pour retourner `{ attempt, quiz: { questions } }`.
+- **XP affiche** : QuizResults.jsx reecrit en dark theme, affiche XP prominemment, utilise useGamification au lieu du stub useBadgeContext.
+
+#### Exercises
+- **Nouveau backend** : `POST /content/exercises/:id/submit` avec self-evaluation (correct/partial/incorrect). XP = 100%/50%/25% des points de base. `GET /content/exercises/:id` pour charger le detail.
+- **Exercise.jsx reecrit** : flow 3 phases (resoudre → voir correction modele → auto-evaluer). Dark theme. Hints progressifs. useGamification branche.
+- **FK exercise_attempts** : pointe vers la table legacy `exercises` (5 rows), pas `exercise_problems` (900 rows). Attempt recording skipped, XP seul credite. A migrer la FK plus tard.
+
+#### Lesson.jsx
+- useBadgeContext remplace par useGamification. Alert('+5 XP') remplace par toast gamification.
+
+#### Content counts
+- `GET /api/content/counts` : retourne QCM et exercises counts par difficulte. Cache serveur 5min.
+
+### Statut bug useBadgeContext
+- **QuizResults.jsx** : RESOLU — useGamification
+- **Exercise.jsx** : RESOLU — useGamification
+- **Lesson.jsx** : RESOLU — useGamification
+- **Layout.jsx** : conserve le stub no-op pour backward compat, peut etre supprime quand plus aucun consommateur
+
+### processAction supporte complete_exercise ?
+Oui — `processAction` accepte n'importe quel `action.type` et `action.xp`. Le type est passe a `awardXP` comme `source` pour le logging. Pas de logique specifique par type — XP + streak + badges evalues pour tous les types.
+
+### Bugs hors scope detectes
+1. **Quiz.jsx labels hardcodes FR** : "Nombre de questions", "Mode Pratique", "Mode Examen", "Melanger les questions", "Commencer le quiz" — pas de `t()`. A internationaliser en Phase 5 i18n.
+2. **QuizPlay.jsx peu accessible** : atteint uniquement via URL directe `/quiz/:id`, pas depuis Quiz.jsx. Pourrait etre retire ou relie depuis la liste de banques.
+3. **exercise_attempts FK** : pointe vers `exercises.id` (5 rows legacy) au lieu de `exercise_problems.id` (900 rows). Migration necessaire pour tracker les tentatives correctement.
+
+### Tests
+- 10 nouveaux tests : total suite **51 tests, tous verts**
+- `npm run lint` : 0 erreurs, 524 warnings (exit 0)
+
+### Tests manuels recommandes
+- [ ] Page /quiz → selectionner une banque → filtres difficulte visibles (Facile/Moyen/Difficile avec compteurs)
+- [ ] Lancer un quiz en mode Examen → timer descendant visible → a 0 : soumission auto
+- [ ] Fin de quiz → page resultats avec score + XP affiches + dark theme
+- [ ] Page /quiz/:id (QuizPlay) → questions chargees, timer fonctionne, soumission OK
+- [ ] Ouvrir un exercice → ecrire reponse → cliquer Soumettre → solution modele affichee avec steps
+- [ ] Apres correction : choisir "Juste" → toast +10 XP, choisir "A moitie" → toast +5 XP
+- [ ] Page Lesson.jsx → completer une leçon → toast XP (pas alert())
+- [ ] Verifier `GET /api/content/counts` retourne les bons totaux par difficulte
+
+**Phase 2B.2 terminée. Phase 2B.3 (Solver IA Gemini) non démarrée — en attente d'instructions.**
