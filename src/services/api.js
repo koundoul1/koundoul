@@ -180,6 +180,22 @@ const api = {
           const reader = res.body.getReader();
           const decoder = new TextDecoder();
           let buffer = '';
+          let doneReceived = false;
+
+          const processSSEPart = (part) => {
+            const eventLine = part.split('\n').find(l => l.startsWith('event: '));
+            const dataLine = part.split('\n').find(l => l.startsWith('data: '));
+            if (!eventLine || !dataLine) return;
+            const event = eventLine.slice(7);
+            try {
+              const data = JSON.parse(dataLine.slice(6));
+              if (event === 'meta') onMeta?.(data);
+              else if (event === 'chunk') onChunk?.(data);
+              else if (event === 'structured') onStructured?.(data);
+              else if (event === 'done') { doneReceived = true; onDone?.(data); }
+              else if (event === 'error') onError?.(data.message);
+            } catch (_e) { /* ignore malformed SSE events */ }
+          };
 
           let reading = true;
           while (reading) {
@@ -191,20 +207,18 @@ const api = {
             buffer = parts.pop() || '';
 
             for (const part of parts) {
-              const eventLine = part.split('\n').find(l => l.startsWith('event: '));
-              const dataLine = part.split('\n').find(l => l.startsWith('data: '));
-              if (!eventLine || !dataLine) continue;
-
-              const event = eventLine.slice(7);
-              try {
-                const data = JSON.parse(dataLine.slice(6));
-                if (event === 'meta') onMeta?.(data);
-                else if (event === 'chunk') onChunk?.(data);
-                else if (event === 'structured') onStructured?.(data);
-                else if (event === 'done') onDone?.(data);
-                else if (event === 'error') onError?.(data.message);
-              } catch (_e) { /* ignore malformed SSE events */ }
+              processSSEPart(part);
             }
+          }
+
+          // Flush remaining buffer (last event may lack trailing \n\n)
+          if (buffer.trim()) {
+            processSSEPart(buffer);
+          }
+
+          // If stream ended without a done event, call onDone as safety net
+          if (!doneReceived) {
+            onDone?.({});
           }
         } catch (err) {
           if (err.name !== 'AbortError') {

@@ -288,12 +288,35 @@ const Solver = () => {
     document.body.removeChild(clone)
   }
 
-  const loadFromHistory = (historyItem) => {
+  const loadFromHistory = async (historyItem) => {
     setProblem(historyItem.description || historyItem.problem || '')
     setSubject(historyItem.subject || historyItem.domain || 'math')
     setDifficulty(historyItem.difficulty || 'easy')
-    setSolution(null) // Don't load old solution — user re-solves
     setShowHistory(false)
+
+    // Load full solution from backend if available
+    if (historyItem.id && isAuthenticated) {
+      try {
+        const res = await api.solver.getHistoryEntry(historyItem.id)
+        if (res.data?.solution) {
+          const sol = typeof res.data.solution === 'string'
+            ? JSON.parse(res.data.solution)
+            : res.data.solution
+          setSolution({
+            solution: sol.text || '',
+            steps: sol.steps || [],
+            hints: sol.hints || [],
+            requiresGraph: sol.requiresGraph || false,
+            functionString: sol.functionString || null,
+            functionName: sol.functionName || null,
+            points: sol.points || 10,
+            detectedDomain: sol.detectedDomain || null
+          })
+          return
+        }
+      } catch (_e) { /* fallback below */ }
+    }
+    setSolution(null)
   }
 
   /**
