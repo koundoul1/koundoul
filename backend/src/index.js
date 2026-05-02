@@ -231,6 +231,9 @@ app.use('/api/notifications', notificationsRoutes);
 const exercisesRoutes = require('./routes/exercises');
 app.use('/api/content/exercises', exercisesRoutes);
 
+const contentRoutes = require('./routes/content');
+app.use('/api/content', contentRoutes);
+
 // Error handling middleware
 app.use(errorHandler);
 
