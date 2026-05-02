@@ -248,14 +248,36 @@ const Solver = () => {
     if (!solution) return
     const el = document.querySelector('.koundoul-solution-final')
     if (!el) return
+
+    // Create a print-friendly clone (white bg, black text, readable font)
+    const clone = el.cloneNode(true)
+    clone.style.cssText = 'background:#fff;color:#111;padding:24px;font-family:Georgia,serif;font-size:14px;line-height:1.7;max-width:700px;'
+    // Fix all child text colors
+    clone.querySelectorAll('*').forEach(child => {
+      child.style.color = '#111'
+      child.style.background = 'transparent'
+      child.style.borderColor = '#ccc'
+    })
+    // Add header
+    const header = document.createElement('div')
+    header.innerHTML = `<div style="text-align:center;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #6C63FF"><h1 style="font-size:20px;color:#6C63FF;margin:0">Koundoul — Solution</h1><p style="color:#666;font-size:12px;margin:4px 0 0">${new Date().toLocaleDateString('fr-FR')} | ${(problem || '').slice(0, 80)}</p></div>`
+    clone.insertBefore(header, clone.firstChild)
+
+    // Render off-screen
+    clone.style.position = 'fixed'
+    clone.style.left = '-9999px'
+    document.body.appendChild(clone)
+
     const html2pdf = (await import('html2pdf.js')).default
-    html2pdf().set({
-      margin: [10, 10, 10, 10],
+    await html2pdf().set({
+      margin: [12, 12, 12, 12],
       filename: `koundoul-solution-${Date.now()}.pdf`,
-      image: { type: 'jpeg', quality: 0.95 },
-      html2canvas: { scale: 2, useCORS: true },
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    }).from(el).save()
+    }).from(clone).save()
+
+    document.body.removeChild(clone)
   }
 
   const loadFromHistory = (historyItem) => {
