@@ -266,4 +266,55 @@ Aucune migration nécessaire. Les tables `users`, `badges`, `user_badges`, `noti
 5. Aller sur /badges → vérifier : 15 badges affichés en dark theme, conditions lisibles pour les verrouillés
 6. Si première leçon complétée → vérifier : badge "Première Leçon" débloqué avec notification toast + notification SSE dans la cloche
 
-**Phase 2A terminée. Phase 2B non démarrée — en attente d'instructions.**
+---
+
+## Mini-correctifs Phase 2A
+
+**Date** : 2026-05-02
+
+### Commits
+
+```
+cdd75f4 fix(xp): prevent XP duplication on lesson re-completion
+1330393 feat(toast): show badge bonus XP in unlock toast
+e0251a4 fix(badges): handle race condition in badge unlock with upsert
+fa4129f chore: remove dead useBadgeNotifications hook and BadgeToast
+[pending] docs(prisma): mark external tables to prevent accidental migration
+```
+
+### Détails
+
+1. **XP duplicable corrigé** : `POST /microlessons/:id/complete` vérifie maintenant si la leçon est déjà complétée. Si oui, retourne `{ alreadyCompleted: true, xpEarned: 0 }` sans créditer. Frontend skip le toast XP. 3 tests de régression ajoutés.
+
+2. **Toast badge enrichi** : affiche désormais le bonus XP du badge (ex: "Première Leçon (+50 XP bonus)").
+
+3. **Race condition badges** : `userBadge.create` remplacé par `userBadge.upsert` pour gérer les évaluations concurrentes sans erreur P2002.
+
+4. **Hook mort supprimé** : `useBadgeNotifications.js` et `BadgeToast.jsx` supprimés. `Layout.jsx` simplifié avec stub no-op pour les consommateurs existants (`Exercise.jsx`, `Lesson.jsx`, `QuizResults.jsx`).
+
+5. **Tables externes marquées** dans `schema.prisma` : `companies`, `expense_categories`, `leave_types` annotées `/// EXTERNAL`.
+
+### ⚠️ Tables externes (Prisma)
+
+Les tables suivantes dans `backend/prisma/schema.prisma` n'appartiennent PAS à Koundoul — elles sont gérées par une autre application partageant la même base Supabase :
+
+- `companies`
+- `expense_categories`
+- `leave_types`
+
+**Précautions** :
+- Ne PAS exécuter `prisma migrate reset` sans `--skip-seed` et vérification manuelle
+- Ne PAS modifier ces modèles dans le code Koundoul
+- Idéalement, migrer vers des migrations ciblées plutôt que `reset`
+- Les modèles sont conservés dans le schema pour refléter la DB réelle
+
+### Dette UX
+
+- **Notifications duel bruyantes** : après un duel terminé, un joueur peut recevoir jusqu'à 3 notifications coup sur coup (duel terminé + level-up + badge). Coalescence à envisager en Phase 6.
+
+### Tests
+
+- 3 nouveaux tests (XP duplication prevention) : total suite **32 tests, tous verts**
+- `npm run lint` : 0 erreurs, 517 warnings (exit 0)
+
+**Phase 2A + mini-correctifs terminés. Phase 2B non démarrée — en attente d'instructions.**

@@ -376,6 +376,7 @@ model coach_answers {
   coach_sessions CoachSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 }
 
+/// EXTERNAL — managed by another app sharing the same Supabase DB. Do NOT modify, migrate, or reset.
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model companies {
   id                 String               @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
@@ -478,6 +479,7 @@ model exercises {
   subjects          subjects            @relation(fields: [subjectId], references: [id])
 }
 
+/// EXTERNAL — managed by another app sharing the same Supabase DB. Do NOT modify, migrate, or reset.
 model expense_categories {
   id               String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   company_id       String    @db.Uuid
@@ -496,6 +498,7 @@ model expense_categories {
   @@index([company_id], map: "idx_expense_categories_company")
 }
 
+/// EXTERNAL — managed by another app sharing the same Supabase DB. Do NOT modify, migrate, or reset.
 model leave_types {
   id                   String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   company_id           String    @db.Uuid
