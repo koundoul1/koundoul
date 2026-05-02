@@ -519,16 +519,20 @@ describe('parseStructured JSON parser', () => {
       functionName: null, hints: [], points: 10, detectedDomain: 'math'
     };
     if (!rawText || typeof rawText !== 'string') return FALLBACK;
+    let cleaned = rawText.trim();
+    const fenceMatch = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/);
+    if (fenceMatch) cleaned = fenceMatch[1].trim();
     try {
-      const parsed = JSON.parse(rawText.trim());
+      const parsed = JSON.parse(cleaned);
       if (parsed && typeof parsed === 'object') return { ...FALLBACK, ...parsed };
-    } catch {}
-    const match = rawText.match(/\{[\s\S]*\}/);
-    if (match) {
+    } catch (_e) { /* not valid JSON */ }
+    const openIdx = cleaned.indexOf('{');
+    const closeIdx = cleaned.lastIndexOf('}');
+    if (openIdx !== -1 && closeIdx > openIdx) {
       try {
-        const parsed = JSON.parse(match[0]);
+        const parsed = JSON.parse(cleaned.slice(openIdx, closeIdx + 1));
         if (parsed && typeof parsed === 'object') return { ...FALLBACK, ...parsed };
-      } catch {}
+      } catch (_e) { /* extraction failed */ }
     }
     return FALLBACK;
   }
