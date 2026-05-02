@@ -42,7 +42,7 @@ import { loadProfileFromStorage, saveProfileToStorage } from '../utils/learningP
 
 // Composant pour afficher la solution avec support LaTeX
 const SolutionDisplay = ({ content }) => {
-  if (!content) return <p className="text-gray-100">Aucune solution affichée</p>;
+  if (!content || typeof content !== 'string') return <p className="text-gray-100">Aucune solution affichée</p>;
   
   // Extraire les blocs LaTeX $$...$$ et inline $...$
   const latexBlocks = [];
@@ -176,7 +176,7 @@ const Solver = () => {
   const streamRef = React.useRef(null)
 
   const handleSolve = () => {
-    if (!problem.trim()) {
+    if (!(problem || '').trim()) {
       setError(t('solver.enterProblem') || 'Entre ton probleme a resoudre')
       return
     }
@@ -194,7 +194,7 @@ const Solver = () => {
     let streamedText = ''
 
     streamRef.current = api.solver.solveStream({
-      problem: problem.trim(),
+      problem: (problem || '').trim(),
       domain: subject,
       level: difficulty,
       onMeta: () => {
@@ -508,7 +508,7 @@ const Solver = () => {
                 {/* Bouton de résolution amélioré */}
                 <button
                   onClick={handleSolve}
-                  disabled={isSolving || !problem.trim()}
+                  disabled={isSolving || !(problem || '').trim()}
                   className="relative w-full koundoul-btn-primary py-4 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center overflow-hidden group"
                 >
                   {/* Effet brillant au survol */}
