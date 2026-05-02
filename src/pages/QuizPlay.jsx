@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Clock, AlertCircle, Trophy } from 'lucide-react';
 import api from '../services/api';
@@ -22,13 +22,26 @@ export default function QuizPlay() {
     startQuiz();
   }, [quizId]);
 
+  // Use ref to avoid stale closure when timer fires auto-submit
+  const answersRef = useRef(answers);
+  useEffect(() => { answersRef.current = answers; }, [answers]);
+  const attemptRef = useRef(attempt);
+  useEffect(() => { attemptRef.current = attempt; }, [attempt]);
+
   useEffect(() => {
-    if (timeLeft <= 0) return;
+    if (timeLeft <= 0 || !quiz) return;
 
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
-          handleAutoSubmit();
+          // Auto-submit with latest answers via ref (no stale closure)
+          setSubmitting(true);
+          api.quiz.submit(attemptRef.current?.id, answersRef.current)
+            .then(response => {
+              processActionResult(response.data?.gamification);
+              navigate(`/quiz/${quizId}/results`, { state: { results: response.data, timeExpired: true } });
+            })
+            .catch(() => setSubmitting(false));
           return 0;
         }
         return prev - 1;
@@ -36,7 +49,7 @@ export default function QuizPlay() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft]);
+  }, [timeLeft > 0, quiz]);
 
   const startQuiz = async () => {
     try {
@@ -80,10 +93,6 @@ export default function QuizPlay() {
       return;
     }
 
-    submitQuiz();
-  };
-
-  const handleAutoSubmit = () => {
     submitQuiz();
   };
 

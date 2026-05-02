@@ -69,14 +69,15 @@ router.get('/:id', optionalAuth, async (req, res, next) => {
   }
 });
 
-// Start quiz
+// Start quiz — returns attempt + quiz with questions (without correct answers)
 router.post('/:id/start', authenticateToken, async (req, res, next) => {
   try {
     const { id } = req.params;
     const userId = req.user.userId;
 
     const bank = await prisma.questionBank.findUnique({
-      where: { id }
+      where: { id },
+      include: { qcm_questions: true }
     });
 
     if (!bank) {
@@ -92,7 +93,28 @@ router.post('/:id/start', authenticateToken, async (req, res, next) => {
       }
     });
 
-    res.json({ success: true, data: attempt });
+    // Return questions without correct_answer for the client
+    const questions = bank.qcm_questions.map(q => ({
+      id: q.id,
+      questionText: q.question,
+      options: q.options,
+      points: q.points || 10
+    }));
+
+    res.json({
+      success: true,
+      data: {
+        attempt,
+        quiz: {
+          id: bank.id,
+          title: bank.title,
+          subject: bank.subject,
+          level: bank.level,
+          timeLimit: bank.timeLimit || 15,
+          questions
+        }
+      }
+    });
   } catch (error) {
     next(error);
   }
