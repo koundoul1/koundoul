@@ -55,7 +55,7 @@ const MODEL_DEFAULTS = {
   coach: 'gemini-2.5-flash'
 };
 
-function getModel(role, systemInstruction) {
+function getModel(role, systemInstruction, generationConfig) {
   const ai = getClient();
   if (!ai) return null;
 
@@ -64,9 +64,8 @@ function getModel(role, systemInstruction) {
     : (process.env.GOOGLE_AI_MODEL_SOLVER || MODEL_DEFAULTS.solver);
 
   const config = { model: modelName };
-  if (systemInstruction) {
-    config.systemInstruction = systemInstruction;
-  }
+  if (systemInstruction) config.systemInstruction = systemInstruction;
+  if (generationConfig) config.generationConfig = generationConfig;
 
   return ai.getGenerativeModel(config);
 }
@@ -108,11 +107,11 @@ function withTimeout(promise, ms = 30000) {
 // ── generate (non-stream) ────────────────────────────────────────────
 
 /**
- * @param {{ role: 'solver'|'coach', systemInstruction: string, userPrompt: string, history?: Array }} opts
+ * @param {{ role: 'solver'|'coach', systemInstruction: string, userPrompt: string, history?: Array, generationConfig?: object }} opts
  * @returns {Promise<string>} The generated text
  */
-async function generate({ role, systemInstruction, userPrompt, history }) {
-  const model = getModel(role, systemInstruction);
+async function generate({ role, systemInstruction, userPrompt, history, generationConfig }) {
+  const model = getModel(role, systemInstruction, generationConfig);
   if (!model) throw new GeminiError('Gemini non configure (GOOGLE_AI_API_KEY absent)');
 
   const start = Date.now();
@@ -138,11 +137,11 @@ async function generate({ role, systemInstruction, userPrompt, history }) {
 // ── streamGenerate (async generator) ─────────────────────────────────
 
 /**
- * @param {{ role: 'solver'|'coach', systemInstruction: string, userPrompt: string, history?: Array }} opts
+ * @param {{ role: 'solver'|'coach', systemInstruction: string, userPrompt: string, history?: Array, generationConfig?: object }} opts
  * @yields {string} text chunks
  */
-async function* streamGenerate({ role, systemInstruction, userPrompt, history }) {
-  const model = getModel(role, systemInstruction);
+async function* streamGenerate({ role, systemInstruction, userPrompt, history, generationConfig }) {
+  const model = getModel(role, systemInstruction, generationConfig);
   if (!model) throw new GeminiError('Gemini non configure (GOOGLE_AI_API_KEY absent)');
 
   const start = Date.now();

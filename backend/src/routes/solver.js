@@ -3,22 +3,7 @@ const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 const { isConfigured, streamGenerate, generate, GeminiError } = require('../services/geminiService');
-
-// Minimal system prompt — real prompt quality is Phase 2B.3b
-const SYSTEM_PROMPT = `Tu es un assistant pedagogique qui resout des problemes de mathematiques, physique et chimie pour des lyceens. Reponds en francais. Utilise le format LaTeX ($...$ pour inline, $$...$$ pour les blocs) pour les formules.`;
-
-const STRUCTURED_PROMPT = `Analyse la solution que tu viens de generer et retourne UNIQUEMENT un objet JSON valide (pas de texte avant ou apres) avec ces champs:
-{
-  "steps": [{"step": 1, "description": "titre court", "content": "detail"}],
-  "requiresGraph": false,
-  "functionString": null,
-  "functionName": null,
-  "hints": ["indice 1"],
-  "points": 10
-}
-Si le probleme est une fonction a tracer, mets requiresGraph=true et functionString="expression js evaluable" (ex: "x**2 - 4").
-Voici le probleme original: {problem}
-Voici la solution generee: {solution}`;
+const { SOLVER_SYSTEM_PROMPT, SOLVER_STRUCTURED_PROMPT, parseStructured } = require('../prompts/solver');
 
 // ── POST /solve — SSE streaming endpoint ─────────────────────────────
 
@@ -68,30 +53,37 @@ router.post('/solve', authenticateToken, async (req, res) => {
   await updateHistory({ status: 'streaming' });
 
   try {
-    // Stream the solution text
+    // Stream the solution text with calibrated prompt
     const userPrompt = `Resous ce probleme de ${domain || 'mathematiques'} (niveau ${level || 'lycee'}):\n\n${problem.trim()}`;
     let fullText = '';
 
-    for await (const chunk of streamGenerate({ role: 'solver', systemInstruction: SYSTEM_PROMPT, userPrompt })) {
+    for await (const chunk of streamGenerate({
+      role: 'solver',
+      systemInstruction: SOLVER_SYSTEM_PROMPT,
+      userPrompt,
+      generationConfig: { temperature: 0.4, maxOutputTokens: 2048 }
+    })) {
       fullText += chunk;
       sendEvent('chunk', { text: chunk });
     }
 
-    // Post-process: extract structured data via a second non-stream call
-    let structured = { steps: [], requiresGraph: false, functionString: null, functionName: null, hints: [], points: 10 };
+    // Post-process: extract structured data via second call (low temperature for deterministic JSON)
+    let structured;
     try {
-      const jsonPrompt = STRUCTURED_PROMPT
+      const jsonPrompt = SOLVER_STRUCTURED_PROMPT
         .replace('{problem}', problem.trim().slice(0, 500))
-        .replace('{solution}', fullText.slice(0, 2000));
+        .replace('{solution}', fullText.slice(0, 3000));
 
-      const jsonText = await generate({ role: 'solver', systemInstruction: 'Tu retournes uniquement du JSON valide, sans markdown ni backticks.', userPrompt: jsonPrompt });
-      // Extract JSON from response (may be wrapped in ```json ... ```)
-      const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        structured = { ...structured, ...JSON.parse(jsonMatch[0]) };
-      }
+      const jsonText = await generate({
+        role: 'solver',
+        systemInstruction: 'Tu retournes uniquement du JSON valide. Aucun markdown, aucun backtick, aucun commentaire.',
+        userPrompt: jsonPrompt,
+        generationConfig: { temperature: 0.1, maxOutputTokens: 1024, responseMimeType: 'application/json' }
+      });
+      structured = parseStructured(jsonText);
     } catch (err) {
       console.warn('[Solver] Structured extraction failed, using defaults:', err.message);
+      structured = parseStructured(null);
     }
 
     sendEvent('structured', structured);
