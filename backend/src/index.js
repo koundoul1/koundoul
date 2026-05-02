@@ -15,6 +15,11 @@ if (!JWT_SECRET || JWT_SECRET.length < 32) {
   process.exit(1);
 }
 
+// AI features: graceful degradation if key missing
+if (!process.env.GOOGLE_AI_API_KEY) {
+  console.warn('⚠️  GOOGLE_AI_API_KEY not set — AI features (Solver, Coach) will return 503');
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
