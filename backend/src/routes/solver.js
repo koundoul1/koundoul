@@ -1,45 +1,190 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
+const prisma = require('../config/database');
+const { isConfigured, streamGenerate, generate, GeminiError } = require('../services/geminiService');
 
-// SolverHistory model doesn't exist in database yet.
-// /solve returns solution without saving; history routes return empty arrays.
+// Minimal system prompt — real prompt quality is Phase 2B.3b
+const SYSTEM_PROMPT = `Tu es un assistant pedagogique qui resout des problemes de mathematiques, physique et chimie pour des lyceens. Reponds en francais. Utilise le format LaTeX ($...$ pour inline, $$...$$ pour les blocs) pour les formules.`;
 
-router.post('/solve', authenticateToken, async (req, res, next) => {
+const STRUCTURED_PROMPT = `Analyse la solution que tu viens de generer et retourne UNIQUEMENT un objet JSON valide (pas de texte avant ou apres) avec ces champs:
+{
+  "steps": [{"step": 1, "description": "titre court", "content": "detail"}],
+  "requiresGraph": false,
+  "functionString": null,
+  "functionName": null,
+  "hints": ["indice 1"],
+  "points": 10
+}
+Si le probleme est une fonction a tracer, mets requiresGraph=true et functionString="expression js evaluable" (ex: "x**2 - 4").
+Voici le probleme original: {problem}
+Voici la solution generee: {solution}`;
+
+// ── POST /solve — SSE streaming endpoint ─────────────────────────────
+
+router.post('/solve', authenticateToken, async (req, res) => {
+  const userId = req.user.userId;
+  const { problem, domain, level } = req.body;
+
+  if (!problem || !problem.trim()) {
+    return res.status(400).json({ error: 'Probleme requis' });
+  }
+
+  if (!isConfigured()) {
+    return res.status(503).json({ error: 'Service IA non configure. Contactez l\'administrateur.' });
+  }
+
+  // SSE headers
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'X-Accel-Buffering': 'no'
+  });
+
+  const sendEvent = (event, data) => {
+    try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
+  };
+
+  // Create history record
+  let historyId = null;
   try {
-    const { problem } = req.body;
+    const record = await prisma.solverHistory.create({
+      data: { userId, problem: problem.trim(), domain: domain || 'general', status: 'pending' }
+    });
+    historyId = record.id;
+  } catch (err) {
+    console.error('[Solver] History create error:', err.message);
+  }
 
-    if (!problem) {
-      return res.status(400).json({ error: 'Problème requis' });
+  sendEvent('meta', { historyId, status: 'streaming' });
+
+  // Update status helper
+  const updateHistory = async (data) => {
+    if (!historyId) return;
+    try { await prisma.solverHistory.update({ where: { id: historyId }, data }); } catch {}
+  };
+
+  await updateHistory({ status: 'streaming' });
+
+  try {
+    // Stream the solution text
+    const userPrompt = `Resous ce probleme de ${domain || 'mathematiques'} (niveau ${level || 'lycee'}):\n\n${problem.trim()}`;
+    let fullText = '';
+
+    for await (const chunk of streamGenerate({ role: 'solver', systemInstruction: SYSTEM_PROMPT, userPrompt })) {
+      fullText += chunk;
+      sendEvent('chunk', { text: chunk });
     }
 
-    const solution = {
-      steps: [
-        { step: 1, description: 'Analyser le problème', content: 'Identifier les données connues et inconnues du problème.' },
-        { step: 2, description: 'Appliquer la méthode appropriée', content: 'Utiliser les formules et méthodes adaptées à ce type de problème.' },
-        { step: 3, description: 'Résoudre étape par étape', content: 'Effectuer les calculs nécessaires de manière progressive.' },
-        { step: 4, description: 'Vérifier la solution', content: 'S\'assurer que la réponse est cohérente et complète.' }
-      ],
-      answer: 'Solution à calculer',
-      explanation: 'Explication détaillée de la méthode utilisée et des étapes de résolution.'
-    };
+    // Post-process: extract structured data via a second non-stream call
+    let structured = { steps: [], requiresGraph: false, functionString: null, functionName: null, hints: [], points: 10 };
+    try {
+      const jsonPrompt = STRUCTURED_PROMPT
+        .replace('{problem}', problem.trim().slice(0, 500))
+        .replace('{solution}', fullText.slice(0, 2000));
 
-    res.json({ success: true, data: solution });
+      const jsonText = await generate({ role: 'solver', systemInstruction: 'Tu retournes uniquement du JSON valide, sans markdown ni backticks.', userPrompt: jsonPrompt });
+      // Extract JSON from response (may be wrapped in ```json ... ```)
+      const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        structured = { ...structured, ...JSON.parse(jsonMatch[0]) };
+      }
+    } catch (err) {
+      console.warn('[Solver] Structured extraction failed, using defaults:', err.message);
+    }
+
+    sendEvent('structured', structured);
+
+    // Persist
+    await updateHistory({
+      status: 'completed',
+      solution: JSON.stringify({ text: fullText, ...structured }),
+      completedAt: new Date()
+    });
+
+    sendEvent('done', { historyId, status: 'completed' });
+  } catch (err) {
+    console.error('[Solver] Stream error:', err.message);
+    const message = err instanceof GeminiError
+      ? err.message
+      : 'Erreur lors de la resolution. Reessayez.';
+
+    await updateHistory({ status: 'failed', errorMessage: message });
+    sendEvent('error', { message });
+  } finally {
+    res.end();
+  }
+});
+
+// ── GET /history — paginated user history ────────────────────────────
+
+router.get('/history', authenticateToken, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+    const take = Math.min(parseInt(req.query.limit) || 20, 50);
+    const skip = Math.max(parseInt(req.query.offset) || 0, 0);
+
+    const [entries, total] = await Promise.all([
+      prisma.solverHistory.findMany({
+        where: { userId },
+        orderBy: { createdAt: 'desc' },
+        take,
+        skip,
+        select: { id: true, problem: true, domain: true, status: true, createdAt: true, completedAt: true }
+      }),
+      prisma.solverHistory.count({ where: { userId } })
+    ]);
+
+    res.json({ success: true, data: entries, total });
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/history', authenticateToken, async (req, res) => {
-  res.json({ success: true, data: [] });
+// ── GET /history/:id — single entry detail ───────────────────────────
+
+router.get('/history/:id', authenticateToken, async (req, res, next) => {
+  try {
+    const entry = await prisma.solverHistory.findUnique({
+      where: { id: req.params.id }
+    });
+
+    if (!entry || entry.userId !== req.user.userId) {
+      return res.status(404).json({ error: 'Entree non trouvee' });
+    }
+
+    // Parse solution JSON if stored
+    let solution = null;
+    if (entry.solution) {
+      try { solution = JSON.parse(entry.solution); } catch { solution = entry.solution; }
+    }
+
+    res.json({ success: true, data: { ...entry, solution } });
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.get('/problems', authenticateToken, async (req, res) => {
-  res.json({ success: true, data: [] });
-});
+// ── DELETE /history/:id — soft delete ────────────────────────────────
 
-router.post('/problems', authenticateToken, async (req, res) => {
-  res.status(404).json({ error: 'La sauvegarde de problèmes n\'est pas encore disponible' });
+router.delete('/history/:id', authenticateToken, async (req, res, next) => {
+  try {
+    const entry = await prisma.solverHistory.findUnique({
+      where: { id: req.params.id }
+    });
+
+    if (!entry || entry.userId !== req.user.userId) {
+      return res.status(404).json({ error: 'Entree non trouvee' });
+    }
+
+    // Hard delete (no deletedAt column for simplicity)
+    await prisma.solverHistory.delete({ where: { id: req.params.id } });
+
+    res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
