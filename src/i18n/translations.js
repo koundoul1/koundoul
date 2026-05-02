@@ -608,6 +608,7 @@ export default {
     // Courses
     courses: {
       title: 'Cours',
+      subtitle: 'Explore les matieres et commence a apprendre',
       math: 'Mathématiques',
       physics: 'Physique',
       chemistry: 'Chimie',
@@ -1466,6 +1467,7 @@ export default {
     // Courses
     courses: {
       title: 'Courses',
+      subtitle: 'Explore subjects and start learning',
       math: 'Mathematics',
       physics: 'Physics',
       chemistry: 'Chemistry',
