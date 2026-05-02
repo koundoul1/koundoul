@@ -538,4 +538,91 @@ Oui — `processAction` accepte n'importe quel `action.type` et `action.xp`. Le 
 - [ ] Page Lesson.jsx → completer une leçon → toast XP (pas alert())
 - [ ] Verifier `GET /api/content/counts` retourne les bons totaux par difficulte
 
-**Phase 2B.2 terminée. Phase 2B.3 (Solver IA Gemini) non démarrée — en attente d'instructions.**
+---
+
+## Phase 2B.3a — Service Gemini + tuyauterie SSE Solver
+
+**Date** : 2026-05-02
+
+### Commits
+
+```
+c70705f chore(env): add Gemini AI config vars and startup check
+671b2da chore: install @google/generative-ai SDK v0.24
+87000ea feat(ai): create shared Gemini service with streaming support
+ce027c1 feat(db): add SolverHistory table for per-user solver persistence
+83636ef feat(solver): rewrite solver with SSE streaming and Gemini integration
+b83f92c feat(solver): add SSE streaming client and adapt Solver.jsx
+5ca87af test(solver): add 9 SSE streaming and infrastructure tests
+```
+
+### Variables d'env ajoutees
+
+| Variable | Valeur par defaut | Description |
+|----------|-------------------|-------------|
+| `GOOGLE_AI_API_KEY` | (requis pour IA) | Cle API Google AI Studio |
+| `GOOGLE_AI_MODEL_SOLVER` | `gemini-2.5-pro` | Modele Gemini pour le Solver (stable) |
+| `GOOGLE_AI_MODEL_COACH` | `gemini-2.5-flash` | Modele Gemini pour le Coach (stable, rapide) |
+
+### Modeles Gemini retenus
+
+- **Solver** : `gemini-2.5-pro` — modele le plus capable pour la resolution pas-a-pas
+- **Coach** : `gemini-2.5-flash` — plus rapide et moins cher pour le dialogue pedagogique
+- Verifie le 2026-05-02 sur ai.google.dev : les deux sont stables (pas experimental/preview)
+
+### Migration Prisma
+
+- **Table** : `solver_history` (SolverHistory model)
+- **Methode** : `prisma db push` (pas `migrate dev` — shadow DB issue avec anciennes migrations)
+- **Appliquee en dev** : OUI
+- **Appliquee en prod** : NON — necessaire avant deploiement
+
+### Architecture
+
+```
+Frontend (Solver.jsx)
+  |
+  | fetch POST /solver/solve (SSE stream)
+  |
+Backend (solver.js)
+  |
+  | 1. Create SolverHistory (status: pending)
+  | 2. event:meta -> frontend
+  | 3. streamGenerate(Gemini) -> event:chunk* -> frontend
+  | 4. generate(Gemini, JSON mode) -> event:structured -> frontend
+  | 5. Update SolverHistory (status: completed)
+  | 6. event:done -> frontend
+  |
+geminiService.js
+  |
+  | GoogleGenerativeAI SDK
+  | Retry (503/429), timeout 30s
+  | Role-based model selection
+```
+
+### Tests
+- 9 nouveaux tests : total suite **60 tests, tous verts**
+- `npm run lint` : 0 erreurs, 525 warnings (exit 0)
+
+### Test manuel recommande
+
+```bash
+# Avec le backend demarre localement (npm run dev dans backend/)
+curl -X POST http://localhost:5000/api/solver/solve \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <JWT>" \
+  -d '{"problem": "x^2 - 4 = 0", "domain": "math"}' \
+  --no-buffer
+```
+
+Resultat attendu : flux SSE avec events meta, chunk*, structured, done.
+Si GOOGLE_AI_API_KEY absent : reponse 503 JSON propre.
+
+### Prompt Gemini
+
+Prompt systeme actuel = **MINIMAL PLACEHOLDER** :
+> "Tu es un assistant pedagogique qui resout des problemes de mathematiques, physique et chimie pour des lyceens. Reponds en francais. Utilise le format LaTeX."
+
+La qualite du prompt (curriculum francais, style pedagogique, nombre d'etapes, etc.) sera traitee en **Phase 2B.3b**.
+
+**Phase 2B.3a terminée. Phase 2B.3b (qualite prompt) non demarree — en attente d'instructions.**
