@@ -78,7 +78,7 @@ router.post('/solve', authenticateToken, async (req, res) => {
         role: 'solver',
         systemInstruction: 'Tu retournes uniquement du JSON valide. Aucun markdown, aucun backtick, aucun commentaire.',
         userPrompt: jsonPrompt,
-        generationConfig: { temperature: 0.1, maxOutputTokens: 1024 }
+        generationConfig: { temperature: 0.1, maxOutputTokens: 2048 }
       });
       structured = parseStructured(jsonText);
     } catch (err) {

@@ -129,17 +129,25 @@ function parseStructured(rawText) {
 
   if (!rawText || typeof rawText !== 'string') return FALLBACK;
 
+  // Strip markdown code fences if present (```json ... ```)
+  let cleaned = rawText.trim();
+  const fenceMatch = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (fenceMatch) {
+    cleaned = fenceMatch[1].trim();
+  }
+
   // 1. Try direct parse
   try {
-    const parsed = JSON.parse(rawText.trim());
+    const parsed = JSON.parse(cleaned);
     if (parsed && typeof parsed === 'object') return { ...FALLBACK, ...parsed };
   } catch {}
 
-  // 2. Extract first { ... } block (handles markdown wrapping, preamble text)
-  const match = rawText.match(/\{[\s\S]*\}/);
-  if (match) {
+  // 2. Extract outermost { ... } block (greedy — last closing brace)
+  const openIdx = cleaned.indexOf('{');
+  const closeIdx = cleaned.lastIndexOf('}');
+  if (openIdx !== -1 && closeIdx > openIdx) {
     try {
-      const parsed = JSON.parse(match[0]);
+      const parsed = JSON.parse(cleaned.slice(openIdx, closeIdx + 1));
       if (parsed && typeof parsed === 'object') return { ...FALLBACK, ...parsed };
     } catch {}
   }
