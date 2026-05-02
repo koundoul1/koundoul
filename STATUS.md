@@ -690,4 +690,40 @@ Le Solver est fonctionnel end-to-end : prompt calibre, streaming SSE, structured
 - 7 nouveaux tests parseStructured : total suite **67 tests, tous verts**
 - `npm run lint` : 0 erreurs, 525 warnings (exit 0)
 
+---
+
+## Plan de rollback prod (post-merge)
+
+**SHA pre-merge de main** : `3c35b137e2613a14075a4b17b9bf2bb89673aad5`
+
+### En cas de catastrophe — rollback immediat
+
+```bash
+git checkout main
+git reset --hard 3c35b137e2613a14075a4b17b9bf2bb89673aad5
+git push origin main --force-with-lease
+```
+
+### Rollback par service
+
+- **Render (backend)** : Dashboard Render > koundoul-backend > Deploys > cliquer "Rollback" sur le deploy precedent
+- **Vercel (frontend)** : Dashboard Vercel > koundoul > Deployments > cliquer "..." > "Promote to Production" sur le deploy precedent
+
+### Migration DB (solver_history)
+
+La table `solver_history` est additive — le rollback du code n'a pas besoin de supprimer la table. Elle restera en DB sans impact si le code est reverte. Si besoin de cleanup :
+
+```sql
+DROP TABLE IF EXISTS solver_history;
+```
+
+### Variables d'env prod (Render)
+
+Nouvelles variables ajoutees sur Render :
+- `GOOGLE_AI_API_KEY`
+- `GOOGLE_AI_MODEL_SOLVER=gemini-2.5-pro`
+- `GOOGLE_AI_MODEL_COACH=gemini-2.5-flash`
+
+En cas de rollback, ces variables peuvent rester — l'ancien code les ignore.
+
 **Phase 2B.3b terminée. Phase 2B.4 (Coach IA) non démarrée — en attente d'instructions.**
