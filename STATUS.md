@@ -625,4 +625,69 @@ Prompt systeme actuel = **MINIMAL PLACEHOLDER** :
 
 La qualite du prompt (curriculum francais, style pedagogique, nombre d'etapes, etc.) sera traitee en **Phase 2B.3b**.
 
-**Phase 2B.3a terminée. Phase 2B.3b (qualite prompt) non demarree — en attente d'instructions.**
+---
+
+## Phase 2B.3b — Calibration qualite Solver IA
+
+**Date** : 2026-05-02
+
+### Commits
+
+```
+5810232 feat(solver): add calibrated system prompt and structured extraction prompt
+748a9bb feat(solver): wire calibrated prompts and Gemini generation config
+fd98143 feat(solver): display detectedDomain badge in solution header
+197adf7 test(solver): add 7 parseStructured robustness tests
+6fd419e fix(solver): increase stream maxOutputTokens and remove responseMimeType
+c101313 fix(solver): fix parseStructured for markdown-wrapped JSON with LaTeX
+afb3838 fix(test): update parseStructured test to match improved implementation
+```
+
+### Prompts
+
+| Prompt | Fichier | Mots |
+|--------|---------|------|
+| SOLVER_SYSTEM_PROMPT | `backend/src/prompts/solver.js` | 934 |
+| SOLVER_STRUCTURED_PROMPT | `backend/src/prompts/solver.js` | 303 |
+
+Sections du system prompt : identite/ton, methode pedagogique (7 points), format LaTeX, detection domain, graphe, perimetre strict, anti-injection.
+
+### Parametres Gemini
+
+| Phase | Temperature | maxOutputTokens | Modele |
+|-------|------------|----------------|--------|
+| Stream (resolution) | 0.4 | 4096 | gemini-2.5-pro |
+| Structured (JSON) | 0.1 | 2048 | gemini-2.5-pro |
+
+`responseMimeType: 'application/json'` retire — ne fonctionnait pas de maniere fiable avec gemini-2.5-pro. Le parsing est gere par `parseStructured()`.
+
+### parseStructured ameliore
+
+- Strip markdown code fences (` ```json ... ``` `) AVANT le parse
+- Utilise indexOf/lastIndexOf pour les accolades (le regex `\{[\s\S]*\}` echouait sur le LaTeX contenant `\{2,3\}`)
+- Fallback minimal si tout echoue
+
+### Test live final — "Résoudre x² - 5x + 6 = 0"
+
+| Critere | Resultat |
+|---------|---------|
+| Auto-identification | "Il s'agit d'une equation du second degre" |
+| Ton pedagogique | "Bien joue !", "Tu y es presque !", "Bravo" |
+| LaTeX correct | `$\Delta = b^2 - 4ac$`, `$$\Delta = 25 - 24 = 1$$` |
+| Nombre d'etapes | **5** (entre 3 et 8) |
+| detectedDomain | `"math"` |
+| requiresGraph | `false` |
+| hints | 3 progressifs |
+| points | 10 |
+| Temps total | ~43s (stream progressif) |
+| SolverHistory DB | status=completed, solution serialisee |
+
+### Solver IA : PRET pour test humain
+
+Le Solver est fonctionnel end-to-end : prompt calibre, streaming SSE, structured JSON, historique DB, domain detection, LaTeX rendu.
+
+### Tests
+- 7 nouveaux tests parseStructured : total suite **67 tests, tous verts**
+- `npm run lint` : 0 erreurs, 525 warnings (exit 0)
+
+**Phase 2B.3b terminée. Phase 2B.4 (Coach IA) non démarrée — en attente d'instructions.**
