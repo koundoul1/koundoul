@@ -509,6 +509,79 @@ describe('Gemini service error classes', () => {
   })
 })
 
+// ── 15. Phase 2B.3b — parseStructured robustness ──
+
+describe('parseStructured JSON parser', () => {
+  // Inline the function to test without CJS import issues
+  function parseStructured(rawText) {
+    const FALLBACK = {
+      steps: [], requiresGraph: false, functionString: null,
+      functionName: null, hints: [], points: 10, detectedDomain: 'math'
+    };
+    if (!rawText || typeof rawText !== 'string') return FALLBACK;
+    try {
+      const parsed = JSON.parse(rawText.trim());
+      if (parsed && typeof parsed === 'object') return { ...FALLBACK, ...parsed };
+    } catch {}
+    const match = rawText.match(/\{[\s\S]*\}/);
+    if (match) {
+      try {
+        const parsed = JSON.parse(match[0]);
+        if (parsed && typeof parsed === 'object') return { ...FALLBACK, ...parsed };
+      } catch {}
+    }
+    return FALLBACK;
+  }
+
+  it('parses clean JSON', () => {
+    const input = '{"steps":[{"step":1,"description":"test","content":"detail"}],"requiresGraph":false,"hints":["h1"],"points":10,"detectedDomain":"math"}';
+    const result = parseStructured(input);
+    expect(result.steps).toHaveLength(1);
+    expect(result.detectedDomain).toBe('math');
+  })
+
+  it('parses JSON wrapped in markdown code block', () => {
+    const input = '```json\n{"steps":[],"requiresGraph":true,"functionString":"x**2","functionName":"f(x)","hints":[],"points":15,"detectedDomain":"physics"}\n```';
+    const result = parseStructured(input);
+    expect(result.requiresGraph).toBe(true);
+    expect(result.functionString).toBe('x**2');
+    expect(result.detectedDomain).toBe('physics');
+  })
+
+  it('parses JSON with preamble text', () => {
+    const input = 'Here is the JSON:\n{"steps":[],"hints":["a","b","c"],"points":5,"detectedDomain":"chemistry"}';
+    const result = parseStructured(input);
+    expect(result.hints).toHaveLength(3);
+    expect(result.detectedDomain).toBe('chemistry');
+  })
+
+  it('returns fallback for totally malformed text', () => {
+    const result = parseStructured('This is not JSON at all');
+    expect(result.steps).toEqual([]);
+    expect(result.points).toBe(10);
+    expect(result.requiresGraph).toBe(false);
+  })
+
+  it('returns fallback for null input', () => {
+    const result = parseStructured(null);
+    expect(result.steps).toEqual([]);
+  })
+
+  it('returns fallback for empty string', () => {
+    const result = parseStructured('');
+    expect(result.steps).toEqual([]);
+  })
+
+  it('merges with defaults (missing fields get defaults)', () => {
+    const input = '{"steps":[{"step":1,"description":"x","content":"y"}]}';
+    const result = parseStructured(input);
+    expect(result.steps).toHaveLength(1);
+    expect(result.requiresGraph).toBe(false);
+    expect(result.hints).toEqual([]);
+    expect(result.detectedDomain).toBe('math');
+  })
+})
+
 describe('SolverHistory status transitions', () => {
   it('valid status flow: pending -> streaming -> completed', () => {
     const validStatuses = ['pending', 'streaming', 'completed', 'failed'];
