@@ -33,13 +33,14 @@ export function useGamification() {
       })
     }
 
-    // Badge toasts
+    // Badge toasts — show bonus XP if badge awards points
     if (gamification.newBadges && gamification.newBadges.length > 0) {
       for (const badge of gamification.newBadges) {
+        const bonusText = badge.points > 0 ? ` (+${badge.points} XP bonus)` : ''
         showGamificationToast({
           type: 'badge',
           title: `${badge.icon} ${badge.name}`,
-          message: badge.description
+          message: `${badge.description}${bonusText}`
         })
       }
     }
