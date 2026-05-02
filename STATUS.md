@@ -317,4 +317,101 @@ Les tables suivantes dans `backend/prisma/schema.prisma` n'appartiennent PAS à 
 - 3 nouveaux tests (XP duplication prevention) : total suite **32 tests, tous verts**
 - `npm run lint` : 0 erreurs, 517 warnings (exit 0)
 
-**Phase 2A + mini-correctifs terminés. Phase 2B non démarrée — en attente d'instructions.**
+---
+
+## Phase 2B — Audit apprentissage
+
+**Date** : 2026-05-02
+
+### A. Micro-Lessons
+
+**Fichiers** : `src/pages/MicroLessonDetail.jsx`, `src/pages/MicroLessons.jsx`, `backend/src/routes/microlessons.js`
+
+**Bug "ouvert = marqué complété"** : la cause racine est dans `MicroLessonDetail.jsx:27-29`. Le code charge le completion record et fait `setCompleted(true)` si `completionRes?.data` est truthy, SANS vérifier `completionRes.data.completed === true`. Un record avec `completed: false` suffit à afficher le badge "Complétée". Fix trivial : ajouter `&& completionRes.data.completed`.
+
+**Bug "Already completed" invisible** : conséquence directe du bug ci-dessus + la page est en light theme (`bg-gradient-to-br from-blue-50`) — le badge vert est là mais peu visible sur fond clair. Harmoniser avec dark theme.
+
+**Bouton "Next lesson"** : absent. L'API `/microlessons` retourne les leçons ordonnées par `id` (ASC). On peut dériver la leçon suivante dans le même chapitre. Effort trivial : requête Supabase pour la prochaine leçon du même chapitre/subject.
+
+**Leçons sans contenu** : `content_sections` est `null` ou `[]` pour certaines leçons Supabase. Le frontend affiche un fallback générique (L161-262). Pas bloquant mais l'UX est médiocre. Option : afficher "Contenu à venir" + masquer le bouton compléter.
+
+**Effort global A** : trivial à modéré (4-5 heures).
+
+### B. Solver IA
+
+**Fichiers** : `src/pages/Solver.jsx`, `backend/src/routes/solver.js`
+
+**Cause racine** : le backend solver est un **STUB COMPLET**. `solver.js` retourne des étapes hardcodées ("Analyser le problème", "Appliquer la méthode") sans aucune intégration IA. Les clés `GOOGLE_AI_API_KEY` et `GOOGLE_AI_MODEL` existent dans `.env` mais le package `@google/generative-ai` n'est PAS installé dans le backend et aucun code ne les utilise. Le frontend Solver appelle `api.solver.solve()` et reçoit une réponse statique — pas d'erreur réseau mais zéro intelligence.
+
+**LaTeX** : le frontend `SolutionDisplay` (L44-81) parse `$$...$$` et `$...$` avec `react-katex`. Le rendu KaTeX fonctionne si le backend envoie du contenu LaTeX. Actuellement il envoie du texte brut.
+
+**Plotly/graphes** : `InteractiveGraph.jsx` existe et utilise react-plotly.js. Conditionné par `solutionData.requiresGraph && solutionData.functionString` (Solver.jsx:204). Le backend stub ne renvoie ni `requiresGraph` ni `functionString` → jamais affiché.
+
+**Historique** : `GET /solver/history` retourne `[]` (hardcodé). Pas de table `SolverHistory` en DB.
+
+**Effort global B** : LOURD. Nécessite : installer `@google/generative-ai`, implémenter l'intégration Gemini avec system prompt math/science, parser la réponse pour extraire LaTeX + graphe, créer une table historique ou utiliser localStorage. Estimation 8-12 heures.
+
+### C. Quiz
+
+**Fichiers** : `src/pages/Quiz.jsx` (quiz interne), `src/pages/QuizPlay.jsx` (route `/quiz/:id`), `backend/src/routes/quiz.js`
+
+**Deux systèmes quiz parallèles** : `Quiz.jsx` a son propre moteur interne (fetch les questions depuis `questionBanks`, filtrage difficulté, modes pratique/examen, timer ascendant/descendant). `QuizPlay.jsx` est une route séparée qui tente de démarrer via `api.quiz.start()` — mais le backend `POST /quiz/:id/start` ne retourne PAS les questions (seulement l'attempt), donc `QuizPlay` crash car `response.data.quiz` est undefined.
+
+**Filtres difficulté** : EXISTENT déjà dans `Quiz.jsx` (L747-788) dans le panneau de paramètres. Facile/Moyen/Difficile filtrent par `difficulty: 1/2/3+`. Le bug QA "pas de filtres" était probablement signalé quand l'élève ne voyait pas le panneau de settings, ou avant son implémentation.
+
+**Timer auto-terminate** : dans `Quiz.jsx` L141-153, le timer descendant (mode examen) appelle `finishExam()` via `setTimeout` quand `prev <= 1`. Fonctionne correctement. Dans `QuizPlay.jsx` L30-31, `handleAutoSubmit()` est appelé dans le setter mais capture une closure stale. Bug réel mais `QuizPlay` est probablement peu utilisé vu que `Quiz.jsx` gère tout en interne.
+
+**XP** : corrigé en Phase 2A (processAction dans `quiz.js` submit).
+
+**Effort global C** : modéré. Le système Quiz.jsx est fonctionnel. Fixer QuizPlay ou le retirer. Ajouter des traductions i18n aux labels hardcodés FR dans Quiz.jsx.
+
+### D. Virtual Coach
+
+**Fichiers** : `src/pages/VirtualCoach.jsx`, `backend/src/routes/coach.js`
+
+**Cause racine** : même problème que le Solver. Le coach backend (`coach.js`) est un **STUB**. `POST /coach/analyze` retourne un objet `analysis` placeholder. Les routes `/coach/steps/*` existent et utilisent la table `coach_sessions` (Prisma), mais la logique de validation est un placeholder (`isValid = true` toujours).
+
+**Fait critique** : `VirtualCoach.jsx:187` appelle `api.solver.solve()` — le Coach frontend utilise le MÊME endpoint que le Solver, pas les routes `/coach/*`. C'est une redirection vers le stub solver.
+
+**LaTeX** : `VirtualCoach.jsx` importe `BlockMath`/`InlineMath` de `react-katex` et a un `SolutionDisplay` identique au Solver. Le rendu LaTeX fonctionnerait si le backend envoyait du LaTeX.
+
+**Historique** : stocké dans la table `coach_sessions` (Prisma), mais `GET /coach/history` retourne les sessions complétées. Le frontend ne charge pas cet historique — il n'y a pas de section "historique" dans VirtualCoach.jsx.
+
+**Langue** : aucun mécanisme pour passer la langue active au backend. Le frontend ne transmet pas `language` dans l'appel API.
+
+**Effort global D** : LOURD (même effort que Solver, car les deux partagent le même besoin d'intégration Gemini). Si le Solver est implémenté, le Coach peut réutiliser le service IA. Estimation 4-6 heures additionnelles au-dessus du Solver.
+
+### E. Courses
+
+**Fichiers** : `src/pages/Courses.jsx`
+
+**État** : la page Courses est un simple hub statique — 3 cartes (Math, Physique, Chimie) qui redirigent vers `/micro-lessons?subject=X`. Pas de progression propre, pas de tracking de course. Le bug "ouvrir une leçon = course complétée" n'existe pas ici car il n'y a pas de concept de "course completion".
+
+**Light theme** : fond blanc, pas de dark theme. Nombres de leçons hardcodés (290, 80, 50).
+
+**Traduction** : utilise `t()` pour les labels, mais pas de traduction manquante visible — les clés existent dans le fichier de traductions.
+
+**Effort global E** : trivial. Harmoniser dark theme + rendre les compteurs dynamiques depuis l'API.
+
+### F. Exercises
+
+**Fichiers** : `src/pages/Exercise.jsx`, `backend/src/routes/questionBanks.js` (exercises endpoint)
+
+**État** : le frontend `Exercise.jsx` existe et appelle `api.questionBanks.getExercises()` pour charger un exercice. La soumission appelle `api.exercises.submit()`. MAIS : il n'y a PAS de route `/exercises` dans le backend (`index.js` ne l'enregistre pas). Les tables `exercises` et `exercise_attempts` existent en DB. Les routes `/question-banks/:id/exercises` et `/question-banks/:id/exercises/random` existent dans `questionBanks.js`.
+
+Le module est partiellement implémenté : lecture via questionBanks OK, mais pas de soumission, pas de XP.
+
+**Effort global F** : modéré (créer route POST /exercises/submit + processAction, 2-3 heures).
+
+### Questions produit à valider
+
+- **A.1** : Mécanisme de complétion leçon ? Options : a) bouton explicite "Marquer terminée" en bas (actuel), b) quiz de fin obligatoire, c) scroll-to-bottom auto-detect
+- **A.2** : Ordre du bouton "Next lesson" ? Par chapitre (même subject+chapter, ordre `id` ASC) ou global ?
+- **A.3** : Leçons sans contenu — masquer ou placeholder "Contenu à venir" ?
+- **B.1** : Solver IA — le backend est un STUB. Pas de Gemini SDK installé. Clés `.env` présentes mais non utilisées. Faut-il implémenter l'intégration Gemini complète en Phase 2B ou repousser ?
+- **B.2** : Historique Solver — par-utilisateur (DB, nouvelle table) ou par-session (localStorage) ?
+- **D.1** : Coach — même stub que Solver. Le frontend Coach appelle `api.solver.solve()`. Faut-il créer un service IA distinct ou réutiliser le même avec un system prompt différent ?
+- **D.2** : Coach historique — la table `coach_sessions` existe mais le frontend ne l'affiche pas. Activer ?
+- **F.1** : Exercises — créer le endpoint submit maintenant ou repousser Phase 3 ?
+
+### En attente de review humain avant de coder.
