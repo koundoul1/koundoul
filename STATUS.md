@@ -726,4 +726,34 @@ Nouvelles variables ajoutees sur Render :
 
 En cas de rollback, ces variables peuvent rester — l'ancien code les ignore.
 
-**Phase 2B.3b terminée. Phase 2B.4 (Coach IA) non démarrée — en attente d'instructions.**
+---
+
+## Production deployment 2026-05-02
+
+**Date/heure merge** : 2026-05-02 ~16:45 UTC
+**SHA merge commit** : `aecaad6`
+**SHA pre-merge main** : `3c35b137e2613a14075a4b17b9bf2bb89673aad5`
+
+### Phases deployees
+
+- **Phase 1** : Auth + Payment fixes + securite (JWT fail-fast, rate limiting)
+- **Phase 2A** : Gamification (XP, streak, badges, processAction, toasts)
+- **Phase 2A mini-correctifs** : XP duplication fix, race condition badges, hook cleanup
+- **Phase 2B.1** : Lessons (auto-mark fix, next lesson, dark theme, placeholder vide)
+- **Phase 2B.2** : Quiz (timer fix, QuizResults rewrite) + Exercises (submit endpoint, self-eval)
+- **Phase 2B.3a** : Infra Gemini (service, SSE, SolverHistory DB)
+- **Phase 2B.3b** : Solver IA prompt calibre (pedagogique, LaTeX, garde-fous)
+
+### Chiffres
+
+- 54 commits merges
+- 65 fichiers modifies (+14041 / -7800 lignes)
+- 67 tests automatises, tous verts
+- 0 erreurs lint
+- 0 conflits au merge
+
+### Statut
+
+Deployed, awaiting human validation on koundoul.com.
+
+**Phase 2B.4 (Coach IA) non démarrée — en attente d'instructions.**
