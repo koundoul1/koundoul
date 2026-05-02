@@ -14,6 +14,7 @@ import {
 
 // Mapping des icônes selon le titre de l'étape
 const getStepIcon = (title) => {
+  if (!title) return <Edit3 className="h-5 w-5" />;
   const lowerTitle = title.toLowerCase();
   
   if (lowerTitle.includes('rappel') || lowerTitle.includes('cours')) {
@@ -37,6 +38,7 @@ const getStepIcon = (title) => {
 
 // Couleur selon le type d'étape - Design amélioré avec gradients
 const getStepColor = (title) => {
+  if (!title) return 'bg-gradient-to-br from-gray-500/10 to-slate-500/10 border-gray-400/40 text-gray-200';
   const lowerTitle = title.toLowerCase();
   
   if (lowerTitle.includes('analyse') || lowerTitle.includes('rappel')) {
@@ -214,7 +216,9 @@ const SolutionSteps = ({ steps = [] }) => {
       </div>
 
       {steps.map((step, index) => {
-        const stepData = typeof step === 'string' ? { title: `Étape ${index + 1}`, content: step } : step;
+        const stepData = typeof step === 'string'
+          ? { title: `Étape ${index + 1}`, content: step }
+          : { title: step.title || step.description || `Étape ${index + 1}`, content: step.content || '' };
         const isExpanded = expandedSteps.has(index);
         const icon = getStepIcon(stepData.title);
         const colorClass = getStepColor(stepData.title);

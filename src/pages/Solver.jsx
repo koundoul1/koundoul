@@ -247,8 +247,8 @@ const Solver = () => {
   }
 
   const handleCopySolution = () => {
-    if (solution) {
-      navigator.clipboard.writeText(solution.solution)
+    if (solution?.solution) {
+      navigator.clipboard.writeText(String(solution.solution))
     }
   }
 
