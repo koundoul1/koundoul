@@ -266,4 +266,58 @@ router.get('/stats/me', authenticateToken, async (req, res, next) => {
   }
 });
 
+// Get next lesson in the same chapter (by id order), fallback to next chapter
+router.get('/:id/next', optionalAuth, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!isSupabaseConfigured()) {
+      return res.json({ success: true, data: null });
+    }
+
+    const supabase = getSupabase();
+    if (!supabase) return res.json({ success: true, data: null });
+
+    // Get current lesson
+    const { data: current } = await supabase
+      .from(TABLE_MICRO_LESSONS)
+      .select('id, subject, chapter, level')
+      .eq('id', id)
+      .maybeSingle();
+
+    if (!current) return res.json({ success: true, data: null });
+
+    // Next lesson in same chapter (id > current, same subject+chapter)
+    const { data: nextInChapter } = await supabase
+      .from(TABLE_MICRO_LESSONS)
+      .select('id, title, subject, chapter, level, difficulty, xp_reward')
+      .eq('subject', current.subject)
+      .eq('chapter', current.chapter)
+      .gt('id', id)
+      .order('id', { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    if (nextInChapter) {
+      return res.json({ success: true, data: nextInChapter });
+    }
+
+    // Fallback: first lesson of the next chapter in same subject+level
+    const { data: nextInSubject } = await supabase
+      .from(TABLE_MICRO_LESSONS)
+      .select('id, title, subject, chapter, level, difficulty, xp_reward')
+      .eq('subject', current.subject)
+      .eq('level', current.level)
+      .gt('chapter', current.chapter)
+      .order('chapter', { ascending: true })
+      .order('id', { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    res.json({ success: true, data: nextInSubject || null });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

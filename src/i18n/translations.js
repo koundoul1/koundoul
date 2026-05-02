@@ -712,9 +712,18 @@ export default {
       completed: 'Complétée',
       inProgress: 'En cours',
       notStarted: 'Non commencée',
-      noLessons: 'Aucune leçon disponible'
+      noLessons: 'Aucune leçon disponible',
+      markCompleted: 'Marquer comme terminée',
+      alreadyCompleted: 'Déjà complétée',
+      nextLesson: 'Leçon suivante',
+      allDone: 'Tu as terminé toutes les leçons de ce chapitre !',
+      backToList: 'Voir toutes les leçons',
+      contentComingSoon: 'Contenu disponible prochainement',
+      contentComingSoonDesc: 'Cette leçon est en cours de préparation par notre équipe pédagogique.',
+      lessonNotFound: 'Leçon introuvable',
+      back: 'Retour'
     },
-    
+
     // Exercise
     exercise: {
       title: 'Exercice',
@@ -1562,9 +1571,18 @@ export default {
       completed: 'Completed',
       inProgress: 'In Progress',
       notStarted: 'Not Started',
-      noLessons: 'No lessons available'
+      noLessons: 'No lessons available',
+      markCompleted: 'Mark as completed',
+      alreadyCompleted: 'Already completed',
+      nextLesson: 'Next lesson',
+      allDone: 'You have completed all lessons in this chapter!',
+      backToList: 'View all lessons',
+      contentComingSoon: 'Content coming soon',
+      contentComingSoonDesc: 'This lesson is being prepared by our teaching team.',
+      lessonNotFound: 'Lesson not found',
+      back: 'Back'
     },
-    
+
     // Exercise
     exercise: {
       title: 'Exercise',

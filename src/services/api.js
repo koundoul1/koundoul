@@ -387,6 +387,7 @@ const api = {
       body: JSON.stringify(data)
     }),
     getCompletion: (id) => request(`/microlessons/${id}/completion`),
+    getNext: (id) => request(`/microlessons/${id}/next`),
     getStats: () => request('/microlessons/stats/me'),
     getToReview: (limit = 10) => request(`/microlessons/reviews/to-review?limit=${limit}`)
   },
