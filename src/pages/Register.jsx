@@ -182,28 +182,28 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mb-3 sm:mb-4 transition-transform hover:scale-110">
             <span className="text-xl sm:text-2xl font-bold text-white">K</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
             {t('auth.register.title')}
           </h1>
-          <p className="text-sm sm:text-base text-gray-600">
+          <p className="text-sm sm:text-base text-gray-400">
             {t('auth.register.subtitle')}
           </p>
         </div>
 
         {/* Formulaire */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
+        <div className="k-card rounded-2xl p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Prénom et Nom */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
                   {t('auth.register.firstNameLabel')}
                 </label>
                 <div className="relative">
@@ -229,7 +229,7 @@ const Register = () => {
               </div>
 
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-2">
                   {t('auth.register.lastNameLabel')}
                 </label>
                 <div className="relative">
@@ -257,7 +257,7 @@ const Register = () => {
 
             {/* Nom d'utilisateur */}
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">
                 {t('auth.register.usernameLabel')}
               </label>
               <div className="relative">
@@ -290,7 +290,7 @@ const Register = () => {
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 {t('auth.register.emailLabel')}
               </label>
               <div className="relative">
@@ -323,7 +323,7 @@ const Register = () => {
 
             {/* Mot de passe */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                 {t('auth.register.passwordLabel')}
               </label>
               <div className="relative">
@@ -345,7 +345,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -357,7 +357,7 @@ const Register = () => {
 
             {/* Confirmation du mot de passe */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
                 {t('auth.register.confirmPasswordLabel')}
               </label>
               <div className="relative">
@@ -379,7 +379,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300"
                 >
                   {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -415,11 +415,11 @@ const Register = () => {
 
           {/* Liens */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-400">
               {t('auth.register.hasAccount')}{' '}
               <Link
                 to="/login"
-                className="font-medium text-purple-600 hover:text-purple-500 transition-colors"
+                className="font-medium text-kprimary hover:text-kprimary/80 transition-colors"
               >
                 {t('auth.register.login')}
               </Link>
