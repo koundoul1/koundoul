@@ -69,6 +69,7 @@ model User {
   duelsAsChallenger                                      Duel[]               @relation("DuelChallenger")
   duelsAsOpponent                                        Duel[]               @relation("DuelOpponent")
   notifications                                          Notification[]
+  solverHistory                                          SolverHistory[]
 
   @@map("users")
 }
@@ -864,4 +865,20 @@ model Duel {
   @@index([isPublic, status])
   @@index([inviteCode])
   @@map("duels")
+}
+
+model SolverHistory {
+  id           String    @id @default(cuid())
+  userId       String
+  problem      String    @db.Text
+  domain       String?
+  solution     String?   @db.Text
+  status       String    @default("pending") @db.VarChar(20)
+  errorMessage String?   @db.Text
+  createdAt    DateTime  @default(now())
+  completedAt  DateTime?
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("solver_history")
 }
