@@ -228,6 +228,9 @@ app.use('/api/leaderboard', leaderboardRoutes);
 const notificationsRoutes = require('./routes/notifications');
 app.use('/api/notifications', notificationsRoutes);
 
+const exercisesRoutes = require('./routes/exercises');
+app.use('/api/content/exercises', exercisesRoutes);
+
 // Error handling middleware
 app.use(errorHandler);
 
