@@ -213,7 +213,8 @@ const Solver = () => {
           functionString: data.functionString,
           functionName: data.functionName,
           hints: data.hints || [],
-          points: data.points || 10
+          points: data.points || 10,
+          detectedDomain: data.detectedDomain || null
         }))
         if (data.requiresGraph && data.functionString) {
           setShowGraph(true)
@@ -591,6 +592,11 @@ const Solver = () => {
                     <h4 className="font-semibold text-green-300 mb-4 flex items-center text-xl">
                       <CheckCircle className="h-7 w-7 mr-3 text-green-400" />
                       Solution trouvée
+                      {solution.detectedDomain && (
+                        <span className="ml-3 px-2.5 py-0.5 text-xs font-bold rounded-full bg-white/10 text-gray-300">
+                          {solution.detectedDomain === 'math' ? 'Maths' : solution.detectedDomain === 'physics' ? 'Physique' : solution.detectedDomain === 'chemistry' ? 'Chimie' : ''}
+                        </span>
+                      )}
                     </h4>
                     <div className="bg-black/20 rounded-lg p-4 border border-green-400/30">
                       <SolutionDisplay content={solution.solution || 'Aucune solution affichée'} />
