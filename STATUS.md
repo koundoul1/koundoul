@@ -414,4 +414,64 @@ Le module est partiellement implémenté : lecture via questionBanks OK, mais pa
 - **D.2** : Coach historique — la table `coach_sessions` existe mais le frontend ne l'affiche pas. Activer ?
 - **F.1** : Exercises — créer le endpoint submit maintenant ou repousser Phase 3 ?
 
-### En attente de review humain avant de coder.
+### Audit validé — Implémentation 2B.1 ci-dessous.
+
+---
+
+## Phase 2B.1 — Lessons + Courses + Dark theme
+
+**Date** : 2026-05-02
+
+### Commits
+
+```
+93df620 fix(lessons): prevent auto-mark completed on lesson open
+fadd2a2 feat(lessons): rewrite MicroLessonDetail with dark theme and full UX
+2e9883b fix(theme): harmonize Courses and Register pages with dark theme
+925acd4 fix(i18n): add missing courses.subtitle key in FR and EN
+8e10f64 test(lessons): add 9 regression tests for Phase 2B.1
+```
+
+### Résumé
+
+#### 2B.1.1 — Auto-mark fix
+Bug racine : `completionRes?.data` truthy meme quand `completed === false`. Fix : verifier `data.completed === true` explicitement.
+
+#### 2B.1.2+3 — Bouton "Marquer terminée" + timeSpent
+Bouton deplace en bas du contenu (etait dans le header). Tracking `timeSpent` reel via `mountedAt` ref. Score=100 conserve avec commentaire expliquant pourquoi (pas de quiz de fin encore). Le score viendra du quiz de fin quand implemente en Phase 2B.2.
+
+#### 2B.1.4 — Next lesson
+Nouvel endpoint `GET /microlessons/:id/next` : cherche la prochaine leçon du meme chapitre (par `id` ASC dans Supabase), fallback au prochain chapitre du meme subject+level. Bouton "Leçon suivante" en bas a cote du bouton complete. Si derniere leçon : message "Tu as termine toutes les leçons de ce chapitre".
+
+#### 2B.1.5 — Placeholder contenu vide
+Detection : `content_sections` null, tableau vide, ou objet vide. Affiche une carte centree avec message "Contenu disponible prochainement" + lien retour. Bouton complet et next desactives (pas d'XP pour du vide).
+
+#### 2B.1.6 — Dark theme harmonise
+- `MicroLessonDetail.jsx` : reecrit en dark theme (k-card, text-gray-300, text-kprimary)
+- `Courses.jsx` : reecrit en dark theme (k-card, k-card-glow)
+- `Register.jsx` : fond light supprime, labels adaptes, k-card pour le formulaire
+
+#### 2B.1.7 — i18n Courses
+Ajout cle `courses.subtitle` FR+EN. Toutes les cles courses existantes couvrent les deux langues.
+
+### Bugs hors scope detectes (a traiter plus tard)
+- Compteurs leçons hardcodes dans Courses.jsx (290, 80, 50) — supprimes dans la rewrite, mais le catalogue ne montre pas de compteur dynamique non plus. A ajouter quand l'API retourne les totaux par matiere.
+- `Exercise.jsx`, `Lesson.jsx`, `QuizResults.jsx` utilisent encore `useBadgeContext()` (stub no-op depuis Phase 2A mini-correctifs). A migrer vers `useGamification` en Phase 2B.2.
+- Le fallback de contenu dans MicroLessonDetail (sections non-array format) genere du texte generique qui n'est pas i18n. Acceptable pour l'instant — le contenu reel vient de Supabase.
+
+### Tests
+- 9 nouveaux tests : total suite **41 tests, tous verts**
+- `npm run lint` : 0 erreurs, 518 warnings (exit 0)
+
+### Tests manuels recommandes
+- [ ] Ouvrir une micro-leçon non completee → PAS de badge "Deja completee", bouton "Marquer terminee" visible en bas
+- [ ] Cliquer "Marquer terminee" → toast XP, bouton bascule en vert "Deja completee" avec date
+- [ ] Re-ouvrir la meme leçon → badge "Deja completee" affiche, bouton desactive
+- [ ] Cliquer "Leçon suivante" → navigue vers la prochaine leçon du chapitre
+- [ ] Derniere leçon d'un chapitre → message "Tu as termine toutes les leçons"
+- [ ] Ouvrir une leçon sans contenu (ex: lesson vide) → placeholder "Contenu disponible prochainement", boutons desactives
+- [ ] Page /courses → dark theme, 3 cartes matiere cliquables
+- [ ] Page /register → dark theme, formulaire lisible sur fond sombre
+- [ ] Switcher langue FR→EN → labels "Mark as completed", "Next lesson", "Content coming soon" traduits
+
+**Phase 2B.1 terminée. Phase 2B.2 non démarrée — en attente d'instructions.**
