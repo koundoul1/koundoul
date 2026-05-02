@@ -6,6 +6,20 @@ const morgan = require('morgan');
 const { initPlans } = require('./scripts/initPlans');
 const prisma = require('./config/database');
 
+// ── Fail-fast: required environment variables ──
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET || JWT_SECRET.length < 32) {
+  console.error('❌ FATAL: JWT_SECRET is missing or too short (minimum 32 characters).');
+  console.error('   Set a strong random secret in your .env file.');
+  console.error('   Example: JWT_SECRET=$(openssl rand -hex 32)');
+  process.exit(1);
+}
+
+// AI features: graceful degradation if key missing
+if (!process.env.GOOGLE_AI_API_KEY) {
+  console.warn('⚠️  GOOGLE_AI_API_KEY not set — AI features (Solver, Coach) will return 503');
+}
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -218,6 +232,12 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 const notificationsRoutes = require('./routes/notifications');
 app.use('/api/notifications', notificationsRoutes);
+
+const exercisesRoutes = require('./routes/exercises');
+app.use('/api/content/exercises', exercisesRoutes);
+
+const contentRoutes = require('./routes/content');
+app.use('/api/content', contentRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

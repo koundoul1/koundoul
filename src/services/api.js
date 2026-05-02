@@ -74,12 +74,14 @@ const request = async (url, options = {}) => {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         // Ne pas rediriger automatiquement, laisser le composant gérer
-        const error = new Error(errorData.error?.message || errorData.message || 'Session expirée')
+        const errorMsg401 = (typeof errorData.error === 'string' ? errorData.error : errorData.error?.message) || errorData.message || 'Session expirée'
+        const error = new Error(errorMsg401)
         error.status = 401
         throw error
       }
       
-      const error = new Error(errorData.error?.message || errorData.message || 'Une erreur est survenue')
+      const errorMsg = (typeof errorData.error === 'string' ? errorData.error : errorData.error?.message) || errorData.message || 'Une erreur est survenue'
+      const error = new Error(errorMsg)
       error.status = response.status
       throw error
     }
@@ -143,22 +145,86 @@ const api = {
 
   // 🧠 RÉSOLUTION DE PROBLÈMES
   solver: {
+    // Legacy non-stream solve (kept for backward compat)
     solve: (data) => request('/solver/solve', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-    
-    getHistory: () => request('/solver/history'),
-    
-    getProblems: (filters = {}) => {
-      const params = new URLSearchParams(filters)
-      return request(`/solver/problems?${params}`)
+
+    /**
+     * SSE streaming solve via fetch + ReadableStream.
+     * EventSource doesn't support POST, so we parse SSE manually.
+     */
+    solveStream: ({ problem, domain, level, onMeta, onChunk, onStructured, onDone, onError }) => {
+      const token = localStorage.getItem('token');
+      const controller = new AbortController();
+
+      const run = async () => {
+        try {
+          const res = await fetch(`${API_BASE}/solver/solve`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { Authorization: `Bearer ${token}` } : {})
+            },
+            body: JSON.stringify({ problem, domain, level }),
+            signal: controller.signal
+          });
+
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({ error: 'Erreur serveur' }));
+            onError?.(err.error || `Erreur ${res.status}`);
+            return;
+          }
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          let reading = true;
+          while (reading) {
+            const { done, value } = await reader.read();
+            if (done) { reading = false; break; }
+
+            buffer += decoder.decode(value, { stream: true });
+            const parts = buffer.split('\n\n');
+            buffer = parts.pop() || '';
+
+            for (const part of parts) {
+              const eventLine = part.split('\n').find(l => l.startsWith('event: '));
+              const dataLine = part.split('\n').find(l => l.startsWith('data: '));
+              if (!eventLine || !dataLine) continue;
+
+              const event = eventLine.slice(7);
+              try {
+                const data = JSON.parse(dataLine.slice(6));
+                if (event === 'meta') onMeta?.(data);
+                else if (event === 'chunk') onChunk?.(data);
+                else if (event === 'structured') onStructured?.(data);
+                else if (event === 'done') onDone?.(data);
+                else if (event === 'error') onError?.(data.message);
+              } catch (_e) { /* ignore malformed SSE events */ }
+            }
+          }
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            onError?.(err.message || 'Erreur de connexion');
+          }
+        }
+      };
+
+      run();
+      return { abort: () => controller.abort() };
     },
-    
-    saveProblem: (data) => request('/solver/problems', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    })
+
+    getHistory: (params = {}) => {
+      const qs = new URLSearchParams(params).toString();
+      return request(`/solver/history?${qs}`);
+    },
+
+    getHistoryEntry: (id) => request(`/solver/history/${id}`),
+
+    deleteHistory: (id) => request(`/solver/history/${id}`, { method: 'DELETE' })
   },
 
   // 📝 QUIZ
@@ -385,6 +451,7 @@ const api = {
       body: JSON.stringify(data)
     }),
     getCompletion: (id) => request(`/microlessons/${id}/completion`),
+    getNext: (id) => request(`/microlessons/${id}/next`),
     getStats: () => request('/microlessons/stats/me'),
     getToReview: (limit = 10) => request(`/microlessons/reviews/to-review?limit=${limit}`)
   },
@@ -424,7 +491,8 @@ const api = {
 
   // 📊 DASHBOARD
   dashboard: {
-    get: () => request('/dashboard')
+    get: () => request('/dashboard'),
+    getActivity: (days = 7) => request(`/dashboard/activity?days=${days}`)
   },
 
   // 🏆 BADGES

@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import { useBadgeNotifications } from '../hooks/useBadgeNotifications';
-import BadgeToast from './BadgeToast';
+
+// Badge notification context removed — replaced by useGamification hook
+// + GamificationToast (Phase 2A). Kept as no-op for backward compat
+// with Exercise.jsx, Lesson.jsx, QuizResults.jsx that import useBadgeContext.
 import { createContext, useContext } from 'react';
 
-// Créer un contexte pour les notifications
 export const BadgeNotificationContext = createContext(null);
 
 export function useBadgeContext() {
@@ -11,26 +12,13 @@ export function useBadgeContext() {
 }
 
 export default function Layout() {
-  const badgeNotifications = useBadgeNotifications();
-
   return (
-    <BadgeNotificationContext.Provider value={badgeNotifications}>
+    <BadgeNotificationContext.Provider value={{ showBadges: () => {}, notifications: [], removeBadgeNotification: () => {} }}>
       <div className="min-h-screen bg-gray-50">
         <main>
           <Outlet />
         </main>
-
-        {/* Notifications de badges */}
-        {badgeNotifications.notifications.map((badge) => (
-          <BadgeToast
-            key={badge.id}
-            badge={badge}
-            onClose={() => badgeNotifications.removeBadgeNotification(badge.id)}
-          />
-        ))}
       </div>
     </BadgeNotificationContext.Provider>
   );
 }
-
-

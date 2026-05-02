@@ -2,11 +2,31 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const rateLimit = require('express-rate-limit');
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 
+// ── Rate limiters for auth endpoints ──
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: () => process.env.NODE_ENV === 'test',
+  message: { error: 'Trop de tentatives de connexion. Réessayez dans 15 minutes.' }
+});
+
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 3,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: () => process.env.NODE_ENV === 'test',
+  message: { error: 'Trop de tentatives d\'inscription. Réessayez dans 1 heure.' }
+});
+
 // Register
-router.post('/register', async (req, res, next) => {
+router.post('/register', registerLimiter, async (req, res, next) => {
   try {
     const { email, password, firstName, lastName, username } = req.body;
 
@@ -14,8 +34,8 @@ router.post('/register', async (req, res, next) => {
       return res.status(400).json({ error: 'Email et mot de passe requis' });
     }
 
-    if (password.length < 6) {
-      return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 6 caractères' });
+    if (password.length < 8) {
+      return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractères' });
     }
 
     // Vérifier si l'email existe déjà
@@ -68,7 +88,7 @@ router.post('/register', async (req, res, next) => {
     // Générer le token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
-      process.env.JWT_SECRET || 'default-secret',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -85,7 +105,7 @@ router.post('/register', async (req, res, next) => {
 });
 
 // Login
-router.post('/login', async (req, res, next) => {
+router.post('/login', loginLimiter, async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -119,7 +139,7 @@ router.post('/login', async (req, res, next) => {
     // Générer le token
     const token = jwt.sign(
       { userId: user.id, email: user.email, is_admin: user.is_admin || false, is_super_admin: user.is_super_admin || false },
-      process.env.JWT_SECRET || 'default-secret',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -229,8 +249,8 @@ router.put('/change-password', authenticateToken, async (req, res, next) => {
       return res.status(400).json({ error: 'Mot de passe actuel et nouveau mot de passe requis' });
     }
 
-    if (newPassword.length < 6) {
-      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 6 caractères' });
+    if (newPassword.length < 8) {
+      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractères' });
     }
 
     const user = await prisma.user.findUnique({
@@ -310,12 +330,12 @@ router.post('/refresh-token', async (req, res, next) => {
     }
 
     // Vérifier le token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'default-secret');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // Générer un nouveau token
     const newToken = jwt.sign(
       { userId: decoded.userId, email: decoded.email, is_admin: decoded.is_admin || false, is_super_admin: decoded.is_super_admin || false },
-      process.env.JWT_SECRET || 'default-secret',
+      process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
 

@@ -48,27 +48,45 @@ const CircularProgress = ({ percentage, color, size = 80, strokeWidth = 6, child
   )
 }
 
-// 7-day activity grid
-const WeekActivityGrid = ({ recentActivity }) => {
-  const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
+// 7-day activity grid — uses real per-day counts from backend
+const WeekActivityGrid = ({ activityData }) => {
+  const dayLabels = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
   const today = new Date()
-  const dayOfWeek = (today.getDay() + 6) % 7 // Monday=0
+  const todayDow = (today.getDay() + 6) % 7 // Monday=0
+
+  // Build a map of date string -> count
+  const countMap = {}
+  if (activityData) {
+    for (const entry of activityData) {
+      countMap[entry.date] = entry.count
+    }
+  }
+
+  // Build last 7 days starting from Monday of this week
+  const mondayOffset = todayDow
+  const monday = new Date(today)
+  monday.setDate(monday.getDate() - mondayOffset)
 
   return (
     <div className="flex items-center gap-2">
-      {days.map((day, i) => {
-        const hasActivity = recentActivity && i <= dayOfWeek && recentActivity.length > (dayOfWeek - i)
+      {dayLabels.map((label, i) => {
+        const d = new Date(monday)
+        d.setDate(d.getDate() + i)
+        const key = d.toISOString().slice(0, 10)
+        const count = countMap[key] || 0
+        const isPast = i <= todayDow
+
         return (
           <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-[10px] text-gray-500 font-medium">{day}</span>
+            <span className="text-[10px] text-gray-500 font-medium">{label}</span>
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold transition-all ${
-              hasActivity
+              count > 0
                 ? 'bg-gradient-to-br from-kprimary to-ksecondary text-white shadow-md shadow-kprimary/20'
-                : i <= dayOfWeek
+                : isPast
                   ? 'bg-white/5 text-gray-600'
                   : 'bg-white/[0.02] text-gray-700'
             }`}>
-              {hasActivity ? '✓' : ''}
+              {count > 0 ? count : ''}
             </div>
           </div>
         )
@@ -82,6 +100,7 @@ const NewDashboard = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [dashboard, setDashboard] = useState(null)
+  const [activityData, setActivityData] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -90,9 +109,13 @@ const NewDashboard = () => {
 
   const fetchDashboard = async () => {
     try {
-      const response = await api.dashboard.get()
-      const data = response.data?.data || response.data || response
+      const [dashRes, actRes] = await Promise.all([
+        api.dashboard.get(),
+        api.dashboard.getActivity(7).catch(() => ({ data: [] }))
+      ])
+      const data = dashRes.data?.data || dashRes.data || dashRes
       setDashboard(data)
+      setActivityData(actRes.data || [])
     } catch (error) {
       console.error('Dashboard fetch error:', error)
     } finally {
@@ -138,11 +161,13 @@ const NewDashboard = () => {
 
   const { profile, stats, subjectProgress, badges, recentActivity, recommendations } = dashboard
 
-  const xp = profile?.xp || 0
-  const level = profile?.level || 1
-  const xpInLevel = profile?.xpInCurrentLevel || 0
-  const xpForNext = profile?.xpForNextLevel || 1000
-  const streak = profile?.streak || 0
+  // Use context user for live XP/level/streak (updated by useGamification after mutations)
+  const XP_PER_LEVEL = 1000
+  const xp = user?.xp ?? profile?.xp ?? 0
+  const level = Math.floor(xp / XP_PER_LEVEL) + 1
+  const xpInLevel = xp % XP_PER_LEVEL
+  const xpForNext = XP_PER_LEVEL
+  const streak = user?.streak ?? profile?.streak ?? 0
   const lessonsCompleted = stats?.lessonsCompleted || 0
   const totalLessons = stats?.totalLessons || 395
   const avgScore = stats?.averageScore || 0
@@ -219,7 +244,7 @@ const NewDashboard = () => {
             </h2>
             <span className="text-xs text-gray-500">{streak > 0 ? t('dashboard.streakActive') : t('dashboard.streakStart')}</span>
           </div>
-          <WeekActivityGrid recentActivity={recentActivity} />
+          <WeekActivityGrid activityData={activityData} />
         </div>
 
         {/* Subject Progress — Circular rings */}

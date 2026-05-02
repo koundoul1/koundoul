@@ -393,11 +393,6 @@ export default {
       }
     },
     
-    quiz: {
-      title: 'Quiz',
-      startQuiz: 'Commencer le quiz'
-    },
-    
     // Authentification
     auth: {
       login: {
@@ -419,7 +414,7 @@ export default {
           emailRequired: 'L\'email est requis',
           emailInvalid: 'Format d\'email invalide',
           passwordRequired: 'Le mot de passe est requis',
-          passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractères'
+          passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères'
         }
       },
       register: {
@@ -455,7 +450,7 @@ export default {
           emailInvalid: 'Format d\'email invalide',
           emailTaken: 'Cet email est déjà utilisé',
           passwordRequired: 'Le mot de passe est requis',
-          passwordMinLength: 'Le mot de passe doit contenir au moins 6 caractères',
+          passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
           passwordComplexity: 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre',
           confirmPasswordRequired: 'La confirmation du mot de passe est requise',
           passwordsNotMatch: 'Les mots de passe ne correspondent pas'
@@ -613,6 +608,7 @@ export default {
     // Courses
     courses: {
       title: 'Cours',
+      subtitle: 'Explore les matieres et commence a apprendre',
       math: 'Mathématiques',
       physics: 'Physique',
       chemistry: 'Chimie',
@@ -717,9 +713,18 @@ export default {
       completed: 'Complétée',
       inProgress: 'En cours',
       notStarted: 'Non commencée',
-      noLessons: 'Aucune leçon disponible'
+      noLessons: 'Aucune leçon disponible',
+      markCompleted: 'Marquer comme terminée',
+      alreadyCompleted: 'Déjà complétée',
+      nextLesson: 'Leçon suivante',
+      allDone: 'Tu as terminé toutes les leçons de ce chapitre !',
+      backToList: 'Voir toutes les leçons',
+      contentComingSoon: 'Contenu disponible prochainement',
+      contentComingSoonDesc: 'Cette leçon est en cours de préparation par notre équipe pédagogique.',
+      lessonNotFound: 'Leçon introuvable',
+      back: 'Retour'
     },
-    
+
     // Exercise
     exercise: {
       title: 'Exercice',
@@ -824,6 +829,9 @@ export default {
         title: 'Abonnement Actif',
         active: 'Actif',
         validUntil: 'Valide jusqu\'au'
+      },
+      errors: {
+        initFailed: 'Erreur lors de l\'initiation du paiement. Veuillez réessayer.'
       },
       payment: {
         success: 'Paiement réussi ! Votre abonnement est maintenant actif.',
@@ -1244,11 +1252,6 @@ export default {
       }
     },
     
-    quiz: {
-      title: 'Quiz',
-      startQuiz: 'Start Quiz'
-    },
-    
     // Authentication
     auth: {
       login: {
@@ -1270,7 +1273,7 @@ export default {
           emailRequired: 'Email is required',
           emailInvalid: 'Invalid email format',
           passwordRequired: 'Password is required',
-          passwordMinLength: 'Password must contain at least 6 characters'
+          passwordMinLength: 'Password must contain at least 8 characters'
         }
       },
       register: {
@@ -1306,7 +1309,7 @@ export default {
           emailInvalid: 'Invalid email format',
           emailTaken: 'This email is already in use',
           passwordRequired: 'Password is required',
-          passwordMinLength: 'Password must contain at least 6 characters',
+          passwordMinLength: 'Password must contain at least 8 characters',
           passwordComplexity: 'Password must contain at least one uppercase letter, one lowercase letter and one number',
           confirmPasswordRequired: 'Password confirmation is required',
           passwordsNotMatch: 'Passwords do not match'
@@ -1464,6 +1467,7 @@ export default {
     // Courses
     courses: {
       title: 'Courses',
+      subtitle: 'Explore subjects and start learning',
       math: 'Mathematics',
       physics: 'Physics',
       chemistry: 'Chemistry',
@@ -1569,9 +1573,18 @@ export default {
       completed: 'Completed',
       inProgress: 'In Progress',
       notStarted: 'Not Started',
-      noLessons: 'No lessons available'
+      noLessons: 'No lessons available',
+      markCompleted: 'Mark as completed',
+      alreadyCompleted: 'Already completed',
+      nextLesson: 'Next lesson',
+      allDone: 'You have completed all lessons in this chapter!',
+      backToList: 'View all lessons',
+      contentComingSoon: 'Content coming soon',
+      contentComingSoonDesc: 'This lesson is being prepared by our teaching team.',
+      lessonNotFound: 'Lesson not found',
+      back: 'Back'
     },
-    
+
     // Exercise
     exercise: {
       title: 'Exercise',
@@ -1676,6 +1689,9 @@ export default {
         title: 'Active Subscription',
         active: 'Active',
         validUntil: 'Valid until'
+      },
+      errors: {
+        initFailed: 'Payment initiation failed. Please try again.'
       },
       payment: {
         success: 'Payment successful! Your subscription is now active.',

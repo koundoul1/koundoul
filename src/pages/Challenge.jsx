@@ -38,12 +38,14 @@ import {
   History
 } from 'lucide-react';
 import api from '../services/api';
+import { useGamification } from '../hooks/useGamification';
 
 const Challenge = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { user } = useAuth();
+  const { processActionResult } = useGamification();
   const [activeTab, setActiveTab] = useState('weekly');
   const [challenges, setChallenges] = useState([]);
   const [duels, setDuels] = useState([]);
@@ -377,6 +379,8 @@ const Challenge = () => {
       if (response.success) {
         setDuelResults(response.data);
         setDuelView('results');
+        // Gamification feedback comes from the backend duel submit
+        // (the server calls processAction for both players)
       }
     } catch (err) {
       setError(err.message);

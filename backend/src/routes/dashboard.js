@@ -3,8 +3,7 @@ const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 const { getSupabase, isSupabaseConfigured } = require('../config/supabase');
-
-const XP_PER_LEVEL = 1000;
+const { updateStreak, calculateLevel, XP_PER_LEVEL } = require('../services/gamification');
 
 router.get('/', authenticateToken, async (req, res, next) => {
   try {
@@ -25,39 +24,13 @@ router.get('/', authenticateToken, async (req, res, next) => {
     }
 
     const xp = user.xp || 0;
-    const calculatedLevel = Math.floor(xp / XP_PER_LEVEL) + 1;
+    const calculatedLevel = calculateLevel(xp);
     const xpInCurrentLevel = xp % XP_PER_LEVEL;
     const xpForNextLevel = XP_PER_LEVEL;
 
-    // 2. Streak logic
-    let streak = user.streak || 0;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    if (user.lastStreakDate) {
-      const lastDate = new Date(user.lastStreakDate);
-      lastDate.setHours(0, 0, 0, 0);
-      const daysDiff = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
-      if (daysDiff === 1) {
-        streak = (user.streak || 0) + 1;
-        await prisma.user.update({
-          where: { id: userId },
-          data: { streak, lastStreakDate: today }
-        });
-      } else if (daysDiff > 1) {
-        streak = 1;
-        await prisma.user.update({
-          where: { id: userId },
-          data: { streak: 1, lastStreakDate: today }
-        });
-      }
-    } else {
-      streak = 1;
-      await prisma.user.update({
-        where: { id: userId },
-        data: { streak: 1, lastStreakDate: today }
-      });
-    }
+    // 2. Streak — delegate to gamification service (UTC-based)
+    const streakResult = await updateStreak(userId);
+    const streak = streakResult.newStreak;
 
     // Update level if needed
     if (calculatedLevel > (user.level || 1)) {
@@ -372,6 +345,48 @@ router.get('/', authenticateToken, async (req, res, next) => {
     };
 
     res.json({ success: true, data: dashboard });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET /activity?days=7 — Aggregated activity per day for the 7-day grid
+router.get('/activity', authenticateToken, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+    const days = Math.min(parseInt(req.query.days) || 7, 30);
+    const since = new Date();
+    since.setUTCHours(0, 0, 0, 0);
+    since.setUTCDate(since.getUTCDate() - (days - 1));
+
+    const [lessonRows, quizRows] = await Promise.all([
+      prisma.microLessonCompletion.findMany({
+        where: { userId, completed: true, completedAt: { gte: since } },
+        select: { completedAt: true }
+      }),
+      prisma.quizAttempt.findMany({
+        where: { userId, completedAt: { gte: since, not: null } },
+        select: { completedAt: true }
+      })
+    ]);
+
+    // Bucket by UTC date string
+    const buckets = {};
+    for (let d = 0; d < days; d++) {
+      const dt = new Date(since);
+      dt.setUTCDate(dt.getUTCDate() + d);
+      buckets[dt.toISOString().slice(0, 10)] = 0;
+    }
+
+    for (const row of [...lessonRows, ...quizRows]) {
+      if (row.completedAt) {
+        const key = new Date(row.completedAt).toISOString().slice(0, 10);
+        if (key in buckets) buckets[key]++;
+      }
+    }
+
+    const activity = Object.entries(buckets).map(([date, count]) => ({ date, count }));
+    res.json({ success: true, data: activity });
   } catch (error) {
     next(error);
   }

@@ -69,10 +69,10 @@ const Register = () => {
     setIsChecking(prev => ({ ...prev, email: true }))
     try {
       const response = await api.utils.checkEmail(email)
-      if (!response.data.available) {
+      if (!response.available) {
         setErrors(prev => ({
           ...prev,
-          email: 'Cet email est déjà utilisé'
+          email: t('auth.register.errors.emailTaken')
         }))
       }
     } catch (error) {
@@ -89,10 +89,10 @@ const Register = () => {
     setIsChecking(prev => ({ ...prev, username: true }))
     try {
       const response = await api.utils.checkUsername(username)
-      if (!response.data.available) {
+      if (!response.available) {
         setErrors(prev => ({
           ...prev,
-          username: 'Ce nom d\'utilisateur est déjà pris'
+          username: t('auth.register.errors.usernameTaken')
         }))
       }
     } catch (error) {
@@ -108,44 +108,44 @@ const Register = () => {
 
     // Prénom
     if (!formData.firstName.trim()) {
-      newErrors.firstName = 'Le prénom est requis'
+      newErrors.firstName = t('auth.register.errors.firstNameRequired')
     }
 
     // Nom
     if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Le nom est requis'
+      newErrors.lastName = t('auth.register.errors.lastNameRequired')
     }
 
     // Nom d'utilisateur
     if (!formData.username.trim()) {
-      newErrors.username = 'Le nom d\'utilisateur est requis'
+      newErrors.username = t('auth.register.errors.usernameRequired')
     } else if (formData.username.length < 3) {
-      newErrors.username = 'Le nom d\'utilisateur doit contenir au moins 3 caractères'
+      newErrors.username = t('auth.register.errors.usernameMinLength')
     } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
-      newErrors.username = 'Le nom d\'utilisateur ne peut contenir que des lettres, chiffres et underscores'
+      newErrors.username = t('auth.register.errors.usernameInvalid')
     }
 
     // Email
     if (!formData.email) {
-      newErrors.email = 'L\'email est requis'
+      newErrors.email = t('auth.register.errors.emailRequired')
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Format d\'email invalide'
+      newErrors.email = t('auth.register.errors.emailInvalid')
     }
 
     // Mot de passe
     if (!formData.password) {
-      newErrors.password = 'Le mot de passe est requis'
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Le mot de passe doit contenir au moins 6 caractères'
+      newErrors.password = t('auth.register.errors.passwordRequired')
+    } else if (formData.password.length < 8) {
+      newErrors.password = t('auth.register.errors.passwordMinLength')
     } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
-      newErrors.password = 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre'
+      newErrors.password = t('auth.register.errors.passwordComplexity')
     }
 
     // Confirmation du mot de passe
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'La confirmation du mot de passe est requise'
+      newErrors.confirmPassword = t('auth.register.errors.confirmPasswordRequired')
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Les mots de passe ne correspondent pas'
+      newErrors.confirmPassword = t('auth.register.errors.passwordsNotMatch')
     }
 
     setErrors(newErrors)
@@ -182,28 +182,28 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mb-3 sm:mb-4 transition-transform hover:scale-110">
             <span className="text-xl sm:text-2xl font-bold text-white">K</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
             {t('auth.register.title')}
           </h1>
-          <p className="text-sm sm:text-base text-gray-600">
+          <p className="text-sm sm:text-base text-gray-400">
             {t('auth.register.subtitle')}
           </p>
         </div>
 
         {/* Formulaire */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
+        <div className="k-card rounded-2xl p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Prénom et Nom */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
                   {t('auth.register.firstNameLabel')}
                 </label>
                 <div className="relative">
@@ -229,7 +229,7 @@ const Register = () => {
               </div>
 
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-2">
                   {t('auth.register.lastNameLabel')}
                 </label>
                 <div className="relative">
@@ -257,7 +257,7 @@ const Register = () => {
 
             {/* Nom d'utilisateur */}
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">
                 {t('auth.register.usernameLabel')}
               </label>
               <div className="relative">
@@ -290,7 +290,7 @@ const Register = () => {
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 {t('auth.register.emailLabel')}
               </label>
               <div className="relative">
@@ -323,8 +323,8 @@ const Register = () => {
 
             {/* Mot de passe */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Mot de passe
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+                {t('auth.register.passwordLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -345,7 +345,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -357,8 +357,8 @@ const Register = () => {
 
             {/* Confirmation du mot de passe */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-                Confirmer le mot de passe
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
+                {t('auth.register.confirmPasswordLabel')}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -379,7 +379,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300"
                 >
                   {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -415,11 +415,11 @@ const Register = () => {
 
           {/* Liens */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-400">
               {t('auth.register.hasAccount')}{' '}
               <Link
                 to="/login"
-                className="font-medium text-purple-600 hover:text-purple-500 transition-colors"
+                className="font-medium text-kprimary hover:text-kprimary/80 transition-colors"
               >
                 {t('auth.register.login')}
               </Link>

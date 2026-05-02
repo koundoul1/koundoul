@@ -54,7 +54,7 @@ export const errorPatterns = {
     orderOfOperations: {
       check: (attempt) => {
         // Détecte si addition/soustraction avant multiplication/division
-        return /\d+\s*[+\-]\s*\d+\s*[×÷*\/]/.test(attempt)
+        return /\d+\s*[+-]\s*\d+\s*[×÷*/]/.test(attempt)
       },
       error: {
         type: 'Ordre des opérations',
@@ -95,7 +95,7 @@ export const errorPatterns = {
     missingParentheses: {
       check: (attempt) => {
         // Détecte expressions ambiguës sans parenthèses
-        return /\d+[a-z]*\s*[+\-]\s*\d+\s*\/\s*\d+/.test(attempt)
+        return /\d+[a-z]*\s*[+-]\s*\d+\s*\/\s*\d+/.test(attempt)
       },
       error: {
         type: 'Parenthèses oubliées',

@@ -172,11 +172,17 @@ const Solver = () => {
     }
   }
 
-  const handleSolve = async () => {
+  // Ref for aborting active stream
+  const streamRef = React.useRef(null)
+
+  const handleSolve = () => {
     if (!problem.trim()) {
-      setError(t('solver.enterProblem') || 'Entre ton problème à résoudre')
+      setError(t('solver.enterProblem') || 'Entre ton probleme a resoudre')
       return
     }
+
+    // Abort any running stream
+    if (streamRef.current) streamRef.current.abort()
 
     setIsSolving(true)
     setError('')
@@ -185,71 +191,51 @@ const Solver = () => {
     setUsedHints([])
     setShowGraph(false)
 
-    try {
-      const response = await api.solver.solve({
-        input: problem.trim(),
-        domain: subject,
-        level: difficulty,
-        guidedMode: showGuidedMode,
-        learningProfile: learningProfile
-      })
+    let streamedText = ''
 
-      if (response.success) {
-        const solutionData = response.data.solution || response.data
-        console.log('✅ Solution reçue:', solutionData)
-        
-        setSolution(solutionData)
-        
-        // Afficher graphique si nécessaire
-        if (solutionData.requiresGraph && solutionData.functionString) {
+    streamRef.current = api.solver.solveStream({
+      problem: problem.trim(),
+      domain: subject,
+      level: difficulty,
+      onMeta: () => {
+        // Streaming started — show partial solution container
+        setSolution({ solution: '', steps: [], hints: [] })
+      },
+      onChunk: ({ text }) => {
+        streamedText += text
+        setSolution(prev => ({ ...prev, solution: streamedText }))
+      },
+      onStructured: (data) => {
+        setSolution(prev => ({
+          ...prev,
+          steps: data.steps || [],
+          requiresGraph: data.requiresGraph,
+          functionString: data.functionString,
+          functionName: data.functionName,
+          hints: data.hints || [],
+          points: data.points || 10,
+          detectedDomain: data.detectedDomain || null
+        }))
+        if (data.requiresGraph && data.functionString) {
           setShowGraph(true)
         }
-        
-        // XP et feedback de succès
-        const earnedXP = response.data.xpGained || 0
-        if (earnedXP > 0) {
-          setXpGained(earnedXP)
-          setShowSuccessFeedback(true)
-          setTimeout(() => setShowSuccessFeedback(false), 3000)
-        }
-        
-        // Avertissement si domaine changé
-        if (response.data.warning) {
-          console.warn('⚠️', response.data.warning)
-        }
-        
-        // Ajouter à l'historique
-        const newProblem = {
-          id: Date.now(),
-          description: problem.trim(),
-          subject: response.data.domainUsed || subject,
-          difficulty: difficulty,
-          solution: solutionData,
-          createdAt: new Date().toISOString()
-        }
-        
-        const updatedHistory = [newProblem, ...history]
-        setHistory(updatedHistory)
-        
-        // Sauvegarder dans localStorage si pas connecté
-        if (!isAuthenticated || !user) {
-          localStorage.setItem('solverHistory', JSON.stringify(updatedHistory.slice(0, 10)))
-        }
-        
-      } else {
-        // Gérer les erreurs spécifiques
-        if (response.error?.code === 'OUT_OF_SCOPE' || response.error === 'out_of_scope') {
-          setError(response.error?.message || response.message || 'Cette question est en dehors du cadre de l\'application (Maths/Physique/Chimie uniquement)')
-        } else {
-          setError(response.error?.message || response.message || 'Une erreur est survenue')
-        }
+      },
+      onDone: () => {
+        setIsSolving(false)
+        streamRef.current = null
+        // Refresh history
+        loadHistory()
+      },
+      onError: (message) => {
+        setError(message || 'Erreur lors de la resolution')
+        setIsSolving(false)
+        streamRef.current = null
       }
-    } catch (error) {
-      console.error('❌ Erreur résolution:', error)
-      setError('Une erreur est survenue. Vérifie ta connexion et réessaie.')
-    } finally {
-      setIsSolving(false)
-    }
+    })
+
+    // Remove old error handling block below — the rest of the original function
+    // dealt with the non-stream response format and is no longer needed.
+    // The streaming callbacks above handle all cases.
   }
 
   const handleCopySolution = () => {
@@ -606,6 +592,11 @@ const Solver = () => {
                     <h4 className="font-semibold text-green-300 mb-4 flex items-center text-xl">
                       <CheckCircle className="h-7 w-7 mr-3 text-green-400" />
                       Solution trouvée
+                      {solution.detectedDomain && (
+                        <span className="ml-3 px-2.5 py-0.5 text-xs font-bold rounded-full bg-white/10 text-gray-300">
+                          {solution.detectedDomain === 'math' ? 'Maths' : solution.detectedDomain === 'physics' ? 'Physique' : solution.detectedDomain === 'chemistry' ? 'Chimie' : ''}
+                        </span>
+                      )}
                     </h4>
                     <div className="bg-black/20 rounded-lg p-4 border border-green-400/30">
                       <SolutionDisplay content={solution.solution || 'Aucune solution affichée'} />

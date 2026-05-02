@@ -1,14 +1,33 @@
 import { useState, useEffect } from 'react';
-import { Award, Trophy, Lock, TrendingUp, CheckCircle } from 'lucide-react';
+import { Award, Trophy, Lock, TrendingUp, CheckCircle, Star } from 'lucide-react';
 import api from '../services/api';
 import { useTranslation } from '../hooks/useTranslation';
+
+/** Turn a badge condition string into a human-readable label */
+function conditionLabel(condition) {
+  if (!condition) return '';
+  const parts = condition.split(':');
+  const type = parts[0];
+  const value = parts[parts.length - 1];
+
+  const labels = {
+    complete_lesson: `${value} lecon(s)`,
+    complete_quiz: `${value} quiz`,
+    streak: `${value} jours consecutifs`,
+    level: `Niveau ${value}`,
+    perfect_quiz: `${value} quiz parfait(s)`,
+    subject: `${value} lecons de ${parts[1]}`,
+    level_mastery: `${value} lecons niveau ${parts[1]}`
+  };
+  return labels[type] || condition;
+}
 
 export default function Badges() {
   const { t } = useTranslation();
   const [badges, setBadges] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('all'); // all, unlocked, locked
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     fetchData();
@@ -20,8 +39,7 @@ export default function Badges() {
         api.badges.getAll(),
         api.badges.getStats()
       ]);
-      
-      setBadges(badgesRes.data);
+      setBadges(badgesRes.data || []);
       setStats(statsRes.data);
     } catch (error) {
       console.error('Erreur:', error);
@@ -33,7 +51,7 @@ export default function Badges() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-kprimary"></div>
       </div>
     );
   }
@@ -49,168 +67,148 @@ export default function Badges() {
   const lockedBadges = badges.filter(b => !b.unlocked);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 py-8">
-        
+    <div className="min-h-screen text-white pb-20 lg:pb-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            🏆 {t('badges.title')}
+          <h1 className="text-3xl sm:text-4xl font-black mb-2">
+            {t('badges.title') || 'Badges'}
           </h1>
-          <p className="text-gray-600 text-lg">
-            {t('badges.subtitle')}
+          <p className="text-gray-400 text-lg">
+            {t('badges.subtitle') || 'Debloque des badges en apprenant'}
           </p>
         </div>
 
-        {/* Statistiques */}
-        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 text-white mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-3xl font-bold mb-2">
-                {stats.unlocked} / {stats.total} {t('badges.stats.unlocked')}
-              </h2>
-              <p className="text-xl opacity-90">
-                {stats.percentage}{t('badges.stats.percentage')}
-              </p>
+        {/* Stats banner */}
+        {stats && (
+          <div className="relative overflow-hidden rounded-2xl p-6 sm:p-8 mb-6 bg-gradient-to-r from-yellow-500 to-orange-500 shadow-2xl shadow-yellow-500/20">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-3xl font-black mb-1">
+                  {stats.unlocked} / {stats.total}
+                </h2>
+                <p className="text-lg text-white/80 font-medium">
+                  {stats.percentage}% {t('badges.stats.unlocked') || 'debloques'}
+                </p>
+              </div>
+              <Trophy className="w-20 h-20 text-white/30" />
             </div>
-            <Trophy className="w-24 h-24 opacity-50" />
+            <div className="mt-4 w-full h-3 bg-white/20 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-white rounded-full transition-all duration-700"
+                style={{ width: `${stats.percentage}%` }}
+              />
+            </div>
           </div>
-          
-          {/* Barre de progression */}
-          <div className="mt-6 w-full h-4 bg-white/30 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-white rounded-full transition-all duration-500"
-              style={{ width: `${stats.percentage}%` }}
-            ></div>
-          </div>
+        )}
+
+        {/* Filters */}
+        <div className="flex gap-3 mb-6 overflow-x-auto scrollbar-hide pb-1">
+          {[
+            { key: 'all', label: t('badges.filters.all') || 'Tous', count: badges.length, active: 'bg-kprimary' },
+            { key: 'unlocked', label: t('badges.filters.unlocked') || 'Debloques', count: unlockedBadges.length, active: 'bg-emerald-600' },
+            { key: 'locked', label: t('badges.filters.locked') || 'Verrouilles', count: lockedBadges.length, active: 'bg-gray-600' }
+          ].map(f => (
+            <button
+              key={f.key}
+              onClick={() => setFilter(f.key)}
+              className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
+                filter === f.key
+                  ? `${f.active} text-white shadow-lg`
+                  : 'bg-white/5 text-gray-400 hover:bg-white/10 border border-white/10'
+              }`}
+            >
+              {f.label} ({f.count})
+            </button>
+          ))}
         </div>
 
-        {/* Filtres */}
-        <div className="flex gap-3 mb-8">
-          <button
-            onClick={() => setFilter('all')}
-            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-              filter === 'all'
-                ? 'bg-blue-600 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200'
-            }`}
-          >
-            {t('badges.filters.all')} ({badges.length})
-          </button>
-          <button
-            onClick={() => setFilter('unlocked')}
-            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-              filter === 'unlocked'
-                ? 'bg-green-600 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200'
-            }`}
-          >
-            {t('badges.filters.unlocked')} ({unlockedBadges.length})
-          </button>
-          <button
-            onClick={() => setFilter('locked')}
-            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-              filter === 'locked'
-                ? 'bg-gray-600 text-white shadow-lg'
-                : 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-gray-200'
-            }`}
-          >
-            {t('badges.filters.locked')} ({lockedBadges.length})
-          </button>
-        </div>
-
-        {/* Galerie de badges */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {/* Badge grid */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {filteredBadges.map((badge) => (
             <div
               key={badge.id}
-              className={`bg-white rounded-xl p-6 border-2 transition-all ${
+              className={`k-card p-5 text-center transition-all ${
                 badge.unlocked
-                  ? 'border-yellow-300 hover:shadow-xl hover:scale-105'
-                  : 'border-gray-200 opacity-60'
+                  ? 'border border-yellow-500/30 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/10'
+                  : 'opacity-50'
               }`}
             >
-              <div className="text-center">
-                {/* Icône du badge */}
-                <div className={`relative inline-block mb-4 ${
-                  badge.unlocked ? 'animate-pulse-slow' : ''
+              {/* Icon */}
+              <div className="relative inline-block mb-3">
+                <div className={`w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto ${
+                  badge.unlocked
+                    ? 'bg-yellow-500/15'
+                    : 'bg-white/5'
                 }`}>
-                  <div 
-                    className={`w-24 h-24 rounded-full flex items-center justify-center text-5xl ${
-                      badge.unlocked ? '' : 'grayscale'
-                    }`}
-                    style={{ 
-                      backgroundColor: badge.unlocked ? badge.color + '20' : '#F3F4F6'
-                    }}
-                  >
-                    {badge.unlocked ? badge.icon : <Lock className="w-12 h-12 text-gray-400" />}
-                  </div>
-                  
-                  {badge.unlocked && (
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-                      <CheckCircle className="w-5 h-5 text-white" />
-                    </div>
-                  )}
+                  {badge.unlocked ? badge.icon : <Lock className="w-10 h-10 text-gray-600" />}
                 </div>
-
-                {/* Nom */}
-                <h3 className={`text-lg font-bold mb-2 ${
-                  badge.unlocked ? 'text-gray-900' : 'text-gray-500'
-                }`}>
-                  {badge.name}
-                </h3>
-
-                {/* Description */}
-                <p className={`text-sm mb-3 ${
-                  badge.unlocked ? 'text-gray-600' : 'text-gray-400'
-                }`}>
-                  {badge.description}
-                </p>
-
-                {/* Date de déblocage */}
-                {badge.unlocked && badge.unlockedAt && (
-                  <p className="text-xs text-green-600 font-semibold">
-                    {t('badges.unlocked')} {new Date(badge.unlockedAt).toLocaleDateString()}
-                  </p>
-                )}
-
-                {!badge.unlocked && (
-                  <div className="flex items-center justify-center gap-1 text-xs text-gray-500">
-                    <Lock className="w-3 h-3" />
-                    <span>{t('badges.locked')}</span>
+                {badge.unlocked && (
+                  <div className="absolute -top-1 -right-1 w-7 h-7 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                    <CheckCircle className="w-4 h-4 text-white" />
                   </div>
                 )}
               </div>
+
+              {/* Name */}
+              <h3 className={`font-bold text-sm mb-1 ${badge.unlocked ? 'text-white' : 'text-gray-500'}`}>
+                {badge.name}
+              </h3>
+
+              {/* Description */}
+              <p className={`text-xs mb-2 leading-relaxed ${badge.unlocked ? 'text-gray-400' : 'text-gray-600'}`}>
+                {badge.description}
+              </p>
+
+              {/* Points */}
+              {badge.points > 0 && (
+                <div className="flex items-center justify-center gap-1 mb-2">
+                  <Star className="w-3 h-3 text-yellow-400" />
+                  <span className="text-xs text-yellow-400 font-bold">+{badge.points} XP</span>
+                </div>
+              )}
+
+              {/* Condition (for locked badges) */}
+              {!badge.unlocked && badge.condition && (
+                <div className="text-[11px] text-gray-500 bg-white/5 rounded-lg px-2 py-1 mt-1">
+                  {conditionLabel(badge.condition)}
+                </div>
+              )}
+
+              {/* Unlock date */}
+              {badge.unlocked && badge.unlockedAt && (
+                <p className="text-[11px] text-emerald-400 font-medium mt-1">
+                  {new Date(badge.unlockedAt).toLocaleDateString()}
+                </p>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Message si aucun badge */}
+        {/* Empty state */}
         {filteredBadges.length === 0 && (
-          <div className="text-center py-12">
-            <Award className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600 text-lg">
-              {t('badges.noBadges')}
+          <div className="text-center py-16">
+            <Award className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+            <p className="text-gray-500 text-lg">
+              {t('badges.noBadges') || 'Aucun badge dans cette categorie'}
             </p>
           </div>
         )}
 
         {/* Encouragement */}
         {lockedBadges.length > 0 && (
-          <div className="mt-12 bg-blue-50 rounded-xl p-8 border-2 border-blue-200 text-center">
-            <TrendingUp className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              {t('badges.encouragement.title')}
+          <div className="mt-8 k-card p-6 text-center border border-dashed border-kprimary/30">
+            <TrendingUp className="w-10 h-10 text-kprimary mx-auto mb-3" />
+            <h3 className="text-xl font-black mb-1">
+              {t('badges.encouragement.title') || 'Continue comme ca !'}
             </h3>
-            <p className="text-gray-700 text-lg">
-              {t('badges.encouragement.message', { count: lockedBadges.length, plural: lockedBadges.length > 1 ? 's' : '' })}
+            <p className="text-gray-400">
+              {lockedBadges.length} badge{lockedBadges.length > 1 ? 's' : ''} {t('badges.encouragement.remaining') || 'encore a debloquer'}
             </p>
           </div>
         )}
-
       </div>
     </div>
   );
 }
-
-

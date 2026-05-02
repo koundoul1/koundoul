@@ -4,6 +4,7 @@ const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const { getSupabase, isSupabaseConfigured } = require('../config/supabase');
 const { filterStatic, getStaticById } = require('../data/microLessonsFallback');
 const prisma = require('../config/database');
+const { processAction } = require('../services/gamification');
 const TABLE_MICRO_LESSONS = 'microlessons';
 
 console.log('[microlessons] SUPABASE_URL:', !!process.env.SUPABASE_URL);
@@ -153,6 +154,21 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
     const { timeSpent, score } = req.body;
     const userId = req.user.userId;
 
+    // Check if already completed — prevent XP duplication
+    const existing = await prisma.microLessonCompletion.findUnique({
+      where: { userId_lessonId: { userId, lessonId: id } }
+    });
+
+    if (existing && existing.completed) {
+      return res.json({
+        success: true,
+        data: existing,
+        alreadyCompleted: true,
+        xpEarned: 0,
+        gamification: null
+      });
+    }
+
     let xpEarned = 50;
     if (score !== undefined) {
       xpEarned = 50 + Math.round((score / 100) * 50);
@@ -160,10 +176,7 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
 
     const completion = await prisma.microLessonCompletion.upsert({
       where: {
-        userId_lessonId: {
-          userId,
-          lessonId: id
-        }
+        userId_lessonId: { userId, lessonId: id }
       },
       update: {
         completed: true,
@@ -181,40 +194,14 @@ router.post('/:id/complete', authenticateToken, async (req, res, next) => {
       }
     });
 
-    await prisma.user.update({
-      where: { id: userId },
-      data: { xp: { increment: xpEarned } }
-    });
-
-    const completionsCount = await prisma.microLessonCompletion.count({
-      where: { userId, completed: true }
-    });
-
-    if (completionsCount === 1) {
-      const firstStepBadge = await prisma.badge.findUnique({
-        where: { id: 'first-step' }
-      });
-      if (firstStepBadge) {
-        await prisma.userBadge.upsert({
-          where: {
-            userId_badgeId: {
-              userId,
-              badgeId: 'first-step'
-            }
-          },
-          update: {},
-          create: {
-            userId,
-            badgeId: 'first-step'
-          }
-        });
-      }
-    }
+    const gamification = await processAction(userId, { type: 'complete_lesson', xp: xpEarned });
 
     res.json({
       success: true,
       data: completion,
-      xpEarned
+      alreadyCompleted: false,
+      xpEarned,
+      gamification
     });
   } catch (error) {
     next(error);
@@ -274,6 +261,60 @@ router.get('/stats/me', authenticateToken, async (req, res, next) => {
         average_score: avgScore._avg.score ? Math.round(avgScore._avg.score) : null
       }
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get next lesson in the same chapter (by id order), fallback to next chapter
+router.get('/:id/next', optionalAuth, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!isSupabaseConfigured()) {
+      return res.json({ success: true, data: null });
+    }
+
+    const supabase = getSupabase();
+    if (!supabase) return res.json({ success: true, data: null });
+
+    // Get current lesson
+    const { data: current } = await supabase
+      .from(TABLE_MICRO_LESSONS)
+      .select('id, subject, chapter, level')
+      .eq('id', id)
+      .maybeSingle();
+
+    if (!current) return res.json({ success: true, data: null });
+
+    // Next lesson in same chapter (id > current, same subject+chapter)
+    const { data: nextInChapter } = await supabase
+      .from(TABLE_MICRO_LESSONS)
+      .select('id, title, subject, chapter, level, difficulty, xp_reward')
+      .eq('subject', current.subject)
+      .eq('chapter', current.chapter)
+      .gt('id', id)
+      .order('id', { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    if (nextInChapter) {
+      return res.json({ success: true, data: nextInChapter });
+    }
+
+    // Fallback: first lesson of the next chapter in same subject+level
+    const { data: nextInSubject } = await supabase
+      .from(TABLE_MICRO_LESSONS)
+      .select('id, title, subject, chapter, level, difficulty, xp_reward')
+      .eq('subject', current.subject)
+      .eq('level', current.level)
+      .gt('chapter', current.chapter)
+      .order('chapter', { ascending: true })
+      .order('id', { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    res.json({ success: true, data: nextInSubject || null });
   } catch (error) {
     next(error);
   }

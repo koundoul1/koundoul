@@ -11,6 +11,7 @@ import TopBar from './components/TopBar'
 import OfflineIndicator from './components/OfflineIndicator'
 import ConnectionStatus from './components/ConnectionStatus'
 import FlashcardsDueNotification from './components/FlashcardsDueNotification'
+import GamificationToastContainer from './components/GamificationToast'
 
 // Lazy-loaded pages
 const NewHome = lazy(() => import('./pages/NewHome'))
@@ -90,6 +91,7 @@ function AppLayout() {
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <OfflineIndicator />
       <ConnectionStatus />
+      <GamificationToastContainer />
       {showAppShell && isAuthenticated && <FlashcardsDueNotification />}
 
       {/* Navigation seulement pour les connectés sur routes protégées */}
