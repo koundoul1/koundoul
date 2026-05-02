@@ -19,13 +19,12 @@ router.post('/solve', authenticateToken, async (req, res) => {
     return res.status(503).json({ error: 'Service IA non configure. Contactez l\'administrateur.' });
   }
 
-  // SSE headers
-  res.writeHead(200, {
-    'Content-Type': 'text/event-stream',
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-    'X-Accel-Buffering': 'no'
-  });
+  // SSE headers — use setHeader (not writeHead) to preserve CORS headers from Express middleware
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.flushHeaders();
 
   const sendEvent = (event, data) => {
     try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
