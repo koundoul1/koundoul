@@ -766,23 +766,29 @@ const Solver = () => {
             )}
 
             {/* NOUVEAU: Graphique Interactif */}
-            {showGraph && solution && solution.requiresGraph && solution.functionString && (
+            {showGraph && solution && solution.requiresGraph && (
               <div className="mt-8 koundoul-card">
-                <InteractiveGraph
-                  func={(x) => {
-                    try {
-                      // Évaluer la fonction de manière sécurisée
-                      // Note: eval est utilisé mais la string vient du backend validé
-                      const safeFunction = solution.functionString.replace(/x/g, `(${x})`)
-                      return eval(safeFunction)
-                    } catch (e) {
-                      console.warn('Erreur évaluation fonction:', e)
-                      return NaN
-                    }
-                  }}
-                  domain={[-10, 10]}
-                  title={solution.functionName || 'f(x)'}
-                />
+                {solution.functionString ? (
+                  <InteractiveGraph
+                    func={(x) => {
+                      try {
+                        const safeFunction = solution.functionString.replace(/x/g, `(${x})`)
+                        return eval(safeFunction)
+                      } catch (e) {
+                        console.warn('Erreur évaluation fonction:', e)
+                        return NaN
+                      }
+                    }}
+                    domain={[-10, 10]}
+                    title={solution.functionName || 'f(x)'}
+                  />
+                ) : (
+                  <div className="p-6 text-center">
+                    <p className="text-gray-400 text-sm">
+                      Le graphe n&apos;a pas pu être généré automatiquement pour cet exercice.
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </div>

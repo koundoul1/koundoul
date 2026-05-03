@@ -91,7 +91,7 @@ Regles pour chaque champ :
 
 - steps : Reprends les etapes de la resolution. Minimum 3, maximum 8. "description" en moins de 8 mots (titre court). "content" peut contenir du LaTeX. Chaque etape doit correspondre a un moment logique de la resolution.
 
-- requiresGraph : true UNIQUEMENT si la resolution porte sur une etude de fonction, geometrie analytique, courbe de trajectoire ou cinetique chimique. Pour les equations algebriques, calculs d'energie, equilibrage chimique, etc. : false. Sois conservateur : en cas de doute, false.
+- requiresGraph : true OBLIGATOIREMENT si l'enonce contient l'un des mots-cles : 'tracer', 'trace', 'courbe', 'graphe', 'graphique', 'representer', 'representation', 'etudier la fonction', 'etude de fonction', 'asymptote', 'tangente', 'variations'. Aussi si la resolution est une etude de fonction au sens large. true RECOMMANDE pour les calculs ou une visualisation aide significativement la comprehension (integrale = aire sous la courbe, limite a l'infini, geometrie analytique, cinetique chimique, courbe de trajectoire). false UNIQUEMENT pour les calculs purs sans aspect visuel (equilibrage chimique, calcul de masse molaire, energie cinetique d'un point materiel, equations algebriques sans representation, etc.).
 
 - functionString : Si requiresGraph=true, fournis une expression evaluable en JavaScript. Utilise la syntaxe JS : x**2 pour x carre, Math.sin(x), Math.cos(x), Math.sqrt(x), Math.log(x) pour ln, Math.exp(x). Variable independante = x. Si requiresGraph=false, mets null.
 

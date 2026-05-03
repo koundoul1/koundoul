@@ -85,6 +85,13 @@ router.post('/solve', authenticateToken, async (req, res) => {
       structured = parseStructured(null);
     }
 
+    // Keyword-based override: force requiresGraph=true if problem explicitly asks for a graph
+    const GRAPH_KEYWORDS = ['tracer', 'tracé', 'courbe', 'graphe', 'graphique', 'représenter', 'représentation graphique'];
+    const problemLower = problem.trim().toLowerCase();
+    if (!structured.requiresGraph && GRAPH_KEYWORDS.some(kw => problemLower.includes(kw))) {
+      structured.requiresGraph = true;
+    }
+
     sendEvent('structured', structured);
 
     // Persist
