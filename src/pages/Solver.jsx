@@ -253,39 +253,47 @@ const Solver = () => {
   }
 
   const handleDownloadSolution = async () => {
-    if (!solution) return
-    const el = document.querySelector('.koundoul-solution-final')
-    if (!el) return
+    if (!solution?.solution) return
 
-    // Create a print-friendly clone (white bg, black text, readable font)
-    const clone = el.cloneNode(true)
-    clone.style.cssText = 'background:#fff;color:#111;padding:24px;font-family:Georgia,serif;font-size:14px;line-height:1.7;max-width:700px;'
-    // Fix all child text colors
-    clone.querySelectorAll('*').forEach(child => {
-      child.style.color = '#111'
-      child.style.background = 'transparent'
-      child.style.borderColor = '#ccc'
-    })
-    // Add header
-    const header = document.createElement('div')
-    header.innerHTML = `<div style="text-align:center;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #6C63FF"><h1 style="font-size:20px;color:#6C63FF;margin:0">Koundoul — Solution</h1><p style="color:#666;font-size:12px;margin:4px 0 0">${new Date().toLocaleDateString('fr-FR')} | ${(problem || '').slice(0, 80)}</p></div>`
-    clone.insertBefore(header, clone.firstChild)
+    // Build a clean HTML document for PDF generation
+    const solutionText = String(solution.solution || '')
+      .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\n/g, '<br/>')
+    const stepsHtml = (solution.steps || []).map((s, i) => {
+      const title = s.title || s.description || `Etape ${i + 1}`
+      const content = (s.content || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br/>')
+      return `<div style="margin:12px 0;padding:10px;background:#f5f5f5;border-left:3px solid #6C63FF;border-radius:4px"><strong>${i + 1}. ${title}</strong><br/><span style="color:#333">${content}</span></div>`
+    }).join('')
 
-    // Render off-screen
-    clone.style.position = 'fixed'
-    clone.style.left = '-9999px'
-    document.body.appendChild(clone)
+    const html = `<div style="font-family:Georgia,serif;color:#111;line-height:1.8;padding:20px;max-width:700px">
+      <div style="text-align:center;border-bottom:2px solid #6C63FF;padding-bottom:12px;margin-bottom:20px">
+        <h1 style="color:#6C63FF;font-size:22px;margin:0">Koundoul — Solution</h1>
+        <p style="color:#888;font-size:12px;margin:4px 0 0">${new Date().toLocaleDateString('fr-FR')}</p>
+      </div>
+      <div style="background:#eef;padding:10px 14px;border-radius:6px;margin-bottom:16px">
+        <strong>Probleme :</strong> ${(problem || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+      </div>
+      <h2 style="color:#333;font-size:16px">Solution</h2>
+      <div style="font-size:14px">${solutionText}</div>
+      ${stepsHtml ? '<h2 style="color:#333;font-size:16px;margin-top:20px">Etapes</h2>' + stepsHtml : ''}
+    </div>`
 
-    const html2pdf = (await import('html2pdf.js')).default
-    await html2pdf().set({
-      margin: [12, 12, 12, 12],
-      filename: `koundoul-solution-${Date.now()}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    }).from(clone).save()
+    const container = document.createElement('div')
+    container.innerHTML = html
+    container.style.cssText = 'position:fixed;left:-9999px;background:#fff;width:700px'
+    document.body.appendChild(container)
 
-    document.body.removeChild(clone)
+    try {
+      const html2pdf = (await import('html2pdf.js')).default
+      await html2pdf().set({
+        margin: [10, 10, 10, 10],
+        filename: `koundoul-solution-${Date.now()}.pdf`,
+        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      }).from(container).save()
+    } finally {
+      document.body.removeChild(container)
+    }
   }
 
   const loadFromHistory = async (historyItem) => {

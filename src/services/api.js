@@ -158,6 +158,21 @@ const api = {
     solveStream: ({ problem, domain, level, onMeta, onChunk, onStructured, onDone, onError }) => {
       const token = localStorage.getItem('token');
       const controller = new AbortController();
+      let finished = false;
+
+      const finish = (data) => {
+        if (finished) return;
+        finished = true;
+        onDone?.(data || {});
+      };
+
+      // Safety timeout: if stream hangs, force-finish after 90s
+      const timeout = setTimeout(() => {
+        if (!finished) {
+          finish({});
+          controller.abort();
+        }
+      }, 90000);
 
       const run = async () => {
         try {
@@ -172,6 +187,7 @@ const api = {
           });
 
           if (!res.ok) {
+            clearTimeout(timeout);
             const err = await res.json().catch(() => ({ error: 'Erreur serveur' }));
             onError?.(err.error || `Erreur ${res.status}`);
             return;
@@ -180,55 +196,52 @@ const api = {
           const reader = res.body.getReader();
           const decoder = new TextDecoder();
           let buffer = '';
-          let doneReceived = false;
 
-          const processSSEPart = (part) => {
-            const eventLine = part.split('\n').find(l => l.startsWith('event: '));
-            const dataLine = part.split('\n').find(l => l.startsWith('data: '));
+          const processLine = (part) => {
+            const lines = part.split('\n');
+            const eventLine = lines.find(l => l.startsWith('event: '));
+            const dataLine = lines.find(l => l.startsWith('data: '));
             if (!eventLine || !dataLine) return;
-            const event = eventLine.slice(7);
+            const event = eventLine.slice(7).trim();
             try {
               const data = JSON.parse(dataLine.slice(6));
               if (event === 'meta') onMeta?.(data);
               else if (event === 'chunk') onChunk?.(data);
               else if (event === 'structured') onStructured?.(data);
-              else if (event === 'done') { doneReceived = true; onDone?.(data); }
-              else if (event === 'error') onError?.(data.message);
-            } catch (_e) { /* ignore malformed SSE events */ }
+              else if (event === 'done') { clearTimeout(timeout); finish(data); }
+              else if (event === 'error') { clearTimeout(timeout); onError?.(data.message); }
+            } catch (_e) { /* malformed SSE event */ }
           };
 
           let reading = true;
           while (reading) {
             const { done, value } = await reader.read();
             if (done) { reading = false; break; }
-
             buffer += decoder.decode(value, { stream: true });
-            const parts = buffer.split('\n\n');
-            buffer = parts.pop() || '';
-
-            for (const part of parts) {
-              processSSEPart(part);
+            const segments = buffer.split('\n\n');
+            buffer = segments.pop() || '';
+            for (const seg of segments) {
+              if (seg.trim()) processLine(seg);
             }
           }
 
-          // Flush remaining buffer (last event may lack trailing \n\n)
-          if (buffer.trim()) {
-            processSSEPart(buffer);
-          }
+          // Flush leftover buffer
+          if (buffer.trim()) processLine(buffer);
 
-          // If stream ended without a done event, call onDone as safety net
-          if (!doneReceived) {
-            onDone?.({});
-          }
+          // Stream closed — ensure we always finish
+          clearTimeout(timeout);
+          finish({});
         } catch (err) {
+          clearTimeout(timeout);
           if (err.name !== 'AbortError') {
             onError?.(err.message || 'Erreur de connexion');
           }
+          finish({});
         }
       };
 
       run();
-      return { abort: () => controller.abort() };
+      return { abort: () => { clearTimeout(timeout); controller.abort(); finish({}); } };
     },
 
     getHistory: (params = {}) => {
