@@ -212,7 +212,7 @@ const VirtualCoach = () => {
 
   const handleDownloadSolution = () => {
     if (solution) {
-      const content = `Problème: ${problemText}\n\nSolution:\n${solution.solution}\n\nExplication:\n${solution.explanation}`;
+      const content = `Problème: ${problemText}\n\nSolution:\n${solution.solution || ''}`;
       const blob = new Blob([content], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
