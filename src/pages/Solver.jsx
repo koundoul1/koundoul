@@ -254,46 +254,65 @@ const Solver = () => {
 
   const handleDownloadSolution = async () => {
     if (!solution?.solution) return
+    const { jsPDF } = await import('jspdf')
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' })
+    const pageWidth = doc.internal.pageSize.getWidth()
+    const margin = 15
+    const maxWidth = pageWidth - margin * 2
+    let y = 20
 
-    // Build a clean HTML document for PDF generation
-    const solutionText = String(solution.solution || '')
-      .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/\n/g, '<br/>')
-    const stepsHtml = (solution.steps || []).map((s, i) => {
-      const title = s.title || s.description || `Etape ${i + 1}`
-      const content = (s.content || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br/>')
-      return `<div style="margin:12px 0;padding:10px;background:#f5f5f5;border-left:3px solid #6C63FF;border-radius:4px"><strong>${i + 1}. ${title}</strong><br/><span style="color:#333">${content}</span></div>`
-    }).join('')
-
-    const html = `<div style="font-family:Georgia,serif;color:#111;line-height:1.8;padding:20px;max-width:700px">
-      <div style="text-align:center;border-bottom:2px solid #6C63FF;padding-bottom:12px;margin-bottom:20px">
-        <h1 style="color:#6C63FF;font-size:22px;margin:0">Koundoul — Solution</h1>
-        <p style="color:#888;font-size:12px;margin:4px 0 0">${new Date().toLocaleDateString('fr-FR')}</p>
-      </div>
-      <div style="background:#eef;padding:10px 14px;border-radius:6px;margin-bottom:16px">
-        <strong>Probleme :</strong> ${(problem || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-      </div>
-      <h2 style="color:#333;font-size:16px">Solution</h2>
-      <div style="font-size:14px">${solutionText}</div>
-      ${stepsHtml ? '<h2 style="color:#333;font-size:16px;margin-top:20px">Etapes</h2>' + stepsHtml : ''}
-    </div>`
-
-    const container = document.createElement('div')
-    container.innerHTML = html
-    container.style.cssText = 'position:fixed;left:-9999px;background:#fff;width:700px'
-    document.body.appendChild(container)
-
-    try {
-      const html2pdf = (await import('html2pdf.js')).default
-      await html2pdf().set({
-        margin: [10, 10, 10, 10],
-        filename: `koundoul-solution-${Date.now()}.pdf`,
-        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).from(container).save()
-    } finally {
-      document.body.removeChild(container)
+    const addText = (text, size, style, color) => {
+      doc.setFontSize(size)
+      doc.setFont('helvetica', style || 'normal')
+      if (color) doc.setTextColor(...color)
+      else doc.setTextColor(30, 30, 30)
+      const lines = doc.splitTextToSize(text, maxWidth)
+      for (const line of lines) {
+        if (y > 275) { doc.addPage(); y = 20 }
+        doc.text(line, margin, y)
+        y += size * 0.45
+      }
+      y += 2
     }
+
+    // Header
+    doc.setTextColor(108, 99, 255)
+    doc.setFontSize(20)
+    doc.text('Koundoul - Solution', pageWidth / 2, y, { align: 'center' })
+    y += 8
+    doc.setTextColor(150, 150, 150)
+    doc.setFontSize(10)
+    doc.text(new Date().toLocaleDateString('fr-FR'), pageWidth / 2, y, { align: 'center' })
+    y += 10
+    doc.setDrawColor(108, 99, 255)
+    doc.line(margin, y, pageWidth - margin, y)
+    y += 8
+
+    // Problem
+    addText('Probleme :', 12, 'bold')
+    // Strip LaTeX delimiters for PDF text
+    const cleanText = (t) => String(t || '').replace(/\$\$/g, '').replace(/\$/g, '').replace(/\\\\/g, '\\')
+    addText(cleanText(problem), 11, 'normal')
+    y += 5
+
+    // Solution
+    addText('Solution :', 12, 'bold', [108, 99, 255])
+    addText(cleanText(solution.solution), 10, 'normal')
+    y += 5
+
+    // Steps
+    const steps = solution.steps || []
+    if (steps.length > 0) {
+      addText('Etapes :', 12, 'bold', [108, 99, 255])
+      steps.forEach((s, i) => {
+        const title = s.title || s.description || `Etape ${i + 1}`
+        addText(`${i + 1}. ${title}`, 10, 'bold')
+        if (s.content) addText(cleanText(s.content), 9, 'normal', [80, 80, 80])
+        y += 2
+      })
+    }
+
+    doc.save(`koundoul-solution-${Date.now()}.pdf`)
   }
 
   const loadFromHistory = async (historyItem) => {
