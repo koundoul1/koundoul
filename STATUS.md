@@ -757,3 +757,42 @@ En cas de rollback, ces variables peuvent rester — l'ancien code les ignore.
 Deployed, awaiting human validation on koundoul.com.
 
 **Phase 2B.4 (Coach IA) non démarrée — en attente d'instructions.**
+
+---
+
+## Mini-correctif post-validation Solver
+
+**Date** : 2026-05-03
+
+### Contexte
+
+14 tests humains validés (11/11 exercices justes, 3/3 garde-fous). 3 bugs cosmétiques détectés et corrigés avant d'attaquer Coach IA (2B.4).
+
+### Commits
+
+```
+9f4b916 fix(solver): remove duplicate Explanation block from UI
+867566e fix(solver): restore French accents in refusal message
+d280c5b fix(solver): improve graph detection with keyword-based override
+f4a6c11 test(solver): add 7 regression tests for mini-correctif
+```
+
+### Bugs corrigés
+
+1. **"Explication: undefined"** — VirtualCoach.jsx download function referenced `solution.explanation` which no longer exists. Removed dead field reference.
+
+2. **Détection de graphe trop conservatrice** — SOLVER_STRUCTURED_PROMPT updated to be permissive when keywords like "tracer", "courbe" are present. Server-side keyword override added in solver route. Frontend shows fallback message when graph is requested but no functionString is available.
+
+3. **Accents manquants dans le message de refus** — "specialise" → "spécialisé", "generales" → "générales" in SOLVER_SYSTEM_PROMPT. Gemini reproduces the example verbatim, so accents in the prompt are critical.
+
+### Tests
+
+- 7 nouveaux tests : total suite **74 tests, tous verts**
+- `npm run lint` : 0 erreurs, 527 warnings (exit 0)
+
+### Tests manuels recommandés en prod après deploy
+
+- [ ] Résoudre "Soit f(x)=2x+3, tracer la courbe" → requiresGraph=true dans la réponse, section graphe visible
+- [ ] Résoudre "Calculer la masse molaire de NaCl" → requiresGraph=false, pas de section graphe
+- [ ] Soumettre "Quelle est la capitale du Sénégal ?" → refus avec "spécialisé" et "générales" accentués
+- [ ] Télécharger une solution sur VirtualCoach → pas de "Explication: undefined" dans le fichier
