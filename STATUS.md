@@ -796,3 +796,196 @@ f4a6c11 test(solver): add 7 regression tests for mini-correctif
 - [ ] Résoudre "Calculer la masse molaire de NaCl" → requiresGraph=false, pas de section graphe
 - [ ] Soumettre "Quelle est la capitale du Sénégal ?" → refus avec "spécialisé" et "générales" accentués
 - [ ] Télécharger une solution sur VirtualCoach → pas de "Explication: undefined" dans le fichier
+
+---
+
+## Phase 2B.4 — Audit Coach IA
+
+**Date** : 2026-05-08
+
+### 1. Schéma DB — coach_sessions
+
+**Table existante** : `coach_sessions` (model `CoachSession`)
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| id | String (cuid) | PK |
+| userId | String? | FK → users.id |
+| exerciseAnalysis | Json | Obligatoire — stocke l'analyse d'un exercice |
+| status | Enum (IN_PROGRESS, COMPLETED, ABANDONED) | Statut session |
+| currentStep | Int (default 0) | Index d'étape actuel |
+| score | Int? | Score global |
+| totalTime | Int? | Temps total en secondes |
+| xpEarned | Int (default 0) | XP gagné |
+| summary | Json? | Résumé de session |
+| startedAt | DateTime | Début |
+| completedAt | DateTime? | Fin |
+| createdAt/updatedAt | DateTime | Timestamps |
+
+**Table liée** : `coach_answers` (1:N depuis coach_sessions) — stocke chaque réponse individuelle avec `question` (Json), `userAnswer`, `isCorrect`, `feedback`, `points`, `timeSpent`.
+
+**Verdict** : ce schéma est conçu pour un parcours step-by-step (exercice → questions → réponses), PAS pour un chat conversationnel. Il manque un champ `messages` (Json array) pour stocker l'historique de chat `[{role, content, timestamp}, ...]`.
+
+**Migration nécessaire** : OUI, il faut ajouter un champ `messages Json?` à `CoachSession` pour stocker l'historique conversationnel. Les champs existants (`exerciseAnalysis`, `currentStep`, `score`, `coach_answers`) ne servent pas pour le mode chat — on peut les garder nullable pour backward compat ou les ignorer. Option plus propre : créer un nouveau model `CoachConversation` dédié. **Question ci-dessous.**
+
+### 2. Routes coach actuelles — stubs obsolètes
+
+| Route | Code | Utilisée par le frontend ? |
+|-------|------|---------------------------|
+| `POST /coach/analyze` | Placeholder — retourne un objet `analysis` bidon | NON — VirtualCoach.jsx appelle `api.solver.solve()` à la place |
+| `POST /coach/steps/start` | Crée une CoachSession, placeholder steps | NON |
+| `POST /coach/steps/validate` | `isValid = true` toujours | NON |
+| `POST /coach/steps/hint` | Retourne `"Indice adapté selon le niveau"` | NON |
+| `POST /coach/steps/complete` | Calcule score, donne XP | NON |
+| `GET /coach/history` | Sessions complétées, fonctionne si data existe | NON — pas de bouton historique dans VirtualCoach.jsx |
+| `GET /coach/stats` | Count + avg score | NON |
+
+**api.js côté frontend** : 11 méthodes coach définies (L585-633) : `analyze`, `generateNextQuestion`, `validateAnswer`, `completeSession`, `startStepSession`, `validateStepAnswer`, `getStepHint`, `adaptGuidance`, `completeStepSession`, `getSessionHistory`, `getCoachStats`. **Aucune n'est appelée** par VirtualCoach.jsx (qui appelle `api.solver.solve()`).
+
+**Décision** : toutes les routes actuelles et méthodes API sont obsolètes pour l'option α (chat). On les remplace par :
+- `POST /coach/chat` — envoie un message, reçoit une réponse SSE streamée (comme le Solver)
+- `GET /coach/sessions` — liste les sessions de l'utilisateur (remplace /history)
+- `GET /coach/sessions/:id` — charge une session complète avec messages
+- `POST /coach/sessions` — crée une nouvelle session (optionnel : peut être implicite au 1er message)
+
+### 3. Frontend VirtualCoach.jsx — état actuel
+
+**442 lignes.** Composants présents :
+- `SolutionDisplay` (L22-81) : rendu LaTeX inline/block — **RÉUTILISABLE**, identique à Solver.jsx. À factoriser dans un composant partagé.
+- Formulaire problème (L248-371) : textarea + mode photo/caméra + bouton "Résoudre avec l'IA".
+- Zone solution (L374-435) : affichage one-shot avec `SolutionSteps`, copier/télécharger, XP.
+- Imports inutilisés : `Send`, `History`, `BookOpen`, `Lightbulb` (déjà importés mais pas rendus).
+
+**À jeter (~90%)** : tout le flow one-shot (formulaire → solution → reset). L'UI doit devenir un chat : liste de messages scrollable, input en bas, sessions dans une sidebar.
+
+**À garder (~10%)** :
+- `SolutionDisplay` composant (rendu LaTeX) — à extraire dans un fichier partagé
+- Dark theme / classes CSS (`koundoul-card`, `koundoul-navbar`, etc.)
+- Import `Brain` icon pour le header
+- Pattern caméra/photo si on veut supporter "envoyer une photo au coach" (nice-to-have, pas MVP)
+
+### 4. SSE / WebSocket — infrastructure existante
+
+**Pas de WebSocket** dans le projet. Le Solver utilise SSE via POST fetch manuelle (`api.solver.solveStream()`, L158-220 dans api.js). Le pattern est :
+1. Frontend : `fetch(POST)` avec `ReadableStream` reader, parse `event:` / `data:` manuellement
+2. Backend : `res.setHeader('Content-Type', 'text/event-stream')` + `res.write()` + `res.end()`
+3. Abort via `AbortController`
+
+**Pour le Coach** : on réutilise le même pattern SSE via POST. Chaque message utilisateur déclenche un POST qui retourne un stream SSE avec la réponse du coach. Pas besoin de WebSocket — le chat n'est pas temps-réel bidirectionnel, c'est request/response avec streaming.
+
+Le timeout de 120s dans api.js (L50) couvre déjà les routes `/coach`.
+
+### 5. Question pour validation humaine
+
+**Garde-t-on `coach_sessions` ou on crée un nouveau model ?**
+
+**Option A — Réutiliser `CoachSession`** : ajouter un champ `messages Json?` et un champ `title String?`. Ignorer les champs step-by-step (`exerciseAnalysis`, `currentStep`, `coach_answers`). Avantage : pas de nouvelle table, migration minimale (`ALTER TABLE ... ADD COLUMN`). Inconvénient : table polluée par des champs qui ne servent plus, `exerciseAnalysis Json` est obligatoire (non-nullable) et devra être rendu nullable.
+
+**Option B — Nouveau model `CoachConversation`** : table dédiée avec `id`, `userId`, `title`, `messages` (Json), `status`, `createdAt`, `updatedAt`. L'ancien `CoachSession` reste en place pour ne rien casser mais n'est plus utilisé. Avantage : schéma propre. Inconvénient : une table de plus.
+
+**Ma recommandation** : Option B. La table `coach_sessions` a 0 données utiles en prod (stubs jamais appelés), et son schéma est incompatible avec le chat. Une table propre `coach_conversations` avec un champ `messages Json` (array de `{role, content, timestamp}`) est plus clair et ne risque pas de casser quoi que ce soit. L'ancienne table reste, on ne la supprime pas (risque zéro).
+
+---
+
+**AUDIT TERMINÉ — validé, implémentation ci-dessous.**
+
+---
+
+## Phase 2B.4 — Implémentation Coach IA
+
+**Date** : 2026-05-08
+
+### Commits
+
+```
+1d851a5 feat(db): add CoachConversation table for chat persistence
+a503af9 feat(coach): add COACH_SYSTEM_PROMPT for conversational tutoring
+dfcd5c7 feat(coach): rewrite backend with SSE chat and conversation CRUD
+bc50c1b feat(coach): replace legacy API methods with chat SSE client
+74563c1 feat(coach): rewrite VirtualCoach as conversational chat UI
+9b8b13f test(coach): add 10 regression tests for Phase 2B.4
+```
+
+### Architecture
+
+```
+Frontend (VirtualCoach.jsx — chat UI)
+  |
+  | api.coach.chatStream() — SSE POST /coach/chat
+  |
+Backend (coach.js)
+  |
+  | 1. Load or create CoachConversation
+  | 2. Append user message to messages JSON
+  | 3. event:meta → frontend
+  | 4. streamGenerate(Gemini flash, history=20 last msgs) → event:chunk* → frontend
+  | 5. Append assistant message to messages JSON
+  | 6. event:done → frontend
+  |
+geminiService.js (role='coach' → gemini-2.5-flash)
+```
+
+### Migration DB (CRITIQUE — appliquer AVANT merge)
+
+**Table** : `coach_conversations`
+**Fichier** : `backend/prisma/migrations/20260508000000_add_coach_conversation/migration.sql`
+**Méthode** : copier le SQL dans Supabase SQL Editor et exécuter AVANT le push sur main.
+
+```sql
+CREATE TABLE IF NOT EXISTS "coach_conversations" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "title" TEXT,
+    "messages" JSONB NOT NULL DEFAULT '[]',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "coach_conversations_pkey" PRIMARY KEY ("id")
+);
+CREATE INDEX IF NOT EXISTS "coach_conversations_userId_updatedAt_idx" ON "coach_conversations"("userId", "updatedAt");
+ALTER TABLE "coach_conversations" ADD CONSTRAINT "coach_conversations_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+```
+
+### COACH_SYSTEM_PROMPT
+
+~700 mots dans `backend/src/prompts/coach.js`. Sections : identité, différence Solver, style conversationnel, méthode pédagogique (5 règles), format LaTeX, périmètre strict, anti-injection.
+
+### Backend — nouvelles routes
+
+| Route | Description |
+|-------|-------------|
+| `POST /coach/chat` | SSE streaming — crée ou reprend une conversation, stream la réponse Gemini |
+| `GET /coach/conversations` | Liste paginée (id, title, messageCount, lastMessageAt) |
+| `GET /coach/conversations/:id` | Conversation complète avec messages |
+| `DELETE /coach/conversations/:id` | Hard delete avec vérification ownership |
+
+Routes supprimées : `/coach/analyze`, `/coach/steps/*`, `/coach/history`, `/coach/stats` (tous stubs jamais utilisés).
+
+### Frontend — VirtualCoach.jsx
+
+Reconstruction complète en chat conversationnel :
+- **Sidebar** (250px desktop, drawer mobile) : liste conversations + bouton "Nouveau chat" + delete
+- **Zone messages** : bubbles user/assistant avec rendu LaTeX, auto-scroll, typing indicator
+- **Input** : textarea auto-resize, Enter pour envoyer, Shift+Enter nouvelle ligne
+- **Empty state** : suggestions cliquables ("Explique-moi le discriminant", etc.)
+
+### Tests
+
+- 10 nouveaux tests : total suite **84 tests, tous verts**
+- `npm run lint` : 0 erreurs, 523 warnings (exit 0)
+
+### Tests manuels recommandés en prod après deploy
+
+- [ ] Ouvrir /coach → empty state avec suggestions
+- [ ] Envoyer "Bonjour, peux-tu m'aider en maths ?" → réponse conversationnelle streamée
+- [ ] Vérifier que la réponse est un DIALOGUE (pas une résolution complète façon Solver)
+- [ ] Envoyer un second message dans la même conversation → contexte conservé
+- [ ] Sidebar : conversation apparaît avec titre tronqué
+- [ ] Cliquer "Nouveau chat" → vide la zone, prêt pour un nouveau message
+- [ ] Charger une conversation existante depuis la sidebar → messages affichés
+- [ ] Supprimer une conversation → disparaît de la sidebar
+- [ ] Envoyer "Quelle est la capitale du Sénégal ?" → refus poli avec accents
+- [ ] Mobile : sidebar drawer ouvre/ferme correctement
+
+### En attente
+
+Push sur main bloqué — migration SQL doit être appliquée en prod AVANT le merge.
