@@ -1,440 +1,394 @@
-import React, { useEffect, useRef, useState } from 'react';
+/**
+ * Coach IA — Chat conversationnel pédagogique.
+ * Dialogue multi-tour avec mémoire de session via SSE streaming.
+ */
+
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BlockMath, InlineMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import api from '../services/api';
-import SolutionSteps from '../components/SolutionSteps';
-import { 
-  Brain, 
-  Send, 
-  Zap,
-  History, 
-  BookOpen, 
-  CheckCircle,
-  AlertCircle,
+import {
+  Brain,
+  Send,
+  Plus,
+  MessageSquare,
   Loader2,
-  Copy,
-  Download,
-  Star,
-  Sparkles,
-  Lightbulb
+  Menu,
+  X,
+  Trash2,
+  AlertCircle
 } from 'lucide-react';
 
-// Composant pour afficher la solution avec support LaTeX
-const SolutionDisplay = ({ content }) => {
-  if (!content) return <p className="text-gray-100">Aucune solution affichée</p>;
-  
-  // Extraire les blocs LaTeX $$...$$ et inline $...$
+// ── LaTeX-aware message renderer ────────────────────────────────────
+
+const MessageContent = ({ content }) => {
+  if (!content || typeof content !== 'string') return null;
+
   const latexBlocks = [];
-  let processedContent = content.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
-    const id = `__LATEX_BLOCK_${latexBlocks.length}__`;
-    latexBlocks.push(formula.trim());
+  let processed = content.replace(/\$\$([\s\S]*?)\$\$/g, (_, f) => {
+    const id = `__BLK_${latexBlocks.length}__`;
+    latexBlocks.push(f.trim());
     return id;
   });
-  
+
   const latexInline = [];
-  processedContent = processedContent.replace(/\$([^$\n]+?)\$/g, (match, formula) => {
-    const id = `__LATEX_INLINE_${latexInline.length}__`;
-    latexInline.push(formula.trim());
+  processed = processed.replace(/\$([^$\n]+?)\$/g, (_, f) => {
+    const id = `__INL_${latexInline.length}__`;
+    latexInline.push(f.trim());
     return id;
   });
-  
-  const parts = [];
-  let lastIndex = 0;
-  const allTokens = [
-    ...latexBlocks.map((f, i) => ({ type: 'block', formula: f, index: processedContent.indexOf(`__LATEX_BLOCK_${i}__`) })),
-    ...latexInline.map((f, i) => ({ type: 'inline', formula: f, index: processedContent.indexOf(`__LATEX_INLINE_${i}__`) }))
+
+  const tokens = [
+    ...latexBlocks.map((f, i) => ({ type: 'block', formula: f, index: processed.indexOf(`__BLK_${i}__`), len: `__BLK_${i}__`.length })),
+    ...latexInline.map((f, i) => ({ type: 'inline', formula: f, index: processed.indexOf(`__INL_${i}__`), len: `__INL_${i}__`.length }))
   ].sort((a, b) => a.index - b.index);
-  
-  allTokens.forEach((token) => {
-    if (token.index > lastIndex) {
-      const textPart = processedContent.substring(lastIndex, token.index);
-      if (textPart) {
-        parts.push(<span key={`text-${lastIndex}`} className="text-gray-100 whitespace-pre-wrap text-lg leading-relaxed font-medium">{textPart}</span>);
-      }
+
+  const parts = [];
+  let last = 0;
+
+  for (const t of tokens) {
+    if (t.index > last) {
+      parts.push(<span key={`t-${last}`} className="whitespace-pre-wrap">{processed.slice(last, t.index)}</span>);
     }
-    
     try {
-      if (token.type === 'block') {
-        parts.push(
-          <div key={`latex-block-${token.index}`} className="my-4 flex justify-center">
-            <BlockMath math={token.formula} />
-          </div>
-        );
+      if (t.type === 'block') {
+        parts.push(<div key={`b-${t.index}`} className="my-3 flex justify-center overflow-x-auto"><BlockMath math={t.formula} /></div>);
       } else {
-        parts.push(<InlineMath key={`latex-inline-${token.index}`} math={token.formula} />);
+        parts.push(<InlineMath key={`i-${t.index}`} math={t.formula} />);
       }
-    } catch (error) {
-      console.warn('Erreur rendu LaTeX:', error);
-      parts.push(<span key={`latex-error-${token.index}`} className="text-red-300">${token.formula}</span>);
+    } catch {
+      parts.push(<code key={`e-${t.index}`} className="text-red-300">{`$${t.formula}$`}</code>);
     }
-    
-    lastIndex = token.index + (token.type === 'block' ? `__LATEX_BLOCK_${latexBlocks.indexOf(token.formula)}__`.length : `__LATEX_INLINE_${latexInline.indexOf(token.formula)}__`.length);
-  });
-  
-  if (lastIndex < processedContent.length) {
-    const textPart = processedContent.substring(lastIndex);
-    if (textPart) {
-      parts.push(<span key="text-end" className="text-gray-100 whitespace-pre-wrap text-lg leading-relaxed font-medium">{textPart}</span>);
-    }
+    last = t.index + t.len;
   }
-  
-  return <div className="text-gray-100 text-lg leading-relaxed font-medium">{parts.length > 0 ? parts : content}</div>;
+  if (last < processed.length) {
+    parts.push(<span key="end" className="whitespace-pre-wrap">{processed.slice(last)}</span>);
+  }
+
+  return <div className="leading-relaxed">{parts}</div>;
 };
 
+// ── Main component ──────────────────────────────────────────────────
+
 const VirtualCoach = () => {
-  const [imagePreview, setImagePreview] = useState(null);
-  const [inputMode, setInputMode] = useState('text');
-  const [problemText, setProblemText] = useState('');
-  const [imageBase64, setImageBase64] = useState(null);
-  const [solution, setSolution] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // Chat state
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState('');
-  
-  const fileInputRef = useRef(null);
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-  const [isCameraOpen, setIsCameraOpen] = useState(false);
-  const mediaStreamRef = useRef(null);
+
+  // Conversation state
+  const [currentConversationId, setCurrentConversationId] = useState(null);
+  const [conversations, setConversations] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Refs
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  const streamRef = useRef(null);
+
+  // ── Load conversations on mount ──
 
   useEffect(() => {
-    return () => closeCamera();
+    loadConversations();
   }, []);
 
-  const resetAll = () => {
-    setSolution(null);
-    setProblemText('');
-    setImageBase64(null);
-    setImagePreview(null);
-    setError('');
-  };
+  // ── Auto-scroll on new messages ──
 
-  const handleSelectImage = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result;
-      setImagePreview(result);
-      setImageBase64(String(result));
-    };
-    reader.readAsDataURL(file);
-  };
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-  const handleOpenCamera = async () => {
+  const loadConversations = async () => {
     try {
-      setIsCameraOpen(true);
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: { ideal: 'environment' } }, 
-        audio: false 
-      });
-      mediaStreamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-      }
+      const res = await api.coach.getConversations(30);
+      setConversations(res.data || []);
     } catch (err) {
-      console.error('Erreur ouverture caméra:', err);
-      alert('Impossible d\'accéder à la caméra. Vérifie les permissions.');
-      setIsCameraOpen(false);
+      console.error('Failed to load conversations:', err);
     }
   };
 
-  const closeCamera = () => {
-    if (mediaStreamRef.current) {
-      mediaStreamRef.current.getTracks().forEach(t => t.stop());
-      mediaStreamRef.current = null;
-    }
-    setIsCameraOpen(false);
-  };
-
-  const handleCapturePhoto = () => {
-    if (!videoRef.current || !canvasRef.current) return;
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    const width = video.videoWidth;
-    const height = video.videoHeight;
-    if (!width || !height) return;
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0, width, height);
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-    setImagePreview(dataUrl);
-    setImageBase64(dataUrl);
-    closeCamera();
-  };
-
-  // Utiliser la même logique que le solver : résolution intégrale complète
-  const handleAnalyze = async () => {
-    if (inputMode === 'photo' && !imageBase64) {
-      setError('Veuillez sélectionner ou prendre une photo');
-      return;
-    }
-    if (inputMode === 'text' && !problemText.trim()) {
-      setError('Veuillez saisir le problème à résoudre');
-      return;
-    }
-    
-    setLoading(true);
-    setError('');
-    setSolution(null);
-
+  const loadConversation = async (id) => {
     try {
-      const problem = inputMode === 'text' ? problemText.trim() : 'Problème depuis image';
-      
-      // Utiliser l'API solver pour résolution intégrale complète
-      // Domain et level seront détectés automatiquement
-      const response = await api.solver.solve({
-        input: problem,
-        domain: 'general', // Détection automatique par l'IA
-        level: 'medium' // Niveau moyen par défaut
-      });
+      const res = await api.coach.getConversation(id);
+      setMessages(res.data.messages || []);
+      setCurrentConversationId(id);
+      setError('');
+      setSidebarOpen(false);
+    } catch (err) {
+      console.error('Failed to load conversation:', err);
+      setError('Impossible de charger la conversation');
+    }
+  };
 
-      if (response.success) {
-        const solutionData = response.data.solution || response.data;
-        setSolution(solutionData);
-      } else {
-        setError(response.message || 'Erreur lors de la résolution');
+  const handleNewChat = useCallback(() => {
+    if (streamRef.current) streamRef.current.abort();
+    setCurrentConversationId(null);
+    setMessages([]);
+    setInput('');
+    setError('');
+    setIsStreaming(false);
+    setSidebarOpen(false);
+    setTimeout(() => inputRef.current?.focus(), 100);
+  }, []);
+
+  const handleDeleteConversation = async (e, id) => {
+    e.stopPropagation();
+    try {
+      await api.coach.deleteConversation(id);
+      setConversations(prev => prev.filter(c => c.id !== id));
+      if (currentConversationId === id) handleNewChat();
+    } catch (err) {
+      console.error('Failed to delete:', err);
+    }
+  };
+
+  // ── Send message ──
+
+  const handleSend = () => {
+    const text = input.trim();
+    if (!text || isStreaming) return;
+
+    if (streamRef.current) streamRef.current.abort();
+
+    const userMsg = { role: 'user', content: text, createdAt: new Date().toISOString() };
+    setMessages(prev => [...prev, userMsg]);
+    setInput('');
+    setError('');
+    setIsStreaming(true);
+
+    // Placeholder for assistant response (will be filled by chunks)
+    let assistantText = '';
+    setMessages(prev => [...prev, { role: 'assistant', content: '', createdAt: new Date().toISOString() }]);
+
+    streamRef.current = api.coach.chatStream({
+      message: text,
+      conversationId: currentConversationId,
+      onMeta: (data) => {
+        if (data.conversationId && !currentConversationId) {
+          setCurrentConversationId(data.conversationId);
+        }
+      },
+      onChunk: ({ text: chunk }) => {
+        assistantText += chunk;
+        setMessages(prev => {
+          const updated = [...prev];
+          updated[updated.length - 1] = {
+            ...updated[updated.length - 1],
+            content: assistantText
+          };
+          return updated;
+        });
+      },
+      onDone: () => {
+        setIsStreaming(false);
+        streamRef.current = null;
+        loadConversations();
+      },
+      onError: (msg) => {
+        setError(msg || 'Erreur de communication avec le Coach');
+        setIsStreaming(false);
+        streamRef.current = null;
+        // Remove empty assistant placeholder if error
+        if (!assistantText) {
+          setMessages(prev => prev.slice(0, -1));
+        }
       }
-    } catch (error) {
-      console.error('Erreur résolution:', error);
-      setError(error.message || 'Erreur lors de la résolution du problème');
-    } finally {
-      setLoading(false);
+    });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
     }
   };
 
-  const handleCopySolution = () => {
-    if (solution) {
-      navigator.clipboard.writeText(solution.solution);
-    }
-  };
+  // ── Current conversation title ──
+  const currentTitle = conversations.find(c => c.id === currentConversationId)?.title || 'Nouveau chat';
 
-  const handleDownloadSolution = () => {
-    if (solution) {
-      const content = `Problème: ${problemText}\n\nSolution:\n${solution.solution || ''}`;
-      const blob = new Blob([content], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `solution_${Date.now()}.txt`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-  };
-
+  // ── Render ──
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950">
-      {/* Header */}
-      <div className="koundoul-navbar">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-2xl font-bold koundoul-text-gradient flex items-center">
-                <Brain className="h-8 w-8 text-blue-400 mr-3" />
-                Coach Pédagogique Universel
-              </h1>
-              <p className="text-gray-300 mt-1">
-                Résolution intégrale complète avec stratégie pédagogique
+    <div className="h-screen flex bg-gray-900">
+
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`
+        fixed inset-y-0 left-0 z-40 w-72 bg-gray-950 border-r border-gray-800 flex flex-col
+        transform transition-transform duration-200
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:relative lg:translate-x-0
+      `}>
+        {/* New chat button */}
+        <div className="p-3 border-b border-gray-800">
+          <button
+            onClick={handleNewChat}
+            className="w-full flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 text-gray-300 hover:text-white transition-colors text-sm"
+          >
+            <Plus className="h-4 w-4" />
+            Nouveau chat
+          </button>
+        </div>
+
+        {/* Conversations list */}
+        <div className="flex-1 overflow-y-auto py-2">
+          {conversations.length === 0 ? (
+            <p className="text-gray-500 text-sm text-center py-8 px-4">
+              Aucune conversation
+            </p>
+          ) : (
+            conversations.map(conv => (
+              <div
+                key={conv.id}
+                onClick={() => loadConversation(conv.id)}
+                className={`group flex items-center gap-2 px-3 py-2.5 mx-2 rounded-lg cursor-pointer text-sm transition-colors ${
+                  conv.id === currentConversationId
+                    ? 'bg-gray-800 text-white'
+                    : 'text-gray-400 hover:bg-gray-800/50 hover:text-gray-200'
+                }`}
+              >
+                <MessageSquare className="h-4 w-4 flex-shrink-0 opacity-60" />
+                <span className="truncate flex-1">{conv.title || 'Sans titre'}</span>
+                <button
+                  onClick={(e) => handleDeleteConversation(e, conv.id)}
+                  className="opacity-0 group-hover:opacity-100 p-1 hover:text-red-400 transition-opacity"
+                  title="Supprimer"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      </aside>
+
+      {/* Main chat area */}
+      <main className="flex-1 flex flex-col min-w-0">
+        {/* Header */}
+        <header className="flex items-center gap-3 px-4 py-3 border-b border-gray-800 bg-gray-900/80 backdrop-blur">
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="lg:hidden p-1.5 rounded-lg hover:bg-gray-800 text-gray-400"
+          >
+            {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+          <Brain className="h-6 w-6 text-blue-400" />
+          <div className="min-w-0">
+            <h1 className="text-base font-semibold text-gray-200 truncate">
+              Coach IA
+            </h1>
+            <p className="text-xs text-gray-500 truncate">{currentTitle}</p>
+          </div>
+        </header>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-4 py-6">
+          {messages.length === 0 && !isStreaming && (
+            <div className="flex flex-col items-center justify-center h-full text-center">
+              <Brain className="h-16 w-16 text-blue-400/30 mb-4" />
+              <h2 className="text-xl font-semibold text-gray-300 mb-2">
+                Comment puis-je t&apos;aider ?
+              </h2>
+              <p className="text-gray-500 text-sm max-w-md">
+                Pose-moi une question de maths, physique ou chimie.
+                Je suis ton coach personnel pour t&apos;accompagner pas à pas.
               </p>
+              <div className="flex flex-wrap gap-2 mt-6 justify-center">
+                {[
+                  'Explique-moi le discriminant',
+                  'Je bloque sur les vecteurs',
+                  'Comment équilibrer une réaction ?'
+                ].map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    onClick={() => { setInput(suggestion); inputRef.current?.focus(); }}
+                    className="px-3 py-1.5 text-sm rounded-lg border border-gray-700 text-gray-400 hover:text-gray-200 hover:border-gray-600 hover:bg-gray-800/50 transition-colors"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
             </div>
+          )}
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
+                  msg.role === 'user'
+                    ? 'bg-blue-600 text-white rounded-br-md'
+                    : 'bg-gray-800 text-gray-200 rounded-bl-md border border-gray-700'
+                }`}>
+                  {msg.role === 'assistant' && !msg.content && isStreaming && i === messages.length - 1 ? (
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Le Coach réfléchit...</span>
+                    </div>
+                  ) : (
+                    <MessageContent content={msg.content} />
+                  )}
+                </div>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
           </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        {/* Saisie du problème */}
-        {!solution && (
-          <div className="koundoul-card mb-6">
-            <h2 className="text-xl font-semibold mb-4">📝 Décrivez votre problème</h2>
-            
-            <div className="flex gap-4 mb-4">
-              <button
-                onClick={() => setInputMode('text')}
-                className={`px-4 py-2 rounded-lg font-medium ${
-                  inputMode === 'text' 
-                    ? 'bg-indigo-600 text-white' 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                }`}
-              >
-                ✍️ Texte
-              </button>
-              <button
-                onClick={() => setInputMode('photo')}
-                className={`px-4 py-2 rounded-lg font-medium ${
-                  inputMode === 'photo' 
-                    ? 'bg-indigo-600 text-white' 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                }`}
-              >
-                📸 Photo
-              </button>
-            </div>
+        {/* Error */}
+        {error && (
+          <div className="mx-4 mb-2 flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-400/30 text-red-300 text-sm">
+            <AlertCircle className="h-4 w-4 flex-shrink-0" />
+            <span>{error}</span>
+          </div>
+        )}
 
-            {inputMode === 'text' && (
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Énoncé du problème
-                </label>
-                <textarea
-                  value={problemText}
-                  onChange={(e) => {
-                    setProblemText(e.target.value);
-                    if (error) setError('');
-                  }}
-                  className="koundoul-solver-input w-full h-32 resize-none"
-                  placeholder="Soyez aussi précis que possible pour obtenir la meilleure solution..."
-                />
-              </div>
-            )}
-
-            {inputMode === 'photo' && (
-              <div>
-                <div className="flex gap-4 mb-4">
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleSelectImage}
-                    className="hidden"
-                  />
-                  <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="koundoul-btn-secondary px-4 py-2"
-                  >
-                    📁 Importer
-                  </button>
-                  <button
-                    onClick={handleOpenCamera}
-                    className="koundoul-btn-secondary px-4 py-2"
-                  >
-                    🎥 Prendre une photo
-                  </button>
-                </div>
-
-                {isCameraOpen && (
-                  <div className="mb-4">
-                    <video ref={videoRef} autoPlay playsInline className="max-h-64 rounded-lg" />
-                    <div className="flex gap-2 mt-2">
-                      <button onClick={handleCapturePhoto} className="koundoul-btn-primary px-4 py-2">
-                        📷 Capturer
-                      </button>
-                      <button onClick={closeCamera} className="px-4 py-2 bg-gray-600 text-white rounded-lg">
-                        ✖️ Fermer
-                      </button>
-                    </div>
-                    <canvas ref={canvasRef} className="hidden" />
-                  </div>
-                )}
-
-                {imagePreview && (
-                  <div className="mb-4">
-                    <img src={imagePreview} alt="Aperçu" className="max-h-64 rounded-lg border border-gray-600" />
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Erreur */}
-            {error && (
-              <div className="mb-4 bg-red-900/30 border border-red-500/50 rounded-lg p-4 flex items-center">
-                <AlertCircle className="h-5 w-5 mr-2 text-red-400" />
-                <p className="text-sm text-red-300">{error}</p>
-              </div>
-            )}
-
+        {/* Input area */}
+        <div className="border-t border-gray-800 px-4 py-3 bg-gray-900">
+          <div className="max-w-3xl mx-auto flex items-end gap-2">
+            <textarea
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Pose ta question au Coach..."
+              rows={1}
+              className="flex-1 resize-none bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 max-h-32 overflow-y-auto"
+              style={{ minHeight: '42px' }}
+              onInput={(e) => {
+                e.target.style.height = 'auto';
+                e.target.style.height = Math.min(e.target.scrollHeight, 128) + 'px';
+              }}
+              disabled={isStreaming}
+            />
             <button
-              onClick={handleAnalyze}
-              disabled={loading || (inputMode === 'photo' && !imageBase64) || (inputMode === 'text' && !problemText.trim())}
-              className="relative w-full koundoul-btn-primary py-4 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center overflow-hidden group"
+              onClick={handleSend}
+              disabled={isStreaming || !input.trim()}
+              className="flex-shrink-0 p-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              title="Envoyer"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 group-hover:animate-pulse transition-opacity" />
-              
-              {loading ? (
-                <>
-                  <Loader2 className="animate-spin h-6 w-6 mr-3" />
-                  <span className="flex items-center gap-2">
-                    <span>Réflexion en cours</span>
-                    <Sparkles className="h-5 w-5 animate-pulse" />
-                  </span>
-                </>
+              {isStreaming ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
-                <>
-                  <Zap className="h-6 w-6 mr-3 group-hover:animate-pulse" />
-                  <span className="text-lg">Résoudre avec l'IA</span>
-                  <Sparkles className="h-5 w-5 ml-2 opacity-75" />
-                </>
+                <Send className="h-5 w-5" />
               )}
             </button>
           </div>
-        )}
-
-        {/* Solution complète */}
-        {solution && (
-          <div className="mt-8 koundoul-card">
-            <div className="border-b border-gray-600 pb-4 mb-6">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-200 flex items-center">
-                  <CheckCircle className="h-6 w-6 text-green-400 mr-2" />
-                  Solution trouvée
-                </h3>
-                <div className="flex space-x-2">
-                  <button
-                    onClick={handleCopySolution}
-                    className="flex items-center px-3 py-1 text-sm text-gray-400 hover:text-gray-200 transition-colors"
-                  >
-                    <Copy className="h-4 w-4 mr-1" />
-                    Copier
-                  </button>
-                  <button
-                    onClick={handleDownloadSolution}
-                    className="flex items-center px-3 py-1 text-sm text-gray-400 hover:text-gray-200 transition-colors"
-                  >
-                    <Download className="h-4 w-4 mr-1" />
-                    Télécharger
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="prose max-w-none">
-              {/* Solution finale avec LaTeX */}
-              <div className="koundoul-solution-final">
-                <h4 className="font-semibold text-green-300 mb-4 flex items-center text-xl">
-                  <CheckCircle className="h-7 w-7 mr-3 text-green-400" />
-                  Solution trouvée
-                </h4>
-                <div className="bg-black/20 rounded-lg p-4 border border-green-400/30">
-                  <SolutionDisplay content={solution.solution || 'Aucune solution affichée'} />
-                </div>
-              </div>
-
-              {/* Étapes pédagogiques avec LaTeX */}
-              {solution.steps && solution.steps.length > 0 && (
-                <SolutionSteps steps={solution.steps} />
-              )}
-
-              <div className="mt-4 flex items-center justify-between text-sm text-gray-400">
-                <div className="flex items-center">
-                  <Star className="h-4 w-4 mr-1" />
-                  +{solution.points || 10} XP
-                </div>
-                <div className="flex items-center">
-                  <button
-                    onClick={resetAll}
-                    className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg text-sm transition-colors"
-                  >
-                    🔄 Résoudre un autre problème
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-      </div>
+          <p className="text-center text-xs text-gray-600 mt-2">
+            Maths, physique, chimie uniquement. Enter pour envoyer, Shift+Enter pour une nouvelle ligne.
+          </p>
+        </div>
+      </main>
     </div>
   );
 };
