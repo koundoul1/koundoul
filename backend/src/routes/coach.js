@@ -2,204 +2,215 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
+const { isConfigured, streamGenerate, GeminiError } = require('../services/geminiService');
+const { COACH_SYSTEM_PROMPT } = require('../prompts/coach');
 
-// Analyze exercise
-router.post('/analyze', authenticateToken, async (req, res, next) => {
-  try {
-    const { imageData, text } = req.body;
-    const userId = req.user.userId;
+// Max messages sent to Gemini as conversation history
+const MAX_HISTORY_MESSAGES = 20;
 
-    if (!imageData && !text) {
-      return res.status(400).json({ error: 'Image ou texte requis' });
-    }
+// ── POST /chat — SSE streaming conversational endpoint ──────────────
 
-    // Placeholder pour l'analyse
-    // Ici vous intégrerez votre service de vision/OCR
-    const analysis = {
-      equation: text || 'Équation détectée depuis l\'image',
-      steps: [],
-      guidance: 'beginner',
-      detectedType: 'equation'
-    };
+router.post('/chat', authenticateToken, async (req, res) => {
+  const userId = req.user.userId;
+  const { message, conversationId } = req.body;
 
-    res.json({ success: true, data: analysis });
-  } catch (error) {
-    next(error);
+  if (!message || !message.trim()) {
+    return res.status(400).json({ error: 'Message requis' });
   }
-});
 
-// Start step session
-router.post('/steps/start', authenticateToken, async (req, res, next) => {
+  if (!isConfigured()) {
+    return res.status(503).json({ error: 'Service IA non configuré. Contactez l\'administrateur.' });
+  }
+
+  // SSE headers
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.flushHeaders();
+
+  const sendEvent = (event, data) => {
+    try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
+  };
+
+  let conversation;
+
   try {
-    const { equation, guidanceLevel = 'beginner' } = req.body;
-    const userId = req.user.userId;
-
-    if (!equation) {
-      return res.status(400).json({ error: 'Équation requise' });
-    }
-
-    const session = await prisma.coachSession.create({
-      data: {
-        userId,
-        equation,
-        guidanceLevel,
-        steps: [],
-        currentStep: 0,
-        completed: false
+    if (conversationId) {
+      // Load existing conversation
+      conversation = await prisma.coachConversation.findUnique({
+        where: { id: conversationId }
+      });
+      if (!conversation || conversation.userId !== userId) {
+        sendEvent('error', { message: 'Conversation non trouvée' });
+        res.end();
+        return;
       }
-    });
-
-    res.json({ success: true, data: session });
-  } catch (error) {
-    next(error);
+    } else {
+      // Create new conversation — title = first 50 chars of first message
+      const title = message.trim().length > 50
+        ? message.trim().slice(0, 50) + '...'
+        : message.trim();
+      conversation = await prisma.coachConversation.create({
+        data: {
+          userId,
+          title,
+          messages: []
+        }
+      });
+    }
+  } catch (err) {
+    console.error('[Coach] Conversation load/create error:', err.message);
+    sendEvent('error', { message: 'Erreur de session' });
+    res.end();
+    return;
   }
-});
 
-// Validate step answer
-router.post('/steps/validate', authenticateToken, async (req, res, next) => {
+  // Append user message
+  const userMessage = { role: 'user', content: message.trim(), createdAt: new Date().toISOString() };
+  const allMessages = [...(conversation.messages || []), userMessage];
+
+  // Persist user message immediately
   try {
-    const { sessionId, inputs } = req.body;
-    const userId = req.user.userId;
-
-    const session = await prisma.coachSession.findUnique({
-      where: { id: sessionId }
+    await prisma.coachConversation.update({
+      where: { id: conversation.id },
+      data: { messages: allMessages }
     });
+  } catch (err) {
+    console.error('[Coach] Message persist error:', err.message);
+  }
 
-    if (!session || session.userId !== userId) {
-      return res.status(404).json({ error: 'Session non trouvée' });
+  sendEvent('meta', { conversationId: conversation.id, status: 'streaming' });
+
+  try {
+    // Build Gemini history from last N messages (excluding the new one which becomes userPrompt)
+    const recentMessages = allMessages.slice(-MAX_HISTORY_MESSAGES);
+    const history = recentMessages.slice(0, -1).map(m => ({
+      role: m.role === 'user' ? 'user' : 'model',
+      parts: [{ text: m.content }]
+    }));
+    const userPrompt = recentMessages[recentMessages.length - 1].content;
+
+    // Stream the response
+    let fullText = '';
+    for await (const chunk of streamGenerate({
+      role: 'coach',
+      systemInstruction: COACH_SYSTEM_PROMPT,
+      userPrompt,
+      history,
+      generationConfig: { temperature: 0.6, maxOutputTokens: 2048 }
+    })) {
+      fullText += chunk;
+      sendEvent('chunk', { text: chunk });
     }
 
-    if (session.completed) {
-      return res.status(400).json({ error: 'Session déjà complétée' });
+    // Persist assistant response
+    const assistantMessage = { role: 'assistant', content: fullText, createdAt: new Date().toISOString() };
+    const updatedMessages = [...allMessages, assistantMessage];
+
+    try {
+      await prisma.coachConversation.update({
+        where: { id: conversation.id },
+        data: { messages: updatedMessages }
+      });
+    } catch (err) {
+      console.error('[Coach] Assistant message persist error:', err.message);
     }
 
-    // Placeholder - valider la réponse
-    const isValid = true; // À implémenter
-    const feedback = 'Bonne réponse !';
-
-    // Mettre à jour la session
-    const updated = await prisma.coachSession.update({
-      where: { id: sessionId },
-      data: {
-        currentStep: session.currentStep + 1,
-        steps: [...(session.steps || []), { step: session.currentStep + 1, inputs, isValid, feedback }]
-      }
-    });
-
-    res.json({ success: true, data: { isValid, feedback, session: updated } });
-  } catch (error) {
-    next(error);
+    sendEvent('done', { conversationId: conversation.id, status: 'completed' });
+  } catch (err) {
+    console.error('[Coach] Stream error:', err.message);
+    const errMsg = err instanceof GeminiError
+      ? err.message
+      : 'Erreur lors de la réponse. Réessayez.';
+    sendEvent('error', { message: errMsg });
+  } finally {
+    res.end();
   }
 });
 
-// Get step hint
-router.post('/steps/hint', authenticateToken, async (req, res, next) => {
-  try {
-    const { sessionId, level } = req.body;
-    const userId = req.user.userId;
+// ── GET /conversations — list user conversations ────────────────────
 
-    const session = await prisma.coachSession.findUnique({
-      where: { id: sessionId }
-    });
-
-    if (!session || session.userId !== userId) {
-      return res.status(404).json({ error: 'Session non trouvée' });
-    }
-
-    // Placeholder - générer indice
-    const hint = 'Indice adapté selon le niveau';
-
-    res.json({ success: true, data: { hint } });
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Complete step session
-router.post('/steps/complete', authenticateToken, async (req, res, next) => {
-  try {
-    const { sessionId } = req.body;
-    const userId = req.user.userId;
-
-    const session = await prisma.coachSession.findUnique({
-      where: { id: sessionId }
-    });
-
-    if (!session || session.userId !== userId) {
-      return res.status(404).json({ error: 'Session non trouvée' });
-    }
-
-    // Calculer le score
-    const totalSteps = session.steps?.length || 0;
-    const correctSteps = session.steps?.filter(s => s.isValid).length || 0;
-    const score = totalSteps > 0 ? (correctSteps / totalSteps) * 100 : 0;
-
-    const updated = await prisma.coachSession.update({
-      where: { id: sessionId },
-      data: {
-        completed: true,
-        score,
-        completedAt: new Date()
-      }
-    });
-
-    // Ajouter XP
-    const xpEarned = Math.round(score / 10); // 1 XP par 10% de score
-    await prisma.user.update({
-      where: { id: userId },
-      data: { xp: { increment: xpEarned } }
-    });
-
-    res.json({
-      success: true,
-      data: {
-        ...updated,
-        xpEarned
-      }
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Get session history
-router.get('/history', authenticateToken, async (req, res, next) => {
+router.get('/conversations', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
-    const sessions = await prisma.coachSession.findMany({
-      where: { userId, completed: true },
-      orderBy: { completedAt: 'desc' },
-      take: 20
-    });
+    const take = Math.min(parseInt(req.query.limit) || 20, 50);
+    const skip = Math.max(parseInt(req.query.offset) || 0, 0);
 
-    res.json({ success: true, data: sessions });
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Get coach stats
-router.get('/stats', authenticateToken, async (req, res, next) => {
-  try {
-    const userId = req.user.userId;
-
-    const [totalSessions, avgScore] = await Promise.all([
-      prisma.coachSession.count({
-        where: { userId, completed: true }
+    const [conversations, total] = await Promise.all([
+      prisma.coachConversation.findMany({
+        where: { userId },
+        orderBy: { updatedAt: 'desc' },
+        take,
+        skip,
+        select: {
+          id: true,
+          title: true,
+          createdAt: true,
+          updatedAt: true,
+          messages: true
+        }
       }),
-      prisma.coachSession.aggregate({
-        where: { userId, completed: true, score: { not: null } },
-        _avg: { score: true }
-      })
+      prisma.coachConversation.count({ where: { userId } })
     ]);
 
+    // Return lightweight entries (message count, no full content)
+    const data = conversations.map(c => ({
+      id: c.id,
+      title: c.title,
+      messageCount: Array.isArray(c.messages) ? c.messages.length : 0,
+      lastMessageAt: c.updatedAt,
+      createdAt: c.createdAt
+    }));
+
+    res.json({ success: true, data, total });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ── GET /conversations/:id — full conversation with messages ────────
+
+router.get('/conversations/:id', authenticateToken, async (req, res, next) => {
+  try {
+    const conversation = await prisma.coachConversation.findUnique({
+      where: { id: req.params.id }
+    });
+
+    if (!conversation || conversation.userId !== req.user.userId) {
+      return res.status(404).json({ error: 'Conversation non trouvée' });
+    }
+
     res.json({
       success: true,
       data: {
-        totalSessions,
-        averageScore: avgScore._avg.score ? Math.round(avgScore._avg.score) : 0
+        id: conversation.id,
+        title: conversation.title,
+        messages: conversation.messages || [],
+        createdAt: conversation.createdAt,
+        updatedAt: conversation.updatedAt
       }
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ── DELETE /conversations/:id — hard delete ─────────────────────────
+
+router.delete('/conversations/:id', authenticateToken, async (req, res, next) => {
+  try {
+    const conversation = await prisma.coachConversation.findUnique({
+      where: { id: req.params.id }
+    });
+
+    if (!conversation || conversation.userId !== req.user.userId) {
+      return res.status(404).json({ error: 'Conversation non trouvée' });
+    }
+
+    await prisma.coachConversation.delete({ where: { id: req.params.id } });
+
+    res.json({ success: true });
   } catch (error) {
     next(error);
   }
