@@ -581,56 +581,94 @@ const api = {
     getUserReplies: () => request('/forum/user/replies')
   },
 
-  // 🤖 COACH VIRTUEL
+  // 🤖 COACH VIRTUEL (chat conversationnel)
   coach: {
-    analyzeExercise: (payload) => {
-      // payload peut être une string (image base64) ou un objet { imageData, text }
-      let body = {};
-      if (typeof payload === 'string') {
-        body = { imageData: payload };
-      } else if (payload && (payload.imageData || payload.text)) {
-        body = payload;
-      }
-      return request('/coach/analyze', {
-        method: 'POST',
-        body: JSON.stringify(body)
-      });
+    /**
+     * SSE streaming chat — same pattern as solver.solveStream.
+     * Returns an object with an abort() method.
+     */
+    chatStream: ({ message, conversationId, onMeta, onChunk, onDone, onError }) => {
+      const token = localStorage.getItem('token');
+      const controller = new AbortController();
+      let finished = false;
+
+      const finish = (data) => {
+        if (finished) return;
+        finished = true;
+        onDone?.(data || {});
+      };
+
+      const timeout = setTimeout(() => {
+        if (!finished) { finish({}); controller.abort(); }
+      }, 120000);
+
+      const run = async () => {
+        try {
+          const res = await fetch(`${API_BASE}/coach/chat`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { Authorization: `Bearer ${token}` } : {})
+            },
+            body: JSON.stringify({ message, conversationId }),
+            signal: controller.signal
+          });
+
+          if (!res.ok) {
+            clearTimeout(timeout);
+            const err = await res.json().catch(() => ({ error: 'Erreur serveur' }));
+            onError?.(err.error || `Erreur ${res.status}`);
+            return;
+          }
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          const processLine = (part) => {
+            const lines = part.split('\n');
+            const eventLine = lines.find(l => l.startsWith('event: '));
+            const dataLine = lines.find(l => l.startsWith('data: '));
+            if (!eventLine || !dataLine) return;
+            const event = eventLine.slice(7).trim();
+            try {
+              const data = JSON.parse(dataLine.slice(6));
+              if (event === 'meta') onMeta?.(data);
+              else if (event === 'chunk') onChunk?.(data);
+              else if (event === 'done') { clearTimeout(timeout); finish(data); }
+              else if (event === 'error') { clearTimeout(timeout); onError?.(data.message); }
+            } catch (_e) { /* malformed SSE event */ }
+          };
+
+          let reading = true;
+          while (reading) {
+            const { done, value } = await reader.read();
+            if (done) { reading = false; break; }
+            buffer += decoder.decode(value, { stream: true });
+            const segments = buffer.split('\n\n');
+            buffer = segments.pop() || '';
+            for (const seg of segments) {
+              if (seg.trim()) processLine(seg);
+            }
+          }
+          // Process remaining buffer
+          if (buffer.trim()) processLine(buffer);
+          clearTimeout(timeout);
+          if (!finished) finish({});
+        } catch (err) {
+          clearTimeout(timeout);
+          if (err.name !== 'AbortError') {
+            onError?.(err.message || 'Erreur de connexion');
+          }
+        }
+      };
+
+      run();
+      return { abort: () => { clearTimeout(timeout); controller.abort(); } };
     },
-    generateNextQuestion: (sessionId, userAnswers, currentStep) => request('/coach/question', {
-      method: 'POST',
-      body: JSON.stringify({ sessionId, userAnswers, currentStep })
-    }),
-    validateAnswer: (sessionId, question, userAnswer, helpLevel) => request('/coach/validate', {
-      method: 'POST',
-      body: JSON.stringify({ sessionId, question, userAnswer, helpLevel })
-    }),
-    completeSession: (sessionId) => request('/coach/complete', {
-      method: 'POST',
-      body: JSON.stringify({ sessionId })
-    }),
-    // Nouvelles méthodes pour le moteur d'étapes
-    startStepSession: (equation, guidanceLevel) => request('/coach/steps/start', {
-      method: 'POST',
-      body: JSON.stringify({ equation, guidanceLevel })
-    }),
-    validateStepAnswer: (sessionId, inputs) => request('/coach/steps/validate', {
-      method: 'POST',
-      body: JSON.stringify({ sessionId, inputs })
-    }),
-    getStepHint: (sessionId, level) => request('/coach/steps/hint', {
-      method: 'POST',
-      body: JSON.stringify({ sessionId, level })
-    }),
-    adaptGuidance: (sessionId, trigger) => request('/coach/steps/adapt', {
-      method: 'POST',
-      body: JSON.stringify({ sessionId, trigger })
-    }),
-    completeStepSession: (sessionId) => request('/coach/steps/complete', {
-      method: 'POST',
-      body: JSON.stringify({ sessionId })
-    }),
-    getSessionHistory: () => request('/coach/history'),
-    getCoachStats: () => request('/coach/stats')
+    getConversations: (limit = 20) => request(`/coach/conversations?limit=${limit}`),
+    getConversation: (id) => request(`/coach/conversations/${id}`),
+    deleteConversation: (id) => request(`/coach/conversations/${id}`, { method: 'DELETE' })
   },
 
   // 🏆 CHALLENGES
