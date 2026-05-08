@@ -10,6 +10,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force-hide KaTeX MathML accessibility span to prevent duplicate
+   rendering when Tailwind Preflight resets interfere with katex.min.css */
+.katex-mathml {
+  display: none !important;
+}
+
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
