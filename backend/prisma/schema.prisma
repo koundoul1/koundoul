@@ -70,6 +70,7 @@ model User {
   duelsAsOpponent                                        Duel[]               @relation("DuelOpponent")
   notifications                                          Notification[]
   solverHistory                                          SolverHistory[]
+  coachConversations                                     CoachConversation[]
 
   @@map("users")
 }
@@ -881,4 +882,17 @@ model SolverHistory {
 
   @@index([userId, createdAt])
   @@map("solver_history")
+}
+
+model CoachConversation {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String?
+  messages  Json     @default("[]")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt])
+  @@map("coach_conversations")
 }
