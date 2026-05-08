@@ -986,6 +986,10 @@ Reconstruction complète en chat conversationnel :
 - [ ] Envoyer "Quelle est la capitale du Sénégal ?" → refus poli avec accents
 - [ ] Mobile : sidebar drawer ouvre/ferme correctement
 
-### En attente
+### Mini-correctif LaTeX dupliqué
 
-Push sur main bloqué — migration SQL doit être appliquée en prod AVANT le merge.
+**Commit** : `158079a fix(coach): remove duplicate LaTeX rendering in chat messages`
+
+**Cause racine** : KaTeX rend chaque formule en deux spans internes — `.katex-mathml` (MathML, normalement caché par CSS) et `.katex-html` (rendu visuel). Quand le CSS KaTeX charge dans un chunk lazy-loadé, Tailwind Preflight peut interférer avec les règles `clip`/`position:absolute` qui cachent le span MathML. Résultat : les deux spans affichent le texte brut côte à côte.
+
+**Fix** : `.katex-mathml { display: none !important; }` dans `index.css` après les imports Tailwind — garantit que le span MathML est toujours caché quel que soit l'ordre de chargement CSS.
