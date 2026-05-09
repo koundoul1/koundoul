@@ -189,7 +189,7 @@ const api = {
           if (!res.ok) {
             clearTimeout(timeout);
             const err = await res.json().catch(() => ({ error: 'Erreur serveur' }));
-            onError?.(err.error || `Erreur ${res.status}`);
+            onError?.(err.error || `Erreur ${res.status}`, err.quotaReached ? err : null);
             return;
           }
 
@@ -617,7 +617,7 @@ const api = {
           if (!res.ok) {
             clearTimeout(timeout);
             const err = await res.json().catch(() => ({ error: 'Erreur serveur' }));
-            onError?.(err.error || `Erreur ${res.status}`);
+            onError?.(err.error || `Erreur ${res.status}`, err.quotaReached ? err : null);
             return;
           }
 
@@ -669,6 +669,11 @@ const api = {
     getConversations: (limit = 20) => request(`/coach/conversations?limit=${limit}`),
     getConversation: (id) => request(`/coach/conversations/${id}`),
     deleteConversation: (id) => request(`/coach/conversations/${id}`, { method: 'DELETE' })
+  },
+
+  // 📊 AI QUOTA
+  aiQuota: {
+    get: () => request('/ai-quota')
   },
 
   // 🏆 CHALLENGES
