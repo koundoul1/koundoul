@@ -221,6 +221,7 @@ app.use('/api/question-banks', questionBanksRoutes);
 app.use('/api/challenges', challengesRoutes);
 app.use('/api/duels', duelsRoutes);
 app.use('/api/solver', solverRoutes);
+app.use('/api/ai-quota', require('./routes/aiQuota'));
 app.use('/api/forum', forumRoutes);
 app.use('/api/microlessons', microlessonsRoutes);
 app.use('/api/coach', coachRoutes);
