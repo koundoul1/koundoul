@@ -33,7 +33,8 @@ import {
   Lock,
   LogIn,
   UserPlus,
-  Share2
+  Share2,
+  Medal
 } from 'lucide-react'
 import ShareModal from './ShareModal'
 
@@ -78,6 +79,7 @@ const Sidebar = () => {
   const communityNav = [
     { name: 'Forum', href: '/forum', icon: MessageSquare },
     { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award },
+    { name: 'Classement', href: '/leaderboard', icon: Medal },
   ]
 
   // ── Section: Compte ──
