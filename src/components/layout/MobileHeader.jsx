@@ -8,6 +8,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useTranslation } from '../../hooks/useTranslation'
 import LanguageSwitcher from '../LanguageSwitcher'
+import { useNotifications } from '../../hooks/useNotifications'
 import { 
   Menu, 
   X, 
@@ -31,6 +32,7 @@ import {
 
 const MobileHeader = () => {
   const { user, logout, isAuthenticated } = useAuth()
+  const { unreadCount: notifUnreadCount } = useNotifications()
   const { t } = useTranslation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navigate = useNavigate()
@@ -106,10 +108,14 @@ const MobileHeader = () => {
           <div className="flex items-center space-x-2">
             {/* Notifications */}
             {isAuthenticated && (
-              <button className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors">
+              <Link to="/notifications" className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors">
                 <Bell className="h-5 w-5" />
-                <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full border border-white"></span>
-              </button>
+                {notifUnreadCount > 0 && (
+                  <span className="absolute top-1 right-1 min-w-[16px] h-4 flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full border border-white px-0.5">
+                    {notifUnreadCount > 9 ? '9+' : notifUnreadCount}
+                  </span>
+                )}
+              </Link>
             )}
 
             {/* Menu hamburger */}

@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useTranslation } from '../../hooks/useTranslation'
 import LanguageSwitcher from '../LanguageSwitcher'
+import { useNotifications } from '../../hooks/useNotifications'
 import { 
   Menu, 
   X, 
@@ -34,6 +35,7 @@ import {
 const DesktopHeader = () => {
   const { user, logout, isAuthenticated } = useAuth()
   const { t } = useTranslation()
+  const { unreadCount: notifUnreadCount } = useNotifications()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const navigate = useNavigate()
@@ -146,10 +148,14 @@ const DesktopHeader = () => {
           {/* Actions utilisateur */}
           <div className="flex items-center space-x-2 sm:space-x-4 relative">
             {/* Notifications */}
-            <button className="hidden sm:block p-2 text-gray-600 hover:text-gray-900 relative transition-colors">
+            <Link to="/notifications" className="hidden sm:block p-2 text-gray-600 hover:text-gray-900 relative transition-colors">
               <Bell className="h-5 w-5" />
-              <span className="absolute top-0 right-0 h-3 w-3 bg-red-500 rounded-full border-2 border-white"></span>
-            </button>
+              {notifUnreadCount > 0 && (
+                <span className="absolute top-0 right-0 min-w-[16px] h-4 flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full border-2 border-white px-0.5">
+                  {notifUnreadCount > 9 ? '9+' : notifUnreadCount}
+                </span>
+              )}
+            </Link>
 
             {/* Menu Profil */}
             <div className="relative" ref={profileRef}>
