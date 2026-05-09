@@ -1366,4 +1366,36 @@ Le Leaderboard est fonctionnellement complet. Il manque uniquement **l'accessibi
 
 ---
 
-**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
+**AUDIT TERMINÉ — implémentation ci-dessous.**
+
+---
+
+## Phase 4.2 — Implémentation Leaderboard
+
+**Date** : 2026-05-09
+
+### Commits
+
+```
+b3131cd feat(leaderboard): add nav links in desktop header and mobile drawer
+c003c79 test(leaderboard): add 4 navigation regression tests
+```
+
+### Résumé
+
+Le backend et le frontend Leaderboard étaient **déjà complets** (routes, page 462 lignes, podium, filtres, pagination, rang perso). Le bug QA "404 / no leaderboard" venait uniquement de l'absence de liens dans la navigation.
+
+**Fix** : ajout de "Classement" dans DesktopHeader (Medal icon) et MobileNavBar drawer (Trophy icon), après Badges.
+
+**Dark theme** : vérifié — la page utilise `bg-white/5` et `text-white` sur fond hérité `bg-gray-900`. Pas d'intervention nécessaire.
+
+### Tests
+
+- 4 nouveaux tests : total suite **133 tests, tous verts**
+- `npm run lint` : 0 erreurs, 526 warnings (exit 0)
+
+### Tests manuels recommandés en prod
+
+- [ ] Desktop : lien "Classement" visible dans la barre de nav → click → page /leaderboard
+- [ ] Mobile : ouvrir drawer "Plus" → lien "Classement" → page /leaderboard
+- [ ] Page affiche podium top 3 + liste paginée + rang perso
