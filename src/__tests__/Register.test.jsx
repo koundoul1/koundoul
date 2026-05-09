@@ -1,6 +1,5 @@
 /**
- * Baseline tests for Register page.
- * Verifies: renders without crash, password 8-char minimum, required fields validation.
+ * Baseline tests for Register page (2-step flow).
  */
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
@@ -41,37 +40,38 @@ function renderRegister() {
 }
 
 describe('Register page', () => {
-  it('renders without crash', () => {
+  it('renders step 1 with two auth method cards', () => {
     renderRegister()
-    expect(screen.getByRole('button', { name: /créer mon compte|create my account/i })).toBeInTheDocument()
+    expect(screen.getByText(/Email \+ Mot de passe/i)).toBeInTheDocument()
+    expect(screen.getByText(/l\u00e9phone \+ Code PIN/i)).toBeInTheDocument()
   })
 
-  it('shows required field errors when submitting empty form', async () => {
+  it('shows email and password fields when password method selected', async () => {
     const user = userEvent.setup()
     renderRegister()
 
-    await user.click(screen.getByRole('button', { name: /créer mon compte|create my account/i }))
+    await user.click(screen.getByText(/Email \+ Mot de passe/i))
 
-    // At least one error message should appear (first name required)
-    const errorMessages = document.querySelectorAll('.text-red-600, .text-red-400')
-    expect(errorMessages.length).toBeGreaterThan(0)
+    expect(screen.getByPlaceholderText(/ton@email.com/i)).toBeInTheDocument()
+    expect(screen.getByText(/Suivant/i)).toBeInTheDocument()
   })
 
-  it('rejects passwords shorter than 8 characters', async () => {
+  it('rejects short password before going to step 2', async () => {
     const user = userEvent.setup()
     const { container } = renderRegister()
 
-    // Fill all required fields with valid data except short password
-    await user.type(container.querySelector('#firstName'), 'Test')
-    await user.type(container.querySelector('#lastName'), 'User')
-    await user.type(container.querySelector('#username'), 'testuser')
-    await user.type(container.querySelector('#email'), 'test@test.com')
-    await user.type(container.querySelector('#password'), 'Short7!')  // 7 chars
-    await user.type(container.querySelector('#confirmPassword'), 'Short7!')
+    await user.click(screen.getByText(/Email \+ Mot de passe/i))
 
-    await user.click(screen.getByRole('button', { name: /créer mon compte|create my account/i }))
+    const emailInput = container.querySelector('#email')
+    const passwordInput = container.querySelector('#password')
+    const confirmInput = container.querySelector('#confirmPassword')
 
-    // Should show the "at least 8 characters" error
+    await user.type(emailInput, 'test@test.com')
+    await user.type(passwordInput, 'Short7!')
+    await user.type(confirmInput, 'Short7!')
+
+    await user.click(screen.getByText(/Suivant/i))
+
     expect(container.textContent).toMatch(/au moins 8|at least 8/i)
   })
 })
