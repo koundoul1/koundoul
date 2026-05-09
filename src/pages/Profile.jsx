@@ -32,12 +32,15 @@ import {
   Unlink,
   Copy,
   Users,
-  MapPin
+  MapPin,
+  Bell,
+  Trash2,
+  AlertTriangle
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Profile = () => {
-  const { user, updateProfile, changePassword, isAuthenticated } = useAuth()
+  const { user, updateProfile, changePassword, isAuthenticated, logout } = useAuth()
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [isEditing, setIsEditing] = useState(false)
@@ -74,6 +77,12 @@ const Profile = () => {
     school: ''
   })
   const [savingLocation, setSavingLocation] = useState(false)
+
+  // Notifications + delete account
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleteConfirmation, setDeleteConfirmation] = useState('')
+  const [deleting, setDeleting] = useState(false)
   const [locationSuccess, setLocationSuccess] = useState('')
 
   useEffect(() => {
@@ -100,6 +109,7 @@ const Profile = () => {
         setProfileData(data)
         setInvitationCode(data.invitationCode)
         if (data.parentId) setLinkedParent(data.parentId)
+        if (data.notificationsEnabled !== undefined) setNotificationsEnabled(data.notificationsEnabled !== false)
         setLocationData({
           country: data.country || 'SN',
           region: data.region || '',
@@ -346,6 +356,34 @@ const Profile = () => {
       setTimeout(() => setError(''), 3000)
     } finally {
       setSavingLocation(false)
+    }
+  }
+
+  const handleToggleNotifications = async () => {
+    const newVal = !notificationsEnabled
+    setNotificationsEnabled(newVal)
+    try {
+      await api.auth.updateProfile({ notificationsEnabled: newVal })
+    } catch (err) {
+      setNotificationsEnabled(!newVal) // revert on error
+      console.error('Erreur toggle notifications:', err)
+    }
+  }
+
+  const handleDeleteAccount = async () => {
+    if (!deleteConfirmation) {
+      setError('Mot de passe ou PIN requis pour confirmer')
+      return
+    }
+    setDeleting(true)
+    try {
+      await api.auth.deleteAccount({ confirmation: deleteConfirmation })
+      logout()
+      navigate('/login')
+    } catch (err) {
+      setError(err.message || 'Erreur lors de la suppression')
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -885,6 +923,92 @@ const Profile = () => {
                 <SubscriptionSection />
               </div>
             </div>
+
+            {/* Preferences */}
+            <div className="k-card overflow-hidden">
+              <div className="p-5 border-b border-white/8">
+                <div className="flex items-center">
+                  <Bell className="h-5 w-5 text-kprimary mr-2" />
+                  <h3 className="text-lg font-semibold text-white">Preferences</h3>
+                </div>
+              </div>
+              <div className="p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-white">Notifications</p>
+                    <p className="text-xs text-gray-400">Recevoir les notifications de badges, duels et challenges</p>
+                  </div>
+                  <button
+                    onClick={handleToggleNotifications}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      notificationsEnabled ? 'bg-kprimary' : 'bg-gray-600'
+                    }`}
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      notificationsEnabled ? 'translate-x-6' : 'translate-x-1'
+                    }`} />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Delete account */}
+            <div className="k-card overflow-hidden border-red-500/20">
+              <div className="p-5 border-b border-red-500/10">
+                <div className="flex items-center">
+                  <AlertTriangle className="h-5 w-5 text-red-400 mr-2" />
+                  <h3 className="text-lg font-semibold text-red-400">Zone dangereuse</h3>
+                </div>
+              </div>
+              <div className="p-5">
+                <p className="text-sm text-gray-400 mb-4">
+                  La suppression de ton compte est irreversible. Toutes tes donnees seront perdues.
+                </p>
+                <button
+                  onClick={() => setShowDeleteModal(true)}
+                  className="px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/30 rounded-lg text-sm font-medium hover:bg-red-500/20 transition-colors"
+                >
+                  <Trash2 className="h-4 w-4 inline mr-1.5" />
+                  Supprimer mon compte
+                </button>
+              </div>
+            </div>
+
+            {/* Delete confirmation modal */}
+            {showDeleteModal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowDeleteModal(false)} />
+                <div className="relative bg-gray-900 border border-gray-700 rounded-2xl p-6 max-w-sm w-full">
+                  <h3 className="text-lg font-bold text-red-400 mb-3">Supprimer mon compte</h3>
+                  <p className="text-sm text-gray-400 mb-4">
+                    Cette action est irreversible. Entre ton mot de passe ou PIN pour confirmer.
+                  </p>
+                  <input
+                    type="password"
+                    value={deleteConfirmation}
+                    onChange={(e) => setDeleteConfirmation(e.target.value)}
+                    placeholder="Mot de passe ou PIN"
+                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm mb-4 focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                  />
+                  {error && <p className="text-xs text-red-400 mb-3">{error}</p>}
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => { setShowDeleteModal(false); setDeleteConfirmation(''); }}
+                      className="flex-1 py-2.5 bg-gray-800 text-gray-300 rounded-xl text-sm font-medium"
+                    >
+                      Annuler
+                    </button>
+                    <button
+                      onClick={handleDeleteAccount}
+                      disabled={deleting || !deleteConfirmation}
+                      className="flex-1 py-2.5 bg-red-600 text-white rounded-xl text-sm font-medium disabled:opacity-50"
+                    >
+                      {deleting ? 'Suppression...' : 'Supprimer'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Stats — 2x2 grid */}
             <div className="k-card overflow-hidden">

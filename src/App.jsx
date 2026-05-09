@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { I18nProvider, useTranslation } from './hooks/useTranslation.jsx'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -124,6 +124,7 @@ function AppLayout() {
             <Route path="/quiz/:quizId" element={<ProtectedRoute><QuizPlay /></ProtectedRoute>} />
             <Route path="/quiz/:quizId/results" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><QuizResults /></Layout></Suspense></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/settings" element={<Navigate to="/profile" replace />} />
             <Route path="/subscriptions" element={<ProtectedRoute><Subscriptions /></ProtectedRoute>} />
             <Route path="/resources" element={<ProtectedRoute><EducationalResources /></ProtectedRoute>} />
             <Route path="/coach" element={<ProtectedRoute><VirtualCoach /></ProtectedRoute>} />

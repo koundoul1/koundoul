@@ -131,7 +131,17 @@ const api = {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
-    
+
+    setPin: (data) => request('/auth/set-pin', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+    deleteAccount: (data) => request('/auth/delete-account', {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+    }),
+
     refreshToken: (token) => request('/auth/refresh-token', {
       method: 'POST',
       body: JSON.stringify({ token }),
