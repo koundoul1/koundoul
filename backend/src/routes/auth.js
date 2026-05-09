@@ -5,232 +5,320 @@ const jwt = require('jsonwebtoken');
 const rateLimit = require('express-rate-limit');
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
+const { normalizePhoneNumber, isPhoneIdentifier, isValidPin } = require('../utils/phoneValidator');
+const { findUserByIdentifier, verifyCredential, isLockedOut, handleLoginAttempt } = require('../services/authService');
 
-// ── Rate limiters for auth endpoints ──
+// ── Rate limiters ──
 const loginLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 5,
   standardHeaders: true,
   legacyHeaders: false,
   skip: () => process.env.NODE_ENV === 'test',
-  message: { error: 'Trop de tentatives de connexion. Réessayez dans 15 minutes.' }
+  message: { error: 'Trop de tentatives de connexion. Reessayez dans 15 minutes.' }
 });
 
 const registerLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
+  windowMs: 60 * 60 * 1000,
   max: 3,
   standardHeaders: true,
   legacyHeaders: false,
   skip: () => process.env.NODE_ENV === 'test',
-  message: { error: 'Trop de tentatives d\'inscription. Réessayez dans 1 heure.' }
+  message: { error: 'Trop de tentatives d\'inscription. Reessayez dans 1 heure.' }
 });
 
-// Register
+const deleteLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 1,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: () => process.env.NODE_ENV === 'test',
+  message: { error: 'Reessayez dans 1 heure.' }
+});
+
+// ── Helper: build JWT ──
+function buildToken(user) {
+  return jwt.sign(
+    {
+      userId: user.id,
+      email: user.email,
+      is_admin: user.is_admin || false,
+      is_super_admin: user.is_super_admin || false
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+}
+
+function userResponse(user) {
+  return {
+    id: user.id,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    username: user.username,
+    xp: user.xp,
+    level: user.level,
+    streak: user.streak,
+    phoneNumber: user.phoneNumber || null,
+    is_admin: user.is_admin || false,
+    is_super_admin: user.is_super_admin || false
+  };
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// POST /register — dual: email always required + password OR phone+PIN
+// ══════════════════════════════════════════════════════════════════════
 router.post('/register', registerLimiter, async (req, res, next) => {
   try {
-    const { email, password, firstName, lastName, username } = req.body;
+    const { email, password, firstName, lastName, username, phoneNumber, pin } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email et mot de passe requis' });
+    // Email always required
+    if (!email) {
+      return res.status(400).json({ error: 'Email requis' });
     }
 
-    if (password.length < 8) {
-      return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractères' });
+    // At least one auth method
+    const hasPassword = password && password.length > 0;
+    const hasPhone = phoneNumber && pin;
+
+    if (!hasPassword && !hasPhone) {
+      return res.status(400).json({ error: 'Mot de passe ou telephone+PIN requis' });
     }
 
-    // Vérifier si l'email existe déjà
-    const existingUser = await prisma.user.findUnique({
-      where: { email }
-    });
-
-    if (existingUser) {
-      return res.status(409).json({ error: 'Cet email est déjà utilisé' });
+    if (hasPassword && password.length < 8) {
+      return res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caracteres' });
     }
 
-    // Vérifier username si fourni
-    if (username) {
-      const existingUsername = await prisma.user.findFirst({
-        where: { username }
-      });
-      if (existingUsername) {
-        return res.status(409).json({ error: 'Ce nom d\'utilisateur est déjà pris' });
+    if (hasPhone) {
+      if (!isValidPin(pin)) {
+        return res.status(400).json({ error: 'Le PIN doit etre exactement 4 chiffres' });
       }
     }
 
-    // Hasher le mot de passe
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Normalize phone
+    let normalizedPhone = null;
+    if (phoneNumber) {
+      normalizedPhone = normalizePhoneNumber(phoneNumber);
+      if (!normalizedPhone) {
+        return res.status(400).json({ error: 'Numero de telephone invalide. Format attendu: +221XXXXXXXXX' });
+      }
+      // Check uniqueness
+      const phoneExists = await prisma.user.findFirst({ where: { phoneNumber: normalizedPhone } });
+      if (phoneExists) {
+        return res.status(409).json({ error: 'Ce numero de telephone est deja utilise' });
+      }
+    }
 
-    // Créer l'utilisateur
+    // Check email uniqueness
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+    if (existingUser) {
+      return res.status(409).json({ error: 'Cet email est deja utilise' });
+    }
+
+    // Check username uniqueness
+    if (username) {
+      const existingUsername = await prisma.user.findFirst({ where: { username } });
+      if (existingUsername) {
+        return res.status(409).json({ error: 'Ce nom d\'utilisateur est deja pris' });
+      }
+    }
+
+    // Build user data
+    const userData = {
+      email,
+      firstName: firstName || null,
+      lastName: lastName || null,
+      username: username || email.split('@')[0],
+      xp: 0,
+      level: 1,
+      streak: 0
+    };
+
+    if (hasPassword) {
+      userData.password = await bcrypt.hash(password, 10);
+    }
+    if (normalizedPhone) {
+      userData.phoneNumber = normalizedPhone;
+    }
+    if (hasPhone) {
+      userData.pinHash = await bcrypt.hash(pin, 10);
+    }
+
     const user = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        firstName: firstName || null,
-        lastName: lastName || null,
-        username: username || email.split('@')[0],
-        xp: 0,
-        level: 1,
-        streak: 0
-      },
+      data: userData,
       select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        username: true,
-        xp: true,
-        level: true,
-        streak: true,
+        id: true, email: true, firstName: true, lastName: true,
+        username: true, xp: true, level: true, streak: true,
+        phoneNumber: true, is_admin: true, is_super_admin: true,
         createdAt: true
       }
     });
 
-    // Générer le token
-    const token = jwt.sign(
-      { userId: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    // Auto-link family: if this user has a phoneNumber, check for children with pendingParentPhone
+    if (normalizedPhone) {
+      try {
+        const pendingChildren = await prisma.user.findMany({
+          where: { pendingParentPhone: normalizedPhone },
+          select: { id: true }
+        });
+        for (const child of pendingChildren.slice(0, 3)) {
+          await prisma.parent_child_links.create({
+            data: { parent_id: user.id, child_id: child.id }
+          }).catch(() => {}); // ignore if link already exists
+          await prisma.user.update({
+            where: { id: child.id },
+            data: { pendingParentPhone: null, parentId: user.id }
+          }).catch(() => {});
+        }
+        if (pendingChildren.length > 0) {
+          console.log('[Auth] Auto-linked ' + pendingChildren.length + ' child(ren) to new parent ' + user.id);
+        }
+      } catch (err) {
+        console.warn('[Auth] Family auto-link error:', err.message);
+      }
+    }
+
+    const token = buildToken(user);
 
     res.status(201).json({
       success: true,
-      data: {
-        user,
-        token
-      }
+      data: { user: userResponse(user), token }
     });
   } catch (error) {
     next(error);
   }
 });
 
-// Login
+// ══════════════════════════════════════════════════════════════════════
+// POST /login — dual: email+password OR phone+PIN
+// ══════════════════════════════════════════════════════════════════════
 router.post('/login', loginLimiter, async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    // Support both old format {email, password} and new {identifier, password/pin}
+    const identifier = req.body.identifier || req.body.email;
+    const password = req.body.password;
+    const pin = req.body.pin;
 
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email et mot de passe requis' });
+    if (!identifier) {
+      return res.status(400).json({ error: 'Email ou numero de telephone requis' });
     }
 
-    // Trouver l'utilisateur
-    const user = await prisma.user.findUnique({
-      where: { email }
-    });
+    const isPhone = isPhoneIdentifier(identifier);
 
-    if (!user || !user.password) {
-      return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+    if (isPhone && !pin) {
+      return res.status(400).json({ error: 'PIN requis pour la connexion par telephone' });
+    }
+    if (!isPhone && !password) {
+      return res.status(400).json({ error: 'Mot de passe requis' });
     }
 
-    // Vérifier le mot de passe
-    const isValid = await bcrypt.compare(password, user.password);
+    // Find user
+    const user = await findUserByIdentifier(identifier);
+
+    if (!user) {
+      return res.status(401).json({ error: isPhone ? 'Numero ou PIN incorrect' : 'Email ou mot de passe incorrect' });
+    }
+
+    // Check lockout
+    if (isLockedOut(user)) {
+      const unlockTime = new Date(user.lockedUntil);
+      const hh = String(unlockTime.getUTCHours()).padStart(2, '0');
+      const mm = String(unlockTime.getUTCMinutes()).padStart(2, '0');
+      return res.status(429).json({
+        error: 'Compte temporairement verrouille jusqu\'a ' + hh + ':' + mm + ' UTC',
+        lockedUntil: user.lockedUntil
+      });
+    }
+
+    // Verify credentials
+    const mode = isPhone ? 'pin' : 'password';
+    const credential = isPhone ? pin : password;
+    const isValid = await verifyCredential(user, credential, mode);
+
+    // Handle attempt
+    await handleLoginAttempt(user.id, isValid);
 
     if (!isValid) {
-      return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+      return res.status(401).json({ error: isPhone ? 'Numero ou PIN incorrect' : 'Email ou mot de passe incorrect' });
     }
 
-    console.log('LOGIN RESPONSE USER:', JSON.stringify({
-      id: user.id,
-      email: user.email,
-      is_admin: user.is_admin,
-      is_super_admin: user.is_super_admin
-    }));
-
-    // Générer le token
-    const token = jwt.sign(
-      { userId: user.id, email: user.email, is_admin: user.is_admin || false, is_super_admin: user.is_super_admin || false },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    const token = buildToken(user);
 
     res.json({
       success: true,
-      data: {
-        user: {
-          id: user.id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          username: user.username,
-          xp: user.xp,
-          level: user.level,
-          streak: user.streak,
-          is_admin: user.is_admin || false,
-          is_super_admin: user.is_super_admin || false
-        },
-        token
-      }
+      data: { user: userResponse(user), token }
     });
   } catch (error) {
     next(error);
   }
 });
 
-// Get profile
+// ══════════════════════════════════════════════════════════════════════
+// GET /profile
+// ══════════════════════════════════════════════════════════════════════
 router.get('/profile', authenticateToken, async (req, res, next) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: req.user.userId },
       select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        username: true,
-        xp: true,
-        level: true,
-        streak: true,
-        is_admin: true,
-        is_super_admin: true,
-        createdAt: true,
-        updatedAt: true
+        id: true, email: true, firstName: true, lastName: true,
+        username: true, xp: true, level: true, streak: true,
+        is_admin: true, is_super_admin: true, createdAt: true, updatedAt: true,
+        phoneNumber: true, notificationsEnabled: true,
+        country: true, region: true, department: true, school: true,
+        language: true, bio: true, phone: true,
+        invitationCode: true, parentId: true, isParent: true,
+        pendingParentPhone: true
       }
     });
 
     if (!user) {
-      return res.status(404).json({ error: 'Utilisateur non trouvé' });
+      return res.status(404).json({ error: 'Utilisateur non trouve' });
     }
 
-    res.json({ success: true, data: user });
+    res.json({
+      success: true,
+      data: {
+        ...user,
+        hasPassword: !!(await prisma.user.findUnique({ where: { id: user.id }, select: { password: true } }))?.password,
+        hasPin: !!(await prisma.user.findUnique({ where: { id: user.id }, select: { pinHash: true } }))?.pinHash
+      }
+    });
   } catch (error) {
     next(error);
   }
 });
 
-// Update profile
+// ══════════════════════════════════════════════════════════════════════
+// PUT /profile
+// ══════════════════════════════════════════════════════════════════════
 router.put('/profile', authenticateToken, async (req, res, next) => {
   try {
-    const { firstName, lastName, username } = req.body;
+    const { firstName, lastName, username, notificationsEnabled } = req.body;
+    const data = {};
 
-    // Vérifier username si fourni
+    if (firstName !== undefined) data.firstName = firstName;
+    if (lastName !== undefined) data.lastName = lastName;
+    if (notificationsEnabled !== undefined) data.notificationsEnabled = notificationsEnabled;
+
     if (username) {
       const existingUsername = await prisma.user.findFirst({
-        where: {
-          username,
-          NOT: { id: req.user.userId }
-        }
+        where: { username, NOT: { id: req.user.userId } }
       });
       if (existingUsername) {
-        return res.status(409).json({ error: 'Ce nom d\'utilisateur est déjà pris' });
+        return res.status(409).json({ error: 'Ce nom d\'utilisateur est deja pris' });
       }
+      data.username = username;
     }
 
     const user = await prisma.user.update({
       where: { id: req.user.userId },
-      data: {
-        ...(firstName !== undefined && { firstName }),
-        ...(lastName !== undefined && { lastName }),
-        ...(username !== undefined && { username })
-      },
+      data,
       select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        username: true,
-        xp: true,
-        level: true,
-        streak: true
+        id: true, email: true, firstName: true, lastName: true,
+        username: true, xp: true, level: true, streak: true,
+        notificationsEnabled: true
       }
     });
 
@@ -240,7 +328,9 @@ router.put('/profile', authenticateToken, async (req, res, next) => {
   }
 });
 
-// Change password
+// ══════════════════════════════════════════════════════════════════════
+// PUT /change-password
+// ══════════════════════════════════════════════════════════════════════
 router.put('/change-password', authenticateToken, async (req, res, next) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -250,99 +340,191 @@ router.put('/change-password', authenticateToken, async (req, res, next) => {
     }
 
     if (newPassword.length < 8) {
-      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractères' });
+      return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caracteres' });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: req.user.userId }
-    });
+    const user = await prisma.user.findUnique({ where: { id: req.user.userId } });
 
     if (!user || !user.password) {
-      return res.status(404).json({ error: 'Utilisateur non trouvé' });
+      return res.status(404).json({ error: 'Utilisateur non trouve' });
     }
 
-    // Vérifier le mot de passe actuel
     const isValid = await bcrypt.compare(currentPassword, user.password);
-
     if (!isValid) {
       return res.status(401).json({ error: 'Mot de passe actuel incorrect' });
     }
 
-    // Hasher le nouveau mot de passe
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-
     await prisma.user.update({
       where: { id: req.user.userId },
       data: { password: hashedPassword }
     });
 
-    res.json({ success: true, message: 'Mot de passe modifié avec succès' });
+    res.json({ success: true, message: 'Mot de passe modifie avec succes' });
   } catch (error) {
     next(error);
   }
 });
 
-// Check email
+// ══════════════════════════════════════════════════════════════════════
+// POST /set-pin — set or change PIN (from Settings)
+// ══════════════════════════════════════════════════════════════════════
+router.post('/set-pin', authenticateToken, async (req, res, next) => {
+  try {
+    const { newPin, phoneNumber, currentPassword } = req.body;
+
+    if (!isValidPin(newPin)) {
+      return res.status(400).json({ error: 'Le PIN doit etre exactement 4 chiffres' });
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: req.user.userId } });
+    if (!user) {
+      return res.status(404).json({ error: 'Utilisateur non trouve' });
+    }
+
+    // If user has a password, require it for confirmation
+    if (user.password && currentPassword) {
+      const isValid = await bcrypt.compare(currentPassword, user.password);
+      if (!isValid) {
+        return res.status(401).json({ error: 'Mot de passe incorrect' });
+      }
+    }
+
+    const data = { pinHash: await bcrypt.hash(newPin, 10) };
+
+    // If phoneNumber provided and user doesn't have one, set it
+    if (phoneNumber && !user.phoneNumber) {
+      const normalized = normalizePhoneNumber(phoneNumber);
+      if (!normalized) {
+        return res.status(400).json({ error: 'Numero de telephone invalide' });
+      }
+      const phoneExists = await prisma.user.findFirst({ where: { phoneNumber: normalized } });
+      if (phoneExists) {
+        return res.status(409).json({ error: 'Ce numero est deja utilise' });
+      }
+      data.phoneNumber = normalized;
+    }
+
+    await prisma.user.update({ where: { id: req.user.userId }, data });
+
+    res.json({ success: true, message: 'PIN defini avec succes' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ══════════════════════════════════════════════════════════════════════
+// DELETE /delete-account — user-initiated account deletion
+// ══════════════════════════════════════════════════════════════════════
+router.delete('/delete-account', authenticateToken, deleteLimiter, async (req, res, next) => {
+  try {
+    const { confirmation } = req.body;
+    const userId = req.user.userId;
+
+    if (!confirmation) {
+      return res.status(400).json({ error: 'Confirmation requise (mot de passe ou PIN)' });
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      return res.status(404).json({ error: 'Utilisateur non trouve' });
+    }
+
+    // Verify confirmation: try password first, then PIN
+    let verified = false;
+    if (user.password) {
+      verified = await bcrypt.compare(confirmation, user.password);
+    }
+    if (!verified && user.pinHash) {
+      verified = await bcrypt.compare(confirmation, user.pinHash);
+    }
+    if (!verified) {
+      return res.status(401).json({ error: 'Confirmation incorrecte' });
+    }
+
+    // Cascade delete (same logic as admin.js)
+    await prisma.$transaction(async (tx) => {
+      await tx.flashcardReview.deleteMany({ where: { userId } });
+      await tx.quizAttempt.deleteMany({ where: { userId } });
+      await tx.lesson_completions.deleteMany({ where: { userId } });
+      await tx.exercise_attempts.deleteMany({ where: { userId } });
+      await tx.discussion_votes.deleteMany({ where: { userId } });
+      await tx.reply_votes.deleteMany({ where: { userId } });
+      await tx.forumReply.deleteMany({ where: { userId } });
+      await tx.forumDiscussion.deleteMany({ where: { userId } });
+      await tx.coachSession.deleteMany({ where: { userId } });
+      await tx.user_masteries.deleteMany({ where: { userId } });
+      await tx.userBadge.deleteMany({ where: { userId } });
+      await tx.solutions.deleteMany({ where: { userId } });
+      await tx.problems.deleteMany({ where: { userId } });
+      await tx.parent_child_links.deleteMany({ where: { OR: [{ parent_id: userId }, { child_id: userId }] } });
+      await tx.payment.deleteMany({ where: { userId } });
+      await tx.subscription.deleteMany({ where: { userId } });
+      await tx.notification.deleteMany({ where: { userId } });
+      await tx.solverHistory.deleteMany({ where: { userId } });
+      await tx.coachConversation.deleteMany({ where: { userId } });
+      await tx.dailyAiUsage.deleteMany({ where: { userId } });
+      await tx.challengeAttempt.deleteMany({ where: { userId } });
+      await tx.user.delete({ where: { id: userId } });
+    });
+
+    res.json({ success: true, message: 'Compte supprime' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ══════════════════════════════════════════════════════════════════════
+// Check email availability
+// ══════════════════════════════════════════════════════════════════════
 router.get('/check-email', async (req, res, next) => {
   try {
     const { email } = req.query;
-
     if (!email) {
       return res.status(400).json({ error: 'Email requis' });
     }
-
-    const exists = await prisma.user.findUnique({
-      where: { email }
-    });
-
+    const exists = await prisma.user.findUnique({ where: { email } });
     res.json({ available: !exists });
   } catch (error) {
     next(error);
   }
 });
 
-// Check username
+// ══════════════════════════════════════════════════════════════════════
+// Check username availability
+// ══════════════════════════════════════════════════════════════════════
 router.get('/check-username', async (req, res, next) => {
   try {
     const { username } = req.query;
-
     if (!username) {
       return res.status(400).json({ error: 'Username requis' });
     }
-
-    const exists = await prisma.user.findFirst({
-      where: { username }
-    });
-
+    const exists = await prisma.user.findFirst({ where: { username } });
     res.json({ available: !exists });
   } catch (error) {
     next(error);
   }
 });
 
+// ══════════════════════════════════════════════════════════════════════
 // Refresh token
+// ══════════════════════════════════════════════════════════════════════
 router.post('/refresh-token', async (req, res, next) => {
   try {
     const { token } = req.body;
-
     if (!token) {
       return res.status(400).json({ error: 'Token requis' });
     }
-
-    // Vérifier le token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Générer un nouveau token
     const newToken = jwt.sign(
       { userId: decoded.userId, email: decoded.email, is_admin: decoded.is_admin || false, is_super_admin: decoded.is_super_admin || false },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
-
     res.json({ success: true, data: { token: newToken } });
   } catch (error) {
     if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
-      return res.status(401).json({ error: 'Token invalide ou expiré' });
+      return res.status(401).json({ error: 'Token invalide ou expire' });
     }
     next(error);
   }

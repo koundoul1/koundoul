@@ -47,6 +47,11 @@ model User {
   resetPasswordToken                                     String?
   resetPasswordExpires                                   DateTime?            @db.Timestamp(6)
   emailVerificationToken                                 String?
+  phoneNumber                                            String?              @unique
+  pinHash                                                String?
+  loginAttemptsCount                                     Int                  @default(0)
+  lockedUntil                                            DateTime?
+  pendingParentPhone                                     String?
   coachSessions                                          CoachSession[]
   discussion_votes                                       discussion_votes[]
   forumDiscussions                                       ForumDiscussion[]
