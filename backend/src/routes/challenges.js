@@ -24,62 +24,81 @@ router.get('/', optionalAuth, async (req, res) => {
   }
 });
 
-// GET /weekly — Challenge hebdomadaire actif
+// GET /weekly — All active weekly challenges (up to 3) with user status
 router.get('/weekly', optionalAuth, async (req, res) => {
   try {
     const now = new Date();
+    const userId = req.user?.userId || null;
 
-    const challenge = await prisma.challenge.findFirst({
+    const activeChallenges = await prisma.challenge.findMany({
       where: {
         status: 'active',
         startDate: { lte: now },
         endDate: { gte: now }
       },
-      orderBy: { createdAt: 'desc' }
+      orderBy: { difficulty: 'asc' }
     });
 
-    if (!challenge) {
+    if (activeChallenges.length === 0) {
       return res.json({
         success: true,
-        data: {
-          id: null,
-          title: 'Aucun challenge actif',
-          description: 'Il n\'y a pas de challenge hebdomadaire actif pour le moment.',
-          subject: 'Mathématiques',
-          difficulty: 'Moyen',
-          timeLimit: 20,
-          participants: 0,
-          isActive: false,
-          startDate: now,
-          endDate: now,
-          questions: 0
-        }
+        data: { weekStart: null, weekEnd: null, timeRemaining: 0, challenges: [] }
       });
     }
 
-    // Compter les participants
-    const participants = await prisma.challengeAttempt.count({
-      where: { challengeId: challenge.id }
-    });
+    // Get user attempts for these challenges
+    let userAttempts = [];
+    if (userId) {
+      userAttempts = await prisma.challengeAttempt.findMany({
+        where: { userId, challengeId: { in: activeChallenges.map(c => c.id) } }
+      });
+    }
+    const attemptMap = Object.fromEntries(userAttempts.map(a => [a.challengeId, a]));
 
-    const questionsArray = Array.isArray(challenge.questions) ? challenge.questions : [];
+    // Get participant counts
+    const participantCounts = await Promise.all(
+      activeChallenges.map(c => prisma.challengeAttempt.count({ where: { challengeId: c.id } }))
+    );
+
+    const weekEnd = activeChallenges[0].endDate;
+    const challenges = activeChallenges.map((c, i) => {
+      const attempt = attemptMap[c.id];
+      const questionsArray = Array.isArray(c.questions) ? c.questions : [];
+      let userStatus = 'not_started';
+      let userScore = null;
+      if (attempt?.completedAt) {
+        userStatus = 'completed';
+        const maxScore = questionsArray.reduce((sum, q) => sum + (q.points || 10), 0);
+        userScore = { score: attempt.score, maxScore };
+      } else if (attempt) {
+        userStatus = 'in_progress';
+      }
+
+      return {
+        id: c.id,
+        title: c.title,
+        description: c.description,
+        subject: c.subject,
+        difficulty: c.difficulty,
+        timeLimit: c.timeLimit,
+        xpReward: c.xpReward,
+        prize: c.prize,
+        questionCount: questionsArray.length,
+        participants: participantCounts[i],
+        startDate: c.startDate,
+        endDate: c.endDate,
+        userStatus,
+        userScore
+      };
+    });
 
     res.json({
       success: true,
       data: {
-        id: challenge.id,
-        title: challenge.title,
-        description: challenge.description,
-        subject: challenge.subject,
-        difficulty: challenge.difficulty,
-        timeLimit: challenge.timeLimit,
-        participants,
-        isActive: true,
-        startDate: challenge.startDate,
-        endDate: challenge.endDate,
-        prize: challenge.prize,
-        xpReward: challenge.xpReward,
-        questions: questionsArray.length
+        weekStart: activeChallenges[0].startDate,
+        weekEnd,
+        timeRemaining: Math.max(0, new Date(weekEnd).getTime() - now.getTime()),
+        challenges
       }
     });
   } catch (error) {
