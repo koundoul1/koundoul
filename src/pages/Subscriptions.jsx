@@ -1,5 +1,5 @@
 /**
- * Page Abonnements - Plans et paiement Wave Checkout
+ * Page Abonnements — 4 plans avec toggle Mensuel/Annuel.
  */
 
 import React, { useState, useEffect } from 'react';
@@ -13,21 +13,36 @@ import {
   Shield,
   TrendingUp,
   Loader2,
-  Star
+  Star,
+  Bot
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import { useTranslation } from '../hooks/useTranslation';
+
+// Plan card configuration (static — maps DB plan names to UI details)
+const PLAN_UI = {
+  FREE: { icon: Sparkles, gradient: 'from-gray-500 to-gray-600', order: 0 },
+  PREMIUM: { icon: Crown, gradient: 'from-purple-500 to-pink-500', badge: 'Le plus populaire', order: 1 },
+  PREMIUM_MAX: { icon: Zap, gradient: 'from-orange-500 to-red-500', order: 2 },
+  FAMILY: { icon: Users, gradient: 'from-blue-500 to-cyan-500', badge: 'Pour les parents', order: 3 },
+};
+
+// Map yearly plan names to their monthly counterparts
+const YEARLY_TO_MONTHLY = {
+  PREMIUM_YEARLY: 'PREMIUM',
+  PREMIUM_MAX_YEARLY: 'PREMIUM_MAX',
+  FAMILY_YEARLY: 'FAMILY'
+};
 
 const Subscriptions = () => {
-  const { t } = useTranslation();
-  const { user, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const [plans, setPlans] = useState([]);
+  const [allPlans, setAllPlans] = useState([]);
   const [currentSubscription, setCurrentSubscription] = useState(null);
   const [loading, setLoading] = useState(true);
   const [processingPlanId, setProcessingPlanId] = useState(null);
   const [paymentError, setPaymentError] = useState('');
+  const [isYearly, setIsYearly] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -41,8 +56,7 @@ const Subscriptions = () => {
         api.subscriptions.getPlans(),
         api.subscriptions.getMySubscription()
       ]);
-
-      if (plansRes.success) setPlans(plansRes.data);
+      if (plansRes.success) setAllPlans(plansRes.data || []);
       if (subscriptionRes.success && subscriptionRes.data) {
         setCurrentSubscription(subscriptionRes.data);
       }
@@ -54,48 +68,59 @@ const Subscriptions = () => {
   };
 
   const handleSubscribe = async (plan) => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
-
+    if (!isAuthenticated) { navigate('/login'); return; }
     try {
       setProcessingPlanId(plan.id);
       setPaymentError('');
-
       const response = await api.payments.initiateWave({ planId: plan.id });
-
       if (response.success && response.data.wave_launch_url) {
         window.location.href = response.data.wave_launch_url;
       } else {
-        setPaymentError(t('subscriptions.errors.initFailed'));
+        setPaymentError('Erreur lors de l\'initiation du paiement');
         setProcessingPlanId(null);
       }
     } catch (error) {
-      console.error('Erreur paiement:', error);
-      setPaymentError(error.message || t('subscriptions.errors.initFailed'));
+      setPaymentError(error.message || 'Erreur lors du paiement');
       setProcessingPlanId(null);
     }
   };
 
-  const formatPrice = (amount) => {
-    return `${Number(amount).toLocaleString('fr-FR')} FCFA`;
+  // Get the 4 display plans (monthly or yearly depending on toggle)
+  const getDisplayPlans = () => {
+    const freePlan = allPlans.find(p => p.name === 'FREE');
+    const monthly = ['PREMIUM', 'PREMIUM_MAX', 'FAMILY'];
+    const yearly = ['PREMIUM_YEARLY', 'PREMIUM_MAX_YEARLY', 'FAMILY_YEARLY'];
+    const targetNames = isYearly ? yearly : monthly;
+
+    const paidPlans = targetNames
+      .map(name => allPlans.find(p => p.name === name))
+      .filter(Boolean);
+
+    return [freePlan, ...paidPlans].filter(Boolean);
   };
 
-  const getPlanIcon = (planName) => {
-    switch (planName) {
-      case 'FREE': return <Sparkles className="w-8 h-8" />;
-      case 'DAILY': return <Zap className="w-8 h-8" />;
-      case 'PREMIUM':
-      case 'PREMIUM_YEARLY': return <Crown className="w-8 h-8" />;
-      case 'FAMILY': return <Users className="w-8 h-8" />;
-      default: return <Zap className="w-8 h-8" />;
-    }
+  const displayPlans = getDisplayPlans();
+
+  // Get UI config for a plan
+  const getUI = (planName) => {
+    const baseName = YEARLY_TO_MONTHLY[planName] || planName;
+    return PLAN_UI[baseName] || PLAN_UI.FREE;
   };
 
-  const isRecommended = (planName) => {
-    return planName === 'PREMIUM';
+  const formatPrice = (amount) => `${Number(amount).toLocaleString('fr-FR')} FCFA`;
+
+  // Savings for yearly plans
+  const getYearlySavings = (plan) => {
+    if (!plan || plan.interval !== 'yearly') return null;
+    const monthlyName = YEARLY_TO_MONTHLY[plan.name];
+    const monthlyPlan = allPlans.find(p => p.name === monthlyName);
+    if (!monthlyPlan) return null;
+    const yearlyIfMonthly = monthlyPlan.price * 12;
+    const savings = yearlyIfMonthly - plan.price;
+    return savings > 0 ? savings : null;
   };
+
+  const isCurrentPlan = (plan) => currentSubscription?.planId === plan.id;
 
   if (loading) {
     return (
@@ -111,144 +136,159 @@ const Subscriptions = () => {
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl font-black mb-4">
-            {t('subscriptions.title')}
+            Choisis ton plan Koundoul
           </h1>
-          <p className="text-xl text-white/90">
-            {t('subscriptions.subtitle')}
+          <p className="text-xl text-white/90 mb-8">
+            Tous les contenus sont gratuits. Le Premium te donne plus d&apos;appels IA par jour.
           </p>
+
+          {/* Toggle Mensuel / Annuel */}
+          <div className="inline-flex items-center bg-white/10 backdrop-blur rounded-full p-1">
+            <button
+              onClick={() => setIsYearly(false)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                !isYearly ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              }`}
+            >
+              Mensuel
+            </button>
+            <button
+              onClick={() => setIsYearly(true)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                isYearly ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              }`}
+            >
+              Annuel (-25%)
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Abonnement actuel */}
+      {/* Current subscription banner */}
       {currentSubscription && (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-6 mb-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">
-                  {t('subscriptions.current.title')}
-                </h2>
-                <p className="text-lg">{currentSubscription.plan.displayName}</p>
-                <p className="text-sm opacity-90 mt-2">
-                  {t('subscriptions.current.validUntil')} {new Date(currentSubscription.endDate).toLocaleDateString('fr-FR')}
-                </p>
-              </div>
-              <CheckCircle className="w-12 h-12" />
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl p-4 flex items-center justify-between">
+            <div>
+              <p className="text-green-400 font-semibold">
+                Abonné {currentSubscription.plan?.displayName || 'Premium'}
+              </p>
+              <p className="text-sm text-gray-400">
+                Valide jusqu&apos;au {new Date(currentSubscription.endDate).toLocaleDateString('fr-FR')}
+              </p>
             </div>
+            <CheckCircle className="w-8 h-8 text-green-400" />
           </div>
         </div>
       )}
 
-      {/* Plans disponibles */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Payment error banner */}
-        {paymentError && (
-          <div className="mb-6 bg-red-500/10 border border-red-500/30 rounded-xl p-4 flex items-center justify-between">
+      {/* Error banner */}
+      {paymentError && (
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="mb-4 bg-red-500/10 border border-red-500/30 rounded-xl p-4 flex items-center justify-between">
             <p className="text-sm text-red-400">{paymentError}</p>
-            <button onClick={() => setPaymentError('')} className="text-red-400 hover:text-red-300 ml-4 text-sm font-medium">✕</button>
+            <button onClick={() => setPaymentError('')} className="text-red-400 hover:text-red-300 ml-4">&#10005;</button>
           </div>
-        )}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {plans.map((plan) => {
-            const isCurrentPlan = currentSubscription?.planId === plan.id;
+        </div>
+      )}
+
+      {/* Plan cards */}
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {displayPlans.map((plan) => {
+            const ui = getUI(plan.name);
+            const Icon = ui.icon;
+            const isCurrent = isCurrentPlan(plan);
             const isFree = plan.name === 'FREE';
-            const recommended = isRecommended(plan.name);
             const isProcessing = processingPlanId === plan.id;
+            const savings = getYearlySavings(plan);
+            const recommended = (ui.order === 1); // PREMIUM
 
             return (
               <div
                 key={plan.id}
-                className={`relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border-2 transition-all duration-300 ${
-                  isCurrentPlan
-                    ? 'border-green-500 scale-105'
+                className={`relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border-2 transition-all duration-300 flex flex-col ${
+                  isCurrent
+                    ? 'border-green-500'
                     : recommended
-                    ? 'border-[#1DC8FF] scale-105 shadow-lg shadow-[#1DC8FF]/20'
-                    : 'border-white/10 hover:border-purple-500/50 hover:scale-105'
+                    ? 'border-purple-500 shadow-lg shadow-purple-500/20'
+                    : 'border-gray-700 hover:border-gray-600'
                 }`}
               >
-                {/* Badge Populaire */}
-                {recommended && !isCurrentPlan && (
+                {/* Badge */}
+                {ui.badge && !isCurrent && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-[#1DC8FF] text-black text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
-                      <Star className="w-3 h-3" /> Populaire
+                    <span className="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
+                      <Star className="w-3 h-3" /> {ui.badge}
                     </span>
                   </div>
                 )}
 
-                {/* Header du plan */}
-                <div className={`w-16 h-16 bg-gradient-to-br ${
-                  isFree ? 'from-gray-500 to-gray-600' :
-                  plan.name === 'DAILY' ? 'from-yellow-500 to-orange-500' :
-                  plan.name === 'FAMILY' ? 'from-blue-500 to-cyan-500' :
-                  'from-purple-500 to-pink-500'
-                } rounded-xl flex items-center justify-center mb-4 text-white`}>
-                  {getPlanIcon(plan.name)}
+                {/* Icon + name */}
+                <div className={`w-12 h-12 bg-gradient-to-br ${ui.gradient} rounded-xl flex items-center justify-center mb-4 text-white`}>
+                  <Icon className="w-6 h-6" />
                 </div>
+                <h3 className="text-xl font-bold mb-1">{plan.displayName}</h3>
+                <p className="text-gray-400 text-sm mb-4">{plan.description}</p>
 
-                <h3 className="text-2xl font-black mb-2">{plan.displayName}</h3>
-                <p className="text-gray-400 mb-4">{plan.description}</p>
-
-                {/* Prix */}
-                <div className="mb-6">
+                {/* Price */}
+                <div className="mb-4">
                   {isFree ? (
-                    <div className="text-4xl font-black text-white">Gratuit</div>
+                    <div className="text-3xl font-black">Gratuit</div>
                   ) : (
                     <>
-                      <div className="text-4xl font-black text-white">
-                        {formatPrice(plan.price)}
-                      </div>
-                      <div className="text-sm text-gray-400">
-                        / {plan.duration} jours
-                      </div>
+                      <div className="text-3xl font-black">{formatPrice(plan.price)}</div>
+                      <div className="text-sm text-gray-400">/ {plan.interval === 'yearly' ? 'an' : 'mois'}</div>
+                      {savings && (
+                        <div className="text-xs text-green-400 mt-1">
+                          Économise {formatPrice(savings)}/an
+                        </div>
+                      )}
                     </>
                   )}
                 </div>
 
+                {/* AI quota highlight */}
+                <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                  <Bot className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span className="text-sm font-semibold text-blue-300">
+                    {plan.aiCallsPerDay || 6} appels IA / jour
+                    {(plan.name === 'FAMILY' || plan.name === 'FAMILY_YEARLY') && ' / enfant'}
+                  </span>
+                </div>
+
                 {/* Features */}
-                <ul className="space-y-3 mb-6">
-                  {(Array.isArray(plan.features) ? plan.features : []).map((feature, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                <ul className="space-y-2.5 mb-6 flex-1">
+                  {(Array.isArray(plan.features) ? plan.features : []).map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                {/* Bouton */}
-                {isCurrentPlan ? (
-                  <button
-                    disabled
-                    className="w-full py-3 bg-green-500/20 text-green-400 rounded-xl font-bold border border-green-500/30"
-                  >
-                    {t('subscriptions.current.active')}
+                {/* CTA */}
+                {isCurrent ? (
+                  <button disabled className="w-full py-3 bg-green-500/20 text-green-400 rounded-xl font-bold border border-green-500/30">
+                    Plan actuel
                   </button>
                 ) : isFree ? (
-                  <button
-                    disabled
-                    className="w-full py-3 bg-gray-700 text-gray-400 rounded-xl font-bold"
-                  >
-                    Plan actuel
+                  <button disabled className="w-full py-3 bg-gray-700 text-gray-500 rounded-xl font-bold">
+                    Inclus
                   </button>
                 ) : (
                   <button
                     onClick={() => handleSubscribe(plan)}
                     disabled={!!processingPlanId}
-                    className="w-full py-3.5 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
-                    style={{ backgroundColor: '#1DC8FF', color: '#000' }}
+                    className={`w-full py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2 disabled:opacity-50 ${
+                      recommended
+                        ? 'bg-purple-600 hover:bg-purple-500 text-white'
+                        : 'bg-blue-600 hover:bg-blue-500 text-white'
+                    }`}
                   >
                     {isProcessing ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Redirection...
-                      </>
+                      <><Loader2 className="w-4 h-4 animate-spin" /> Redirection...</>
                     ) : (
-                      <>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                          <circle cx="12" cy="12" r="10" fill="#1DC8FF"/>
-                          <text x="12" y="16" textAnchor="middle" fill="#000" fontSize="12" fontWeight="bold">W</text>
-                        </svg>
-                        Payer avec Wave
-                      </>
+                      'Choisir ce plan'
                     )}
                   </button>
                 )}
@@ -258,37 +298,42 @@ const Subscriptions = () => {
         </div>
       </div>
 
-      {/* Pourquoi s'abonner */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-white/10">
-          <h2 className="text-3xl font-black mb-6 text-center">
-            {t('subscriptions.why.title')}
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <Zap className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">{t('subscriptions.why.unlimited.title')}</h3>
-              <p className="text-gray-400">{t('subscriptions.why.unlimited.desc')}</p>
+      {/* FAQ */}
+      <div className="max-w-3xl mx-auto px-4 py-12">
+        <h2 className="text-2xl font-bold text-center mb-8">Questions fréquentes</h2>
+        <div className="space-y-4">
+          {[
+            {
+              q: 'Qu\'est-ce qu\'un appel IA ?',
+              a: 'Chaque résolution du Solver ou chaque message envoyé au Coach IA compte comme 1 appel. Les quiz, exercices et micro-leçons sont illimités pour tous les plans.'
+            },
+            {
+              q: 'Quand le compteur se remet à zéro ?',
+              a: 'Le compteur se reset chaque jour à minuit UTC (1h du matin heure de Dakar). Tu récupères tous tes appels chaque jour.'
+            },
+            {
+              q: 'Puis-je annuler mon abonnement ?',
+              a: 'Oui, à tout moment depuis ton profil. Tu conserves l\'accès jusqu\'à la fin de la période payée.'
+            },
+            {
+              q: 'Le plan Famille, c\'est pour qui ?',
+              a: 'Pour un parent qui veut suivre la progression de ses enfants. Tu lies jusqu\'à 3 comptes enfant, chacun avec 100 appels IA/jour et un dashboard de suivi.'
+            }
+          ].map((faq, i) => (
+            <div key={i} className="bg-gray-800 rounded-xl p-5 border border-gray-700">
+              <h3 className="font-semibold text-white mb-2">{faq.q}</h3>
+              <p className="text-sm text-gray-400">{faq.a}</p>
             </div>
-            <div className="text-center">
-              <Shield className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">{t('subscriptions.why.support.title')}</h3>
-              <p className="text-gray-400">{t('subscriptions.why.support.desc')}</p>
-            </div>
-            <div className="text-center">
-              <TrendingUp className="w-12 h-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">{t('subscriptions.why.progress.title')}</h3>
-              <p className="text-gray-400">{t('subscriptions.why.progress.desc')}</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Sécurité des paiements */}
-      <div className="max-w-6xl mx-auto px-4 py-8 text-center">
-        <p className="text-gray-400 text-sm">
-          Paiements sécurisés par Wave. Vos données sont protégées.
-        </p>
+      {/* Security notice */}
+      <div className="max-w-3xl mx-auto px-4 pb-12 text-center">
+        <div className="flex items-center justify-center gap-2 text-gray-500 text-sm">
+          <Shield className="w-4 h-4" />
+          <span>Paiements sécurisés via Wave Mobile Money</span>
+        </div>
       </div>
     </div>
   );
