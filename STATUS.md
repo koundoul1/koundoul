@@ -1399,3 +1399,92 @@ Le backend et le frontend Leaderboard étaient **déjà complets** (routes, page
 - [ ] Desktop : lien "Classement" visible dans la barre de nav → click → page /leaderboard
 - [ ] Mobile : ouvrir drawer "Plus" → lien "Classement" → page /leaderboard
 - [ ] Page affiche podium top 3 + liste paginée + rang perso
+
+---
+
+## Phase 4.3 — Audit Weekly Challenges
+
+**Date** : 2026-05-09
+
+### 1. Backend — état existant
+
+#### Routes (`backend/src/routes/challenges.js`, 336 lignes)
+
+| Route | Méthode | Auth | Description |
+|-------|---------|------|-------------|
+| `GET /challenges` | optionalAuth | Tous les challenges actifs | 
+| `GET /challenges/weekly` | optionalAuth | Challenge hebdo actif (1 seul retourné, filtré par status+date) |
+| `GET /challenges/:id` | optionalAuth | Détail d'un challenge |
+| `POST /challenges/:id/start` | required | Crée un ChallengeAttempt, retourne les questions sans réponses |
+| `POST /challenges/:id/submit` | required | Score les réponses, XP via processAction si score > 50% |
+| `GET /challenges/:id/leaderboard` | optionalAuth | Top 50, usernames anonymisés |
+| `GET /challenges/:id/rank` | required | Rang du user dans un challenge |
+
+**Gamification** : `processAction(userId, { type: 'submit_challenge', xp })` appelé en L249 si score > 50% du max.
+
+#### Schéma DB
+
+**Challenge** (schema.prisma L799-819) :
+- `id`, `title`, `description`, `subject` (default "Mathématiques"), `difficulty` (default "Moyen"), `timeLimit` (default 20 min)
+- `questions` (Json — array de {id, question, options, correct_answer, explanation, points, time_limit_seconds})
+- `status` (default "active"), `xpReward` (default 500), `prize`, `startDate`, `endDate`
+- Index : `[status]`, `[startDate, endDate]`
+
+**ChallengeAttempt** (L821-836) :
+- `userId`, `challengeId`, `score`, `answers` (Json), `timeSpent`, `completedAt`
+- Unique : `[userId, challengeId]` (1 tentative par user par challenge)
+- Index : `[challengeId, score(DESC)]`
+
+#### Seed (`backend/src/seeds/seedChallenges.js`, 140 lignes)
+
+Crée 3 challenges (Maths, Physique, Chimie) à partir de `qcm_questions` (difficulté 2-3). 10 questions chacun. Durée 7 jours. xpReward=500. Status="active". Idempotent (skip si titre existe déjà et actif).
+
+**Problème** : le seed est un script one-shot exécuté manuellement. Pas de renouvellement automatique.
+
+#### Génération automatique — **ABSENTE**
+
+Aucun cron job, aucun node-cron, aucun scheduler, aucun setInterval. Le seed crée 3 challenges une fois, ils expirent après 7 jours, jamais renouvelés. **C'est la cause racine du bug "1 challenge au lieu de 3"** : les challenges Physique et Chimie ont probablement expiré ou n'ont jamais été créés si le seed a échoué sur ces matières.
+
+### 2. Frontend — état existant
+
+**Page** : `src/pages/Challenge.jsx` — route `/challenge` (App.jsx L140, ProtectedRoute).
+
+Système à 3 onglets : Weekly Challenge, Leaderboard, Duels. L'onglet "Weekly" appelle `GET /challenges/weekly` qui ne retourne **qu'un seul** challenge. Le frontend affiche ce qu'il reçoit — s'il n'y a qu'un challenge actif en DB, il n'en affiche qu'un.
+
+Flow complet : voir challenge → Start → 10 QCM avec timer 20min → Submit → score + XP + leaderboard.
+
+### 3. Banque d'exercices — disponibilité
+
+| Source | Subject | Difficulty | Quantité | Utilisable ? |
+|--------|---------|------------|----------|-------------|
+| `qcm_questions` | Via `question_banks.subject` | Int (1-4) | ~900+ | OUI — seed utilise déjà cette table |
+| `exercise_problems` | Via `question_banks.subject` | Int (1-4) | ~900+ | OUI |
+| `exercises` | Via `subjectId` | Enum (FACILE/MOYEN/DIFFICILE/EXPERT) | ~5 (legacy) | NON — trop peu |
+
+**Filtrage** : `qcm_questions` reliées à `question_banks` qui ont `subject` (Mathématiques/Physique/Chimie) et `level` (SECONDE/PREMIERE/TERMINALE). Le seed actuel tire déjà par matière + difficulté 2-3. Facilement adaptable pour tirer 1 Facile (diff=1) + 1 Moyen (diff=2) + 1 Difficile (diff=3).
+
+### 4. Bugs QA initiaux (BUGS.md)
+
+| Ref | Issue | Testeurs | Cause |
+|-----|-------|----------|-------|
+| P2 "3 active challenges" | "only the math challenge can be seen" | 1 | Seed one-shot + pas de renouvellement auto |
+| P2 "Answer and submit" | Score, leaderboard rank, XP awarded | 2 | Backend fonctionne mais dépend des challenges actifs |
+| P2 "Already completed" | "Already participated this week" | 2 | Constraint unique [userId, challengeId] — fonctionne |
+| P2 "Complete challenge info" | "XPs are not mentioned" | 1 | xpReward non affiché dans l'UI |
+| P2 "Start challenge" | 10 MCQ + timer | 1 | Fonctionne si challenge actif |
+| P1 "Smart Challenge" | "no button to end challenge" | 1 | Bug UI potentiel |
+
+### 5. Plan de fix proposé
+
+| Sous-tâche | Description | Effort |
+|------------|-------------|--------|
+| **4.3.1** | Cron backend : générer 3 challenges chaque lundi 00:00 UTC. Tirer 10 QCM par matière (1 Facile diff=1, 1 Moyen diff=2, 1 Difficile diff=3 ou mix). Expiration dimanche 23:59 UTC. Installer `node-cron`. | Modéré |
+| **4.3.2** | Refactorer `GET /challenges/weekly` pour retourner LES 3 challenges actifs de la semaine (pas 1 seul). Ajouter le statut user (not_started/in_progress/completed) par challenge. | Léger |
+| **4.3.3** | XP par difficulté : adapter xpReward (Facile=50, Moyen=100, Difficile=200) au lieu du 500 fixe. Le processAction le gère déjà — juste changer le seed/cron. | Trivial |
+| **4.3.4** | Notification lundi : appeler `sendNotification` pour tous les users actifs quand les 3 challenges sont créés. | Léger |
+| **4.3.5** | Frontend : afficher 3 cards (Facile/Moyen/Difficile) au lieu d'1 seul. Indicateur temps restant ("Termine dans Xj Xh"). Afficher xpReward. Statut user (badge vert "Complété" / bouton "Commencer"). | Modéré |
+| **4.3.6** | Tests Vitest : cron crée 3 challenges, weekly retourne 3, XP correct par difficulté, statut user affiché. | Léger |
+
+---
+
+**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
