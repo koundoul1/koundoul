@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
+const { checkAiQuota } = require('../middlewares/aiQuota');
 const prisma = require('../config/database');
 const { isConfigured, streamGenerate, generate, GeminiError } = require('../services/geminiService');
 const { SOLVER_SYSTEM_PROMPT, SOLVER_STRUCTURED_PROMPT, parseStructured } = require('../prompts/solver');
+const { incrementUsage } = require('../services/aiQuotaService');
 
 // ── POST /solve — SSE streaming endpoint ─────────────────────────────
 
-router.post('/solve', authenticateToken, async (req, res) => {
+router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
   const userId = req.user.userId;
   const { problem, domain, level } = req.body;
 
@@ -100,6 +102,9 @@ router.post('/solve', authenticateToken, async (req, res) => {
       solution: JSON.stringify({ text: fullText, ...structured }),
       completedAt: new Date()
     });
+
+    // Increment AI quota counter after successful completion
+    try { await incrementUsage(userId); } catch (e) { console.warn('[Solver] incrementUsage error:', e.message); }
 
     sendEvent('done', { historyId, status: 'completed' });
   } catch (err) {

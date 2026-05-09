@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
+const { checkAiQuota } = require('../middlewares/aiQuota');
 const prisma = require('../config/database');
 const { isConfigured, streamGenerate, GeminiError } = require('../services/geminiService');
 const { COACH_SYSTEM_PROMPT } = require('../prompts/coach');
+const { incrementUsage } = require('../services/aiQuotaService');
 
 // Max messages sent to Gemini as conversation history
 const MAX_HISTORY_MESSAGES = 20;
 
 // ── POST /chat — SSE streaming conversational endpoint ──────────────
 
-router.post('/chat', authenticateToken, async (req, res) => {
+router.post('/chat', authenticateToken, checkAiQuota, async (req, res) => {
   const userId = req.user.userId;
   const { message, conversationId } = req.body;
 
@@ -116,6 +118,9 @@ router.post('/chat', authenticateToken, async (req, res) => {
     } catch (err) {
       console.error('[Coach] Assistant message persist error:', err.message);
     }
+
+    // Increment AI quota counter after successful completion
+    try { await incrementUsage(userId); } catch (e) { console.warn('[Coach] incrementUsage error:', e.message); }
 
     sendEvent('done', { conversationId: conversation.id, status: 'completed' });
   } catch (err) {
