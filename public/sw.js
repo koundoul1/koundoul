@@ -123,6 +123,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
+  // Cache API only supports GET — let non-GET requests pass through
+  if (request.method !== 'GET') {
+    return;
+  }
+
   // Stratégie selon le type de requête
   if (request.url.includes('/api/')) {
     // API: Network First (avec fallback cache)
