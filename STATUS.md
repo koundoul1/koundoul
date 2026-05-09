@@ -1487,4 +1487,57 @@ Flow complet : voir challenge → Start → 10 QCM avec timer 20min → Submit �
 
 ---
 
-**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
+**AUDIT TERMINÉ — implémentation ci-dessous.**
+
+---
+
+## Phase 4.3 — Implémentation Weekly Challenges
+
+**Date** : 2026-05-09
+
+### Commits
+
+```
+cc8b73f feat(challenges): add weekly cron job for auto-generation
+0e10273 feat(challenges): refactor GET /challenges/weekly for 3 challenges
+e63725a feat(challenges): redesign weekly tab with 3 cards and countdown
+f276217 test(challenges): add 14 regression tests for Phase 4.3
+```
+
+### Résumé
+
+#### Cron job (`backend/src/jobs/weeklyChallengeJob.js`)
+- `node-cron` : lundi 00:00 UTC → génère 3 challenges (Maths/Physique/Chimie)
+- Rotation des difficultés par semaine (cycle de 6 permutations)
+- 5 QCM par challenge tirés depuis `qcm_questions` via `question_banks.subject`
+- Fallback : si pas assez de QCM à la difficulté demandée, essaie ±1
+- Idempotent : skip si 3 challenges existent déjà cette semaine
+- Catch-up au démarrage du backend (génère les challenges manquants)
+- Notification à tous les users après création (batched par 50, skip si catch-up tardif)
+
+#### XP par difficulté
+- Facile = 50 XP, Moyen = 100 XP, Difficile = 200 XP
+- Stocké dans `challenge.xpReward` à la création, utilisé par la route submit existante
+
+#### Backend `GET /challenges/weekly`
+- Retourne les 3 challenges actifs avec userStatus (not_started/in_progress/completed), userScore, participants, weekStart/weekEnd/timeRemaining
+
+#### Frontend (`Challenge.jsx`)
+- WeekCountdown : bannière "Cette semaine se termine dans Xj Xh XXmin"
+- 3 cards par matière avec couleur, badge difficulté, XP, statut user
+- Bouton "Commencer" / "Continuer" / badge "Complété" selon statut
+- Bannière célébration si les 3 sont complétés
+
+### Tests
+
+- 14 nouveaux tests : total suite **147 tests, tous verts**
+- `npm run lint` : 0 erreurs, 527 warnings (exit 0)
+
+### Tests manuels recommandés en prod après deploy
+
+- [ ] Au démarrage backend : 3 challenges créés automatiquement (vérifier logs Render)
+- [ ] Page /challenge → onglet "Challenge Hebdomadaire" → 3 cards visibles
+- [ ] Chaque card : matière, difficulté, XP, nombre de questions
+- [ ] Countdown affiché en haut ("Cette semaine se termine dans...")
+- [ ] Commencer un challenge → QCM + timer → score + XP
+- [ ] Badge "Complété" après soumission
