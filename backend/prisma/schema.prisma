@@ -71,6 +71,7 @@ model User {
   notifications                                          Notification[]
   solverHistory                                          SolverHistory[]
   coachConversations                                     CoachConversation[]
+  dailyAiUsage                                           DailyAiUsage[]
 
   @@map("users")
 }
@@ -291,6 +292,8 @@ model SubscriptionPlan {
   displayName   String         @default("")
   interval      String         @default("monthly")
   sortOrder     Int            @default(0)
+  aiCallsPerDay Int            @default(6)
+  maxChildren   Int            @default(0)
   subscriptions Subscription[]
 
   @@map("subscription_plans")
@@ -895,4 +898,17 @@ model CoachConversation {
 
   @@index([userId, updatedAt])
   @@map("coach_conversations")
+}
+
+model DailyAiUsage {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @db.Date
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId, date])
+  @@map("daily_ai_usage")
 }
