@@ -6,16 +6,18 @@ const API_BASE = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api`
   : 'http://localhost:3001/api'
 
+const MAX_RETRIES = 10
+
 export function useNotifications() {
   const { isAuthenticated } = useAuth()
   const [notifications, setNotifications] = useState([])
   const [unreadCount, setUnreadCount] = useState(0)
   const [latestNotification, setLatestNotification] = useState(null)
-  const eventSourceRef = useRef(null)
+  const controllerRef = useRef(null)
   const retryTimeoutRef = useRef(null)
   const retryCountRef = useRef(0)
+  const stoppedRef = useRef(false)
 
-  // Fetch initial notifications
   const fetchNotifications = useCallback(async () => {
     if (!isAuthenticated) return
     try {
@@ -25,36 +27,45 @@ export function useNotifications() {
         setUnreadCount(res.data.unreadCount)
       }
     } catch {
-      // silent fail
+      // silent
     }
   }, [isAuthenticated])
 
-  // Connect to SSE stream
   const connectSSE = useCallback(() => {
-    if (!isAuthenticated) return
+    if (!isAuthenticated || stoppedRef.current) return
 
     const token = localStorage.getItem('token')
     if (!token) return
 
     // Close existing connection
-    if (eventSourceRef.current) {
-      eventSourceRef.current.close()
+    if (controllerRef.current) {
+      controllerRef.current.abort()
     }
 
-    const url = `${API_BASE}/notifications/stream`
-    const es = new EventSource(url, {
-      // EventSource doesn't support headers natively,
-      // so we pass token as query param
-    })
-
-    // Since EventSource doesn't support auth headers,
-    // we'll use fetch-based SSE instead
     const controller = new AbortController()
+    controllerRef.current = controller
+
+    const url = `${API_BASE}/notifications/stream`
 
     fetch(url, {
       headers: { Authorization: `Bearer ${token}` },
       signal: controller.signal
     }).then(response => {
+      // Check HTTP status before reading stream
+      if (response.status === 401 || response.status === 403) {
+        console.warn('[Notifications] Auth expired (', response.status, '), SSE stopped.')
+        stoppedRef.current = true
+        return // Do NOT reconnect
+      }
+      if (!response.ok) {
+        console.warn('[Notifications] SSE error', response.status)
+        scheduleReconnect()
+        return
+      }
+
+      // Connection successful — reset retry counter
+      retryCountRef.current = 0
+
       const reader = response.body.getReader()
       const decoder = new TextDecoder()
       let buffer = ''
@@ -62,16 +73,16 @@ export function useNotifications() {
       function read() {
         reader.read().then(({ done, value }) => {
           if (done) {
-            // Connection closed, retry
+            // Server closed connection — reconnect
             scheduleReconnect()
             return
           }
 
           buffer += decoder.decode(value, { stream: true })
-          const lines = buffer.split('\n\n')
-          buffer = lines.pop() || ''
+          const segments = buffer.split('\n\n')
+          buffer = segments.pop() || ''
 
-          for (const chunk of lines) {
+          for (const chunk of segments) {
             const dataLine = chunk.split('\n').find(l => l.startsWith('data: '))
             if (!dataLine) continue
 
@@ -81,13 +92,10 @@ export function useNotifications() {
                 setNotifications(prev => [event.notification, ...prev].slice(0, 20))
                 setUnreadCount(prev => prev + 1)
                 setLatestNotification(event.notification)
-                // Play notification sound
                 playNotificationSound()
               }
-              // Reset retry count on successful message
-              retryCountRef.current = 0
             } catch {
-              // ignore parse errors (ping, etc)
+              // ignore parse errors (ping, connected, etc.)
             }
           }
 
@@ -98,21 +106,24 @@ export function useNotifications() {
       }
 
       read()
-    }).catch(() => {
+    }).catch(err => {
+      if (err.name === 'AbortError') return // intentional cleanup
       scheduleReconnect()
     })
-
-    // Store abort controller for cleanup
-    eventSourceRef.current = { close: () => controller.abort() }
   }, [isAuthenticated])
 
   const scheduleReconnect = useCallback(() => {
+    if (stoppedRef.current) return
+    if (retryCountRef.current >= MAX_RETRIES) {
+      console.warn('[Notifications] Max retries reached, SSE stopped.')
+      stoppedRef.current = true
+      return
+    }
     const delay = Math.min(1000 * Math.pow(2, retryCountRef.current), 30000)
     retryCountRef.current++
     retryTimeoutRef.current = setTimeout(connectSSE, delay)
   }, [connectSSE])
 
-  // Play a short notification sound using Web Audio API
   const playNotificationSound = () => {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)()
@@ -131,7 +142,6 @@ export function useNotifications() {
     }
   }
 
-  // Mark notification as read
   const markRead = useCallback(async (id) => {
     try {
       await api.notifications.markRead(id)
@@ -142,7 +152,6 @@ export function useNotifications() {
     }
   }, [])
 
-  // Mark all as read
   const markAllRead = useCallback(async () => {
     try {
       await api.notifications.markAllRead()
@@ -153,22 +162,24 @@ export function useNotifications() {
     }
   }, [])
 
-  // Clear latest notification (for toast dismiss)
   const clearLatest = useCallback(() => {
     setLatestNotification(null)
   }, [])
 
   useEffect(() => {
     if (isAuthenticated) {
+      stoppedRef.current = false
+      retryCountRef.current = 0
       fetchNotifications()
       connectSSE()
     } else {
+      stoppedRef.current = true
       setNotifications([])
       setUnreadCount(0)
     }
 
     return () => {
-      if (eventSourceRef.current) eventSourceRef.current.close()
+      if (controllerRef.current) controllerRef.current.abort()
       if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current)
     }
   }, [isAuthenticated, fetchNotifications, connectSSE])
