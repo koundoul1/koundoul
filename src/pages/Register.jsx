@@ -41,9 +41,10 @@ const Register = () => {
     }
   }, [isAuthenticated, navigate, location])
 
+  // Clear auth context error on input change
   useEffect(() => {
     if (error) clearError()
-  }, [formData, password, pin, clearError])
+  }, [formData.email, formData.username]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -150,7 +151,10 @@ const Register = () => {
         navigate(from, { replace: true })
       }
     } catch (err) {
-      console.error('Erreur inscription:', err)
+      // AuthContext already dispatches the error, but add local fallback
+      if (!error) {
+        setErrors(prev => ({ ...prev, api: err.message || 'Erreur lors de l\'inscription' }))
+      }
     } finally {
       setIsLoading(false)
     }
@@ -341,9 +345,9 @@ const Register = () => {
             )}
 
             {/* Error */}
-            {error && (
+            {(error || errors.api) && (
               <div className="rounded-xl p-3 bg-red-500/10 border border-red-500/20">
-                <p className="text-sm text-red-400">{error}</p>
+                <p className="text-sm text-red-400">{error || errors.api}</p>
               </div>
             )}
 

@@ -47,7 +47,7 @@ const PhoneInput = ({ value, onChange, error, className }) => {
           </button>
 
           {showDropdown && (
-            <div className="absolute top-full left-0 mt-1 w-56 bg-gray-900 border border-gray-700 rounded-xl shadow-xl z-50 max-h-48 overflow-y-auto">
+            <div className="fixed left-4 right-4 sm:absolute sm:left-0 sm:right-auto sm:top-full mt-1 w-auto sm:w-56 bg-gray-900 border border-gray-700 rounded-xl shadow-2xl max-h-48 overflow-y-auto" style={{ zIndex: 9999 }}>
               {COUNTRY_CODES.map(c => (
                 <button
                   key={c.code}
