@@ -583,4 +583,149 @@ router.put('/notifications/:childId', authenticateToken, async (req, res, next) 
   }
 });
 
+// ══════════════════════════════════════════════════════════════════════
+// POST /link-by-phone — child enters parent phone number
+// ══════════════════════════════════════════════════════════════════════
+router.post('/link-by-phone', authenticateToken, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+    const { parentPhoneNumber } = req.body;
+
+    const { normalizePhoneNumber } = require('../utils/phoneValidator');
+    const normalized = normalizePhoneNumber(parentPhoneNumber);
+    if (!normalized) {
+      return res.status(400).json({ success: false, error: 'Numero de telephone invalide' });
+    }
+
+    // Check child is not already linked
+    const existingLink = await prisma.parent_child_links.findFirst({
+      where: { child_id: userId }
+    });
+    if (existingLink) {
+      return res.status(400).json({ success: false, error: 'Tu es deja lie a un parent' });
+    }
+
+    // Look for parent with this phone number
+    const parent = await prisma.user.findFirst({
+      where: { phoneNumber: normalized }
+    });
+
+    if (parent) {
+      // Check max children (3 for phone-based family)
+      const childCount = await prisma.parent_child_links.count({ where: { parent_id: parent.id } });
+      if (childCount >= 3) {
+        return res.status(400).json({ success: false, error: 'Ce parent a deja atteint le maximum de 3 enfants' });
+      }
+
+      await prisma.parent_child_links.create({
+        data: { parent_id: parent.id, child_id: userId }
+      });
+      await prisma.user.update({
+        where: { id: userId },
+        data: { parentId: parent.id, pendingParentPhone: null }
+      });
+
+      return res.status(201).json({
+        success: true,
+        message: 'Lien parent-enfant cree',
+        data: { parentName: parent.firstName || parent.username }
+      });
+    }
+
+    // Parent not found — store as pending
+    await prisma.user.update({
+      where: { id: userId },
+      data: { pendingParentPhone: normalized }
+    });
+
+    res.json({
+      success: true,
+      message: 'Lien en attente. Demande a ton parent de creer son compte avec ce numero.',
+      data: { pending: true, parentPhone: normalized }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ══════════════════════════════════════════════════════════════════════
+// DELETE /link-by-phone — child removes phone link or pending
+// ══════════════════════════════════════════════════════════════════════
+router.delete('/link-by-phone', authenticateToken, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+
+    // Remove active link if exists
+    await prisma.parent_child_links.deleteMany({ where: { child_id: userId } });
+    // Clear pending
+    await prisma.user.update({
+      where: { id: userId },
+      data: { pendingParentPhone: null, parentId: null }
+    });
+
+    res.json({ success: true, message: 'Lien retire' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// ══════════════════════════════════════════════════════════════════════
+// GET /family-status — get family link status for current user
+// ══════════════════════════════════════════════════════════════════════
+router.get('/family-status', authenticateToken, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { parentId: true, pendingParentPhone: true, isParent: true }
+    });
+
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'Utilisateur non trouve' });
+    }
+
+    // Parent view: list children
+    if (user.isParent) {
+      const children = await prisma.parent_child_links.findMany({
+        where: { parent_id: userId },
+        include: {
+          users_parent_child_links_child_idTousers: {
+            select: { id: true, firstName: true, lastName: true, username: true, xp: true, level: true }
+          }
+        }
+      });
+      return res.json({
+        success: true,
+        data: {
+          role: 'parent',
+          children: children.map(c => c.users_parent_child_links_child_idTousers)
+        }
+      });
+    }
+
+    // Child view: linked or pending
+    if (user.parentId) {
+      const parent = await prisma.user.findUnique({
+        where: { id: user.parentId },
+        select: { firstName: true, username: true }
+      });
+      return res.json({
+        success: true,
+        data: { role: 'child', status: 'linked', parentName: parent?.firstName || parent?.username }
+      });
+    }
+
+    if (user.pendingParentPhone) {
+      return res.json({
+        success: true,
+        data: { role: 'child', status: 'pending', pendingPhone: user.pendingParentPhone }
+      });
+    }
+
+    res.json({ success: true, data: { role: 'none', status: 'unlinked' } });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
