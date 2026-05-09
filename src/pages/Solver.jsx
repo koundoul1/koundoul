@@ -40,6 +40,11 @@ import LearningProfileSelector from '../components/solver/LearningProfileSelecto
 import { analyzeStudentAttempt } from '../utils/errorAnalyzer'
 import { loadProfileFromStorage, saveProfileToStorage } from '../utils/learningProfiles'
 
+// Quota IA
+import useAiQuota from '../hooks/useAiQuota'
+import AiQuotaBadge from '../components/AiQuotaBadge'
+import QuotaReachedModal from '../components/QuotaReachedModal'
+
 // Composant pour afficher la solution avec support LaTeX
 const SolutionDisplay = ({ content }) => {
   if (!content || typeof content !== 'string') return <p className="text-gray-100">Aucune solution affichée</p>;
@@ -105,6 +110,8 @@ const SolutionDisplay = ({ content }) => {
 const Solver = () => {
   const { user, isAuthenticated } = useAuth()
   const { t } = useTranslation()
+  const { quota, refreshQuota, warningToast } = useAiQuota()
+  const [quotaModalData, setQuotaModalData] = useState(null)
   const [problem, setProblem] = useState('')
   const [subject, setSubject] = useState('math')
   const [difficulty, setDifficulty] = useState('easy')
@@ -231,11 +238,15 @@ const Solver = () => {
       onDone: () => {
         setIsSolving(false)
         streamRef.current = null
-        // Refresh history
         loadHistory()
+        refreshQuota()
       },
-      onError: (message) => {
-        setError(message || 'Erreur lors de la resolution')
+      onError: (message, quotaInfo) => {
+        if (quotaInfo?.quotaReached) {
+          setQuotaModalData(quotaInfo)
+        } else {
+          setError(message || 'Erreur lors de la resolution')
+        }
         setIsSolving(false)
         streamRef.current = null
       }
@@ -389,6 +400,18 @@ const Solver = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950">
+      {/* Quota reached modal */}
+      {quotaModalData && (
+        <QuotaReachedModal quotaData={quotaModalData} onClose={() => setQuotaModalData(null)} />
+      )}
+
+      {/* Warning toast at 80% usage */}
+      {warningToast && (
+        <div className="fixed top-4 right-4 z-50 bg-orange-500/90 text-white px-4 py-2.5 rounded-lg shadow-lg text-sm font-medium animate-in slide-in-from-top duration-300">
+          {warningToast}
+        </div>
+      )}
+
       {/* Feedback de succès */}
       {showSuccessFeedback && (
         <SuccessFeedback xpGained={xpGained} />
@@ -407,13 +430,16 @@ const Solver = () => {
                 Utilisez l'intelligence artificielle pour résoudre vos problèmes scientifiques
               </p>
             </div>
-            <button
-              onClick={() => setShowHistory(!showHistory)}
-              className="koundoul-btn-primary flex items-center px-4 py-2"
-            >
-              <History className="h-5 w-5 mr-2" />
-              Historique
-            </button>
+            <div className="flex items-center gap-3">
+              <AiQuotaBadge quota={quota} />
+              <button
+                onClick={() => setShowHistory(!showHistory)}
+                className="koundoul-btn-primary flex items-center px-4 py-2"
+              >
+                <History className="h-5 w-5 mr-2" />
+                Historique
+              </button>
+            </div>
           </div>
         </div>
       </div>

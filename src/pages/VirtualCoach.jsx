@@ -18,6 +18,9 @@ import {
   Trash2,
   AlertCircle
 } from 'lucide-react';
+import useAiQuota from '../hooks/useAiQuota';
+import AiQuotaBadge from '../components/AiQuotaBadge';
+import QuotaReachedModal from '../components/QuotaReachedModal';
 
 // ── LaTeX-aware message renderer ────────────────────────────────────
 
@@ -71,6 +74,10 @@ const MessageContent = ({ content }) => {
 // ── Main component ──────────────────────────────────────────────────
 
 const VirtualCoach = () => {
+  // AI Quota
+  const { quota, refreshQuota, warningToast } = useAiQuota();
+  const [quotaModalData, setQuotaModalData] = useState(null);
+
   // Chat state
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -184,9 +191,14 @@ const VirtualCoach = () => {
         setIsStreaming(false);
         streamRef.current = null;
         loadConversations();
+        refreshQuota();
       },
-      onError: (msg) => {
-        setError(msg || 'Erreur de communication avec le Coach');
+      onError: (msg, quotaInfo) => {
+        if (quotaInfo?.quotaReached) {
+          setQuotaModalData(quotaInfo);
+        } else {
+          setError(msg || 'Erreur de communication avec le Coach');
+        }
         setIsStreaming(false);
         streamRef.current = null;
         // Remove empty assistant placeholder if error
@@ -211,6 +223,18 @@ const VirtualCoach = () => {
 
   return (
     <div className="h-screen flex bg-gray-900">
+
+      {/* Quota reached modal */}
+      {quotaModalData && (
+        <QuotaReachedModal quotaData={quotaModalData} onClose={() => setQuotaModalData(null)} />
+      )}
+
+      {/* Warning toast */}
+      {warningToast && (
+        <div className="fixed top-4 right-4 z-50 bg-orange-500/90 text-white px-4 py-2.5 rounded-lg shadow-lg text-sm font-medium">
+          {warningToast}
+        </div>
+      )}
 
       {/* Mobile overlay */}
       {sidebarOpen && (
@@ -281,12 +305,13 @@ const VirtualCoach = () => {
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
           <Brain className="h-6 w-6 text-blue-400" />
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <h1 className="text-base font-semibold text-gray-200 truncate">
               Coach IA
             </h1>
             <p className="text-xs text-gray-500 truncate">{currentTitle}</p>
           </div>
+          <AiQuotaBadge quota={quota} />
         </header>
 
         {/* Messages */}
