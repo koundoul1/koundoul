@@ -43,7 +43,7 @@ async function seedDuel() {
       questions: formatted,
       xpReward: 50,
       isPublic: true,
-      status: 'PENDING'
+      status: 'pending'
     }
   });
 
