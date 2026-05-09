@@ -266,9 +266,9 @@ const server = app.listen(PORT, async () => {
   if (migrationStatus.migrated) {
     try {
       await initPlans();
-      console.log(‘✅ Plans d’abonnement initialisés’);
+      console.log(‘✅ Plans d\’abonnement initialises’);
     } catch (error) {
-      console.error(‘❌ Erreur lors de l’initialisation des plans d’abonnement:’, error.message);
+      console.error(‘❌ Erreur init plans:’, error.message);
     }
 
     // Setup weekly challenge cron + startup catch-up
