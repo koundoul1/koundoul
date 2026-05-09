@@ -99,18 +99,34 @@ router.post('/', authenticateToken, async (req, res) => {
     const userId = req.user.userId;
     const { subject, level, difficulty } = req.body;
 
-    // Piocher 10 questions QCM
+    // Piocher 10 questions QCM filtrees par matiere + difficulte
     const difficultyMap = { 'Facile': 1, 'Moyen': 2, 'Difficile': 3 };
     const diffLevel = difficultyMap[difficulty] || 2;
+    const subjectName = subject || 'Mathematiques';
 
-    const questions = await prisma.qcm_questions.findMany({
-      where: { difficulty: { in: [diffLevel, diffLevel + 1] } },
-      take: 10,
-      orderBy: { created_at: 'desc' }
+    // Find banks matching the requested subject
+    const banks = await prisma.questionBank.findMany({
+      where: { subject: { contains: subjectName, mode: 'insensitive' }, is_active: true },
+      select: { id: true }
+    });
+    const bankIds = banks.map(b => b.id);
+
+    // Query with subject filter if banks found, fallback to any subject
+    const whereClause = { difficulty: { in: [diffLevel, diffLevel + 1] } };
+    if (bankIds.length > 0) {
+      whereClause.bank_id = { in: bankIds };
+    }
+
+    const allQuestions = await prisma.qcm_questions.findMany({
+      where: whereClause,
+      take: 30
     });
 
+    // Shuffle and take 10
+    const questions = allQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
+
     if (questions.length < 5) {
-      return res.status(400).json({ success: false, error: 'Pas assez de questions disponibles' });
+      return res.status(400).json({ success: false, error: 'Pas assez de questions en ' + subjectName + ' a cette difficulte' });
     }
 
     const formattedQuestions = questions.map(q => ({
