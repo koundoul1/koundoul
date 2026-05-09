@@ -319,12 +319,14 @@ const Challenge = () => {
         level: duelLevel,
         difficulty: duelDifficulty
       });
-      if (response.success) {
+      if (response.success && response.data) {
         setCreatedDuel(response.data);
         setDuelView('created');
+      } else {
+        setError(response.error || 'Impossible de creer le duel. Reessaie.');
       }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Erreur lors de la creation du duel');
     } finally {
       setLoading(false);
     }
@@ -882,7 +884,7 @@ const Challenge = () => {
 
                   <div className="text-sm text-gray-400 flex items-center justify-center">
                     <Clock className="h-4 w-4 mr-1" />
-                    Expire dans 24h — {createdDuel.questions} questions — {createdDuel.subject}
+                    Expire dans 24h — {createdDuel.questions || '?'} questions — {createdDuel.subject || 'Maths'}
                   </div>
                 </div>
 
