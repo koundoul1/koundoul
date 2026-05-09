@@ -809,7 +809,8 @@ const Profile = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Parent Section — violet-tinted card */}
+            {/* Parent Section — only if user IS a parent (has code or children) */}
+            {(profileData?.isParent || invitationCode || parentChildren.length > 0) && (
             <div className="k-card overflow-hidden" style={{ background: 'rgba(108,99,255,0.08)', borderColor: 'rgba(108,99,255,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">
@@ -914,7 +915,10 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Link to parent — child section */}
+            )}
+
+            {/* Link to parent — child section: only if user is NOT a parent */}
+            {!(profileData?.isParent || invitationCode || parentChildren.length > 0) && (
             <div className="k-card overflow-hidden" style={{ background: 'rgba(0,217,163,0.06)', borderColor: 'rgba(0,217,163,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">
@@ -968,18 +972,21 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Phone-based family linking */}
+            )}
+
+            {/* Phone-based family linking — only for children (not parents) */}
+            {!(profileData?.isParent || invitationCode || parentChildren.length > 0) && (
             <div className="k-card overflow-hidden" style={{ background: 'rgba(59,130,246,0.06)', borderColor: 'rgba(59,130,246,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">
                   <Phone className="h-5 w-5 text-blue-400 mr-2" />
-                  <h3 className="text-lg font-semibold text-white">Lier par telephone</h3>
+                  <h3 className="text-lg font-semibold text-white">Lier par t&eacute;l&eacute;phone</h3>
                 </div>
 
                 {familyPhoneStatus?.linked ? (
                   <div className="p-4 bg-white/5 rounded-xl border border-blue-500/20">
                     <p className="text-sm text-gray-300 mb-2">
-                      Lie a <strong className="text-blue-400">{familyPhoneStatus.parentName}</strong>
+                      Li&eacute; &agrave; <strong className="text-blue-400">{familyPhoneStatus.parentName}</strong>
                     </p>
                     <button onClick={handleUnlinkByPhone} className="px-3 py-1.5 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/10 text-xs font-medium flex items-center">
                       <Unlink className="h-3 w-3 mr-1" /> Retirer le lien
@@ -989,7 +996,7 @@ const Profile = () => {
                   <div className="p-4 bg-white/5 rounded-xl border border-yellow-500/20">
                     <p className="text-sm text-yellow-300 mb-1">Lien en attente</p>
                     <p className="text-xs text-gray-400 mb-2">
-                      Numero : {familyPhoneStatus.parentPhone}. Demande a ton parent de creer son compte.
+                      Num&eacute;ro : {familyPhoneStatus.parentPhone}. Demande &agrave; ton parent de cr&eacute;er son compte.
                     </p>
                     <button onClick={handleUnlinkByPhone} className="px-3 py-1.5 text-gray-400 border border-gray-600 rounded-lg text-xs">
                       Annuler
@@ -998,7 +1005,7 @@ const Profile = () => {
                 ) : (
                   <div>
                     <p className="text-xs text-gray-400 mb-3">
-                      Entre le numero de telephone de ton parent pour lier vos comptes.
+                      Entre le num&eacute;ro de t&eacute;l&eacute;phone de ton parent pour lier vos comptes.
                     </p>
                     <div className="flex gap-2">
                       <input
@@ -1020,6 +1027,7 @@ const Profile = () => {
                 )}
               </div>
             </div>
+            )}
 
             {/* Subscriptions */}
             <div className="k-card overflow-hidden">
@@ -1039,7 +1047,7 @@ const Profile = () => {
               <div className="p-5 border-b border-white/8">
                 <div className="flex items-center">
                   <Bell className="h-5 w-5 text-kprimary mr-2" />
-                  <h3 className="text-lg font-semibold text-white">Preferences</h3>
+                  <h3 className="text-lg font-semibold text-white">Pr&eacute;f&eacute;rences</h3>
                 </div>
               </div>
               <div className="p-5">
@@ -1072,7 +1080,7 @@ const Profile = () => {
               </div>
               <div className="p-5">
                 <p className="text-sm text-gray-400 mb-4">
-                  La suppression de ton compte est irreversible. Toutes tes donnees seront perdues.
+                  La suppression de ton compte est irr&eacute;versible. Toutes tes donn&eacute;es seront perdues.
                 </p>
                 <button
                   onClick={() => setShowDeleteModal(true)}
@@ -1091,7 +1099,7 @@ const Profile = () => {
                 <div className="relative bg-gray-900 border border-gray-700 rounded-2xl p-6 max-w-sm w-full">
                   <h3 className="text-lg font-bold text-red-400 mb-3">Supprimer mon compte</h3>
                   <p className="text-sm text-gray-400 mb-4">
-                    Cette action est irreversible. Entre ton mot de passe ou PIN pour confirmer.
+                    Cette action est irr&eacute;versible. Entre ton mot de passe ou PIN pour confirmer.
                   </p>
                   <input
                     type="password"
