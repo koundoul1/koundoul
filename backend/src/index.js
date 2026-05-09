@@ -278,6 +278,14 @@ const server = app.listen(PORT, async () => {
     } catch (error) {
       console.error('Erreur cron weekly challenges:', error.message);
     }
+
+    // Setup duel cleanup cron (expire stale duels every 5 min)
+    try {
+      const { setupDuelCleanupJob } = require('./jobs/duelCleanupJob');
+      setupDuelCleanupJob();
+    } catch (error) {
+      console.error('Erreur cron duel cleanup:', error.message);
+    }
   }
 });
 
