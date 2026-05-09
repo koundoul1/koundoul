@@ -40,6 +40,30 @@ import {
 import api from '../services/api';
 import { useGamification } from '../hooks/useGamification';
 
+const WeekCountdown = ({ endDate }) => {
+  const [timeLeft, setTimeLeft] = React.useState('');
+  React.useEffect(() => {
+    const update = () => {
+      const diff = new Date(endDate).getTime() - Date.now();
+      if (diff <= 0) { setTimeLeft('Terminé'); return; }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      setTimeLeft(`${d}j ${h}h ${String(m).padStart(2, '0')}min`);
+    };
+    update();
+    const interval = setInterval(update, 60000);
+    return () => clearInterval(interval);
+  }, [endDate]);
+
+  return (
+    <div className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-sm">
+      <Flame className="h-4 w-4 text-orange-400" />
+      <span className="text-orange-300 font-semibold">Cette semaine se termine dans {timeLeft}</span>
+    </div>
+  );
+};
+
 const Challenge = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -55,6 +79,9 @@ const Challenge = () => {
   const [leaderboardScope, setLeaderboardScope] = useState('international');
   const [userRank, setUserRank] = useState(null);
   const [showCountryMenu, setShowCountryMenu] = useState(false);
+
+  // Selected challenge for starting
+  const [selectedChallengeId, setSelectedChallengeId] = useState(null);
 
   // Duel state
   const [duelView, setDuelView] = useState('menu'); // menu, create, join, play, results, myduels
@@ -204,7 +231,7 @@ const Challenge = () => {
 
   // Charger le classement quand on change d'onglet ou de scope
   useEffect(() => {
-    if (activeTab === 'leaderboard' && weeklyChallenge?.id) {
+    if (activeTab === 'leaderboard' && weeklyChallenge?.challenges?.[0]?.id) {
       loadLeaderboard();
       loadUserRank();
     }
@@ -232,26 +259,20 @@ const Challenge = () => {
       setError(null);
       const response = await api.challenges.getWeekly();
       if (response.success && response.data) {
-        setWeeklyChallenge({
-          ...response.data,
-          subject: response.data.subject?.name || 'Mathématiques',
-          difficulty: response.data.difficulty || 'Moyen'
-        });
+        // New format: { weekStart, weekEnd, timeRemaining, challenges: [...] }
+        if (response.data.challenges) {
+          setWeeklyChallenge(response.data);
+        } else {
+          // Legacy single-challenge format fallback
+          setWeeklyChallenge({
+            weekStart: response.data.startDate,
+            weekEnd: response.data.endDate,
+            timeRemaining: response.data.endDate ? new Date(response.data.endDate).getTime() - Date.now() : 0,
+            challenges: response.data.id ? [response.data] : []
+          });
+        }
       } else {
-        // Challenge par défaut si aucun n'est actif
-        setWeeklyChallenge({
-          id: null,
-          title: 'Aucun challenge actif',
-          description: 'Il n\'y a pas de challenge hebdomadaire actif pour le moment.',
-          subject: 'Mathématiques',
-          difficulty: 'Moyen',
-          participants: 0,
-          endDate: null,
-          prize: 'Récompenses à venir',
-          questions: 10,
-          timeLimit: 20,
-          isActive: false
-        });
+        setWeeklyChallenge({ weekStart: null, weekEnd: null, timeRemaining: 0, challenges: [] });
       }
     } catch (err) {
       console.error('Erreur chargement challenge:', err);
@@ -426,7 +447,7 @@ const Challenge = () => {
     
     try {
       setLoading(true);
-      const response = await api.challenges.getLeaderboard(weeklyChallenge.id, leaderboardScope);
+      const response = await api.challenges.getLeaderboard(weeklyChallenge?.challenges?.[0]?.id, leaderboardScope);
       if (response.success) {
         setRankings(response.data);
       }
@@ -442,7 +463,7 @@ const Challenge = () => {
     if (!weeklyChallenge?.id) return;
     
     try {
-      const response = await api.challenges.getUserRank(weeklyChallenge.id, leaderboardScope);
+      const response = await api.challenges.getUserRank(weeklyChallenge?.challenges?.[0]?.id, leaderboardScope);
       if (response.success && response.data) {
         setUserRank(response.data);
       } else {
@@ -455,27 +476,23 @@ const Challenge = () => {
   };
 
   const startChallenge = useCallback(async () => {
-    if (!isValidChallenge(weeklyChallenge)) {
-      setError('Aucun challenge disponible ou challenge invalide');
-      return;
-    }
-
-    if (!weeklyChallenge.isActive) {
-      setError('Ce challenge n\'est plus actif');
+    const challengeId = selectedChallengeId;
+    const ch = weeklyChallenge?.challenges?.find(c => c.id === challengeId);
+    if (!challengeId || !ch) {
+      setError('Aucun challenge sélectionné');
       return;
     }
 
     try {
       setLoading(true);
       setError(null);
-      const response = await api.challenges.start(weeklyChallenge.id);
-      
+      const response = await api.challenges.start(challengeId);
+
       if (response.success && response.data.quiz) {
-        // Rediriger vers le quiz avec le challenge ID
-        navigate(`/quiz/${response.data.quiz.id}?challenge=${weeklyChallenge.id}`, {
-          state: { 
-            challenge: weeklyChallenge,
-            session: response.data 
+        navigate(`/quiz/${response.data.quiz.id}?challenge=${challengeId}`, {
+          state: {
+            challenge: ch,
+            session: response.data
           }
         });
       } else {
@@ -582,122 +599,95 @@ const Challenge = () => {
           </div>
         )}
 
-        {/* Challenge Hebdomadaire */}
+        {/* Challenge Hebdomadaire — 3 cards */}
         {activeTab === 'weekly' && (
           <div className="space-y-6">
             {loading && !weeklyChallenge ? (
               <div className="flex items-center justify-center py-12">
                 <Loader2 className="h-8 w-8 animate-spin text-yellow-400" />
               </div>
-            ) : weeklyChallenge ? (
-              <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-2 border-yellow-500/50 rounded-2xl p-8">
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    {weeklyChallenge?.isActive && (
-                      <div className="flex items-center mb-2">
-                        <Flame className="h-6 w-6 text-orange-500 mr-2 animate-pulse" />
-                        <span className="px-3 py-1 bg-orange-500/30 text-orange-200 rounded-full text-sm font-semibold">
-                          Challenge Actif
-                        </span>
+            ) : weeklyChallenge?.challenges?.length > 0 ? (
+              <>
+                {/* Countdown banner */}
+                {weeklyChallenge.weekEnd && (
+                  <WeekCountdown endDate={weeklyChallenge.weekEnd} />
+                )}
+
+                {/* 3 challenge cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  {weeklyChallenge.challenges.map(ch => {
+                    const diffColor = ch.difficulty === 'Facile' ? 'green' : ch.difficulty === 'Moyen' ? 'orange' : 'red';
+                    const gradients = {
+                      'Mathématiques': 'from-purple-500/20 to-pink-500/20 border-purple-500/40',
+                      'Physique': 'from-blue-500/20 to-cyan-500/20 border-blue-500/40',
+                      'Chimie': 'from-green-500/20 to-emerald-500/20 border-green-500/40'
+                    };
+                    const grad = gradients[ch.subject] || gradients['Mathématiques'];
+
+                    return (
+                      <div key={ch.id} className={`bg-gradient-to-br ${grad} border-2 rounded-2xl p-6 flex flex-col`}>
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-sm font-semibold text-gray-300">{ch.subject}</span>
+                          <span className={`px-2.5 py-0.5 text-xs font-bold rounded-full bg-${diffColor}-500/20 text-${diffColor}-400 border border-${diffColor}-500/30`}>
+                            {ch.difficulty}
+                          </span>
+                        </div>
+
+                        <h3 className="text-lg font-bold text-white mb-2">{ch.title}</h3>
+
+                        {/* Stats */}
+                        <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
+                          <span className="flex items-center gap-1"><BookOpen className="h-4 w-4" /> {ch.questionCount} Q</span>
+                          <span className="flex items-center gap-1"><Timer className="h-4 w-4" /> {ch.timeLimit} min</span>
+                          <span className="flex items-center gap-1"><Users className="h-4 w-4" /> {ch.participants}</span>
+                        </div>
+
+                        {/* XP reward */}
+                        <div className="mb-4 px-3 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/20 text-center">
+                          <span className="text-sm font-bold text-yellow-300">{ch.xpReward} XP</span>
+                        </div>
+
+                        {/* CTA based on userStatus */}
+                        <div className="mt-auto">
+                          {ch.userStatus === 'completed' ? (
+                            <div className="flex items-center justify-center gap-2 py-3 bg-green-500/20 text-green-400 rounded-xl font-semibold text-sm border border-green-500/30">
+                              <CheckCircle className="h-4 w-4" />
+                              Complété {ch.userScore ? `— ${ch.userScore.score}/${ch.userScore.maxScore}` : ''}
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => { setSelectedChallengeId(ch.id); startChallenge(); }}
+                              disabled={loading}
+                              className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-xl font-bold text-sm hover:from-yellow-600 hover:to-orange-600 transition-all disabled:opacity-50"
+                            >
+                              <Play className="h-4 w-4" />
+                              {ch.userStatus === 'in_progress' ? 'Continuer' : 'Commencer'}
+                            </button>
+                          )}
+                        </div>
                       </div>
-                    )}
-                    <h2 className="text-3xl font-bold text-white mb-2">{weeklyChallenge?.title || 'Aucun challenge actif'}</h2>
-                    <p className="text-gray-300">{weeklyChallenge?.description || 'Il n\'y a pas de challenge hebdomadaire actif pour le moment.'}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-4xl font-bold text-yellow-400 mb-1">{weeklyChallenge?.participants || 0}</div>
-                    <div className="text-sm text-gray-300">Participants</div>
-                  </div>
+                    );
+                  })}
                 </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <BookOpen className="h-5 w-5 mr-2" />
-                    Matière
+                {/* All completed banner */}
+                {weeklyChallenge.challenges.every(ch => ch.userStatus === 'completed') && (
+                  <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl p-5 text-center">
+                    <Trophy className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
+                    <p className="text-green-300 font-semibold">
+                      Bravo ! Tu as terminé tous les challenges de la semaine !
+                    </p>
                   </div>
-                    <div className="text-xl font-bold text-white">{weeklyChallenge?.subject || 'Mathématiques'}</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <Target className="h-5 w-5 mr-2" />
-                    Difficulté
-                  </div>
-                  <div className="text-xl font-bold text-yellow-400">{weeklyChallenge?.difficulty || 'Moyen'}</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <Timer className="h-5 w-5 mr-2" />
-                    Durée
-                  </div>
-                  <div className="text-xl font-bold text-white">{weeklyChallenge?.timeLimit || 20} min</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-4">
-                  <div className="flex items-center text-gray-300 mb-2">
-                    <Award className="h-5 w-5 mr-2" />
-                    Récompense
-                  </div>
-                  <div className="text-lg font-bold text-purple-300">{weeklyChallenge?.prize || 'Récompenses à venir'}</div>
-                </div>
-              </div>
-
-                <button
-                  onClick={startChallenge}
-                  disabled={loading || !weeklyChallenge?.isActive}
-                  aria-label="Commencer le challenge hebdomadaire"
-                  className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-4 rounded-lg font-bold text-lg hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/50 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 className="h-6 w-6 mr-2 animate-spin" />
-                      Chargement...
-                    </>
-                  ) : (
-                    <>
-                      <Play className="h-6 w-6 mr-2" />
-                      Commencer le Challenge
-                      <ArrowRight className="h-5 w-5 ml-2" />
-                    </>
-                  )}
-                </button>
-              </div>
+                )}
+              </>
             ) : (
               <div className="bg-white/5 border border-white/10 rounded-xl p-8 text-center">
                 <Trophy className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Aucun Challenge Actif
-                </h3>
-                <p className="text-gray-300">
-                  Revenez bientôt pour participer au prochain challenge hebdomadaire !
-                </p>
+                <h3 className="text-xl font-bold text-white mb-2">Aucun Challenge Actif</h3>
+                <p className="text-gray-300">De nouveaux challenges arrivent chaque lundi !</p>
               </div>
             )}
-
-            {/* Règles */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-                <Shield className="h-6 w-6 mr-2 text-blue-400" />
-                Règles du Challenge
-              </h3>
-              <ul className="space-y-2 text-gray-300">
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-2">✓</span>
-                  Vous avez {weeklyChallenge?.timeLimit || 20} minutes pour répondre à {weeklyChallenge?.questions || 10} questions
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-2">✓</span>
-                  Les meilleurs scores sont classés anonymement
-                </li>
- <li className="flex items-start">
-                  <span className="text-green-400 mr-2">✓</span>
-                  Les récompenses sont attribuées à la fin du challenge
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-2">✓</span>
-                  Un classement anonymisé est disponible (École/Région/Pays)
-                </li>
-              </ul>
-            </div>
           </div>
         )}
 
