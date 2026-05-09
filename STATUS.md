@@ -1292,3 +1292,78 @@ Nouvelle page minimaliste : liste verticale de notifs, icône par type (7 types)
 - [ ] Click sur une notif → marquée lue (point bleu disparaît) + navigation
 - [ ] "Tout marquer lu" → compteur reset à 0
 - [ ] Empty state si aucune notification
+
+---
+
+## Phase 4.2 — Audit Leaderboard
+
+**Date** : 2026-05-09
+
+### 1. Backend — état existant
+
+**Le backend est COMPLET.** Routes fonctionnelles dans `backend/src/routes/leaderboard.js` (175 lignes), montées dans index.js (L233).
+
+| Route | Méthode | Description |
+|-------|---------|-------------|
+| `GET /api/leaderboard` | optionalAuth | Top N users trié par XP DESC. Params : `type` (global/country/region/school), `period` (week/month/alltime), `page`, `limit` (max 100). Retourne username, avatar, xp, streak, badgesCount, rank. |
+| `GET /api/leaderboard/my-rank` | authenticateToken | Rank de l'user dans chaque scope (global, country, region, school). Calcul : `COUNT(users WHERE xp > myXp) + 1`. |
+
+API client frontend : `api.leaderboard.get(params)` + `api.leaderboard.getMyRank()` (api.js L715-720).
+
+### 2. Schéma DB — XP
+
+Champ utilisé pour le classement : `users.xp` (Int, default 0) — mis à jour par `gamification.awardXP()`.
+
+**Pas de table d'historique XP.** Les gains individuels ne sont pas loggés avec timestamp. Les filtres `week`/`month` du backend se basent sur `lastLoginAt` (pas sur la date du gain XP) → un user inactif cette semaine mais avec beaucoup d'XP apparaîtra quand même en "alltime" mais pas en "week".
+
+Champ `totalXp` (Int?, L31) existe mais n'est jamais mis à jour — code mort.
+
+### 3. Frontend — état existant
+
+**La page EXISTE** : `src/pages/Leaderboard.jsx` (462 lignes). Route définie dans App.jsx L141 (`ProtectedRoute`). Lazy-loaded L48.
+
+**Fonctionnalités déjà implémentées :**
+- Filtres par période (semaine/mois/all time) et scope (global/pays/région/école)
+- Dropdown pays (50+ pays africains) + régions Sénégal + école (input texte)
+- Podium top 3 avec emojis médailles
+- Liste paginée 20/page avec rang, avatar, nom, XP, streak, badges
+- Highlight de l'user courant dans la liste
+- Insertion de l'user courant s'il n'est pas dans le top 20
+- Section "Mon rang" avec grille global/pays/région/école
+
+**Problème d'accès (cause du bug QA)** : le Leaderboard n'est **pas accessible depuis la navigation**. Pas dans MobileNavBar, pas dans le drawer "Plus", pas dans DesktopHeader. L'utilisateur doit connaître l'URL `/leaderboard` pour y accéder.
+
+### 4. Bugs QA initiaux (BUGS.md)
+
+| Ref | Issue | Testeurs | Statut |
+|-----|-------|----------|--------|
+| P2 "Access Leaderboard" | /leaderboard → page avec filtres | 1 (Student) | CODE EXISTE mais pas dans la nav |
+| P2 "Pagination 20/page" | Navigation paginée | 1 (Student) | IMPLÉMENTÉ |
+| P3 "Leaderboard" | Table horizontale scrollable, podium, rang perso | 1 (Student) | "no leader board" → pas trouvable |
+
+**Cause racine** : le code backend+frontend est complet et fonctionnel, mais la page est **invisible** — aucun lien dans la navigation ne pointe vers /leaderboard.
+
+### 5. Questions design — recommandations
+
+| # | Question | Recommandation |
+|---|----------|----------------|
+| 1 | Périodes | All time + week/month (déjà implémentés, basés sur lastLoginAt — acceptable MVP) |
+| 2 | Filtres | Déjà faits (global/pays/région/école). OK. |
+| 3 | Visibilité | MVP : tous visibles. Toggle "anonyme" en Phase 6. |
+| 4 | Podium top 3 | Déjà implémenté (3 cartes séparées). |
+| 5 | Position user | Déjà implémenté (insertion + section "Mon rang"). |
+| 6 | Mise à jour | Refresh au mount. Pas de SSE nécessaire. |
+
+### 6. Plan de fix proposé
+
+Le Leaderboard est fonctionnellement complet. Il manque uniquement **l'accessibilité dans la navigation**.
+
+| Sous-tâche | Description | Effort |
+|------------|-------------|--------|
+| **4.2.1** | Ajouter lien "Classement" dans MobileNavBar (drawer "Plus") et DesktopHeader | Trivial (5-10 lignes) |
+| **4.2.2** | Audit visuel : vérifier dark theme cohérent, responsive mobile, pas de bugs d'affichage | Léger |
+| **4.2.3** | Tests : route accessible, API retourne des données, navigation link existe | Léger |
+
+---
+
+**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
