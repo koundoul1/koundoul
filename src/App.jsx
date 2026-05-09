@@ -37,6 +37,7 @@ const DiscussionDetail = lazy(() => import('./pages/DiscussionDetail'))
 const CreateDiscussion = lazy(() => import('./pages/CreateDiscussion'))
 const EducationalResources = lazy(() => import('./pages/EducationalResources'))
 const VirtualCoach = lazy(() => import('./pages/VirtualCoach'))
+const NotificationsPage = lazy(() => import('./pages/Notifications'))
 const InteractiveVisualizations = lazy(() => import('./pages/InteractiveVisualizations'))
 const MicroLessons = lazy(() => import('./pages/MicroLessons'))
 const MicroLessonDetail = lazy(() => import('./pages/MicroLessonDetail'))
@@ -139,6 +140,7 @@ function AppLayout() {
             <Route path="/challenge" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
             <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
             <Route path="/badges" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><Badges /></Layout></Suspense></ProtectedRoute>} />
+            <Route path="/notifications" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><NotificationsPage /></Layout></Suspense></ProtectedRoute>} />
             <Route path="/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
             <Route path="/flashcards/review" element={<ProtectedRoute><FlashcardsReview /></ProtectedRoute>} />
             <Route path="/forum" element={<ProtectedRoute><Forum /></ProtectedRoute>} />
