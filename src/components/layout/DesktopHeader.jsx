@@ -20,6 +20,7 @@ import {
   BookOpen,
   Home,
   Award,
+  Medal,
   MessageSquare,
   Repeat,
   Calculator,
@@ -102,6 +103,7 @@ const DesktopHeader = () => {
     { name: t('nav.revisions'), href: '/flashcards', icon: Repeat },
     { name: t('nav.forum'), href: '/forum', icon: MessageSquare },
     { name: t('nav.badges'), href: '/badges', icon: Award },
+    { name: 'Classement', href: '/leaderboard', icon: Medal },
     { name: t('nav.resources'), href: '/resources', icon: BookOpen },
   ]
 

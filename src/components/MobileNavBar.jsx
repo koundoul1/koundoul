@@ -85,6 +85,7 @@ const MobileNavBar = () => {
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏' },
     { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬' },
     { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
+    { name: 'Classement', href: '/leaderboard', icon: Trophy, emoji: '🏆' },
     { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
     { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚' },
     { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '📊' },
