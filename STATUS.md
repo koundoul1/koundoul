@@ -1669,4 +1669,48 @@ Le backend ET le frontend sont déjà implémentés. Le travail Phase 4.4 est pr
 
 ---
 
-**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
+**AUDIT TERMINÉ — implementation ci-dessous.**
+
+---
+
+## Phase 4.4 — Implementation Duels
+
+**Date** : 2026-05-09
+
+### Commits
+
+```
+dc85af8 fix(duels): normalize status to lowercase in seed
+2a0cc79 fix(duels): defensive guards on creation and rendering
+43cb602 feat(duels): auto-expire stale duels via cron job
+953b9f4 test(duels): add 13 regression tests for Phase 4.4
+```
+
+### Cause racine du bug "11 issues"
+
+Le bug #1 ("blank page" a la creation) avait 2 causes probables :
+1. **Seed avec status UPPERCASE** : `seedDuel.js` creait un duel avec `status: 'PENDING'` mais les routes filtrent sur `'pending'` (lowercase) → duel invisible
+2. **Pas de gestion de l'echec** : `createDuel()` ne gerait pas le cas `!response.data` → silence au lieu d'erreur visible
+
+Les 10 autres issues sont des consequences en cascade : le testeur n'a jamais pu creer de duel fonctionnel → tout le reste etait inatteignable.
+
+### Corrections
+
+- **Seed fix** : `'PENDING'` → `'pending'`
+- **Frontend** : gestion explicite de l'echec creation avec message d'erreur, guards null sur le rendu
+- **Cron duel cleanup** : expire les duels pending/active dont expiresAt < now (toutes les 5 min)
+- **Notification expiration** : le createur est notifie quand son duel expire
+
+### PROTOCOLE STRICT applique
+
+- `node -c` : index.js, duels.js, duelCleanupJob.js, seedDuel.js — tous OK
+- Grep curly quotes : CLEAN
+- 160 tests verts, 0 erreurs lint
+
+### Tests manuels recommandes en prod
+
+- [ ] Creer un duel → invite code affiche (pas de blank page)
+- [ ] Copier le code → partager → l'autre user rejoint
+- [ ] Les 2 jouent → resultats affiches avec score et XP
+- [ ] Duel non joue sous 24h → status passe en 'expired' (verifier logs Render)
+- [ ] Onglet "Mes Duels" → historique visible avec stats W/L/D
