@@ -993,3 +993,87 @@ Reconstruction complète en chat conversationnel :
 **Cause racine** : KaTeX rend chaque formule en deux spans internes — `.katex-mathml` (MathML, normalement caché par CSS) et `.katex-html` (rendu visuel). Quand le CSS KaTeX charge dans un chunk lazy-loadé, Tailwind Preflight peut interférer avec les règles `clip`/`position:absolute` qui cachent le span MathML. Résultat : les deux spans affichent le texte brut côte à côte.
 
 **Fix** : `.katex-mathml { display: none !important; }` dans `index.css` après les imports Tailwind — garantit que le span MathML est toujours caché quel que soit l'ordre de chargement CSS.
+
+---
+
+## Phase Tarif.1 — Backend stratégie tarifaire
+
+**Date** : 2026-05-09
+
+### Commits
+
+```
+35ec571 feat(quota): add DailyAiUsage table and plan quota columns
+3bbb538 feat(plans): update subscription plans with new pricing strategy
+6d0aa00 feat(quota): implement aiQuotaService for plan-based limits
+2218dc8 feat(quota): add quota middleware on Solver and Coach endpoints
+2871d6d feat(quota): expose GET /api/ai-quota for frontend display
+d5a4f9b test(quota): add 13 regression tests for quota logic
+```
+
+### Grille tarifaire
+
+| Plan | Prix | Appels IA/jour | maxChildren |
+|------|------|----------------|-------------|
+| FREE | 0 FCFA | 6 | 0 |
+| PREMIUM | 5 000/mois | 50 | 0 |
+| PREMIUM_YEARLY | 45 000/an | 50 | 0 |
+| PREMIUM_MAX | 10 000/mois | 300 | 0 |
+| PREMIUM_MAX_YEARLY | 90 000/an | 300 | 0 |
+| FAMILY | 18 000/mois | 100/enfant | 3 |
+| FAMILY_YEARLY | 162 000/an | 100/enfant | 3 |
+
+### Migration DB (CRITIQUE — appliquer AVANT merge)
+
+**Fichier** : `backend/prisma/migrations/20260509000000_add_ai_quota/migration.sql`
+
+```sql
+ALTER TABLE "subscription_plans" ADD COLUMN IF NOT EXISTS "aiCallsPerDay" INTEGER NOT NULL DEFAULT 6;
+ALTER TABLE "subscription_plans" ADD COLUMN IF NOT EXISTS "maxChildren" INTEGER NOT NULL DEFAULT 0;
+
+CREATE TABLE IF NOT EXISTS "daily_ai_usage" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "date" DATE NOT NULL,
+    "count" INTEGER NOT NULL DEFAULT 0,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "daily_ai_usage_pkey" PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "daily_ai_usage_userId_date_key" ON "daily_ai_usage"("userId", "date");
+CREATE INDEX IF NOT EXISTS "daily_ai_usage_userId_date_idx" ON "daily_ai_usage"("userId", "date");
+ALTER TABLE "daily_ai_usage" ADD CONSTRAINT "daily_ai_usage_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+```
+
+Les 7 plans seront insérés automatiquement au démarrage du backend via `initPlans.js`.
+
+### Architecture quota
+
+```
+Request (POST /solver/solve ou /coach/chat)
+  → authenticateToken (JWT)
+  → checkAiQuota middleware
+    → checkQuota(userId)
+      → getUserPlan: own sub > parent family sub > FREE
+      → DailyAiUsage lookup (today UTC)
+      → allowed = used < limit
+    → Si !allowed: 429 { quotaReached, plan, limit, used, resetAt }
+  → Gemini stream
+  → Si succès: incrementUsage(userId) (upsert atomic)
+```
+
+### Tests
+
+- 13 nouveaux tests : total suite **97 tests, tous verts**
+- `npm run lint` : 0 erreurs, 524 warnings (exit 0)
+
+### Tests manuels recommandés en prod après deploy
+
+- [ ] GET /api/ai-quota → retourne plan FREE avec limit=6 pour un user sans abonnement
+- [ ] POST /solver/solve → fonctionne normalement, daily_ai_usage incrémenté en DB
+- [ ] Après 6 appels Solver/Coach : le 7ème retourne 429 avec quotaReached=true
+- [ ] Un user avec abonnement PREMIUM actif → limit=50
+- [ ] Un enfant lié à un parent FAMILY → hérite du quota 100/jour
+
+### En attente
+
+Push sur main bloqué — migration SQL doit être appliquée en prod AVANT le merge.
