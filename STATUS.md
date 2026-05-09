@@ -1074,6 +1074,46 @@ Request (POST /solver/solve ou /coach/chat)
 - [ ] Un user avec abonnement PREMIUM actif → limit=50
 - [ ] Un enfant lié à un parent FAMILY → hérite du quota 100/jour
 
-### En attente
+---
 
-Push sur main bloqué — migration SQL doit être appliquée en prod AVANT le merge.
+## Phase Tarif.2 — Frontend stratégie tarifaire
+
+**Date** : 2026-05-09
+
+### Commits
+
+```
+e02d433 feat(quota): add useAiQuota hook and api client
+52c2595 feat(quota): add AiQuotaBadge, QuotaReachedModal, and proactive toast
+8c097ac feat(subscriptions): rewrite page with 4 plans and yearly toggle
+565e0c7 test(quota): add 13 UI regression tests for quota system
+```
+
+### Composants créés
+
+| Composant | Description |
+|-----------|-------------|
+| `useAiQuota` | Hook : fetch quota, refresh auto 5min, toast proactif à 80% |
+| `AiQuotaBadge` | Pill "X/Y appels IA" vert/orange/rouge, cliquable → /subscriptions |
+| `QuotaReachedModal` | Modale upsell sur 429 avec countdown, messaging par plan |
+| `Subscriptions.jsx` | 4 cartes + toggle Mensuel/Annuel + FAQ + savings |
+
+### Intégrations
+
+- **Solver.jsx** : badge dans le header, modal sur 429, toast proactif, refreshQuota après succès
+- **VirtualCoach.jsx** : idem (header chat, modal, toast)
+- **api.js** : `api.aiQuota.get()`, SSE error handlers passent quotaData sur 429
+
+### Tests
+
+- 13 nouveaux tests UI : total suite **110 tests, tous verts**
+- `npm run lint` : 0 erreurs, 526 warnings (exit 0)
+
+### Tests manuels recommandés en prod après deploy
+
+- [ ] Page /subscriptions : 4 cartes visibles, toggle Mensuel/Annuel change les prix
+- [ ] Badge quota visible sur Solver et Coach (X/Y appels IA)
+- [ ] 6 résolutions Solver en FREE → la 7ème ouvre la modale d'upsell (pas le message brut)
+- [ ] Modale : countdown affiché, bouton "Voir les plans" redirige vers /subscriptions
+- [ ] Toast proactif : apparaît quand on atteint 80% du quota (5ème appel sur FREE)
+- [ ] Badge couleur : vert > 50%, orange 20-50%, rouge < 20%
