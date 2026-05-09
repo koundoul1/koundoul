@@ -1117,3 +1117,133 @@ e02d433 feat(quota): add useAiQuota hook and api client
 - [ ] Modale : countdown affiché, bouton "Voir les plans" redirige vers /subscriptions
 - [ ] Toast proactif : apparaît quand on atteint 80% du quota (5ème appel sur FREE)
 - [ ] Badge couleur : vert > 50%, orange 20-50%, rouge < 20%
+
+---
+
+## Phase 4.1 — Audit Notifications
+
+**Date** : 2026-05-09
+
+### 1. Backend — état existant
+
+#### Routes (`backend/src/routes/notifications.js`)
+
+| Méthode | Path | Description | Fonctionne ? |
+|---------|------|-------------|-------------|
+| GET | `/notifications/stream` | SSE temps réel, heartbeat 30s, `authenticateToken` | OUI côté serveur, mais 401 côté client (voir diagnostic) |
+| GET | `/notifications` | Liste 20 dernières notifs + unreadCount | OUI |
+| PUT | `/notifications/:id/read` | Marquer une notif comme lue | OUI |
+| PUT | `/notifications/read-all` | Marquer toutes comme lues | OUI |
+
+#### Service (`backend/src/utils/notificationService.js`)
+
+Fonctions exportées : `addConnection`, `removeConnection`, `pushToUser`, `sendNotification`.
+
+`sendNotification(userId, type, title, message, data)` fait deux choses :
+1. Crée une entrée en DB (Prisma `notification.create`)
+2. Pousse via SSE à toutes les connexions actives du user (`pushToUser`)
+
+Connexions actives stockées dans un `Map<userId, Set<response>>` en mémoire.
+
+#### Schéma DB (`model Notification`)
+
+| Champ | Type | Description |
+|-------|------|-------------|
+| id | String (cuid) | PK |
+| userId | String | FK → users |
+| type | String | duel_invite, badge_earned, level_up, payment_confirmed, streak_reminder, challenge_start, new_message |
+| title | String | Titre de la notif |
+| message | String | Corps |
+| data | Json? | Metadata optionnelle (badgeId, duelId, etc.) |
+| isRead | Boolean (default false) | Lu/non-lu |
+| createdAt | DateTime | Timestamp |
+
+Index : `(userId, isRead)` + `(userId, createdAt)`. Table existe en prod.
+
+#### Sources d'événements — qui crée des notifications ?
+
+| Source | Type | Fichier | Implémenté ? |
+|--------|------|---------|-------------|
+| Badge débloqué | `badge_earned` | gamification.js:162 | OUI |
+| Level up | `level_up` | gamification.js:51 | OUI |
+| Duel accepté | `duel_invite` | duels.js:210 | OUI |
+| Duel terminé (win/lose/draw) | `duel_invite` | duels.js:480-484 | OUI (4 points) |
+| Paiement confirmé | `payment_confirmed` | payments.js:237 | OUI |
+| Streak reminder | `streak_reminder` | — | NON implémenté |
+| Challenge weekly | `challenge_start` | — | NON implémenté |
+| New forum message | `new_message` | — | NON implémenté |
+| Quota IA proche | — | — | Géré par toast frontend (Tarif.2), pas de notif persistante |
+
+**Total : 8 points de création actifs** (gamification 2, duels 5, payments 1).
+
+### 2. Frontend — état existant
+
+#### Composants
+
+| Fichier | Description | Fonctionnel ? |
+|---------|-------------|---------------|
+| `NotificationBell.jsx` (194 lignes) | Bell icon avec dropdown, compteur non-lus, toast 4s, navigation par type | OUI (connecté à useNotifications) |
+| `FlashcardsDueNotification.jsx` (86 lignes) | Banner flashcards à réviser (bottom-right) | OUI (indépendant) |
+
+#### Hook (`useNotifications.js`, 186 lignes)
+
+- **Connexion SSE** : utilise `fetch()` avec `Authorization: Bearer` header (pas EventSource natif — correct, permet les headers custom)
+- **Parse SSE** : split `\n\n`, extrait `data:` lines
+- **Reconnexion** : backoff exponentiel (1s → 2s → 4s → ... → 30s max)
+- **Son** : sine wave 800Hz via Web Audio API
+
+#### Intégration
+
+- `TopBar.jsx:163` : `<NotificationBell />` pour desktop (authentifié uniquement)
+- `MobileHeader.jsx:108` : bell icon statique (placeholder, NON connecté au hook)
+- `DesktopHeader.jsx:148` : bell icon statique (placeholder, NON connecté au hook)
+- `App.jsx:95` : `<FlashcardsDueNotification />` (authentifié uniquement)
+
+### 3. Diagnostic du bug 401 en boucle
+
+**Cause racine identifiée** : `useNotifications.js` lignes 95-103.
+
+Le hook utilise `fetch()` (pas EventSource natif — c'est bien car ça permet le header Authorization). MAIS quand le fetch reçoit une réponse 401 :
+1. Le code ne vérifie PAS `response.ok` ou `response.status === 401`
+2. L'erreur tombe dans le `.catch()` générique (ligne 101-102)
+3. `scheduleReconnect()` est appelé → backoff exponentiel jusqu'à 30s
+4. Après 30s, reconnexion → 401 → reconnexion → 401 → boucle infinie
+
+**Pourquoi le 401 arrive** : le token JWT expire (1h par défaut) ou l'utilisateur n'est pas authentifié (page ouverte sans login). Le hook tente quand même la connexion SSE.
+
+**Solution recommandée** : Option 2 du brief (fetch avec ReadableStream, pattern déjà utilisé par Solver/Coach). Le fix est dans le hook frontend :
+1. Vérifier `response.ok` après le fetch
+2. Si `response.status === 401` → NE PAS reconnecter, loguer l'erreur
+3. Si `response.status >= 500` → reconnecter avec backoff
+4. Si connexion perdue (réseau) → reconnecter avec backoff
+5. Reset `retryCountRef` après une connexion réussie
+
+### 4. Fonctionnalités attendues (BUGS.md) vs implémentées
+
+| Fonctionnalité | BUGS.md ref | Implémenté ? |
+|----------------|-------------|-------------|
+| Bell icon avec badge rouge + compteur | P2 "Red bell badge" (2 testeurs) | OUI dans TopBar, NON sur mobile |
+| Icônes par type (badge, duel, streak, payment) | P2 "Types with icons" (2 testeurs) | OUI (emojis dans NotificationBell) |
+| Notification "Someone joined your challenge" | P1 "Duel notification received" | OUI (duels.js:210) |
+| Badge "Première Leçon" + notification | P1 "Earn first lesson badge" | OUI (gamification.js:162) |
+| Toggle notifications dans profil | P2 "Toggle notifications" | NON (champ `notificationsEnabled` existe en DB mais pas utilisé) |
+| Page /notifications avec historique | — | NON (pas de page dédiée) |
+| Notifications push mobile | — | NON (hors scope MVP) |
+| Notifications email | — | NON (hors scope MVP) |
+
+### 5. Plan de fix proposé
+
+| Sous-tâche | Description | Effort |
+|------------|-------------|--------|
+| **4.1.1** | Fix bug 401 SSE : vérifier `response.ok`, arrêter la reconnexion sur 401, reset retry count sur succès | Trivial (10 lignes) |
+| **4.1.2** | Connecter la bell mobile : remplacer le placeholder dans MobileHeader par le vrai `<NotificationBell />` | Trivial (5 lignes) |
+| **4.1.3** | Ajouter notification "Quota IA à 80%" : créer une notif persistante en DB quand le toast proactif se déclenche (1x/jour max) | Léger |
+| **4.1.4** | Page /notifications : historique scrollable avec filtres par type, mark-as-read en bulk | Modéré |
+| **4.1.5** | Respecter `notificationsEnabled` : si user l'a désactivé, ne pas envoyer de push SSE (la DB stocke quand même) | Léger |
+| **4.1.6** | Tests : 6+ tests (401 arrête la reconnexion, notif créée sur badge, bell affiche unreadCount, etc.) | Léger |
+
+**Priorité recommandée** : 4.1.1 d'abord (le bug 401 pollue les logs prod et la facture Render), puis 4.1.2 (quick win mobile), puis le reste.
+
+---
+
+**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
