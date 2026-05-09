@@ -1803,4 +1803,171 @@ Flow : parent genere code 8 chars via `POST /parent/invite` → enfant entre le 
 
 ---
 
-**AUDIT TERMINE — en attente d'instructions pour l'implementation.**
+**AUDIT v1 TERMINE — audit REVISE ci-dessous.**
+
+---
+
+## Phase 3.1 — Audit REVISE Settings + Auth telephone + Famille matching
+
+**Date** : 2026-05-09
+
+### 1. Backend existant — auth
+
+#### Login actuel (auth.js L108-167)
+- Email + password (bcrypt) uniquement
+- JWT 7j avec `{ userId, email, is_admin, is_super_admin }`
+- Rate limiting : 5 tentatives / 15 min (express-rate-limit L9-16)
+- Pas de lockout par compte (lockout par IP seulement)
+
+#### Register actuel (auth.js L28-105)
+- Email + password obligatoires, username optionnel
+- Password min 8 chars, bcrypt hash
+- Pas de champ telephone, pas de PIN
+
+#### Middleware auth (middlewares/auth.js)
+- `authenticateToken` : verifie JWT Bearer token
+- `optionalAuth` : JWT optionnel (pour endpoints publics)
+- `requireAdmin` : verifie is_admin en DB
+- Pas de logique telephone/PIN
+
+### 2. Schema DB User — champs existants vs manquants
+
+**EXISTANT** (42 champs) :
+- `email` (String, unique) — auth principale
+- `password` (String) — bcrypt hash
+- `phone` (String?) — champ EXISTE mais pas utilise pour l'auth, juste informatif
+- `invitationCode` (String?, unique) — pour systeme famille codes 8 chars
+- `parentInvitationCode` (String?) — code du parent utilise a l'inscription
+- `parentId` (String?) — ID du parent lie
+- `isParent` (Boolean?, default false)
+
+**MANQUANT** pour auth telephone+PIN :
+- `phoneNumber` TEXT UNIQUE NULL — format E.164 (+221771234567), indexable, distinct du champ `phone` actuel (non normalise)
+- `pinHash` TEXT NULL — bcrypt hash du PIN 4 chiffres
+- `loginAttemptsCount` INT DEFAULT 0 — compteur tentatives echouees
+- `lockedUntil` TIMESTAMP NULL — lockout jusqu'a cette date
+
+**MANQUANT** pour famille matching telephone :
+- `pendingParentPhone` TEXT NULL — numero du parent entre par l'enfant, en attente de matching
+
+### 3. Migration DB requise
+
+```sql
+-- Auth telephone + PIN
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "phoneNumber" TEXT UNIQUE;
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "pinHash" TEXT;
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "loginAttemptsCount" INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "lockedUntil" TIMESTAMP(3);
+
+-- Famille matching telephone
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "pendingParentPhone" TEXT;
+
+-- Index pour login par telephone
+CREATE UNIQUE INDEX IF NOT EXISTS "users_phoneNumber_key" ON "users"("phoneNumber") WHERE "phoneNumber" IS NOT NULL;
+CREATE INDEX IF NOT EXISTS "users_pendingParentPhone_idx" ON "users"("pendingParentPhone") WHERE "pendingParentPhone" IS NOT NULL;
+```
+
+### 4. Systeme famille existant — codes 8 chars
+
+**FONCTIONNE** : parent genere code via `POST /parent/invite` → enfant entre code via `POST /parent/link` → `parent_child_links` cree. Max 5 enfants (parent.js L6). Expiry 7j. Unlink bidirectionnel. Cascade delete.
+
+**Coexistence** : ce systeme reste intact pour les comptes email/password existants. Le nouveau matching telephone s'ajoute EN PARALLELE, pas en remplacement.
+
+### 5. Frontend existant
+
+#### Login.jsx
+- 1 champ email + 1 champ password. Pas de detection telephone. Pas de PIN.
+
+#### Register.jsx
+- Champs : firstName, lastName, username, email, password, confirmPassword. Pas de telephone, pas de PIN.
+
+#### Profile.jsx (982 lignes)
+- Info perso, langue, localisation, securite (changement mdp), panel parent/enfant, abonnement, stats
+- **PAS de** : champ telephone, PIN, toggle notifications, suppression compte
+
+#### Navigation
+- `/settings` → 404 (tout est dans `/profile`)
+
+### 6. Bugs QA Settings (6 issues) — rappel
+
+| # | Issue | Cause |
+|---|-------|-------|
+| S1 | /settings → 404 | Pas de route, tout dans /profile |
+| S2 | Toggle notifications | Pas de toggle UI |
+| S3 | Changer langue | Existe dans Profile (accessible via /profile, pas /settings) |
+| S4 | Privacy section | Hors scope MVP |
+| S5 | Delete account | Ni backend ni frontend |
+| S6 | Mobile settings | = S1 |
+
+### 7. Securite PIN — risques documentes
+
+- PIN 4 chiffres = 10 000 combinaisons → brute force en ~30 min sans protection
+- **Mitigation** : lockout compte apres 5 essais en 10 min → bloque 1h (loginAttemptsCount + lockedUntil)
+- Rate limiting IP existant (5/15min) + lockout compte = double protection
+- PIN stocke en bcrypt (jamais en clair)
+- Compte telephone-only + PIN oublie = **compte perdu** (limitation MVP documentee)
+
+### 8. Logique login dual — design
+
+```
+POST /auth/login { identifier, credential }
+  |
+  identifier commence par "+" et que chiffres ?
+    OUI → chercher User par phoneNumber
+           comparer credential vs pinHash (bcrypt)
+           verifier lockout (lockedUntil > now → 423 Locked)
+           si echec → incrementer loginAttemptsCount
+           si loginAttemptsCount >= 5 → lockedUntil = now + 1h
+    NON → chercher User par email (existant)
+           comparer credential vs password (bcrypt)
+           (rate limiting IP existant suffit)
+  |
+  succes → JWT identique ({ userId, email/phone })
+```
+
+### 9. Logique famille matching telephone — design
+
+```
+Enfant dans Settings entre "telephone de mon parent" (+221XXXXXXXXX)
+  → stocke dans User.pendingParentPhone
+  → cherche si un User avec phoneNumber = ce numero existe deja
+    OUI → creer parent_child_links immediatement
+    NON → rien (en attente)
+
+Parent s'inscrit avec phoneNumber = +221XXXXXXXXX
+  → POST /auth/register cree le User
+  → apres creation : chercher tous les User avec
+    pendingParentPhone = phoneNumber
+  → pour chaque match : creer parent_child_links (max 3)
+  → notifier parent et enfant(s)
+```
+
+### 10. Plan en 11 sous-taches
+
+| # | Tache | Effort |
+|---|-------|--------|
+| **3.1.1** | Migration DB : phoneNumber, pinHash, loginAttemptsCount, lockedUntil, pendingParentPhone | Trivial |
+| **3.1.2** | Backend auth dual : modifier POST /login pour detecter email vs telephone, ajouter lockout | Modere |
+| **3.1.3** | Backend register dual : modifier POST /register pour accepter telephone+PIN ou email+password | Modere |
+| **3.1.4** | Backend routes PIN : POST /auth/set-pin, POST /auth/change-pin (depuis Settings) | Leger |
+| **3.1.5** | Backend famille matching : POST /settings/family/link-by-phone + trigger auto au register | Modere |
+| **3.1.6** | Backend DELETE /auth/delete-account avec confirmation password ou PIN | Leger |
+| **3.1.7** | Frontend Login : champ unifie + detection email/telephone, affichage password ou PIN, message recuperation | Modere |
+| **3.1.8** | Frontend Register : choix email ou telephone, composants PhoneInput + PinInput, indicatif +221 | Modere |
+| **3.1.9** | Frontend Settings/Profile : sections telephone+PIN, telephone parent, toggle notifs, supprimer compte | Modere |
+| **3.1.10** | Frontend redirect /settings → /profile | Trivial |
+| **3.1.11** | Tests Vitest (12+ backend + 8+ frontend) | Modere |
+
+**Estimation totale** : 4-5h Claude.
+
+### 11. Risques identifies
+
+1. **Coexistence 2 systemes auth** : le login doit gerer email/password ET telephone/PIN sans confusion. Risque de regression sur le login email existant si mal code.
+2. **Coexistence 2 systemes famille** : codes 8 chars + matching telephone doivent cohabiter. Les liens existants ne doivent PAS etre casses.
+3. **PIN brute force** : le lockout est critique. Si oublie, le PIN est aussi vulnérable qu'un code de carte bancaire.
+4. **Compte telephone-only irrecuperable** : si PIN oublie et pas d'email associe, le compte est perdu. Doit etre clairement communique a l'inscription.
+5. **Format E.164** : le numero doit etre normalise (+221771234567, pas 0771234567). Le frontend doit forcer le format.
+
+---
+
+**AUDIT REVISE TERMINE — en attente d'instructions pour l'implementation.**
