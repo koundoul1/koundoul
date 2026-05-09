@@ -1714,3 +1714,93 @@ Les 10 autres issues sont des consequences en cascade : le testeur n'a jamais pu
 - [ ] Les 2 jouent → resultats affiches avec score et XP
 - [ ] Duel non joue sous 24h → status passe en 'expired' (verifier logs Render)
 - [ ] Onglet "Mes Duels" → historique visible avec stats W/L/D
+
+---
+
+## Phase 3.1 — Audit Settings
+
+**Date** : 2026-05-09
+
+### 1. Backend — etat existant
+
+#### Routes existantes
+
+| Fichier | Route | Description | Fonctionne ? |
+|---------|-------|-------------|-------------|
+| auth.js:170 | `GET /auth/profile` | Profil basique (nom, email, XP) | OUI |
+| auth.js:201 | `PUT /auth/profile` | Modifier firstName/lastName/username | OUI |
+| auth.js:244 | `PUT /auth/change-password` | Changer mdp (valide ancien, min 8 chars) | OUI |
+| users.js:7 | `GET /users/profile` | Profil etendu (location, invitation, isParent) | OUI |
+| users.js:53 | `PUT /users/profile` | Dupliquer de auth — met a jour nom/username | OUI |
+| users.js:196 | `POST /users/generate-invitation-code` | Genere code 8 chars pour parent | OUI |
+| users.js:240 | `PUT /users/location` | Modifier country/region/department/school | OUI |
+| parent.js:20 | `POST /parent/invite` | Genere code invitation parent (7j expiry) | OUI |
+| parent.js:76 | `POST /parent/link` | Enfant se lie au parent via code 8 chars | OUI |
+| parent.js:180 | `DELETE /parent/unlink/:childId` | Parent delie un enfant | OUI |
+| parent.js:229 | `DELETE /parent/unlink-self` | Enfant se delie du parent | OUI |
+| parent.js:271 | `GET /parent/children` | Liste des enfants lies | OUI |
+| admin.js:259 | `DELETE /admin/users/:id` | Suppression user (admin only, 18 etapes cascade) | OUI |
+
+**MANQUANT** : `DELETE /auth/delete-account` — suppression par l'utilisateur lui-meme. Seul l'admin peut supprimer. A creer.
+
+#### Schema DB User (42 champs)
+
+Champs pertinents pour Settings : `firstName`, `lastName`, `email`, `username`, `password`, `avatar`, `bio`, `phone`, `country` (default "SN"), `region`, `department`, `school`, `language` (default "fr"), `timezone` (default "Africa/Dakar"), `notificationsEnabled` (default true), `invitationCode` (unique), `parentInvitationCode`, `parentId`, `isParent`, `preferences` (Json).
+
+#### Systeme invitation famille — EXISTE ET FONCTIONNE
+
+Migration `20250215000000_add_invitation_codes` : ajoute `invitationCode` et `parentInvitationCode` au model User.
+
+Model `parent_child_links` : `parent_id`, `child_id`, `approved` (default true), timestamps. Cascade delete des 2 cotes. Unique `[parent_id, child_id]`. Max 5 enfants (constante dans parent.js L6).
+
+Flow : parent genere code 8 chars via `POST /parent/invite` → enfant entre le code via `POST /parent/link` → liaison creee. Expiry 7 jours. Unlink bidirectionnel (parent ou enfant).
+
+### 2. Frontend — etat existant
+
+**Page Profile.jsx** (982 lignes) — route `/profile` dans App.jsx. Pas de page `/settings` separee.
+
+| Section | Lignes | Impl. ? | Detail |
+|---------|--------|---------|--------|
+| Info perso (nom, email) | 387-500 | OUI | Mode edition/lecture, save |
+| Langue | 503-524 | OUI | LanguageSwitcher component |
+| Localisation | 526-633 | OUI | 50+ pays africains, regions Senegal |
+| Securite (mdp) | 635-712 | OUI | ancien + nouveau + confirmation, min 8 |
+| Panel parent | 716-819 | OUI | Generer code, liste enfants, unlink |
+| Panel enfant | 823-873 | OUI | Entrer code parent, unlink |
+| Abonnement | 876-887 | OUI | Via SubscriptionSection component |
+| Statistiques | 889-975 | OUI | XP, level, streak, badges, quiz |
+| **Supprimer compte** | — | **NON** | Ni frontend ni backend |
+| **Toggle notifications** | — | **NON** | Champ DB existe mais pas de toggle UI |
+
+**API client** : `auth.changePassword`, `auth.updateProfile`, `users.updateLocation`, `parent.generateInvite`, `parent.linkToParent`, `parent.unlinkChild`, `parent.unlinkSelf`. **Pas de** `deleteAccount`.
+
+**Navigation** : "Profil" dans Sidebar (desktop) + bottom tab (mobile). Pas de lien `/settings`.
+
+**Register.jsx** : PAS de champ code invitation famille a l'inscription. Le lien parent-enfant se fait post-inscription dans Profile.
+
+### 3. Bugs QA initiaux (6 issues Settings + 2 Profile)
+
+| # | Issue | Cause | Statut |
+|---|-------|-------|--------|
+| S1 | `/settings` → 404 | Pas de route `/settings`, tout est dans `/profile` | A FIXER (redirect ou page) |
+| S2 | Toggle notifications | Champ DB `notificationsEnabled` existe mais pas de toggle UI | A CREER |
+| S3 | Changer langue depuis settings | LanguageSwitcher existe dans Profile mais pas accessible depuis `/settings` (404) | FIXE indirectement (dans Profile) |
+| S4 | Privacy section | N'existe pas | HORS SCOPE MVP |
+| S5 | Delete account | Ni backend ni frontend | A CREER |
+| S6 | Mobile settings | `/settings` 404 sur mobile | = S1 |
+| P1 | Profile stats | Stats affichees dans Profile | FIXE |
+| P2 | Change password | Fonctionne dans Profile | FIXE |
+
+### 4. Plan de fix propose
+
+| Sous-tache | Description | Effort |
+|------------|-------------|--------|
+| **3.1.1** | Backend : `DELETE /auth/delete-account` — suppression par l'user avec confirmation password. Reutiliser la cascade de admin.js. | Modere |
+| **3.1.2** | Frontend : ajouter toggle `notificationsEnabled` dans Profile.jsx + appel API `PUT /users/profile` | Trivial |
+| **3.1.3** | Frontend : redirect `/settings` → `/profile` dans App.jsx (fixe le 404 QA) | Trivial |
+| **3.1.4** | Frontend : ajouter section "Supprimer mon compte" avec modale de confirmation (saisir mot de passe) | Leger |
+| **3.1.5** | Tests Vitest | Leger |
+
+---
+
+**AUDIT TERMINE — en attente d'instructions pour l'implementation.**
