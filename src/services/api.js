@@ -746,7 +746,13 @@ const api = {
     updateNotificationLevel: (childId, level) => request(`/parent/notifications/${childId}`, {
       method: 'PUT',
       body: JSON.stringify({ level }),
-    })
+    }),
+    linkByPhone: (data) => request('/parent/link-by-phone', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+    unlinkByPhone: () => request('/parent/link-by-phone', { method: 'DELETE' }),
+    getFamilyStatus: () => request('/parent/family-status')
   },
 
   // 🔔 NOTIFICATIONS

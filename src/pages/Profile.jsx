@@ -35,7 +35,8 @@ import {
   MapPin,
   Bell,
   Trash2,
-  AlertTriangle
+  AlertTriangle,
+  Phone
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -83,6 +84,11 @@ const Profile = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteConfirmation, setDeleteConfirmation] = useState('')
   const [deleting, setDeleting] = useState(false)
+
+  // Phone-based family linking
+  const [parentPhoneInput, setParentPhoneInput] = useState('+221')
+  const [linkingByPhone, setLinkingByPhone] = useState(false)
+  const [familyPhoneStatus, setFamilyPhoneStatus] = useState(null) // null | { pending, parentPhone } | { linked, parentName }
   const [locationSuccess, setLocationSuccess] = useState('')
 
   useEffect(() => {
@@ -356,6 +362,57 @@ const Profile = () => {
       setTimeout(() => setError(''), 3000)
     } finally {
       setSavingLocation(false)
+    }
+  }
+
+  // Load phone-based family status
+  useEffect(() => {
+    if (isAuthenticated) {
+      api.parent.getFamilyStatus?.()?.then(res => {
+        if (res?.success && res.data) {
+          if (res.data.status === 'pending') {
+            setFamilyPhoneStatus({ pending: true, parentPhone: res.data.pendingPhone })
+          } else if (res.data.status === 'linked') {
+            setFamilyPhoneStatus({ linked: true, parentName: res.data.parentName })
+          }
+        }
+      }).catch(() => {})
+    }
+  }, [isAuthenticated])
+
+  const handleLinkByPhone = async () => {
+    if (!parentPhoneInput || parentPhoneInput.replace(/\D/g, '').length < 9) {
+      setError('Numero de telephone invalide')
+      return
+    }
+    setLinkingByPhone(true)
+    try {
+      const res = await api.parent.linkByPhone({ parentPhoneNumber: parentPhoneInput })
+      if (res.success) {
+        if (res.data?.pending) {
+          setFamilyPhoneStatus({ pending: true, parentPhone: res.data.parentPhone })
+          setSuccess('Lien en attente. Demande a ton parent de creer son compte.')
+        } else {
+          setFamilyPhoneStatus({ linked: true, parentName: res.data?.parentName })
+          setSuccess('Lie a ton parent !')
+        }
+        setTimeout(() => setSuccess(''), 3000)
+      }
+    } catch (err) {
+      setError(err.message || 'Erreur de liaison')
+    } finally {
+      setLinkingByPhone(false)
+    }
+  }
+
+  const handleUnlinkByPhone = async () => {
+    try {
+      await api.parent.unlinkByPhone()
+      setFamilyPhoneStatus(null)
+      setSuccess('Lien retire')
+      setTimeout(() => setSuccess(''), 3000)
+    } catch (err) {
+      setError(err.message || 'Erreur')
     }
   }
 
@@ -904,6 +961,59 @@ const Profile = () => {
                         ) : (
                           <><Link2 className="h-4 w-4 mr-1" /> {t('parent.linkButton')}</>
                         )}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Phone-based family linking */}
+            <div className="k-card overflow-hidden" style={{ background: 'rgba(59,130,246,0.06)', borderColor: 'rgba(59,130,246,0.2)' }}>
+              <div className="p-5">
+                <div className="flex items-center mb-3">
+                  <Phone className="h-5 w-5 text-blue-400 mr-2" />
+                  <h3 className="text-lg font-semibold text-white">Lier par telephone</h3>
+                </div>
+
+                {familyPhoneStatus?.linked ? (
+                  <div className="p-4 bg-white/5 rounded-xl border border-blue-500/20">
+                    <p className="text-sm text-gray-300 mb-2">
+                      Lie a <strong className="text-blue-400">{familyPhoneStatus.parentName}</strong>
+                    </p>
+                    <button onClick={handleUnlinkByPhone} className="px-3 py-1.5 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/10 text-xs font-medium flex items-center">
+                      <Unlink className="h-3 w-3 mr-1" /> Retirer le lien
+                    </button>
+                  </div>
+                ) : familyPhoneStatus?.pending ? (
+                  <div className="p-4 bg-white/5 rounded-xl border border-yellow-500/20">
+                    <p className="text-sm text-yellow-300 mb-1">Lien en attente</p>
+                    <p className="text-xs text-gray-400 mb-2">
+                      Numero : {familyPhoneStatus.parentPhone}. Demande a ton parent de creer son compte.
+                    </p>
+                    <button onClick={handleUnlinkByPhone} className="px-3 py-1.5 text-gray-400 border border-gray-600 rounded-lg text-xs">
+                      Annuler
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <p className="text-xs text-gray-400 mb-3">
+                      Entre le numero de telephone de ton parent pour lier vos comptes.
+                    </p>
+                    <div className="flex gap-2">
+                      <input
+                        type="tel"
+                        value={parentPhoneInput}
+                        onChange={(e) => setParentPhoneInput(e.target.value)}
+                        placeholder="+221771234567"
+                        className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                      />
+                      <button
+                        onClick={handleLinkByPhone}
+                        disabled={linkingByPhone}
+                        className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium disabled:opacity-50"
+                      >
+                        {linkingByPhone ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Lier'}
                       </button>
                     </div>
                   </div>
