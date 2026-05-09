@@ -1246,4 +1246,49 @@ Le hook utilise `fetch()` (pas EventSource natif — c'est bien car ça permet l
 
 ---
 
-**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
+**AUDIT TERMINÉ — implémentation ci-dessous.**
+
+---
+
+## Phase 4.1 — Implémentation Notifications
+
+**Date** : 2026-05-09
+
+### Commits
+
+```
+4e3ec31 fix(notifications): stop reconnect loop on 401 SSE
+21abc9c feat(notifications): connect bell on mobile and desktop headers
+3bf17ed feat(notifications): add /notifications page
+2969534 feat(notifications): respect user notificationsEnabled toggle
+6671b46 test(notifications): add 19 regression tests for Phase 4.1
+```
+
+### Résumé des changements
+
+#### 4.1.1 — Fix 401 SSE (CRITIQUE)
+`useNotifications.js` réécrit : vérifie `response.ok` après fetch SSE. Sur 401/403 → arrêt définitif (pas de reconnexion). Sur 5xx/réseau → backoff exponentiel plafonné à 10 tentatives. Retry counter reset sur connexion réussie. Code mort EventSource supprimé.
+
+#### 4.1.2 — Bell mobile + desktop
+MobileHeader et DesktopHeader : bell placeholder remplacé par un `<Link to="/notifications">` avec compteur unreadCount réel (badge rouge, "9+" au-delà de 9). Connecté au hook useNotifications.
+
+#### 4.1.4 — Page /notifications
+Nouvelle page minimaliste : liste verticale de notifs, icône par type (7 types), indicateur non-lu (point bleu + bold), timestamps relatifs en français, click → mark read + navigation, bouton "Tout marquer lu", empty state. Route protégée dans App.jsx.
+
+#### 4.1.5 — Toggle notificationsEnabled
+`sendNotification()` backend vérifie `user.notificationsEnabled` avant de créer. Si false → notification silencieusement ignorée. Exception : `payment_confirmed` passe toujours (type critique).
+
+### Tests
+
+- 19 nouveaux tests : total suite **129 tests, tous verts**
+- `npm run lint` : 0 erreurs, 526 warnings (exit 0)
+
+### Tests manuels recommandés en prod après deploy
+
+- [ ] Console DevTools : ouvrir koundoul.com, PAS de boucle 401 dans la console
+- [ ] Supprimer le token de localStorage → 1 seul 401, pas de boucle
+- [ ] Bell mobile : badge rouge visible avec compteur si notifs non lues
+- [ ] Click bell → page /notifications avec liste de notifs
+- [ ] Click sur une notif → marquée lue (point bleu disparaît) + navigation
+- [ ] "Tout marquer lu" → compteur reset à 0
+- [ ] Empty state si aucune notification
