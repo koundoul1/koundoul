@@ -50,8 +50,22 @@ function pushToUser(userId, eventData) {
  * Send a notification to a user
  * Saves to DB and pushes via SSE if connected
  */
+// Types that always go through regardless of user toggle
+const CRITICAL_TYPES = ['payment_confirmed'];
+
 async function sendNotification(userId, type, title, message, data = null) {
   try {
+    // Respect user's notificationsEnabled toggle (except for critical types)
+    if (!CRITICAL_TYPES.includes(type)) {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { notificationsEnabled: true }
+      });
+      if (user && user.notificationsEnabled === false) {
+        return null;
+      }
+    }
+
     const notification = await prisma.notification.create({
       data: { userId, type, title, message, data }
     });
