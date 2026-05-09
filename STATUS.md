@@ -1970,4 +1970,55 @@ Parent s'inscrit avec phoneNumber = +221XXXXXXXXX
 
 ---
 
-**AUDIT REVISE TERMINE — en attente d'instructions pour l'implementation.**
+**AUDIT REVISE TERMINE — implementation ci-dessous.**
+
+---
+
+## Phase 3.1 — Implementation Settings + Auth telephone + Famille
+
+**Date** : 2026-05-09/10
+
+### Commits
+
+```
+593b9a3 feat(auth): add phone+PIN dual authentication backend
+15ea007 feat(family): phone-based parent-child linking
+73808b6 test(auth): add 28 regression tests for phone+PIN auth
+3de4fcc feat(auth-ui): unified login with email or phone+PIN
+55edb99 feat(profile): add notifications toggle, delete account, /settings redirect
+```
+
+### Migration DB (appliquee en prod)
+
+5 colonnes ajoutees a users : phoneNumber (unique), pinHash, loginAttemptsCount, lockedUntil, pendingParentPhone. 2 index conditionnels.
+
+### Backend
+
+- **Login dual** : detecte email vs telephone automatiquement, verifie password ou PIN bcrypt, lockout apres 5 echecs (1h)
+- **Register dual** : email toujours requis + password OU telephone+PIN. Auto-link famille via pendingParentPhone matching
+- **Set PIN** : depuis Settings, avec confirmation password si existant
+- **Delete account** : confirmation password/PIN, cascade 21 etapes, rate limit 1/h
+- **Famille matching** : POST /parent/link-by-phone (enfant entre num parent), GET /parent/family-status, DELETE /parent/link-by-phone
+
+### Frontend
+
+- **Login.jsx** : champ unifie "Email ou telephone", detection auto, PIN 4 inputs ou password selon mode
+- **Profile.jsx** : toggle notifications, section suppression compte avec modale
+- **App.jsx** : /settings redirige vers /profile (fixe bug QA 404)
+- **api.js** : methodes setPin et deleteAccount ajoutees
+
+### Tests
+
+- 28 nouveaux tests : total suite **188 tests, tous verts**
+- `npm run lint` : 0 erreurs, 527 warnings (exit 0)
+- PROTOCOLE STRICT : node -c sur tous les .js backend, grep curly quotes clean
+
+### Tests manuels recommandes en prod
+
+- [ ] Login email+password existant → fonctionne toujours (regression)
+- [ ] Login telephone+PIN → fonctionne (si compte telephone cree)
+- [ ] 5 echecs login → message lockout "compte verrouille jusqu'a HH:MM"
+- [ ] /settings → redirige vers /profile (plus de 404)
+- [ ] Toggle notifications dans Profile → preference sauvee
+- [ ] Supprimer mon compte → modale, confirmation, suppression + deconnexion
+- [ ] Famille : enfant entre numero parent → lien en attente ou immediat
