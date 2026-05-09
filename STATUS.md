@@ -1541,3 +1541,132 @@ f276217 test(challenges): add 14 regression tests for Phase 4.3
 - [ ] Countdown affiché en haut ("Cette semaine se termine dans...")
 - [ ] Commencer un challenge → QCM + timer → score + XP
 - [ ] Badge "Complété" après soumission
+
+---
+
+## Phase 4.4 — Audit Duels
+
+**Date** : 2026-05-09
+
+### 1. Backend — état existant
+
+**Le backend Duels est COMPLET.** `backend/src/routes/duels.js` (506 lignes), monté sur `/api/duels` (index.js L222).
+
+| Route | Méthode | Auth | Description |
+|-------|---------|------|-------------|
+| `GET /duels` | required | Duels de l'user OU duels publics (`?public=true`) |
+| `GET /duels/my` | required | Tous les duels de l'user + stats (wins/losses/draws) |
+| `GET /duels/history` | required | Historique des duels complétés |
+| `POST /duels` | required | Créer un duel public (tire 10 QCM, génère inviteCode, expire 24h) |
+| `POST /duels/join/:inviteCode` | required | Rejoindre par code → status='active', notif au challenger |
+| `GET /duels/:id` | required | Détail d'un duel (questions masquées si pas complété) |
+| `POST /duels/:id/accept` | required | Accepter un duel public (alt à join) |
+| `POST /duels/:id/start` | required | Démarrer/récupérer les questions (sans réponses) |
+| `POST /duels/:id/submit` | required | Soumettre réponses → score → si les 2 ont joué : winner, XP, notifs |
+
+#### Schéma DB (`model Duel`, schema.prisma L838-872)
+
+Champs : `id`, `challengerId`, `opponentId?`, `subject`, `level`, `difficulty`, `timeLimit` (10min), `questions` (Json), `xpReward` (200), `status` (pending/active/completed), `isPublic`, `inviteCode` (unique), `challengerScore?`, `opponentScore?`, `challengerAnswers?`, `opponentAnswers?`, `challengerTime?`, `opponentTime?`, `winnerId?`, `expiresAt`, `startedAt?`, `completedAt?`, timestamps.
+
+Index : status, challengerId, opponentId, isPublic+status, inviteCode.
+
+#### Matchmaking
+
+**Pas de matchmaking automatique.** Deux modes manuels :
+- **Invitation directe** : créer → partager inviteCode → l'autre rejoint via `/join/:code`
+- **Duels publics** : `GET /duels?public=true` liste les duels en attente, `POST /duels/:id/accept` pour accepter
+
+#### Modèle d'exécution : ASYNCHRONE (tour par tour)
+
+Chaque joueur soumet indépendamment. Le gagnant est déterminé quand le 2ème joueur soumet. Pas de WebSocket, pas de sync temps réel. Timer côté client uniquement (10min).
+
+#### XP via gamification (L450-454)
+
+- Gagnant : 200 XP (`processAction` type='win_duel')
+- Perdant : 50 XP (type='lose_duel')
+- Match nul : 100 XP chacun (type='draw_duel')
+
+#### Notifications (L210, L471-486)
+
+- Duel accepté → notif au challenger ("X a rejoint ton duel")
+- Duel terminé → notif gagnant ("Duel gagné ! +200 XP"), perdant ("X a gagné"), nul ("Match nul ! +100 XP")
+- Type : `duel_invite` pour tous
+
+#### Problèmes identifiés
+
+1. **Pas de nettoyage automatique** : les duels actifs non terminés restent en DB indéfiniment
+2. **Timer côté client uniquement** : le serveur accepte `timeSpent` du client sans vérification
+3. **Race condition** : soumission simultanée des 2 joueurs théoriquement possible (peu probable en pratique)
+4. **Seed incohérent** : `seedDuel.js` crée un duel avec status='PENDING' (majuscule) vs 'pending' (minuscule) dans les routes
+
+### 2. Frontend — état existant
+
+**Tout est dans `Challenge.jsx`** (1362 lignes) — onglet "Duels". Pas de page dédiée.
+
+**Flow complet implémenté** :
+- **Menu** : 3 cartes (Créer / Rejoindre / Mes Duels) + règles + duels publics
+- **Création** : sélection matière/niveau/difficulté → inviteCode affiché + bouton copier
+- **Rejoindre** : input code → valider → lancement
+- **Jeu** : timer 10min + progression + question + 4 options + navigation prev/next + submit
+- **Résultats** : score + comparaison adversaire + revanche
+- **Historique** : stats W/L/D + duels en cours/terminés
+- **Auto-join** : URL `?duel=inviteCode` détecté automatiquement
+
+**API client** : 9 méthodes (api.js L695-712) : getAll, getMy, getById, getHistory, create, joinByCode, accept, start, submit.
+
+**Navigation** : accessible via "Défi" (Trophy icon) dans Sidebar et MobileNavBar bottom tab → `/challenge` → onglet Duels.
+
+### 3. Bugs QA initiaux (11 issues BUGS.md)
+
+| # | Issue | Attendu | Constat | Cause probable |
+|---|-------|---------|---------|----------------|
+| 1 | Create a duel | Invite code + share link | "blank page appear" | Erreur JS frontend lors de la création |
+| 2 | Share invite code | Copyable code or QR | Non testé (dépend du #1) | — |
+| 3 | Join via public list | Browse + accept | Non testé | — |
+| 4 | Join via code | Duel starts, questions displayed | Non testé (dépend du #1) | — |
+| 5 | Duel questions (10 MCQ) | 10 questions + 10min timer | Non testé | — |
+| 6 | Submit duel | Results: Your score vs Opponent | Non testé | — |
+| 7 | Winner XP +200 | 200 XP added | Non testé | — |
+| 8 | Loser XP +50 | 50 XP added | Non testé | — |
+| 9 | Rematch button | New duel same config | Non testé | — |
+| 10 | My Duels — history | W/L/D stats, ongoing, history | Non testé | — |
+| 11 | Duel notification | "Someone joined your challenge!" | Non testé (Phase 4.1 fixée depuis) | — |
+
+**Analyse** : le testeur a été bloqué au #1 (page blanche à la création). Les 10 issues suivantes sont probablement des conséquences du #1 — le testeur n'a jamais pu aller plus loin. Le backend est complet et fonctionnel. Le bug est probablement un crash frontend lors de l'appel `api.duels.create()` ou du traitement de la réponse.
+
+### 4. Questions design — recommandations
+
+| # | Question | Recommandation | Justification |
+|---|----------|----------------|---------------|
+| 1 | Tour-par-tour vs temps réel | **Tour-par-tour** (déjà implémenté) | Plus tolérant aux connexions mobiles Afrique. Pas besoin de WebSocket. |
+| 2 | Matchmaking | **Invitation directe + duels publics** (déjà implémenté) | Queue aléatoire nécessite masse critique d'users connectés. Phase ultérieure. |
+| 3 | Format | **10 questions** (déjà implémenté) | Cohérent avec l'existant. |
+| 4 | Timer | **10 min global** (déjà implémenté) | Pas de timer par question — le joueur gère son temps. |
+| 5 | XP | **Gagnant 200 / Perdant 50 / Nul 100** (déjà implémenté) | Via processAction, cohérent Phase 2A. |
+| 6 | Expiration | **24h** (déjà implémenté) | Suffisant pour partager le code. |
+| 7 | Re-défier | **Oui, sans cooldown** (bouton "Revanche" existe) | Encourage l'engagement. |
+| 8 | Liste duels | **Onglet "Mes Duels"** dans Challenge.jsx (déjà implémenté) | En cours / Terminés / Stats. |
+
+### 5. Diagnostic : pourquoi "blank page" à la création ?
+
+Hypothèses à vérifier en implémentation :
+1. **Pas assez de QCM** : la route POST /duels tire 10 questions filtrées par difficulté. Si la DB n'a pas assez de QCM à la difficulté demandée → erreur 400/500 → crash frontend non géré
+2. **Erreur de parsing réponse** : le frontend attend `response.data.inviteCode` mais le backend renvoie `response.data.duelId` + `response.data.inviteCode` — vérifier la correspondance
+3. **Crash JS** : une erreur non catchée dans `createDuel()` cause un blank screen
+
+### 6. Plan de fix proposé
+
+Le backend ET le frontend sont déjà implémentés. Le travail Phase 4.4 est principalement du **debug et de la stabilisation**, pas une reconstruction.
+
+| Sous-tâche | Description | Effort |
+|------------|-------------|--------|
+| **4.4.1** | Debug création duel : reproduire le "blank page", identifier le crash JS, fixer | Modéré |
+| **4.4.2** | Tester le flow complet localement : créer → copier code → rejoindre (2ème user) → jouer → résultats → XP | Modéré |
+| **4.4.3** | Ajouter nettoyage auto des duels expirés : cron job ou check au démarrage (marquer status='expired' si expiresAt < now et status='pending') | Léger |
+| **4.4.4** | Fix seed incohérent : 'PENDING' (majuscule) → 'pending' (minuscule) dans seedDuel.js | Trivial |
+| **4.4.5** | Vérifier intégration notifications Phase 4.1 : les notifs duel arrivent-elles bien sur la page /notifications ? | Léger |
+| **4.4.6** | Tests Vitest : 6+ tests sur la logique duel (création, join, score, XP, expiration) | Léger |
+
+---
+
+**AUDIT TERMINÉ — en attente d'instructions pour l'implémentation.**
