@@ -815,61 +815,68 @@ const Profile = () => {
               <div className="p-5">
                 <div className="flex items-center mb-3">
                   <Shield className="h-6 w-6 text-kprimary mr-2" />
-                  <h3 className="text-lg font-semibold text-white">{t('parent.title')}</h3>
+                  <h3 className="text-lg font-semibold text-white">Espace Parent</h3>
                 </div>
-                <p className="text-sm text-gray-400 mb-4">
-                  {t('parent.codeDesc')}
-                </p>
 
-                {/* Generate/show parent code */}
-                <div className="mb-4 p-4 bg-white/5 rounded-xl border border-white/10">
-                  {invitationCode ? (
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-400 mb-1">
-                        {t('parent.yourCode')}
-                      </label>
-                      <p className="text-xs text-gray-500 mb-3">
-                        {t('parent.shareCodeDesc')}
-                      </p>
-                      <div className="flex items-center space-x-2">
-                        <code className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg font-mono text-lg font-bold text-white text-center tracking-widest">
-                          {invitationCode}
-                        </code>
-                        <button
-                          onClick={() => {
-                            navigator.clipboard.writeText(invitationCode)
-                            setSuccess(t('common.copiedToClipboard'))
-                            setTimeout(() => setSuccess(''), 2000)
-                          }}
-                          className="px-3 py-2 bg-kprimary text-white rounded-lg hover:bg-kprimary-500 transition-colors"
-                          title={t('actions.copy')}
-                        >
-                          <Copy className="h-4 w-4" />
-                        </button>
-                      </div>
+                {/* Code system — only for email-only accounts (no phoneNumber) */}
+                {!profileData?.phoneNumber && (
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-400 mb-3">
+                      {t('parent.codeDesc')}
+                    </p>
+                    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                      {invitationCode ? (
+                        <div>
+                          <label className="block text-xs font-semibold text-gray-400 mb-1">
+                            {t('parent.yourCode')}
+                          </label>
+                          <div className="flex items-center space-x-2 mt-2">
+                            <code className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg font-mono text-lg font-bold text-white text-center tracking-widest">
+                              {invitationCode}
+                            </code>
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(invitationCode)
+                                setSuccess(t('common.copiedToClipboard'))
+                                setTimeout(() => setSuccess(''), 2000)
+                              }}
+                              className="px-3 py-2 bg-kprimary text-white rounded-lg hover:bg-kprimary-500 transition-colors"
+                            >
+                              <Copy className="h-4 w-4" />
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-center py-2">
+                          <button
+                            onClick={handleGenerateParentCode}
+                            disabled={generatingCode}
+                            className="px-4 py-2 bg-kprimary text-white rounded-xl hover:bg-kprimary-500 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
+                          >
+                            {generatingCode ? (
+                              <><Loader2 className="h-4 w-4 animate-spin mr-2" /> {t('parent.generating')}</>
+                            ) : (
+                              <><UserPlus className="h-4 w-4 mr-2" /> {t('parent.generateCode')}</>
+                            )}
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="text-center py-2">
-                      <button
-                        onClick={handleGenerateParentCode}
-                        disabled={generatingCode}
-                        className="px-4 py-2 bg-kprimary text-white rounded-xl hover:bg-kprimary-500 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
-                      >
-                        {generatingCode ? (
-                          <><Loader2 className="h-4 w-4 animate-spin mr-2" /> {t('parent.generating')}</>
-                        ) : (
-                          <><UserPlus className="h-4 w-4 mr-2" /> {t('parent.generateCode')}</>
-                        )}
-                      </button>
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
+
+                {/* Phone-based parent: no code needed, just show info */}
+                {profileData?.phoneNumber && (
+                  <p className="text-sm text-gray-400 mb-4">
+                    Tes enfants peuvent te lier en entrant ton num&eacute;ro <strong className="text-white">{profileData.phoneNumber}</strong> dans leur espace.
+                  </p>
+                )}
 
                 {/* Linked children */}
-                {parentChildren.length > 0 && (
+                {parentChildren.length > 0 ? (
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-gray-300 mb-2 flex items-center">
-                      <Users className="h-4 w-4 mr-1" /> {t('parent.linkedChildren')} ({parentChildren.length}/5)
+                      <Users className="h-4 w-4 mr-1" /> Mes enfants ({parentChildren.length}/3)
                     </h4>
                     <div className="space-y-2">
                       {parentChildren.map(child => (
@@ -881,17 +888,13 @@ const Profile = () => {
                             <div className="flex items-center gap-3 text-xs text-gray-500 mt-1">
                               <span>{child.xp || 0} XP</span>
                               <span>Lv. {child.level || 1}</span>
-                              <span>{child.streak || 0}d streak</span>
-                              {child.lessonsCompleted !== undefined && (
-                                <span>{child.lessonsCompleted} {t('parent.lessons')}</span>
-                              )}
+                              <span>{child.streak || 0}j streak</span>
                             </div>
                           </div>
                           <button
                             onClick={() => handleUnlinkChild(child.id)}
                             disabled={unlinkingChild === child.id}
                             className="ml-2 p-1.5 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded transition-colors"
-                            title={t('parent.unlinkChild')}
                           >
                             {unlinkingChild === child.id ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
@@ -903,6 +906,8 @@ const Profile = () => {
                       ))}
                     </div>
                   </div>
+                ) : (
+                  <p className="text-sm text-gray-500 mb-4">Aucun enfant li&eacute; pour le moment.</p>
                 )}
 
                 <Link
@@ -910,7 +915,7 @@ const Profile = () => {
                   className="flex items-center justify-center px-4 py-2 bg-white/5 text-kprimary border border-kprimary/30 rounded-xl hover:bg-kprimary/10 transition-colors font-medium text-sm"
                 >
                   <Shield className="h-4 w-4 mr-2" />
-                  {t('parent.dashboard')}
+                  Dashboard Parents
                 </Link>
               </div>
             </div>
