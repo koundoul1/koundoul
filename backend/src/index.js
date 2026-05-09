@@ -266,9 +266,17 @@ const server = app.listen(PORT, async () => {
   if (migrationStatus.migrated) {
     try {
       await initPlans();
-      console.log('✅ Plans d’abonnement initialisés');
+      console.log(‘✅ Plans d’abonnement initialisés’);
     } catch (error) {
-      console.error('❌ Erreur lors de l’initialisation des plans d’abonnement:', error.message);
+      console.error(‘❌ Erreur lors de l’initialisation des plans d’abonnement:’, error.message);
+    }
+
+    // Setup weekly challenge cron + startup catch-up
+    try {
+      const { setupWeeklyChallengeJob } = require(‘./jobs/weeklyChallengeJob’);
+      setupWeeklyChallengeJob();
+    } catch (error) {
+      console.error(‘❌ Erreur cron weekly challenges:’, error.message);
     }
   }
 });
