@@ -16,6 +16,7 @@ import {
   BellOff
 } from 'lucide-react';
 import { useNotifications } from '../hooks/useNotifications';
+import { useTranslation } from '../hooks/useTranslation';
 
 const TYPE_CONFIG = {
   badge_earned: { icon: Award, color: 'text-yellow-400', bg: 'bg-yellow-400/10' },
@@ -52,6 +53,7 @@ function timeAgo(dateStr) {
 const Notifications = () => {
   const navigate = useNavigate();
   const { notifications, unreadCount, markRead, markAllRead } = useNotifications();
+  const { t } = useTranslation();
 
   const handleClick = (notif) => {
     if (!notif.isRead) markRead(notif.id);
@@ -66,7 +68,7 @@ const Notifications = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Bell className="h-6 w-6 text-blue-400" />
-            <h1 className="text-xl font-bold">Notifications</h1>
+            <h1 className="text-xl font-bold">{t('notif.title')}</h1>
             {unreadCount > 0 && (
               <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                 {unreadCount}
@@ -79,7 +81,7 @@ const Notifications = () => {
               className="flex items-center gap-1.5 text-sm text-blue-400 hover:text-blue-300 transition-colors"
             >
               <CheckCheck className="h-4 w-4" />
-              Tout marquer lu
+              {t('notif.markAllRead')}
             </button>
           )}
         </div>
@@ -91,10 +93,10 @@ const Notifications = () => {
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <BellOff className="h-16 w-16 text-gray-600 mb-4" />
             <h2 className="text-lg font-semibold text-gray-400 mb-2">
-              Aucune notification
+              {t('notif.empty')}
             </h2>
             <p className="text-sm text-gray-500">
-              Tu recevras des notifications quand tu gagneras des badges, monteras de niveau, ou recevras un défi.
+              {t('notif.emptyDesc')}
             </p>
           </div>
         ) : (

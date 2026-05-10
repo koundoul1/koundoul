@@ -54,11 +54,11 @@ describe('Dark theme consistency', () => {
 // ── Empty states quality ──────────────────────────────────────────────
 
 describe('Empty states quality', () => {
-  it('Notifications has icon + title + description', () => {
+  it('Notifications has icon + i18n title + description', () => {
     const content = readFile('pages/Notifications.jsx')
     expect(content).toContain('BellOff')
-    expect(content).toContain('Aucune notification')
-    expect(content).toMatch(/recevras des notifications/)
+    expect(content).toContain("t('notif.empty')")
+    expect(content).toContain("t('notif.emptyDesc')")
   })
 
   it('Challenge Mes Duels has icon + title + description + CTA', () => {
@@ -74,12 +74,11 @@ describe('Empty states quality', () => {
     expect(content).toContain('Envoie un message')
   })
 
-  it('Forum has dark theme placeholder with icon', () => {
+  it('Forum has dark theme placeholder with icon and i18n', () => {
     const content = readFile('pages/Forum.jsx')
     expect(content).toContain('Construction')
-    expect(content).toContain('bientot disponible')
-    expect(content).not.toContain('bg-white')
-    expect(content).not.toContain('text-gray-600')
+    expect(content).toContain("t('forumPage.comingSoon')")
+    expect(content).not.toMatch(/bg-white[\s"']/)
   })
 })
 

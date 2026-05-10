@@ -18,12 +18,10 @@ const Forum = () => {
             <Construction className="h-8 w-8 text-kprimary" />
           </div>
           <h2 className="text-xl font-semibold text-gray-300 mb-2">
-            Forum bientot disponible
+            {t('forumPage.comingSoon')}
           </h2>
           <p className="text-sm text-gray-500 max-w-md">
-            Le forum communautaire est en cours de developpement.
-            Tu pourras bientot poser des questions, echanger avec d&apos;autres eleves
-            et partager tes solutions.
+            {t('forumPage.comingSoonDesc')}
           </p>
         </div>
       </div>

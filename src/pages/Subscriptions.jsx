@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from '../hooks/useTranslation';
 
 // Plan card configuration (static — maps DB plan names to UI details)
 const PLAN_UI = {
@@ -39,6 +40,7 @@ const YEARLY_TO_MONTHLY = {
 const Subscriptions = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [allPlans, setAllPlans] = useState([]);
   const [currentSubscription, setCurrentSubscription] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -141,10 +143,10 @@ const Subscriptions = () => {
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black mb-4">
-            Choisis ton plan Koundoul
+            {t('subscriptions.chooseYourPlan')}
           </h1>
           <p className="text-xl text-white/90 mb-8">
-            Tous les contenus sont gratuits. Le Premium te donne plus d&apos;appels IA par jour.
+            {t('subscriptions.allFreeDesc')}
           </p>
 
           {/* Toggle 24h / Mensuel / Annuel */}
@@ -155,7 +157,7 @@ const Subscriptions = () => {
                 billingPeriod === 'daily' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
-              24h
+              {t('subscriptions.toggleDaily')}
             </button>
             <button
               onClick={() => setBillingPeriod('monthly')}
@@ -163,7 +165,7 @@ const Subscriptions = () => {
                 billingPeriod === 'monthly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
-              Mensuel
+              {t('subscriptions.toggleMonthly')}
             </button>
             <button
               onClick={() => setBillingPeriod('yearly')}
@@ -171,7 +173,7 @@ const Subscriptions = () => {
                 billingPeriod === 'yearly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
-              Annuel (-25%)
+              {t('subscriptions.toggleYearly')}
             </button>
           </div>
         </div>
@@ -250,7 +252,7 @@ const Subscriptions = () => {
                   ) : (
                     <>
                       <div className="text-3xl font-black">{formatPrice(plan.price)}</div>
-                      <div className="text-sm text-gray-400">/ {plan.interval === 'yearly' ? 'an' : plan.interval === 'daily' ? '24h' : 'mois'}</div>
+                      <div className="text-sm text-gray-400">/ {plan.interval === 'yearly' ? t('subscriptions.yearly') : plan.interval === 'daily' ? t('subscriptions.daily') : t('subscriptions.monthly')}</div>
                       {savings && (
                         <div className="text-xs text-green-400 mt-1">
                           Économise {formatPrice(savings)}/an
@@ -264,8 +266,7 @@ const Subscriptions = () => {
                 <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
                   <Bot className="w-4 h-4 text-blue-400 flex-shrink-0" />
                   <span className="text-sm font-semibold text-blue-300">
-                    {plan.aiCallsPerDay || 6} appels IA / jour
-                    {(plan.name === 'FAMILY' || plan.name === 'FAMILY_YEARLY') && ' / enfant'}
+                    {plan.aiCallsPerDay || 6} {(plan.name === 'FAMILY' || plan.name === 'FAMILY_YEARLY') ? t('subscriptions.aiCallsPerChild') : t('subscriptions.aiCallsPerDay')}
                   </span>
                 </div>
 
@@ -282,11 +283,11 @@ const Subscriptions = () => {
                 {/* CTA */}
                 {isCurrent ? (
                   <button disabled className="w-full py-3 bg-green-500/20 text-green-400 rounded-xl font-bold border border-green-500/30">
-                    Plan actuel
+                    {t('subscriptions.currentPlan')}
                   </button>
                 ) : isFree ? (
                   <button disabled className="w-full py-3 bg-gray-700 text-gray-500 rounded-xl font-bold">
-                    Inclus
+                    {t('subscriptions.included')}
                   </button>
                 ) : (
                   <button
@@ -299,9 +300,9 @@ const Subscriptions = () => {
                     }`}
                   >
                     {isProcessing ? (
-                      <><Loader2 className="w-4 h-4 animate-spin" /> Redirection...</>
+                      <><Loader2 className="w-4 h-4 animate-spin" /> {t('subscriptions.redirecting')}</>
                     ) : (
-                      'Choisir ce plan'
+                      t('subscriptions.choosePlan')
                     )}
                   </button>
                 )}
@@ -313,29 +314,14 @@ const Subscriptions = () => {
 
       {/* FAQ */}
       <div className="max-w-3xl mx-auto px-4 py-12">
-        <h2 className="text-2xl font-bold text-center mb-8">Questions fréquentes</h2>
+        <h2 className="text-2xl font-bold text-center mb-8">{t('subscriptions.faq.title')}</h2>
         <div className="space-y-4">
           {[
-            {
-              q: 'Qu\'est-ce qu\'un appel IA ?',
-              a: 'Chaque résolution du Solver ou chaque message envoyé au Coach IA compte comme 1 appel. Les quiz, exercices et micro-leçons sont illimités pour tous les plans.'
-            },
-            {
-              q: 'Quand le compteur se remet à zéro ?',
-              a: 'Le compteur se reset chaque jour à minuit UTC (1h du matin heure de Dakar). Tu récupères tous tes appels chaque jour.'
-            },
-            {
-              q: 'Puis-je annuler mon abonnement ?',
-              a: 'Oui, à tout moment depuis ton profil. Tu conserves l\'accès jusqu\'à la fin de la période payée.'
-            },
-            {
-              q: 'Comment fonctionne le Pass 24h ?',
-              a: 'Le Pass 24h te donne un accès Premium ou Premium Max pendant 24 heures exactement. Ideal avant un controle ou pour une session de revision intensive. Le compteur expire automatiquement.'
-            },
-            {
-              q: 'Le plan Famille, c\'est pour qui ?',
-              a: 'Pour un parent qui veut suivre la progression de ses enfants. Tu lies jusqu\'à 3 comptes enfant, chacun avec 100 appels IA/jour et un dashboard de suivi.'
-            }
+            { q: t('subscriptions.faq.whatIsAiCall'), a: t('subscriptions.faq.whatIsAiCallAnswer') },
+            { q: t('subscriptions.faq.whenReset'), a: t('subscriptions.faq.whenResetAnswer') },
+            { q: t('subscriptions.faq.canCancel'), a: t('subscriptions.faq.canCancelAnswer') },
+            { q: t('subscriptions.faq.howDaily'), a: t('subscriptions.faq.howDailyAnswer') },
+            { q: t('subscriptions.faq.whatIsFamily'), a: t('subscriptions.faq.whatIsFamilyAnswer') }
           ].map((faq, i) => (
             <div key={i} className="bg-gray-800 rounded-xl p-5 border border-gray-700">
               <h3 className="font-semibold text-white mb-2">{faq.q}</h3>

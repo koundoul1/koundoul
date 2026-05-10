@@ -853,7 +853,61 @@ export default {
           desc: 'Accédez à des outils avancés pour progresser plus vite'
         }
       },
-      security: 'Paiements sécurisés via Wave. Vos données sont protégées.'
+      security: 'Paiements sécurisés via Wave. Vos données sont protégées.',
+      chooseYourPlan: 'Choisis ton plan Koundoul',
+      allFreeDesc: 'Tous les contenus sont gratuits. Le Premium te donne plus d\'appels IA par jour.',
+      daily: 'par 24h',
+      toggleDaily: '24h',
+      toggleMonthly: 'Mensuel',
+      toggleYearly: 'Annuel (-25%)',
+      currentPlan: 'Plan actuel',
+      included: 'Inclus',
+      choosePlan: 'Choisir ce plan',
+      redirecting: 'Redirection...',
+      subscribedTo: 'Abonne',
+      validUntil: 'Valide jusqu\'au',
+      saves: 'Economise',
+      perYear: '/an',
+      aiCallsPerDay: 'appels IA / jour',
+      aiCallsPerChild: 'appels IA / jour / enfant',
+      faq: {
+        title: 'Questions frequentes',
+        whatIsAiCall: 'Qu\'est-ce qu\'un appel IA ?',
+        whatIsAiCallAnswer: 'Chaque resolution du Solver ou chaque message envoye au Coach IA compte comme 1 appel. Les quiz, exercices et micro-lecons sont illimites pour tous les plans.',
+        whenReset: 'Quand le compteur se remet a zero ?',
+        whenResetAnswer: 'Le compteur se reset chaque jour a minuit UTC (1h du matin heure de Dakar). Tu recuperes tous tes appels chaque jour.',
+        canCancel: 'Puis-je annuler mon abonnement ?',
+        canCancelAnswer: 'Oui, a tout moment depuis ton profil. Tu conserves l\'acces jusqu\'a la fin de la periode payee.',
+        howDaily: 'Comment fonctionne le Pass 24h ?',
+        howDailyAnswer: 'Le Pass 24h te donne un acces Premium ou Premium Max pendant 24 heures exactement. Ideal avant un controle ou pour une session de revision intensive.',
+        whatIsFamily: 'Le plan Famille, c\'est pour qui ?',
+        whatIsFamilyAnswer: 'Pour un parent qui veut suivre la progression de ses enfants. Tu lies jusqu\'a 3 comptes enfant, chacun avec 100 appels IA/jour et un dashboard de suivi.'
+      }
+    },
+
+    // Notifications
+    notif: {
+      title: 'Notifications',
+      markAllRead: 'Tout marquer lu',
+      empty: 'Aucune notification',
+      emptyDesc: 'Tu recevras des notifications quand tu gagneras des badges, monteras de niveau, ou recevras un defi.'
+    },
+
+    // Forum
+    forumPage: {
+      comingSoon: 'Forum bientot disponible',
+      comingSoonDesc: 'Le forum communautaire est en cours de developpement. Tu pourras bientot poser des questions, echanger avec d\'autres eleves et partager tes solutions.'
+    },
+
+    // Profile extras
+    profileExtra: {
+      deleteAccount: 'Supprimer mon compte',
+      deleteWarning: 'Cette action est irreversible. Toutes vos donnees seront definitivement supprimees.',
+      typePassword: 'Tapez votre mot de passe pour confirmer',
+      deleting: 'Suppression...',
+      notifToggle: 'Notifications',
+      notifEnabled: 'Activees',
+      notifDisabled: 'Desactivees'
     }
     },
     
@@ -1713,7 +1767,61 @@ export default {
           desc: 'Access advanced tools to progress faster'
         }
       },
-      security: 'Secure payments via Wave. Your data is protected.'
+      security: 'Secure payments via Wave. Your data is protected.',
+      chooseYourPlan: 'Choose your Koundoul plan',
+      allFreeDesc: 'All content is free. Premium gives you more AI calls per day.',
+      daily: 'per 24h',
+      toggleDaily: '24h',
+      toggleMonthly: 'Monthly',
+      toggleYearly: 'Yearly (-25%)',
+      currentPlan: 'Current plan',
+      included: 'Included',
+      choosePlan: 'Choose this plan',
+      redirecting: 'Redirecting...',
+      subscribedTo: 'Subscribed',
+      validUntil: 'Valid until',
+      saves: 'Save',
+      perYear: '/year',
+      aiCallsPerDay: 'AI calls / day',
+      aiCallsPerChild: 'AI calls / day / child',
+      faq: {
+        title: 'FAQ',
+        whatIsAiCall: 'What is an AI call?',
+        whatIsAiCallAnswer: 'Each Solver resolution or Coach AI message counts as 1 call. Quizzes, exercises and micro-lessons are unlimited for all plans.',
+        whenReset: 'When does the counter reset?',
+        whenResetAnswer: 'The counter resets every day at midnight UTC (1am Dakar time). You get all your calls back every day.',
+        canCancel: 'Can I cancel my subscription?',
+        canCancelAnswer: 'Yes, at any time from your profile. You keep access until the end of the paid period.',
+        howDaily: 'How does the 24h Pass work?',
+        howDailyAnswer: 'The 24h Pass gives you Premium or Premium Max access for exactly 24 hours. Ideal before a test or for an intensive review session.',
+        whatIsFamily: 'What is the Family plan?',
+        whatIsFamilyAnswer: 'For parents who want to track their children\'s progress. Link up to 3 child accounts, each with 100 AI calls/day and a tracking dashboard.'
+      }
+    },
+
+    // Notifications
+    notif: {
+      title: 'Notifications',
+      markAllRead: 'Mark all as read',
+      empty: 'No notifications',
+      emptyDesc: 'You will receive notifications when you earn badges, level up, or get a challenge.'
+    },
+
+    // Forum
+    forumPage: {
+      comingSoon: 'Forum coming soon',
+      comingSoonDesc: 'The community forum is under development. You will soon be able to ask questions, chat with other students and share your solutions.'
+    },
+
+    // Profile extras
+    profileExtra: {
+      deleteAccount: 'Delete my account',
+      deleteWarning: 'This action is irreversible. All your data will be permanently deleted.',
+      typePassword: 'Type your password to confirm',
+      deleting: 'Deleting...',
+      notifToggle: 'Notifications',
+      notifEnabled: 'Enabled',
+      notifDisabled: 'Disabled'
     }
   }
 };
