@@ -25,9 +25,11 @@ const PLAN_UI = {
   PREMIUM: { icon: Crown, gradient: 'from-purple-500 to-pink-500', badge: 'Le plus populaire', order: 1 },
   PREMIUM_MAX: { icon: Zap, gradient: 'from-orange-500 to-red-500', order: 2 },
   FAMILY: { icon: Users, gradient: 'from-blue-500 to-cyan-500', badge: 'Pour les parents', order: 3 },
+  PREMIUM_DAILY: { icon: Crown, gradient: 'from-purple-500 to-pink-500', badge: 'Pass 24h', order: 1 },
+  PREMIUM_MAX_DAILY: { icon: Zap, gradient: 'from-orange-500 to-red-500', badge: 'Intensif 24h', order: 2 },
 };
 
-// Map yearly plan names to their monthly counterparts
+// Map yearly/daily plan names to their monthly counterparts for UI lookup
 const YEARLY_TO_MONTHLY = {
   PREMIUM_YEARLY: 'PREMIUM',
   PREMIUM_MAX_YEARLY: 'PREMIUM_MAX',
@@ -42,7 +44,7 @@ const Subscriptions = () => {
   const [loading, setLoading] = useState(true);
   const [processingPlanId, setProcessingPlanId] = useState(null);
   const [paymentError, setPaymentError] = useState('');
-  const [isYearly, setIsYearly] = useState(false);
+  const [billingPeriod, setBillingPeriod] = useState('monthly'); // 'daily' | 'monthly' | 'yearly'
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -85,12 +87,15 @@ const Subscriptions = () => {
     }
   };
 
-  // Get the 4 display plans (monthly or yearly depending on toggle)
+  // Get display plans based on billing period
   const getDisplayPlans = () => {
     const freePlan = allPlans.find(p => p.name === 'FREE');
-    const monthly = ['PREMIUM', 'PREMIUM_MAX', 'FAMILY'];
-    const yearly = ['PREMIUM_YEARLY', 'PREMIUM_MAX_YEARLY', 'FAMILY_YEARLY'];
-    const targetNames = isYearly ? yearly : monthly;
+    const plansByPeriod = {
+      daily: ['PREMIUM_DAILY', 'PREMIUM_MAX_DAILY'],
+      monthly: ['PREMIUM', 'PREMIUM_MAX', 'FAMILY'],
+      yearly: ['PREMIUM_YEARLY', 'PREMIUM_MAX_YEARLY', 'FAMILY_YEARLY'],
+    };
+    const targetNames = plansByPeriod[billingPeriod] || plansByPeriod.monthly;
 
     const paidPlans = targetNames
       .map(name => allPlans.find(p => p.name === name))
@@ -142,20 +147,28 @@ const Subscriptions = () => {
             Tous les contenus sont gratuits. Le Premium te donne plus d&apos;appels IA par jour.
           </p>
 
-          {/* Toggle Mensuel / Annuel */}
+          {/* Toggle 24h / Mensuel / Annuel */}
           <div className="inline-flex items-center bg-white/10 backdrop-blur rounded-full p-1">
             <button
-              onClick={() => setIsYearly(false)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
-                !isYearly ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              onClick={() => setBillingPeriod('daily')}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                billingPeriod === 'daily' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              }`}
+            >
+              24h
+            </button>
+            <button
+              onClick={() => setBillingPeriod('monthly')}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                billingPeriod === 'monthly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
               Mensuel
             </button>
             <button
-              onClick={() => setIsYearly(true)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
-                isYearly ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              onClick={() => setBillingPeriod('yearly')}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                billingPeriod === 'yearly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
               Annuel (-25%)
@@ -193,7 +206,7 @@ const Subscriptions = () => {
 
       {/* Plan cards */}
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className={`grid sm:grid-cols-2 ${displayPlans.length > 3 ? 'lg:grid-cols-4' : 'lg:grid-cols-3 max-w-4xl mx-auto'} gap-5`}>
           {displayPlans.map((plan) => {
             const ui = getUI(plan.name);
             const Icon = ui.icon;
@@ -237,7 +250,7 @@ const Subscriptions = () => {
                   ) : (
                     <>
                       <div className="text-3xl font-black">{formatPrice(plan.price)}</div>
-                      <div className="text-sm text-gray-400">/ {plan.interval === 'yearly' ? 'an' : 'mois'}</div>
+                      <div className="text-sm text-gray-400">/ {plan.interval === 'yearly' ? 'an' : plan.interval === 'daily' ? '24h' : 'mois'}</div>
                       {savings && (
                         <div className="text-xs text-green-400 mt-1">
                           Économise {formatPrice(savings)}/an
@@ -314,6 +327,10 @@ const Subscriptions = () => {
             {
               q: 'Puis-je annuler mon abonnement ?',
               a: 'Oui, à tout moment depuis ton profil. Tu conserves l\'accès jusqu\'à la fin de la période payée.'
+            },
+            {
+              q: 'Comment fonctionne le Pass 24h ?',
+              a: 'Le Pass 24h te donne un accès Premium ou Premium Max pendant 24 heures exactement. Ideal avant un controle ou pour une session de revision intensive. Le compteur expire automatiquement.'
             },
             {
               q: 'Le plan Famille, c\'est pour qui ?',

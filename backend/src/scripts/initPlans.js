@@ -139,6 +139,48 @@ const PLANS = [
     sortOrder: 6
   },
   {
+    id: 'plan-premium-daily',
+    name: 'PREMIUM_DAILY',
+    displayName: 'Premium 24h',
+    description: 'Accès Premium pour 24 heures',
+    price: 200,
+    currency: 'XOF',
+    duration: 1,
+    interval: 'daily',
+    aiCallsPerDay: 50,
+    maxChildren: 0,
+    features: [
+      '50 appels IA pour 24h',
+      'Duels en ligne',
+      'Statistiques avancées',
+      'Téléchargement PDF des solutions',
+      'Idéal avant un contrôle'
+    ],
+    isActive: true,
+    sortOrder: 8
+  },
+  {
+    id: 'plan-premium-max-daily',
+    name: 'PREMIUM_MAX_DAILY',
+    displayName: 'Premium Max 24h',
+    description: 'Accès illimité pour 24 heures de révision intensive',
+    price: 350,
+    currency: 'XOF',
+    duration: 1,
+    interval: 'daily',
+    aiCallsPerDay: 300,
+    maxChildren: 0,
+    features: [
+      '300 appels IA pour 24h',
+      'Duels en ligne',
+      'Statistiques avancées',
+      'Téléchargement PDF des solutions',
+      'Révisions bac / concours'
+    ],
+    isActive: true,
+    sortOrder: 9
+  },
+  {
     id: 'plan-family-yearly',
     name: 'FAMILY_YEARLY',
     displayName: 'Famille Annuel',
