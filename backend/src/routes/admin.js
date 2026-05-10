@@ -208,6 +208,8 @@ router.get('/users', requireAdmin, async (req, res, next) => {
       where.isActive = true;
     } else if (status === 'inactive') {
       where.isActive = false;
+    } else if (status === 'admin') {
+      where.is_admin = true;
     }
 
     let orderBy = { createdAt: 'desc' };

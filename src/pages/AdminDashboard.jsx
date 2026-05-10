@@ -504,10 +504,10 @@ const UsersSection = ({ showToast, showConfirm }) => {
     try {
       const params = { page, limit: perPage }
       if (search) params.search = search
-      if (filter !== 'all') params.filter = filter
+      if (filter !== 'all') params.status = filter
       const data = await api.admin.getUsers(params)
       setUsers(data.users || data.data || [])
-      setTotalPages(data.totalPages || Math.ceil((data.total || 0) / perPage) || 1)
+      setTotalPages(data.pagination?.totalPages || data.totalPages || Math.ceil((data.total || 0) / perPage) || 1)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -657,7 +657,7 @@ const UsersSection = ({ showToast, showConfirm }) => {
                 ) : users.map((u) => (
                   <React.Fragment key={u.id}>
                     <tr className="border-b border-gray-800/50 hover:bg-white/[0.02]">
-                      <td className="py-3 px-3 text-white font-medium">{`${u.firstName || ''} ${u.lastName || ''}`.trim() || u.username || '—'}</td>
+                      <td className="py-3 px-3 text-white font-medium">{`${u.firstName || ''} ${u.lastName || ''}`.trim() || u.username || u.email?.split('@')[0] || '—'}</td>
                       <td className="py-3 px-3 text-gray-400">{u.email}</td>
                       <td className="py-3 px-3 hidden md:table-cell text-gray-400">{u.level || '—'}</td>
                       <td className="py-3 px-3 hidden md:table-cell text-gray-400">{u.xp ?? 0}</td>
@@ -1069,7 +1069,15 @@ const ContentSection = ({ showToast, showConfirm }) => {
         api.admin.getPlans().catch(() => ({ plans: [] })),
       ])
       setContentStats(statsData)
-      setPlans(plansData?.plans || plansData || [])
+      const allPlans = plansData?.plans || plansData || []
+      // Sort: active first, then by sortOrder
+      allPlans.sort((a, b) => {
+        const aActive = a.isActive ?? a.is_active ?? false
+        const bActive = b.isActive ?? b.is_active ?? false
+        if (aActive !== bActive) return bActive ? 1 : -1
+        return (a.sortOrder || 99) - (b.sortOrder || 99)
+      })
+      setPlans(allPlans)
     } catch (err) {
       setError(err.message)
     } finally {
@@ -1136,12 +1144,12 @@ const ContentSection = ({ showToast, showConfirm }) => {
   }
 
   const statsGrid = [
-    { label: 'Micro-lecons', value: contentStats?.microlessons ?? '—', icon: BookOpen },
-    { label: 'Lecons', value: contentStats?.lessons ?? '—', icon: Layers },
-    { label: 'Exercices', value: contentStats?.exercises ?? '—', icon: Edit3 },
-    { label: 'Quiz', value: contentStats?.quizzes ?? '—', icon: HelpCircle },
-    { label: 'Badges', value: contentStats?.badges ?? '—', icon: Award },
-    { label: 'Flashcards', value: contentStats?.flashcards ?? '—', icon: CreditCard },
+    { label: 'Micro-lecons', value: contentStats?.microlessonsCount ?? contentStats?.microlessons ?? '—', icon: BookOpen },
+    { label: 'Lecons', value: contentStats?.lessonsCount ?? contentStats?.lessons ?? '—', icon: Layers },
+    { label: 'Exercices', value: contentStats?.exercisesCount ?? contentStats?.exercises ?? '—', icon: Edit3 },
+    { label: 'Quiz', value: contentStats?.quizzesCount ?? contentStats?.quizzes ?? '—', icon: HelpCircle },
+    { label: 'Badges', value: contentStats?.badgesCount ?? contentStats?.badges ?? '—', icon: Award },
+    { label: 'Flashcards', value: contentStats?.flashcardsCount ?? contentStats?.flashcards ?? '—', icon: CreditCard },
   ]
 
   if (loading) return <Spinner />
@@ -1165,16 +1173,40 @@ const ContentSection = ({ showToast, showConfirm }) => {
       {/* Plans management */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Plans d&apos;abonnement</h3>
-        <button onClick={() => openPlanModal()} className="flex items-center gap-2 px-4 py-2 bg-[#FF4757] hover:bg-red-600 text-sm rounded-lg">
-          <Plus size={14} /> Nouveau Plan
-        </button>
+        <div className="flex gap-2">
+          {plans.some(p => !(p.isActive ?? p.is_active)) && (
+            <button
+              onClick={() => {
+                const inactiveIds = plans.filter(p => !(p.isActive ?? p.is_active)).map(p => p.id)
+                showConfirm(
+                  'Supprimer les plans inactifs',
+                  `${inactiveIds.length} plan(s) inactif(s) seront supprimes. Les plans avec abonnements actifs seront preserves.`,
+                  async () => {
+                    let deleted = 0
+                    for (const id of inactiveIds) {
+                      try { await api.admin.deletePlan(id); deleted++ } catch (e) { /* has active subs */ }
+                    }
+                    showToast(`${deleted} plan(s) inactif(s) supprime(s)`)
+                    fetchData()
+                  }
+                )
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-sm rounded-lg text-gray-400"
+            >
+              <Trash2 size={14} /> Nettoyer inactifs
+            </button>
+          )}
+          <button onClick={() => openPlanModal()} className="flex items-center gap-2 px-4 py-2 bg-[#FF4757] hover:bg-red-600 text-sm rounded-lg">
+            <Plus size={14} /> Nouveau Plan
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {plans.length === 0 ? (
           <p className="text-gray-500 text-sm col-span-full text-center py-8">Aucun plan</p>
         ) : plans.map((plan) => (
-          <div key={plan.id} className="bg-[#12122A] border border-gray-800 rounded-xl p-5">
+          <div key={plan.id} className={`bg-[#12122A] border rounded-xl p-5 ${(plan.isActive ?? plan.is_active) ? 'border-gray-800' : 'border-gray-800/50 opacity-50'}`}>
             <div className="flex items-start justify-between mb-3">
               <div>
                 <h4 className="font-semibold text-white">{plan.name}</h4>
