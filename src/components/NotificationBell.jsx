@@ -79,10 +79,10 @@ const NotificationBell = () => {
       {/* Dropdown */}
       {showDropdown && (
         <>
-          <div className="fixed inset-0 z-[9998]" onClick={() => setShowDropdown(false)} />
+          <div className="fixed inset-0 z-[60]" onClick={() => setShowDropdown(false)} />
           <div
             ref={dropdownRef}
-            className="absolute top-full right-0 mt-2 w-[22rem] max-h-[75vh] bg-[#0F0F1E] border border-white/10 rounded-2xl shadow-2xl z-[9999] overflow-hidden flex flex-col"
+            className="absolute top-full right-0 mt-2 w-[22rem] max-h-[75vh] bg-[#0F0F1E] border border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
@@ -169,7 +169,7 @@ function NotificationToast({ notification, onDismiss, onNavigate }) {
 
   return (
     <div
-      className="fixed top-4 right-4 z-[10001] w-80 bg-[#1A1A2E] border border-kprimary/30 rounded-2xl shadow-2xl p-4 cursor-pointer"
+      className="fixed top-4 right-4 z-[80] w-80 bg-[#1A1A2E] border border-kprimary/30 rounded-2xl shadow-2xl p-4 cursor-pointer"
       onClick={() => onNavigate(notification)}
       style={{ animation: 'toastSlideIn 0.3s ease-out' }}
     >

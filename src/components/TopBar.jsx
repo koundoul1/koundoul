@@ -52,7 +52,7 @@ const TopBar = () => {
 
   return (
     <header
-      className="hidden md:flex fixed top-0 right-0 z-30 items-center justify-between px-6"
+      className="hidden md:flex fixed top-0 right-0 z-50 items-center justify-between px-6"
       style={{
         left: '240px',
         height: '64px',
@@ -116,10 +116,10 @@ const TopBar = () => {
           {showLangMenu && (
             <>
               <div
-                className="fixed inset-0 z-[9998]"
+                className="fixed inset-0 z-[60]"
                 onClick={() => setShowLangMenu(false)}
               ></div>
-              <div className="absolute top-full right-0 mt-2 w-48 bg-[#1A1A2E] border border-kprimary/20 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+              <div className="absolute top-full right-0 mt-2 w-48 bg-[#1A1A2E] border border-kprimary/20 rounded-xl shadow-2xl z-[70] overflow-hidden">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
@@ -179,8 +179,8 @@ const TopBar = () => {
 
             {showUserMenu && (
               <>
-                <div className="fixed inset-0 z-[9998]" onClick={() => setShowUserMenu(false)}></div>
-                <div className="absolute top-full right-0 mt-2 w-64 bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+                <div className="fixed inset-0 z-[60]" onClick={() => setShowUserMenu(false)}></div>
+                <div className="absolute top-full right-0 mt-2 w-64 bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[70] overflow-hidden">
                   {/* User info */}
                   <div className="px-4 py-3 border-b border-white/5">
                     <p className="text-sm font-semibold text-white">{user.firstName} {user.lastName}</p>
