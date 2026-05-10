@@ -2022,3 +2022,197 @@ Parent s'inscrit avec phoneNumber = +221XXXXXXXXX
 - [ ] Toggle notifications dans Profile → preference sauvee
 - [ ] Supprimer mon compte → modale, confirmation, suppression + deconnexion
 - [ ] Famille : enfant entre numero parent → lien en attente ou immediat
+
+---
+
+## Phase 3.2 — Audit Super Admin Panel
+
+**Date** : 2026-05-10
+
+### 1. Backend — état existant
+
+#### Routes admin (`backend/src/routes/admin.js`, ~717 lignes)
+
+Le fichier existe et est **fonctionnel**. Monté sur `/api/admin` (index.js L214). Toutes les routes protégées par `requireAdmin`.
+
+| Route | Méthode | Description |
+|-------|---------|-------------|
+| `GET /admin/stats` | GET | 5 KPIs (totalUsers, activeToday, activeSubscriptions, lessonsCompleted, monthlyRevenue) + signups 30j + revenue 6 mois + activité récente |
+| `GET /admin/users` | GET | Liste paginée (page/limit), recherche (firstName/lastName/email/username), filtre status (active/inactive), tri (name/email/xp/level/lastLogin) |
+| `PATCH /admin/users/:id` | PATCH | Toggle `is_admin` et `isActive` |
+| `DELETE /admin/users/:id` | DELETE | Suppression avec cascade (18+ étapes) |
+| `GET /admin/subscriptions` | GET | Liste paginée, filtre status/plan |
+| `PATCH /admin/subscriptions/:id` | PATCH | Modifier status ou endDate |
+| `GET /admin/payments` | GET | Liste paginée, filtre method/status/date |
+| `GET /admin/content/stats` | GET | Compteurs par type (lessons, exercises, quizzes, badges, flashcards) + par matière |
+| `GET /admin/plans` | GET | Liste plans |
+| `POST /admin/plans` | POST | Créer plan |
+| `PATCH /admin/plans/:id` | PATCH | Modifier plan |
+| `DELETE /admin/plans/:id` | DELETE | Supprimer plan (bloqué si subs actives) |
+| `POST /admin/students` | POST | Créer compte élève |
+
+**Logging** : `logAdminAction()` helper enregistre dans `admin_logs` (adminId, action, target, targetId, details, ip).
+
+#### Middleware requireAdmin (`backend/src/middlewares/auth.js`)
+
+EXISTE (L35-65). Vérifie JWT → lookup DB → `user.is_admin === true` → 403 si false. Check au moment de la requête (pas cache JWT), donc changement de rôle effectif immédiatement.
+
+#### Schéma DB User — champs pertinents
+
+| Champ | Type | Présent ? | Note |
+|-------|------|-----------|------|
+| `is_admin` | Boolean (default false) | OUI | Flag admin principal |
+| `is_super_admin` | Boolean (default false) | OUI | Jamais utilisé dans le code |
+| `isActive` | Boolean (default true) | OUI | Utilisé comme suspend/activate toggle |
+| `lastLoginAt` | DateTime? | OUI | Mis à jour à chaque login → DAU/MAU calculable |
+| `loginCount` | Int? (default 0) | OUI | Compteur de connexions |
+| `notificationsEnabled` | Boolean? (default true) | OUI | Toggle notifications |
+| `isSuspended` | — | **NON** | N'existe PAS — le backend utilise `isActive` à la place |
+| `suspendedReason` | — | **NON** | N'existe PAS |
+
+**Verdict** : `isActive = false` sert de suspension mais sans raison. Migration nécessaire pour `suspendedReason` si on veut un message au login.
+
+#### Tables Payment/Subscription/Plan
+
+- **Payment** : id, userId, subscriptionId, amount, currency (xof), status (PENDING/COMPLETED/SUCCESS/FAILED), paymentMethod (STRIPE/wave/orange_money), waveCheckoutId, metadata (Json), timestamps
+- **Subscription** : id, userId, planId, status (ACTIVE/cancelled), startDate, endDate, autoRenew, cancelledAt, timestamps
+- **SubscriptionPlan** : id, name (unique), price (int), currency, duration (days), features (Json), isActive, aiCallsPerDay, maxChildren, interval, displayName, sortOrder
+
+#### Table DailyAiUsage
+
+`userId + date (DATE)` unique. Champ `count` (int). Permet le calcul des appels Solver/Coach par jour.
+
+#### AdminLog
+
+Table existante : id (autoincrement), adminId, action, target, targetId, details (Json), ip, createdAt.
+
+#### Notifications broadcast — ABSENT
+
+`notificationService.js` n'a PAS de fonction `sendToAllUsers`. Seule `sendNotification(userId, ...)` existe (par user). Le pattern batch existe dans `weeklyChallengeJob.js:149-170` :
+```
+findMany({ where: { isActive: true }, select: { id: true } })
+→ batch par 50
+→ Promise.all(batch.map(u => sendNotification(u.id, ...)))
+```
+Ce pattern est réutilisable pour le broadcast admin.
+
+### 2. Frontend — état existant
+
+#### AdminDashboard.jsx (1214 lignes)
+
+**EXISTE et est FONCTIONNEL** — pas un stub. Composant monolithique avec 6 sections :
+
+| Section | Fonctionnelle ? | Contenu |
+|---------|-----------------|---------|
+| **Vue Générale** | OUI | 5 KPI cards, graphe signups 30j, activité récente |
+| **Utilisateurs** | OUI | Table paginée, recherche, expand détail, toggle admin, suspend/activate, delete, export CSV |
+| **Abonnements** | OUI | Filtre status, stats MRR/total/churn, prolonger +30j, annuler |
+| **Paiements** | OUI | Multi-filtres (method/status/mois), pagination, export CSV |
+| **Contenu** | OUI | 6 compteurs, CRUD plans |
+| **Support** | STUB | Placeholder "Bientôt disponible" |
+
+**Composants inline** : Toast, ConfirmModal, Pagination, Spinner, ErrorBlock — tous définis dans le fichier, pas de composants réutilisables partagés (pas de DataTable, StatCard, etc.).
+
+#### Routing (App.jsx)
+
+- L50 : `const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))`
+- L156 : `<Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />`
+- Protection : `ProtectedRoute` vérifie l'auth, puis `AdminDashboard` lui-même redirige si `!user.is_admin` (L198-202). Pas de wrapper `RequireAdmin` dédié.
+
+#### Navigation
+
+| Composant | Lien Admin ? | Détail |
+|-----------|-------------|--------|
+| Sidebar.jsx | OUI | "Admin" avec ShieldCheck, `adminOnly: true`, filtré par `user?.is_admin` |
+| DesktopHeader.jsx | OUI | Lien jaune "Administration" dans dropdown profil, badge "Admin" à côté du nom |
+| TopBar.jsx | NON | Pas de lien admin |
+| MobileNavBar.jsx | NON | Pas de lien admin dans le drawer |
+
+#### API client (api.js L345-403)
+
+10 méthodes : `getDashboard`, `getUsers`, `updateUser`, `deleteUser`, `getSubscriptions`, `updateSubscription`, `getPayments`, `getPlans`, `createPlan`, `updatePlan`, `deletePlan`, `createStudent`, `getContentStats`.
+
+#### Bug naming : `is_admin` vs `isAdmin`
+
+- Sidebar, AdminDashboard, Login : `user.is_admin` (snake_case) — correct
+- DesktopHeader : `user?.isAdmin` (camelCase) — **INCORRECT**, le backend renvoie `is_admin`
+
+### 3. Bugs QA initiaux (BUGS.md — 8 issues Super Admin)
+
+| # | Issue | Constat testeur | Cause probable |
+|---|-------|-----------------|----------------|
+| 1 | Overview KPIs | "Active today not working" | `lesson_completions` dans la query raw peut échouer si table nommée différemment |
+| 2 | User management | "Show all users in one list" | Pagination fonctionnelle côté code — possible bug frontend fetch |
+| 3 | Search user by email | "Filters not working" | Recherche sur 4 champs existe — possible erreur dans le wiring frontend |
+| 4 | Promote to admin | "needs to logout and login again" | Normal : `is_admin` dans JWT mis à jour au prochain login. Le fix serait de forcer un refresh du user context |
+| 5 | Subscription management | "list empty" | Possible : pas de subscriptions en DB, ou status mismatch ACTIVE vs active (case) |
+| 6 | Content stats | "not showing content" | Endpoint `/admin/content/stats` peut échouer si tables comptées n'existent pas ou sont vides |
+| 7 | Payment history | "not showing user name, not updating, Filters not working" | La route payments ne joint pas le user (manque le nom), filtres potentiellement mal wired |
+| 8 | Actions logged | Non testé réellement | `logAdminAction()` fonctionne si table `admin_logs` existe |
+
+### 4. Métriques demandées vs existantes
+
+| # | Métrique | Existe dans GET /admin/stats ? | Action |
+|---|----------|-------------------------------|--------|
+| 1 | Total users | OUI | — |
+| 2 | DAU (24h) | OUI (`activeUsersToday`) | — |
+| 3 | MAU (30j) | NON | A AJOUTER (query lastLoginAt >= 30j) |
+| 4 | XP total distribué | NON | A AJOUTER (SUM users.xp) |
+| 5 | Calls Solver/Coach aujourd'hui | NON | A AJOUTER (SUM daily_ai_usage.count WHERE date=today) |
+| 6 | Duels joués cette semaine | NON | A AJOUTER (COUNT duels WHERE completedAt >= lundi) |
+| 7 | Top 10 users par XP | NON | A AJOUTER (findMany orderBy xp DESC take 10) |
+| 8 | MRR (FCFA) | PARTIEL (`monthlyRevenue` = revenu du mois, pas MRR récurrent) | A AFFINER |
+| 9 | Subs par plan | NON | A AJOUTER (groupBy planId count) |
+| 10 | Taux conversion gratuit→premium | NON | A AJOUTER (calcul sur 30j) |
+| 11 | Coût Gemini estimé | NON | A AJOUTER (SUM daily_ai_usage * prix moyen) |
+
+**Existant : 2/11 métriques. 9 à ajouter.**
+
+### 5. Migration DB nécessaire
+
+```sql
+-- Raison de suspension (le toggle isActive existe déjà)
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "suspendedReason" TEXT;
+```
+
+Migration minimale : 1 champ. `isActive` sert déjà de flag suspension. `lastLoginAt` et `loginCount` existent déjà.
+
+### 6. Décisions techniques confirmées
+
+1. **Pagination users** : 50/page avec boutons prev/next (actuellement 20/page, à augmenter)
+2. **Recherche users** : champ unifié sur nom, email, username (existe, ajouter téléphone + id)
+3. **Suspension** : `isActive = false` + nouveau champ `suspendedReason`. Message affiché au login si suspendu.
+4. **DAU/MAU** : `lastLoginAt` existe déjà, mis à jour au login. Query directe.
+5. **Coût Gemini** : agrégation `daily_ai_usage.count` * prix moyen. Solver (gemini-2.5-pro) ~0.005 USD ~3 FCFA, Coach (gemini-2.5-flash) ~0.001 USD ~0.6 FCFA. Approximation : prix moyen 2 FCFA/appel.
+6. **Confirmation destructive** : saisie "SUPPRIMER" obligatoire pour delete user, annuler sub, etc. Remplace le simple ConfirmModal actuel.
+
+### 7. Plan en sous-tâches
+
+| # | Tâche | Effort |
+|---|-------|--------|
+| **3.2.1** | Migration DB : ajouter `suspendedReason` TEXT à users | Trivial |
+| **3.2.2** | Backend : enrichir GET /admin/stats avec 9 métriques manquantes (MAU, XP total, AI calls, duels, top 10, subs par plan, taux conversion, coût Gemini) | Modéré |
+| **3.2.3** | Backend : ajouter POST /admin/notifications/broadcast (titre + message + lien optionnel → batch sendNotification à tous users notificationsEnabled=true) | Léger |
+| **3.2.4** | Backend : fixer les bugs QA existants — payments sans nom user, subscription status case mismatch, content stats query | Modéré |
+| **3.2.5** | Backend : ajouter `suspendedReason` au PATCH /admin/users/:id, afficher raison au login si isActive=false | Léger |
+| **3.2.6** | Backend : recherche users étendue (ajouter phoneNumber + id dans le filtre OR) | Trivial |
+| **3.2.7** | Frontend : refactorer AdminDashboard — extraire composants réutilisables (AdminStatCard, AdminDataTable, DestructiveConfirmModal avec saisie "SUPPRIMER") | Modéré |
+| **3.2.8** | Frontend : section Stats refaite avec les 11 métriques en 3 niveaux (Basiques, Engagement, Revenue) | Modéré |
+| **3.2.9** | Frontend : fixer bugs QA users (recherche, pagination, promote admin refresh context) | Léger |
+| **3.2.10** | Frontend : section Notifications broadcast (formulaire titre + message + lien, preview, envoi) | Léger |
+| **3.2.11** | Frontend : confirmation destructive — remplacer ConfirmModal par DestructiveConfirmModal (saisie "SUPPRIMER") pour delete user, annuler sub, supprimer plan | Léger |
+| **3.2.12** | Frontend : fixer `user?.isAdmin` → `user?.is_admin` dans DesktopHeader.jsx | Trivial |
+| **3.2.13** | Tests : 12+ backend (stats, broadcast, suspend) + 8+ frontend (admin routes, destructive confirm) | Modéré |
+
+**Estimation totale** : 2-3h Claude.
+
+### 8. Risques identifiés
+
+1. **Query raw SQL** : les stats existantes utilisent `$queryRaw` avec des noms de tables/colonnes. Si le schéma Prisma et les noms DB divergent (snake_case vs camelCase), les queries échouent silencieusement.
+2. **Performance stats** : 11 métriques = 11+ queries DB. Sur une DB Supabase free tier, le temps de réponse peut être >2s. Cache serveur recommandé (5min comme content counts).
+3. **Broadcast notifs** : envoyer à N users = N inserts DB + N push SSE. Si 500+ users, batching par 50 est critique. Le pattern weeklyChallengeJob est le bon modèle.
+4. **Naming `is_admin`** : le champ est snake_case partout sauf DesktopHeader. Bug potentiel si le lien admin DesktopHeader ne s'affiche pas.
+
+---
+
+**AUDIT TERMINÉ — en attente de validation pour lancer l'implémentation.**
