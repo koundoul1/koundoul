@@ -140,7 +140,7 @@ const Subscriptions = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-black mb-4">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black mb-4">
             Choisis ton plan Koundoul
           </h1>
           <p className="text-xl text-white/90 mb-8">
@@ -151,7 +151,7 @@ const Subscriptions = () => {
           <div className="inline-flex items-center bg-white/10 backdrop-blur rounded-full p-1">
             <button
               onClick={() => setBillingPeriod('daily')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+              className={`px-3 py-2 sm:px-4 text-xs sm:text-sm rounded-full font-semibold transition-all ${
                 billingPeriod === 'daily' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
@@ -159,7 +159,7 @@ const Subscriptions = () => {
             </button>
             <button
               onClick={() => setBillingPeriod('monthly')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+              className={`px-3 py-2 sm:px-4 text-xs sm:text-sm rounded-full font-semibold transition-all ${
                 billingPeriod === 'monthly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
@@ -167,7 +167,7 @@ const Subscriptions = () => {
             </button>
             <button
               onClick={() => setBillingPeriod('yearly')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+              className={`px-3 py-2 sm:px-4 text-xs sm:text-sm rounded-full font-semibold transition-all ${
                 billingPeriod === 'yearly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
               }`}
             >
@@ -219,7 +219,7 @@ const Subscriptions = () => {
             return (
               <div
                 key={plan.id}
-                className={`relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border-2 transition-all duration-300 flex flex-col ${
+                className={`relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-4 sm:p-6 border-2 transition-all duration-300 flex flex-col ${
                   isCurrent
                     ? 'border-green-500'
                     : recommended

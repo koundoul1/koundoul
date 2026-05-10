@@ -573,8 +573,8 @@ const Quiz = () => {
             </div>
 
             {/* Statistiques principales */}
-            <div className="grid grid-cols-4 gap-4 mb-8">
-              <div className="bg-white/10 rounded-xl p-4 border border-white/20">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8">
+              <div className="bg-white/10 rounded-xl p-3 sm:p-4 border border-white/20">
                 <p className="text-blue-200 text-sm mb-1">{t('quiz.score')}</p>
                 <p className="text-2xl font-bold text-white">{finalScoreValue || score || 0} pts</p>
               </div>
@@ -717,7 +717,7 @@ const Quiz = () => {
                 <label className="block text-white font-semibold mb-3">
                   Nombre de questions
                 </label>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                   {[10, 20, 30, 50].map((count) => (
                     <button
                       key={count}
@@ -749,7 +749,7 @@ const Quiz = () => {
                 <label className="block text-white font-semibold mb-3">
                   Niveau de difficulté
                 </label>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                   {['all', 'easy', 'medium', 'hard'].map((diff) => {
                     const labels = { all: 'Tous', easy: 'Facile', medium: 'Moyen', hard: 'Difficile' }
                     const activeStyles = {
@@ -1136,8 +1136,8 @@ const Quiz = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         
         {/* Statistiques améliorées */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-blue-400/60 transition-all">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-8">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-6 border border-white/20 hover:border-blue-400/60 transition-all">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-blue-200 mb-1">Banques QCM</p>

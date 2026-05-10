@@ -536,7 +536,7 @@ const Challenge = () => {
                 <Trophy className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-white flex items-center">
+                <h1 className="text-2xl sm:text-4xl font-bold text-white flex items-center">
                   Mode Défi
                   <Sparkles className="h-8 w-8 ml-3 text-yellow-400 animate-pulse" />
                 </h1>
@@ -807,9 +807,9 @@ const Challenge = () => {
                     <Target className="h-5 w-5 mr-2 text-purple-400" />
                     Vos Résultats
                   </h3>
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div className="bg-white/5 rounded-lg p-4">
-                      <div className="text-3xl font-bold text-green-400">{duelResults.score}</div>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 text-center">
+                    <div className="bg-white/5 rounded-lg p-2 sm:p-4">
+                      <div className="text-xl sm:text-3xl font-bold text-green-400">{duelResults.score}</div>
                       <div className="text-sm text-gray-400">Bonnes réponses</div>
                     </div>
                     <div className="bg-white/5 rounded-lg p-4">
@@ -827,9 +827,9 @@ const Challenge = () => {
                 {duelResults.duelResult && (
                   <div className="bg-white/5 border border-white/10 rounded-xl p-6">
                     <h3 className="text-xl font-bold text-white mb-4 text-center">Toi vs Adversaire</h3>
-                    <div className="grid grid-cols-3 gap-4 items-center text-center">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4 items-center text-center">
                       <div>
-                        <div className="text-2xl font-bold text-blue-400">{duelResults.duelResult.challengerScore}</div>
+                        <div className="text-lg sm:text-2xl font-bold text-blue-400">{duelResults.duelResult.challengerScore}</div>
                         <div className="text-sm text-gray-400">Challenger</div>
                       </div>
                       <div className="text-3xl font-bold text-gray-500">VS</div>
@@ -869,7 +869,7 @@ const Challenge = () => {
                   </p>
 
                   {/* Code d'invitation */}
-                  <div className="bg-indigo-950 border-2 border-dashed border-purple-500 rounded-xl p-6 mb-6 max-w-md mx-auto">
+                  <div className="bg-indigo-950 border-2 border-dashed border-purple-500 rounded-xl p-4 sm:p-6 mb-6 max-w-sm sm:max-w-md mx-auto">
                     <div className="text-4xl font-mono font-bold text-yellow-400 tracking-wider mb-3">
                       {createdDuel.inviteCode?.slice(0, 12)}
                     </div>
@@ -1028,7 +1028,7 @@ const Challenge = () => {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                   <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-3 text-center">
                     <div className="text-2xl font-bold text-green-400">{myDuels.stats?.wins || 0}</div>
                     <div className="text-xs text-gray-400">Victoires</div>

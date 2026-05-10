@@ -214,7 +214,7 @@ export default function Exercise() {
             {phase === 'review' && (
               <div className="k-card p-6 mb-6">
                 <h3 className="text-lg font-bold mb-4">Comment as-tu trouve ?</h3>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                   {[
                     { key: 'correct', label: 'Juste', color: 'from-emerald-600 to-emerald-700', desc: '100% XP' },
                     { key: 'partial', label: 'A moitie', color: 'from-yellow-600 to-yellow-700', desc: '50% XP' },

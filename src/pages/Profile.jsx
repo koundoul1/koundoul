@@ -1179,7 +1179,7 @@ const Profile = () => {
                             {stat.icon}
                           </div>
                           <div className="text-lg font-black text-white">{stat.value}</div>
-                          <div className="text-[10px] text-gray-500 leading-tight">{stat.label}</div>
+                          <div className="text-xs text-gray-500 leading-tight">{stat.label}</div>
                         </div>
                       ))}
                     </div>

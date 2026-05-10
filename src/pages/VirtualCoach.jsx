@@ -335,7 +335,7 @@ const VirtualCoach = () => {
                   <button
                     key={suggestion}
                     onClick={() => { setInput(suggestion); inputRef.current?.focus(); }}
-                    className="px-3 py-1.5 text-sm rounded-lg border border-gray-700 text-gray-400 hover:text-gray-200 hover:border-gray-600 hover:bg-gray-800/50 transition-colors"
+                    className="px-3 py-2 sm:py-1.5 text-sm rounded-lg border border-gray-700 text-gray-400 hover:text-gray-200 hover:border-gray-600 hover:bg-gray-800/50 transition-colors"
                   >
                     {suggestion}
                   </button>

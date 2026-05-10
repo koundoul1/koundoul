@@ -236,8 +236,8 @@ const MobileNavBar = () => {
               </div>
             )}
 
-            {/* Grid of modules — 3 columns */}
-            <div className="px-4 pb-2 grid grid-cols-3 gap-3">
+            {/* Grid of modules — responsive columns */}
+            <div className="px-4 pb-2 grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
               {drawerItems.map((item) => {
                 const active = isActive(item.href)
                 const locked = !isAuthenticated
@@ -276,7 +276,7 @@ const MobileNavBar = () => {
                       {item.emoji}
                     </div>
                     <span className={`
-                      text-[11px] font-medium text-center leading-tight
+                      text-xs font-medium text-center leading-tight
                       ${active ? 'text-kprimary' : locked ? 'text-white/40' : 'text-white/60'}
                     `}>
                       {item.name}

@@ -178,7 +178,7 @@ const MicroLessons = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 mb-8">
           {[
             { label: t('microLessons.stats.total'), value: lessons.length, icon: <BookOpen className="w-6 h-6" />, color: 'text-kprimary', bg: 'bg-kprimary/15' },
             { label: t('microLessons.stats.completed'), value: stats?.total_completed || Object.keys(completions).filter(id => completions[id]?.completed).length, icon: <CheckCircle2 className="w-6 h-6" />, color: 'text-emerald-400', bg: 'bg-emerald-500/15' },
@@ -295,7 +295,7 @@ const MicroLessons = () => {
                   </p>
 
                   <div className="flex items-center justify-between text-sm mb-4">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1.5 sm:gap-3">
                       <span className="flex items-center text-gray-400">
                         <Clock className="h-3.5 w-3.5 mr-1" />
                         <span className="text-xs">{lesson.duration_min || 8} min</span>

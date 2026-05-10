@@ -552,7 +552,7 @@ const Solver = () => {
                             key={diff.value}
                             type="button"
                             onClick={() => setDifficulty(diff.value)}
-                            className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all duration-200 border-2 ${buttonClasses[diff.color]}`}
+                            className={`flex-1 px-3 py-2.5 sm:px-4 rounded-lg text-sm sm:text-base font-medium transition-all duration-200 border-2 ${buttonClasses[diff.color]}`}
                           >
                             {diff.label}
                           </button>

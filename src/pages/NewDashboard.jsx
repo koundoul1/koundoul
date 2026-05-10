@@ -78,7 +78,7 @@ const WeekActivityGrid = ({ activityData }) => {
 
         return (
           <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-[10px] text-gray-500 font-medium">{label}</span>
+            <span className="text-xs text-gray-500 font-medium">{label}</span>
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold transition-all ${
               count > 0
                 ? 'bg-gradient-to-br from-kprimary to-ksecondary text-white shadow-md shadow-kprimary/20'
@@ -189,7 +189,7 @@ const NewDashboard = () => {
           <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <p className="text-white/80 text-sm font-medium mb-1">{getGreeting()}</p>
-              <h1 className="text-3xl sm:text-4xl font-black text-white mb-2">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-2">
                 {profile?.firstName || profile?.username || t('dashboard.student')}
               </h1>
               <div className="flex items-center gap-4 text-white/90">
@@ -211,7 +211,7 @@ const NewDashboard = () => {
               <CircularProgress percentage={(xpInLevel / xpForNext) * 100} color="#FFD700" size={90} strokeWidth={7}>
                 <div className="text-center">
                   <div className="text-lg font-black text-white">{level}</div>
-                  <div className="text-[9px] text-white/70 font-medium">LEVEL</div>
+                  <div className="text-[11px] text-white/70 font-medium">LEVEL</div>
                 </div>
               </CircularProgress>
             </div>
@@ -259,7 +259,7 @@ const NewDashboard = () => {
                   </CircularProgress>
                   <h3 className="font-bold text-sm mt-3 text-white">{t(`common.subjects.${sp.name}`) || sp.name}</h3>
                   <p className="text-xs text-gray-400 mt-0.5">{sp.completed}/{sp.total} ({sp.percentage}%)</p>
-                  <span className="text-[10px] mt-1 px-2 py-0.5 rounded-full font-medium" style={{ background: colors.bg, color: colors.ring }}>
+                  <span className="text-xs mt-1 px-2 py-0.5 rounded-full font-medium" style={{ background: colors.bg, color: colors.ring }}>
                     {sp.mastery === 'advanced' && t('dashboard.mastery.advanced')}
                     {sp.mastery === 'intermediate' && t('dashboard.mastery.intermediate')}
                     {sp.mastery === 'beginner' && t('dashboard.mastery.beginner')}
@@ -343,25 +343,25 @@ const NewDashboard = () => {
           {badges?.recent && badges.recent.length > 0 ? (
             <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1">
               {badges.recent.map((b, i) => (
-                <div key={i} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/5 border border-yellow-500/20 min-w-[80px]">
+                <div key={i} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/5 border border-yellow-500/20 min-w-[70px] sm:min-w-[80px]">
                   <span className="text-2xl">{b.icon}</span>
-                  <span className="text-[10px] font-semibold text-yellow-400 text-center leading-tight">{b.name}</span>
+                  <span className="text-xs font-semibold text-yellow-400 text-center leading-tight">{b.name}</span>
                 </div>
               ))}
               {/* Locked badges placeholder */}
               {Array.from({ length: Math.max(0, 4 - (badges.recent?.length || 0)) }).map((_, i) => (
-                <div key={`locked-${i}`} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/[0.02] border border-white/5 min-w-[80px] opacity-40">
+                <div key={`locked-${i}`} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/[0.02] border border-white/5 min-w-[70px] sm:min-w-[80px] opacity-40">
                   <span className="text-2xl">🔒</span>
-                  <span className="text-[10px] font-semibold text-gray-600 text-center">???</span>
+                  <span className="text-xs font-semibold text-gray-600 text-center">???</span>
                 </div>
               ))}
             </div>
           ) : (
             <div className="flex gap-3">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/[0.02] border border-white/5 min-w-[80px] opacity-40">
+                <div key={i} className="flex-shrink-0 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/[0.02] border border-white/5 min-w-[70px] sm:min-w-[80px] opacity-40">
                   <span className="text-2xl">🔒</span>
-                  <span className="text-[10px] font-semibold text-gray-600 text-center">???</span>
+                  <span className="text-xs font-semibold text-gray-600 text-center">???</span>
                 </div>
               ))}
             </div>
