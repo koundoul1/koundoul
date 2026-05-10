@@ -38,7 +38,6 @@ import {
   Send,
   Zap,
   Sword,
-  Crown,
   BarChart3,
   Cpu,
 } from 'lucide-react'
