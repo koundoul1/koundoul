@@ -2282,3 +2282,43 @@ Fichier : `backend/prisma/migrations/20260510100000_add_suspended_reason/migrati
 - [ ] Section Notifications → remplir titre + message → aperçu → Envoyer → compteur "X destinataires"
 - [ ] TopBar dropdown : lien "Administration" visible pour l'admin
 - [ ] DesktopHeader : lien admin visible (corrigé isAdmin → is_admin)
+
+---
+
+## Phase 5.1 — Performance : Plotly lazy-load
+
+**Date** : 2026-05-10
+
+### Audit
+
+Plotly était **déjà lazy-loadé** à 3 niveaux :
+1. `App.jsx` : `Solver` et `TestHintSystem` chargés via `React.lazy()`
+2. `InteractiveGraph.jsx:10` : `const Plot = lazy(() => import('react-plotly.js'))`
+3. Aucun autre fichier n'importe `react-plotly.js` statiquement
+
+Le chunk Plotly était déjà séparé mais sans nom explicite dans `manualChunks`.
+
+### Commit
+
+```
+1b57a36 perf(plotly): dedicate Plotly to named chunk via manualChunks
+```
+
+### Changement
+
+`vite.config.js` : ajout `if (id.includes('plotly')) return 'plotly'` dans `manualChunks` pour nommer le chunk explicitement.
+
+### Mesure bundle
+
+| Chunk | Taille | Gzip | Chargé sur |
+|-------|--------|------|------------|
+| `plotly-6be6971b.js` | 4,865 kB | 1,478 kB | `/solver` uniquement (quand graphe requis) |
+| `index-7bc50931.js` | 125 kB | 34 kB | Toutes les pages (main) |
+| `Solver-68342eb7.js` | 34 kB | 9 kB | `/solver` |
+
+**Impact** : le main chunk (125 kB) ne contient AUCUN code Plotly. Un élève sur mobile 3G charge ~34 kB gzippé pour la page d'accueil, pas 1.5 MB.
+
+### Tests
+
+- 6 nouveaux tests : lazy import vérifié, pas d'import statique, vite config validé, taille chunk validée
+- Total suite : **224 tests, tous verts**
