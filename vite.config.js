@@ -33,7 +33,7 @@ export default defineConfig({
             if (id.includes('katex') || id.includes('rehype-katex') || id.includes('remark-math')) return 'vendor-math'
             if (id.includes('react-markdown') || id.includes('rehype-raw') || id.includes('remark-gfm')) return 'vendor-markdown'
             if (id.includes('qrcode')) return 'vendor-qr'
-            if (id.includes('plotly')) return 'plotly'
+            // plotly: lazy-loaded via InteractiveGraph.jsx, Vite splits it automatically
           }
         }
       }

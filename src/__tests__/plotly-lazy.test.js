@@ -74,14 +74,14 @@ describe('Build output analysis', () => {
   it('plotly chunk exists as separate file', () => {
     if (!fs.existsSync(distDir)) return // skip if no build
     const files = fs.readdirSync(distDir)
-    const plotlyChunk = files.find(f => f.startsWith('plotly-') && f.endsWith('.js'))
+    const plotlyChunk = files.find(f => (f.startsWith('plotly-') || f.startsWith('react-plotly-')) && f.endsWith('.js'))
     expect(plotlyChunk).toBeDefined()
   })
 
   it('plotly chunk is >4MB (contains the full library)', () => {
     if (!fs.existsSync(distDir)) return
     const files = fs.readdirSync(distDir)
-    const plotlyChunk = files.find(f => f.startsWith('plotly-') && f.endsWith('.js'))
+    const plotlyChunk = files.find(f => (f.startsWith('plotly-') || f.startsWith('react-plotly-')) && f.endsWith('.js'))
     if (!plotlyChunk) return
     const stats = fs.statSync(path.join(distDir, plotlyChunk))
     expect(stats.size).toBeGreaterThan(4 * 1024 * 1024) // >4MB
