@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { requireAdmin } = require('../middlewares/auth');
 const prisma = require('../config/database');
+const { sendNotification } = require('../utils/notificationService');
 
 // Helper to log admin actions (won't fail if table doesn't exist)
 async function logAdminAction(adminId, action, target, targetId, details, ip) {
@@ -22,121 +23,159 @@ async function logAdminAction(adminId, action, target, targetId, details, ip) {
   }
 }
 
-// ==================== STATS ====================
+// Stats cache (5 min TTL)
+let statsCache = null;
+let statsCacheTime = 0;
+const STATS_CACHE_TTL = 5 * 60 * 1000;
+
+// ==================== STATS (11 metrics + charts) ====================
 
 router.get('/stats', requireAdmin, async (req, res, next) => {
   try {
+    // Return cached if fresh
+    if (statsCache && Date.now() - statsCacheTime < STATS_CACHE_TTL) {
+      return res.json(statsCache);
+    }
+
     const now = new Date();
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const todayStr = todayStart.toISOString().slice(0, 10);
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
     const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+    const weekStart = new Date(now);
+    weekStart.setDate(weekStart.getDate() - weekStart.getDay() + 1);
+    weekStart.setHours(0, 0, 0, 0);
 
-    // Run counts in parallel
-    const [
-      totalUsers,
-      activeUsersToday,
-      activeSubscriptions,
-      lessonsCompleted,
-      monthlyRevenueResult
-    ] = await Promise.all([
+    // Level 1 — Basics
+    const [totalUsers, dau, mau] = await Promise.all([
       prisma.user.count(),
-      prisma.user.count({
-        where: { lastLoginAt: { gte: todayStart } }
-      }),
-      prisma.subscription.count({
-        where: { status: 'ACTIVE' }
-      }),
-      prisma.lesson_completions.count(),
-      prisma.payment.aggregate({
-        _sum: { amount: true },
-        where: {
-          status: { in: ['COMPLETED', 'SUCCESS'] },
-          createdAt: { gte: monthStart }
-        }
-      })
+      prisma.user.count({ where: { lastLoginAt: { gte: todayStart } } }),
+      prisma.user.count({ where: { lastLoginAt: { gte: thirtyDaysAgo } } })
     ]);
 
+    // Level 2 — Engagement
+    let totalXpDistributed = 0;
+    try {
+      const xpAgg = await prisma.user.aggregate({ _sum: { xp: true } });
+      totalXpDistributed = xpAgg._sum.xp || 0;
+    } catch (e) { /* ignore */ }
+
+    let aiCallsToday = 0;
+    try {
+      const aiAgg = await prisma.dailyAiUsage.aggregate({
+        _sum: { count: true },
+        where: { date: new Date(todayStr) }
+      });
+      aiCallsToday = aiAgg._sum.count || 0;
+    } catch (e) { /* ignore */ }
+
+    let duelsThisWeek = 0;
+    try {
+      duelsThisWeek = await prisma.duel.count({ where: { completedAt: { gte: weekStart } } });
+    } catch (e) { /* ignore */ }
+
+    const top10Users = await prisma.user.findMany({
+      select: { id: true, firstName: true, lastName: true, username: true, xp: true, level: true },
+      orderBy: { xp: 'desc' },
+      take: 10
+    });
+
+    // Level 3 — Revenue
+    const [activeSubscriptions, monthlyRevenueResult] = await Promise.all([
+      prisma.subscription.count({ where: { status: 'ACTIVE' } }),
+      prisma.payment.aggregate({
+        _sum: { amount: true },
+        where: { status: { in: ['COMPLETED', 'SUCCESS'] }, createdAt: { gte: monthStart } }
+      })
+    ]);
     const monthlyRevenue = monthlyRevenueResult._sum.amount || 0;
 
-    // Recent signups (last 30 days grouped by day)
+    let subsByPlan = [];
+    try {
+      const raw = await prisma.subscription.groupBy({ by: ['planId'], _count: true, where: { status: 'ACTIVE' } });
+      const plans = await prisma.subscriptionPlan.findMany({ select: { id: true, name: true, displayName: true } });
+      const planMap = {};
+      plans.forEach(p => { planMap[p.id] = p.displayName || p.name; });
+      subsByPlan = raw.map(r => ({ planId: r.planId, planName: planMap[r.planId] || r.planId, count: r._count }));
+    } catch (e) { /* ignore */ }
+
+    const freeUsers = Math.max(0, totalUsers - activeSubscriptions);
+
+    let conversionRate = 0;
+    try {
+      const recentSubs = await prisma.subscription.count({ where: { status: 'ACTIVE', createdAt: { gte: thirtyDaysAgo } } });
+      conversionRate = totalUsers > 0 ? Math.round((recentSubs / totalUsers) * 10000) / 100 : 0;
+    } catch (e) { /* ignore */ }
+
+    let geminiCostFCFA = 0;
+    try {
+      const aiMonth = await prisma.dailyAiUsage.aggregate({ _sum: { count: true }, where: { date: { gte: monthStart } } });
+      geminiCostFCFA = (aiMonth._sum.count || 0) * 2;
+    } catch (e) { /* ignore */ }
+
+    // Charts — signups 30 days
     const recentSignupsRaw = await prisma.$queryRaw`
-      SELECT DATE(\"createdAt\") as date, COUNT(*)::int as count
+      SELECT DATE("createdAt") as date, COUNT(*)::int as count
       FROM users
       WHERE "createdAt" >= ${thirtyDaysAgo}
       GROUP BY DATE("createdAt")
       ORDER BY date ASC
     `;
 
-    // Revenue by month (last 6 months)
+    // Revenue by month (6 months)
     const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1);
     const revenueByMonthRaw = await prisma.$queryRaw`
-      SELECT
-        TO_CHAR("created_at", 'YYYY-MM') as month,
-        SUM(amount)::int as revenue
+      SELECT TO_CHAR("created_at", 'YYYY-MM') as month, SUM(amount)::int as revenue
       FROM payments
-      WHERE "created_at" >= ${sixMonthsAgo}
-        AND status IN ('COMPLETED', 'SUCCESS')
+      WHERE "created_at" >= ${sixMonthsAgo} AND status IN ('COMPLETED', 'SUCCESS')
       GROUP BY TO_CHAR("created_at", 'YYYY-MM')
       ORDER BY month ASC
     `;
 
-    // Recent activity (last 10 logins + lesson completions)
+    // Recent activity
     const recentLogins = await prisma.user.findMany({
       where: { lastLoginAt: { not: null } },
-      select: {
-        id: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        lastLoginAt: true
-      },
+      select: { id: true, firstName: true, lastName: true, email: true, lastLoginAt: true },
       orderBy: { lastLoginAt: 'desc' },
       take: 5
     });
 
-    const recentCompletions = await prisma.lesson_completions.findMany({
-      select: {
-        id: true,
-        userId: true,
-        lessonId: true,
-        createdAt: true,
-        users: {
-          select: { firstName: true, lastName: true, email: true }
+    let recentCompletions = [];
+    try {
+      recentCompletions = await prisma.lesson_completions.findMany({
+        select: {
+          id: true, userId: true, lessonId: true, createdAt: true,
+          users: { select: { firstName: true, lastName: true, email: true } },
+          lessons: { select: { title: true } }
         },
-        lessons: {
-          select: { title: true }
-        }
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 5
-    });
+        orderBy: { createdAt: 'desc' },
+        take: 5
+      });
+    } catch (e) { /* ignore */ }
 
     const recentActivity = [
       ...recentLogins.map(u => ({
-        type: 'login',
-        userId: u.id,
+        type: 'login', userId: u.id,
         userName: `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email,
         timestamp: u.lastLoginAt
       })),
       ...recentCompletions.map(c => ({
-        type: 'lesson_completed',
-        userId: c.userId,
+        type: 'lesson_completed', userId: c.userId,
         userName: `${c.users?.firstName || ''} ${c.users?.lastName || ''}`.trim() || c.users?.email,
-        lessonTitle: c.lessons?.title,
-        timestamp: c.createdAt
+        lessonTitle: c.lessons?.title, timestamp: c.createdAt
       }))
     ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 10);
 
-    res.json({
-      totalUsers,
-      activeUsersToday,
-      activeSubscriptions,
-      monthlyRevenue,
-      lessonsCompleted,
-      recentSignups: recentSignupsRaw,
-      revenueByMonth: revenueByMonthRaw,
-      recentActivity
-    });
+    const result = {
+      totalUsers, dau, mau,
+      totalXpDistributed, aiCallsToday, duelsThisWeek, top10Users,
+      monthlyRevenue, activeSubscriptions, subsByPlan, freeUsers, conversionRate, geminiCostFCFA,
+      recentSignups: recentSignupsRaw, revenueByMonth: revenueByMonthRaw, recentActivity
+    };
+
+    statsCache = result;
+    statsCacheTime = Date.now();
+    res.json(result);
   } catch (error) {
     console.error('Admin stats error:', error);
     next(error);
@@ -159,7 +198,9 @@ router.get('/users', requireAdmin, async (req, res, next) => {
         { firstName: { contains: search, mode: 'insensitive' } },
         { lastName: { contains: search, mode: 'insensitive' } },
         { email: { contains: search, mode: 'insensitive' } },
-        { username: { contains: search, mode: 'insensitive' } }
+        { username: { contains: search, mode: 'insensitive' } },
+        { phoneNumber: { contains: search, mode: 'insensitive' } },
+        { id: { contains: search, mode: 'insensitive' } }
       ];
     }
 
@@ -185,11 +226,13 @@ router.get('/users', requireAdmin, async (req, res, next) => {
           lastName: true,
           email: true,
           username: true,
+          phoneNumber: true,
           level: true,
           xp: true,
           streak: true,
           is_admin: true,
           isActive: true,
+          suspendedReason: true,
           createdAt: true,
           lastLoginAt: true,
           _count: {
@@ -221,11 +264,19 @@ router.get('/users', requireAdmin, async (req, res, next) => {
 router.patch('/users/:id', requireAdmin, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { is_admin, isActive } = req.body;
+    const { is_admin, isActive, suspendedReason } = req.body;
 
     const updateData = {};
     if (typeof is_admin === 'boolean') updateData.is_admin = is_admin;
-    if (typeof isActive === 'boolean') updateData.isActive = isActive;
+    if (typeof isActive === 'boolean') {
+      updateData.isActive = isActive;
+      if (!isActive && suspendedReason) {
+        updateData.suspendedReason = suspendedReason;
+      }
+      if (isActive) {
+        updateData.suspendedReason = null;
+      }
+    }
 
     const updatedUser = await prisma.user.update({
       where: { id },
@@ -710,6 +761,49 @@ router.post('/students', requireAdmin, async (req, res, next) => {
     res.status(201).json(student);
   } catch (error) {
     console.error('Admin create student error:', error);
+    next(error);
+  }
+});
+
+// ==================== NOTIFICATIONS BROADCAST ====================
+
+router.post('/notifications/broadcast', requireAdmin, async (req, res, next) => {
+  try {
+    const { title, message, link } = req.body;
+
+    if (!title || !message) {
+      return res.status(400).json({ error: 'Title and message are required' });
+    }
+
+    // Get all active users with notifications enabled
+    const users = await prisma.user.findMany({
+      where: { isActive: true, notificationsEnabled: true },
+      select: { id: true }
+    });
+
+    const BATCH = 50;
+    let sent = 0;
+
+    for (let i = 0; i < users.length; i += BATCH) {
+      const batch = users.slice(i, i + BATCH);
+      await Promise.all(batch.map(u =>
+        sendNotification(u.id, 'admin_broadcast', title, message, link ? { link } : null)
+      ));
+      sent += batch.length;
+    }
+
+    await logAdminAction(
+      req.user.userId,
+      'BROADCAST_NOTIFICATION',
+      'Notification',
+      null,
+      { title, recipientCount: sent },
+      req.ip
+    );
+
+    res.json({ success: true, sent });
+  } catch (error) {
+    console.error('Admin broadcast error:', error);
     next(error);
   }
 });

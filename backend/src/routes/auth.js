@@ -220,6 +220,12 @@ router.post('/login', loginLimiter, async (req, res, next) => {
       return res.status(401).json({ error: isPhone ? 'Numero ou PIN incorrect' : 'Email ou mot de passe incorrect' });
     }
 
+    // Check suspended
+    if (!user.isActive) {
+      const reason = user.suspendedReason || 'Votre compte a ete suspendu.';
+      return res.status(403).json({ error: reason, suspended: true });
+    }
+
     // Check lockout
     if (isLockedOut(user)) {
       const unlockTime = new Date(user.lockedUntil);
