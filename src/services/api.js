@@ -406,6 +406,27 @@ const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+
+    // Logs
+    getLogs: (params = {}) => {
+      const q = new URLSearchParams(params).toString()
+      return request(`/admin/logs${q ? `?${q}` : ''}`)
+    },
+
+    // Forum moderation
+    getForumDiscussions: (params = {}) => {
+      const q = new URLSearchParams(params).toString()
+      return request(`/admin/forum/discussions${q ? `?${q}` : ''}`)
+    },
+    deleteDiscussion: (id) => request(`/admin/forum/discussions/${id}`, { method: 'DELETE' }),
+    deleteReply: (id) => request(`/admin/forum/replies/${id}`, { method: 'DELETE' }),
+
+    // Coach sessions
+    getCoachConversations: (params = {}) => {
+      const q = new URLSearchParams(params).toString()
+      return request(`/admin/coach/conversations${q ? `?${q}` : ''}`)
+    },
+    getCoachConversation: (id) => request(`/admin/coach/conversations/${id}`),
   },
 
   // 🏆 GAMIFICATION

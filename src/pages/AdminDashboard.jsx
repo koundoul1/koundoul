@@ -40,6 +40,9 @@ import {
   Sword,
   BarChart3,
   Cpu,
+  MessageSquare,
+  Eye,
+  ScrollText,
 } from 'lucide-react'
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -196,6 +199,7 @@ const SECTIONS = [
   { id: 'payments', label: 'Paiements', icon: Wallet },
   { id: 'content', label: 'Contenu', icon: BookOpen },
   { id: 'notifications', label: 'Notifications', icon: Bell },
+  { id: 'support', label: 'Support', icon: HeadphonesIcon },
 ]
 
 // =============================================================================
@@ -320,6 +324,7 @@ const AdminDashboard = () => {
           {activeSection === 'payments' && <PaymentsSection showToast={showToast} />}
           {activeSection === 'content' && <ContentSection showToast={showToast} showConfirm={showConfirm} />}
           {activeSection === 'notifications' && <NotificationsSection showToast={showToast} />}
+          {activeSection === 'support' && <SupportSection showToast={showToast} showConfirm={showConfirm} />}
         </div>
       </main>
     </div>
@@ -1375,6 +1380,384 @@ const NotificationsSection = ({ showToast }) => {
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+// =============================================================================
+// 7. SUPPORT SECTION — Forum Moderation + Coach Sessions + Admin Logs
+// =============================================================================
+
+const SupportSection = ({ showToast, showConfirm }) => {
+  const [tab, setTab] = useState('forum')
+
+  const tabs = [
+    { id: 'forum', label: 'Forum', icon: MessageSquare },
+    { id: 'coach', label: 'Sessions Coach', icon: HeadphonesIcon },
+    { id: 'logs', label: 'Historique Actions', icon: ScrollText },
+  ]
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6">Support & Moderation</h2>
+
+      {/* Tabs */}
+      <div className="flex gap-2 mb-6 border-b border-gray-800 pb-3">
+        {tabs.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            onClick={() => setTab(id)}
+            className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-colors ${
+              tab === id ? 'bg-[#FF4757] text-white' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+            }`}
+          >
+            <Icon size={14} />
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {tab === 'forum' && <ForumModerationTab showToast={showToast} showConfirm={showConfirm} />}
+      {tab === 'coach' && <CoachSessionsTab showToast={showToast} />}
+      {tab === 'logs' && <AdminLogsTab />}
+    </div>
+  )
+}
+
+// ─── Forum Moderation Tab ──────────────────────────────────────────────
+
+const ForumModerationTab = ({ showToast, showConfirm }) => {
+  const [discussions, setDiscussions] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [search, setSearch] = useState('')
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [expandedDisc, setExpandedDisc] = useState(null)
+  const searchTimeout = useRef(null)
+
+  const fetchDiscussions = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const params = { page, limit: 20 }
+      if (search) params.search = search
+      const data = await api.admin.getForumDiscussions(params)
+      setDiscussions(data.discussions || [])
+      setTotalPages(data.pagination?.totalPages || 1)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }, [page, search])
+
+  useEffect(() => { fetchDiscussions() }, [fetchDiscussions])
+
+  const handleSearchChange = (val) => {
+    clearTimeout(searchTimeout.current)
+    searchTimeout.current = setTimeout(() => { setSearch(val); setPage(1) }, 400)
+  }
+
+  const deleteDiscussion = (disc) => {
+    showConfirm(
+      'Supprimer la discussion',
+      `Supprimer "${disc.title}" et toutes ses reponses ? Cette action est irreversible.`,
+      async () => {
+        try {
+          await api.admin.deleteDiscussion(disc.id)
+          showToast('Discussion supprimee')
+          fetchDiscussions()
+        } catch (err) {
+          showToast(err.message, 'error')
+        }
+      }
+    )
+  }
+
+  return (
+    <div>
+      {/* Search */}
+      <div className="relative max-w-md mb-4">
+        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+        <input
+          type="text"
+          placeholder="Rechercher dans le forum..."
+          defaultValue={search}
+          onChange={(e) => handleSearchChange(e.target.value)}
+          className="w-full pl-9 pr-3 py-2 text-sm bg-[#12122A] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#FF4757]"
+        />
+      </div>
+
+      {loading ? <Spinner /> : error ? <ErrorBlock message={error} onRetry={fetchDiscussions} /> : (
+        <>
+          {discussions.length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              <MessageSquare size={32} className="mx-auto mb-3 text-gray-600" />
+              <p className="text-sm">Aucune discussion</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {discussions.map((disc) => (
+                <div key={disc.id} className="bg-[#12122A] border border-gray-800 rounded-xl p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`px-2 py-0.5 text-[10px] rounded ${disc.category === 'QUESTION' ? 'bg-blue-500/20 text-blue-400' : disc.category === 'DISCUSSION' ? 'bg-purple-500/20 text-purple-400' : 'bg-green-500/20 text-green-400'}`}>
+                          {disc.category}
+                        </span>
+                        {disc.solved && <span className="px-2 py-0.5 text-[10px] rounded bg-green-500/20 text-green-400">Resolu</span>}
+                        {disc.isPinned && <span className="px-2 py-0.5 text-[10px] rounded bg-yellow-500/20 text-yellow-400">Epingle</span>}
+                      </div>
+                      <h4 className="text-sm font-semibold text-white">{disc.title}</h4>
+                      <div className="flex items-center gap-4 mt-1.5 text-xs text-gray-500">
+                        <span>{disc.user?.firstName || disc.user?.username || disc.user?.email || '?'}</span>
+                        <span>{formatDate(disc.createdAt)}</span>
+                        <span className="flex items-center gap-1"><MessageSquare size={10} />{disc._count?.replies || 0}</span>
+                        <span className="flex items-center gap-1"><Eye size={10} />{disc.views || 0}</span>
+                        <span>{disc.votes || 0} votes</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 shrink-0">
+                      <button onClick={() => setExpandedDisc(expandedDisc === disc.id ? null : disc.id)} title="Voir contenu" className="p-1.5 rounded hover:bg-gray-800 text-gray-400 hover:text-white">
+                        {expandedDisc === disc.id ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                      </button>
+                      <button onClick={() => deleteDiscussion(disc)} title="Supprimer" className="p-1.5 rounded hover:bg-gray-800 text-gray-400 hover:text-red-400">
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  </div>
+                  {expandedDisc === disc.id && (
+                    <div className="mt-3 pt-3 border-t border-gray-800">
+                      <p className="text-sm text-gray-300 whitespace-pre-wrap max-h-40 overflow-y-auto">{disc.content}</p>
+                      <p className="text-[10px] text-gray-600 mt-2">ID: {disc.id}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+        </>
+      )}
+    </div>
+  )
+}
+
+// ─── Coach Sessions Tab ────────────────────────────────────────────────
+
+const CoachSessionsTab = ({ showToast }) => {
+  const [conversations, setConversations] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [viewingConv, setViewingConv] = useState(null)
+  const [convDetail, setConvDetail] = useState(null)
+  const [loadingDetail, setLoadingDetail] = useState(false)
+
+  const fetchConversations = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await api.admin.getCoachConversations({ page, limit: 20 })
+      setConversations(data.conversations || [])
+      setTotalPages(data.pagination?.totalPages || 1)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }, [page])
+
+  useEffect(() => { fetchConversations() }, [fetchConversations])
+
+  const viewConversation = async (conv) => {
+    if (viewingConv === conv.id) {
+      setViewingConv(null)
+      setConvDetail(null)
+      return
+    }
+    setViewingConv(conv.id)
+    setLoadingDetail(true)
+    try {
+      const data = await api.admin.getCoachConversation(conv.id)
+      setConvDetail(data)
+    } catch (err) {
+      showToast(err.message, 'error')
+    } finally {
+      setLoadingDetail(false)
+    }
+  }
+
+  return (
+    <div>
+      {loading ? <Spinner /> : error ? <ErrorBlock message={error} onRetry={fetchConversations} /> : (
+        <>
+          {conversations.length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              <HeadphonesIcon size={32} className="mx-auto mb-3 text-gray-600" />
+              <p className="text-sm">Aucune session Coach</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {conversations.map((conv) => (
+                <div key={conv.id} className="bg-[#12122A] border border-gray-800 rounded-xl p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-sm font-semibold text-white truncate">{conv.title || 'Sans titre'}</h4>
+                      <div className="flex items-center gap-4 mt-1 text-xs text-gray-500">
+                        <span>{conv.user?.firstName || conv.user?.username || conv.user?.email || '?'}</span>
+                        <span>{conv.messageCount || 0} messages</span>
+                        <span>{formatDate(conv.updatedAt)}</span>
+                      </div>
+                    </div>
+                    <button onClick={() => viewConversation(conv)} className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white">
+                      <Eye size={12} />
+                      {viewingConv === conv.id ? 'Fermer' : 'Voir'}
+                    </button>
+                  </div>
+
+                  {viewingConv === conv.id && (
+                    <div className="mt-3 pt-3 border-t border-gray-800">
+                      {loadingDetail ? (
+                        <div className="flex justify-center py-4"><Loader2 size={18} className="animate-spin text-gray-500" /></div>
+                      ) : convDetail?.messages ? (
+                        <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
+                          {(Array.isArray(convDetail.messages) ? convDetail.messages : []).map((msg, i) => (
+                            <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                              <div className={`max-w-[80%] px-3 py-2 rounded-lg text-xs ${
+                                msg.role === 'user' ? 'bg-[#FF4757]/20 text-gray-200' : 'bg-gray-800 text-gray-300'
+                              }`}>
+                                <p className="whitespace-pre-wrap">{msg.content}</p>
+                                {msg.timestamp && <span className="text-[9px] text-gray-500 mt-1 block">{new Date(msg.timestamp).toLocaleString('fr-FR')}</span>}
+                              </div>
+                            </div>
+                          ))}
+                          {convDetail.messages.length === 0 && <p className="text-xs text-gray-500 text-center py-2">Aucun message</p>}
+                        </div>
+                      ) : (
+                        <p className="text-xs text-gray-500">Impossible de charger les messages</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+        </>
+      )}
+    </div>
+  )
+}
+
+// ─── Admin Logs Tab ────────────────────────────────────────────────────
+
+const AdminLogsTab = () => {
+  const [logs, setLogs] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+
+  const fetchLogs = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await api.admin.getLogs({ page, limit: 50 })
+      setLogs(data.logs || [])
+      setTotalPages(data.pagination?.totalPages || 1)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }, [page])
+
+  useEffect(() => { fetchLogs() }, [fetchLogs])
+
+  const actionColors = {
+    UPDATE_USER: 'text-blue-400',
+    DELETE_USER: 'text-red-400',
+    UPDATE_SUBSCRIPTION: 'text-purple-400',
+    CREATE_PLAN: 'text-green-400',
+    UPDATE_PLAN: 'text-yellow-400',
+    DELETE_PLAN: 'text-red-400',
+    CREATE_STUDENT: 'text-cyan-400',
+    BROADCAST_NOTIFICATION: 'text-orange-400',
+    DELETE_DISCUSSION: 'text-red-400',
+    DELETE_REPLY: 'text-red-400',
+  }
+
+  const actionLabels = {
+    UPDATE_USER: 'Modifier user',
+    DELETE_USER: 'Supprimer user',
+    UPDATE_SUBSCRIPTION: 'Modifier abo',
+    CREATE_PLAN: 'Creer plan',
+    UPDATE_PLAN: 'Modifier plan',
+    DELETE_PLAN: 'Supprimer plan',
+    CREATE_STUDENT: 'Creer eleve',
+    BROADCAST_NOTIFICATION: 'Broadcast',
+    DELETE_DISCUSSION: 'Suppr. discussion',
+    DELETE_REPLY: 'Suppr. reponse',
+  }
+
+  return (
+    <div>
+      {loading ? <Spinner /> : error ? <ErrorBlock message={error} onRetry={fetchLogs} /> : (
+        <>
+          {logs.length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              <ScrollText size={32} className="mx-auto mb-3 text-gray-600" />
+              <p className="text-sm">Aucun log</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-800 text-left text-gray-500 text-xs uppercase">
+                    <th className="py-3 px-3">Date</th>
+                    <th className="py-3 px-3">Admin</th>
+                    <th className="py-3 px-3">Action</th>
+                    <th className="py-3 px-3">Cible</th>
+                    <th className="py-3 px-3 hidden md:table-cell">Details</th>
+                    <th className="py-3 px-3 hidden lg:table-cell">IP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {logs.map((log) => (
+                    <tr key={log.id} className="border-b border-gray-800/50 hover:bg-white/[0.02]">
+                      <td className="py-2.5 px-3 text-gray-500 text-xs whitespace-nowrap">
+                        {new Date(log.createdAt).toLocaleString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                      </td>
+                      <td className="py-2.5 px-3 text-gray-300 text-xs">
+                        {log.admin?.firstName || log.admin?.email || log.adminId}
+                      </td>
+                      <td className="py-2.5 px-3">
+                        <span className={`text-xs font-medium ${actionColors[log.action] || 'text-gray-400'}`}>
+                          {actionLabels[log.action] || log.action}
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 text-gray-400 text-xs">
+                        {log.target && <span>{log.target}</span>}
+                        {log.targetId && <span className="text-gray-600 ml-1 text-[10px]">({log.targetId.slice(0, 8)}...)</span>}
+                      </td>
+                      <td className="py-2.5 px-3 hidden md:table-cell text-gray-500 text-[11px] max-w-[200px] truncate">
+                        {log.details ? JSON.stringify(log.details).slice(0, 80) : '—'}
+                      </td>
+                      <td className="py-2.5 px-3 hidden lg:table-cell text-gray-600 text-[10px]">
+                        {log.ip || '—'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+        </>
+      )}
     </div>
   )
 }

@@ -808,4 +808,188 @@ router.post('/notifications/broadcast', requireAdmin, async (req, res, next) => 
   }
 });
 
+// ==================== ADMIN LOGS ====================
+
+router.get('/logs', requireAdmin, async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 50;
+    const skip = (page - 1) * limit;
+
+    const [logs, total] = await Promise.all([
+      prisma.adminLog.findMany({
+        include: {
+          admin: { select: { id: true, firstName: true, lastName: true, email: true } }
+        },
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take: limit
+      }),
+      prisma.adminLog.count()
+    ]);
+
+    res.json({
+      logs,
+      pagination: { page, limit, total, totalPages: Math.ceil(total / limit) }
+    });
+  } catch (error) {
+    console.error('Admin logs error:', error);
+    next(error);
+  }
+});
+
+// ==================== FORUM MODERATION ====================
+
+router.get('/forum/discussions', requireAdmin, async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const skip = (page - 1) * limit;
+    const { search } = req.query;
+
+    const where = {};
+    if (search) {
+      where.OR = [
+        { title: { contains: search, mode: 'insensitive' } },
+        { content: { contains: search, mode: 'insensitive' } }
+      ];
+    }
+
+    const [discussions, total] = await Promise.all([
+      prisma.forumDiscussion.findMany({
+        where,
+        include: {
+          user: { select: { id: true, firstName: true, lastName: true, username: true, email: true } },
+          _count: { select: { replies: true, discussion_votes: true } }
+        },
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take: limit
+      }),
+      prisma.forumDiscussion.count({ where })
+    ]);
+
+    res.json({
+      discussions,
+      pagination: { page, limit, total, totalPages: Math.ceil(total / limit) }
+    });
+  } catch (error) {
+    console.error('Admin forum discussions error:', error);
+    next(error);
+  }
+});
+
+router.delete('/forum/discussions/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const disc = await prisma.forumDiscussion.findUnique({
+      where: { id },
+      select: { title: true, userId: true }
+    });
+
+    if (!disc) return res.status(404).json({ error: 'Discussion not found' });
+
+    // Cascade: votes + replies (+ reply votes) are cascade-deleted by Prisma
+    await prisma.$transaction(async (tx) => {
+      await tx.discussion_votes.deleteMany({ where: { discussionId: id } });
+      // Delete reply votes first, then replies
+      const replyIds = await tx.forumReply.findMany({ where: { discussionId: id }, select: { id: true } });
+      if (replyIds.length > 0) {
+        await tx.reply_votes.deleteMany({ where: { replyId: { in: replyIds.map(r => r.id) } } });
+      }
+      await tx.forumReply.deleteMany({ where: { discussionId: id } });
+      await tx.forumDiscussion.delete({ where: { id } });
+    });
+
+    await logAdminAction(req.user.userId, 'DELETE_DISCUSSION', 'ForumDiscussion', id, { title: disc.title }, req.ip);
+    res.json({ message: 'Discussion deleted' });
+  } catch (error) {
+    console.error('Admin delete discussion error:', error);
+    next(error);
+  }
+});
+
+router.delete('/forum/replies/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const reply = await prisma.forumReply.findUnique({
+      where: { id },
+      select: { content: true, userId: true, discussionId: true }
+    });
+
+    if (!reply) return res.status(404).json({ error: 'Reply not found' });
+
+    await prisma.$transaction(async (tx) => {
+      await tx.reply_votes.deleteMany({ where: { replyId: id } });
+      await tx.forumReply.delete({ where: { id } });
+    });
+
+    await logAdminAction(req.user.userId, 'DELETE_REPLY', 'ForumReply', id, { discussionId: reply.discussionId }, req.ip);
+    res.json({ message: 'Reply deleted' });
+  } catch (error) {
+    console.error('Admin delete reply error:', error);
+    next(error);
+  }
+});
+
+// ==================== COACH SESSIONS ====================
+
+router.get('/coach/conversations', requireAdmin, async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const skip = (page - 1) * limit;
+
+    const [conversations, total] = await Promise.all([
+      prisma.coachConversation.findMany({
+        include: {
+          user: { select: { id: true, firstName: true, lastName: true, username: true, email: true } }
+        },
+        orderBy: { updatedAt: 'desc' },
+        skip,
+        take: limit
+      }),
+      prisma.coachConversation.count()
+    ]);
+
+    // Add message count without sending full messages
+    const formatted = conversations.map(c => ({
+      id: c.id,
+      userId: c.userId,
+      user: c.user,
+      title: c.title,
+      messageCount: Array.isArray(c.messages) ? c.messages.length : 0,
+      createdAt: c.createdAt,
+      updatedAt: c.updatedAt
+    }));
+
+    res.json({
+      conversations: formatted,
+      pagination: { page, limit, total, totalPages: Math.ceil(total / limit) }
+    });
+  } catch (error) {
+    console.error('Admin coach conversations error:', error);
+    next(error);
+  }
+});
+
+router.get('/coach/conversations/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const conv = await prisma.coachConversation.findUnique({
+      where: { id: req.params.id },
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, username: true, email: true } }
+      }
+    });
+
+    if (!conv) return res.status(404).json({ error: 'Conversation not found' });
+    res.json(conv);
+  } catch (error) {
+    console.error('Admin get conversation error:', error);
+    next(error);
+  }
+});
+
 module.exports = router;

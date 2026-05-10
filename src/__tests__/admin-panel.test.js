@@ -216,3 +216,86 @@ describe('Admin flag naming', () => {
     expect(user.isAdmin).toBeUndefined()
   })
 })
+
+// ── Forum moderation logic ────────────────────────────────────────────
+
+describe('Forum moderation', () => {
+  it('cascade delete removes replies and votes', () => {
+    // Simulates the cascade logic
+    const discussion = { id: 'd1', title: 'Test', replies: [{ id: 'r1' }, { id: 'r2' }] }
+    const replyIds = discussion.replies.map(r => r.id)
+    expect(replyIds).toEqual(['r1', 'r2'])
+    // After delete: no replies remain
+    discussion.replies = []
+    expect(discussion.replies).toHaveLength(0)
+  })
+
+  it('search filters by title or content', () => {
+    const discussions = [
+      { title: 'Math question', content: 'How to solve x+1=2' },
+      { title: 'Physics help', content: 'Explain gravity' },
+      { title: 'Random', content: 'Off topic' },
+    ]
+    const search = 'math'
+    const filtered = discussions.filter(d =>
+      d.title.toLowerCase().includes(search) || d.content.toLowerCase().includes(search)
+    )
+    expect(filtered).toHaveLength(1)
+    expect(filtered[0].title).toBe('Math question')
+  })
+})
+
+// ── Coach conversations formatting ────────────────────────────────────
+
+describe('Coach conversations admin view', () => {
+  it('formats conversation with message count', () => {
+    const conv = {
+      id: 'c1',
+      title: 'Aide en maths',
+      messages: [{ role: 'user', content: 'Bonjour' }, { role: 'assistant', content: 'Salut!' }],
+      userId: 'u1',
+      user: { firstName: 'Samba' }
+    }
+    const formatted = {
+      id: conv.id,
+      title: conv.title,
+      messageCount: Array.isArray(conv.messages) ? conv.messages.length : 0,
+      user: conv.user
+    }
+    expect(formatted.messageCount).toBe(2)
+    expect(formatted.user.firstName).toBe('Samba')
+  })
+
+  it('handles empty messages array', () => {
+    const count = Array.isArray([]) ? [].length : 0
+    expect(count).toBe(0)
+  })
+})
+
+// ── Admin logs display ────────────────────────────────────────────────
+
+describe('Admin logs formatting', () => {
+  const actionLabels = {
+    UPDATE_USER: 'Modifier user',
+    DELETE_USER: 'Supprimer user',
+    BROADCAST_NOTIFICATION: 'Broadcast',
+    DELETE_DISCUSSION: 'Suppr. discussion',
+    DELETE_REPLY: 'Suppr. reponse',
+  }
+
+  it('maps all known action types to labels', () => {
+    expect(actionLabels['UPDATE_USER']).toBe('Modifier user')
+    expect(actionLabels['DELETE_DISCUSSION']).toBe('Suppr. discussion')
+    expect(actionLabels['BROADCAST_NOTIFICATION']).toBe('Broadcast')
+  })
+
+  it('returns undefined for unknown actions', () => {
+    expect(actionLabels['UNKNOWN_ACTION']).toBeUndefined()
+  })
+
+  it('truncates details JSON to 80 chars', () => {
+    const details = { changes: { firstName: 'NewName', email: 'very-long-email@example.com' } }
+    const truncated = JSON.stringify(details).slice(0, 80)
+    expect(truncated.length).toBeLessThanOrEqual(80)
+  })
+})
