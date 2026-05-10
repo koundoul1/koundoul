@@ -2215,4 +2215,70 @@ Migration minimale : 1 champ. `isActive` sert déjà de flag suspension. `lastLo
 
 ---
 
-**AUDIT TERMINÉ — en attente de validation pour lancer l'implémentation.**
+**AUDIT TERMINÉ — implémentation ci-dessous.**
+
+---
+
+## Phase 3.2 — Implémentation Super Admin Panel
+
+**Date** : 2026-05-10
+
+### Commits
+
+```
+8f3bcaf feat(admin): enrich stats, broadcast notifs, suspend reason, login check
+f0506e1 feat(admin): rewrite dashboard with 11 metrics, broadcast, destructive confirm
+a13f721 test(admin): add 23 regression tests for Phase 3.2
+```
+
+### Migration DB
+
+```sql
+ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "suspendedReason" TEXT;
+```
+
+Fichier : `backend/prisma/migrations/20260510100000_add_suspended_reason/migration.sql`
+
+### Backend
+
+- **GET /admin/stats** : 11 métriques en 3 niveaux + cache 5min
+  - Basiques : totalUsers, DAU, MAU
+  - Engagement : totalXpDistributed, aiCallsToday, duelsThisWeek, top10Users
+  - Revenue : monthlyRevenue, activeSubscriptions, subsByPlan, freeUsers, conversionRate, geminiCostFCFA
+- **POST /admin/notifications/broadcast** : titre + message + lien optionnel → batch 50 users → sendNotification pour chaque user actif avec notificationsEnabled
+- **PATCH /admin/users/:id** : suspendedReason ajouté (set on suspend, cleared on reactivate)
+- **POST /auth/login** : vérifie isActive, bloque les comptes suspendus avec raison
+- **GET /admin/users** : recherche étendue à phoneNumber + id (6 champs)
+- **GET /admin/payments** : inclut user (firstName, lastName, email) via relation
+
+### Frontend
+
+- **OverviewSection** : 3 niveaux de KPI (11 cards), subs par plan, top 10 XP, graphe inscriptions, activité récente
+- **UsersSection** : champs fixes (firstName/lastName au lieu de name, isActive au lieu de status), pagination 50/page, recherche élargie, suspend avec raison (input inline), expanded details avec téléphone + dernière connexion + raison suspension
+- **SubscriptionsSection** : noms user/plan corrigés depuis les relations Prisma
+- **PaymentsSection** : noms user corrigés depuis la relation, paymentMethod
+- **NotificationsSection** (NOUVELLE) : formulaire titre + message + lien optionnel, aperçu live, envoi batch, compteur résultat
+- **DestructiveConfirmModal** : remplace ConfirmModal, saisie "SUPPRIMER" obligatoire pour actions irréversibles (suppression user, annulation sub, suppression plan)
+- **TopBar** : lien "Administration" (jaune) ajouté dans le dropdown profil pour les admins
+- **DesktopHeader** : `isAdmin` corrigé en `is_admin` (2 occurrences)
+- **NotificationBell** : panneau élargi (352px), truncate retiré des titres, messages 3 lignes
+- **api.js** : ajout `admin.broadcast()`
+
+### Tests
+
+- 23 nouveaux tests : total suite **211 tests, tous verts**
+- `npm run lint` : 0 erreurs
+- PROTOCOLE STRICT : node -c sur tous les .js backend, build vite OK
+
+### Tests manuels recommandés en prod après deploy
+
+- [ ] /admin → Tableau de Bord : 11 métriques visibles en 3 niveaux
+- [ ] Section Users : recherche par email/nom/téléphone/ID fonctionne
+- [ ] Suspendre un user → raison inline → user voit message au login
+- [ ] Réactiver un user → raison effacée, login OK
+- [ ] Supprimer un user → saisie "SUPPRIMER" requise → suppression cascade
+- [ ] Annuler un abonnement → saisie "SUPPRIMER" requise
+- [ ] Noms des users affichés dans Paiements et Abonnements (pas de "—")
+- [ ] Section Notifications → remplir titre + message → aperçu → Envoyer → compteur "X destinataires"
+- [ ] TopBar dropdown : lien "Administration" visible pour l'admin
+- [ ] DesktopHeader : lien admin visible (corrigé isAdmin → is_admin)
