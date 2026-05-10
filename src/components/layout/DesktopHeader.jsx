@@ -176,7 +176,7 @@ const DesktopHeader = () => {
                     <span className="text-sm font-medium text-gray-700">
                       {user?.username || user?.email || 'Mon Profil'}
                     </span>
-                    {user?.isAdmin && (
+                    {user?.is_admin && (
                       <span className="px-1.5 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800 rounded">
                         Admin
                       </span>
@@ -217,7 +217,7 @@ const DesktopHeader = () => {
                         <div className="text-sm font-semibold text-white truncate">
                           {user?.username || user?.email || t('header.user')}
                         </div>
-                        {user?.isAdmin && (
+                        {user?.is_admin && (
                           <span className="px-2 py-0.5 text-xs font-medium bg-yellow-500 text-yellow-900 rounded ml-2 flex-shrink-0">
                             {t('header.admin')}
                           </span>
@@ -241,7 +241,7 @@ const DesktopHeader = () => {
                       <Settings className="h-4 w-4 mr-2 text-gray-400" />
                       {t('header.parentDashboard')}
                     </Link>
-                    {user?.isAdmin && (
+                    {user?.is_admin && (
                       <Link
                         to="/admin"
                         onClick={() => setIsProfileOpen(false)}

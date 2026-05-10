@@ -401,6 +401,11 @@ const api = {
       method: 'PATCH',
       body: JSON.stringify(data),
     }),
+
+    broadcast: (data) => request('/admin/notifications/broadcast', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
   },
 
   // 🏆 GAMIFICATION

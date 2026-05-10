@@ -34,6 +34,13 @@ import {
   Layers,
   HelpCircle,
   CalendarDays,
+  Bell,
+  Send,
+  Zap,
+  Sword,
+  Crown,
+  BarChart3,
+  Cpu,
 } from 'lucide-react'
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -85,28 +92,41 @@ const Toast = ({ message, type, onClose }) => {
   )
 }
 
-// ─── Confirm Modal ──────────────────────────────────────────────────────────
+// ─── Destructive Confirm Modal (type SUPPRIMER) ────────────────────────────
 
-const ConfirmModal = ({ title, message, onConfirm, onCancel, loading }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-    <div className="bg-[#12122A] border border-gray-700 rounded-xl p-6 max-w-md w-full">
-      <div className="flex items-center gap-3 mb-4">
-        <AlertTriangle className="text-red-500" size={24} />
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
-      </div>
-      <p className="text-gray-300 text-sm mb-6">{message}</p>
-      <div className="flex justify-end gap-3">
-        <button onClick={onCancel} disabled={loading} className="px-4 py-2 text-sm rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 disabled:opacity-50">
-          Annuler
-        </button>
-        <button onClick={onConfirm} disabled={loading} className="px-4 py-2 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 flex items-center gap-2">
-          {loading && <Loader2 size={14} className="animate-spin" />}
-          Confirmer
-        </button>
+const DestructiveConfirmModal = ({ title, message, onConfirm, onCancel, loading }) => {
+  const [typed, setTyped] = useState('')
+  const confirmed = typed === 'SUPPRIMER'
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+      <div className="bg-[#12122A] border border-gray-700 rounded-xl p-6 max-w-md w-full">
+        <div className="flex items-center gap-3 mb-4">
+          <AlertTriangle className="text-red-500" size={24} />
+          <h3 className="text-lg font-semibold text-white">{title}</h3>
+        </div>
+        <p className="text-gray-300 text-sm mb-4">{message}</p>
+        <p className="text-xs text-gray-400 mb-2">Tapez <span className="text-red-400 font-bold">SUPPRIMER</span> pour confirmer :</p>
+        <input
+          value={typed}
+          onChange={(e) => setTyped(e.target.value)}
+          placeholder="SUPPRIMER"
+          className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-red-500 mb-4"
+          autoFocus
+        />
+        <div className="flex justify-end gap-3">
+          <button onClick={onCancel} disabled={loading} className="px-4 py-2 text-sm rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 disabled:opacity-50">
+            Annuler
+          </button>
+          <button onClick={onConfirm} disabled={loading || !confirmed} className="px-4 py-2 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+            {loading && <Loader2 size={14} className="animate-spin" />}
+            Confirmer
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 // ─── Pagination ─────────────────────────────────────────────────────────────
 
@@ -171,12 +191,12 @@ const ErrorBlock = ({ message, onRetry }) => (
 // ─── SIDEBAR ITEMS ──────────────────────────────────────────────────────────
 
 const SECTIONS = [
-  { id: 'overview', label: 'Vue Generale', icon: LayoutDashboard },
+  { id: 'overview', label: 'Tableau de Bord', icon: LayoutDashboard },
   { id: 'users', label: 'Utilisateurs', icon: Users },
   { id: 'subscriptions', label: 'Abonnements', icon: CreditCard },
   { id: 'payments', label: 'Paiements', icon: Wallet },
   { id: 'content', label: 'Contenu', icon: BookOpen },
-  { id: 'requests', label: 'Support', icon: HeadphonesIcon },
+  { id: 'notifications', label: 'Notifications', icon: Bell },
 ]
 
 // =============================================================================
@@ -227,9 +247,9 @@ const AdminDashboard = () => {
       {/* Toast */}
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
-      {/* Confirm Modal */}
+      {/* Destructive Confirm Modal */}
       {confirmModal && (
-        <ConfirmModal
+        <DestructiveConfirmModal
           title={confirmModal.title}
           message={confirmModal.message}
           onConfirm={handleConfirm}
@@ -300,7 +320,7 @@ const AdminDashboard = () => {
           {activeSection === 'subscriptions' && <SubscriptionsSection showToast={showToast} showConfirm={showConfirm} />}
           {activeSection === 'payments' && <PaymentsSection showToast={showToast} />}
           {activeSection === 'content' && <ContentSection showToast={showToast} showConfirm={showConfirm} />}
-          {activeSection === 'requests' && <RequestsSection />}
+          {activeSection === 'notifications' && <NotificationsSection showToast={showToast} />}
         </div>
       </main>
     </div>
@@ -334,56 +354,81 @@ const OverviewSection = ({ showToast }) => {
   if (loading) return <Spinner />
   if (error) return <ErrorBlock message={error} onRetry={fetchStats} />
 
-  const kpis = [
-    { label: 'Total Utilisateurs', value: stats?.totalUsers ?? 0, icon: Users, color: 'text-blue-400' },
-    { label: 'Actifs Aujourd\'hui', value: stats?.activeToday ?? 0, icon: Activity, color: 'text-green-400' },
-    { label: 'Revenu Mensuel', value: formatCFA(stats?.monthlyRevenue), icon: DollarSign, color: 'text-yellow-400' },
-    { label: 'Abonnements Actifs', value: stats?.activeSubscriptions ?? 0, icon: CreditCard, color: 'text-purple-400' },
-    { label: 'Lecons Terminees', value: stats?.lessonsCompleted ?? 0, icon: BookOpen, color: 'text-cyan-400' },
-  ]
-
   const signups = stats?.recentSignups || []
   const maxSignup = Math.max(...signups.map((s) => s.count || 0), 1)
-
   const recentActivity = stats?.recentActivity || []
+  const top10 = stats?.top10Users || []
+
+  const StatCard = ({ label, value, icon: Icon, color, sub }) => (
+    <div className="bg-[#12122A] border border-gray-800 rounded-xl p-4">
+      <div className="flex items-center gap-3 mb-2">
+        <Icon size={18} className={color} />
+        <span className="text-xs text-gray-400">{label}</span>
+      </div>
+      <p className="text-xl font-bold">{value}</p>
+      {sub && <p className="text-[11px] text-gray-500 mt-1">{sub}</p>}
+    </div>
+  )
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">Vue Generale</h2>
+      <h2 className="text-2xl font-bold mb-6">Tableau de Bord</h2>
 
-      {/* KPI cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
-        {kpis.map(({ label, value, icon: Icon, color }) => (
-          <div key={label} className="bg-[#12122A] border border-gray-800 rounded-xl p-4">
-            <div className="flex items-center gap-3 mb-2">
-              <Icon size={20} className={color} />
-              <span className="text-xs text-gray-400">{label}</span>
-            </div>
-            <p className="text-xl font-bold">{value}</p>
-          </div>
-        ))}
+      {/* Level 1 — Basics */}
+      <h3 className="text-xs uppercase text-gray-500 mb-3 tracking-wide">Utilisateurs</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <StatCard label="Total Inscrits" value={stats?.totalUsers ?? 0} icon={Users} color="text-blue-400" />
+        <StatCard label="DAU (Aujourd'hui)" value={stats?.dau ?? 0} icon={Activity} color="text-green-400" />
+        <StatCard label="MAU (30 jours)" value={stats?.mau ?? 0} icon={TrendingUp} color="text-cyan-400" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Level 2 — Engagement */}
+      <h3 className="text-xs uppercase text-gray-500 mb-3 tracking-wide">Engagement</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <StatCard label="XP Total Distribue" value={(stats?.totalXpDistributed ?? 0).toLocaleString('fr-FR')} icon={Zap} color="text-yellow-400" />
+        <StatCard label="Appels IA Aujourd'hui" value={stats?.aiCallsToday ?? 0} icon={Cpu} color="text-purple-400" />
+        <StatCard label="Duels cette Semaine" value={stats?.duelsThisWeek ?? 0} icon={Sword} color="text-orange-400" />
+        <StatCard label="Abonnements Actifs" value={stats?.activeSubscriptions ?? 0} icon={CreditCard} color="text-emerald-400" />
+      </div>
+
+      {/* Level 3 — Revenue */}
+      <h3 className="text-xs uppercase text-gray-500 mb-3 tracking-wide">Revenus</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <StatCard label="MRR (ce mois)" value={formatCFA(stats?.monthlyRevenue)} icon={DollarSign} color="text-green-400" />
+        <StatCard label="Utilisateurs Gratuits" value={stats?.freeUsers ?? 0} icon={Users} color="text-gray-400" />
+        <StatCard label="Taux Conversion" value={`${stats?.conversionRate ?? 0}%`} icon={BarChart3} color="text-blue-400" sub="30 derniers jours" />
+        <StatCard label="Cout Gemini Estime" value={formatCFA(stats?.geminiCostFCFA)} icon={Cpu} color="text-red-400" sub="ce mois" />
+      </div>
+
+      {/* Subs by plan */}
+      {stats?.subsByPlan?.length > 0 && (
+        <div className="bg-[#12122A] border border-gray-800 rounded-xl p-5 mb-6">
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">Abonnements par Plan</h3>
+          <div className="flex flex-wrap gap-3">
+            {stats.subsByPlan.map((sp, i) => (
+              <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-gray-800/50 rounded-lg">
+                <span className="text-sm text-gray-300">{sp.planName}</span>
+                <span className="text-sm font-bold text-[#FF4757]">{sp.count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         {/* Signups chart */}
         <div className="bg-[#12122A] border border-gray-800 rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-gray-300 mb-4">Inscriptions Recentes</h3>
+          <h3 className="text-sm font-semibold text-gray-300 mb-4">Inscriptions (30j)</h3>
           {signups.length === 0 ? (
             <p className="text-gray-500 text-sm">Aucune donnee</p>
           ) : (
-            <div className="flex items-end gap-2 h-40">
-              {signups.map((s, i) => {
+            <div className="flex items-end gap-1 h-32">
+              {signups.slice(-15).map((s, i) => {
                 const pct = ((s.count || 0) / maxSignup) * 100
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                    <span className="text-xs text-gray-400">{s.count || 0}</span>
-                    <div
-                      className="w-full bg-[#FF4757] rounded-t"
-                      style={{ height: `${Math.max(pct, 4)}%` }}
-                    />
-                    <span className="text-[10px] text-gray-500 truncate w-full text-center">
-                      {s.label || s.date || ''}
-                    </span>
+                    <span className="text-[9px] text-gray-500">{s.count || 0}</span>
+                    <div className="w-full bg-[#FF4757] rounded-t" style={{ height: `${Math.max(pct, 4)}%` }} />
                   </div>
                 )
               })}
@@ -391,19 +436,37 @@ const OverviewSection = ({ showToast }) => {
           )}
         </div>
 
+        {/* Top 10 XP */}
+        <div className="bg-[#12122A] border border-gray-800 rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">Top 10 XP</h3>
+          {top10.length === 0 ? (
+            <p className="text-gray-500 text-sm">Aucune donnee</p>
+          ) : (
+            <ul className="space-y-1.5">
+              {top10.map((u, i) => (
+                <li key={u.id} className="flex items-center gap-2 text-sm">
+                  <span className={`w-5 text-center text-xs font-bold ${i < 3 ? 'text-yellow-400' : 'text-gray-500'}`}>{i + 1}</span>
+                  <span className="text-gray-300 flex-1 truncate">{u.firstName || u.username || '?'}</span>
+                  <span className="text-xs text-yellow-400 font-medium">{(u.xp || 0).toLocaleString()}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
         {/* Recent activity */}
         <div className="bg-[#12122A] border border-gray-800 rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-gray-300 mb-4">Activite Recente</h3>
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">Activite Recente</h3>
           {recentActivity.length === 0 ? (
             <p className="text-gray-500 text-sm">Aucune activite</p>
           ) : (
-            <ul className="space-y-2 max-h-60 overflow-y-auto">
+            <ul className="space-y-1.5 max-h-48 overflow-y-auto">
               {recentActivity.slice(0, 10).map((act, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm py-1.5 border-b border-gray-800/50 last:border-0">
-                  <Activity size={14} className="text-gray-500 mt-0.5 shrink-0" />
+                <li key={i} className="flex items-start gap-2 text-sm py-1 border-b border-gray-800/50 last:border-0">
+                  <Activity size={12} className="text-gray-500 mt-0.5 shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <span className="text-gray-300 truncate block">{act.description || act.action || 'Action'}</span>
-                    <span className="text-[11px] text-gray-500">{act.user || ''} {act.date ? `- ${formatDate(act.date)}` : ''}</span>
+                    <span className="text-gray-300 text-xs block truncate">{act.userName || 'User'} — {act.type === 'login' ? 'connexion' : act.lessonTitle || 'lecon terminee'}</span>
+                    <span className="text-[10px] text-gray-500">{formatDate(act.timestamp)}</span>
                   </div>
                 </li>
               ))}
@@ -428,7 +491,7 @@ const UsersSection = ({ showToast, showConfirm }) => {
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [expandedUser, setExpandedUser] = useState(null)
-  const perPage = 20
+  const perPage = 50
   const searchTimeout = useRef(null)
 
   const fetchUsers = useCallback(async () => {
@@ -461,18 +524,25 @@ const UsersSection = ({ showToast, showConfirm }) => {
   const toggleAdmin = async (u) => {
     try {
       await api.admin.updateUser(u.id, { is_admin: !u.is_admin })
-      showToast(`${u.name || u.email} ${u.is_admin ? 'n\'est plus' : 'est maintenant'} admin`)
+      showToast(`${u.firstName || u.email} ${u.is_admin ? 'n\'est plus' : 'est maintenant'} admin`)
       fetchUsers()
     } catch (err) {
       showToast(err.message, 'error')
     }
   }
 
+  const [suspendReason, setSuspendReason] = useState('')
+  const [showSuspendInput, setShowSuspendInput] = useState(null)
+
   const toggleActive = async (u) => {
-    const newStatus = u.status === 'active' ? 'suspended' : 'active'
+    const newActive = !(u.isActive !== false)
     try {
-      await api.admin.updateUser(u.id, { status: newStatus })
-      showToast(`Utilisateur ${newStatus === 'active' ? 'active' : 'suspendu'}`)
+      const data = { isActive: newActive }
+      if (!newActive && suspendReason) data.suspendedReason = suspendReason
+      await api.admin.updateUser(u.id, data)
+      showToast(newActive ? 'Utilisateur reactive' : 'Utilisateur suspendu')
+      setShowSuspendInput(null)
+      setSuspendReason('')
       fetchUsers()
     } catch (err) {
       showToast(err.message, 'error')
@@ -482,7 +552,7 @@ const UsersSection = ({ showToast, showConfirm }) => {
   const deleteUser = (u) => {
     showConfirm(
       'Supprimer l\'utilisateur',
-      `Voulez-vous vraiment supprimer ${u.name || u.email} ? Cette action est irreversible.`,
+      `Voulez-vous vraiment supprimer ${u.firstName || u.email} ? Cette action est irreversible. Toutes les donnees seront perdues.`,
       async () => {
         try {
           await api.admin.deleteUser(u.id)
@@ -499,14 +569,14 @@ const UsersSection = ({ showToast, showConfirm }) => {
     if (!users.length) return
     const headers = ['Nom', 'Email', 'Niveau', 'XP', 'Streak', 'Abonnement', 'Date Inscription', 'Statut']
     const rows = users.map((u) => [
-      u.name || '',
+      `${u.firstName || ''} ${u.lastName || ''}`.trim(),
       u.email || '',
       u.level || '',
       u.xp ?? '',
       u.streak ?? '',
-      u.subscription_status || u.subscriptionStatus || '',
-      u.created_at || u.createdAt || '',
-      u.status || '',
+      u._count?.subscriptions > 0 ? 'Abonne' : 'Gratuit',
+      u.createdAt || '',
+      u.isActive !== false ? 'Actif' : 'Suspendu',
     ])
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n')
     const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' })
@@ -541,7 +611,7 @@ const UsersSection = ({ showToast, showConfirm }) => {
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
           <input
             type="text"
-            placeholder="Rechercher par nom ou email..."
+            placeholder="Rechercher par nom, email, telephone, ID..."
             defaultValue={search}
             onChange={(e) => handleSearchChange(e.target.value)}
             className="w-full pl-9 pr-3 py-2 text-sm bg-[#12122A] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#FF4757]"
@@ -583,20 +653,20 @@ const UsersSection = ({ showToast, showConfirm }) => {
                 ) : users.map((u) => (
                   <React.Fragment key={u.id}>
                     <tr className="border-b border-gray-800/50 hover:bg-white/[0.02]">
-                      <td className="py-3 px-3 text-white font-medium">{u.name || '—'}</td>
+                      <td className="py-3 px-3 text-white font-medium">{`${u.firstName || ''} ${u.lastName || ''}`.trim() || u.username || '—'}</td>
                       <td className="py-3 px-3 text-gray-400">{u.email}</td>
                       <td className="py-3 px-3 hidden md:table-cell text-gray-400">{u.level || '—'}</td>
                       <td className="py-3 px-3 hidden md:table-cell text-gray-400">{u.xp ?? 0}</td>
                       <td className="py-3 px-3 hidden lg:table-cell text-gray-400">{u.streak ?? 0}</td>
                       <td className="py-3 px-3 hidden lg:table-cell">
-                        <span className={`px-2 py-0.5 rounded text-xs ${statusColors[u.subscription_status || u.subscriptionStatus] || 'bg-gray-700 text-gray-400'}`}>
-                          {statusLabel(u.subscription_status || u.subscriptionStatus || 'none')}
+                        <span className={`px-2 py-0.5 rounded text-xs ${u._count?.subscriptions > 0 ? 'bg-green-500/20 text-green-400' : 'bg-gray-700 text-gray-400'}`}>
+                          {u._count?.subscriptions > 0 ? 'Abonne' : 'Gratuit'}
                         </span>
                       </td>
-                      <td className="py-3 px-3 hidden xl:table-cell text-gray-500 text-xs">{formatDate(u.created_at || u.createdAt)}</td>
+                      <td className="py-3 px-3 hidden xl:table-cell text-gray-500 text-xs">{formatDate(u.createdAt)}</td>
                       <td className="py-3 px-3">
-                        <span className={`px-2 py-0.5 rounded text-xs ${statusColors[u.status] || 'bg-gray-700 text-gray-400'}`}>
-                          {statusLabel(u.status || 'active')}
+                        <span className={`px-2 py-0.5 rounded text-xs ${u.isActive !== false ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                          {u.isActive !== false ? 'Actif' : 'Suspendu'}
                         </span>
                       </td>
                       <td className="py-3 px-3">
@@ -607,27 +677,37 @@ const UsersSection = ({ showToast, showConfirm }) => {
                           <button onClick={() => toggleAdmin(u)} title={u.is_admin ? 'Retirer admin' : 'Rendre admin'} className="p-1.5 rounded hover:bg-gray-800 text-gray-400 hover:text-yellow-400">
                             {u.is_admin ? <ShieldOff size={14} /> : <ShieldCheck size={14} />}
                           </button>
-                          <button onClick={() => toggleActive(u)} title={u.status === 'active' ? 'Suspendre' : 'Activer'} className="p-1.5 rounded hover:bg-gray-800 text-gray-400 hover:text-blue-400">
-                            {u.status === 'active' || !u.status ? <UserX size={14} /> : <UserCheck size={14} />}
+                          <button onClick={() => { u.isActive !== false ? setShowSuspendInput(u.id) : toggleActive(u) }} title={u.isActive !== false ? 'Suspendre' : 'Reactiver'} className="p-1.5 rounded hover:bg-gray-800 text-gray-400 hover:text-blue-400">
+                            {u.isActive !== false ? <UserX size={14} /> : <UserCheck size={14} />}
                           </button>
                           <button onClick={() => deleteUser(u)} title="Supprimer" className="p-1.5 rounded hover:bg-gray-800 text-gray-400 hover:text-red-400">
                             <Trash2 size={14} />
                           </button>
                         </div>
+                        {showSuspendInput === u.id && (
+                          <div className="mt-2 flex gap-2">
+                            <input value={suspendReason} onChange={e => setSuspendReason(e.target.value)} placeholder="Raison (optionnel)" className="flex-1 px-2 py-1 text-xs bg-[#0A0A15] border border-gray-700 rounded text-white" />
+                            <button onClick={() => toggleActive(u)} className="px-2 py-1 text-xs bg-red-600 text-white rounded">Suspendre</button>
+                            <button onClick={() => setShowSuspendInput(null)} className="px-2 py-1 text-xs bg-gray-700 text-gray-300 rounded">X</button>
+                          </div>
+                        )}
                       </td>
                     </tr>
                     {expandedUser === u.id && (
                       <tr className="bg-[#0A0A15]">
                         <td colSpan={9} className="p-4">
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                            <div><span className="text-gray-500 block text-xs">ID</span>{u.id}</div>
-                            <div><span className="text-gray-500 block text-xs">Nom complet</span>{u.name || '—'}</div>
+                            <div><span className="text-gray-500 block text-xs">ID</span><span className="text-[11px] break-all">{u.id}</span></div>
+                            <div><span className="text-gray-500 block text-xs">Nom complet</span>{`${u.firstName || ''} ${u.lastName || ''}`.trim() || '—'}</div>
                             <div><span className="text-gray-500 block text-xs">Email</span>{u.email}</div>
+                            <div><span className="text-gray-500 block text-xs">Telephone</span>{u.phoneNumber || '—'}</div>
                             <div><span className="text-gray-500 block text-xs">Niveau</span>{u.level || '—'}</div>
                             <div><span className="text-gray-500 block text-xs">XP</span>{u.xp ?? 0}</div>
                             <div><span className="text-gray-500 block text-xs">Streak</span>{u.streak ?? 0} jours</div>
                             <div><span className="text-gray-500 block text-xs">Admin</span>{u.is_admin ? 'Oui' : 'Non'}</div>
-                            <div><span className="text-gray-500 block text-xs">Inscription</span>{formatDate(u.created_at || u.createdAt)}</div>
+                            <div><span className="text-gray-500 block text-xs">Inscription</span>{formatDate(u.createdAt)}</div>
+                            <div><span className="text-gray-500 block text-xs">Dernier login</span>{formatDate(u.lastLoginAt)}</div>
+                            {u.suspendedReason && <div><span className="text-gray-500 block text-xs">Raison suspension</span><span className="text-red-400">{u.suspendedReason}</span></div>}
                           </div>
                         </td>
                       </tr>
@@ -693,7 +773,7 @@ const SubscriptionsSection = ({ showToast, showConfirm }) => {
   const cancelSub = (sub) => {
     showConfirm(
       'Annuler l\'abonnement',
-      `Voulez-vous vraiment annuler l'abonnement de ${sub.user_name || sub.userName || sub.user?.name || 'cet utilisateur'} ?`,
+      `Voulez-vous vraiment annuler l'abonnement de ${sub.user?.firstName || sub.user?.email || 'cet utilisateur'} ?`,
       async () => {
         try {
           await api.admin.updateSubscription(sub.id, { status: 'cancelled' })
@@ -766,8 +846,8 @@ const SubscriptionsSection = ({ showToast, showConfirm }) => {
                   <tr><td colSpan={7} className="text-center py-8 text-gray-500">Aucun abonnement</td></tr>
                 ) : subs.map((s) => (
                   <tr key={s.id} className="border-b border-gray-800/50 hover:bg-white/[0.02]">
-                    <td className="py-3 px-3 text-white">{s.user_name || s.userName || s.user?.name || '—'}</td>
-                    <td className="py-3 px-3 text-gray-400">{s.plan_name || s.planName || s.plan?.name || '—'}</td>
+                    <td className="py-3 px-3 text-white">{s.user ? `${s.user.firstName || ''} ${s.user.lastName || ''}`.trim() || s.user.email : '—'}</td>
+                    <td className="py-3 px-3 text-gray-400">{s.plan?.displayName || s.plan?.name || '—'}</td>
                     <td className="py-3 px-3 hidden md:table-cell text-gray-500 text-xs">{formatDate(s.start_date || s.startDate)}</td>
                     <td className="py-3 px-3 hidden md:table-cell text-gray-500 text-xs">{formatDate(s.end_date || s.endDate)}</td>
                     <td className="py-3 px-3 text-gray-300">{formatCFA(s.amount || s.price)}</td>
@@ -837,10 +917,10 @@ const PaymentsSection = ({ showToast }) => {
     if (!payments.length) return
     const headers = ['Utilisateur', 'Montant', 'Date', 'Methode', 'Statut']
     const rows = payments.map((p) => [
-      p.user_name || p.userName || p.user?.name || '',
+      p.user ? `${p.user.firstName || ''} ${p.user.lastName || ''}`.trim() || p.user.email : '',
       p.amount || '',
-      p.created_at || p.createdAt || p.date || '',
-      p.method || p.payment_method || '',
+      p.createdAt || '',
+      p.paymentMethod || '',
       p.status || '',
     ])
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n')
@@ -941,10 +1021,10 @@ const PaymentsSection = ({ showToast }) => {
                   <tr><td colSpan={5} className="text-center py-8 text-gray-500">Aucun paiement</td></tr>
                 ) : payments.map((p) => (
                   <tr key={p.id} className="border-b border-gray-800/50 hover:bg-white/[0.02]">
-                    <td className="py-3 px-3 text-white">{p.user_name || p.userName || p.user?.name || '—'}</td>
+                    <td className="py-3 px-3 text-white">{p.user ? `${p.user.firstName || ''} ${p.user.lastName || ''}`.trim() || p.user.email : '—'}</td>
                     <td className="py-3 px-3 text-gray-300 font-medium">{formatCFA(p.amount)}</td>
                     <td className="py-3 px-3 hidden md:table-cell text-gray-500 text-xs">{formatDate(p.created_at || p.createdAt || p.date)}</td>
-                    <td className="py-3 px-3 text-gray-400 capitalize">{(p.method || p.payment_method || '—').replace('_', ' ')}</td>
+                    <td className="py-3 px-3 text-gray-400 capitalize">{(p.paymentMethod || '—').replace('_', ' ')}</td>
                     <td className="py-3 px-3">
                       <span className={`px-2 py-0.5 rounded text-xs ${statusColors[p.status] || 'bg-gray-700 text-gray-400'}`}>
                         {statusLabel(p.status)}
@@ -1187,27 +1267,117 @@ const ContentSection = ({ showToast, showConfirm }) => {
 }
 
 // =============================================================================
-// 6. REQUESTS / SUPPORT SECTION (Placeholder)
+// 6. NOTIFICATIONS BROADCAST SECTION
 // =============================================================================
 
-const RequestsSection = () => (
-  <div className="flex flex-col items-center justify-center py-24 text-center">
-    <div className="w-20 h-20 rounded-full bg-[#12122A] border border-gray-800 flex items-center justify-center mb-6">
-      <HeadphonesIcon size={36} className="text-gray-600" />
+const NotificationsSection = ({ showToast }) => {
+  const [title, setTitle] = useState('')
+  const [message, setMessage] = useState('')
+  const [link, setLink] = useState('')
+  const [sending, setSending] = useState(false)
+  const [lastResult, setLastResult] = useState(null)
+
+  const handleSend = async () => {
+    if (!title.trim() || !message.trim()) {
+      showToast('Titre et message requis', 'error')
+      return
+    }
+    setSending(true)
+    try {
+      const data = { title: title.trim(), message: message.trim() }
+      if (link.trim()) data.link = link.trim()
+      const result = await api.admin.broadcast(data)
+      setLastResult(result)
+      showToast(`Notification envoyee a ${result.sent} utilisateurs`)
+      setTitle('')
+      setMessage('')
+      setLink('')
+    } catch (err) {
+      showToast(err.message, 'error')
+    } finally {
+      setSending(false)
+    }
+  }
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6">Notifications Globales</h2>
+
+      <div className="max-w-2xl">
+        <div className="bg-[#12122A] border border-gray-800 rounded-xl p-6">
+          <h3 className="text-sm font-semibold text-gray-300 mb-4">Envoyer une notification a tous les utilisateurs</h3>
+          <p className="text-xs text-gray-500 mb-5">
+            Cette notification sera envoyee a tous les utilisateurs actifs avec les notifications activees.
+          </p>
+
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs text-gray-400 block mb-1">Titre *</label>
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Ex: Nouveaute sur Koundoul !"
+                maxLength={100}
+                className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#FF4757]"
+              />
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 block mb-1">Message *</label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Ex: De nouveaux challenges hebdomadaires sont disponibles. Viens tester tes connaissances !"
+                rows={3}
+                maxLength={500}
+                className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#FF4757] resize-none"
+              />
+              <span className="text-[10px] text-gray-600 mt-1 block">{message.length}/500</span>
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 block mb-1">Lien (optionnel)</label>
+              <input
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+                placeholder="Ex: /subscriptions"
+                className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-[#FF4757]"
+              />
+            </div>
+          </div>
+
+          {/* Preview */}
+          {(title || message) && (
+            <div className="mt-5 p-4 bg-[#0A0A15] border border-gray-700/50 rounded-lg">
+              <p className="text-[10px] text-gray-500 uppercase mb-2">Apercu</p>
+              <div className="flex items-start gap-3">
+                <span className="text-xl">📢</span>
+                <div>
+                  <p className="text-sm font-semibold text-white">{title || 'Titre...'}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{message || 'Message...'}</p>
+                  {link && <p className="text-[10px] text-[#FF4757] mt-1">→ {link}</p>}
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between mt-6">
+            <div>
+              {lastResult && (
+                <span className="text-xs text-green-400">Dernier envoi : {lastResult.sent} destinataires</span>
+              )}
+            </div>
+            <button
+              onClick={handleSend}
+              disabled={sending || !title.trim() || !message.trim()}
+              className="flex items-center gap-2 px-5 py-2.5 bg-[#FF4757] text-white text-sm font-medium rounded-lg hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {sending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
+              Envoyer a tous
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <h2 className="text-xl font-bold mb-2">Support - Bientot disponible</h2>
-    <p className="text-gray-500 text-sm max-w-md">
-      Cette section regroupera prochainement la gestion des signalements du forum,
-      les sessions de coaching, et les tickets de support.
-    </p>
-    <div className="flex flex-wrap justify-center gap-3 mt-6">
-      {['Signalements Forum', 'Sessions Coach', 'Tickets Support'].map((item) => (
-        <span key={item} className="px-3 py-1.5 bg-gray-800 text-gray-500 text-xs rounded-full">
-          {item}
-        </span>
-      ))}
-    </div>
-  </div>
-)
+  )
+}
 
 export default AdminDashboard

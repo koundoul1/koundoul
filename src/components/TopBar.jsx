@@ -180,7 +180,16 @@ const TopBar = () => {
             {showUserMenu && (
               <>
                 <div className="fixed inset-0 z-[9998]" onClick={() => setShowUserMenu(false)}></div>
-                <div className="absolute top-full right-0 mt-2 w-48 bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+                <div className="absolute top-full right-0 mt-2 w-64 bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[9999] overflow-hidden">
+                  {/* User info */}
+                  <div className="px-4 py-3 border-b border-white/5">
+                    <p className="text-sm font-semibold text-white">{user.firstName} {user.lastName}</p>
+                    <p className="text-xs text-white/40 mt-0.5">{user.email || user.phone || ''}</p>
+                    <div className="flex items-center gap-3 mt-2">
+                      <span className="text-xs text-orange-400 font-medium"><Flame className="w-3 h-3 inline mr-0.5" />{user.streak || 0}</span>
+                      <span className="text-xs text-yellow-400 font-medium"><Star className="w-3 h-3 inline mr-0.5" />{user.xp?.toLocaleString() || 0} XP</span>
+                    </div>
+                  </div>
                   <Link
                     to="/profile"
                     onClick={() => setShowUserMenu(false)}
@@ -189,6 +198,16 @@ const TopBar = () => {
                     <User className="w-4 h-4" />
                     <span className="text-sm font-medium">Mon Profil</span>
                   </Link>
+                  {user.is_admin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setShowUserMenu(false)}
+                      className="flex items-center gap-3 px-4 py-3 text-yellow-300 hover:bg-yellow-500/10 transition-colors"
+                    >
+                      <Star className="w-4 h-4" />
+                      <span className="text-sm font-medium">Administration</span>
+                    </Link>
+                  )}
                   <button
                     onClick={() => { setShowUserMenu(false); logout(); navigate('/login'); }}
                     className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 transition-colors"

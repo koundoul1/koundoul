@@ -82,7 +82,7 @@ const NotificationBell = () => {
           <div className="fixed inset-0 z-[9998]" onClick={() => setShowDropdown(false)} />
           <div
             ref={dropdownRef}
-            className="absolute top-full right-0 mt-2 w-80 max-h-[70vh] bg-[#0F0F1E] border border-white/10 rounded-2xl shadow-2xl z-[9999] overflow-hidden flex flex-col"
+            className="absolute top-full right-0 mt-2 w-[22rem] max-h-[75vh] bg-[#0F0F1E] border border-white/10 rounded-2xl shadow-2xl z-[9999] overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
@@ -119,14 +119,14 @@ const NotificationBell = () => {
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className={`text-sm font-semibold truncate ${!notif.isRead ? 'text-white' : 'text-white/60'}`}>
+                        <span className={`text-sm font-semibold ${!notif.isRead ? 'text-white' : 'text-white/60'}`}>
                           {notif.title}
                         </span>
                         {!notif.isRead && (
                           <span className="w-2 h-2 rounded-full bg-kprimary flex-shrink-0" />
                         )}
                       </div>
-                      <p className="text-xs text-white/40 mt-0.5 line-clamp-2">{notif.message}</p>
+                      <p className="text-xs text-white/40 mt-0.5 line-clamp-3">{notif.message}</p>
                       <span className="text-[10px] text-white/25 mt-1 block">{timeAgo(notif.createdAt)}</span>
                     </div>
                   </button>
@@ -176,7 +176,7 @@ function NotificationToast({ notification, onDismiss, onNavigate }) {
       <div className="flex items-start gap-3">
         <span className="text-xl">{ICONS[notification.type] || '🔔'}</span>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-white truncate">{notification.title}</p>
+          <p className="text-sm font-semibold text-white">{notification.title}</p>
           <p className="text-xs text-white/50 mt-0.5 line-clamp-2">{notification.message}</p>
         </div>
       </div>
