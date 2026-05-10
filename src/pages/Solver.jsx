@@ -641,7 +641,7 @@ const Solver = () => {
 
             {/* Message pour utilisateurs non connectés */}
             {!isAuthenticated && (
-              <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="mt-6 bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
                     <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
@@ -649,15 +649,15 @@ const Solver = () => {
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <h3 className="text-sm font-medium text-blue-800">
-                      Mode démo
+                    <h3 className="text-sm font-medium text-blue-300">
+                      Mode demo
                     </h3>
-                    <div className="mt-2 text-sm text-blue-700">
+                    <div className="mt-2 text-sm text-blue-200/70">
                       <p>
-                        Vous utilisez le solveur en mode démo. 
-                        <Link to="/register" className="font-medium underline hover:text-blue-600">
-                          Créez un compte
-                        </Link> pour sauvegarder vos solutions et gagner de l'XP !
+                        Vous utilisez le solveur en mode demo.{' '}
+                        <Link to="/register" className="font-medium underline hover:text-blue-300">
+                          Creez un compte
+                        </Link> pour sauvegarder vos solutions et gagner de l&apos;XP !
                       </p>
                     </div>
                   </div>

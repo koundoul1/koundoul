@@ -265,9 +265,11 @@ const VirtualCoach = () => {
         {/* Conversations list */}
         <div className="flex-1 overflow-y-auto py-2">
           {conversations.length === 0 ? (
-            <p className="text-gray-500 text-sm text-center py-8 px-4">
-              Aucune conversation
-            </p>
+            <div className="flex flex-col items-center py-8 px-4 text-center">
+              <MessageSquare className="h-8 w-8 text-gray-600 mb-2" />
+              <p className="text-sm text-gray-500">Aucune conversation</p>
+              <p className="text-xs text-gray-600 mt-1">Envoie un message pour commencer</p>
+            </div>
           ) : (
             conversations.map(conv => (
               <div

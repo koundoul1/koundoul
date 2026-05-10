@@ -1100,7 +1100,19 @@ const Challenge = () => {
                 )}
 
                 {(!myDuels.pending?.length && !myDuels.active?.length && !myDuels.completed?.length) && (
-                  <div className="text-center text-gray-400 py-8">Aucun duel pour le moment</div>
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <Swords className="h-12 w-12 text-gray-600 mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-400 mb-2">Aucun duel en cours</h3>
+                    <p className="text-sm text-gray-500 mb-4 max-w-sm">
+                      Cree un duel ou rejoins-en un pour defier tes camarades !
+                    </p>
+                    <button
+                      onClick={() => setDuelView('menu')}
+                      className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
+                    >
+                      Creer un Duel
+                    </button>
+                  </div>
                 )}
               </div>
 
