@@ -68,11 +68,11 @@ const TopBar = () => {
       </div>
 
       {/* Right side */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-1.5 lg:gap-3">
         {isAuthenticated ? (
           <>
-            {/* Streak & XP badges */}
-            <div className="flex items-center gap-2">
+            {/* Streak & XP badges — hidden between md and lg to prevent overflow */}
+            <div className="hidden lg:flex items-center gap-2">
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 text-sm font-bold">
                 <Flame className="w-4 h-4" />
                 <span>{user?.streak || 0}</span>
@@ -141,17 +141,17 @@ const TopBar = () => {
           )}
         </div>
 
-        {/* Search — only for authenticated */}
+        {/* Search — hidden between md and lg to save space */}
         {isAuthenticated && (
-          <button className="p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
+          <button className="hidden lg:block p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all">
             <Search className="w-5 h-5" />
           </button>
         )}
 
-        {/* Share button */}
+        {/* Share button — hidden between md and lg */}
         <button
           onClick={() => setShowShareModal(true)}
-          className="p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all"
+          className="hidden lg:block p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all"
           title="Partager l'app"
         >
           <Share2 className="w-5 h-5" />
@@ -180,7 +180,7 @@ const TopBar = () => {
             {showUserMenu && (
               <>
                 <div className="fixed inset-0 z-[60]" onClick={() => setShowUserMenu(false)}></div>
-                <div className="absolute top-full right-0 mt-2 w-64 bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[70] overflow-hidden">
+                <div className="absolute top-full right-0 mt-2 w-64 max-w-[calc(100vw-1rem)] bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[70] overflow-hidden">
                   {/* User info */}
                   <div className="px-4 py-3 border-b border-white/5">
                     <p className="text-sm font-semibold text-white">{user.firstName} {user.lastName}</p>

@@ -462,7 +462,13 @@ export default {
       forgotPassword: 'Mot de passe oublié ?',
       rememberMe: 'Se souvenir de moi'
     },
-    
+
+    forgotPassword: {
+      title: 'Mot de passe oublie',
+      description: 'Tu as oublie ton mot de passe ? Contacte-nous a contact@koundoul.com et nous t\'aiderons a recuperer ton acces.',
+      backToLogin: 'Retour a la connexion'
+    },
+
     // Messages généraux
     loading: 'Chargement...',
     error: 'Une erreur est survenue',
@@ -1375,7 +1381,13 @@ export default {
       forgotPassword: 'Forgot password?',
       rememberMe: 'Remember me'
     },
-    
+
+    forgotPassword: {
+      title: 'Forgot your password',
+      description: 'Forgot your password? Contact us at contact@koundoul.com and we will help you recover your access.',
+      backToLogin: 'Back to login'
+    },
+
     // General messages
     loading: 'Loading...',
     error: 'An error occurred',
