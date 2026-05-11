@@ -78,6 +78,8 @@ model User {
   solverHistory                                          SolverHistory[]
   coachConversations                                     CoachConversation[]
   dailyAiUsage                                           DailyAiUsage[]
+  createdFlashcards                                      Flashcard[]          @relation("UserCreatedFlashcards")
+  flashcardDecks                                         FlashcardDeck[]
 
   @@map("users")
 }
@@ -167,6 +169,9 @@ model Flashcard {
   front       String            @map("question")
   back        String            @map("answer")
   explanation String?
+  chapter     String?
+  isOfficial  Boolean           @default(true)
+  createdById String?
   lessonId    String?
   chapterId   String?
   subjectId   String
@@ -178,26 +183,46 @@ model Flashcard {
   chapters    chapters?         @relation(fields: [chapterId], references: [id])
   lessons     lessons?          @relation(fields: [lessonId], references: [id])
   subjects    subjects          @relation(fields: [subjectId], references: [id])
+  createdBy   User?             @relation("UserCreatedFlashcards", fields: [createdById], references: [id], onDelete: SetNull)
 
   @@map("flashcards")
 }
 
 model FlashcardReview {
-  id          String    @id @default(cuid())
+  id          String         @id @default(cuid())
   userId      String
   flashcardId String
   quality     Int
   interval    Int
   easeFactor  Float
-  repetitions Int       @default(0)
-  reviewedAt  DateTime  @default(now())
+  repetitions Int            @default(0)
+  status      String         @default("new")
+  deckId      String?
+  reviewedAt  DateTime       @default(now())
   nextReview  DateTime
   timeSpent   Int?
-  flashcard   Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
-  user        User      @relation(fields: [userId], references: [id])
+  flashcard   Flashcard      @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  user        User           @relation(fields: [userId], references: [id])
+  deck        FlashcardDeck? @relation(fields: [deckId], references: [id], onDelete: SetNull)
 
+  @@unique([userId, flashcardId])
   @@index([userId, nextReview])
   @@map("flashcard_reviews")
+}
+
+model FlashcardDeck {
+  id          String            @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  isPublic    Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @default(now())
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cards       FlashcardReview[]
+
+  @@index([userId])
+  @@map("flashcard_decks")
 }
 
 model ForumDiscussion {
