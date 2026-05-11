@@ -34,9 +34,11 @@ import {
   Lock,
   LogIn,
   UserPlus,
-  Share2
+  Share2,
+  Bell
 } from 'lucide-react'
 import ShareModal from './ShareModal'
+import { useNotifications } from '../hooks/useNotifications'
 
 const MobileNavBar = () => {
   const location = useLocation()
@@ -48,6 +50,7 @@ const MobileNavBar = () => {
   const [showDrawer, setShowDrawer] = useState(false)
   const [showLangMenu, setShowLangMenu] = useState(false)
   const [showShareModal, setShowShareModal] = useState(false)
+  const { unreadCount } = useNotifications()
 
   // Close drawer on route change
   useEffect(() => {
@@ -66,11 +69,12 @@ const MobileNavBar = () => {
     }
   }
 
-  // 4 main bottom tabs — always visible
+  // 5 main bottom tabs — always visible
   const mainTabs = [
     { name: t('nav.home'), href: '/', icon: Home, public: true },
     { name: t('nav.courses'), href: '/courses', icon: BookOpen },
     { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy },
+    { name: t('nav.notifications') || 'Notifs', href: '/notifications', icon: Bell },
     { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
   ]
 
@@ -128,6 +132,11 @@ const MobileNavBar = () => {
                     )}
                     {locked && (
                       <Lock className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 text-white/30" />
+                    )}
+                    {item.href === '/notifications' && unreadCount > 0 && (
+                      <span className="absolute -top-1 -right-1 min-w-[16px] h-4 flex items-center justify-center bg-red-500 text-white text-[9px] font-bold rounded-full px-0.5">
+                        {unreadCount > 9 ? '9+' : unreadCount}
+                      </span>
                     )}
                   </div>
                   <span className={`
