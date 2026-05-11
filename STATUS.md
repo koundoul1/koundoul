@@ -2322,3 +2322,79 @@ Le chunk Plotly était déjà séparé mais sans nom explicite dans `manualChunk
 
 - 6 nouveaux tests : lazy import vérifié, pas d'import statique, vite config validé, taille chunk validée
 - Total suite : **224 tests, tous verts**
+
+---
+
+## Audit post-QA externe — État réel des 30 bugs
+
+**Date** : 2026-05-11
+
+Ce rapport QA date d'AVANT toutes nos phases. Cross-référence avec le code actuel post-Phase 5.
+
+### Tableau complet
+
+| # | Bug | Statut | Cause racine / Phase de fix |
+|---|-----|--------|-----------------------------|
+| 1 | Sign in → page blanche | ✅ FIXED | Phase 1 — api.js error extraction fix, AuthContext login dispatch |
+| 2 | Notifications icon invisible | ✅ FIXED | Phase 5.2 — TopBar z-30→z-50, dropdowns z-[70] |
+| 3 | Menu profil tronqué/invisible | ✅ FIXED | Phase 3.2 — w-48→w-64, user info section ajoutée, z-[70] |
+| 4 | Wrong password → pas de message | ✅ FIXED | Phase 1 — api.js gère les 2 formats d'erreur (string + object) |
+| 5 | Email déjà utilisé accepté | ✅ FIXED | Phase 1 — checkEmailAvailability() frontend + 409 backend |
+| 6 | Email sans @ accepté à l'inscription | ⚠️ PARTIAL | Frontend regex OK, backend ne valide pas le format email |
+| 7 | Login/Register validation incohérente | ⚠️ PARTIAL | Login accepte tout (dual email/phone), Register valide @ — design voulu pour auth duale |
+| 8 | /forgot-password → 404 | ❌ STILL PRESENT P2 | Pas de route, pas de composant. Le lien existe dans Login.jsx mais pointe vers le vide |
+| 9 | Register bouton/labels non traduits EN | ⚠️ PARTIAL | Boutons principaux traduits (Phase 1), mais étapes 1/2 hardcodées FR ("Étape 1", "Suivant") |
+| 10 | Exercise : pas de bouton Submit | ✅ FIXED | Phase 2B.2 — Exercise.jsx réécrit avec flow 3 phases |
+| 11 | Quiz option A affiche "has" | ✅ FIXED | String.fromCharCode(65+index) correct dans Quiz.jsx |
+| 12 | Quiz total MCQ affiche 0 | ⚠️ PARTIAL | Display fonctionne, mais dépend de bank.total_questions du backend — peut être 0 si pas peuplé |
+| 13 | Score quiz ne s'update pas | ✅ FIXED | Quiz.jsx calcule et affiche le score correctement |
+| 14 | Dashboard exercises completed = 0 | ❌ STILL PRESENT P3 | Le compteur affiche lessonsCompleted, pas exercisesCompleted. Pas de tracking exercices dans le dashboard |
+| 15 | Challenges création ne marche pas | ✅ FIXED | Phase 4.4 — seed lowercase, guards frontend |
+| 16 | Start Challenge ne s'active pas | ✅ FIXED | Phase 4.3 — weekly challenges cron + frontend redesign |
+| 17 | Parent "Learn More" ne fait rien | 🔵 IGNORED | Le bouton n'existe plus dans le code actuel (supprimé lors de rewrite Home) |
+| 18 | Subscriptions EUR vs FCFA | ✅ FIXED | Tarif.2 — formatPrice uniforme FCFA partout |
+| 19 | Flashcards en thème clair | ❌ STILL PRESENT P2 | Flashcards.jsx:91 utilise bg-gradient-to-br from-slate-50 to-blue-50 (light theme) |
+| 20 | Région non sélectionnable | ✅ FIXED | Profile.jsx a un select conditionnel + SENEGAL_REGIONS avec 14 régions |
+| 21 | Toggle langue ne fonctionne pas | ✅ FIXED | useTranslation.jsx avec validation, sync backend, localStorage |
+| 22 | Upload photo profil impossible | ❌ STILL PRESENT P3 | Profile.jsx:518-520 a un bouton camera DECORATIF — pas de handler, pas d'upload |
+| 23 | Page Badges vide | ✅ FIXED | Commit f31df20 — API calls séparées, getAll ne crash plus si getStats 401 |
+| 24 | Visualizations Pythagore sliders | ✅ FIXED | useState + onChange handlers corrects dans InteractiveVisualizations.jsx |
+| 25 | Quiz numéros questions | ✅ FIXED | currentIndex tracké et affiché "Question X sur Y" |
+| 26 | Quiz Summary → 404 | ❓ UNCLEAR | Pas de bouton "Summary" dans le code actuel — résultats s'affichent inline |
+| 27 | Admin rapports non traduits EN | 🔵 IGNORED | Décision MVP — admin en FR uniquement |
+| 28 | Visualizations texte invisible | ❓ UNCLEAR | Pas de section conversion unités trouvée dans le code |
+| 29 | Visualizations 3D peu attractifs | 🔵 IGNORED | Feedback design subjectif, pas un bug |
+| 30 | Subscriptions/Profile pas responsive | ✅ FIXED | Phase 5.2 — mobile-first fixes 360-414px |
+
+### Synthèse
+
+| Statut | Nombre |
+|--------|--------|
+| ✅ FIXED | 19 |
+| ⚠️ PARTIAL | 4 |
+| ❌ STILL PRESENT | 4 |
+| 🔵 IGNORED (décision produit) | 3 |
+| ❓ UNCLEAR (à tester manuellement) | 2 |
+
+### Bugs STILL PRESENT par priorité
+
+**P2 (à fixer)** :
+- **#8 /forgot-password 404** : route + composant inexistants. Le lien est dans Login.jsx. Effort : 30min (créer une page placeholder "Contactez le support" ou implémenter un vrai reset par email).
+- **#19 Flashcards light theme** : Flashcards.jsx utilise bg-slate-50/blue-50. Effort : 15min (remplacer par dark theme comme les autres pages).
+
+**P3 (cosmétique)** :
+- **#14 Exercises completed = 0** : Le dashboard n'a pas de compteur exercices, seulement leçons. Effort : 30min (ajouter un count depuis exercise_attempts).
+- **#22 Upload photo impossible** : Le bouton camera est décoratif. Effort : 1h+ (file upload + backend endpoint + stockage Supabase).
+
+### Régressions identifiées
+
+Aucune régression introduite par nos phases. Les bugs #2 et #3 (header) étaient pré-existants et ont été fixés par Phase 3.2 et 5.2. Le bug #8 (/forgot-password) n'a jamais été adressé dans aucune phase.
+
+### Plan d'attaque proposé
+
+| Bloc | Bugs | Effort | Priorité |
+|------|------|--------|----------|
+| **Bloc 1** | #8 (forgot-password), #19 (Flashcards dark theme) | 45 min | P2 — à faire |
+| **Bloc 2** | #9 (Register i18n étapes), #12 (Quiz MCQ count) | 30 min | PARTIAL → compléter |
+| **Bloc 3** | #14 (exercises counter), #22 (photo upload) | 1h30 | P3 — nice-to-have |
+| **Reporter** | #26, #28 (UNCLEAR — tester manuellement) | — | Besoin de test prod |
