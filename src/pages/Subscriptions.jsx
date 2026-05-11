@@ -49,26 +49,29 @@ const Subscriptions = () => {
   const [billingPeriod, setBillingPeriod] = useState('monthly'); // 'daily' | 'monthly' | 'yearly'
 
   useEffect(() => {
-    if (!isAuthenticated) return;
     loadData();
-  }, [isAuthenticated]);
+  }, []);
+
+  const [loadError, setLoadError] = useState('');
 
   const loadData = async () => {
     try {
       setLoading(true);
-      const [plansRes, subscriptionRes] = await Promise.all([
-        api.subscriptions.getPlans(),
-        api.subscriptions.getMySubscription()
-      ]);
-      if (plansRes.success) setAllPlans(plansRes.data || []);
-      if (subscriptionRes.success && subscriptionRes.data) {
-        setCurrentSubscription(subscriptionRes.data);
-      }
+      setLoadError('');
+      const plansRes = await api.subscriptions.getPlans();
+      setAllPlans(plansRes?.data || plansRes || []);
     } catch (error) {
-      console.error('Erreur:', error);
-    } finally {
-      setLoading(false);
+      console.error('Erreur plans:', error);
+      setLoadError(error.message || 'Erreur de chargement des plans');
     }
+    try {
+      const subscriptionRes = await api.subscriptions.getMySubscription();
+      if (subscriptionRes?.data) setCurrentSubscription(subscriptionRes.data);
+      else if (subscriptionRes?.planId) setCurrentSubscription(subscriptionRes);
+    } catch (error) {
+      // Subscription fetch may fail for non-authenticated — OK
+    }
+    setLoading(false);
   };
 
   const handleSubscribe = async (plan) => {
@@ -139,6 +142,16 @@ const Subscriptions = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white pb-20 lg:pb-0">
+      {/* Error banner */}
+      {loadError && (
+        <div className="max-w-6xl mx-auto px-4 pt-4">
+          <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center">
+            <p className="text-sm text-red-400">{loadError}</p>
+            <button onClick={loadData} className="mt-2 text-xs text-red-300 underline hover:text-white">Reessayer</button>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-600 to-pink-600 py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
