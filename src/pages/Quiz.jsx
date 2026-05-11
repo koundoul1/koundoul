@@ -434,7 +434,7 @@ const Quiz = () => {
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
-  const totalQCM = questionBanks.reduce((sum, bank) => sum + (bank.total_questions || 0), 0)
+  const totalQCM = questionBanks.reduce((sum, bank) => sum + (bank.totalQuestions || bank.total_questions || 0), 0)
   const subjectsCount = new Set(questionBanks.map(b => b.subject)).size
   const correctCount = correctAnswers.filter(a => a === true).length
   const incorrectCount = correctAnswers.filter(a => a === false).length
@@ -1257,7 +1257,7 @@ const Quiz = () => {
                     <div className="flex items-center gap-6 text-sm text-blue-100">
                       <span className="flex items-center gap-1">
                         <Target className="w-4 h-4" />
-                        {bank.total_questions || 0} questions
+                        {bank.totalQuestions || bank.total_questions || 0} questions
                       </span>
                       {bank.difficulty_distribution && (
                         <span className="flex items-center gap-1">

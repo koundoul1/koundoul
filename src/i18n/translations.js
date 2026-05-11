@@ -453,8 +453,20 @@ export default {
           passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
           passwordComplexity: 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre',
           confirmPasswordRequired: 'La confirmation du mot de passe est requise',
-          passwordsNotMatch: 'Les mots de passe ne correspondent pas'
-        }
+          passwordsNotMatch: 'Les mots de passe ne correspondent pas',
+        chooseMethod: 'Choisis une methode de connexion',
+        phoneInvalid: 'Numero de telephone invalide',
+        pinRequired: 'PIN 4 chiffres requis',
+        emailRequiredRecovery: 'Email requis (pour recuperation de compte)'
+        },
+        step1Title: 'Etape 1 : Comment veux-tu te connecter ?',
+        step2Title: 'Etape 2 : Tes informations',
+        methodEmail: 'Email + Mot de passe',
+        methodEmailDesc: 'Connexion classique par email',
+        methodPhone: 'Telephone + PIN',
+        methodPhoneDesc: 'Connexion rapide par PIN 4 chiffres',
+        back: 'Retour',
+        next: 'Suivant'
       },
       email: 'Email',
       password: 'Mot de passe',
@@ -1372,8 +1384,20 @@ export default {
           passwordMinLength: 'Password must contain at least 8 characters',
           passwordComplexity: 'Password must contain at least one uppercase letter, one lowercase letter and one number',
           confirmPasswordRequired: 'Password confirmation is required',
-          passwordsNotMatch: 'Passwords do not match'
-        }
+          passwordsNotMatch: 'Passwords do not match',
+          chooseMethod: 'Choose a login method',
+          phoneInvalid: 'Invalid phone number',
+          pinRequired: '4-digit PIN required',
+          emailRequiredRecovery: 'Email required (for account recovery)'
+        },
+        step1Title: 'Step 1: How do you want to sign in?',
+        step2Title: 'Step 2: Your information',
+        methodEmail: 'Email + Password',
+        methodEmailDesc: 'Classic email login',
+        methodPhone: 'Phone + PIN',
+        methodPhoneDesc: 'Quick login with 4-digit PIN',
+        back: 'Back',
+        next: 'Next'
       },
       email: 'Email',
       password: 'Password',

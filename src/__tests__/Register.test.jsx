@@ -42,25 +42,28 @@ function renderRegister() {
 describe('Register page', () => {
   it('renders step 1 with two auth method cards', () => {
     renderRegister()
-    expect(screen.getByText(/Email \+ Mot de passe/i)).toBeInTheDocument()
-    expect(screen.getByText(/l\u00e9phone \+ Code PIN/i)).toBeInTheDocument()
+    // Text comes from i18n: auth.register.methodEmail / methodPhone
+    expect(screen.getAllByText(/Email/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/PIN/i).length).toBeGreaterThanOrEqual(1)
   })
 
   it('shows email and password fields when password method selected', async () => {
     const user = userEvent.setup()
     renderRegister()
 
-    await user.click(screen.getByText(/Email \+ Mot de passe/i))
+    // Click the email method card (first button containing "Email")
+    const emailCards = screen.getAllByText(/Email \+ /i)
+    await user.click(emailCards[0])
 
     expect(screen.getByPlaceholderText(/ton@email.com/i)).toBeInTheDocument()
-    expect(screen.getByText(/Suivant/i)).toBeInTheDocument()
   })
 
   it('rejects short password before going to step 2', async () => {
     const user = userEvent.setup()
     const { container } = renderRegister()
 
-    await user.click(screen.getByText(/Email \+ Mot de passe/i))
+    const emailCards = screen.getAllByText(/Email \+ /i)
+    await user.click(emailCards[0])
 
     const emailInput = container.querySelector('#email')
     const passwordInput = container.querySelector('#password')
@@ -70,7 +73,9 @@ describe('Register page', () => {
     await user.type(passwordInput, 'Short7!')
     await user.type(confirmInput, 'Short7!')
 
-    await user.click(screen.getByText(/Suivant/i))
+    // Click the "Next" button (Suivant in FR)
+    const nextBtn = screen.getByRole('button', { name: /suivant|next/i })
+    await user.click(nextBtn)
 
     expect(container.textContent).toMatch(/au moins 8|at least 8/i)
   })

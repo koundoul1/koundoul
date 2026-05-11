@@ -70,7 +70,7 @@ const Register = () => {
   // Validate step 1
   const validateStep1 = () => {
     const e = {}
-    if (!authMode) { e.mode = 'Choisis une m\u00e9thode de connexion'; setErrors(e); return false }
+    if (!authMode) { e.mode = t('auth.register.errors.chooseMethod'); setErrors(e); return false }
 
     if (authMode === 'password') {
       if (!email) e.email = t('auth.register.errors.emailRequired')
@@ -80,9 +80,9 @@ const Register = () => {
       if (password !== confirmPassword) e.confirmPassword = t('auth.register.errors.passwordsNotMatch')
     } else {
       // phone mode
-      if (!phoneNumber || phoneNumber.replace(/\D/g, '').length < 9) e.phone = 'Num\u00e9ro de t\u00e9l\u00e9phone invalide'
-      if (!pin || pin.length !== 4) e.pin = 'PIN 4 chiffres requis'
-      if (!email) e.email = 'Email requis (pour r\u00e9cup\u00e9ration de compte)'
+      if (!phoneNumber || phoneNumber.replace(/\D/g, '').length < 9) e.phone = t('auth.register.errors.phoneInvalid')
+      if (!pin || pin.length !== 4) e.pin = t('auth.register.errors.pinRequired')
+      if (!email) e.email = t('auth.register.errors.emailRequiredRecovery')
       else if (!/\S+@\S+\.\S+/.test(email)) e.email = t('auth.register.errors.emailInvalid')
     }
 
@@ -167,7 +167,7 @@ const Register = () => {
           {/* ═══ STEP 1: Auth method ═══ */}
           {step === 1 && (
             <div className="space-y-5">
-              <p className="text-sm text-white/50 text-center mb-2">{'\u00C9'}tape 1 : Comment veux-tu te connecter ?</p>
+              <p className="text-sm text-white/50 text-center mb-2">{t('auth.register.step1Title')}</p>
 
               {/* Method choice — big cards */}
               {!authMode && (
@@ -181,8 +181,8 @@ const Register = () => {
                       <Mail className="h-6 w-6 text-purple-400" />
                     </div>
                     <div>
-                      <p className="font-semibold text-white">Email + Mot de passe</p>
-                      <p className="text-xs text-white/40">Connexion classique par email</p>
+                      <p className="font-semibold text-white">{t('auth.register.methodEmail')}</p>
+                      <p className="text-xs text-white/40">{t('auth.register.methodEmailDesc')}</p>
                     </div>
                   </button>
 
@@ -195,8 +195,8 @@ const Register = () => {
                       <Phone className="h-6 w-6 text-blue-400" />
                     </div>
                     <div>
-                      <p className="font-semibold text-white">T{'\u00e9'}l{'\u00e9'}phone + Code PIN</p>
-                      <p className="text-xs text-white/40">Connexion rapide par PIN 4 chiffres</p>
+                      <p className="font-semibold text-white">{t('auth.register.methodPhone')}</p>
+                      <p className="text-xs text-white/40">{t('auth.register.methodPhoneDesc')}</p>
                     </div>
                   </button>
                   {errors.mode && <p className="text-xs text-red-400 text-center">{errors.mode}</p>}
@@ -307,7 +307,7 @@ const Register = () => {
                   onClick={goToStep2}
                   className="w-full bg-gradient-to-r from-kprimary to-ksecondary text-white py-3 px-4 rounded-xl font-semibold hover:opacity-90 transition-all flex items-center justify-center text-sm shadow-lg shadow-kprimary/25"
                 >
-                  Suivant <ArrowRight className="w-4 h-4 ml-2" />
+                  {t('auth.register.next')} <ArrowRight className="w-4 h-4 ml-2" />
                 </button>
               )}
             </div>
@@ -317,9 +317,9 @@ const Register = () => {
           {step === 2 && (
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="flex items-center justify-between mb-2">
-                <p className="text-sm text-white/50">{'\u00C9'}tape 2 : Tes informations</p>
+                <p className="text-sm text-white/50">{t('auth.register.step2Title')}</p>
                 <button type="button" onClick={() => setStep(1)} className="text-xs text-white/30 hover:text-white/60 flex items-center gap-1">
-                  <ArrowLeft className="h-3 w-3" /> Retour
+                  <ArrowLeft className="h-3 w-3" /> {t('auth.register.back')}
                 </button>
               </div>
 
