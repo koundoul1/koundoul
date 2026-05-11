@@ -35,17 +35,18 @@ export default function Badges() {
 
   const fetchData = async () => {
     try {
-      const [badgesRes, statsRes] = await Promise.all([
-        api.badges.getAll(),
-        api.badges.getStats()
-      ]);
-      setBadges(badgesRes.data || []);
-      setStats(statsRes.data);
+      const badgesRes = await api.badges.getAll();
+      setBadges(badgesRes.data || badgesRes || []);
     } catch (error) {
-      console.error('Erreur:', error);
-    } finally {
-      setLoading(false);
+      console.error('Erreur badges:', error);
     }
+    try {
+      const statsRes = await api.badges.getStats();
+      setStats(statsRes.data || statsRes);
+    } catch (error) {
+      // Stats may fail for unauthenticated users — OK
+    }
+    setLoading(false);
   };
 
   if (loading) {
@@ -188,10 +189,21 @@ export default function Badges() {
 
         {/* Empty state */}
         {filteredBadges.length === 0 && (
-          <div className="text-center py-16">
-            <Award className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">
-              {t('badges.noBadges') || 'Aucun badge dans cette categorie'}
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <Award className="w-16 h-16 text-gray-600 mb-4" />
+            <h2 className="text-lg font-semibold text-gray-400 mb-2">
+              {filter === 'unlocked'
+                ? (t('badges.noUnlocked') || 'Aucun badge debloque')
+                : badges.length === 0
+                  ? (t('badges.noBadges') || 'Aucun badge disponible')
+                  : (t('badges.noBadges') || 'Aucun badge dans cette categorie')}
+            </h2>
+            <p className="text-sm text-gray-500 max-w-sm">
+              {filter === 'unlocked'
+                ? (t('badges.startLearning') || 'Complete des lecons et des quiz pour debloquer tes premiers badges !')
+                : badges.length === 0
+                  ? (t('badges.checkConnection') || 'Verifie ta connexion et reessaye.')
+                  : ''}
             </p>
           </div>
         )}
