@@ -2,7 +2,7 @@
  * Page Notifications — liste verticale avec mark-as-read et navigation.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Bell,
@@ -13,7 +13,10 @@ import {
   Flame,
   MessageSquare,
   CheckCheck,
-  BellOff
+  BellOff,
+  Megaphone,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import { useNotifications } from '../hooks/useNotifications';
 import { useTranslation } from '../hooks/useTranslation';
@@ -25,7 +28,8 @@ const TYPE_CONFIG = {
   payment_confirmed: { icon: CreditCard, color: 'text-blue-400', bg: 'bg-blue-400/10' },
   streak_reminder: { icon: Flame, color: 'text-orange-400', bg: 'bg-orange-400/10' },
   challenge_start: { icon: Swords, color: 'text-purple-400', bg: 'bg-purple-400/10' },
-  new_message: { icon: MessageSquare, color: 'text-cyan-400', bg: 'bg-cyan-400/10' }
+  new_message: { icon: MessageSquare, color: 'text-cyan-400', bg: 'bg-cyan-400/10' },
+  admin_broadcast: { icon: Megaphone, color: 'text-pink-400', bg: 'bg-pink-400/10' }
 };
 
 const NAV_PATHS = {
@@ -54,11 +58,19 @@ const Notifications = () => {
   const navigate = useNavigate();
   const { notifications, unreadCount, markRead, markAllRead } = useNotifications();
   const { t } = useTranslation();
+  const [expandedId, setExpandedId] = useState(null);
 
   const handleClick = (notif) => {
     if (!notif.isRead) markRead(notif.id);
-    const path = NAV_PATHS[notif.type];
-    if (path) navigate(path);
+    // Toggle expand to read full message
+    if (expandedId === notif.id) {
+      setExpandedId(null);
+      // Navigate on second click if path exists
+      const path = notif.type === 'admin_broadcast' ? (notif.data?.link || null) : NAV_PATHS[notif.type];
+      if (path) navigate(path);
+    } else {
+      setExpandedId(notif.id);
+    }
   };
 
   return (
@@ -130,8 +142,13 @@ const Notifications = () => {
                         <span className="flex-shrink-0 w-2 h-2 mt-1.5 rounded-full bg-blue-500" />
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{notif.message}</p>
-                    <p className="text-xs text-gray-600 mt-1">{timeAgo(notif.createdAt)}</p>
+                    <p className={`text-xs text-gray-500 mt-0.5 ${expandedId === notif.id ? '' : 'line-clamp-2'}`}>{notif.message}</p>
+                    <div className="flex items-center gap-3 mt-1">
+                      <p className="text-xs text-gray-600">{timeAgo(notif.createdAt)}</p>
+                      {notif.message && notif.message.length > 80 && (
+                        <span className="text-[10px] text-gray-600">{expandedId === notif.id ? '▲ reduire' : '▼ lire plus'}</span>
+                      )}
+                    </div>
                   </div>
                 </button>
               );

@@ -10,7 +10,8 @@ const ICONS = {
   challenge_start: '🏆',
   level_up: '⬆️',
   new_message: '💬',
-  payment_confirmed: '💳'
+  payment_confirmed: '💳',
+  admin_broadcast: '📢'
 }
 
 function timeAgo(dateStr) {
@@ -34,7 +35,8 @@ function getNavPath(notif) {
     case 'new_message': return d.discussionId ? `/forum/${d.discussionId}` : '/forum'
     case 'payment_confirmed': return '/subscriptions'
     case 'streak_reminder': return '/dashboard'
-    default: return null
+    case 'admin_broadcast': return d.link || '/notifications'
+    default: return '/notifications'
   }
 }
 
