@@ -47,16 +47,18 @@ router.get('/banks', async (req, res, next) => {
   try {
     const banks = await prisma.$queryRaw`
       SELECT
-        COALESCE(chapter, 'General') as chapter,
-        "subjectId" as subject,
+        COALESCE(f.chapter, 'General') as chapter,
+        f."subjectId" as "subjectId",
+        s.name as subject,
         COUNT(*)::int as "totalCards",
-        COUNT(*) FILTER (WHERE difficulty = 'FACILE')::int as easy,
-        COUNT(*) FILTER (WHERE difficulty = 'MOYEN')::int as medium,
-        COUNT(*) FILTER (WHERE difficulty = 'DIFFICILE')::int as hard
-      FROM flashcards
-      WHERE "isOfficial" = true OR "isOfficial" IS NULL
-      GROUP BY chapter, "subjectId"
-      ORDER BY "subjectId", chapter
+        COUNT(*) FILTER (WHERE f.difficulty = 'FACILE')::int as easy,
+        COUNT(*) FILTER (WHERE f.difficulty = 'MOYEN')::int as medium,
+        COUNT(*) FILTER (WHERE f.difficulty = 'DIFFICILE')::int as hard
+      FROM flashcards f
+      LEFT JOIN subjects s ON s.id = f."subjectId"
+      WHERE f."isOfficial" = true OR f."isOfficial" IS NULL
+      GROUP BY f.chapter, f."subjectId", s.name
+      ORDER BY s.name, f.chapter
     `;
     res.json({ success: true, data: banks });
   } catch (error) {
@@ -164,7 +166,11 @@ router.post('/start-deck', authenticateToken, async (req, res, next) => {
 
     var where = {};
     if (subject) {
-      where.subjectId = subject;
+      // subject can be a name or an ID — try to resolve
+      var subjectRecord = await prisma.subjects.findFirst({
+        where: { OR: [{ id: subject }, { name: { contains: subject, mode: 'insensitive' } }] }
+      });
+      where.subjectId = subjectRecord ? subjectRecord.id : subject;
       if (chapter) where.chapter = chapter;
     }
 

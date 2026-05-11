@@ -515,27 +515,31 @@ async function seedFlashcards() {
     3: 'DIFFICILE',
   };
 
-  // Find subject IDs
-  const mathSubject = await prisma.subjects.findFirst({
-    where: { name: { contains: 'Math', mode: 'insensitive' } },
-  });
-  const physiqueSubject = await prisma.subjects.findFirst({
-    where: { name: { contains: 'Physi', mode: 'insensitive' } },
-  });
-  const chimieSubject = await prisma.subjects.findFirst({
-    where: { name: { contains: 'Chimi', mode: 'insensitive' } },
-  });
+  // Find subject IDs — try multiple strategies
+  var allSubjects = await prisma.subjects.findMany();
+  console.log('Subjects en DB:', allSubjects.map(function(s) { return s.id + '=' + s.name; }).join(', '));
+
+  function findSubject(keyword) {
+    var kw = keyword.toLowerCase();
+    return allSubjects.find(function(s) {
+      return s.name.toLowerCase().indexOf(kw) !== -1 || s.id.toLowerCase().indexOf(kw) !== -1;
+    });
+  }
+
+  var mathSubject = findSubject('math');
+  var physiqueSubject = findSubject('physi');
+  var chimieSubject = findSubject('chimi');
 
   if (!mathSubject) {
-    console.error('Matiere "Mathematiques" introuvable. Verifiez la table subjects.');
+    console.error('Matiere "Mathematiques" introuvable. Subjects:', allSubjects.map(function(s) { return s.name; }));
     return;
   }
   if (!physiqueSubject) {
-    console.error('Matiere "Physique" introuvable. Verifiez la table subjects.');
+    console.error('Matiere "Physique" introuvable.');
     return;
   }
   if (!chimieSubject) {
-    console.error('Matiere "Chimie" introuvable. Verifiez la table subjects.');
+    console.error('Matiere "Chimie" introuvable.');
     return;
   }
 
