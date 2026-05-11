@@ -1,5 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+// Use shared prisma instance if available, else create standalone
+let prisma;
+try { prisma = require('../config/database'); } catch (e) { prisma = new PrismaClient(); }
 
 // =============================================================================
 // 450 FLASHCARDS POUR LE LYCEE FRANCAIS

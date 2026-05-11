@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const { initPlans } = require('./scripts/initPlans');
+const { seedFlashcards } = require('./scripts/seedFlashcards');
 const prisma = require('./config/database');
 
 // ── Fail-fast: required environment variables ──
@@ -269,6 +270,14 @@ const server = app.listen(PORT, async () => {
       console.log('Plans d\'abonnement initialises');
     } catch (error) {
       console.error('Erreur init plans:', error.message);
+    }
+
+    // Seed flashcards (idempotent)
+    try {
+      await seedFlashcards();
+      console.log('Flashcards officielles initialisees');
+    } catch (error) {
+      console.error('Erreur seed flashcards:', error.message);
     }
 
     // Setup weekly challenge cron + startup catch-up
