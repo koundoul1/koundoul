@@ -42,8 +42,10 @@ const NotificationBell = () => {
   const { notifications, unreadCount, markRead, markAllRead, latestNotification, clearLatest } = useNotifications()
   const [showDropdown, setShowDropdown] = useState(false)
   const [shake, setShake] = useState(false)
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 })
   const navigate = useNavigate()
   const dropdownRef = useRef(null)
+  const bellRef = useRef(null)
 
   // Shake animation when new notification arrives
   useEffect(() => {
@@ -65,7 +67,14 @@ const NotificationBell = () => {
     <>
       {/* Bell button */}
       <button
-        onClick={() => setShowDropdown(!showDropdown)}
+        ref={bellRef}
+        onClick={() => {
+          if (!showDropdown && bellRef.current) {
+            const rect = bellRef.current.getBoundingClientRect()
+            setDropdownPos({ top: rect.bottom + 8, right: Math.max(16, window.innerWidth - rect.right) })
+          }
+          setShowDropdown(!showDropdown)
+        }}
         className={`relative p-2 text-gray-400 hover:text-gray-300 hover:bg-white/5 rounded-xl transition-all ${shake ? 'animate-shake' : ''}`}
       >
         <Bell className="w-5 h-5" />
@@ -76,13 +85,14 @@ const NotificationBell = () => {
         )}
       </button>
 
-      {/* Dropdown */}
+      {/* Dropdown — fixed position to escape TopBar stacking context */}
       {showDropdown && (
         <>
-          <div className="fixed inset-0 z-[60]" onClick={() => setShowDropdown(false)} />
+          <div className="fixed inset-0" style={{ zIndex: 9998 }} onClick={() => setShowDropdown(false)} />
           <div
             ref={dropdownRef}
-            className="absolute top-full right-0 mt-2 w-[22rem] max-h-[75vh] bg-[#0F0F1E] border border-white/10 rounded-2xl shadow-2xl z-[70] overflow-hidden flex flex-col"
+            className="fixed w-[22rem] max-w-[calc(100vw-1rem)] max-h-[75vh] bg-[#0F0F1E] border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+            style={{ zIndex: 9999, top: `${dropdownPos.top}px`, right: `${dropdownPos.right}px` }}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">

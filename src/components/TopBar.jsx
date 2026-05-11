@@ -4,7 +4,7 @@
  * Non-authenticated: shows login/register buttons instead of streak/XP.
  */
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from '../hooks/useTranslation'
@@ -30,7 +30,11 @@ const TopBar = () => {
   const languages = getAvailableLanguages()
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
   const [showLangMenu, setShowLangMenu] = useState(false)
+  const [langMenuPos, setLangMenuPos] = useState({ top: 0, right: 0 })
+  const langBtnRef = useRef(null)
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [userMenuPos, setUserMenuPos] = useState({ top: 0, right: 0 })
+  const userBtnRef = useRef(null)
   const [showShareModal, setShowShareModal] = useState(false)
 
   const getPageTitle = () => {
@@ -106,7 +110,14 @@ const TopBar = () => {
         {/* Language selector */}
         <div className="relative">
           <button
-            onClick={() => setShowLangMenu(!showLangMenu)}
+            ref={langBtnRef}
+            onClick={() => {
+              if (!showLangMenu && langBtnRef.current) {
+                const rect = langBtnRef.current.getBoundingClientRect()
+                setLangMenuPos({ top: rect.bottom + 8, right: Math.max(16, window.innerWidth - rect.right) })
+              }
+              setShowLangMenu(!showLangMenu)
+            }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-kprimary/10 hover:bg-kprimary/20 border border-kprimary/20 text-white text-sm font-medium transition-all"
           >
             <span>{currentLang.flag} {language.toUpperCase()}</span>
@@ -116,10 +127,11 @@ const TopBar = () => {
           {showLangMenu && (
             <>
               <div
-                className="fixed inset-0 z-[60]"
+                className="fixed inset-0"
+                style={{ zIndex: 9998 }}
                 onClick={() => setShowLangMenu(false)}
               ></div>
-              <div className="absolute top-full right-0 mt-2 w-48 bg-[#1A1A2E] border border-kprimary/20 rounded-xl shadow-2xl z-[70] overflow-hidden">
+              <div className="fixed w-48 bg-[#1A1A2E] border border-kprimary/20 rounded-xl shadow-2xl overflow-hidden" style={{ zIndex: 9999, top: `${langMenuPos.top}px`, right: `${langMenuPos.right}px` }}>
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
@@ -168,7 +180,14 @@ const TopBar = () => {
         {isAuthenticated && user && (
           <div className="relative">
             <button
-              onClick={() => setShowUserMenu(!showUserMenu)}
+              ref={userBtnRef}
+              onClick={() => {
+                if (!showUserMenu && userBtnRef.current) {
+                  const rect = userBtnRef.current.getBoundingClientRect()
+                  setUserMenuPos({ top: rect.bottom + 8, right: Math.max(16, window.innerWidth - rect.right) })
+                }
+                setShowUserMenu(!showUserMenu)
+              }}
               className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-white/5 transition-colors"
             >
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-kprimary to-ksecondary flex items-center justify-center">
@@ -179,8 +198,8 @@ const TopBar = () => {
 
             {showUserMenu && (
               <>
-                <div className="fixed inset-0 z-[60]" onClick={() => setShowUserMenu(false)}></div>
-                <div className="absolute top-full right-0 mt-2 w-64 max-w-[calc(100vw-1rem)] bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl z-[70] overflow-hidden">
+                <div className="fixed inset-0" style={{ zIndex: 9998 }} onClick={() => setShowUserMenu(false)}></div>
+                <div className="fixed w-64 max-w-[calc(100vw-1rem)] bg-[#1A1A2E] border border-white/10 rounded-xl shadow-2xl overflow-hidden" style={{ zIndex: 9999, top: `${userMenuPos.top}px`, right: `${userMenuPos.right}px` }}>
                   {/* User info */}
                   <div className="px-4 py-3 border-b border-white/5">
                     <p className="text-sm font-semibold text-white">{user.firstName} {user.lastName}</p>
