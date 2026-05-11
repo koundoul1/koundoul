@@ -135,6 +135,34 @@ describe('Flashcards route file', () => {
   });
 })
 
+// ── Seed file validation ──────────────────────────────────────────────
+
+describe('Flashcards seed file', () => {
+  const seedPath = path.resolve(__dirname, '../../backend/src/scripts/seedFlashcards.js')
+
+  it('seed file exists', () => {
+    expect(fs.existsSync(seedPath)).toBe(true)
+  })
+
+  it('contains exactly 450 cards', () => {
+    const content = fs.readFileSync(seedPath, 'utf-8')
+    const count = (content.match(/question:/g) || []).length
+    expect(count).toBe(450)
+  })
+
+  it('has no curly quotes', () => {
+    const content = fs.readFileSync(seedPath, 'utf-8')
+    expect(content).not.toMatch(/[\u2018\u2019\u201C\u201D]/)
+  })
+
+  it('covers 3 subjects', () => {
+    const content = fs.readFileSync(seedPath, 'utf-8')
+    expect(content).toContain("'Mathematiques'")
+    expect(content).toContain("'Physique'")
+    expect(content).toContain("'Chimie'")
+  })
+})
+
 // ── Schema validation ─────────────────────────────────────────────────
 
 describe('Prisma schema flashcard models', () => {
