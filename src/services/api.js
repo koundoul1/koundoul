@@ -555,7 +555,8 @@ const api = {
   // 📊 DASHBOARD
   dashboard: {
     get: () => request('/dashboard'),
-    getActivity: (days = 7) => request(`/dashboard/activity?days=${days}`)
+    getActivity: (days = 7) => request(`/dashboard/activity?days=${days}`),
+    getAdvancedStats: () => request('/dashboard/advanced-stats')
   },
 
   // 🏆 BADGES

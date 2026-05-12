@@ -392,4 +392,126 @@ router.get('/activity', authenticateToken, async (req, res, next) => {
   }
 });
 
+// ── GET /advanced-stats — premium only stats ─────────────────────────
+
+router.get('/advanced-stats', authenticateToken, async (req, res, next) => {
+  try {
+    var userId = req.user.userId;
+
+    // Check if user has active subscription (premium)
+    var now = new Date();
+    var activeSub = await prisma.subscription.findFirst({
+      where: { userId: userId, status: 'ACTIVE', endDate: { gte: now } },
+      include: { plan: true }
+    });
+
+    var isPremium = !!activeSub;
+
+    if (!isPremium) {
+      return res.json({
+        success: true,
+        data: { locked: true, message: 'Abonnez-vous pour voir les statistiques avancees' }
+      });
+    }
+
+    var thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+    // 1. Daily activity for 30 days (progression chart)
+    var dailyActivity = [];
+    try {
+      dailyActivity = await prisma.$queryRaw`
+        SELECT DATE("completedAt") as date, COUNT(*)::int as count,
+               AVG(score)::int as "avgScore"
+        FROM microlesson_completions
+        WHERE "userId" = ${userId} AND "completedAt" >= ${thirtyDaysAgo}
+        GROUP BY DATE("completedAt")
+        ORDER BY date ASC
+      `;
+    } catch (e) { /* ignore */ }
+
+    // 2. Quiz scores over time
+    var quizHistory = [];
+    try {
+      quizHistory = await prisma.$queryRaw`
+        SELECT DATE("completedAt") as date, COUNT(*)::int as count,
+               AVG(score)::int as "avgScore"
+        FROM quiz_attempts
+        WHERE "userId" = ${userId} AND "completedAt" >= ${thirtyDaysAgo}
+              AND "completedAt" IS NOT NULL
+        GROUP BY DATE("completedAt")
+        ORDER BY date ASC
+      `;
+    } catch (e) { /* ignore */ }
+
+    // 3. XP by subject (via lesson completions + microlessons)
+    var xpBySubject = [];
+    try {
+      xpBySubject = await prisma.$queryRaw`
+        SELECT s.name as subject, COUNT(mc.id)::int as "lessonsCompleted",
+               AVG(mc.score)::int as "avgScore",
+               COUNT(mc.id)::int * 50 as "estimatedXp"
+        FROM microlesson_completions mc
+        JOIN microlessons m ON m.id = mc."lessonId"
+        JOIN chapters c ON c.id = m."chapterId"
+        JOIN subjects s ON s.id = c."subjectId"
+        WHERE mc."userId" = ${userId} AND mc.completed = true
+        GROUP BY s.name
+        ORDER BY "estimatedXp" DESC
+      `;
+    } catch (e) { /* ignore */ }
+
+    // 4. Study time by week (last 4 weeks)
+    var weeklyStudyTime = [];
+    try {
+      weeklyStudyTime = await prisma.$queryRaw`
+        SELECT DATE_TRUNC('week', "completedAt") as week,
+               COUNT(*)::int as activities,
+               SUM(COALESCE("timeSpent", 10))::int as "totalMinutes"
+        FROM microlesson_completions
+        WHERE "userId" = ${userId} AND "completedAt" >= ${thirtyDaysAgo}
+        GROUP BY DATE_TRUNC('week', "completedAt")
+        ORDER BY week ASC
+      `;
+    } catch (e) { /* ignore */ }
+
+    // 5. Flashcard mastery breakdown
+    var flashcardStats = { mastered: 0, learning: 0, newCards: 0 };
+    try {
+      var fc = await Promise.all([
+        prisma.flashcardReview.count({ where: { userId: userId, status: 'mastered' } }),
+        prisma.flashcardReview.count({ where: { userId: userId, status: 'learning' } }),
+        prisma.flashcardReview.count({ where: { userId: userId, status: 'new' } })
+      ]);
+      flashcardStats = { mastered: fc[0], learning: fc[1], newCards: fc[2] };
+    } catch (e) { /* ignore */ }
+
+    // 6. AI usage this month
+    var aiUsageMonth = 0;
+    try {
+      var monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+      var aiAgg = await prisma.dailyAiUsage.aggregate({
+        _sum: { count: true },
+        where: { userId: userId, date: { gte: monthStart } }
+      });
+      aiUsageMonth = aiAgg._sum.count || 0;
+    } catch (e) { /* ignore */ }
+
+    res.json({
+      success: true,
+      data: {
+        locked: false,
+        plan: activeSub.plan.displayName || activeSub.plan.name,
+        dailyActivity: dailyActivity,
+        quizHistory: quizHistory,
+        xpBySubject: xpBySubject,
+        weeklyStudyTime: weeklyStudyTime,
+        flashcardStats: flashcardStats,
+        aiUsageMonth: aiUsageMonth
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

@@ -9,7 +9,7 @@ import { useTranslation } from '../hooks/useTranslation'
 import {
   Flame, Star, TrendingUp, Target, Brain, Trophy, BookOpen,
   Zap, Award, Clock, Activity, ChevronRight, Crown, Rocket,
-  Play, BookMarked
+  Play, BookMarked, BarChart3, Lock
 } from 'lucide-react'
 import api from '../services/api'
 
@@ -472,6 +472,164 @@ const NewDashboard = () => {
             <Link to="/profile" className="block bg-gradient-to-r from-kprimary to-ksecondary rounded-2xl p-5 text-center font-bold hover:scale-105 transition-all duration-300 shadow-lg shadow-kprimary/20">
               {t('dashboard.viewProfile')}
             </Link>
+          </div>
+        </div>
+
+        {/* Advanced Stats — Premium only */}
+        <AdvancedStatsSection />
+      </div>
+    </div>
+  )
+}
+
+// ── Advanced Stats (Premium) ──────────────────────────────────────────
+
+function AdvancedStatsSection() {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await api.dashboard.getAdvancedStats()
+        setData(res.data || res)
+      } catch (e) { /* ignore */ }
+      setLoading(false)
+    }
+    load()
+  }, [])
+
+  if (loading) return null
+
+  // Locked for free users — show upsell card
+  if (!data || data.locked) {
+    return (
+      <div className="mt-8">
+        <div className="k-card p-6 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-kprimary/5 to-ksecondary/5" />
+          <div className="relative text-center py-4">
+            <BarChart3 className="w-10 h-10 text-kprimary mx-auto mb-3" />
+            <h3 className="text-lg font-bold text-white mb-2">Statistiques Avancees</h3>
+            <p className="text-sm text-gray-400 mb-4 max-w-md mx-auto">
+              Progression sur 30 jours, scores par matiere, temps d&apos;etude detaille, et plus encore.
+            </p>
+            <Link
+              to="/subscriptions"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-kprimary to-ksecondary text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
+            >
+              <Lock className="w-4 h-4" />
+              Debloquer avec Premium
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  var dailyActivity = data.dailyActivity || []
+  var xpBySubject = data.xpBySubject || []
+  var weeklyStudyTime = data.weeklyStudyTime || []
+  var flashcardStats = data.flashcardStats || {}
+  var quizHistory = data.quizHistory || []
+
+  return (
+    <div className="mt-8">
+      <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+        <BarChart3 className="w-5 h-5 text-kprimary" />
+        Statistiques Avancees
+        <span className="px-2 py-0.5 text-[10px] font-bold bg-kprimary/20 text-kprimary rounded-full">{data.plan}</span>
+      </h2>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Daily Activity Chart (30 days) */}
+        <div className="k-card p-5">
+          <h3 className="text-sm font-semibold text-gray-400 mb-3">Activite sur 30 jours</h3>
+          {dailyActivity.length === 0 ? (
+            <p className="text-xs text-gray-600 py-4 text-center">Pas encore de donnees</p>
+          ) : (
+            <div className="flex items-end gap-0.5 h-24">
+              {dailyActivity.map(function(d, i) {
+                var maxCount = Math.max.apply(null, dailyActivity.map(function(x) { return x.count; })) || 1
+                var pct = (d.count / maxCount) * 100
+                return (
+                  <div key={i} className="flex-1 flex flex-col items-center">
+                    <div className="w-full bg-kprimary/60 rounded-t" style={{ height: Math.max(pct, 4) + '%' }} title={d.date + ': ' + d.count + ' activites'} />
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* XP by Subject */}
+        <div className="k-card p-5">
+          <h3 className="text-sm font-semibold text-gray-400 mb-3">XP par matiere</h3>
+          {xpBySubject.length === 0 ? (
+            <p className="text-xs text-gray-600 py-4 text-center">Complete des lecons pour voir tes stats</p>
+          ) : (
+            <div className="space-y-3">
+              {xpBySubject.map(function(s, i) {
+                var maxXp = Math.max.apply(null, xpBySubject.map(function(x) { return x.estimatedXp; })) || 1
+                return (
+                  <div key={i}>
+                    <div className="flex justify-between text-xs mb-1">
+                      <span className="text-gray-300 font-medium">{s.subject}</span>
+                      <span className="text-yellow-400 font-bold">{s.estimatedXp} XP</span>
+                    </div>
+                    <div className="w-full h-2 bg-white/10 rounded-full">
+                      <div className="h-2 bg-gradient-to-r from-kprimary to-ksecondary rounded-full" style={{ width: ((s.estimatedXp / maxXp) * 100) + '%' }} />
+                    </div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">{s.lessonsCompleted} lecons, score moyen {s.avgScore || 0}%</div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Weekly Study Time */}
+        <div className="k-card p-5">
+          <h3 className="text-sm font-semibold text-gray-400 mb-3">Temps d&apos;etude hebdomadaire</h3>
+          {weeklyStudyTime.length === 0 ? (
+            <p className="text-xs text-gray-600 py-4 text-center">Pas encore de donnees</p>
+          ) : (
+            <div className="space-y-2">
+              {weeklyStudyTime.map(function(w, i) {
+                var weekLabel = new Date(w.week).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
+                return (
+                  <div key={i} className="flex items-center gap-3">
+                    <span className="text-xs text-gray-500 w-16">{weekLabel}</span>
+                    <div className="flex-1 h-3 bg-white/10 rounded-full">
+                      <div className="h-3 bg-emerald-500 rounded-full" style={{ width: Math.min((w.totalMinutes / 300) * 100, 100) + '%' }} />
+                    </div>
+                    <span className="text-xs text-gray-400 w-12 text-right">{w.totalMinutes} min</span>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Flashcards + AI Usage */}
+        <div className="k-card p-5">
+          <h3 className="text-sm font-semibold text-gray-400 mb-3">Flashcards & IA</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-emerald-500/10 rounded-xl p-3 text-center">
+              <p className="text-xl font-bold text-emerald-400">{flashcardStats.mastered || 0}</p>
+              <p className="text-[10px] text-gray-500">Maitrisees</p>
+            </div>
+            <div className="bg-yellow-500/10 rounded-xl p-3 text-center">
+              <p className="text-xl font-bold text-yellow-400">{flashcardStats.learning || 0}</p>
+              <p className="text-[10px] text-gray-500">En cours</p>
+            </div>
+            <div className="bg-blue-500/10 rounded-xl p-3 text-center">
+              <p className="text-xl font-bold text-blue-400">{flashcardStats.newCards || 0}</p>
+              <p className="text-[10px] text-gray-500">Nouvelles</p>
+            </div>
+            <div className="bg-purple-500/10 rounded-xl p-3 text-center">
+              <p className="text-xl font-bold text-purple-400">{data.aiUsageMonth || 0}</p>
+              <p className="text-[10px] text-gray-500">Appels IA ce mois</p>
+            </div>
           </div>
         </div>
       </div>
