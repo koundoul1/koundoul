@@ -82,6 +82,7 @@ model User {
   flashcardDecks                                         FlashcardDeck[]
   groupDuelsCreated                                      GroupDuel[]           @relation("GroupDuelCreator")
   groupDuelParticipations                                GroupDuelParticipant[]
+  promoCodeUses                                          PromoCodeUse[]
 
   @@map("users")
 }
@@ -328,6 +329,7 @@ model SubscriptionPlan {
   aiCallsPerDay Int            @default(6)
   maxChildren   Int            @default(0)
   subscriptions Subscription[]
+  promoCodes    PromoCode[]
 
   @@map("subscription_plans")
 }
@@ -944,6 +946,35 @@ model DailyAiUsage {
   @@unique([userId, date])
   @@index([userId, date])
   @@map("daily_ai_usage")
+}
+
+model PromoCode {
+  id           String          @id @default(cuid())
+  code         String          @unique
+  description  String?
+  planId       String
+  durationDays Int             @default(30)
+  maxUses      Int             @default(100)
+  currentUses  Int             @default(0)
+  isActive     Boolean         @default(true)
+  expiresAt    DateTime?
+  createdAt    DateTime        @default(now())
+  plan         SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  uses         PromoCodeUse[]
+
+  @@map("promo_codes")
+}
+
+model PromoCodeUse {
+  id          String    @id @default(cuid())
+  promoCodeId String
+  userId      String
+  usedAt      DateTime  @default(now())
+  promoCode   PromoCode @relation(fields: [promoCodeId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([promoCodeId, userId])
+  @@map("promo_code_uses")
 }
 
 model GroupDuel {

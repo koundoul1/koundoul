@@ -199,6 +199,7 @@ const SECTIONS = [
   { id: 'payments', label: 'Paiements', icon: Wallet },
   { id: 'content', label: 'Contenu', icon: BookOpen },
   { id: 'notifications', label: 'Notifications', icon: Bell },
+  { id: 'promos', label: 'Codes Promo', icon: Award },
   { id: 'support', label: 'Support', icon: HeadphonesIcon },
 ]
 
@@ -324,6 +325,7 @@ const AdminDashboard = () => {
           {activeSection === 'payments' && <PaymentsSection showToast={showToast} />}
           {activeSection === 'content' && <ContentSection showToast={showToast} showConfirm={showConfirm} />}
           {activeSection === 'notifications' && <NotificationsSection showToast={showToast} />}
+          {activeSection === 'promos' && <PromoCodesSection showToast={showToast} />}
           {activeSection === 'support' && <SupportSection showToast={showToast} showConfirm={showConfirm} />}
         </div>
       </main>
@@ -1815,6 +1817,135 @@ const AdminLogsTab = () => {
           )}
           <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
         </>
+      )}
+    </div>
+  )
+}
+
+// =============================================================================
+// PROMO CODES SECTION
+// =============================================================================
+
+const PromoCodesSection = ({ showToast }) => {
+  const [promos, setPromos] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [showForm, setShowForm] = useState(false)
+  const [form, setForm] = useState({ code: '', planId: 'plan-premium', durationDays: 30, maxUses: 100, description: '' })
+  const [creating, setCreating] = useState(false)
+
+  const fetchPromos = useCallback(async () => {
+    setLoading(true)
+    try {
+      const res = await api.promo.adminList()
+      setPromos(res.data || [])
+    } catch (e) { /* ignore */ }
+    setLoading(false)
+  }, [])
+
+  useEffect(() => { fetchPromos() }, [fetchPromos])
+
+  const createPromo = async () => {
+    if (!form.code.trim()) { showToast('Code requis', 'error'); return }
+    setCreating(true)
+    try {
+      await api.promo.adminCreate({ ...form, code: form.code.trim().toUpperCase() })
+      showToast('Code promo cree')
+      setShowForm(false)
+      setForm({ code: '', planId: 'plan-premium', durationDays: 30, maxUses: 100, description: '' })
+      fetchPromos()
+    } catch (err) {
+      showToast(err.message, 'error')
+    }
+    setCreating(false)
+  }
+
+  const deletePromo = async (id) => {
+    try {
+      await api.promo.adminDelete(id)
+      showToast('Code supprime')
+      fetchPromos()
+    } catch (err) {
+      showToast(err.message, 'error')
+    }
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold">Codes Promo</h2>
+        <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 px-4 py-2 bg-[#FF4757] hover:bg-red-600 text-sm rounded-lg">
+          <Plus size={14} /> Nouveau Code
+        </button>
+      </div>
+
+      {showForm && (
+        <div className="bg-[#12122A] border border-gray-800 rounded-xl p-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs text-gray-400 block mb-1">Code *</label>
+              <input value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value.toUpperCase() })} placeholder="PROMO2026" className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white font-mono uppercase" />
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 block mb-1">Plan a offrir *</label>
+              <select value={form.planId} onChange={(e) => setForm({ ...form, planId: e.target.value })} className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white">
+                <option value="plan-premium">Premium (50 IA/j)</option>
+                <option value="plan-premium-max">Premium Max (300 IA/j)</option>
+                <option value="plan-family">Famille</option>
+                <option value="plan-premium-daily">Premium 24h</option>
+                <option value="plan-premium-max-daily">Premium Max 24h</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 block mb-1">Duree (jours)</label>
+              <input type="number" value={form.durationDays} onChange={(e) => setForm({ ...form, durationDays: parseInt(e.target.value) || 30 })} className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white" />
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 block mb-1">Utilisations max</label>
+              <input type="number" value={form.maxUses} onChange={(e) => setForm({ ...form, maxUses: parseInt(e.target.value) || 100 })} className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white" />
+            </div>
+            <div className="md:col-span-2">
+              <label className="text-xs text-gray-400 block mb-1">Description</label>
+              <input value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Ex: Promo lancement mai 2026" className="w-full px-3 py-2 text-sm bg-[#0A0A15] border border-gray-700 rounded-lg text-white" />
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 mt-4">
+            <button onClick={() => setShowForm(false)} className="px-4 py-2 text-sm bg-gray-700 text-gray-300 rounded-lg">Annuler</button>
+            <button onClick={createPromo} disabled={creating} className="px-4 py-2 text-sm bg-[#FF4757] text-white rounded-lg disabled:opacity-50">
+              {creating ? <Loader2 size={14} className="animate-spin" /> : 'Creer'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {loading ? <Spinner /> : (
+        <div className="space-y-3">
+          {promos.length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              <Award size={32} className="mx-auto mb-3 text-gray-600" />
+              <p className="text-sm">Aucun code promo</p>
+            </div>
+          ) : promos.map((p) => (
+            <div key={p.id} className="bg-[#12122A] border border-gray-800 rounded-xl p-4 flex items-center justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-1">
+                  <code className="text-lg font-mono font-bold text-yellow-400">{p.code}</code>
+                  <span className={`px-2 py-0.5 text-[10px] rounded ${p.isActive ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'}`}>
+                    {p.isActive ? 'Actif' : 'Inactif'}
+                  </span>
+                </div>
+                <div className="flex items-center gap-4 text-xs text-gray-500">
+                  <span>Plan: {p.plan?.displayName || p.plan?.name}</span>
+                  <span>{p.durationDays}j</span>
+                  <span>{p.currentUses}/{p.maxUses} utilise(s)</span>
+                  {p.description && <span>{p.description}</span>}
+                </div>
+              </div>
+              <button onClick={() => deletePromo(p.id)} className="p-2 text-gray-500 hover:text-red-400">
+                <Trash2 size={16} />
+              </button>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   )

@@ -325,6 +325,13 @@ const Subscriptions = () => {
         </div>
       </div>
 
+      {/* Promo Code */}
+      {isAuthenticated && (
+        <div className="max-w-md mx-auto px-4 py-8">
+          <PromoCodeInput />
+        </div>
+      )}
+
       {/* FAQ */}
       <div className="max-w-3xl mx-auto px-4 py-12">
         <h2 className="text-2xl font-bold text-center mb-8">{t('subscriptions.faq.title')}</h2>
@@ -354,5 +361,53 @@ const Subscriptions = () => {
     </div>
   );
 };
+
+function PromoCodeInput() {
+  const [code, setCode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async () => {
+    if (!code.trim()) return;
+    setLoading(true);
+    setError('');
+    setResult(null);
+    try {
+      const res = await api.promo.validate(code.trim());
+      setResult(res.message || 'Code applique !');
+      setCode('');
+    } catch (err) {
+      setError(err.message || 'Code invalide');
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+      <h3 className="text-lg font-bold text-white mb-2">Code promo</h3>
+      <p className="text-xs text-gray-500 mb-4">Tu as un code ? Entre-le ici pour activer ton plan.</p>
+      <div className="flex gap-2">
+        <input
+          value={code}
+          onChange={(e) => setCode(e.target.value.toUpperCase())}
+          placeholder="CODE PROMO"
+          maxLength={20}
+          className="flex-1 px-4 py-2.5 bg-gray-800 border border-white/10 rounded-xl text-white text-center font-mono text-lg tracking-widest uppercase placeholder-gray-600 focus:outline-none focus:border-kprimary"
+          onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(); }}
+        />
+        <button
+          onClick={handleSubmit}
+          disabled={loading || !code.trim()}
+          className="px-5 py-2.5 bg-kprimary text-white rounded-xl font-semibold hover:bg-kprimary/90 disabled:opacity-50"
+        >
+          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Activer'}
+        </button>
+      </div>
+      {error && <p className="text-xs text-red-400 mt-2">{error}</p>}
+      {result && <p className="text-xs text-green-400 mt-2">{result}</p>}
+    </div>
+  );
+}
 
 export default Subscriptions;

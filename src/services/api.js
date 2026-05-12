@@ -797,6 +797,14 @@ const api = {
     }),
   },
 
+  // 🎫 PROMO CODES
+  promo: {
+    validate: (code) => request('/promo/validate', { method: 'POST', body: JSON.stringify({ code }) }),
+    adminList: () => request('/promo/admin/list'),
+    adminCreate: (data) => request('/promo/admin/create', { method: 'POST', body: JSON.stringify(data) }),
+    adminDelete: (id) => request('/promo/admin/' + id, { method: 'DELETE' }),
+  },
+
   // ⚔️ GROUP DUELS
   groupDuels: {
     create: (data) => request('/group-duels', { method: 'POST', body: JSON.stringify(data) }),
