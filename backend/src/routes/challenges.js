@@ -3,6 +3,7 @@ const router = express.Router();
 const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const prisma = require('../config/database');
 const { processAction } = require('../services/gamification');
+const { getUserPlanInfo } = require('../middlewares/premiumCheck');
 
 // GET / — Tous les challenges actifs
 router.get('/', optionalAuth, async (req, res) => {
@@ -153,6 +154,20 @@ router.post('/:id/start', authenticateToken, async (req, res) => {
 
     if (challenge.status !== 'active' || new Date() > new Date(challenge.endDate)) {
       return res.status(400).json({ success: false, error: 'Ce challenge n\'est plus actif' });
+    }
+
+    // Free users: max 1 challenge per week
+    var planInfo = await getUserPlanInfo(userId);
+    if (!planInfo.isPremium) {
+      var weekStart = new Date();
+      weekStart.setDate(weekStart.getDate() - weekStart.getDay() + 1);
+      weekStart.setHours(0, 0, 0, 0);
+      var weekAttempts = await prisma.challengeAttempt.count({
+        where: { userId: userId, createdAt: { gte: weekStart } }
+      });
+      if (weekAttempts >= 1) {
+        return res.status(403).json({ success: false, error: 'Maximum 1 challenge par semaine en plan gratuit. Passe Premium pour les 3 !', premiumRequired: true });
+      }
     }
 
     // Vérifier si l'user a déjà participé

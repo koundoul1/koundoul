@@ -6,6 +6,7 @@ const prisma = require('../config/database');
 const { isConfigured, streamGenerate, generate, GeminiError } = require('../services/geminiService');
 const { SOLVER_SYSTEM_PROMPT, SOLVER_STRUCTURED_PROMPT, parseStructured } = require('../prompts/solver');
 const { incrementUsage } = require('../services/aiQuotaService');
+const { getUserPlanInfo } = require('../middlewares/premiumCheck');
 
 // ── POST /solve — SSE streaming endpoint ─────────────────────────────
 
@@ -125,7 +126,10 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
 router.get('/history', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
-    const take = Math.min(parseInt(req.query.limit) || 20, 50);
+    // Free users: max 5 history entries
+    var planInfo = await getUserPlanInfo(userId);
+    var maxEntries = planInfo.isPremium ? 50 : 5;
+    const take = Math.min(parseInt(req.query.limit) || 20, maxEntries);
     const skip = Math.max(parseInt(req.query.offset) || 0, 0);
 
     const [entries, total] = await Promise.all([

@@ -3,6 +3,7 @@ var router = express.Router();
 var { authenticateToken } = require('../middlewares/auth');
 var prisma = require('../config/database');
 var crypto = require('crypto');
+var { getUserPlanInfo } = require('../middlewares/premiumCheck');
 
 function generateInviteCode() {
   return crypto.randomBytes(4).toString('hex').toUpperCase();
@@ -19,6 +20,12 @@ router.post('/', authenticateToken, async function(req, res, next) {
 
     if (maxPlayers < 3 || maxPlayers > 4) {
       return res.status(400).json({ error: 'maxPlayers doit etre 3 ou 4' });
+    }
+
+    // Premium only
+    var planInfo = await getUserPlanInfo(userId);
+    if (!planInfo.isPremium) {
+      return res.status(403).json({ error: 'Les duels de groupe sont reserves aux abonnes Premium', premiumRequired: true });
     }
 
     // Get questions from qcm_questions

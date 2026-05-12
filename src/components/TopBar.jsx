@@ -17,7 +17,8 @@ import {
   User,
   LogIn,
   UserPlus,
-  Share2
+  Share2,
+  Crown
 } from 'lucide-react'
 import ShareModal from './ShareModal'
 import NotificationBell from './NotificationBell'
@@ -197,8 +198,13 @@ const TopBar = () => {
               }}
               className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-white/5 transition-colors"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-kprimary to-ksecondary flex items-center justify-center">
-                <span className="text-white font-bold text-sm">{user.firstName?.charAt(0) || 'U'}</span>
+              <div className="relative">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-kprimary to-ksecondary flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">{user.firstName?.charAt(0) || 'U'}</span>
+                </div>
+                {user.isPremium && (
+                  <Crown className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 text-yellow-400 drop-shadow" />
+                )}
               </div>
               <ChevronDown className={`w-3.5 h-3.5 text-white/50 transition-transform ${showUserMenu ? 'rotate-180' : ''}`} />
             </button>

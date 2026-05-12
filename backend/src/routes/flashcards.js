@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
+const { getUserPlanInfo, countTodayUsage } = require('../middlewares/premiumCheck');
 
 // ── SM-2 Algorithm ────────────────────────────────────────────────────
 
@@ -228,6 +229,15 @@ router.post('/:id/review', authenticateToken, async (req, res, next) => {
 
     if (quality === undefined || quality < 1 || quality > 4) {
       return res.status(400).json({ error: 'Quality doit etre entre 1 et 4' });
+    }
+
+    // Free users: max 10 reviews/day
+    var planInfo = await getUserPlanInfo(userId);
+    if (!planInfo.isPremium) {
+      var todayReviews = await countTodayUsage(userId, 'flashcard_review');
+      if (todayReviews >= 10) {
+        return res.status(403).json({ error: 'Maximum 10 revisions par jour en plan gratuit. Passe Premium pour des revisions illimitees !', premiumRequired: true });
+      }
     }
 
     // Map quality 1-4 to SM-2 scale 1-5

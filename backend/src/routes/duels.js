@@ -4,6 +4,7 @@ const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 const { sendNotification } = require('../utils/notificationService');
 const { processAction } = require('../services/gamification');
+const { getUserPlanInfo, countTodayUsage } = require('../middlewares/premiumCheck');
 
 // GET / — Liste des duels publics disponibles
 router.get('/', authenticateToken, async (req, res) => {
@@ -98,6 +99,15 @@ router.post('/', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;
     const { subject, level, difficulty } = req.body;
+
+    // Free users: max 3 duels/day
+    var planInfo = await getUserPlanInfo(userId);
+    if (!planInfo.isPremium) {
+      var todayDuels = await countTodayUsage(userId, 'duel');
+      if (todayDuels >= 3) {
+        return res.status(403).json({ error: 'Maximum 3 duels par jour en plan gratuit. Passe Premium pour des duels illimites !', premiumRequired: true });
+      }
+    }
 
     // Piocher 10 questions QCM filtrees par matiere + difficulte
     const difficultyMap = { 'Facile': 1, 'Moyen': 2, 'Difficile': 3 };

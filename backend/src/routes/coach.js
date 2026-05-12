@@ -6,6 +6,7 @@ const prisma = require('../config/database');
 const { isConfigured, streamGenerate, GeminiError } = require('../services/geminiService');
 const { COACH_SYSTEM_PROMPT } = require('../prompts/coach');
 const { incrementUsage } = require('../services/aiQuotaService');
+const { getUserPlanInfo } = require('../middlewares/premiumCheck');
 
 // Max messages sent to Gemini as conversation history
 const MAX_HISTORY_MESSAGES = 20;
@@ -21,7 +22,20 @@ router.post('/chat', authenticateToken, checkAiQuota, async (req, res) => {
   }
 
   if (!isConfigured()) {
-    return res.status(503).json({ error: 'Service IA non configuré. Contactez l\'administrateur.' });
+    return res.status(503).json({ error: 'Service IA non configure.' });
+  }
+
+  // Free users: max 3 conversations
+  if (!conversationId) {
+    var planInfo = await getUserPlanInfo(userId);
+    if (!planInfo.isPremium) {
+      var convCount = await prisma.coachConversation.count({
+        where: { userId: userId, title: { not: { startsWith: '[Parent]' } } }
+      });
+      if (convCount >= 3) {
+        return res.status(403).json({ error: 'Maximum 3 conversations Coach en plan gratuit. Supprime une conversation ou passe Premium !', premiumRequired: true });
+      }
+    }
   }
 
   // SSE headers

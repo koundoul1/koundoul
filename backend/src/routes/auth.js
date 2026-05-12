@@ -259,9 +259,13 @@ router.post('/login', loginLimiter, async (req, res, next) => {
 
     const token = buildToken(user);
 
+    // Check premium status
+    var { getUserPlanInfo } = require('../middlewares/premiumCheck');
+    var planInfo = await getUserPlanInfo(user.id);
+
     res.json({
       success: true,
-      data: { user: userResponse(user), token }
+      data: { user: { ...userResponse(user), isPremium: planInfo.isPremium, planName: planInfo.displayName }, token }
     });
   } catch (error) {
     next(error);
