@@ -525,13 +525,20 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
       });
     } catch (e) { /* ignore */ }
 
-    // Days active in period
+    // Days active in period — count from ALL activity sources
     var daysActive = 0;
     try {
       var activityDays = await prisma.$queryRaw`
-        SELECT COUNT(DISTINCT DATE("completedAt"))::int as days
-        FROM microlesson_completions
-        WHERE "userId" = ${childId} AND "completedAt" >= ${startDate}
+        SELECT COUNT(DISTINCT d)::int as days FROM (
+          SELECT DATE("completedAt") as d FROM microlesson_completions
+            WHERE "userId" = ${childId} AND "completedAt" >= ${startDate}
+          UNION
+          SELECT DATE("completedAt") as d FROM quiz_attempts
+            WHERE "userId" = ${childId} AND "completedAt" >= ${startDate} AND "completedAt" IS NOT NULL
+          UNION
+          SELECT DATE("reviewedAt") as d FROM flashcard_reviews
+            WHERE "userId" = ${childId} AND "reviewedAt" >= ${startDate}
+        ) all_dates
       `;
       daysActive = activityDays[0]?.days || 0;
     } catch (e) { /* ignore */ }
