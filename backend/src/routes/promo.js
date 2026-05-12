@@ -78,7 +78,13 @@ router.post('/validate', authenticateToken, async function(req, res, next) {
 router.get('/admin/list', requireAdmin, async function(req, res, next) {
   try {
     var promos = await prisma.promoCode.findMany({
-      include: { plan: { select: { name: true, displayName: true } }, _count: { select: { uses: true } } },
+      include: {
+        plan: { select: { name: true, displayName: true } },
+        uses: {
+          include: { user: { select: { id: true, firstName: true, lastName: true, email: true } } },
+          orderBy: { usedAt: 'desc' }
+        }
+      },
       orderBy: { createdAt: 'desc' }
     });
     res.json({ success: true, data: promos });

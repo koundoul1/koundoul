@@ -237,8 +237,21 @@ router.get('/users', requireAdmin, async (req, res, next) => {
           suspendedReason: true,
           createdAt: true,
           lastLoginAt: true,
-          _count: {
-            select: { subscriptions: true }
+          subscriptions: {
+            where: { status: 'ACTIVE' },
+            take: 1,
+            orderBy: { createdAt: 'desc' },
+            include: { plan: { select: { name: true, displayName: true } } }
+          },
+          payments: {
+            take: 1,
+            orderBy: { createdAt: 'desc' },
+            select: { paymentMethod: true, status: true, createdAt: true }
+          },
+          promoCodeUses: {
+            take: 1,
+            orderBy: { usedAt: 'desc' },
+            include: { promoCode: { select: { code: true } } }
           }
         },
         orderBy,

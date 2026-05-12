@@ -580,7 +580,7 @@ const UsersSection = ({ showToast, showConfirm }) => {
       u.level || '',
       u.xp ?? '',
       u.streak ?? '',
-      u._count?.subscriptions > 0 ? 'Abonne' : 'Gratuit',
+      u.subscriptions?.length > 0 ? (u.subscriptions[0].plan?.displayName || 'Premium') : 'Gratuit',
       u.createdAt || '',
       u.isActive !== false ? 'Actif' : 'Suspendu',
     ])
@@ -665,8 +665,8 @@ const UsersSection = ({ showToast, showConfirm }) => {
                       <td className="py-3 px-3 hidden md:table-cell text-gray-400">{u.xp ?? 0}</td>
                       <td className="py-3 px-3 hidden lg:table-cell text-gray-400">{u.streak ?? 0}</td>
                       <td className="py-3 px-3 hidden lg:table-cell">
-                        <span className={`px-2 py-0.5 rounded text-xs ${u._count?.subscriptions > 0 ? 'bg-green-500/20 text-green-400' : 'bg-gray-700 text-gray-400'}`}>
-                          {u._count?.subscriptions > 0 ? 'Abonne' : 'Gratuit'}
+                        <span className={`px-2 py-0.5 rounded text-xs ${u.subscriptions?.length > 0 ? 'bg-green-500/20 text-green-400' : 'bg-gray-700 text-gray-400'}`}>
+                          {u.subscriptions?.length > 0 ? (u.subscriptions[0].plan?.displayName || 'Premium') : 'Gratuit'}
                         </span>
                       </td>
                       <td className="py-3 px-3 hidden xl:table-cell text-gray-500 text-xs">{formatDate(u.createdAt)}</td>
@@ -713,6 +713,24 @@ const UsersSection = ({ showToast, showConfirm }) => {
                             <div><span className="text-gray-500 block text-xs">Admin</span>{u.is_admin ? 'Oui' : 'Non'}</div>
                             <div><span className="text-gray-500 block text-xs">Inscription</span>{formatDate(u.createdAt)}</div>
                             <div><span className="text-gray-500 block text-xs">Dernier login</span>{formatDate(u.lastLoginAt)}</div>
+                            {u.subscriptions?.length > 0 && (
+                              <div>
+                                <span className="text-gray-500 block text-xs">Plan actif</span>
+                                <span className="text-green-400 font-medium">{u.subscriptions[0].plan?.displayName || u.subscriptions[0].plan?.name}</span>
+                              </div>
+                            )}
+                            {u.subscriptions?.length > 0 && (
+                              <div>
+                                <span className="text-gray-500 block text-xs">Source</span>
+                                <span className="text-gray-300">
+                                  {u.promoCodeUses?.length > 0
+                                    ? 'Code promo: ' + u.promoCodeUses[0].promoCode?.code
+                                    : u.payments?.length > 0
+                                      ? (u.payments[0].paymentMethod || 'Paiement').replace('_', ' ')
+                                      : 'Admin'}
+                                </span>
+                              </div>
+                            )}
                             {u.suspendedReason && <div><span className="text-gray-500 block text-xs">Raison suspension</span><span className="text-red-400">{u.suspendedReason}</span></div>}
                           </div>
                           <div className="mt-3 pt-3 border-t border-gray-800 flex items-center gap-3">
@@ -1925,24 +1943,43 @@ const PromoCodesSection = ({ showToast }) => {
               <p className="text-sm">Aucun code promo</p>
             </div>
           ) : promos.map((p) => (
-            <div key={p.id} className="bg-[#12122A] border border-gray-800 rounded-xl p-4 flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-3 mb-1">
+            <div key={p.id} className="bg-[#12122A] border border-gray-800 rounded-xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-3">
                   <code className="text-lg font-mono font-bold text-yellow-400">{p.code}</code>
                   <span className={`px-2 py-0.5 text-[10px] rounded ${p.isActive ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'}`}>
                     {p.isActive ? 'Actif' : 'Inactif'}
                   </span>
+                  {p.expiresAt && new Date(p.expiresAt) < new Date() && (
+                    <span className="px-2 py-0.5 text-[10px] rounded bg-red-500/20 text-red-400">Expire</span>
+                  )}
+                  {p.currentUses >= p.maxUses && (
+                    <span className="px-2 py-0.5 text-[10px] rounded bg-orange-500/20 text-orange-400">Epuise</span>
+                  )}
                 </div>
-                <div className="flex items-center gap-4 text-xs text-gray-500">
-                  <span>Plan: {p.plan?.displayName || p.plan?.name}</span>
-                  <span>{p.durationDays}j</span>
-                  <span>{p.currentUses}/{p.maxUses} utilise(s)</span>
-                  {p.description && <span>{p.description}</span>}
-                </div>
+                <button onClick={() => deletePromo(p.id)} className="p-2 text-gray-500 hover:text-red-400">
+                  <Trash2 size={16} />
+                </button>
               </div>
-              <button onClick={() => deletePromo(p.id)} className="p-2 text-gray-500 hover:text-red-400">
-                <Trash2 size={16} />
-              </button>
+              <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-2">
+                <span>Plan: <strong className="text-gray-300">{p.plan?.displayName || p.plan?.name}</strong></span>
+                <span>{p.durationDays} jours</span>
+                <span className="text-kprimary font-bold">{p.currentUses}/{p.maxUses} utilise(s)</span>
+                {p.expiresAt && <span>Expire: {formatDate(p.expiresAt)}</span>}
+                {p.description && <span className="text-gray-400">{p.description}</span>}
+              </div>
+              {p.uses && p.uses.length > 0 && (
+                <div className="mt-2 pt-2 border-t border-gray-800">
+                  <p className="text-[10px] text-gray-500 mb-1">Utilise par :</p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.uses.map((u) => (
+                      <span key={u.id} className="px-2 py-0.5 bg-white/5 rounded text-[10px] text-gray-400">
+                        {u.user?.firstName || u.user?.email} — {new Date(u.usedAt).toLocaleDateString('fr-FR')}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
