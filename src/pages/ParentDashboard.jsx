@@ -78,22 +78,8 @@ const ParentDashboard = () => {
       
       if (response.success) {
         const data = response.data || {};
-        // Construire un résumé hebdomadaire simple à partir des données back
-        const derivedWeeklySummary = {
-          studyTime: `${data.estimatedStudyTimeHours ?? 0} h`,
-          exercisesCompleted: (data.quizAttempts || 0) + (data.challenges || 0),
-          progression: 0,
-          weeklyGoal: 0,
-          daysActive: data.stats?.streak || 0,
-          consecutiveDays: data.stats?.streak || 0,
-          quizzesCompleted: data.quizAttempts || 0,
-          lessonsCompleted: 0
-        };
-
-        setDashboardData({
-          ...data,
-          weeklySummary: data.weeklySummary || derivedWeeklySummary
-        });
+        // Use backend weeklySummary directly — it has real data
+        setDashboardData(data);
       }
     } catch (error) {
       console.error('Erreur chargement dashboard:', error);
