@@ -163,27 +163,27 @@ const Subscriptions = () => {
           </p>
 
           {/* Toggle 24h / Mensuel / Annuel */}
-          <div className="inline-flex items-center bg-white/10 backdrop-blur rounded-full p-1">
+          <div className="inline-flex items-center bg-black/30 backdrop-blur-md rounded-full p-1.5 border border-white/20">
             <button
               onClick={() => setBillingPeriod('daily')}
-              className={`px-3 py-2 sm:px-4 text-xs sm:text-sm rounded-full font-semibold transition-all ${
-                billingPeriod === 'daily' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              className={`px-5 py-2.5 sm:px-6 text-sm sm:text-base rounded-full font-bold transition-all ${
+                billingPeriod === 'daily' ? 'bg-white text-purple-700 shadow-lg' : 'text-white/70 hover:text-white hover:bg-white/10'
               }`}
             >
               {t('subscriptions.toggleDaily')}
             </button>
             <button
               onClick={() => setBillingPeriod('monthly')}
-              className={`px-3 py-2 sm:px-4 text-xs sm:text-sm rounded-full font-semibold transition-all ${
-                billingPeriod === 'monthly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              className={`px-5 py-2.5 sm:px-6 text-sm sm:text-base rounded-full font-bold transition-all ${
+                billingPeriod === 'monthly' ? 'bg-white text-purple-700 shadow-lg' : 'text-white/70 hover:text-white hover:bg-white/10'
               }`}
             >
               {t('subscriptions.toggleMonthly')}
             </button>
             <button
               onClick={() => setBillingPeriod('yearly')}
-              className={`px-3 py-2 sm:px-4 text-xs sm:text-sm rounded-full font-semibold transition-all ${
-                billingPeriod === 'yearly' ? 'bg-white text-purple-700 shadow' : 'text-white/80 hover:text-white'
+              className={`px-5 py-2.5 sm:px-6 text-sm sm:text-base rounded-full font-bold transition-all ${
+                billingPeriod === 'yearly' ? 'bg-white text-purple-700 shadow-lg' : 'text-white/70 hover:text-white hover:bg-white/10'
               }`}
             >
               {t('subscriptions.toggleYearly')}
