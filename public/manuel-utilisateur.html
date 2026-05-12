@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koundoul — Manuel Utilisateur</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; color: #1a1a2e; line-height: 1.7; background: #fff; }
+
+  @media print {
+    body { font-size: 11pt; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    section { page-break-inside: avoid; }
+    .cover { height: auto; padding: 80px 40px; }
+  }
+
+  /* Cover */
+  .cover {
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #6C63FF 0%, #00D9A3 100%);
+    color: white; text-align: center; padding: 60px 20px;
+  }
+  .cover h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -1px; }
+  .cover h2 { font-size: 1.5rem; font-weight: 500; opacity: 0.9; margin-bottom: 40px; }
+  .cover .badge { display: inline-block; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; padding: 12px 30px; font-size: 1rem; font-weight: 600; }
+  .cover .version { margin-top: 60px; font-size: 0.85rem; opacity: 0.7; }
+
+  /* Layout */
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 30px; }
+
+  /* TOC */
+  .toc { background: #f8f9ff; border-radius: 16px; padding: 30px 40px; margin: 30px 0; }
+  .toc h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: #6C63FF; }
+  .toc ul { list-style: none; }
+  .toc li { padding: 8px 0; border-bottom: 1px solid #e8e8f0; }
+  .toc li:last-child { border-bottom: none; }
+  .toc a { text-decoration: none; color: #1a1a2e; font-weight: 500; display: flex; justify-content: space-between; }
+  .toc a:hover { color: #6C63FF; }
+  .toc .num { color: #6C63FF; font-weight: 700; min-width: 30px; }
+
+  /* Section headers */
+  .section-header {
+    background: linear-gradient(135deg, #6C63FF, #00D9A3);
+    color: white; padding: 30px 40px; border-radius: 16px; margin: 50px 0 30px;
+  }
+  .section-header h2 { font-size: 1.8rem; font-weight: 800; }
+  .section-header p { opacity: 0.9; margin-top: 5px; }
+  .section-header .icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+  /* Content */
+  h3 { font-size: 1.3rem; font-weight: 700; color: #6C63FF; margin: 30px 0 15px; }
+  h4 { font-size: 1.1rem; font-weight: 600; margin: 20px 0 10px; }
+  p { margin-bottom: 15px; color: #444; }
+
+  /* Feature cards */
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
+  .feature-card {
+    background: #f8f9ff; border: 1px solid #e8e8f0; border-radius: 12px; padding: 20px;
+    text-align: center;
+  }
+  .feature-card .emoji { font-size: 2.5rem; margin-bottom: 10px; }
+  .feature-card h4 { margin: 0 0 8px; color: #1a1a2e; font-size: 1rem; }
+  .feature-card p { font-size: 0.85rem; color: #666; margin: 0; }
+
+  /* Steps */
+  .steps { counter-reset: step; margin: 20px 0; }
+  .step {
+    display: flex; gap: 16px; margin-bottom: 20px; padding: 16px; background: #fafafe;
+    border-radius: 12px; border-left: 4px solid #6C63FF;
+  }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    min-width: 36px; height: 36px; background: #6C63FF; color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.9rem; flex-shrink: 0;
+  }
+  .step-content h4 { margin: 0 0 5px; font-size: 1rem; }
+  .step-content p { margin: 0; font-size: 0.9rem; color: #555; }
+
+  /* Screenshots placeholder */
+  .screenshot {
+    background: linear-gradient(135deg, #0D0D1A, #1a1a3e); border-radius: 12px;
+    padding: 40px; text-align: center; color: #6C63FF; margin: 20px 0;
+    border: 2px solid #2a2a4e; position: relative; overflow: hidden;
+  }
+  .screenshot .label { font-size: 0.8rem; opacity: 0.6; color: #888; }
+  .screenshot .title { font-size: 1.2rem; font-weight: 700; margin-top: 5px; }
+  .screenshot .mockup {
+    display: flex; gap: 8px; justify-content: center; margin-top: 15px; flex-wrap: wrap;
+  }
+  .screenshot .mock-card {
+    background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 8px; padding: 12px 16px; font-size: 0.75rem; color: #aaa;
+  }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+  th { background: #6C63FF; color: white; padding: 12px 16px; text-align: left; font-weight: 600; }
+  td { padding: 10px 16px; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) td { background: #fafafe; }
+
+  /* Tips */
+  .tip {
+    background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 8px;
+    padding: 16px 20px; margin: 20px 0; font-size: 0.9rem;
+  }
+  .tip strong { color: #2e7d32; }
+  .warning {
+    background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 8px;
+    padding: 16px 20px; margin: 20px 0; font-size: 0.9rem;
+  }
+  .warning strong { color: #e65100; }
+
+  /* Separator */
+  .separator { text-align: center; margin: 40px 0; color: #ccc; font-size: 1.5rem; letter-spacing: 10px; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 40px; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; margin-top: 60px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<div class="cover">
+  <div style="font-size:5rem; margin-bottom:20px;">🎓</div>
+  <h1>Koundoul</h1>
+  <h2>Manuel Utilisateur</h2>
+  <div class="badge">Guide complet pour Eleves et Parents</div>
+  <div class="version">Version 2.0 — Mai 2026<br>www.koundoul.com</div>
+</div>
+
+<!-- ═══════════════ TABLE OF CONTENTS ═══════════════ -->
+<div class="container">
+  <div class="toc">
+    <h2>Sommaire</h2>
+    <ul>
+      <li><a href="#intro"><span class="num">1</span> Presentation de Koundoul</a></li>
+      <li><a href="#inscription"><span class="num">2</span> Inscription et Connexion</a></li>
+      <li><a href="#dashboard"><span class="num">3</span> Tableau de Bord</a></li>
+      <li><a href="#solver"><span class="num">4</span> Le Resolveur</a></li>
+      <li><a href="#coach"><span class="num">5</span> Le Coach Virtuel</a></li>
+      <li><a href="#quiz"><span class="num">6</span> Quiz et Exercices</a></li>
+      <li><a href="#flashcards"><span class="num">7</span> Flashcards</a></li>
+      <li><a href="#challenges"><span class="num">8</span> Challenges et Duels</a></li>
+      <li><a href="#gamification"><span class="num">9</span> XP, Badges et Classement</a></li>
+      <li><a href="#subscriptions"><span class="num">10</span> Abonnements et Codes Promo</a></li>
+      <li><a href="#parent"><span class="num">11</span> Guide Parent</a></li>
+      <li><a href="#faq"><span class="num">12</span> Questions Frequentes</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════ 1. INTRO ═══════════════ -->
+  <div class="section-header" id="intro">
+    <div class="icon">🌍</div>
+    <h2>1. Presentation de Koundoul</h2>
+    <p>Ta plateforme educative pour reussir en Maths, Physique et Chimie</p>
+  </div>
+
+  <p>Koundoul est une plateforme educative conçue pour les lyceens d'Afrique de l'Ouest. Elle couvre les programmes de <strong>Seconde, Premiere et Terminale</strong> en Mathematiques, Physique et Chimie.</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="emoji">🧠</div>
+      <h4>Resolveur</h4>
+      <p>Resous tes exercices pas a pas</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">💬</div>
+      <h4>Coach Virtuel</h4>
+      <p>Un tuteur personnel disponible 24h/24</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">📝</div>
+      <h4>Quiz</h4>
+      <p>900+ QCM pour tester tes connaissances</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">🃏</div>
+      <h4>Flashcards</h4>
+      <p>450 cartes de revision espacee</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">⚔️</div>
+      <h4>Duels</h4>
+      <p>Defie tes amis en 1v1, a 3 ou a 4</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">🏆</div>
+      <h4>Challenges</h4>
+      <p>3 defis hebdomadaires par matiere</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════ 2. INSCRIPTION ═══════════════ -->
+  <div class="section-header page-break" id="inscription">
+    <div class="icon">🔑</div>
+    <h2>2. Inscription et Connexion</h2>
+    <p>Cree ton compte en moins de 2 minutes</p>
+  </div>
+
+  <h3>Choisir ton profil</h3>
+  <p>A l'inscription, choisis si tu es :</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="emoji">🎓</div>
+      <h4>Eleve</h4>
+      <p>Acces a tous les modules d'apprentissage (lecons, quiz, exercices, resolveur, coach, flashcards, duels)</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">👨‍👩‍👧</div>
+      <h4>Parent</h4>
+      <p>Suivez la progression de votre enfant, consultez ses statistiques et utilisez le Coach Parent</p>
+    </div>
+  </div>
+
+  <h3>Deux methodes de connexion</h3>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-content">
+        <h4>Email + Mot de passe</h4>
+        <p>Methode classique. Entre ton email, choisis un mot de passe (8 caracteres minimum), puis complete tes informations personnelles.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Telephone + Code PIN</h4>
+        <p>Connexion rapide par numero de telephone (+221...) et un code PIN a 4 chiffres. Ideal si tu n'as pas d'email.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>Conseil :</strong> Meme en choisissant le telephone, un email est demande pour la recuperation de compte. Utilise un email valide !
+  </div>
+
+  <!-- ═══════════════ 3. DASHBOARD ═══════════════ -->
+  <div class="section-header page-break" id="dashboard">
+    <div class="icon">📊</div>
+    <h2>3. Tableau de Bord</h2>
+    <p>Ta vue d'ensemble quotidienne</p>
+  </div>
+
+  <p>Le tableau de bord est ta page d'accueil apres connexion. Tu y trouves :</p>
+
+  <div class="screenshot">
+    <div class="label">Apercu du Dashboard</div>
+    <div class="title">Bienvenue, Samba ! 🎉</div>
+    <div class="mockup">
+      <div class="mock-card">🔥 Streak: 5 jours</div>
+      <div class="mock-card">⭐ 1,280 XP</div>
+      <div class="mock-card">📚 8/395 Lecons</div>
+      <div class="mock-card">📝 Score: 72%</div>
+    </div>
+  </div>
+
+  <h4>Ce que tu vois :</h4>
+  <ul style="margin:15px 0; padding-left:20px; color:#555;">
+    <li><strong>XP et Niveau</strong> — Ta progression globale</li>
+    <li><strong>Streak</strong> — Ton nombre de jours consecutifs d'activite</li>
+    <li><strong>Lecons completees</strong> — Ton avancement dans le programme</li>
+    <li><strong>Activite de la semaine</strong> — Grille visuelle de tes jours actifs</li>
+    <li><strong>Badges recents</strong> — Tes dernieres recompenses</li>
+    <li><strong>Actions rapides</strong> — Acces direct au Resolveur, Quiz, Coach</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Statistiques avancees (Premium) :</strong> Les abonnes Premium voient en plus : progression sur 30 jours, XP par matiere, temps d'etude hebdomadaire, et statistiques de flashcards.
+  </div>
+
+  <!-- ═══════════════ 4. SOLVER ═══════════════ -->
+  <div class="section-header page-break" id="solver">
+    <div class="icon">🧠</div>
+    <h2>4. Le Resolveur</h2>
+    <p>Resous n'importe quel exercice pas a pas</p>
+  </div>
+
+  <h3>Comment utiliser le Resolveur</h3>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-content">
+        <h4>Choisis la matiere et la difficulte</h4>
+        <p>Selectionne Maths, Physique ou Chimie, puis le niveau de difficulte (Facile, Moyen, Difficile).</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Ecris ou photographie ton exercice</h4>
+        <p>Tape l'enonce dans la zone de texte, OU clique sur <strong>"Prendre en photo"</strong> pour photographier ton exercice. Le texte sera extrait automatiquement.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Clique sur "Resoudre"</h4>
+        <p>La resolution apparait en temps reel, etape par etape, avec les formules mathematiques.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot">
+    <div class="label">Le Resolveur en action</div>
+    <div class="title">Resoudre x² - 5x + 6 = 0</div>
+    <div class="mockup">
+      <div class="mock-card">Etape 1: Identifier a, b, c</div>
+      <div class="mock-card">Etape 2: Calculer Delta</div>
+      <div class="mock-card">Etape 3: Solutions</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Fonction</th><th>Gratuit</th><th>Premium</th></tr>
+    <tr><td>Resolutions par jour</td><td>6</td><td>50 a 300</td></tr>
+    <tr><td>Photo d'exercice</td><td>1 par jour</td><td>Illimite</td></tr>
+    <tr><td>Historique</td><td>5 derniers</td><td>Illimite</td></tr>
+  </table>
+
+  <!-- ═══════════════ 5. COACH ═══════════════ -->
+  <div class="section-header page-break" id="coach">
+    <div class="icon">💬</div>
+    <h2>5. Le Coach Virtuel</h2>
+    <p>Ton tuteur personnel qui t'accompagne pas a pas</p>
+  </div>
+
+  <p>Contrairement au Resolveur qui donne la solution directement, le Coach te <strong>guide par le dialogue</strong>. Il pose des questions, donne des indices, et t'aide a trouver la reponse toi-meme.</p>
+
+  <h3>Exemples de questions au Coach</h3>
+  <ul style="margin:15px 0; padding-left:20px; color:#555;">
+    <li>"Explique-moi le discriminant"</li>
+    <li>"Comment calculer une derivee ?"</li>
+    <li>"Je ne comprends pas la loi de Newton"</li>
+    <li>"Aide-moi avec les reactions d'oxydoreduction"</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Conversations sauvegardees :</strong> Tes conversations avec le Coach sont conservees dans la barre laterale. Tu peux y revenir a tout moment.
+  </div>
+
+  <table>
+    <tr><th>Fonction</th><th>Gratuit</th><th>Premium</th></tr>
+    <tr><td>Messages par jour</td><td>6 (partage avec Resolveur)</td><td>50 a 300</td></tr>
+    <tr><td>Conversations actives</td><td>3 maximum</td><td>Illimite</td></tr>
+  </table>
+
+  <!-- ═══════════════ 6. QUIZ ═══════════════ -->
+  <div class="section-header page-break" id="quiz">
+    <div class="icon">📝</div>
+    <h2>6. Quiz et Exercices</h2>
+    <p>Teste tes connaissances avec 900+ QCM</p>
+  </div>
+
+  <h3>Quiz</h3>
+  <p>Choisis une banque de questions par matiere et niveau. Configure le nombre de questions (10, 20, 30, 50) et la difficulte. Deux modes disponibles :</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="emoji">📖</div>
+      <h4>Mode Pratique</h4>
+      <p>Pas de limite de temps. Correction immediate apres chaque question.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">⏱️</div>
+      <h4>Mode Examen</h4>
+      <p>Timer descendant. Toutes les questions d'abord, correction a la fin.</p>
+    </div>
+  </div>
+
+  <h3>Exercices</h3>
+  <p>Les exercices sont differents des quiz : tu ecris ta reponse, puis tu compares avec la solution modele et tu t'auto-evalues (Juste / A moitie / Faux). Chaque evaluation donne des XP.</p>
+
+  <!-- ═══════════════ 7. FLASHCARDS ═══════════════ -->
+  <div class="section-header page-break" id="flashcards">
+    <div class="icon">🃏</div>
+    <h2>7. Flashcards</h2>
+    <p>La revision espacee pour memoriser durablement</p>
+  </div>
+
+  <p>Les flashcards utilisent l'algorithme <strong>SM-2</strong> (le meme qu'Anki) pour optimiser ta memorisation. Les cartes que tu maitrises apparaissent moins souvent, celles que tu oublies reviennent plus vite.</p>
+
+  <h3>Trois onglets</h3>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-content">
+        <h4>Etudier</h4>
+        <p>Revise les cartes "dues" aujourd'hui. Clique sur la carte pour la retourner, puis evalue ta reponse : Difficile, Moyen ou Facile.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Banque officielle</h4>
+        <p>450 cartes officielles reparties en 16 chapitres (Maths, Physique, Chimie). Clique "Commencer" pour ajouter 20 cartes a ta pile de revision.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Mes cartes</h4>
+        <p>Cree tes propres flashcards personnalisees. Ecris la question (recto) et la reponse (verso).</p>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Fonction</th><th>Gratuit</th><th>Premium</th></tr>
+    <tr><td>Revisions par jour</td><td>10</td><td>Illimite</td></tr>
+    <tr><td>Cartes personnalisees</td><td>Illimite</td><td>Illimite</td></tr>
+  </table>
+
+  <!-- ═══════════════ 8. CHALLENGES ═══════════════ -->
+  <div class="section-header page-break" id="challenges">
+    <div class="icon">⚔️</div>
+    <h2>8. Challenges et Duels</h2>
+    <p>La competition pour progresser plus vite</p>
+  </div>
+
+  <h3>Challenges hebdomadaires</h3>
+  <p>Chaque lundi, 3 nouveaux challenges apparaissent (Maths, Physique, Chimie). Chacun contient 5 QCM avec un timer. Complete-les pour gagner des XP et apparaitre dans le classement.</p>
+
+  <table>
+    <tr><th>Fonction</th><th>Gratuit</th><th>Premium</th></tr>
+    <tr><td>Challenges par semaine</td><td>1 sur 3</td><td>Les 3</td></tr>
+  </table>
+
+  <h3>Duels</h3>
+  <p>Defie tes amis ! Trois modes disponibles :</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="emoji">⚔️</div>
+      <h4>Duel 1v1</h4>
+      <p>Toi contre un ami. 10 questions, 10 minutes.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">👥</div>
+      <h4>Duel a 3</h4>
+      <p>3 joueurs s'affrontent. Premium uniquement.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">👥👥</div>
+      <h4>Duel a 4</h4>
+      <p>4 joueurs s'affrontent. Premium uniquement.</p>
+    </div>
+  </div>
+
+  <h4>Comment creer un duel</h4>
+  <div class="steps">
+    <div class="step">
+      <div class="step-content">
+        <h4>Clique sur "Duel 1v1" (ou a 3, a 4)</h4>
+        <p>Choisis la matiere et clique Creer.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Partage le code</h4>
+        <p>Un code unique est genere. Copie-le ou envoie-le directement via <strong>WhatsApp</strong>.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Jouez !</h4>
+        <p>Quand tout le monde a rejoint, le duel demarre. Reponds aux 10 questions le plus vite possible.</p>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Classement</th><th>XP gagne</th></tr>
+    <tr><td>1er</td><td>+200 XP</td></tr>
+    <tr><td>2eme</td><td>+100 XP</td></tr>
+    <tr><td>3eme et +</td><td>+50 XP</td></tr>
+  </table>
+
+  <table>
+    <tr><th>Fonction</th><th>Gratuit</th><th>Premium</th></tr>
+    <tr><td>Duels 1v1 par jour</td><td>3</td><td>Illimite</td></tr>
+    <tr><td>Duels de groupe (3/4)</td><td>Non</td><td>Oui</td></tr>
+  </table>
+
+  <!-- ═══════════════ 9. GAMIFICATION ═══════════════ -->
+  <div class="section-header page-break" id="gamification">
+    <div class="icon">🏅</div>
+    <h2>9. XP, Badges et Classement</h2>
+    <p>Progresse, collectionne et compare-toi</p>
+  </div>
+
+  <h3>Comment gagner des XP</h3>
+  <table>
+    <tr><th>Action</th><th>XP</th></tr>
+    <tr><td>Completer une micro-lecon</td><td>+50 a +100</td></tr>
+    <tr><td>Soumettre un quiz</td><td>+10 par bonne reponse</td></tr>
+    <tr><td>Completer un challenge</td><td>+50 a +200</td></tr>
+    <tr><td>Gagner un duel</td><td>+200</td></tr>
+    <tr><td>Reviser une flashcard</td><td>+5</td></tr>
+    <tr><td>Resoudre un exercice</td><td>+5 a +10</td></tr>
+  </table>
+
+  <h3>Niveaux</h3>
+  <p><strong>1 000 XP = 1 niveau.</strong> Le niveau est affiche a cote de ton nom partout dans l'application.</p>
+
+  <h3>Badges</h3>
+  <p>15 badges a debloquer en accomplissant des objectifs : premiere lecon, 10 lecons, streak de 7 jours, quiz parfait, etc. Visite la page <strong>/badges</strong> pour voir ta collection.</p>
+
+  <h3>Classement</h3>
+  <p>Compare-toi aux autres eleves ! Le classement est filtre par : global, pays, region, ecole. Visible dans le menu lateral.</p>
+
+  <!-- ═══════════════ 10. SUBSCRIPTIONS ═══════════════ -->
+  <div class="section-header page-break" id="subscriptions">
+    <div class="icon">💎</div>
+    <h2>10. Abonnements et Codes Promo</h2>
+    <p>Gratuit ou Premium : a toi de choisir</p>
+  </div>
+
+  <h3>Grille tarifaire</h3>
+  <table>
+    <tr><th>Plan</th><th>Prix</th><th>Appels IA/jour</th></tr>
+    <tr><td>Gratuit</td><td>0 FCFA</td><td>6</td></tr>
+    <tr><td>Premium 24h</td><td>125 FCFA</td><td>20</td></tr>
+    <tr><td>Premium Max 24h</td><td>250 FCFA</td><td>45</td></tr>
+    <tr><td>Premium</td><td>5 000 FCFA/mois</td><td>50</td></tr>
+    <tr><td>Premium Max</td><td>10 000 FCFA/mois</td><td>300</td></tr>
+    <tr><td>Famille</td><td>18 000 FCFA/mois</td><td>100/enfant</td></tr>
+  </table>
+
+  <h3>Fonctionnalites Premium exclusives</h3>
+  <ul style="margin:15px 0; padding-left:20px; color:#555;">
+    <li>50 a 300 appels IA par jour (au lieu de 6)</li>
+    <li>Statistiques avancees dans le Dashboard</li>
+    <li>Duels de groupe (a 3 et a 4)</li>
+    <li>Flashcards illimitees par jour (au lieu de 10)</li>
+    <li>3 challenges hebdomadaires (au lieu de 1)</li>
+    <li>Conversations Coach illimitees</li>
+    <li>Historique Resolveur illimite</li>
+    <li>Photos d'exercice illimitees</li>
+    <li>Badge couronne Premium</li>
+  </ul>
+
+  <h3>Codes Promo</h3>
+  <p>Tu as recu un code promo ? Rends-toi sur la page <strong>Abonnements</strong> et entre ton code dans la zone "Code promo" en bas de la page. Le plan s'active instantanement !</p>
+
+  <div class="warning">
+    <strong>Attention :</strong> Un code promo ne peut etre utilise qu'une seule fois par compte. Il peut avoir une date d'expiration et un nombre maximum d'utilisations.
+  </div>
+
+  <!-- ═══════════════ 11. PARENT ═══════════════ -->
+  <div class="section-header page-break" id="parent">
+    <div class="icon">👨‍👩‍👧</div>
+    <h2>11. Guide Parent</h2>
+    <p>Suivez la progression de votre enfant</p>
+  </div>
+
+  <h3>Inscription Parent</h3>
+  <p>A l'inscription, choisissez <strong>"Parent"</strong>. Vous aurez un compte dedie avec uniquement les modules parentaux (pas les modules eleve).</p>
+
+  <h3>Lier votre enfant</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-content">
+        <h4>Allez dans votre Profil</h4>
+        <p>Section "Liaison enfant".</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Entrez l'email ou le telephone de votre enfant</h4>
+        <p>L'enfant doit avoir un compte Koundoul. La liaison est immediate.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-content">
+        <h4>Consultez l'Espace Parent</h4>
+        <p>Vous voyez les statistiques : temps d'etude, lecons, quiz, jours actifs, XP par matiere.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Ce que vous voyez</h3>
+  <ul style="margin:15px 0; padding-left:20px; color:#555;">
+    <li><strong>Resume hebdomadaire</strong> : temps d'etude, exercices, jours actifs</li>
+    <li><strong>Progression par matiere</strong> : Maths, Physique, Chimie</li>
+    <li><strong>Forces et faiblesses</strong> : analyse personnalisee</li>
+    <li><strong>Alertes automatiques</strong> : enfant inactif, score en baisse, streak</li>
+  </ul>
+
+  <h3>Coach Parent</h3>
+  <p>Un coach dedie aux parents. Deux modes :</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="emoji">💡</div>
+      <h4>Question generale</h4>
+      <p>Conseils pedagogiques : motivation, organisation des revisions, gestion du stress.</p>
+    </div>
+    <div class="feature-card">
+      <div class="emoji">📊</div>
+      <h4>Question sur mon enfant</h4>
+      <p>Le coach analyse les statistiques de votre enfant et donne des recommandations personnalisees.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>Vie privee :</strong> Vous voyez les statistiques de votre enfant, pas le detail de ses conversations avec le Coach. La vie privee de votre enfant est respectee.
+  </div>
+
+  <!-- ═══════════════ 12. FAQ ═══════════════ -->
+  <div class="section-header page-break" id="faq">
+    <div class="icon">❓</div>
+    <h2>12. Questions Frequentes</h2>
+    <p>Les reponses a vos questions</p>
+  </div>
+
+  <h4>Qu'est-ce qu'un appel IA ?</h4>
+  <p>Chaque resolution du Resolveur ou chaque message envoye au Coach compte comme 1 appel. Les quiz, exercices et micro-lecons sont <strong>illimites</strong> pour tous les plans.</p>
+
+  <h4>Quand le compteur d'appels se remet a zero ?</h4>
+  <p>Chaque jour a minuit UTC (1h du matin heure de Dakar).</p>
+
+  <h4>Comment passer Premium ?</h4>
+  <p>Va dans Abonnements, choisis ton plan (24h, Mensuel ou Annuel), et paie via Wave. Tu peux aussi utiliser un code promo.</p>
+
+  <h4>Puis-je annuler mon abonnement ?</h4>
+  <p>Oui, a tout moment depuis ton profil. Tu conserves l'acces jusqu'a la fin de la periode payee.</p>
+
+  <h4>Comment fonctionne le Pass 24h ?</h4>
+  <p>Le Pass 24h te donne un acces Premium pendant exactement 24 heures. Ideal avant un controle.</p>
+
+  <h4>J'ai oublie mon mot de passe.</h4>
+  <p>Va sur la page de connexion et clique "Mot de passe oublie ?". Contacte le support a contact@koundoul.com.</p>
+
+  <h4>Comment lier mon compte parent a mon enfant ?</h4>
+  <p>Dans votre Profil, entrez l'email ou le numero de telephone de votre enfant dans la section "Liaison enfant".</p>
+
+  <h4>Le Coach peut-il voir les conversations de mon enfant ?</h4>
+  <p>Non. Le Coach Parent a acces aux <strong>statistiques</strong> (XP, scores, temps d'etude) mais jamais au contenu des conversations privees de votre enfant.</p>
+
+  <div class="separator">. . .</div>
+
+  <div class="footer">
+    <div style="font-size:2rem; margin-bottom:15px;">🎓</div>
+    <strong>Koundoul</strong> — La reussite scolaire a portee de main<br>
+    www.koundoul.com — contact@koundoul.com<br><br>
+    <em>Version 2.0 — Mai 2026</em>
+  </div>
+</div>
+
+</body>
+</html>
