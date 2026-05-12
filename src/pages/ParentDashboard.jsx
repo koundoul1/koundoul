@@ -137,7 +137,7 @@ const ParentDashboard = () => {
       case 'good': return 'text-emerald-400 bg-emerald-500/20';
       case 'warning': return 'text-yellow-400 bg-yellow-500/20';
       case 'alert': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-gray-500 bg-white/10';
     }
   };
 
@@ -153,7 +153,7 @@ const ParentDashboard = () => {
   // Affichage du loading initial
   if (loadingChildren) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center">
+      <div className="min-h-screen text-white flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="h-12 w-12 text-kprimary animate-spin mx-auto mb-4" />
           <p className="text-white text-lg font-semibold">Chargement...</p>
@@ -182,7 +182,7 @@ const ParentDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen text-white">
       {/* Header */}
       <div className="bg-white/5 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -376,7 +376,7 @@ const ParentDashboard = () => {
               {subjectsProgress.length === 0 && (
                 <div className="mt-6 pt-6 border-t border-white/10 text-center py-8">
                   <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-sm text-gray-600 font-medium">
+                  <p className="text-sm text-gray-500 font-medium">
                     Aucune activité enregistrée pour le moment. Les données de progression apparaîtront ici.
                   </p>
                 </div>
@@ -422,7 +422,7 @@ const ParentDashboard = () => {
               {recommendations.length === 0 && strengths.length === 0 && weaknesses.length === 0 && (
                 <div className="mt-6 pt-6 border-t border-white/10 text-center py-8">
                   <Lightbulb className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-sm text-gray-600 font-medium">
+                  <p className="text-sm text-gray-500 font-medium">
                     Les analyses apparaîtront ici une fois que {selectedChild?.name || 'votre enfant'} aura complété quelques activités.
                   </p>
                 </div>
@@ -553,7 +553,7 @@ const ParentDashboard = () => {
             </div>
 
             {/* Recommandations */}
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-lg shadow-black/20 p-6">
+            <div className="bg-white/5 border border-white/10 rounded-xl shadow-lg shadow-black/20 p-6">
               <h3 className="text-lg font-bold text-white mb-4">💡 Recommandations Personnalisées</h3>
               
               <div className="space-y-3">
