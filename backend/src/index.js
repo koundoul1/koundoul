@@ -1,4 +1,16 @@
 require('dotenv').config();
+
+// Sentry monitoring (opt-in: set SENTRY_DSN_BACKEND env var)
+const Sentry = require('@sentry/node');
+if (process.env.SENTRY_DSN_BACKEND) {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN_BACKEND,
+    environment: process.env.NODE_ENV || 'production',
+    tracesSampleRate: 0.1,
+  });
+  console.log('Sentry backend monitoring enabled');
+}
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -241,6 +253,11 @@ app.use('/api/content/exercises', exercisesRoutes);
 
 const contentRoutes = require('./routes/content');
 app.use('/api/content', contentRoutes);
+
+// Sentry error handler (must be before custom error handler)
+if (process.env.SENTRY_DSN_BACKEND) {
+  app.use(Sentry.setupExpressErrorHandler());
+}
 
 // Error handling middleware
 app.use(errorHandler);
