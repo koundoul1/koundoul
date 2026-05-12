@@ -34,17 +34,34 @@ export default function Badges() {
   }, []);
 
   const fetchData = async () => {
+    var badgesLoaded = [];
     try {
       const badgesRes = await api.badges.getAll();
-      setBadges(badgesRes.data || badgesRes || []);
+      badgesLoaded = badgesRes?.data || (Array.isArray(badgesRes) ? badgesRes : []);
+      setBadges(badgesLoaded);
     } catch (error) {
       console.error('Erreur badges:', error);
+      // If 401, don't redirect — just show badges without unlock state
+      if (error.status === 401) {
+        try {
+          const publicRes = await fetch(
+            (import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/api' : '/api') + '/badges/all'
+          );
+          const publicData = await publicRes.json();
+          badgesLoaded = publicData?.data || [];
+          setBadges(badgesLoaded);
+        } catch (e) { /* ignore */ }
+      }
     }
     try {
       const statsRes = await api.badges.getStats();
-      setStats(statsRes.data || statsRes);
+      setStats(statsRes?.data || statsRes);
     } catch (error) {
-      // Stats may fail for unauthenticated users — OK
+      // Stats fail for unauthenticated — generate from badges
+      if (badgesLoaded.length > 0) {
+        var unlocked = badgesLoaded.filter(function(b) { return b.unlocked; }).length;
+        setStats({ total: badgesLoaded.length, unlocked: unlocked, percentage: Math.round((unlocked / badgesLoaded.length) * 100) });
+      }
     }
     setLoading(false);
   };
