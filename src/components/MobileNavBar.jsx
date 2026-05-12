@@ -43,7 +43,7 @@ import { useNotifications } from '../hooks/useNotifications'
 const MobileNavBar = () => {
   const location = useLocation()
   const navigate = useNavigate()
-  const { isAuthenticated, logout } = useAuth()
+  const { isAuthenticated, logout, user } = useAuth()
   const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
   const currentLang = languages.find(lang => lang.code === language) || languages[0] || { code: 'fr', name: 'Français', flag: '🇫🇷' }
@@ -69,23 +69,30 @@ const MobileNavBar = () => {
     }
   }
 
-  // 5 main bottom tabs — always visible
-  const mainTabs = [
+  // Bottom tabs — different for parent vs student
+  const isParentUser = user?.isParent;
+
+  const mainTabs = isParentUser ? [
+    { name: 'Accueil', href: '/', icon: Home, public: true },
+    { name: 'Mes enfants', href: '/parent-dashboard', icon: Shield },
+    { name: 'Notifs', href: '/notifications', icon: Bell },
+    { name: 'Profil', href: '/profile', icon: User },
+  ] : [
     { name: t('nav.home'), href: '/', icon: Home, public: true },
     { name: t('nav.courses'), href: '/courses', icon: BookOpen },
-    { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy },
-    { name: t('nav.notifications') || 'Notifs', href: '/notifications', icon: Bell },
-    { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
-  ]
+    { name: t('nav.defi') || 'Defi', href: '/challenge', icon: Trophy },
+    { name: 'Notifs', href: '/notifications', icon: Bell },
+    { name: 'Profil', href: '/profile', icon: User },
+  ];
 
-  // All other modules for the drawer — always visible
-  const drawerItems = [
+  // Drawer items — parent only sees account modules
+  const studentDrawerItems = [
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3, emoji: '📊' },
-    { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯' },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯' },
     { name: 'Exercices', href: '/exercices', icon: Dumbbell, emoji: '🧩' },
     { name: 'Quiz', href: '/quiz', icon: Zap, emoji: '📝' },
-    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain, emoji: '🤖' },
-    { name: 'Défi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
+    { name: t('dashboard.actions.solver') || 'Resolveur', href: '/solver', icon: Brain, emoji: '🤖' },
+    { name: 'Defi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏' },
     { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬' },
     { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
@@ -93,9 +100,14 @@ const MobileNavBar = () => {
     { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
     { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚' },
     { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '📊' },
-    { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield, emoji: '👨‍👩‍👧' },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
-  ]
+  ];
+
+  const parentDrawerItems = [
+    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
+  ];
+
+  const drawerItems = isParentUser ? parentDrawerItems : studentDrawerItems;
 
   // Check if any drawer item is active (to highlight the "Plus" button)
   const isDrawerItemActive = drawerItems.some(item => isActive(item.href))

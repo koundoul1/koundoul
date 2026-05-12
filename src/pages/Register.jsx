@@ -15,7 +15,8 @@ import { Eye, EyeOff, Mail, Lock, User, Phone, Loader2, ArrowRight, ArrowLeft } 
 
 const Register = () => {
   const { t } = useTranslation()
-  const [step, setStep] = useState(1) // 1 = auth method, 2 = profile info
+  const [step, setStep] = useState(0) // 0 = role, 1 = auth method, 2 = profile info
+  const [role, setRole] = useState(null) // null | 'student' | 'parent'
   const [authMode, setAuthMode] = useState(null) // null | 'password' | 'phone'
 
   // Auth fields
@@ -117,7 +118,8 @@ const Register = () => {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         username: username.trim(),
-        email: email.trim()
+        email: email.trim(),
+        role: role === 'parent' ? 'parent' : 'student'
       }
       if (authMode === 'password') {
         data.password = password
@@ -128,7 +130,7 @@ const Register = () => {
 
       const result = await register(data)
       if (result.success) {
-        navigate(location.state?.from?.pathname || '/dashboard', { replace: true })
+        navigate(role === 'parent' ? '/parent-dashboard' : '/dashboard', { replace: true })
       }
     } catch (err) {
       if (!error) setErrors(prev => ({ ...prev, api: err.message || 'Erreur lors de l\'inscription' }))
@@ -164,10 +166,51 @@ const Register = () => {
 
         <div className="rounded-2xl p-6 sm:p-8 border border-white/10" style={{ background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(20px)' }}>
 
+          {/* ═══ STEP 0: Role choice ═══ */}
+          {step === 0 && (
+            <div className="space-y-5">
+              <p className="text-sm text-white/50 text-center mb-2">Tu es...</p>
+              <div className="space-y-3">
+                <button
+                  type="button"
+                  onClick={() => { setRole('student'); setStep(1); }}
+                  className="w-full flex items-center gap-4 p-5 rounded-xl border-2 border-white/10 hover:border-kprimary/50 bg-white/[0.02] hover:bg-kprimary/5 transition-all text-left"
+                >
+                  <div className="w-14 h-14 rounded-xl bg-kprimary/20 flex items-center justify-center text-3xl">
+                    🎓
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-lg">Eleve</p>
+                    <p className="text-xs text-white/40">Apprends, revise et progresse avec l&apos;IA</p>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => { setRole('parent'); setStep(1); }}
+                  className="w-full flex items-center gap-4 p-5 rounded-xl border-2 border-white/10 hover:border-blue-500/50 bg-white/[0.02] hover:bg-blue-500/5 transition-all text-left"
+                >
+                  <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center text-3xl">
+                    👨‍👩‍👧
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-lg">Parent</p>
+                    <p className="text-xs text-white/40">Suivez la progression de votre enfant</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* ═══ STEP 1: Auth method ═══ */}
           {step === 1 && (
             <div className="space-y-5">
-              <p className="text-sm text-white/50 text-center mb-2">{t('auth.register.step1Title')}</p>
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-sm text-white/50">{t('auth.register.step1Title')}</p>
+                <button type="button" onClick={() => { setStep(0); setAuthMode(null); }} className="text-xs text-white/30 hover:text-white/60 flex items-center gap-1">
+                  <ArrowLeft className="h-3 w-3" /> {t('auth.register.back')}
+                </button>
+              </div>
 
               {/* Method choice — big cards */}
               {!authMode && (

@@ -62,7 +62,8 @@ function userResponse(user) {
     streak: user.streak,
     phoneNumber: user.phoneNumber || null,
     is_admin: user.is_admin || false,
-    is_super_admin: user.is_super_admin || false
+    is_super_admin: user.is_super_admin || false,
+    isParent: user.isParent || false
   };
 }
 
@@ -71,7 +72,7 @@ function userResponse(user) {
 // ══════════════════════════════════════════════════════════════════════
 router.post('/register', registerLimiter, async (req, res, next) => {
   try {
-    const { email, password, firstName, lastName, username, phoneNumber, pin } = req.body;
+    const { email, password, firstName, lastName, username, phoneNumber, pin, role } = req.body;
 
     // Email always required
     if (!email) {
@@ -148,6 +149,9 @@ router.post('/register', registerLimiter, async (req, res, next) => {
     if (hasPhone) {
       userData.pinHash = await bcrypt.hash(pin, 10);
     }
+    if (role === 'parent') {
+      userData.isParent = true;
+    }
 
     const user = await prisma.user.create({
       data: userData,
@@ -155,7 +159,7 @@ router.post('/register', registerLimiter, async (req, res, next) => {
         id: true, email: true, firstName: true, lastName: true,
         username: true, xp: true, level: true, streak: true,
         phoneNumber: true, is_admin: true, is_super_admin: true,
-        createdAt: true
+        isParent: true, createdAt: true
       }
     });
 

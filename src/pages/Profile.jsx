@@ -809,17 +809,18 @@ const Profile = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Parent Section — visible to everyone (any user can become a parent) */}
-            {true && (
-            <div className="k-card overflow-hidden" style={{ background: 'rgba(108,99,255,0.08)', borderColor: 'rgba(108,99,255,0.2)' }}>
+            {/* Family Linking — role-based */}
+            <div className="k-card overflow-hidden" style={{ background: profileData?.isParent ? 'rgba(108,99,255,0.08)' : 'rgba(0,217,163,0.06)', borderColor: profileData?.isParent ? 'rgba(108,99,255,0.2)' : 'rgba(0,217,163,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">
                   <Shield className="h-6 w-6 text-kprimary mr-2" />
-                  <h3 className="text-lg font-semibold text-white">Espace Parent</h3>
+                  <h3 className="text-lg font-semibold text-white">
+                    {profileData?.isParent ? 'Liaison enfant' : 'Liaison parent'}
+                  </h3>
                 </div>
 
                 {/* Code system — only for email-only accounts (no phoneNumber) */}
-                {!profileData?.phoneNumber && (
+                {profileData?.isParent && !profileData?.phoneNumber && (
                   <div className="mb-4">
                     <p className="text-sm text-gray-400 mb-3">
                       {t('parent.codeDesc')}

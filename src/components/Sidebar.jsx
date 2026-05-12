@@ -86,7 +86,7 @@ const Sidebar = () => {
   const accountNav = [
     { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
-    { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield },
+    ...(user?.isParent ? [{ name: 'Espace Parent', href: '/parent-dashboard', icon: Shield }] : []),
   ]
 
   // ── Section: Admin (visible only to admin) ──
@@ -168,12 +168,12 @@ const Sidebar = () => {
         </Link>
       </div>
 
-      {/* Navigation sections */}
+      {/* Navigation sections — parent sees only parent modules */}
       <nav className="flex-1 px-2 py-1 overflow-y-auto scrollbar-hide">
         {renderSection('Navigation', mainNav)}
-        {renderSection('Outils', toolsNav)}
-        {renderSection('Apprentissage', learnNav)}
-        {renderSection('Communauté', communityNav)}
+        {!user?.isParent && renderSection('Outils', toolsNav)}
+        {!user?.isParent && renderSection('Apprentissage', learnNav)}
+        {!user?.isParent && renderSection('Communaute', communityNav)}
         {isAuthenticated && renderSection('Compte', accountNav)}
         {isAuthenticated && renderSection('Administration', adminNav)}
       </nav>

@@ -40,9 +40,16 @@ function renderRegister() {
 }
 
 describe('Register page', () => {
-  it('renders step 1 with two auth method cards', () => {
+  it('renders step 0 with role choice (Eleve / Parent)', () => {
     renderRegister()
-    // Text comes from i18n: auth.register.methodEmail / methodPhone
+    expect(screen.getByText(/Eleve/i)).toBeInTheDocument()
+    expect(screen.getByText(/Parent/i)).toBeInTheDocument()
+  })
+
+  it('shows auth method cards after selecting Eleve role', async () => {
+    const user = userEvent.setup()
+    renderRegister()
+    await user.click(screen.getByText(/Eleve/i))
     expect(screen.getAllByText(/Email/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/PIN/i).length).toBeGreaterThanOrEqual(1)
   })
@@ -50,18 +57,16 @@ describe('Register page', () => {
   it('shows email and password fields when password method selected', async () => {
     const user = userEvent.setup()
     renderRegister()
-
-    // Click the email method card (first button containing "Email")
+    await user.click(screen.getByText(/Eleve/i))
     const emailCards = screen.getAllByText(/Email \+ /i)
     await user.click(emailCards[0])
-
     expect(screen.getByPlaceholderText(/ton@email.com/i)).toBeInTheDocument()
   })
 
   it('rejects short password before going to step 2', async () => {
     const user = userEvent.setup()
     const { container } = renderRegister()
-
+    await user.click(screen.getByText(/Eleve/i))
     const emailCards = screen.getAllByText(/Email \+ /i)
     await user.click(emailCards[0])
 
