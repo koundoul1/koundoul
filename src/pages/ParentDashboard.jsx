@@ -214,25 +214,7 @@ const ParentDashboard = () => {
               </div>
             </div>
 
-            {/* Niveau de visibilité */}
-                          <div className="mt-4 flex items-center space-x-4">
-                <span className="text-sm text-gray-300 font-semibold">Niveau de visibilité :</span>
-                <div className="flex space-x-2">
-                {[1, 2, 3].map((level) => (
-                  <button
-                    key={level}
-                    onClick={() => setNotificationLevel(level)}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
-                      notificationLevel === level
-                        ? 'bg-blue-600 text-white shadow-lg shadow-black/20'
-                        : 'bg-white/10 text-white hover:bg-white/20 font-semibold'
-                    }`}
-                  >
-                    Niveau {level} {level === 1 ? '🔒' : level === 2 ? '⚖️' : '🔍'}
-                  </button>
-                ))}
-              </div>
-            </div>
+            {/* Niveau de visibilité supprimé */}
           </div>
         </div>
       </div>
