@@ -809,8 +809,8 @@ const Profile = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Parent Section — only if user IS a parent (has code or children) */}
-            {(profileData?.isParent || invitationCode || parentChildren.length > 0) && (
+            {/* Parent Section — visible to everyone (any user can become a parent) */}
+            {true && (
             <div className="k-card overflow-hidden" style={{ background: 'rgba(108,99,255,0.08)', borderColor: 'rgba(108,99,255,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">
@@ -922,8 +922,8 @@ const Profile = () => {
 
             )}
 
-            {/* Link to parent — child section: only if user is NOT a parent */}
-            {!(profileData?.isParent || invitationCode || parentChildren.length > 0) && (
+            {/* Link to parent — child section */}
+            {!linkedParent && (
             <div className="k-card overflow-hidden" style={{ background: 'rgba(0,217,163,0.06)', borderColor: 'rgba(0,217,163,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">
@@ -979,8 +979,8 @@ const Profile = () => {
 
             )}
 
-            {/* Phone-based family linking — only for children (not parents) */}
-            {!(profileData?.isParent || invitationCode || parentChildren.length > 0) && (
+            {/* Phone-based family linking */}
+            {!linkedParent && (
             <div className="k-card overflow-hidden" style={{ background: 'rgba(59,130,246,0.06)', borderColor: 'rgba(59,130,246,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">

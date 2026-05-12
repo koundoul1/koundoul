@@ -165,16 +165,17 @@ const ParentDashboard = () => {
   // Affichage si aucun enfant lié
   if (!loadingChildren && children.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center">
-        <div className="text-center max-w-md bg-white rounded-2xl p-8 shadow-lg">
-          <Shield className="h-20 w-20 text-blue-600 mx-auto mb-6" />
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Aucun enfant lié</h2>
-          <p className="text-gray-700 mb-8">
-            Pour commencer à suivre la progression de votre enfant, demandez-lui de générer un code d'invitation depuis son profil.
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="text-center max-w-md bg-white/5 border border-white/10 rounded-2xl p-8">
+          <Shield className="h-16 w-16 text-kprimary mx-auto mb-6" />
+          <h2 className="text-2xl font-bold text-white mb-4">Aucun enfant lie</h2>
+          <p className="text-gray-400 mb-6 text-sm leading-relaxed">
+            Pour lier un enfant, allez dans votre Profil et generez un code d'invitation.
+            Partagez ce code avec votre enfant pour qu'il le saisisse dans son profil.
           </p>
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-            En savoir plus
-          </button>
+          <a href="/profile" className="inline-block bg-kprimary text-white px-6 py-3 rounded-xl font-semibold hover:bg-kprimary/90 transition-colors">
+            Aller au Profil
+          </a>
         </div>
       </div>
     );
