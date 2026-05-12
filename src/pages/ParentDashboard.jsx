@@ -135,8 +135,8 @@ const ParentDashboard = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'good': return 'text-emerald-400 bg-emerald-500/20';
-      case 'warning': return 'text-yellow-400 bg-yellow-500/20';
-      case 'alert': return 'text-red-600 bg-red-100';
+      case 'warning': return 'text-yellow-400 bg-yellow-500/100/20';
+      case 'alert': return 'text-red-400 bg-red-100';
       default: return 'text-gray-500 bg-white/10';
     }
   };
@@ -170,8 +170,7 @@ const ParentDashboard = () => {
           <Shield className="h-16 w-16 text-kprimary mx-auto mb-6" />
           <h2 className="text-2xl font-bold text-white mb-4">Aucun enfant lie</h2>
           <p className="text-gray-400 mb-6 text-sm leading-relaxed">
-            Pour lier un enfant, allez dans votre Profil et generez un code d'invitation.
-            Partagez ce code avec votre enfant pour qu'il le saisisse dans son profil.
+            Pour lier un enfant, allez dans votre Profil et entrez l'email ou le numero de telephone de votre enfant.
           </p>
           <a href="/profile" className="inline-block bg-kprimary text-white px-6 py-3 rounded-xl font-semibold hover:bg-kprimary/90 transition-colors">
             Aller au Profil
@@ -319,18 +318,16 @@ const ParentDashboard = () => {
                 key={index}
                 className={`p-4 rounded-lg border-l-4 ${
                   alert.type === 'success'
-                    ? 'bg-green-50 border-green-500'
+                    ? 'bg-emerald-500/10 border-green-500'
                     : alert.type === 'warning'
-                    ? 'bg-yellow-50 border-yellow-500'
-                    : 'bg-red-50 border-red-500'
+                    ? 'bg-yellow-500/10 border-yellow-500'
+                    : 'bg-red-500/10 border-red-500'
                 }`}
               >
                 <div className="flex items-start">
-                  <alert.icon className={`h-5 w-5 mr-3 ${
-                    alert.type === 'success' ? 'text-emerald-400' :
-                    alert.type === 'warning' ? 'text-yellow-400' :
-                    'text-red-600'
-                  }`} />
+                  <span className="mr-3 text-lg">
+                    {alert.type === 'success' ? '✅' : alert.type === 'warning' ? '⚠️' : '🔴'}
+                  </span>
                   <p className="text-sm text-gray-300">{alert.message}</p>
                 </div>
               </div>
@@ -363,7 +360,7 @@ const ParentDashboard = () => {
                     <div className="w-full bg-white/10 rounded-full h-3">
                       <div
                         className={`h-3 rounded-full ${
-                          subject.status === 'good' ? 'bg-green-500' : 'bg-yellow-500'
+                          subject.status === 'good' ? 'bg-emerald-500/100' : 'bg-yellow-500/100'
                         }`}
                         style={{ width: `${subject.progress}%` }}
                       />
@@ -389,7 +386,7 @@ const ParentDashboard = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-semibold text-green-700 mb-3 flex items-center">
+                  <h4 className="font-semibold text-emerald-400 mb-3 flex items-center">
                     <CheckCircle className="h-5 w-5 mr-2" />
                     Points Forts
                   </h4>
@@ -404,7 +401,7 @@ const ParentDashboard = () => {
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold text-yellow-700 mb-3 flex items-center">
+                  <h4 className="font-semibold text-yellow-400 mb-3 flex items-center">
                     <AlertCircle className="h-5 w-5 mr-2" />
                     Points à Surveiller
                   </h4>
@@ -437,22 +434,22 @@ const ParentDashboard = () => {
               </h3>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center p-4 bg-green-50 rounded-lg">
+                <div className="text-center p-4 bg-emerald-500/10 rounded-lg">
                   <div className="text-2xl font-bold text-emerald-400">{weeklySummary.daysActive}</div>
                   <div className="text-xs text-gray-300 font-semibold mt-1">Jours actifs</div>
                 </div>
-                <div className="text-center p-4 bg-blue-50 rounded-lg">
+                <div className="text-center p-4 bg-blue-500/10 rounded-lg">
                   <div className="text-2xl font-bold text-kprimary">{weeklySummary.consecutiveDays}</div>
                   <div className="text-xs text-gray-300 font-semibold mt-1">Jours consécutifs 🔥</div>
                 </div>
-                <div className="text-center p-4 bg-purple-50 rounded-lg">
+                <div className="text-center p-4 bg-purple-500/10 rounded-lg">
                   <div className="text-2xl font-bold text-purple-400">
                     {dashboardData?.weeklySummary?.quizzesCompleted || 0}
                   </div>
                   <div className="text-xs text-gray-300 font-semibold mt-1">Quiz complétés</div>
                 </div>
-                <div className="text-center p-4 bg-orange-50 rounded-lg">
-                  <div className="text-2xl font-bold text-orange-600">
+                <div className="text-center p-4 bg-orange-500/10 rounded-lg">
+                  <div className="text-2xl font-bold text-orange-400">
                     {dashboardData?.weeklySummary?.lessonsCompleted || 0}
                   </div>
                   <div className="text-xs text-gray-300 font-semibold mt-1">Leçons complétées</div>
@@ -466,7 +463,7 @@ const ParentDashboard = () => {
             {/* Préparation examens */}
             <div className="bg-white/5 rounded-xl border border-white/10 p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-                <Target className="h-5 w-5 mr-2 text-red-600" />
+                <Target className="h-5 w-5 mr-2 text-red-400" />
                 Préparation Examens
               </h3>
               
@@ -501,7 +498,7 @@ const ParentDashboard = () => {
             {/* Temps d'écran */}
             <div className="bg-white/5 rounded-xl border border-white/10 p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-                <Moon className="h-5 w-5 mr-2 text-indigo-600" />
+                <Moon className="h-5 w-5 mr-2 text-indigo-400" />
                 Santé Numérique
               </h3>
               
@@ -519,7 +516,7 @@ const ParentDashboard = () => {
                   <span className="font-semibold text-emerald-400">Oui ✓</span>
                 </div>
                 <div className="pt-3 border-t border-white/10">
-                  <div className="flex items-center text-sm text-green-700 bg-green-50 px-3 py-2 rounded-lg">
+                  <div className="flex items-center text-sm text-emerald-400 bg-emerald-500/10 px-3 py-2 rounded-lg">
                     <Smile className="h-4 w-4 mr-2" />
                     Temps d'étude sain pour un lycéen
                   </div>
@@ -530,7 +527,7 @@ const ParentDashboard = () => {
             {/* Objectifs partagés */}
             <div className="bg-white/5 rounded-xl border border-white/10 p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-                <MessageSquare className="h-5 w-5 mr-2 text-pink-600" />
+                <MessageSquare className="h-5 w-5 mr-2 text-pink-400" />
                 Objectifs Partagés
               </h3>
               
@@ -560,7 +557,7 @@ const ParentDashboard = () => {
                 {recommendations.map((rec, index) => (
                   <div key={index} className="bg-white/5 rounded-lg p-3">
                     <div className="flex items-start">
-                      <rec.icon className="h-5 w-5 text-kprimary mr-2 mt-0.5" />
+                      <Lightbulb className="h-5 w-5 text-kprimary mr-2 mt-0.5" />
                       <div>
                         <div className="text-sm font-semibold text-white mb-1">{rec.title}</div>
                         <div className="text-xs text-white font-medium">{rec.message}</div>
@@ -573,13 +570,18 @@ const ParentDashboard = () => {
           </div>
         </div>
 
-        {/* Bouton Rapport mensuel */}
+        {/* Actions + Privacy notice */}
         {!loadingDashboard && (
-          <div className="mt-8 flex justify-center">
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center">
-              <BarChart3 className="h-5 w-5 mr-2" />
-              Générer le Rapport Mensuel
-            </button>
+          <div className="mt-8 space-y-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3">
+              <a href="/parent-coach" className="px-6 py-3 bg-kprimary text-white rounded-xl font-medium hover:bg-kprimary/90 transition-colors flex items-center justify-center">
+                <MessageSquare className="h-5 w-5 mr-2" />
+                Coach IA Parent
+              </a>
+            </div>
+            <p className="text-center text-xs text-gray-600">
+              Vous voyez les statistiques de votre enfant, pas le detail de ses conversations (vie privee).
+            </p>
           </div>
         )}
       </div>
