@@ -815,4 +815,85 @@ router.get('/children/:childId/timeline', authenticateToken, async (req, res, ne
   }
 });
 
+// ══════════════════════════════════════════════════════════════════════
+// POST /link-direct — link by email or phone (mutual, no code needed)
+// Parent enters child's email/phone, child enters parent's email/phone
+// ══════════════════════════════════════════════════════════════════════
+router.post('/link-direct', authenticateToken, async (req, res, next) => {
+  try {
+    var userId = req.user.userId;
+    var contact = (req.body.contact || '').trim();
+
+    if (!contact) {
+      return res.status(400).json({ error: 'Email ou numero de telephone requis' });
+    }
+
+    // Find the target user by email or phone
+    var isPhone = contact.startsWith('+');
+    var target = null;
+
+    if (isPhone) {
+      var { normalizePhoneNumber } = require('../utils/phoneValidator');
+      var normalized = normalizePhoneNumber(contact);
+      if (normalized) {
+        target = await prisma.user.findFirst({ where: { phoneNumber: normalized } });
+      }
+    } else {
+      target = await prisma.user.findFirst({
+        where: { email: { equals: contact, mode: 'insensitive' } }
+      });
+    }
+
+    if (!target) {
+      return res.status(404).json({ error: 'Aucun compte trouve avec cet identifiant. Verifiez ou demandez a l\'autre de s\'inscrire d\'abord.' });
+    }
+
+    if (target.id === userId) {
+      return res.status(400).json({ error: 'Vous ne pouvez pas vous lier a vous-meme' });
+    }
+
+    // Determine roles
+    var me = await prisma.user.findUnique({ where: { id: userId }, select: { isParent: true } });
+    var parentId, childId;
+
+    if (me.isParent) {
+      parentId = userId;
+      childId = target.id;
+    } else {
+      parentId = target.id;
+      childId = userId;
+    }
+
+    // Check max children
+    var existingCount = await prisma.parent_child_links.count({ where: { parent_id: parentId } });
+    if (existingCount >= MAX_CHILDREN) {
+      return res.status(400).json({ error: 'Maximum ' + MAX_CHILDREN + ' enfants atteint' });
+    }
+
+    // Check not already linked
+    var existing = await prisma.parent_child_links.findFirst({
+      where: { parent_id: parentId, child_id: childId }
+    });
+    if (existing) {
+      return res.status(400).json({ error: 'Deja lie(e)' });
+    }
+
+    // Create link
+    await prisma.parent_child_links.create({
+      data: { parent_id: parentId, child_id: childId, approved: true }
+    });
+
+    // Update child parentId
+    await prisma.user.update({
+      where: { id: childId },
+      data: { parentId: parentId }
+    });
+
+    var targetName = target.firstName || target.email || contact;
+    res.json({ success: true, message: 'Liaison etablie avec ' + targetName });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

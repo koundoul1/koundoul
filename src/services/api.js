@@ -780,6 +780,10 @@ const api = {
     unlinkByPhone: () => request('/parent/link-by-phone', { method: 'DELETE' }),
     getFamilyStatus: () => request('/parent/family-status'),
     getTimeline: (childId) => request('/parent/children/' + childId + '/timeline'),
+    linkDirect: (contact) => request('/parent/link-direct', {
+      method: 'POST',
+      body: JSON.stringify({ contact }),
+    }),
   },
 
   // 👨‍👩‍👧 PARENT COACH

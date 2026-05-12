@@ -40,6 +40,59 @@ import {
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
+// ── Direct Link Form (email or phone) ──────────────────────────────
+
+function DirectLinkForm({ isParent, onSuccess }) {
+  const [contact, setContact] = useState('')
+  const [linking, setLinking] = useState(false)
+  const [linkError, setLinkError] = useState('')
+  const [linkSuccess, setLinkSuccess] = useState('')
+
+  const handleLink = async () => {
+    if (!contact.trim()) return
+    setLinking(true)
+    setLinkError('')
+    setLinkSuccess('')
+    try {
+      const res = await api.parent.linkDirect(contact.trim())
+      setLinkSuccess(res.message || 'Liaison etablie !')
+      setContact('')
+      if (onSuccess) onSuccess()
+    } catch (err) {
+      setLinkError(err.message || 'Erreur de liaison')
+    }
+    setLinking(false)
+  }
+
+  return (
+    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+      <p className="text-sm text-gray-400 mb-3">
+        {isParent
+          ? 'Entrez l\'email ou le numero de telephone de votre enfant pour le lier.'
+          : 'Entrez l\'email ou le numero de telephone de votre parent pour le lier.'}
+      </p>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          placeholder={isParent ? 'Email ou +221... de l\'enfant' : 'Email ou +221... du parent'}
+          className="flex-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-kprimary/50"
+        />
+        <button
+          onClick={handleLink}
+          disabled={linking || !contact.trim()}
+          className="px-4 py-2.5 bg-kprimary text-white rounded-lg text-sm font-medium disabled:opacity-50 flex items-center gap-1"
+        >
+          {linking ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Lier'}
+        </button>
+      </div>
+      {linkError && <p className="text-xs text-red-400 mt-2">{linkError}</p>}
+      {linkSuccess && <p className="text-xs text-green-400 mt-2">{linkSuccess}</p>}
+    </div>
+  )
+}
+
 const Profile = () => {
   const { user, updateProfile, changePassword, isAuthenticated, logout } = useAuth()
   const { t } = useTranslation()
@@ -809,7 +862,7 @@ const Profile = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            {/* Family Linking — role-based */}
+            {/* Family Linking — simple: enter email or phone */}
             <div className="k-card overflow-hidden" style={{ background: profileData?.isParent ? 'rgba(108,99,255,0.08)' : 'rgba(0,217,163,0.06)', borderColor: profileData?.isParent ? 'rgba(108,99,255,0.2)' : 'rgba(0,217,163,0.2)' }}>
               <div className="p-5">
                 <div className="flex items-center mb-3">
@@ -819,65 +872,17 @@ const Profile = () => {
                   </h3>
                 </div>
 
-                {/* Code system — only for email-only accounts (no phoneNumber) */}
-                {profileData?.isParent && !profileData?.phoneNumber && (
-                  <div className="mb-4">
-                    <p className="text-sm text-gray-400 mb-3">
-                      {t('parent.codeDesc')}
-                    </p>
-                    <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                      {invitationCode ? (
-                        <div>
-                          <label className="block text-xs font-semibold text-gray-400 mb-1">
-                            {t('parent.yourCode')}
-                          </label>
-                          <div className="flex items-center space-x-2 mt-2">
-                            <code className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg font-mono text-lg font-bold text-white text-center tracking-widest">
-                              {invitationCode}
-                            </code>
-                            <button
-                              onClick={() => {
-                                navigator.clipboard.writeText(invitationCode)
-                                setSuccess(t('common.copiedToClipboard'))
-                                setTimeout(() => setSuccess(''), 2000)
-                              }}
-                              className="px-3 py-2 bg-kprimary text-white rounded-lg hover:bg-kprimary-500 transition-colors"
-                            >
-                              <Copy className="h-4 w-4" />
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="text-center py-2">
-                          <button
-                            onClick={handleGenerateParentCode}
-                            disabled={generatingCode}
-                            className="px-4 py-2 bg-kprimary text-white rounded-xl hover:bg-kprimary-500 transition-colors text-sm font-medium disabled:opacity-50 flex items-center mx-auto"
-                          >
-                            {generatingCode ? (
-                              <><Loader2 className="h-4 w-4 animate-spin mr-2" /> {t('parent.generating')}</>
-                            ) : (
-                              <><UserPlus className="h-4 w-4 mr-2" /> {t('parent.generateCode')}</>
-                            )}
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+                {/* Simple linking form */}
+                <DirectLinkForm
+                  isParent={profileData?.isParent}
+                  onSuccess={() => { fetchProfile(); setSuccess('Liaison etablie !'); setTimeout(() => setSuccess(''), 3000); }}
+                />
 
-                {/* Phone-based parent: no code needed, just show info */}
-                {profileData?.phoneNumber && (
-                  <p className="text-sm text-gray-400 mb-4">
-                    Tes enfants peuvent te lier en entrant ton num&eacute;ro <strong className="text-white">{profileData.phoneNumber}</strong> dans leur espace.
-                  </p>
-                )}
-
-                {/* Linked children */}
-                {parentChildren.length > 0 ? (
-                  <div className="mb-4">
+                {/* Linked children (parent only) */}
+                {profileData?.isParent && parentChildren.length > 0 ? (
+                  <div className="mb-4 mt-4">
                     <h4 className="text-sm font-semibold text-gray-300 mb-2 flex items-center">
-                      <Users className="h-4 w-4 mr-1" /> Mes enfants ({parentChildren.length}/3)
+                      <Users className="h-4 w-4 mr-1" /> Mes enfants ({parentChildren.length}/5)
                     </h4>
                     <div className="space-y-2">
                       {parentChildren.map(child => (
@@ -923,117 +928,25 @@ const Profile = () => {
 
             )}
 
-            {/* Link to parent — child section */}
-            {!linkedParent && (
+            {/* Linked parent info (child only) */}
+            {!profileData?.isParent && linkedParent && (
             <div className="k-card overflow-hidden" style={{ background: 'rgba(0,217,163,0.06)', borderColor: 'rgba(0,217,163,0.2)' }}>
               <div className="p-5">
-                <div className="flex items-center mb-3">
-                  <Link2 className="h-6 w-6 text-ksecondary mr-2" />
-                  <h3 className="text-lg font-semibold text-white">{t('parent.linkParent')}</h3>
-                </div>
-
-                {linkedParent ? (
-                  <div className="p-4 bg-white/5 rounded-xl border border-ksecondary/20">
-                    <p className="text-sm text-gray-300 mb-2">
-                      {t('parent.linkedTo')} <strong className="text-ksecondary">{linkedParent}</strong>
-                    </p>
-                    <p className="text-xs text-gray-500 mb-3">
-                      {t('parent.parentCanTrack')}
-                    </p>
-                    <button
-                      onClick={handleUnlinkSelf}
-                      className="px-3 py-1.5 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/10 transition-colors text-xs font-medium flex items-center"
-                    >
-                      <Unlink className="h-3 w-3 mr-1" /> {t('parent.unlinkSelf')}
-                    </button>
-                  </div>
-                ) : (
-                  <div className="p-4 bg-white/5 rounded-xl border border-ksecondary/20">
-                    <p className="text-sm text-gray-400 mb-3">
-                      {t('parent.enterCodeDesc')}
-                    </p>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="text"
-                        value={parentCode}
-                        onChange={(e) => setParentCode(e.target.value.toUpperCase().slice(0, 8))}
-                        placeholder={t('parent.codePlaceholder')}
-                        maxLength={8}
-                        className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg font-mono text-center text-lg tracking-widest uppercase text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-ksecondary focus:border-transparent"
-                      />
-                      <button
-                        onClick={handleLinkToParent}
-                        disabled={linkingToParent || parentCode.length !== 8}
-                        className="px-4 py-2 bg-ksecondary text-white rounded-lg hover:bg-ksecondary-500 transition-colors text-sm font-medium disabled:opacity-50 flex items-center"
-                      >
-                        {linkingToParent ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <><Link2 className="h-4 w-4 mr-1" /> {t('parent.linkButton')}</>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            )}
-
-            {/* Phone-based family linking */}
-            {!linkedParent && (
-            <div className="k-card overflow-hidden" style={{ background: 'rgba(59,130,246,0.06)', borderColor: 'rgba(59,130,246,0.2)' }}>
-              <div className="p-5">
-                <div className="flex items-center mb-3">
-                  <Phone className="h-5 w-5 text-blue-400 mr-2" />
-                  <h3 className="text-lg font-semibold text-white">Lier par t&eacute;l&eacute;phone</h3>
-                </div>
-
-                {familyPhoneStatus?.linked ? (
-                  <div className="p-4 bg-white/5 rounded-xl border border-blue-500/20">
-                    <p className="text-sm text-gray-300 mb-2">
-                      Li&eacute; &agrave; <strong className="text-blue-400">{familyPhoneStatus.parentName}</strong>
-                    </p>
-                    <button onClick={handleUnlinkByPhone} className="px-3 py-1.5 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/10 text-xs font-medium flex items-center">
-                      <Unlink className="h-3 w-3 mr-1" /> Retirer le lien
-                    </button>
-                  </div>
-                ) : familyPhoneStatus?.pending ? (
-                  <div className="p-4 bg-white/5 rounded-xl border border-yellow-500/20">
-                    <p className="text-sm text-yellow-300 mb-1">Lien en attente</p>
-                    <p className="text-xs text-gray-400 mb-2">
-                      Num&eacute;ro : {familyPhoneStatus.parentPhone}. Demande &agrave; ton parent de cr&eacute;er son compte.
-                    </p>
-                    <button onClick={handleUnlinkByPhone} className="px-3 py-1.5 text-gray-400 border border-gray-600 rounded-lg text-xs">
-                      Annuler
-                    </button>
-                  </div>
-                ) : (
-                  <div>
-                    <p className="text-xs text-gray-400 mb-3">
-                      Entre le num&eacute;ro de t&eacute;l&eacute;phone de ton parent pour lier vos comptes.
-                    </p>
-                    <div className="flex gap-2">
-                      <input
-                        type="tel"
-                        value={parentPhoneInput}
-                        onChange={(e) => setParentPhoneInput(e.target.value)}
-                        placeholder="+221771234567"
-                        className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                      />
-                      <button
-                        onClick={handleLinkByPhone}
-                        disabled={linkingByPhone}
-                        className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium disabled:opacity-50"
-                      >
-                        {linkingByPhone ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Lier'}
-                      </button>
-                    </div>
-                  </div>
-                )}
+                <p className="text-sm text-gray-300 mb-2">
+                  Lie a : <strong className="text-ksecondary">{linkedParent}</strong>
+                </p>
+                <p className="text-xs text-gray-500 mb-3">Ton parent peut suivre ta progression.</p>
+                <button
+                  onClick={handleUnlinkSelf}
+                  className="px-3 py-1.5 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/10 transition-colors text-xs font-medium flex items-center"
+                >
+                  <Unlink className="h-3 w-3 mr-1" /> Se delier
+                </button>
               </div>
             </div>
             )}
+
+            {/* Old phone linking section removed — replaced by DirectLinkForm above */}
 
             {/* Subscriptions */}
             <div className="k-card overflow-hidden">
