@@ -728,4 +728,91 @@ router.get('/family-status', authenticateToken, async (req, res, next) => {
   }
 });
 
+// ══════════════════════════════════════════════════════════════════════
+// GET /children/:childId/timeline — 30 days of activity
+// ══════════════════════════════════════════════════════════════════════
+router.get('/children/:childId/timeline', authenticateToken, async (req, res, next) => {
+  try {
+    var parentId = req.user.userId;
+    var childId = req.params.childId;
+
+    // Verify parent-child link
+    var link = await prisma.parent_child_links.findFirst({
+      where: { parent_id: parentId, child_id: childId, approved: true }
+    });
+    if (!link) {
+      // Also check invitation code link
+      var parent = await prisma.user.findUnique({ where: { id: parentId }, select: { invitationCode: true } });
+      var child = await prisma.user.findUnique({ where: { id: childId }, select: { parentInvitationCode: true } });
+      if (!parent?.invitationCode || child?.parentInvitationCode !== parent.invitationCode) {
+        return res.status(403).json({ success: false, error: 'Acces non autorise' });
+      }
+    }
+
+    var thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    var timeline = [];
+
+    // Lessons completed
+    try {
+      var lessons = await prisma.microLessonCompletion.findMany({
+        where: { userId: childId, completed: true, completedAt: { gte: thirtyDaysAgo } },
+        select: { completedAt: true, score: true },
+        orderBy: { completedAt: 'desc' },
+        take: 50
+      });
+      lessons.forEach(function(l) {
+        timeline.push({ date: l.completedAt, type: 'lesson', description: 'Lecon terminee', score: l.score });
+      });
+    } catch (e) { /* ignore */ }
+
+    // Quiz attempts
+    try {
+      var quizzes = await prisma.quizAttempt.findMany({
+        where: { userId: childId, completedAt: { gte: thirtyDaysAgo } },
+        select: { completedAt: true, score: true },
+        orderBy: { completedAt: 'desc' },
+        take: 50
+      });
+      quizzes.forEach(function(q) {
+        timeline.push({ date: q.completedAt, type: 'quiz', description: 'Quiz termine', score: q.score });
+      });
+    } catch (e) { /* ignore */ }
+
+    // Challenge attempts
+    try {
+      var challenges = await prisma.challengeAttempt.findMany({
+        where: { userId: childId, completedAt: { gte: thirtyDaysAgo } },
+        select: { completedAt: true, score: true },
+        orderBy: { completedAt: 'desc' },
+        take: 20
+      });
+      challenges.forEach(function(c) {
+        timeline.push({ date: c.completedAt, type: 'challenge', description: 'Challenge termine', score: c.score });
+      });
+    } catch (e) { /* ignore */ }
+
+    // Badges earned
+    try {
+      var badges = await prisma.userBadge.findMany({
+        where: { userId: childId, unlockedAt: { gte: thirtyDaysAgo } },
+        include: { badge: { select: { name: true } } },
+        orderBy: { unlockedAt: 'desc' },
+        take: 20
+      });
+      badges.forEach(function(b) {
+        timeline.push({ date: b.unlockedAt, type: 'badge', description: 'Badge obtenu : ' + (b.badge?.name || '?') });
+      });
+    } catch (e) { /* ignore */ }
+
+    // Sort by date desc
+    timeline.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+
+    res.json({ success: true, data: timeline.slice(0, 100) });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

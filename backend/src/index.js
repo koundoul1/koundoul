@@ -295,6 +295,14 @@ const server = app.listen(PORT, async () => {
     } catch (error) {
       console.error('Erreur cron duel cleanup:', error.message);
     }
+
+    // Setup parent alerts cron (daily at 18h UTC)
+    try {
+      const { setupParentAlertsJob } = require('./jobs/parentAlertsJob');
+      setupParentAlertsJob();
+    } catch (error) {
+      console.error('Erreur cron parent alerts:', error.message);
+    }
   }
 });
 
