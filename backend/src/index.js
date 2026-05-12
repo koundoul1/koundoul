@@ -230,6 +230,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/subscriptions', subscriptionsRoutes);
 app.use('/api/payments', paymentsRoutes);
 app.use('/api/parent', parentRoutes);
+app.use('/api/parent-coach', require('./routes/parentCoach'));
 app.use('/api/admin', adminRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 const notificationsRoutes = require('./routes/notifications');
