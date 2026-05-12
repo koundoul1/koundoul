@@ -134,8 +134,8 @@ const ParentDashboard = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'good': return 'text-green-600 bg-green-100';
-      case 'warning': return 'text-yellow-600 bg-yellow-100';
+      case 'good': return 'text-emerald-400 bg-emerald-500/20';
+      case 'warning': return 'text-yellow-400 bg-yellow-500/20';
       case 'alert': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';
     }
@@ -155,8 +155,8 @@ const ParentDashboard = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="h-12 w-12 text-blue-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-900 text-lg font-semibold">Chargement...</p>
+          <Loader2 className="h-12 w-12 text-kprimary animate-spin mx-auto mb-4" />
+          <p className="text-white text-lg font-semibold">Chargement...</p>
         </div>
       </div>
     );
@@ -204,7 +204,7 @@ const ParentDashboard = () => {
               <div className="flex items-center space-x-4">
                 {/* Sélecteur d'enfant */}
                 <select 
-                  className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-semibold"
+                  className="px-4 py-2 border border-white/20 rounded-lg bg-white/10 text-white font-semibold"
                   value={selectedChild?.id || ''}
                   onChange={(e) => {
                     const child = children.find(c => c.id === e.target.value);
@@ -223,7 +223,7 @@ const ParentDashboard = () => {
                     );
                   })}
                 </select>
-                <button className="p-2 text-gray-800 hover:text-gray-900 font-semibold">
+                <button className="p-2 text-gray-300 hover:text-white font-semibold">
                   <Settings className="h-5 w-5" />
                 </button>
               </div>
@@ -231,7 +231,7 @@ const ParentDashboard = () => {
 
             {/* Niveau de visibilité */}
                           <div className="mt-4 flex items-center space-x-4">
-                <span className="text-sm text-gray-800 font-semibold">Niveau de visibilité :</span>
+                <span className="text-sm text-gray-300 font-semibold">Niveau de visibilité :</span>
                 <div className="flex space-x-2">
                 {[1, 2, 3].map((level) => (
                   <button
@@ -239,8 +239,8 @@ const ParentDashboard = () => {
                     onClick={() => setNotificationLevel(level)}
                     className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
                       notificationLevel === level
-                        ? 'bg-blue-600 text-white shadow-md'
-                        : 'bg-gray-200 text-gray-900 hover:bg-gray-300 font-semibold'
+                        ? 'bg-blue-600 text-white shadow-lg shadow-black/20'
+                        : 'bg-white/10 text-white hover:bg-white/20 font-semibold'
                     }`}
                   >
                     Niveau {level} {level === 1 ? '🔒' : level === 2 ? '⚖️' : '🔍'}
@@ -256,8 +256,8 @@ const ParentDashboard = () => {
         {/* Loading state */}
         {loadingDashboard && (
           <div className="flex items-center justify-center py-12 mb-6">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            <span className="ml-3 text-gray-700 font-medium">Chargement des données...</span>
+            <Loader2 className="h-8 w-8 animate-spin text-kprimary" />
+            <span className="ml-3 text-gray-400 font-medium">Chargement des données...</span>
           </div>
         )}
 
@@ -327,11 +327,11 @@ const ParentDashboard = () => {
               >
                 <div className="flex items-start">
                   <alert.icon className={`h-5 w-5 mr-3 ${
-                    alert.type === 'success' ? 'text-green-600' :
-                    alert.type === 'warning' ? 'text-yellow-600' :
+                    alert.type === 'success' ? 'text-emerald-400' :
+                    alert.type === 'warning' ? 'text-yellow-400' :
                     'text-red-600'
                   }`} />
-                  <p className="text-sm text-gray-800">{alert.message}</p>
+                  <p className="text-sm text-gray-300">{alert.message}</p>
                 </div>
               </div>
             ))}
@@ -341,9 +341,9 @@ const ParentDashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Progression par matière */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                <BookOpen className="h-5 w-5 mr-2 text-blue-600" />
+            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center">
+                <BookOpen className="h-5 w-5 mr-2 text-kprimary" />
                 Progression par Matière
               </h3>
               
@@ -351,16 +351,16 @@ const ParentDashboard = () => {
                 {subjectsProgress.map((subject, index) => (
                   <div key={index}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-semibold text-gray-900">{subject.name}</span>
+                      <span className="text-sm font-semibold text-white">{subject.name}</span>
                       <div className="flex items-center space-x-2">
-                        <span className={`text-sm font-semibold ${subject.status === 'good' ? 'text-green-600' : 'text-yellow-600'}`}>
+                        <span className={`text-sm font-semibold ${subject.status === 'good' ? 'text-emerald-400' : 'text-yellow-400'}`}>
                           {subject.trend}
                         </span>
-                        <span className="text-sm font-bold text-gray-900">{subject.progress}%</span>
+                        <span className="text-sm font-bold text-white">{subject.progress}%</span>
                         <span className="text-lg">{getStatusIcon(subject.status)}</span>
                       </div>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-white/10 rounded-full h-3">
                       <div
                         className={`h-3 rounded-full ${
                           subject.status === 'good' ? 'bg-green-500' : 'bg-yellow-500'
@@ -374,7 +374,7 @@ const ParentDashboard = () => {
 
               {/* Message si pas de données */}
               {subjectsProgress.length === 0 && (
-                <div className="mt-6 pt-6 border-t border-gray-200 text-center py-8">
+                <div className="mt-6 pt-6 border-t border-white/10 text-center py-8">
                   <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-3" />
                   <p className="text-sm text-gray-600 font-medium">
                     Aucune activité enregistrée pour le moment. Les données de progression apparaîtront ici.
@@ -384,8 +384,8 @@ const ParentDashboard = () => {
             </div>
 
             {/* Points forts et faiblesses */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Analyse personnalisée - Forces & Axes d'amélioration</h3>
+            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold text-white mb-4">Analyse personnalisée - Forces & Axes d'amélioration</h3>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -395,7 +395,7 @@ const ParentDashboard = () => {
                   </h4>
                   <ul className="space-y-2">
                     {strengths.map((strength, index) => (
-                      <li key={index} className="text-sm text-gray-900 font-medium flex items-start">
+                      <li key={index} className="text-sm text-white font-medium flex items-start">
                         <span className="text-green-500 mr-2">✓</span>
                         {strength}
                       </li>
@@ -410,7 +410,7 @@ const ParentDashboard = () => {
                   </h4>
                   <ul className="space-y-2">
                     {weaknesses.map((weakness, index) => (
-                      <li key={index} className="text-sm text-gray-900 font-medium flex items-start">
+                      <li key={index} className="text-sm text-white font-medium flex items-start">
                         <span className="text-yellow-500 mr-2">•</span>
                         {weakness}
                       </li>
@@ -420,7 +420,7 @@ const ParentDashboard = () => {
               </div>
 
               {recommendations.length === 0 && strengths.length === 0 && weaknesses.length === 0 && (
-                <div className="mt-6 pt-6 border-t border-gray-200 text-center py-8">
+                <div className="mt-6 pt-6 border-t border-white/10 text-center py-8">
                   <Lightbulb className="h-12 w-12 text-gray-400 mx-auto mb-3" />
                   <p className="text-sm text-gray-600 font-medium">
                     Les analyses apparaîtront ici une fois que {selectedChild?.name || 'votre enfant'} aura complété quelques activités.
@@ -430,32 +430,32 @@ const ParentDashboard = () => {
             </div>
 
             {/* Engagement et motivation */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                <Activity className="h-5 w-5 mr-2 text-purple-600" />
+            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center">
+                <Activity className="h-5 w-5 mr-2 text-purple-400" />
                 Engagement & Motivation
               </h3>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-green-50 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600">{weeklySummary.daysActive}</div>
-                  <div className="text-xs text-gray-800 font-semibold mt-1">Jours actifs</div>
+                  <div className="text-2xl font-bold text-emerald-400">{weeklySummary.daysActive}</div>
+                  <div className="text-xs text-gray-300 font-semibold mt-1">Jours actifs</div>
                 </div>
                 <div className="text-center p-4 bg-blue-50 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">{weeklySummary.consecutiveDays}</div>
-                  <div className="text-xs text-gray-800 font-semibold mt-1">Jours consécutifs 🔥</div>
+                  <div className="text-2xl font-bold text-kprimary">{weeklySummary.consecutiveDays}</div>
+                  <div className="text-xs text-gray-300 font-semibold mt-1">Jours consécutifs 🔥</div>
                 </div>
                 <div className="text-center p-4 bg-purple-50 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600">
+                  <div className="text-2xl font-bold text-purple-400">
                     {dashboardData?.weeklySummary?.quizzesCompleted || 0}
                   </div>
-                  <div className="text-xs text-gray-800 font-semibold mt-1">Quiz complétés</div>
+                  <div className="text-xs text-gray-300 font-semibold mt-1">Quiz complétés</div>
                 </div>
                 <div className="text-center p-4 bg-orange-50 rounded-lg">
                   <div className="text-2xl font-bold text-orange-600">
                     {dashboardData?.weeklySummary?.lessonsCompleted || 0}
                   </div>
-                  <div className="text-xs text-gray-800 font-semibold mt-1">Leçons complétées</div>
+                  <div className="text-xs text-gray-300 font-semibold mt-1">Leçons complétées</div>
                 </div>
               </div>
             </div>
@@ -464,8 +464,8 @@ const ParentDashboard = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Préparation examens */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center">
                 <Target className="h-5 w-5 mr-2 text-red-600" />
                 Préparation Examens
               </h3>
@@ -473,25 +473,25 @@ const ParentDashboard = () => {
               <div className="space-y-3">
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm text-gray-800 font-semibold">Simulation Bac</span>
-                    <span className="text-lg font-bold text-gray-900">{examPreparation.simulatedScore}/20</span>
+                    <span className="text-sm text-gray-300 font-semibold">Simulation Bac</span>
+                    <span className="text-lg font-bold text-white">{examPreparation.simulatedScore}/20</span>
                   </div>
-                  <div className="flex items-center text-xs text-green-600 font-semibold">
+                  <div className="flex items-center text-xs text-emerald-400 font-semibold">
                     <TrendingUp className="h-3 w-3 mr-1" />
                     {examPreparation.progression} depuis le mois dernier
                   </div>
                 </div>
                 
-                <div className="pt-3 border-t border-gray-200">
+                <div className="pt-3 border-t border-white/10">
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-800 font-semibold">Annales complétées</span>
+                    <span className="text-gray-300 font-semibold">Annales complétées</span>
                     <span className="font-semibold">{examPreparation.annalsCompleted}</span>
                   </div>
                 </div>
                 
-                <div className="pt-3 border-t border-gray-200">
+                <div className="pt-3 border-t border-white/10">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-800 font-semibold">Chapitres maîtrisés</span>
+                    <span className="text-gray-300 font-semibold">Chapitres maîtrisés</span>
                     <span className="font-semibold">{examPreparation.chaptersMastered}</span>
                   </div>
                 </div>
@@ -499,26 +499,26 @@ const ParentDashboard = () => {
             </div>
 
             {/* Temps d'écran */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center">
                 <Moon className="h-5 w-5 mr-2 text-indigo-600" />
                 Santé Numérique
               </h3>
               
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-800 font-semibold">Temps quotidien moyen</span>
+                  <span className="text-sm text-gray-300 font-semibold">Temps quotidien moyen</span>
                   <span className="font-semibold">{screenTime.dailyAverage}</span>
                 </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-800 font-semibold">Sessions superieures a 2h</span>
-                    <span className="font-semibold text-green-600">{screenTime.longSessions} cette semaine ✓</span>
+                    <span className="text-sm text-gray-300 font-semibold">Sessions superieures a 2h</span>
+                    <span className="font-semibold text-emerald-400">{screenTime.longSessions} cette semaine ✓</span>
                   </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-800 font-semibold">Pauses régulières</span>
-                  <span className="font-semibold text-green-600">Oui ✓</span>
+                  <span className="text-sm text-gray-300 font-semibold">Pauses régulières</span>
+                  <span className="font-semibold text-emerald-400">Oui ✓</span>
                 </div>
-                <div className="pt-3 border-t border-gray-200">
+                <div className="pt-3 border-t border-white/10">
                   <div className="flex items-center text-sm text-green-700 bg-green-50 px-3 py-2 rounded-lg">
                     <Smile className="h-4 w-4 mr-2" />
                     Temps d'étude sain pour un lycéen
@@ -528,8 +528,8 @@ const ParentDashboard = () => {
             </div>
 
             {/* Objectifs partagés */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+            <div className="bg-white/5 rounded-xl border border-white/10 p-6">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center">
                 <MessageSquare className="h-5 w-5 mr-2 text-pink-600" />
                 Objectifs Partagés
               </h3>
@@ -538,10 +538,10 @@ const ParentDashboard = () => {
                 {sharedGoals.map((goal, index) => (
                   <div key={index}>
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs text-gray-800 font-semibold">{goal.name}</span>
-                      <span className="text-xs font-semibold text-gray-900">{goal.target}</span>
+                      <span className="text-xs text-gray-300 font-semibold">{goal.name}</span>
+                      <span className="text-xs font-semibold text-white">{goal.target}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-white/10 rounded-full h-2">
                       <div
                         className="bg-pink-500 h-2 rounded-full"
                         style={{ width: `${goal.progress}%` }}
@@ -553,17 +553,17 @@ const ParentDashboard = () => {
             </div>
 
             {/* Recommandations */}
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">💡 Recommandations Personnalisées</h3>
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-lg shadow-black/20 p-6">
+              <h3 className="text-lg font-bold text-white mb-4">💡 Recommandations Personnalisées</h3>
               
               <div className="space-y-3">
                 {recommendations.map((rec, index) => (
-                  <div key={index} className="bg-white rounded-lg p-3">
+                  <div key={index} className="bg-white/5 rounded-lg p-3">
                     <div className="flex items-start">
-                      <rec.icon className="h-5 w-5 text-blue-600 mr-2 mt-0.5" />
+                      <rec.icon className="h-5 w-5 text-kprimary mr-2 mt-0.5" />
                       <div>
-                        <div className="text-sm font-semibold text-gray-900 mb-1">{rec.title}</div>
-                        <div className="text-xs text-gray-900 font-medium">{rec.message}</div>
+                        <div className="text-sm font-semibold text-white mb-1">{rec.title}</div>
+                        <div className="text-xs text-white font-medium">{rec.message}</div>
                       </div>
                     </div>
                   </div>
