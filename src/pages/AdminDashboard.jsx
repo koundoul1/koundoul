@@ -713,6 +713,32 @@ const UsersSection = ({ showToast, showConfirm }) => {
                             <div><span className="text-gray-500 block text-xs">Dernier login</span>{formatDate(u.lastLoginAt)}</div>
                             {u.suspendedReason && <div><span className="text-gray-500 block text-xs">Raison suspension</span><span className="text-red-400">{u.suspendedReason}</span></div>}
                           </div>
+                          <div className="mt-3 pt-3 border-t border-gray-800 flex items-center gap-3">
+                            <span className="text-xs text-gray-500">Assigner un plan :</span>
+                            <select
+                              defaultValue=""
+                              onChange={async (e) => {
+                                if (!e.target.value) return;
+                                try {
+                                  await api.admin.assignPlan(u.id, e.target.value);
+                                  showToast('Plan assigne avec succes');
+                                  fetchUsers();
+                                } catch (err) {
+                                  showToast(err.message, 'error');
+                                }
+                                e.target.value = '';
+                              }}
+                              className="px-3 py-1.5 text-xs bg-gray-800 border border-gray-700 rounded-lg text-white"
+                            >
+                              <option value="">Choisir...</option>
+                              <option value="plan-free">Gratuit</option>
+                              <option value="plan-premium">Premium (50 IA/j)</option>
+                              <option value="plan-premium-max">Premium Max (300 IA/j)</option>
+                              <option value="plan-family">Famille (100 IA/j)</option>
+                              <option value="plan-premium-daily">Premium 24h</option>
+                              <option value="plan-premium-max-daily">Premium Max 24h</option>
+                            </select>
+                          </div>
                         </td>
                       </tr>
                     )}

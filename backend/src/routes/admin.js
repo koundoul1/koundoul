@@ -309,6 +309,49 @@ router.patch('/users/:id', requireAdmin, async (req, res, next) => {
   }
 });
 
+// Assign plan to user (create/update subscription)
+router.post('/users/:id/assign-plan', requireAdmin, async (req, res, next) => {
+  try {
+    var userId = req.params.id;
+    var planId = req.body.planId;
+
+    if (!planId) return res.status(400).json({ error: 'planId requis' });
+
+    var plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+    if (!plan) return res.status(404).json({ error: 'Plan non trouve' });
+
+    // Deactivate existing active subscriptions
+    await prisma.subscription.updateMany({
+      where: { userId: userId, status: 'ACTIVE' },
+      data: { status: 'cancelled', cancelledAt: new Date() }
+    });
+
+    // Create new subscription
+    var now = new Date();
+    var endDate = new Date(now);
+    endDate.setDate(endDate.getDate() + (plan.duration || 30));
+
+    var subscription = await prisma.subscription.create({
+      data: {
+        userId: userId,
+        planId: planId,
+        status: 'ACTIVE',
+        startDate: now,
+        endDate: endDate,
+        autoRenew: false
+      },
+      include: { plan: true }
+    });
+
+    await logAdminAction(req.user.userId, 'ASSIGN_PLAN', 'Subscription', subscription.id, { userId: userId, planName: plan.name }, req.ip);
+
+    res.json({ success: true, data: subscription });
+  } catch (error) {
+    console.error('Admin assign plan error:', error);
+    next(error);
+  }
+});
+
 router.delete('/users/:id', requireAdmin, async (req, res, next) => {
   try {
     const { id } = req.params;

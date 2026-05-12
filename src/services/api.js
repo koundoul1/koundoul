@@ -407,6 +407,11 @@ const api = {
       body: JSON.stringify(data),
     }),
 
+    assignPlan: (userId, planId) => request(`/admin/users/${userId}/assign-plan`, {
+      method: 'POST',
+      body: JSON.stringify({ planId }),
+    }),
+
     broadcast: (data) => request('/admin/notifications/broadcast', {
       method: 'POST',
       body: JSON.stringify(data),
