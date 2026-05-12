@@ -787,6 +787,15 @@ const api = {
     }),
   },
 
+  // ⚔️ GROUP DUELS
+  groupDuels: {
+    create: (data) => request('/group-duels', { method: 'POST', body: JSON.stringify(data) }),
+    join: (code) => request('/group-duels/join/' + code, { method: 'POST' }),
+    get: (id) => request('/group-duels/' + id),
+    submit: (id, data) => request('/group-duels/' + id + '/submit', { method: 'POST', body: JSON.stringify(data) }),
+    myList: () => request('/group-duels/my/list'),
+  },
+
   // 👨‍👩‍👧 PARENT COACH
   parentCoach: {
     getConversations: (limit) => request('/parent-coach/conversations?limit=' + (limit || 20)),

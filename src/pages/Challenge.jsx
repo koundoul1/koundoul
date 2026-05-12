@@ -84,7 +84,9 @@ const Challenge = () => {
   const [selectedChallengeId, setSelectedChallengeId] = useState(null);
 
   // Duel state
-  const [duelView, setDuelView] = useState('menu'); // menu, create, join, play, results, myduels
+  const [duelView, setDuelView] = useState('menu'); // menu, create, create-group, join, play, results, myduels
+  const [groupMaxPlayers, setGroupMaxPlayers] = useState(3);
+  const [groupCreated, setGroupCreated] = useState(null);
   const [duelSubject, setDuelSubject] = useState('Mathématiques');
   const [duelLevel, setDuelLevel] = useState('Terminale');
   const [duelDifficulty, setDuelDifficulty] = useState('Moyen');
@@ -340,7 +342,37 @@ const Challenge = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await api.duels.joinByCode(joinCode.trim());
+      // Try 1v1 duel first, then group duel
+      var response;
+      try {
+        response = await api.duels.joinByCode(joinCode.trim());
+      } catch (e1) {
+        // Try group duel
+        try {
+          response = await api.groupDuels.join(joinCode.trim());
+          if (response.success) {
+            // Load group duel details
+            var gd = await api.groupDuels.get(response.data.duelId);
+            if (gd.success) {
+              setActiveDuel(gd.data);
+              setDuelQuestions(gd.data.questions || []);
+              setCurrentQuestion(0);
+              setDuelAnswers([]);
+              setDuelTimer(gd.data.timeLimit || 600);
+              if (gd.data.status === 'active') {
+                setDuelView('play');
+              } else {
+                setError('En attente de ' + gd.data.maxPlayers + ' joueurs (' + gd.data.participants.length + '/' + gd.data.maxPlayers + '). Partage le code !');
+                setDuelView('menu');
+              }
+              setLoading(false);
+              return;
+            }
+          }
+        } catch (e2) {
+          throw e1; // original error
+        }
+      }
       if (response.success) {
         setActiveDuel(response.data);
         setDuelQuestions(response.data.questions || []);
@@ -350,7 +382,7 @@ const Challenge = () => {
         setDuelView('play');
       }
     } catch (err) {
-      setError(err.message || 'Code de duel invalide');
+      setError(err.message || 'Code invalide');
     } finally {
       setLoading(false);
     }
@@ -907,7 +939,91 @@ const Challenge = () => {
                 </button>
               </div>
 
-            /* CRÉER UN DUEL */
+            /* CRÉER UN DUEL DE GROUPE (3 ou 4) */
+            ) : duelView === 'create-group' ? (
+              <div className="space-y-6">
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                  <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                    <Users className="h-6 w-6 mr-2 text-orange-400" />
+                    Duel a {groupMaxPlayers} joueurs
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm text-gray-400 mb-2">Matiere</label>
+                      <select value={duelSubject} onChange={(e) => setDuelSubject(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-white/10 rounded-xl text-white">
+                        <option value="Mathematiques">Mathematiques</option>
+                        <option value="Physique">Physique</option>
+                        <option value="Chimie">Chimie</option>
+                      </select>
+                    </div>
+                    <button
+                      onClick={async () => {
+                        try {
+                          setCreatingDuel(true);
+                          var res = await api.groupDuels.create({ subject: duelSubject, maxPlayers: groupMaxPlayers, difficulty: parseInt(duelDifficulty) || 2 });
+                          if (res.success) {
+                            setGroupCreated(res.data);
+                            setDuelView('group-created');
+                          }
+                        } catch (err) {
+                          setDuelError(err.message);
+                        } finally {
+                          setCreatingDuel(false);
+                        }
+                      }}
+                      disabled={creatingDuel}
+                      className="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold hover:opacity-90 disabled:opacity-50"
+                    >
+                      {creatingDuel ? 'Creation...' : 'Creer le duel a ' + groupMaxPlayers}
+                    </button>
+                  </div>
+                  <button onClick={() => setDuelView('menu')} className="mt-4 w-full text-center text-sm text-gray-500 hover:text-white">Retour</button>
+                </div>
+              </div>
+
+            /* DUEL DE GROUPE CRÉÉ */
+            ) : duelView === 'group-created' && groupCreated ? (
+              <div className="space-y-6">
+                <div className="bg-gradient-to-r from-orange-500/20 to-amber-500/20 border-2 border-orange-500/50 rounded-2xl p-8 text-center">
+                  <CheckCircle className="h-16 w-16 text-orange-400 mx-auto mb-4" />
+                  <h2 className="text-2xl font-bold text-white mb-2">Duel a {groupCreated.maxPlayers} cree !</h2>
+                  <p className="text-gray-300 mb-6">Partage ce code — {groupCreated.maxPlayers - 1} joueurs doivent rejoindre</p>
+
+                  <div className="bg-gray-900 border-2 border-dashed border-orange-500 rounded-xl p-4 sm:p-6 mb-6 max-w-sm sm:max-w-md mx-auto">
+                    <div className="text-4xl font-mono font-bold text-orange-400 tracking-wider mb-3">
+                      {groupCreated.inviteCode}
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <button
+                        onClick={() => { navigator.clipboard.writeText(groupCreated.inviteCode); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
+                        className="px-6 py-2.5 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 flex items-center justify-center"
+                      >
+                        {copied ? <Check className="h-4 w-4 mr-2" /> : <Copy className="h-4 w-4 mr-2" />}
+                        {copied ? 'Copie !' : 'Copier le code'}
+                      </button>
+                      <a
+                        href={'https://wa.me/?text=' + encodeURIComponent('Duel a ' + groupCreated.maxPlayers + ' sur Koundoul ! Rejoins avec ce code : ' + groupCreated.inviteCode + ' sur https://www.koundoul.com/challenge')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-2.5 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 flex items-center justify-center"
+                      >
+                        <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.616l4.584-1.468A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.34 0-4.508-.813-6.206-2.172l-.437-.362-3.018.966.999-2.956-.393-.462A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                        WhatsApp
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="text-sm text-gray-400">
+                    <Clock className="h-4 w-4 inline mr-1" />
+                    {groupCreated.questionsCount} questions — Expire dans 24h
+                  </div>
+                </div>
+                <button onClick={() => { setDuelView('menu'); setGroupCreated(null); }} className="w-full bg-white/10 text-white py-3 rounded-lg font-bold hover:bg-white/20">
+                  Retour au menu
+                </button>
+              </div>
+
+            /* CRÉER UN DUEL 1v1 */
             ) : duelView === 'create' ? (
               <div className="space-y-6">
                 <div className="bg-white/5 border border-white/10 rounded-xl p-6">
@@ -1131,38 +1247,60 @@ const Challenge = () => {
             ) : (
               <div className="space-y-6">
                 {/* Actions principales */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                   <button
                     onClick={() => setDuelView('create')}
-                    className="bg-gradient-to-br from-red-500/20 to-pink-500/20 border-2 border-red-500/40 rounded-xl p-6 text-center hover:border-red-500/70 transition-all group"
+                    className="bg-gradient-to-br from-red-500/20 to-pink-500/20 border-2 border-red-500/40 rounded-xl p-4 text-center hover:border-red-500/70 transition-all group"
                   >
-                    <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <Sword className="h-8 w-8 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                      <Sword className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-1">Créer un Défi</h3>
-                    <p className="text-sm text-gray-400">Défie un ami avec un code</p>
+                    <h3 className="text-sm font-bold text-white mb-1">Duel 1v1</h3>
+                    <p className="text-xs text-gray-400">Defie un ami</p>
+                  </button>
+
+                  <button
+                    onClick={() => { setDuelView('create-group'); setGroupMaxPlayers(3); }}
+                    className="bg-gradient-to-br from-orange-500/20 to-amber-500/20 border-2 border-orange-500/40 rounded-xl p-4 text-center hover:border-orange-500/70 transition-all group"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                      <Users className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-sm font-bold text-white mb-1">Duel a 3</h3>
+                    <p className="text-xs text-gray-400">3 joueurs</p>
+                  </button>
+
+                  <button
+                    onClick={() => { setDuelView('create-group'); setGroupMaxPlayers(4); }}
+                    className="bg-gradient-to-br from-emerald-500/20 to-green-500/20 border-2 border-emerald-500/40 rounded-xl p-4 text-center hover:border-emerald-500/70 transition-all group"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                      <Users className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-sm font-bold text-white mb-1">Duel a 4</h3>
+                    <p className="text-xs text-gray-400">4 joueurs</p>
                   </button>
 
                   <button
                     onClick={() => setDuelView('join')}
-                    className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border-2 border-blue-500/40 rounded-xl p-6 text-center hover:border-blue-500/70 transition-all group"
+                    className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border-2 border-blue-500/40 rounded-xl p-4 text-center hover:border-blue-500/70 transition-all group"
                   >
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <Share2 className="h-8 w-8 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                      <Share2 className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-1">Rejoindre</h3>
-                    <p className="text-sm text-gray-400">Entre un code d'invitation</p>
+                    <h3 className="text-sm font-bold text-white mb-1">Rejoindre</h3>
+                    <p className="text-xs text-gray-400">Entrer un code</p>
                   </button>
 
                   <button
                     onClick={loadMyDuels}
-                    className="bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border-2 border-purple-500/40 rounded-xl p-6 text-center hover:border-purple-500/70 transition-all group"
+                    className="bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border-2 border-purple-500/40 rounded-xl p-4 text-center hover:border-purple-500/70 transition-all group"
                   >
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <History className="h-8 w-8 text-white" />
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                      <History className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-1">Mes Duels</h3>
-                    <p className="text-sm text-gray-400">Historique et résultats</p>
+                    <h3 className="text-sm font-bold text-white mb-1">Mes Duels</h3>
+                    <p className="text-xs text-gray-400">Historique</p>
                   </button>
                 </div>
 

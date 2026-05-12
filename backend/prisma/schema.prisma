@@ -80,6 +80,8 @@ model User {
   dailyAiUsage                                           DailyAiUsage[]
   createdFlashcards                                      Flashcard[]          @relation("UserCreatedFlashcards")
   flashcardDecks                                         FlashcardDeck[]
+  groupDuelsCreated                                      GroupDuel[]           @relation("GroupDuelCreator")
+  groupDuelParticipations                                GroupDuelParticipant[]
 
   @@map("users")
 }
@@ -942,4 +944,44 @@ model DailyAiUsage {
   @@unique([userId, date])
   @@index([userId, date])
   @@map("daily_ai_usage")
+}
+
+model GroupDuel {
+  id           String                @id @default(cuid())
+  creatorId    String
+  subject      String                @default("Mathematiques")
+  level        String?
+  difficulty   Int                   @default(2)
+  timeLimit    Int                   @default(600)
+  questions    Json                  @default("[]")
+  maxPlayers   Int                   @default(3)
+  status       String                @default("waiting")
+  inviteCode   String                @unique
+  xpReward     Int                   @default(200)
+  expiresAt    DateTime
+  completedAt  DateTime?
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @default(now())
+  creator      User                  @relation("GroupDuelCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  participants GroupDuelParticipant[]
+
+  @@index([status])
+  @@map("group_duels")
+}
+
+model GroupDuelParticipant {
+  id          String    @id @default(cuid())
+  groupDuelId String
+  userId      String
+  score       Int?
+  answers     Json?
+  timeSpent   Int?
+  completedAt DateTime?
+  rank        Int?
+  createdAt   DateTime  @default(now())
+  groupDuel   GroupDuel  @relation(fields: [groupDuelId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupDuelId, userId])
+  @@map("group_duel_participants")
 }
