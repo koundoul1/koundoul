@@ -452,24 +452,26 @@ router.get('/child/:id/stats', authenticateToken, async (req, res, next) => {
   }
 });
 
-// GET /dashboard/:childId — dashboard complet (legacy, garde compatibilité)
+// GET /dashboard/:childId — dashboard complet
 router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
   try {
     const { childId } = req.params;
+    const parentId = req.user.userId;
     const timeRange = req.query.timeRange || 'week';
 
-    const user = await prisma.user.findUnique({
-      where: { id: req.user.userId },
-      select: { invitationCode: true }
+    // Verify parent-child link via BOTH systems
+    var linked = false;
+    var linkRecord = await prisma.parent_child_links.findFirst({
+      where: { parent_id: parentId, child_id: childId, approved: true }
     });
-
-    const child = await prisma.user.findUnique({
-      where: { id: childId },
-      select: { parentInvitationCode: true }
-    });
-
-    if (!child || child.parentInvitationCode !== user?.invitationCode) {
-      return res.status(403).json({ success: false, error: 'Accès non autorisé' });
+    if (linkRecord) linked = true;
+    if (!linked) {
+      var parentUser = await prisma.user.findUnique({ where: { id: parentId }, select: { invitationCode: true } });
+      var childUser = await prisma.user.findUnique({ where: { id: childId }, select: { parentInvitationCode: true } });
+      if (parentUser?.invitationCode && childUser?.parentInvitationCode === parentUser.invitationCode) linked = true;
+    }
+    if (!linked) {
+      return res.status(403).json({ success: false, error: 'Acces non autorise' });
     }
 
     const now = new Date();
@@ -507,7 +509,42 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
       })
     ]);
 
-    const estimatedStudyTime = (quizAttempts.length * 15) + (challenges.length * 20) + (flashcards.length * 2);
+    // Lessons completed in period
+    var lessonsInPeriod = 0;
+    try {
+      lessonsInPeriod = await prisma.microLessonCompletion.count({
+        where: { userId: childId, completed: true, completedAt: { gte: startDate } }
+      });
+    } catch (e) { /* ignore */ }
+
+    // Total lessons completed
+    var totalLessons = 0;
+    try {
+      totalLessons = await prisma.microLessonCompletion.count({
+        where: { userId: childId, completed: true }
+      });
+    } catch (e) { /* ignore */ }
+
+    // Days active in period
+    var daysActive = 0;
+    try {
+      var activityDays = await prisma.$queryRaw`
+        SELECT COUNT(DISTINCT DATE("completedAt"))::int as days
+        FROM microlesson_completions
+        WHERE "userId" = ${childId} AND "completedAt" >= ${startDate}
+      `;
+      daysActive = activityDays[0]?.days || 0;
+    } catch (e) { /* ignore */ }
+
+    // Quiz avg score
+    var quizAvgScore = 0;
+    if (quizAttempts.length > 0) {
+      quizAvgScore = Math.round(quizAttempts.reduce(function(s, q) { return s + (q.score || 0); }, 0) / quizAttempts.length);
+    }
+
+    var estimatedStudyMinutes = (lessonsInPeriod * 10) + (quizAttempts.length * 15) + (challenges.length * 20) + (flashcards.length * 2);
+    var studyHours = Math.floor(estimatedStudyMinutes / 60);
+    var studyMins = estimatedStudyMinutes % 60;
 
     res.json({
       success: true,
@@ -518,14 +555,24 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
           streak: stats?.streak || 0,
           daysSinceJoined: Math.floor((now - new Date(stats?.createdAt || now)) / (1000 * 60 * 60 * 24))
         },
+        weeklySummary: {
+          studyTime: studyHours + 'h' + (studyMins > 0 ? String(studyMins).padStart(2, '0') : '00'),
+          exercisesCompleted: quizAttempts.length + challenges.length,
+          lessonsCompleted: lessonsInPeriod,
+          quizzesCompleted: quizAttempts.length,
+          daysActive: daysActive,
+          consecutiveDays: stats?.streak || 0,
+          progression: quizAvgScore,
+          weeklyGoal: 0
+        },
+        totalLessons: totalLessons,
         badges: userBadges.length,
         recentBadges: userBadges.slice(0, 5),
         quizAttempts: quizAttempts.length,
-        recentQuizAttempts: quizAttempts.slice(0, 5),
+        quizAvgScore: quizAvgScore,
         challenges: challenges.length,
-        recentChallenges: challenges.slice(0, 5),
         flashcardsReviewed: flashcards.length,
-        estimatedStudyTimeHours: Math.round(estimatedStudyTime / 60 * 10) / 10,
+        estimatedStudyTimeHours: Math.round(estimatedStudyMinutes / 60 * 10) / 10,
         timeRange
       }
     });
@@ -538,19 +585,19 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
 router.get('/notifications/:childId', authenticateToken, async (req, res, next) => {
   try {
     const { childId } = req.params;
+    const parentId = req.user.userId;
 
-    const user = await prisma.user.findUnique({
-      where: { id: req.user.userId },
-      select: { invitationCode: true }
-    });
-
-    const child = await prisma.user.findUnique({
-      where: { id: childId },
-      select: { parentInvitationCode: true }
-    });
-
-    if (!child || child.parentInvitationCode !== user?.invitationCode) {
-      return res.status(403).json({ success: false, error: 'Accès non autorisé' });
+    // Verify link via both systems
+    var isLinked = false;
+    var lr = await prisma.parent_child_links.findFirst({ where: { parent_id: parentId, child_id: childId, approved: true } });
+    if (lr) isLinked = true;
+    if (!isLinked) {
+      var pu = await prisma.user.findUnique({ where: { id: parentId }, select: { invitationCode: true } });
+      var cu = await prisma.user.findUnique({ where: { id: childId }, select: { parentInvitationCode: true } });
+      if (pu?.invitationCode && cu?.parentInvitationCode === pu.invitationCode) isLinked = true;
+    }
+    if (!isLinked) {
+      return res.status(403).json({ success: false, error: 'Acces non autorise' });
     }
 
     // Notifications basées sur les dernières activités
