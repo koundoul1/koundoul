@@ -188,8 +188,8 @@ const ParentDashboard = () => {
               </div>
               <div className="flex items-center space-x-4">
                 {/* Sélecteur d'enfant */}
-                <select 
-                  className="px-4 py-2 border border-white/20 rounded-lg bg-white/10 text-white font-semibold"
+                <select
+                  className="px-4 py-2 border border-white/20 rounded-lg bg-gray-800 text-white font-semibold"
                   value={selectedChild?.id || ''}
                   onChange={(e) => {
                     const child = children.find(c => c.id === e.target.value);
