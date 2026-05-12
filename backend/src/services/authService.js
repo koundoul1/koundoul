@@ -19,10 +19,14 @@ async function findUserByIdentifier(identifier) {
   const trimmed = identifier.trim();
 
   if (isPhoneIdentifier(trimmed)) {
-    return prisma.user.findFirst({ where: { phoneNumber: trimmed } });
+    // Normalize phone to match DB format
+    const { normalizePhoneNumber } = require('../utils/phoneValidator');
+    const normalized = normalizePhoneNumber(trimmed);
+    if (!normalized) return null;
+    return prisma.user.findFirst({ where: { phoneNumber: normalized } });
   }
-  // Default: email lookup
-  return prisma.user.findUnique({ where: { email: trimmed } });
+  // Default: email lookup (case-insensitive)
+  return prisma.user.findFirst({ where: { email: { equals: trimmed, mode: 'insensitive' } } });
 }
 
 /**
