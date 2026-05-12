@@ -68,3 +68,6 @@ scripts/
 backend/frontend/
 backend/pr循isma/
 
+
+# Claude Code
+.claude/

@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 STAGED=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|jsx)$' | grep -v node_modules || true)
 [ -z "$STAGED" ] && exit 0
 node -e "
