@@ -457,7 +457,7 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
   try {
     const { childId } = req.params;
     const parentId = req.user.userId;
-    const timeRange = req.query.timeRange || 'week';
+    const timeRange = req.query.timeRange || 'month';
 
     // Verify parent-child link via BOTH systems
     var linked = false;
@@ -546,6 +546,28 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
     var studyHours = Math.floor(estimatedStudyMinutes / 60);
     var studyMins = estimatedStudyMinutes % 60;
 
+    // All-time totals (always show something meaningful)
+    var totalQuizzes = 0;
+    var totalQuizAvg = 0;
+    try {
+      totalQuizzes = await prisma.quizAttempt.count({ where: { userId: childId, completedAt: { not: null } } });
+      var allQuizAvg = await prisma.quizAttempt.aggregate({ where: { userId: childId, completedAt: { not: null } }, _avg: { score: true } });
+      totalQuizAvg = allQuizAvg._avg.score ? Math.round(allQuizAvg._avg.score) : 0;
+    } catch (e) { /* ignore */ }
+
+    // Use all-time values as fallback if period values are all zero
+    var displayExercises = quizAttempts.length + challenges.length;
+    var displayLessons = lessonsInPeriod;
+    var displayProgress = quizAvgScore;
+    var displayDays = daysActive;
+
+    if (displayExercises === 0 && displayLessons === 0 && totalLessons > 0) {
+      // Period has no data but all-time does — show all-time with note
+      displayExercises = totalQuizzes;
+      displayLessons = totalLessons;
+      displayProgress = totalQuizAvg;
+    }
+
     res.json({
       success: true,
       data: {
@@ -557,15 +579,17 @@ router.get('/dashboard/:childId', authenticateToken, async (req, res, next) => {
         },
         weeklySummary: {
           studyTime: studyHours + 'h' + (studyMins > 0 ? String(studyMins).padStart(2, '0') : '00'),
-          exercisesCompleted: quizAttempts.length + challenges.length,
-          lessonsCompleted: lessonsInPeriod,
-          quizzesCompleted: quizAttempts.length,
-          daysActive: daysActive,
+          exercisesCompleted: displayExercises,
+          lessonsCompleted: displayLessons,
+          quizzesCompleted: quizAttempts.length || totalQuizzes,
+          daysActive: displayDays,
           consecutiveDays: stats?.streak || 0,
-          progression: quizAvgScore,
+          progression: displayProgress,
           weeklyGoal: 0
         },
         totalLessons: totalLessons,
+        totalQuizzes: totalQuizzes,
+        totalQuizAvg: totalQuizAvg,
         badges: userBadges.length,
         recentBadges: userBadges.slice(0, 5),
         quizAttempts: quizAttempts.length,
