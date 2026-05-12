@@ -23,7 +23,7 @@ import {
 import ShareModal from './ShareModal'
 import NotificationBell from './NotificationBell'
 import AiQuotaBadge from './AiQuotaBadge'
-import { useAiQuota } from '../hooks/useAiQuota'
+import useAiQuota from '../hooks/useAiQuota'
 
 const TopBar = () => {
   const location = useLocation()
