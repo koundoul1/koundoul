@@ -367,7 +367,7 @@ export default {
     },
     
     solver: {
-      title: 'Résolveur de problèmes',
+      title: 'Resolveur',
       enterProblem: 'Entrez votre problème',
       problemLabel: 'Énoncé du problème',
       problemPlaceholder: 'Décrivez votre problème scientifique...',

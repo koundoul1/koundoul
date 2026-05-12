@@ -428,11 +428,8 @@ const Solver = () => {
             <div>
               <h1 className="text-2xl font-bold koundoul-text-gradient flex items-center">
                 <Brain className="h-8 w-8 text-blue-400 mr-3" />
-                Résolveur de Problèmes IA
+                {t('solver.title')}
               </h1>
-              <p className="text-gray-300 mt-1">
-                Utilisez l'intelligence artificielle pour résoudre vos problèmes scientifiques
-              </p>
             </div>
             <div className="flex items-center gap-3">
               <AiQuotaBadge quota={quota} />
