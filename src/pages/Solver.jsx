@@ -590,9 +590,8 @@ const Solver = () => {
                       className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold rounded-xl transition-all disabled:opacity-50"
                     >
                       {isExtracting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Camera className="w-5 h-5" />}
-                      {isExtracting ? 'Extraction du texte en cours...' : 'Prendre en photo un exercice'}
+                      {isExtracting ? t('solver.photoExtracting') : t('solver.photoButton')}
                     </button>
-                    <p className="text-xs text-gray-500 text-center mt-1">Prends une photo de ton exercice et l&apos;IA extraira le texte automatiquement</p>
                   </div>
 
                   <input
@@ -684,7 +683,7 @@ const Solver = () => {
                   ) : (
                     <>
                       <Zap className="h-6 w-6 mr-3 group-hover:animate-pulse" />
-                      <span className="text-lg">Résoudre avec l'IA</span>
+                      <span className="text-lg">{t('solver.solveButton')}</span>
                       <Sparkles className="h-5 w-5 ml-2 opacity-75" />
                     </>
                   )}
