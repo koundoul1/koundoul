@@ -137,6 +137,10 @@ router.post('/register', registerLimiter, async (req, res, next) => {
 
     if (hasPassword) {
       userData.password = await bcrypt.hash(password, 10);
+    } else {
+      // Phone-only accounts get a random password (unusable, login via PIN only)
+      const crypto = require('crypto');
+      userData.password = await bcrypt.hash(crypto.randomBytes(32).toString('hex'), 10);
     }
     if (normalizedPhone) {
       userData.phoneNumber = normalizedPhone;
