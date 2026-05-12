@@ -261,7 +261,12 @@ const api = {
 
     getHistoryEntry: (id) => request(`/solver/history/${id}`),
 
-    deleteHistory: (id) => request(`/solver/history/${id}`, { method: 'DELETE' })
+    deleteHistory: (id) => request(`/solver/history/${id}`, { method: 'DELETE' }),
+
+    extractFromImage: (base64) => request('/solver/extract-from-image', {
+      method: 'POST',
+      body: JSON.stringify({ image: base64 }),
+    })
   },
 
   // 📝 QUIZ

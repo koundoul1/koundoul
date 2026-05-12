@@ -26,7 +26,8 @@ import {
   Download,
   Star,
   Sparkles,
-  Lightbulb
+  Lightbulb,
+  Camera
 } from 'lucide-react'
 
 // Nouveaux composants pédagogiques
@@ -116,6 +117,8 @@ const Solver = () => {
   const [subject, setSubject] = useState('math')
   const [difficulty, setDifficulty] = useState('easy')
   const [isSolving, setIsSolving] = useState(false)
+  const [isExtracting, setIsExtracting] = useState(false)
+  const fileInputRef = React.useRef(null)
   const [solution, setSolution] = useState(null)
   const [history, setHistory] = useState([])
   const [showHistory, setShowHistory] = useState(false)
@@ -562,11 +565,56 @@ const Solver = () => {
                   </div>
                 </div>
 
-                {/* Zone de texte */}
+                {/* Zone de texte + photo */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    {t('solver.problemLabel')}
-                  </label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-300">
+                      {t('solver.problemLabel')}
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={isExtracting || isSolving}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg text-xs text-gray-300 font-medium transition-colors disabled:opacity-50"
+                    >
+                      {isExtracting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Camera className="w-3.5 h-3.5" />}
+                      {isExtracting ? 'Extraction...' : 'Photo'}
+                    </button>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      className="hidden"
+                      onChange={async (e) => {
+                        var file = e.target.files?.[0];
+                        if (!file) return;
+                        setIsExtracting(true);
+                        setError('');
+                        try {
+                          var reader = new FileReader();
+                          reader.onload = async function() {
+                            try {
+                              var res = await api.solver.extractFromImage(reader.result);
+                              if (res.success && res.data?.extractedText) {
+                                setProblem(res.data.extractedText);
+                              } else {
+                                setError('Impossible d\'extraire le texte de cette image');
+                              }
+                            } catch (err) {
+                              setError(err.message || 'Erreur lors de l\'extraction');
+                            }
+                            setIsExtracting(false);
+                          };
+                          reader.readAsDataURL(file);
+                        } catch (err) {
+                          setError('Erreur lecture image');
+                          setIsExtracting(false);
+                        }
+                        e.target.value = '';
+                      }}
+                    />
+                  </div>
                   <textarea
                     value={problem}
                     onChange={(e) => {

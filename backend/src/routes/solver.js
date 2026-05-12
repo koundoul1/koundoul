@@ -8,6 +8,46 @@ const { SOLVER_SYSTEM_PROMPT, SOLVER_STRUCTURED_PROMPT, parseStructured } = requ
 const { incrementUsage } = require('../services/aiQuotaService');
 const { getUserPlanInfo } = require('../middlewares/premiumCheck');
 
+// ── POST /extract-from-image — extract problem text from photo ───────
+
+router.post('/extract-from-image', authenticateToken, async (req, res, next) => {
+  try {
+    var imageData = req.body.image; // base64 string
+    if (!imageData) {
+      return res.status(400).json({ error: 'Image requise (base64)' });
+    }
+
+    if (!isConfigured()) {
+      return res.status(503).json({ error: 'Service IA non configure' });
+    }
+
+    // Use Gemini to extract text from image
+    var { GoogleGenerativeAI } = require('@google/generative-ai');
+    var genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
+    var model = genAI.getGenerativeModel({ model: process.env.GOOGLE_AI_MODEL_SOLVER || 'gemini-2.5-flash' });
+
+    // Remove data:image/...;base64, prefix if present
+    var base64 = imageData.replace(/^data:image\/\w+;base64,/, '');
+
+    var result = await model.generateContent([
+      {
+        inlineData: {
+          mimeType: 'image/jpeg',
+          data: base64
+        }
+      },
+      'Extrais le texte de cet exercice ou probleme de maths/physique/chimie. Retourne UNIQUEMENT le texte du probleme, sans commentaire. Si l\'image contient des formules mathematiques, ecris-les en notation standard (par exemple x^2 + 3x - 5 = 0). Si tu ne vois pas de probleme scolaire, reponds "Aucun probleme detecte dans cette image."'
+    ]);
+
+    var text = result.response.text().trim();
+
+    res.json({ success: true, data: { extractedText: text } });
+  } catch (error) {
+    console.error('[Solver] Image extraction error:', error.message);
+    res.status(500).json({ error: 'Erreur lors de l\'extraction du texte' });
+  }
+});
+
 // ── POST /solve — SSE streaming endpoint ─────────────────────────────
 
 router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
