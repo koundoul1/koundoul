@@ -34,7 +34,8 @@ import {
   LogIn,
   UserPlus,
   Share2,
-  Medal
+  Medal,
+  Bell
 } from 'lucide-react'
 import ShareModal from './ShareModal'
 
@@ -87,6 +88,7 @@ const Sidebar = () => {
   // ── Section: Compte ──
   const accountNav = [
     { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
+    { name: 'Notifications', href: '/notifications', icon: Bell },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
     ...(user?.isParent ? [
       { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield },
