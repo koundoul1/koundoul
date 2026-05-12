@@ -12,9 +12,23 @@ const { getUserPlanInfo } = require('../middlewares/premiumCheck');
 
 router.post('/extract-from-image', authenticateToken, async (req, res, next) => {
   try {
+    var userId = req.user.userId;
     var imageData = req.body.image; // base64 string
     if (!imageData) {
       return res.status(400).json({ error: 'Image requise (base64)' });
+    }
+
+    // Free users: max 1 photo extraction/day
+    var planInfo = await getUserPlanInfo(userId);
+    if (!planInfo.isPremium) {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      var todayExtracts = await prisma.solverHistory.count({
+        where: { userId: userId, domain: 'photo_extract', createdAt: { gte: today } }
+      });
+      if (todayExtracts >= 1) {
+        return res.status(403).json({ error: 'Maximum 1 photo par jour en plan gratuit. Passe Premium pour des photos illimitees !', premiumRequired: true });
+      }
     }
 
     if (!isConfigured()) {
@@ -40,6 +54,13 @@ router.post('/extract-from-image', authenticateToken, async (req, res, next) => 
     ]);
 
     var text = result.response.text().trim();
+
+    // Log extraction for daily count
+    try {
+      await prisma.solverHistory.create({
+        data: { userId: userId, problem: 'Photo extraction', domain: 'photo_extract', status: 'completed', completedAt: new Date() }
+      });
+    } catch (e) { /* ignore */ }
 
     res.json({ success: true, data: { extractedText: text } });
   } catch (error) {
