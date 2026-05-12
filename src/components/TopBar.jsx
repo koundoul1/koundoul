@@ -21,6 +21,8 @@ import {
 } from 'lucide-react'
 import ShareModal from './ShareModal'
 import NotificationBell from './NotificationBell'
+import AiQuotaBadge from './AiQuotaBadge'
+import { useAiQuota } from '../hooks/useAiQuota'
 
 const TopBar = () => {
   const location = useLocation()
@@ -36,6 +38,8 @@ const TopBar = () => {
   const [userMenuPos, setUserMenuPos] = useState({ top: 0, right: 0 })
   const userBtnRef = useRef(null)
   const [showShareModal, setShowShareModal] = useState(false)
+  const aiQuota = useAiQuota()
+  const quota = (!user?.isParent && isAuthenticated) ? aiQuota.quota : null
 
   const getPageTitle = () => {
     const path = location.pathname
@@ -86,6 +90,9 @@ const TopBar = () => {
                 <span>{user?.xp?.toLocaleString() || 0}</span>
               </div>
             </div>
+
+            {/* AI Quota badge */}
+            {quota && <AiQuotaBadge quota={quota} />}
           </>
         ) : (
           /* Auth buttons for non-authenticated */
