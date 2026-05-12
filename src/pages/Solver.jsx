@@ -565,56 +565,11 @@ const Solver = () => {
                   </div>
                 </div>
 
-                {/* Zone de texte + photo */}
+                {/* Zone de texte */}
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="block text-sm font-medium text-gray-300">
-                      {t('solver.problemLabel')}
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      disabled={isExtracting || isSolving}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-lg text-xs text-gray-300 font-medium transition-colors disabled:opacity-50"
-                    >
-                      {isExtracting ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Camera className="w-3.5 h-3.5" />}
-                      {isExtracting ? 'Extraction...' : 'Photo'}
-                    </button>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      capture="environment"
-                      className="hidden"
-                      onChange={async (e) => {
-                        var file = e.target.files?.[0];
-                        if (!file) return;
-                        setIsExtracting(true);
-                        setError('');
-                        try {
-                          var reader = new FileReader();
-                          reader.onload = async function() {
-                            try {
-                              var res = await api.solver.extractFromImage(reader.result);
-                              if (res.success && res.data?.extractedText) {
-                                setProblem(res.data.extractedText);
-                              } else {
-                                setError('Impossible d\'extraire le texte de cette image');
-                              }
-                            } catch (err) {
-                              setError(err.message || 'Erreur lors de l\'extraction');
-                            }
-                            setIsExtracting(false);
-                          };
-                          reader.readAsDataURL(file);
-                        } catch (err) {
-                          setError('Erreur lecture image');
-                          setIsExtracting(false);
-                        }
-                        e.target.value = '';
-                      }}
-                    />
-                  </div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    {t('solver.problemLabel')}
+                  </label>
                   <textarea
                     value={problem}
                     onChange={(e) => {
@@ -623,6 +578,55 @@ const Solver = () => {
                     }}
                     placeholder={t('solver.problemPlaceholder')}
                     className="koundoul-solver-input w-full h-32 resize-none"
+                  />
+
+                  {/* Bouton Photo — bien visible sous le textarea */}
+                  <div className="mt-3">
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={isExtracting || isSolving}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold rounded-xl transition-all disabled:opacity-50"
+                    >
+                      {isExtracting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Camera className="w-5 h-5" />}
+                      {isExtracting ? 'Extraction du texte en cours...' : 'Prendre en photo un exercice'}
+                    </button>
+                    <p className="text-xs text-gray-500 text-center mt-1">Prends une photo de ton exercice et l&apos;IA extraira le texte automatiquement</p>
+                  </div>
+
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    className="hidden"
+                    onChange={async (e) => {
+                      var file = e.target.files?.[0];
+                      if (!file) return;
+                      setIsExtracting(true);
+                      setError('');
+                      try {
+                        var reader = new FileReader();
+                        reader.onload = async function() {
+                          try {
+                            var res = await api.solver.extractFromImage(reader.result);
+                            if (res.success && res.data?.extractedText) {
+                              setProblem(res.data.extractedText);
+                            } else {
+                              setError('Impossible d\'extraire le texte de cette image');
+                            }
+                          } catch (err) {
+                            setError(err.message || 'Erreur lors de l\'extraction');
+                          }
+                          setIsExtracting(false);
+                        };
+                        reader.readAsDataURL(file);
+                      } catch (err) {
+                        setError('Erreur lecture image');
+                        setIsExtracting(false);
+                      }
+                      e.target.value = '';
+                    }}
                   />
                 </div>
 
