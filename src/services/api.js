@@ -778,7 +778,56 @@ const api = {
       body: JSON.stringify(data),
     }),
     unlinkByPhone: () => request('/parent/link-by-phone', { method: 'DELETE' }),
-    getFamilyStatus: () => request('/parent/family-status')
+    getFamilyStatus: () => request('/parent/family-status'),
+    getTimeline: (childId) => request('/parent/children/' + childId + '/timeline'),
+  },
+
+  // 👨‍👩‍👧 PARENT COACH
+  parentCoach: {
+    getConversations: (limit) => request('/parent-coach/conversations?limit=' + (limit || 20)),
+    deleteConversation: (id) => request('/parent-coach/conversations/' + id, { method: 'DELETE' }),
+    chatStream: async function(message, mode, childId, conversationId, onChunk, onDone, onError) {
+      var token = localStorage.getItem('token');
+      var base = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/api' : 'http://localhost:5000/api';
+      var body = { message: message, mode: mode || 'general' };
+      if (childId) body.childId = childId;
+      if (conversationId) body.conversationId = conversationId;
+      try {
+        var response = await fetch(base + '/parent-coach/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify(body)
+        });
+        if (!response.ok) {
+          var err = await response.json().catch(function() { return {}; });
+          if (onError) onError(err.error || 'Erreur');
+          return;
+        }
+        var reader = response.body.getReader();
+        var decoder = new TextDecoder();
+        var buffer = '';
+        while (true) {
+          var result = await reader.read();
+          if (result.done) break;
+          buffer += decoder.decode(result.value, { stream: true });
+          var lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            if (line.startsWith('data: ')) {
+              try {
+                var data = JSON.parse(line.slice(6));
+                if (data.text && onChunk) onChunk(data.text);
+                if (data.status === 'completed' && onDone) onDone(data);
+                if (data.message && !data.text && !data.status && onError) onError(data.message);
+              } catch (e) {}
+            }
+          }
+        }
+      } catch (e) {
+        if (onError) onError(e.message || 'Erreur reseau');
+      }
+    }
   },
 
   // 🔔 NOTIFICATIONS

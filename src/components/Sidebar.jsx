@@ -86,7 +86,10 @@ const Sidebar = () => {
   const accountNav = [
     { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
-    ...(user?.isParent ? [{ name: 'Espace Parent', href: '/parent-dashboard', icon: Shield }] : []),
+    ...(user?.isParent ? [
+      { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield },
+      { name: 'Coach Parent', href: '/parent-coach', icon: Bot },
+    ] : []),
   ]
 
   // ── Section: Admin (visible only to admin) ──

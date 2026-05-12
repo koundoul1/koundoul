@@ -48,6 +48,7 @@ const AdvancedFeatures = lazy(() => import('./pages/AdvancedFeatures'))
 const Challenge = lazy(() => import('./pages/Challenge'))
 const Leaderboard = lazy(() => import('./pages/Leaderboard'))
 const ParentDashboard = lazy(() => import('./pages/ParentDashboard'))
+const ParentCoach = lazy(() => import('./pages/ParentCoach'))
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
 const QuestionBanks = lazy(() => import('./pages/QuestionBanks'))
 const QuestionBankDetail = lazy(() => import('./pages/QuestionBankDetail'))
@@ -155,6 +156,7 @@ function AppLayout() {
             <Route path="/lessons/:lessonId" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><Lesson /></Layout></Suspense></ProtectedRoute>} />
             <Route path="/exercises/:exerciseId" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><Exercise /></Layout></Suspense></ProtectedRoute>} />
             <Route path="/parent-dashboard" element={<ProtectedRoute><ParentDashboard /></ProtectedRoute>} />
+            <Route path="/parent-coach" element={<ProtectedRoute><ParentCoach /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
 
             {/* Route 404 */}

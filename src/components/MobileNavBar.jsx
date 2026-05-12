@@ -104,6 +104,7 @@ const MobileNavBar = () => {
   ];
 
   const parentDrawerItems = [
+    { name: 'Coach Parent', href: '/parent-coach', icon: Bot, emoji: '🤖' },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
   ];
 
