@@ -80,7 +80,7 @@ const Sidebar = () => {
 
   // ── Section: Communauté ──
   const communityNav = [
-    { name: 'Forum', href: '/forum', icon: MessageSquare },
+    // Forum masqué — en développement
     { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award },
     { name: 'Classement', href: '/leaderboard', icon: Medal },
   ]

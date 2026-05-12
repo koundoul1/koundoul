@@ -94,7 +94,7 @@ const MobileNavBar = () => {
     { name: t('dashboard.actions.solver') || 'Resolveur', href: '/solver', icon: Brain, emoji: '🤖' },
     { name: 'Defi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏' },
-    { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬' },
+    // Forum masque — en developpement
     { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
     { name: 'Classement', href: '/leaderboard', icon: Trophy, emoji: '🏆' },
     { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
