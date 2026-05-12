@@ -51,11 +51,13 @@ const Sidebar = () => {
   }
 
   // ── Section: Principal ──
-  const mainNav = [
+  const mainNav = user?.isParent ? [
+    { name: 'Accueil', href: '/', icon: Home, public: true },
+  ] : [
     { name: 'Accueil', href: '/', icon: Home, public: true },
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
     { name: t('nav.courses'), href: '/courses', icon: BookOpen },
-    { name: t('dashboard.actions.microLessons') || 'Micro-Leçons', href: '/micro-lessons', icon: BookMarked },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked },
   ]
 
   // ── Section: Outils ──
