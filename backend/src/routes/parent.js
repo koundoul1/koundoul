@@ -272,17 +272,35 @@ router.get('/children', authenticateToken, async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
-    const user = await prisma.user.findUnique({
+    // Get children from BOTH systems: invitationCode AND parent_child_links
+    var childIds = new Set();
+
+    // System 1: invitation code
+    var user = await prisma.user.findUnique({
       where: { id: userId },
       select: { invitationCode: true }
     });
+    if (user?.invitationCode) {
+      var codeChildren = await prisma.user.findMany({
+        where: { parentInvitationCode: user.invitationCode },
+        select: { id: true }
+      });
+      codeChildren.forEach(function(c) { childIds.add(c.id); });
+    }
 
-    if (!user?.invitationCode) {
+    // System 2: parent_child_links
+    var links = await prisma.parent_child_links.findMany({
+      where: { parent_id: userId, approved: true },
+      select: { child_id: true }
+    });
+    links.forEach(function(l) { childIds.add(l.child_id); });
+
+    if (childIds.size === 0) {
       return res.json({ success: true, data: [] });
     }
 
     const children = await prisma.user.findMany({
-      where: { parentInvitationCode: user.invitationCode },
+      where: { id: { in: Array.from(childIds) } },
       select: {
         id: true,
         firstName: true,
@@ -291,7 +309,8 @@ router.get('/children', authenticateToken, async (req, res, next) => {
         xp: true,
         level: true,
         streak: true,
-        createdAt: true
+        createdAt: true,
+        lastLoginAt: true
       }
     });
 
