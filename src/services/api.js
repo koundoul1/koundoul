@@ -806,9 +806,10 @@ const api = {
         var reader = response.body.getReader();
         var decoder = new TextDecoder();
         var buffer = '';
-        while (true) {
+        var reading = true;
+        while (reading) {
           var result = await reader.read();
-          if (result.done) break;
+          if (result.done) { reading = false; break; }
           buffer += decoder.decode(result.value, { stream: true });
           var lines = buffer.split('\n');
           buffer = lines.pop() || '';
@@ -820,7 +821,7 @@ const api = {
                 if (data.text && onChunk) onChunk(data.text);
                 if (data.status === 'completed' && onDone) onDone(data);
                 if (data.message && !data.text && !data.status && onError) onError(data.message);
-              } catch (e) {}
+              } catch (_e) { /* parse error, skip */ }
             }
           }
         }
