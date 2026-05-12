@@ -41,9 +41,14 @@ export default function useAiQuota() {
 
   useEffect(() => {
     fetchQuota();
-    // Refresh every 5 minutes
-    const interval = setInterval(fetchQuota, 5 * 60 * 1000);
-    return () => clearInterval(interval);
+    // Refresh every 30 seconds for near-realtime updates
+    const interval = setInterval(fetchQuota, 30 * 1000);
+
+    // Listen for custom event from Solver/Coach after AI call
+    const handleAiCall = () => fetchQuota();
+    window.addEventListener('ai-quota-changed', handleAiCall);
+
+    return () => { clearInterval(interval); window.removeEventListener('ai-quota-changed', handleAiCall); };
   }, [fetchQuota]);
 
   return { quota, refreshQuota: fetchQuota, isLoading, warningToast };

@@ -243,6 +243,7 @@ const Solver = () => {
         streamRef.current = null
         loadHistory()
         refreshQuota()
+        window.dispatchEvent(new Event('ai-quota-changed'))
       },
       onError: (message, quotaInfo) => {
         if (quotaInfo?.quotaReached) {

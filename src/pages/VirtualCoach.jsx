@@ -192,6 +192,7 @@ const VirtualCoach = () => {
         streamRef.current = null;
         loadConversations();
         refreshQuota();
+        window.dispatchEvent(new Event('ai-quota-changed'));
       },
       onError: (msg, quotaInfo) => {
         if (quotaInfo?.quotaReached) {
