@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "git config core.hooksPath .husky 2>/dev/null || true"
   },
   "dependencies": {
     "@sentry/react": "^10.52.0",
