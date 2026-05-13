@@ -38,7 +38,7 @@ router.post('/', authenticateToken, async function(req, res, next) {
       if (banks.length > 0) {
         var bankIds = banks.map(function(b) { return b.id; });
         var allQcm = await prisma.qcm_questions.findMany({
-          where: { questionBankId: { in: bankIds }, difficulty: difficulty },
+          where: { bank_id: { in: bankIds }, difficulty: difficulty },
           take: 50
         });
         // Shuffle and take 10
@@ -51,6 +51,7 @@ router.post('/', authenticateToken, async function(req, res, next) {
             id: q.id,
             question: q.question,
             options: q.options,
+            correct_answer: q.correct_answer,
             points: q.points || 10
           };
         });
