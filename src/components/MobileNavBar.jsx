@@ -88,19 +88,21 @@ const MobileNavBar = () => {
   // Drawer items — parent only sees account modules
   const studentDrawerItems = [
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3, emoji: '📊' },
+    { name: t('nav.courses') || 'Cours', href: '/courses', icon: BookOpen, emoji: '📖' },
     { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯' },
     { name: 'Exercices', href: '/exercices', icon: Dumbbell, emoji: '🧩' },
     { name: 'Quiz', href: '/quiz', icon: Zap, emoji: '📝' },
     { name: t('dashboard.actions.solver') || 'Resolveur', href: '/solver', icon: Brain, emoji: '🤖' },
     { name: 'Defi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
+    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy, emoji: '🏆' },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏' },
-    // Forum masque — en developpement
     { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
-    { name: 'Classement', href: '/leaderboard', icon: Trophy, emoji: '🏆' },
+    { name: 'Classement', href: '/leaderboard', icon: Trophy, emoji: '🥇' },
     { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
     { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚' },
-    { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '📊' },
+    { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '👁️' },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
+    ...(user?.is_admin ? [{ name: 'Admin', href: '/admin', icon: Shield, emoji: '🛡️' }] : []),
   ];
 
   const parentDrawerItems = [
