@@ -203,6 +203,7 @@ const SECTIONS = [
   { id: 'overview', label: 'Tableau de Bord', icon: LayoutDashboard },
   { id: 'users', label: 'Utilisateurs', icon: Users },
   { id: 'subscriptions', label: 'Abonnements', icon: CreditCard },
+  { id: 'pending', label: 'Demandes', icon: Clock },
   { id: 'payments', label: 'Paiements', icon: Wallet },
   { id: 'content', label: 'Contenu', icon: BookOpen },
   { id: 'notifications', label: 'Notifications', icon: Bell },
@@ -332,6 +333,7 @@ const AdminDashboard = () => {
           {activeSection === 'overview' && <OverviewSection showToast={showToast} />}
           {activeSection === 'users' && <UsersSection showToast={showToast} showConfirm={showConfirm} />}
           {activeSection === 'subscriptions' && <SubscriptionsSection showToast={showToast} showConfirm={showConfirm} />}
+          {activeSection === 'pending' && <PendingPaymentsSection showToast={showToast} showConfirm={showConfirm} />}
           {activeSection === 'payments' && <PaymentsSection showToast={showToast} />}
           {activeSection === 'content' && <ContentSection showToast={showToast} showConfirm={showConfirm} />}
           {activeSection === 'notifications' && <NotificationsSection showToast={showToast} />}
@@ -2002,7 +2004,138 @@ const PromoCodesSection = ({ showToast }) => {
 }
 
 // =============================================================================
-// 9. FAMILIES SECTION
+// 9. PENDING PAYMENTS SECTION (manual QR code flow)
+// =============================================================================
+
+const PendingPaymentsSection = ({ showToast, showConfirm }) => {
+  const [payments, setPayments] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [rejectId, setRejectId] = useState(null)
+  const [rejectReason, setRejectReason] = useState('')
+
+  const fetchPending = useCallback(async () => {
+    setLoading(true)
+    try {
+      const data = await api.admin.getPendingPayments()
+      setPayments(data.payments || [])
+    } catch (err) { showToast(err.message, 'error') }
+    finally { setLoading(false) }
+  }, [showToast])
+
+  useEffect(() => { fetchPending() }, [fetchPending])
+
+  const handleActivate = (p) => {
+    showConfirm('Activer cet abonnement ?',
+      `Activer ${p.planName} pour ${p.userName || p.user?.email} (${formatCFA(p.amount)}) ?`,
+      async () => {
+        try {
+          await api.admin.activatePayment(p.id)
+          showToast(`Abonnement ${p.planName} active pour ${p.userName || p.user?.email}`)
+          fetchPending()
+        } catch (err) { showToast(err.message, 'error') }
+      })
+  }
+
+  const handleReject = async (id) => {
+    try {
+      await api.admin.rejectPayment(id, rejectReason)
+      showToast('Demande refusee')
+      setRejectId(null)
+      setRejectReason('')
+      fetchPending()
+    } catch (err) { showToast(err.message, 'error') }
+  }
+
+  const methodLabel = (m) => {
+    const labels = { wave: 'Wave', orange_money: 'Orange Money' }
+    return labels[m] || m
+  }
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
+        <Clock size={24} className="text-[#FF4757]" /> Demandes de paiement
+      </h2>
+      <p className="text-sm text-gray-500 mb-6">
+        Paiements manuels (QR code) en attente de confirmation. Active les abonnements une fois le paiement verifie.
+      </p>
+
+      {loading && <Spinner />}
+
+      {!loading && payments.length === 0 && (
+        <div className="text-center py-12">
+          <CheckCircle size={48} className="text-green-500/30 mx-auto mb-3" />
+          <p className="text-gray-500">Aucune demande en attente</p>
+        </div>
+      )}
+
+      {!loading && payments.length > 0 && (
+        <div className="space-y-3">
+          <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-3 flex items-center gap-2 mb-4">
+            <AlertTriangle size={18} className="text-yellow-400 flex-shrink-0" />
+            <span className="text-sm text-yellow-300 font-medium">{payments.length} demande(s) en attente</span>
+          </div>
+
+          {payments.map((p) => (
+            <div key={p.id} className="bg-white/5 rounded-xl p-5 border border-gray-800">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-white font-bold text-lg">{p.userName || `${p.user?.firstName || ''} ${p.user?.lastName || ''}`}</span>
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${p.paymentMethod === 'wave' ? 'bg-blue-500/20 text-blue-400' : 'bg-orange-500/20 text-orange-400'}`}>
+                      {methodLabel(p.paymentMethod)}
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-400">{p.user?.email}</p>
+                  {p.userPhone && <p className="text-sm text-gray-500">{p.userPhone}</p>}
+                </div>
+                <div className="text-right">
+                  <p className="text-2xl font-black text-[#FF4757]">{formatCFA(p.amount)}</p>
+                  <p className="text-sm text-gray-400 font-medium">{p.planName}</p>
+                  <p className="text-xs text-gray-600">{p.planDuration} jours</p>
+                </div>
+              </div>
+
+              <div className="text-xs text-gray-600 mb-4">
+                Demande le {new Date(p.requestedAt).toLocaleString('fr-FR')}
+                {' — '}il y a {Math.round((Date.now() - new Date(p.requestedAt).getTime()) / 60000)} min
+              </div>
+
+              {rejectId === p.id ? (
+                <div className="flex gap-2">
+                  <input
+                    value={rejectReason}
+                    onChange={(e) => setRejectReason(e.target.value)}
+                    placeholder="Raison du refus (optionnel)"
+                    className="flex-1 px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white focus:outline-none"
+                  />
+                  <button onClick={() => handleReject(p.id)}
+                    className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-500">Confirmer refus</button>
+                  <button onClick={() => setRejectId(null)}
+                    className="px-3 py-2 bg-gray-700 text-white rounded-lg text-sm hover:bg-gray-600">Annuler</button>
+                </div>
+              ) : (
+                <div className="flex gap-2">
+                  <button onClick={() => handleActivate(p)}
+                    className="flex-1 py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-lg font-bold text-sm flex items-center justify-center gap-2 transition-all">
+                    <CheckCircle size={16} /> Activer l&apos;abonnement
+                  </button>
+                  <button onClick={() => setRejectId(p.id)}
+                    className="px-4 py-2.5 bg-red-600/20 text-red-400 rounded-lg text-sm font-medium hover:bg-red-600/30">
+                    Refuser
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =============================================================================
+// 10. FAMILIES SECTION
 // =============================================================================
 
 const FamiliesSection = ({ showToast, showConfirm }) => {

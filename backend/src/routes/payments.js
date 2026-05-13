@@ -375,6 +375,89 @@ router.get('/:id/status', authenticateToken, async (req, res) => {
 });
 
 // ──────────────────────────────────────────────
+// MANUAL PAYMENT REQUEST (QR Code flow)
+// ──────────────────────────────────────────────
+
+router.post('/manual-request', authenticateToken, async (req, res) => {
+  try {
+    const { planId, paymentMethod } = req.body;
+    const userId = req.user.userId;
+
+    if (!planId) return res.status(400).json({ success: false, error: 'Plan ID requis' });
+
+    const plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+    if (!plan) return res.status(404).json({ success: false, error: 'Plan non trouve' });
+    if (plan.price <= 0) return res.status(400).json({ success: false, error: 'Ce plan est gratuit' });
+
+    // Check no pending manual request for same plan
+    const existing = await prisma.payment.findFirst({
+      where: { userId, status: 'awaiting_confirmation', metadata: { path: ['planId'], equals: planId } }
+    });
+    if (existing) {
+      return res.status(400).json({ success: false, error: 'Tu as deja une demande en attente pour ce plan. Envoie ta confirmation WhatsApp.' });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { firstName: true, lastName: true, email: true, phone: true, phoneNumber: true }
+    });
+
+    const payment = await prisma.payment.create({
+      data: {
+        userId,
+        amount: plan.price,
+        currency: plan.currency || 'xof',
+        status: 'awaiting_confirmation',
+        paymentMethod: paymentMethod || 'wave',
+        metadata: {
+          planId,
+          planName: plan.displayName || plan.name,
+          planDuration: plan.duration,
+          userName: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+          userEmail: user.email,
+          userPhone: user.phone || user.phoneNumber || '',
+          requestedAt: new Date().toISOString(),
+          type: 'manual_qr'
+        }
+      }
+    });
+
+    res.json({
+      success: true,
+      data: {
+        paymentId: payment.id,
+        amount: plan.price,
+        planName: plan.displayName || plan.name,
+        duration: plan.duration
+      }
+    });
+  } catch (error) {
+    console.error('Manual payment request error:', error);
+    res.status(500).json({ success: false, error: 'Erreur serveur' });
+  }
+});
+
+// User cancels their pending request
+router.delete('/manual-request/:id', authenticateToken, async (req, res) => {
+  try {
+    const payment = await prisma.payment.findFirst({
+      where: { id: req.params.id, userId: req.user.userId, status: 'awaiting_confirmation' }
+    });
+    if (!payment) return res.status(404).json({ success: false, error: 'Demande non trouvee' });
+
+    await prisma.payment.update({
+      where: { id: payment.id },
+      data: { status: 'cancelled' }
+    });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Cancel manual request error:', error);
+    res.status(500).json({ success: false, error: 'Erreur serveur' });
+  }
+});
+
+// ──────────────────────────────────────────────
 // INVOICE / RECEIPT — Generate PDF
 // ──────────────────────────────────────────────
 

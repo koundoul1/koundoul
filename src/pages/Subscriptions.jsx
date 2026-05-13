@@ -14,11 +14,48 @@ import {
   TrendingUp,
   Loader2,
   Star,
-  Bot
+  Bot,
+  X,
+  Copy,
+  Check,
+  MessageCircle,
+  Phone
 } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
+
+// Config paiement — QR codes et contact admin
+const PAYMENT_CONFIG = {
+  wave: {
+    label: 'Wave',
+    phone: '+221 77 123 45 67',  // REMPLACER par votre vrai numero Wave
+    qrValue: 'wave://send?phone=221771234567', // REMPLACER
+    color: '#1DC8FF',
+    bgColor: '#0A1929',
+    instructions: [
+      'Ouvre ton appli Wave',
+      'Scanne le QR code ou envoie au numero affiche',
+      'Envoie le montant exact indique',
+      'Clique sur "J\'ai paye" ci-dessous'
+    ]
+  },
+  orange_money: {
+    label: 'Orange Money',
+    phone: '+221 77 987 65 43',  // REMPLACER par votre vrai numero OM
+    qrValue: 'om://send?phone=221779876543', // REMPLACER
+    color: '#FF6600',
+    bgColor: '#1A0E00',
+    instructions: [
+      'Ouvre ton appli Orange Money',
+      'Scanne le QR code ou envoie au numero affiche',
+      'Envoie le montant exact indique',
+      'Clique sur "J\'ai paye" ci-dessous'
+    ]
+  },
+  whatsapp: '+221771234567' // REMPLACER — numero WhatsApp admin pour recevoir confirmations
+};
 
 // Plan card configuration (static — maps DB plan names to UI details)
 const PLAN_UI = {
@@ -38,7 +75,7 @@ const YEARLY_TO_MONTHLY = {
 };
 
 const Subscriptions = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [allPlans, setAllPlans] = useState([]);
@@ -75,34 +112,52 @@ const Subscriptions = () => {
   };
 
   const [paymentMethod, setPaymentMethod] = useState('wave'); // 'wave' | 'orange_money'
+  const [qrModal, setQrModal] = useState(null); // { plan, method }
+  const [confirmStep, setConfirmStep] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleSubscribe = async (plan) => {
+  const handleSubscribe = (plan) => {
     if (!isAuthenticated) { navigate('/login'); return; }
-    try {
-      setProcessingPlanId(plan.id);
-      setPaymentError('');
+    setPaymentError('');
+    setConfirmStep(false);
+    setCopied(false);
+    setQrModal({ plan, method: paymentMethod });
+  };
 
-      if (paymentMethod === 'orange_money') {
-        const response = await api.payments.initiateOm({ planId: plan.id });
-        if (response.success && response.data.payment_url) {
-          window.location.href = response.data.payment_url;
-        } else {
-          setPaymentError('Erreur lors du paiement Orange Money');
-          setProcessingPlanId(null);
-        }
-      } else {
-        const response = await api.payments.initiateWave({ planId: plan.id });
-        if (response.success && response.data.wave_launch_url) {
-          window.location.href = response.data.wave_launch_url;
-        } else {
-          setPaymentError('Erreur lors du paiement Wave');
-          setProcessingPlanId(null);
-        }
+  const handleConfirmPayment = async () => {
+    if (!qrModal) return;
+    setProcessingPlanId(qrModal.plan.id);
+    try {
+      const res = await api.payments.manualRequest({
+        planId: qrModal.plan.id,
+        paymentMethod: qrModal.method
+      });
+      if (res.success) {
+        setConfirmStep(true);
       }
     } catch (error) {
-      setPaymentError(error.message || 'Erreur lors du paiement');
+      setPaymentError(error.message || 'Erreur');
+    } finally {
       setProcessingPlanId(null);
     }
+  };
+
+  const sendWhatsApp = () => {
+    if (!qrModal) return;
+    const { plan, method } = qrModal;
+    const methodLabel = PAYMENT_CONFIG[method]?.label || method;
+    const msg = [
+      `Bonjour, je confirme mon paiement Koundoul :`,
+      ``,
+      `Plan : ${plan.displayName || plan.name}`,
+      `Montant : ${plan.price?.toLocaleString('fr-FR')} FCFA`,
+      `Methode : ${methodLabel}`,
+      `Email : ${user?.email || ''}`,
+      `Nom : ${user?.firstName || ''} ${user?.lastName || ''}`,
+      ``,
+      `Merci d'activer mon abonnement.`
+    ].join('\n');
+    window.open(`https://wa.me/${PAYMENT_CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   // Get display plans based on billing period
@@ -388,9 +443,134 @@ const Subscriptions = () => {
       <div className="max-w-3xl mx-auto px-4 pb-12 text-center">
         <div className="flex items-center justify-center gap-2 text-gray-500 text-sm">
           <Shield className="w-4 h-4" />
-          <span>Paiements sécurisés via Wave Mobile Money</span>
+          <span>Paiements via Wave et Orange Money</span>
         </div>
       </div>
+
+      {/* QR Code Payment Modal */}
+      {qrModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" onClick={() => { setQrModal(null); setConfirmStep(false); }}>
+          <div className="bg-gray-900 border border-gray-700 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            {!confirmStep ? (
+              <>
+                {/* Step 1: QR Code + Instructions */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-white">Payer via {PAYMENT_CONFIG[qrModal.method]?.label}</h3>
+                    <button onClick={() => setQrModal(null)} className="text-gray-500 hover:text-white"><X size={20} /></button>
+                  </div>
+
+                  {/* Plan recap */}
+                  <div className="bg-white/5 rounded-xl p-4 mb-5">
+                    <p className="text-sm text-gray-400">Plan choisi</p>
+                    <p className="text-xl font-bold text-white">{qrModal.plan.displayName || qrModal.plan.name}</p>
+                    <p className="text-2xl font-black mt-1" style={{ color: PAYMENT_CONFIG[qrModal.method]?.color }}>
+                      {qrModal.plan.price?.toLocaleString('fr-FR')} FCFA
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">{qrModal.plan.duration} jours</p>
+                  </div>
+
+                  {/* QR Code */}
+                  <div className="flex justify-center mb-5">
+                    <div className="bg-white rounded-2xl p-4">
+                      <QRCodeSVG
+                        value={PAYMENT_CONFIG[qrModal.method]?.qrValue || PAYMENT_CONFIG[qrModal.method]?.phone}
+                        size={180}
+                        fgColor="#000000"
+                        bgColor="#FFFFFF"
+                        level="H"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Phone number */}
+                  <div className="flex items-center justify-center gap-2 mb-5">
+                    <Phone size={16} className="text-gray-400" />
+                    <span className="text-white font-mono font-bold text-lg">{PAYMENT_CONFIG[qrModal.method]?.phone}</span>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(PAYMENT_CONFIG[qrModal.method]?.phone?.replace(/\s/g, '') || '');
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      className="p-1 text-gray-500 hover:text-white"
+                    >
+                      {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
+                    </button>
+                  </div>
+
+                  {/* Instructions */}
+                  <div className="space-y-2 mb-6">
+                    {PAYMENT_CONFIG[qrModal.method]?.instructions?.map((step, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white">{i + 1}</span>
+                        <span className="text-sm text-gray-300">{step}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Confirm button */}
+                  <button
+                    onClick={handleConfirmPayment}
+                    disabled={!!processingPlanId}
+                    className="w-full py-3.5 rounded-xl font-bold text-white transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    style={{ backgroundColor: PAYMENT_CONFIG[qrModal.method]?.color }}
+                  >
+                    {processingPlanId ? (
+                      <><Loader2 size={18} className="animate-spin" /> Envoi...</>
+                    ) : (
+                      <><CheckCircle size={18} /> J&apos;ai paye</>
+                    )}
+                  </button>
+
+                  <p className="text-xs text-gray-500 text-center mt-3">
+                    Ton abonnement sera active dans l&apos;heure suivant la confirmation
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Step 2: WhatsApp confirmation */}
+                <div className="p-6 text-center">
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle size={32} className="text-green-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Demande enregistree !</h3>
+                  <p className="text-gray-400 text-sm mb-6">
+                    Envoie maintenant ta confirmation par WhatsApp pour qu&apos;on active ton abonnement rapidement.
+                  </p>
+
+                  <button
+                    onClick={sendWhatsApp}
+                    className="w-full py-3.5 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 mb-3 transition-all"
+                  >
+                    <MessageCircle size={20} /> Envoyer la confirmation WhatsApp
+                  </button>
+
+                  <p className="text-xs text-gray-500 mb-4">
+                    Un message pre-rempli avec tes infos sera envoye
+                  </p>
+
+                  <div className="bg-white/5 rounded-xl p-4 text-left">
+                    <p className="text-xs text-gray-500 mb-2">Delai d&apos;activation :</p>
+                    <ul className="space-y-1 text-sm text-gray-300">
+                      <li>Sous 1h en journee (8h-22h)</li>
+                      <li>Notification envoyee des activation</li>
+                    </ul>
+                  </div>
+
+                  <button
+                    onClick={() => { setQrModal(null); setConfirmStep(false); }}
+                    className="w-full mt-4 py-2.5 bg-white/10 text-gray-300 rounded-xl text-sm hover:bg-white/20"
+                  >
+                    Fermer
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

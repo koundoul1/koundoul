@@ -1050,6 +1050,148 @@ router.get('/coach/conversations/:id', requireAdmin, async (req, res, next) => {
   }
 });
 
+// ==================== PENDING MANUAL PAYMENTS ====================
+
+router.get('/pending-payments', requireAdmin, async (req, res, next) => {
+  try {
+    const payments = await prisma.payment.findMany({
+      where: { status: 'awaiting_confirmation' },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, email: true, phone: true, phoneNumber: true, username: true } }
+      }
+    });
+
+    res.json({
+      payments: payments.map(p => ({
+        id: p.id,
+        user: p.user,
+        amount: p.amount,
+        paymentMethod: p.paymentMethod,
+        planName: p.metadata?.planName,
+        planId: p.metadata?.planId,
+        planDuration: p.metadata?.planDuration,
+        userName: p.metadata?.userName,
+        userPhone: p.metadata?.userPhone,
+        requestedAt: p.metadata?.requestedAt || p.createdAt,
+        createdAt: p.createdAt
+      })),
+      total: payments.length
+    });
+  } catch (error) {
+    console.error('Admin pending payments error:', error);
+    next(error);
+  }
+});
+
+router.post('/activate-payment/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const payment = await prisma.payment.findUnique({
+      where: { id: req.params.id },
+      include: { user: { select: { id: true, firstName: true, email: true } } }
+    });
+
+    if (!payment) return res.status(404).json({ error: 'Paiement non trouve' });
+    if (payment.status !== 'awaiting_confirmation') return res.status(400).json({ error: 'Ce paiement n\'est pas en attente' });
+
+    const planId = payment.metadata?.planId;
+    if (!planId) return res.status(400).json({ error: 'Plan ID manquant dans la demande' });
+
+    const plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+    if (!plan) return res.status(404).json({ error: 'Plan non trouve' });
+
+    // Mark payment as completed
+    await prisma.payment.update({
+      where: { id: payment.id },
+      data: {
+        status: 'completed',
+        metadata: { ...payment.metadata, activatedBy: req.user.id, activatedAt: new Date().toISOString() }
+      }
+    });
+
+    // Cancel existing active subscriptions
+    await prisma.subscription.updateMany({
+      where: { userId: payment.userId, status: { in: ['active', 'ACTIVE'] } },
+      data: { status: 'cancelled', cancelledAt: new Date() }
+    });
+
+    // Create subscription
+    const startDate = new Date();
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + (plan.duration || 30));
+
+    const subscription = await prisma.subscription.create({
+      data: {
+        userId: payment.userId,
+        planId: plan.id,
+        status: 'active',
+        startDate,
+        endDate,
+        autoRenew: false
+      }
+    });
+
+    // Link payment to subscription
+    await prisma.payment.update({
+      where: { id: payment.id },
+      data: { subscriptionId: subscription.id }
+    });
+
+    // Notify user
+    try {
+      await sendNotification(
+        payment.userId,
+        'Abonnement active !',
+        `Ton abonnement ${plan.displayName || plan.name} est maintenant actif jusqu'au ${endDate.toLocaleDateString('fr-FR')}. Bon apprentissage !`,
+        '/dashboard'
+      );
+    } catch (e) { /* ignore */ }
+
+    await logAdminAction(req.user.id, 'ACTIVATE_PAYMENT', 'payments', payment.id,
+      `Activated manual payment for ${payment.user?.email} — plan ${plan.name}`, req.ip);
+
+    res.json({ success: true, subscription });
+  } catch (error) {
+    console.error('Admin activate payment error:', error);
+    next(error);
+  }
+});
+
+router.post('/reject-payment/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const { reason } = req.body;
+    const payment = await prisma.payment.findUnique({ where: { id: req.params.id } });
+
+    if (!payment) return res.status(404).json({ error: 'Paiement non trouve' });
+    if (payment.status !== 'awaiting_confirmation') return res.status(400).json({ error: 'Ce paiement n\'est pas en attente' });
+
+    await prisma.payment.update({
+      where: { id: payment.id },
+      data: {
+        status: 'failed',
+        metadata: { ...payment.metadata, rejectedBy: req.user.id, rejectedAt: new Date().toISOString(), rejectReason: reason || '' }
+      }
+    });
+
+    try {
+      await sendNotification(
+        payment.userId,
+        'Demande de paiement refusee',
+        reason ? `Raison : ${reason}. Contacte-nous si besoin.` : 'Ta demande de paiement n\'a pas pu etre validee. Contacte-nous pour plus d\'infos.',
+        '/subscriptions'
+      );
+    } catch (e) { /* ignore */ }
+
+    await logAdminAction(req.user.id, 'REJECT_PAYMENT', 'payments', payment.id,
+      `Rejected manual payment — ${reason || 'no reason'}`, req.ip);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Admin reject payment error:', error);
+    next(error);
+  }
+});
+
 // ==================== FAMILIES / PARENT-CHILD MANAGEMENT ====================
 
 router.get('/families', requireAdmin, async (req, res, next) => {

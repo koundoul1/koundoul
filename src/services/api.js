@@ -329,6 +329,13 @@ const api = {
 
     getOmStatus: (paymentId) => request(`/payments/om/status/${paymentId}`),
 
+    manualRequest: (data) => request('/payments/manual-request', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+    cancelManualRequest: (id) => request(`/payments/manual-request/${id}`, { method: 'DELETE' }),
+
     getHistory: () => request('/payments/history'),
 
     getMyPayments: () => request('/payments/my-payments'),
@@ -472,6 +479,14 @@ const api = {
       body: JSON.stringify(data),
     }),
     getFinanceSummary: () => request('/admin/finance/summary'),
+
+    // Pending manual payments
+    getPendingPayments: () => request('/admin/pending-payments'),
+    activatePayment: (id) => request(`/admin/activate-payment/${id}`, { method: 'POST' }),
+    rejectPayment: (id, reason) => request(`/admin/reject-payment/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+    }),
 
     // Support Tickets
     getTickets: (params = {}) => {
