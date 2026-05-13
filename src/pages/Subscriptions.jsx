@@ -32,12 +32,13 @@ const PAYMENT_CONFIG = {
     label: 'Wave',
     phone: '+221 78 792 89 89',
     // QR code image: mettre le fichier wave-qr.png dans public/ puis remplacer qrImage ci-dessous
-    qrImage: null, // mettre '/wave-qr.png' une fois l'image deposee dans public/
+    qrImage: null,
+    qrValue: '787928989',
     color: '#1DC8FF',
     bgColor: '#0A1929',
     instructions: [
       'Ouvre ton appli Wave',
-      'Copie le numero ci-dessus',
+      'Scanne le QR code ou envoie au numero affiche',
       'Envoie le montant exact indique',
       'Reviens ici et clique "J\'ai paye"'
     ]
@@ -45,12 +46,13 @@ const PAYMENT_CONFIG = {
   orange_money: {
     label: 'Orange Money',
     phone: '+221 78 792 89 89',
-    qrImage: null, // mettre '/om-qr.png' une fois l'image deposee dans public/
+    qrImage: null,
+    qrValue: '787928989',
     color: '#FF6600',
     bgColor: '#1A0E00',
     instructions: [
       'Ouvre ton appli Orange Money',
-      'Copie le numero ci-dessus',
+      'Scanne le QR code ou envoie au numero affiche',
       'Envoie le montant exact indique',
       'Reviens ici et clique "J\'ai paye"'
     ]
@@ -471,18 +473,26 @@ const Subscriptions = () => {
                     <p className="text-xs text-gray-500 mt-1">{qrModal.plan.duration} jours</p>
                   </div>
 
-                  {/* QR Code — uniquement si image fournie */}
-                  {PAYMENT_CONFIG[qrModal.method]?.qrImage && (
-                    <div className="flex justify-center mb-5">
-                      <div className="bg-white rounded-2xl p-4">
+                  {/* QR Code */}
+                  <div className="flex justify-center mb-5">
+                    <div className="bg-white rounded-2xl p-4">
+                      {PAYMENT_CONFIG[qrModal.method]?.qrImage ? (
                         <img
                           src={PAYMENT_CONFIG[qrModal.method].qrImage}
                           alt={`QR Code ${PAYMENT_CONFIG[qrModal.method]?.label}`}
                           className="w-[200px] h-[200px] object-contain"
                         />
-                      </div>
+                      ) : (
+                        <QRCodeSVG
+                          value={PAYMENT_CONFIG[qrModal.method]?.qrValue || '787928989'}
+                          size={200}
+                          fgColor="#000000"
+                          bgColor="#FFFFFF"
+                          level="H"
+                        />
+                      )}
                     </div>
-                  )}
+                  </div>
 
                   {/* Phone number — toujours visible, plus grand si pas de QR */}
                   <div className={`rounded-xl p-4 mb-5 text-center ${!PAYMENT_CONFIG[qrModal.method]?.qrImage ? 'bg-white/5 border-2 border-dashed' : ''}`}
