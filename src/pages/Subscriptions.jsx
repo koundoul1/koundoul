@@ -30,8 +30,10 @@ import { useTranslation } from '../hooks/useTranslation';
 const PAYMENT_CONFIG = {
   wave: {
     label: 'Wave',
-    phone: '+221 77 123 45 67',  // REMPLACER par votre vrai numero Wave
-    qrValue: 'wave://send?phone=221771234567', // REMPLACER
+    phone: '+221 78 792 89 89',
+    // QR code image: mettre le fichier wave-qr.png dans public/ puis remplacer qrImage ci-dessous
+    qrImage: null, // sera '/wave-qr.png' une fois l'image fournie
+    qrValue: '+221787928989',
     color: '#1DC8FF',
     bgColor: '#0A1929',
     instructions: [
@@ -43,8 +45,10 @@ const PAYMENT_CONFIG = {
   },
   orange_money: {
     label: 'Orange Money',
-    phone: '+221 77 987 65 43',  // REMPLACER par votre vrai numero OM
-    qrValue: 'om://send?phone=221779876543', // REMPLACER
+    phone: '+221 78 792 89 89',
+    // QR code image: mettre le fichier om-qr.png dans public/ puis remplacer qrImage ci-dessous
+    qrImage: null, // sera '/om-qr.png' une fois l'image fournie
+    qrValue: '+221787928989',
     color: '#FF6600',
     bgColor: '#1A0E00',
     instructions: [
@@ -54,7 +58,7 @@ const PAYMENT_CONFIG = {
       'Clique sur "J\'ai paye" ci-dessous'
     ]
   },
-  whatsapp: '+221771234567' // REMPLACER — numero WhatsApp admin pour recevoir confirmations
+  whatsapp: '221787928989'
 };
 
 // Plan card configuration (static — maps DB plan names to UI details)
@@ -470,16 +474,24 @@ const Subscriptions = () => {
                     <p className="text-xs text-gray-500 mt-1">{qrModal.plan.duration} jours</p>
                   </div>
 
-                  {/* QR Code */}
+                  {/* QR Code — image fournie ou genere */}
                   <div className="flex justify-center mb-5">
                     <div className="bg-white rounded-2xl p-4">
-                      <QRCodeSVG
-                        value={PAYMENT_CONFIG[qrModal.method]?.qrValue || PAYMENT_CONFIG[qrModal.method]?.phone}
-                        size={180}
-                        fgColor="#000000"
-                        bgColor="#FFFFFF"
-                        level="H"
-                      />
+                      {PAYMENT_CONFIG[qrModal.method]?.qrImage ? (
+                        <img
+                          src={PAYMENT_CONFIG[qrModal.method].qrImage}
+                          alt={`QR Code ${PAYMENT_CONFIG[qrModal.method]?.label}`}
+                          className="w-[180px] h-[180px] object-contain"
+                        />
+                      ) : (
+                        <QRCodeSVG
+                          value={PAYMENT_CONFIG[qrModal.method]?.qrValue || PAYMENT_CONFIG[qrModal.method]?.phone}
+                          size={180}
+                          fgColor="#000000"
+                          bgColor="#FFFFFF"
+                          level="H"
+                        />
+                      )}
                     </div>
                   </div>
 
