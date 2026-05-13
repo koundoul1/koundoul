@@ -246,6 +246,7 @@ app.use('/api/parent-coach', require('./routes/parentCoach'));
 app.use('/api/group-duels', require('./routes/groupDuels'));
 app.use('/api/promo', require('./routes/promo'));
 app.use('/api/admin', adminRoutes);
+app.use('/api/support', require('./routes/support'));
 app.use('/api/leaderboard', leaderboardRoutes);
 const notificationsRoutes = require('./routes/notifications');
 app.use('/api/notifications', notificationsRoutes);

@@ -43,6 +43,13 @@ import {
   MessageSquare,
   Eye,
   ScrollText,
+  UserPlus,
+  Link2,
+  Unlink,
+  Ticket,
+  ArrowRightLeft,
+  CircleDollarSign,
+  MessageCircle,
 } from 'lucide-react'
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -201,6 +208,9 @@ const SECTIONS = [
   { id: 'notifications', label: 'Notifications', icon: Bell },
   { id: 'promos', label: 'Codes Promo', icon: Award },
   { id: 'support', label: 'Support', icon: HeadphonesIcon },
+  { id: 'families', label: 'Familles', icon: Link2 },
+  { id: 'refunds', label: 'Remboursements', icon: ArrowRightLeft },
+  { id: 'tickets', label: 'Tickets', icon: Ticket },
 ]
 
 // =============================================================================
@@ -327,6 +337,9 @@ const AdminDashboard = () => {
           {activeSection === 'notifications' && <NotificationsSection showToast={showToast} />}
           {activeSection === 'promos' && <PromoCodesSection showToast={showToast} />}
           {activeSection === 'support' && <SupportSection showToast={showToast} showConfirm={showConfirm} />}
+          {activeSection === 'families' && <FamiliesSection showToast={showToast} showConfirm={showConfirm} />}
+          {activeSection === 'refunds' && <RefundsSection showToast={showToast} showConfirm={showConfirm} />}
+          {activeSection === 'tickets' && <TicketsSection showToast={showToast} showConfirm={showConfirm} />}
         </div>
       </main>
     </div>
@@ -1982,6 +1995,734 @@ const PromoCodesSection = ({ showToast }) => {
               )}
             </div>
           ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =============================================================================
+// 9. FAMILIES SECTION
+// =============================================================================
+
+const FamiliesSection = ({ showToast, showConfirm }) => {
+  const [families, setFamilies] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [search, setSearch] = useState('')
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [stats, setStats] = useState({})
+  const [showLinkForm, setShowLinkForm] = useState(false)
+  const [parentEmail, setParentEmail] = useState('')
+  const [childEmail, setChildEmail] = useState('')
+  const [linkLoading, setLinkLoading] = useState(false)
+  const searchTimeout = useRef(null)
+
+  const fetchFamilies = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await api.admin.getFamilies({ page, limit: 20, search })
+      setFamilies(data.families || [])
+      setStats(data.stats || {})
+      setTotalPages(data.pagination?.totalPages || 1)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }, [page, search])
+
+  useEffect(() => { fetchFamilies() }, [fetchFamilies])
+
+  const handleSearch = (val) => {
+    clearTimeout(searchTimeout.current)
+    searchTimeout.current = setTimeout(() => { setSearch(val); setPage(1) }, 400)
+  }
+
+  const unlinkFamily = (id, parentName, childName) => {
+    showConfirm('Supprimer le lien familial',
+      `Supprimer le lien entre ${parentName} et ${childName} ?`,
+      async () => {
+        try {
+          await api.admin.deleteFamilyLink(id)
+          showToast('Lien supprimé')
+          fetchFamilies()
+        } catch (err) { showToast(err.message, 'error') }
+      })
+  }
+
+  const handleLink = async (e) => {
+    e.preventDefault()
+    setLinkLoading(true)
+    try {
+      await api.admin.createFamilyLink({ parentEmail, childEmail })
+      showToast('Lien familial créé')
+      setShowLinkForm(false)
+      setParentEmail('')
+      setChildEmail('')
+      fetchFamilies()
+    } catch (err) {
+      showToast(err.message, 'error')
+    } finally {
+      setLinkLoading(false)
+    }
+  }
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <Link2 size={24} className="text-[#FF4757]" /> Gestion des Familles
+      </h2>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-white/5 rounded-xl p-4">
+          <p className="text-xs text-gray-500">Total liens</p>
+          <p className="text-2xl font-bold text-white">{stats.totalLinks || 0}</p>
+        </div>
+        <div className="bg-white/5 rounded-xl p-4">
+          <p className="text-xs text-gray-500">Parents inscrits</p>
+          <p className="text-2xl font-bold text-blue-400">{stats.parentCount || 0}</p>
+        </div>
+        <div className="bg-white/5 rounded-xl p-4">
+          <p className="text-xs text-gray-500">Enfants liés</p>
+          <p className="text-2xl font-bold text-green-400">{stats.childCount || 0}</p>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+        <div className="relative flex-1 w-full">
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+          <input onChange={(e) => handleSearch(e.target.value)} placeholder="Rechercher parent ou enfant..."
+            className="w-full pl-10 pr-4 py-2 bg-white/5 border border-gray-800 rounded-lg text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+        </div>
+        <button onClick={() => setShowLinkForm(!showLinkForm)}
+          className="flex items-center gap-2 px-4 py-2 bg-[#FF4757] text-white rounded-lg text-sm hover:bg-[#FF4757]/80">
+          <UserPlus size={16} /> Lier manuellement
+        </button>
+      </div>
+
+      {/* Link Form */}
+      {showLinkForm && (
+        <form onSubmit={handleLink} className="bg-white/5 rounded-xl p-4 mb-6 space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs text-gray-400 mb-1 block">Email du parent</label>
+              <input value={parentEmail} onChange={(e) => setParentEmail(e.target.value)} required type="email"
+                className="w-full px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1 block">Email enfant</label>
+              <input value={childEmail} onChange={(e) => setChildEmail(e.target.value)} required type="email"
+                className="w-full px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <button type="submit" disabled={linkLoading}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-500 disabled:opacity-50">
+              {linkLoading ? <Loader2 size={16} className="animate-spin" /> : 'Créer le lien'}
+            </button>
+            <button type="button" onClick={() => setShowLinkForm(false)}
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg text-sm hover:bg-gray-600">Annuler</button>
+          </div>
+        </form>
+      )}
+
+      {loading && <Spinner />}
+      {error && <ErrorBlock message={error} onRetry={fetchFamilies} />}
+
+      {!loading && !error && (
+        <div className="space-y-3">
+          {families.length === 0 && <p className="text-gray-500 text-center py-8">Aucun lien familial trouvé</p>}
+          {families.map((f) => (
+            <div key={f.id} className="bg-white/5 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] rounded font-medium">PARENT</span>
+                  <span className="text-sm text-white font-medium truncate">
+                    {f.parent?.firstName} {f.parent?.lastName}
+                  </span>
+                  <span className="text-xs text-gray-500">{f.parent?.email}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] rounded font-medium">ENFANT</span>
+                  <span className="text-sm text-white font-medium truncate">
+                    {f.child?.firstName} {f.child?.lastName}
+                  </span>
+                  <span className="text-xs text-gray-500">{f.child?.email || f.child?.username}</span>
+                  {f.child?.level && <span className="text-xs text-gray-600">Niv.{f.child.level} — {f.child.xp} XP</span>}
+                </div>
+                <div className="text-[10px] text-gray-600 mt-1">
+                  Lié le {new Date(f.createdAt).toLocaleDateString('fr-FR')}
+                  {f.approved === false && <span className="ml-2 text-yellow-500">⏳ En attente</span>}
+                </div>
+              </div>
+              <button onClick={() => unlinkFamily(f.id, f.parent?.firstName || '?', f.child?.firstName || '?')}
+                className="p-2 text-gray-500 hover:text-red-400" title="Supprimer le lien">
+                <Unlink size={16} />
+              </button>
+            </div>
+          ))}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-3 pt-4">
+              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
+                className="px-3 py-1 text-xs bg-white/5 rounded disabled:opacity-30 text-gray-400 hover:text-white">Précédent</button>
+              <span className="text-xs text-gray-500">{page}/{totalPages}</span>
+              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
+                className="px-3 py-1 text-xs bg-white/5 rounded disabled:opacity-30 text-gray-400 hover:text-white">Suivant</button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =============================================================================
+// 10. REFUNDS / INVOICES SECTION
+// =============================================================================
+
+const RefundsSection = ({ showToast, showConfirm }) => {
+  const [tab, setTab] = useState('summary')
+  const tabs = [
+    { id: 'summary', label: 'Vue Financière', icon: CircleDollarSign },
+    { id: 'refunds', label: 'Remboursements', icon: ArrowRightLeft },
+  ]
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <CircleDollarSign size={24} className="text-[#FF4757]" /> Remboursements & Finances
+      </h2>
+      <div className="flex gap-2 mb-6">
+        {tabs.map(t => (
+          <button key={t.id} onClick={() => setTab(t.id)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm ${tab === t.id ? 'bg-[#FF4757]/15 text-[#FF4757]' : 'bg-white/5 text-gray-400 hover:text-white'}`}>
+            <t.icon size={16} /> {t.label}
+          </button>
+        ))}
+      </div>
+      {tab === 'summary' && <FinanceSummaryTab showToast={showToast} />}
+      {tab === 'refunds' && <RefundsTab showToast={showToast} showConfirm={showConfirm} />}
+    </div>
+  )
+}
+
+const FinanceSummaryTab = ({ showToast }) => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const d = await api.admin.getFinanceSummary()
+        setData(d)
+      } catch (err) { showToast(err.message, 'error') }
+      finally { setLoading(false) }
+    })()
+  }, [showToast])
+
+  if (loading) return <Spinner />
+  if (!data) return <p className="text-gray-500 text-center py-8">Impossible de charger le résumé</p>
+
+  const growthColor = data.revenueGrowth >= 0 ? 'text-green-400' : 'text-red-400'
+  const growthIcon = data.revenueGrowth >= 0 ? '↑' : '↓'
+
+  return (
+    <div className="space-y-6">
+      {/* Revenue cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-white/5 rounded-xl p-4">
+          <p className="text-xs text-gray-500">Revenu total</p>
+          <p className="text-2xl font-bold text-white">{formatCFA(data.totalRevenue)}</p>
+        </div>
+        <div className="bg-white/5 rounded-xl p-4">
+          <p className="text-xs text-gray-500">Ce mois</p>
+          <p className="text-2xl font-bold text-green-400">{formatCFA(data.monthRevenue)}</p>
+          <p className={`text-xs ${growthColor}`}>{growthIcon} {Math.abs(data.revenueGrowth)}% vs mois dernier</p>
+        </div>
+        <div className="bg-white/5 rounded-xl p-4">
+          <p className="text-xs text-gray-500">Total remboursé</p>
+          <p className="text-2xl font-bold text-orange-400">{formatCFA(data.totalRefunded)}</p>
+          <p className="text-xs text-gray-500">{data.totalRefundCount} remboursements</p>
+        </div>
+        <div className="bg-white/5 rounded-xl p-4">
+          <p className="text-xs text-gray-500">Remb. en attente</p>
+          <p className="text-2xl font-bold text-yellow-400">{data.pendingRefunds}</p>
+        </div>
+      </div>
+
+      {/* Payment methods breakdown */}
+      <div className="bg-white/5 rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-gray-300 mb-3">Répartition par méthode de paiement</h3>
+        <div className="space-y-2">
+          {(data.paymentsByMethod || []).map((m) => {
+            const methodLabels = { wave: 'Wave', orange_money: 'Orange Money', STRIPE: 'Carte bancaire' }
+            return (
+              <div key={m.method} className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                <span className="text-sm text-white">{methodLabels[m.method] || m.method}</span>
+                <div className="text-right">
+                  <span className="text-sm font-bold text-white">{formatCFA(m.total)}</span>
+                  <span className="text-xs text-gray-500 ml-2">({m.count} tx)</span>
+                </div>
+              </div>
+            )
+          })}
+          {(!data.paymentsByMethod || data.paymentsByMethod.length === 0) && (
+            <p className="text-gray-500 text-xs text-center">Aucun paiement</p>
+          )}
+        </div>
+      </div>
+
+      {/* Recent payments */}
+      <div className="bg-white/5 rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-gray-300 mb-3">Derniers paiements</h3>
+        <div className="space-y-2">
+          {(data.recentPayments || []).map((p) => (
+            <div key={p.id} className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+              <div>
+                <span className="text-sm text-white">{p.user?.firstName} {p.user?.lastName}</span>
+                <span className="text-xs text-gray-500 ml-2">{p.user?.email}</span>
+              </div>
+              <div className="text-right">
+                <span className="text-sm font-bold text-green-400">{formatCFA(p.amount)}</span>
+                <p className="text-[10px] text-gray-500">{new Date(p.createdAt).toLocaleDateString('fr-FR')}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const RefundsTab = ({ showToast, showConfirm }) => {
+  const [refunds, setRefunds] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [showForm, setShowForm] = useState(false)
+  const [formData, setFormData] = useState({ paymentId: '', reason: '', amount: '', adminNote: '' })
+  const [formLoading, setFormLoading] = useState(false)
+
+  const fetchRefunds = useCallback(async () => {
+    setLoading(true)
+    try {
+      const data = await api.admin.getRefunds({ page, limit: 20, status: statusFilter })
+      setRefunds(data.refunds || [])
+      setTotalPages(data.pagination?.totalPages || 1)
+    } catch (err) { showToast(err.message, 'error') }
+    finally { setLoading(false) }
+  }, [page, statusFilter, showToast])
+
+  useEffect(() => { fetchRefunds() }, [fetchRefunds])
+
+  const handleCreateRefund = async (e) => {
+    e.preventDefault()
+    setFormLoading(true)
+    try {
+      await api.admin.createRefund({
+        paymentId: formData.paymentId.trim(),
+        reason: formData.reason,
+        amount: formData.amount ? parseInt(formData.amount) : undefined,
+        adminNote: formData.adminNote || undefined,
+      })
+      showToast('Remboursement créé')
+      setShowForm(false)
+      setFormData({ paymentId: '', reason: '', amount: '', adminNote: '' })
+      fetchRefunds()
+    } catch (err) { showToast(err.message, 'error') }
+    finally { setFormLoading(false) }
+  }
+
+  const updateStatus = (id, newStatus, label) => {
+    showConfirm(`${label} le remboursement ?`, `Confirmer : ${label}`,
+      async () => {
+        try {
+          await api.admin.updateRefund(id, { status: newStatus })
+          showToast(`Remboursement ${label.toLowerCase()}`)
+          fetchRefunds()
+        } catch (err) { showToast(err.message, 'error') }
+      })
+  }
+
+  const statusBadge = (s) => {
+    const colors = { pending: 'bg-yellow-500/20 text-yellow-400', approved: 'bg-blue-500/20 text-blue-400', processed: 'bg-green-500/20 text-green-400', rejected: 'bg-red-500/20 text-red-400' }
+    const labels = { pending: 'En attente', approved: 'Approuvé', processed: 'Traité', rejected: 'Refusé' }
+    return <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${colors[s] || 'bg-gray-500/20 text-gray-400'}`}>{labels[s] || s}</span>
+  }
+
+  return (
+    <div>
+      {/* Filters + Create */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+        <select value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1) }}
+          className="px-3 py-2 bg-white/5 border border-gray-800 rounded-lg text-sm text-white focus:outline-none">
+          <option value="all">Tous les statuts</option>
+          <option value="pending">En attente</option>
+          <option value="approved">Approuvés</option>
+          <option value="processed">Traités</option>
+          <option value="rejected">Refusés</option>
+        </select>
+        <button onClick={() => setShowForm(!showForm)}
+          className="flex items-center gap-2 px-4 py-2 bg-[#FF4757] text-white rounded-lg text-sm hover:bg-[#FF4757]/80">
+          <Plus size={16} /> Nouveau remboursement
+        </button>
+      </div>
+
+      {/* Create Form */}
+      {showForm && (
+        <form onSubmit={handleCreateRefund} className="bg-white/5 rounded-xl p-4 mb-6 space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs text-gray-400 mb-1 block">ID du paiement *</label>
+              <input value={formData.paymentId} onChange={(e) => setFormData(f => ({ ...f, paymentId: e.target.value }))} required
+                placeholder="ID du paiement à rembourser"
+                className="w-full px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1 block">Montant (FCFA, vide = total)</label>
+              <input value={formData.amount} onChange={(e) => setFormData(f => ({ ...f, amount: e.target.value }))} type="number"
+                placeholder="Laisser vide pour remboursement total"
+                className="w-full px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+            </div>
+          </div>
+          <div>
+            <label className="text-xs text-gray-400 mb-1 block">Raison *</label>
+            <input value={formData.reason} onChange={(e) => setFormData(f => ({ ...f, reason: e.target.value }))} required
+              placeholder="Raison du remboursement"
+              className="w-full px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+          </div>
+          <div>
+            <label className="text-xs text-gray-400 mb-1 block">Note admin</label>
+            <input value={formData.adminNote} onChange={(e) => setFormData(f => ({ ...f, adminNote: e.target.value }))}
+              placeholder="Note interne (optionnelle)"
+              className="w-full px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+          </div>
+          <div className="flex gap-2">
+            <button type="submit" disabled={formLoading}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-500 disabled:opacity-50">
+              {formLoading ? <Loader2 size={16} className="animate-spin" /> : 'Créer'}
+            </button>
+            <button type="button" onClick={() => setShowForm(false)}
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg text-sm hover:bg-gray-600">Annuler</button>
+          </div>
+        </form>
+      )}
+
+      {loading && <Spinner />}
+
+      {!loading && (
+        <div className="space-y-3">
+          {refunds.length === 0 && <p className="text-gray-500 text-center py-8">Aucun remboursement</p>}
+          {refunds.map((r) => (
+            <div key={r.id} className="bg-white/5 rounded-xl p-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-2">
+                  {statusBadge(r.status)}
+                  <span className="text-sm text-white font-medium">{r.user?.firstName} {r.user?.lastName}</span>
+                  <span className="text-xs text-gray-500">{r.user?.email}</span>
+                </div>
+                <span className="text-lg font-bold text-orange-400">{formatCFA(r.amount)}</span>
+              </div>
+              <p className="text-xs text-gray-400 mb-1"><strong>Raison:</strong> {r.reason}</p>
+              {r.adminNote && <p className="text-xs text-gray-500 mb-1"><strong>Note:</strong> {r.adminNote}</p>}
+              <div className="flex items-center gap-3 text-[10px] text-gray-600 mb-2">
+                <span>Paiement: {formatCFA(r.payment?.amount)} ({r.payment?.paymentMethod})</span>
+                <span>Créé le {new Date(r.createdAt).toLocaleDateString('fr-FR')}</span>
+                {r.processedAt && <span>Traité le {new Date(r.processedAt).toLocaleDateString('fr-FR')}</span>}
+                {r.admin && <span>Par {r.admin.firstName}</span>}
+              </div>
+              {r.status === 'pending' && (
+                <div className="flex gap-2 mt-2">
+                  <button onClick={() => updateStatus(r.id, 'processed', 'Traiter')}
+                    className="px-3 py-1 text-xs bg-green-600/20 text-green-400 rounded hover:bg-green-600/30">Traiter</button>
+                  <button onClick={() => updateStatus(r.id, 'rejected', 'Refuser')}
+                    className="px-3 py-1 text-xs bg-red-600/20 text-red-400 rounded hover:bg-red-600/30">Refuser</button>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-3 pt-4">
+              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
+                className="px-3 py-1 text-xs bg-white/5 rounded disabled:opacity-30 text-gray-400 hover:text-white">Précédent</button>
+              <span className="text-xs text-gray-500">{page}/{totalPages}</span>
+              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
+                className="px-3 py-1 text-xs bg-white/5 rounded disabled:opacity-30 text-gray-400 hover:text-white">Suivant</button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// =============================================================================
+// 11. TICKETS SECTION
+// =============================================================================
+
+const TicketsSection = ({ showToast, showConfirm }) => {
+  const [tickets, setTickets] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [categoryFilter, setCategoryFilter] = useState('all')
+  const [priorityFilter, setPriorityFilter] = useState('all')
+  const [search, setSearch] = useState('')
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [statusCounts, setStatusCounts] = useState({})
+  const [selectedTicket, setSelectedTicket] = useState(null)
+  const [ticketDetail, setTicketDetail] = useState(null)
+  const [replyText, setReplyText] = useState('')
+  const [replyLoading, setReplyLoading] = useState(false)
+  const searchTimeout = useRef(null)
+
+  const fetchTickets = useCallback(async () => {
+    setLoading(true)
+    try {
+      const data = await api.admin.getTickets({ page, limit: 20, status: statusFilter, category: categoryFilter, priority: priorityFilter, search })
+      setTickets(data.tickets || [])
+      setStatusCounts(data.statusCounts || {})
+      setTotalPages(data.pagination?.totalPages || 1)
+    } catch (err) { showToast(err.message, 'error') }
+    finally { setLoading(false) }
+  }, [page, statusFilter, categoryFilter, priorityFilter, search, showToast])
+
+  useEffect(() => { fetchTickets() }, [fetchTickets])
+
+  const handleSearch = (val) => {
+    clearTimeout(searchTimeout.current)
+    searchTimeout.current = setTimeout(() => { setSearch(val); setPage(1) }, 400)
+  }
+
+  const loadTicketDetail = async (id) => {
+    if (selectedTicket === id) { setSelectedTicket(null); return }
+    setSelectedTicket(id)
+    try {
+      const data = await api.admin.getTicket(id)
+      setTicketDetail(data)
+    } catch (err) { showToast(err.message, 'error') }
+  }
+
+  const handleReply = async (ticketId) => {
+    if (!replyText.trim()) return
+    setReplyLoading(true)
+    try {
+      await api.admin.replyTicket(ticketId, replyText)
+      showToast('Réponse envoyée')
+      setReplyText('')
+      const data = await api.admin.getTicket(ticketId)
+      setTicketDetail(data)
+      fetchTickets()
+    } catch (err) { showToast(err.message, 'error') }
+    finally { setReplyLoading(false) }
+  }
+
+  const updateTicket = async (id, data) => {
+    try {
+      await api.admin.updateTicket(id, data)
+      showToast('Ticket mis à jour')
+      fetchTickets()
+      if (selectedTicket === id) {
+        const d = await api.admin.getTicket(id)
+        setTicketDetail(d)
+      }
+    } catch (err) { showToast(err.message, 'error') }
+  }
+
+  const deleteTicket = (id, subject) => {
+    showConfirm('Supprimer le ticket', `Supprimer "${subject}" ?`,
+      async () => {
+        try {
+          await api.admin.deleteTicket(id)
+          showToast('Ticket supprimé')
+          if (selectedTicket === id) setSelectedTicket(null)
+          fetchTickets()
+        } catch (err) { showToast(err.message, 'error') }
+      })
+  }
+
+  const statusBadge = (s) => {
+    const colors = { open: 'bg-blue-500/20 text-blue-400', in_progress: 'bg-yellow-500/20 text-yellow-400', resolved: 'bg-green-500/20 text-green-400', closed: 'bg-gray-500/20 text-gray-400' }
+    const labels = { open: 'Ouvert', in_progress: 'En cours', resolved: 'Résolu', closed: 'Fermé' }
+    return <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${colors[s] || 'bg-gray-500/20 text-gray-400'}`}>{labels[s] || s}</span>
+  }
+
+  const priorityBadge = (p) => {
+    const colors = { low: 'text-gray-400', normal: 'text-blue-400', high: 'text-orange-400', urgent: 'text-red-400' }
+    const labels = { low: 'Bas', normal: 'Normal', high: 'Haut', urgent: 'Urgent' }
+    return <span className={`text-[10px] font-bold ${colors[p] || 'text-gray-400'}`}>{labels[p] || p}</span>
+  }
+
+  const categoryLabel = (c) => {
+    const labels = { general: 'Général', bug: 'Bug', billing: 'Facturation', account: 'Compte', feature: 'Fonctionnalité' }
+    return labels[c] || c
+  }
+
+  const totalOpen = (statusCounts.open || 0) + (statusCounts.in_progress || 0)
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <Ticket size={24} className="text-[#FF4757]" /> Tickets Support
+        {totalOpen > 0 && <span className="ml-2 px-2 py-0.5 bg-red-500/20 text-red-400 text-xs rounded-full">{totalOpen} ouverts</span>}
+      </h2>
+
+      {/* Status summary */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+        {[
+          { label: 'Ouverts', key: 'open', color: 'text-blue-400' },
+          { label: 'En cours', key: 'in_progress', color: 'text-yellow-400' },
+          { label: 'Résolus', key: 'resolved', color: 'text-green-400' },
+          { label: 'Fermés', key: 'closed', color: 'text-gray-400' },
+        ].map(s => (
+          <div key={s.key} className="bg-white/5 rounded-xl p-3 text-center">
+            <p className={`text-2xl font-bold ${s.color}`}>{statusCounts[s.key] || 0}</p>
+            <p className="text-xs text-gray-500">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6 flex-wrap">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+          <input onChange={(e) => handleSearch(e.target.value)} placeholder="Rechercher..."
+            className="w-full pl-10 pr-4 py-2 bg-white/5 border border-gray-800 rounded-lg text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+        </div>
+        <select value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1) }}
+          className="px-3 py-2 bg-white/5 border border-gray-800 rounded-lg text-sm text-white focus:outline-none">
+          <option value="all">Tous statuts</option>
+          <option value="open">Ouverts</option>
+          <option value="in_progress">En cours</option>
+          <option value="resolved">Résolus</option>
+          <option value="closed">Fermés</option>
+        </select>
+        <select value={categoryFilter} onChange={(e) => { setCategoryFilter(e.target.value); setPage(1) }}
+          className="px-3 py-2 bg-white/5 border border-gray-800 rounded-lg text-sm text-white focus:outline-none">
+          <option value="all">Toutes catégories</option>
+          <option value="general">Général</option>
+          <option value="bug">Bug</option>
+          <option value="billing">Facturation</option>
+          <option value="account">Compte</option>
+          <option value="feature">Fonctionnalité</option>
+        </select>
+        <select value={priorityFilter} onChange={(e) => { setPriorityFilter(e.target.value); setPage(1) }}
+          className="px-3 py-2 bg-white/5 border border-gray-800 rounded-lg text-sm text-white focus:outline-none">
+          <option value="all">Toutes priorités</option>
+          <option value="urgent">Urgent</option>
+          <option value="high">Haut</option>
+          <option value="normal">Normal</option>
+          <option value="low">Bas</option>
+        </select>
+      </div>
+
+      {loading && <Spinner />}
+
+      {!loading && (
+        <div className="space-y-3">
+          {tickets.length === 0 && <p className="text-gray-500 text-center py-8">Aucun ticket</p>}
+          {tickets.map((t) => (
+            <div key={t.id} className="bg-white/5 rounded-xl overflow-hidden">
+              <div className="p-4 cursor-pointer hover:bg-white/5" onClick={() => loadTicketDetail(t.id)}>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {statusBadge(t.status)}
+                    {priorityBadge(t.priority)}
+                    <span className="px-2 py-0.5 bg-white/10 text-gray-400 text-[10px] rounded">{categoryLabel(t.category)}</span>
+                    <span className="text-sm text-white font-medium">{t.subject}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {t._count?.replies > 0 && (
+                      <span className="flex items-center gap-1 text-xs text-gray-500"><MessageCircle size={12} />{t._count.replies}</span>
+                    )}
+                    <button onClick={(e) => { e.stopPropagation(); deleteTicket(t.id, t.subject) }}
+                      className="p-1 text-gray-600 hover:text-red-400"><Trash2 size={14} /></button>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-[10px] text-gray-500">
+                  <span>De: {t.user?.firstName} {t.user?.lastName} ({t.user?.email})</span>
+                  <span>{new Date(t.createdAt).toLocaleDateString('fr-FR')}</span>
+                  {t.admin && <span>Assigné: {t.admin.firstName}</span>}
+                </div>
+              </div>
+
+              {/* Expanded detail */}
+              {selectedTicket === t.id && ticketDetail && (
+                <div className="border-t border-gray-800 p-4 bg-white/[0.02]">
+                  <p className="text-sm text-gray-300 mb-4 whitespace-pre-wrap">{ticketDetail.message}</p>
+
+                  {/* Status/Priority controls */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <select value={ticketDetail.status} onChange={(e) => updateTicket(t.id, { status: e.target.value })}
+                      className="px-2 py-1 bg-white/5 border border-gray-700 rounded text-xs text-white">
+                      <option value="open">Ouvert</option>
+                      <option value="in_progress">En cours</option>
+                      <option value="resolved">Résolu</option>
+                      <option value="closed">Fermé</option>
+                    </select>
+                    <select value={ticketDetail.priority} onChange={(e) => updateTicket(t.id, { priority: e.target.value })}
+                      className="px-2 py-1 bg-white/5 border border-gray-700 rounded text-xs text-white">
+                      <option value="low">Bas</option>
+                      <option value="normal">Normal</option>
+                      <option value="high">Haut</option>
+                      <option value="urgent">Urgent</option>
+                    </select>
+                  </div>
+
+                  {/* Replies */}
+                  {ticketDetail.replies && ticketDetail.replies.length > 0 && (
+                    <div className="space-y-2 mb-4">
+                      <p className="text-xs text-gray-500 font-medium">Conversation :</p>
+                      {ticketDetail.replies.map((r) => (
+                        <div key={r.id} className={`p-3 rounded-lg text-sm ${r.isAdmin ? 'bg-[#FF4757]/10 border-l-2 border-[#FF4757]' : 'bg-white/5 border-l-2 border-blue-500'}`}>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className={`text-xs font-medium ${r.isAdmin ? 'text-[#FF4757]' : 'text-blue-400'}`}>
+                              {r.user?.firstName} {r.user?.lastName} {r.isAdmin && '(Admin)'}
+                            </span>
+                            <span className="text-[10px] text-gray-500">{new Date(r.createdAt).toLocaleString('fr-FR')}</span>
+                          </div>
+                          <p className="text-gray-300 whitespace-pre-wrap">{r.message}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Reply form */}
+                  {ticketDetail.status !== 'closed' && (
+                    <div className="flex gap-2">
+                      <input value={replyText} onChange={(e) => setReplyText(e.target.value)}
+                        placeholder="Répondre au ticket..."
+                        onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleReply(t.id)}
+                        className="flex-1 px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+                      <button onClick={() => handleReply(t.id)} disabled={replyLoading || !replyText.trim()}
+                        className="px-4 py-2 bg-[#FF4757] text-white rounded-lg text-sm hover:bg-[#FF4757]/80 disabled:opacity-50">
+                        {replyLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-3 pt-4">
+              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
+                className="px-3 py-1 text-xs bg-white/5 rounded disabled:opacity-30 text-gray-400 hover:text-white">Précédent</button>
+              <span className="text-xs text-gray-500">{page}/{totalPages}</span>
+              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
+                className="px-3 py-1 text-xs bg-white/5 rounded disabled:opacity-30 text-gray-400 hover:text-white">Suivant</button>
+            </div>
+          )}
         </div>
       )}
     </div>

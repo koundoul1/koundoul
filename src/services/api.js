@@ -437,6 +437,48 @@ const api = {
       return request(`/admin/coach/conversations${q ? `?${q}` : ''}`)
     },
     getCoachConversation: (id) => request(`/admin/coach/conversations/${id}`),
+
+    // Families
+    getFamilies: (params = {}) => {
+      const q = new URLSearchParams(params).toString()
+      return request(`/admin/families${q ? `?${q}` : ''}`)
+    },
+    deleteFamilyLink: (id) => request(`/admin/families/${id}`, { method: 'DELETE' }),
+    createFamilyLink: (data) => request('/admin/families/link', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+    // Refunds
+    getRefunds: (params = {}) => {
+      const q = new URLSearchParams(params).toString()
+      return request(`/admin/refunds${q ? `?${q}` : ''}`)
+    },
+    createRefund: (data) => request('/admin/refunds', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+    updateRefund: (id, data) => request(`/admin/refunds/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
+    getFinanceSummary: () => request('/admin/finance/summary'),
+
+    // Support Tickets
+    getTickets: (params = {}) => {
+      const q = new URLSearchParams(params).toString()
+      return request(`/admin/tickets${q ? `?${q}` : ''}`)
+    },
+    getTicket: (id) => request(`/admin/tickets/${id}`),
+    updateTicket: (id, data) => request(`/admin/tickets/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
+    replyTicket: (id, message) => request(`/admin/tickets/${id}/reply`, {
+      method: 'POST',
+      body: JSON.stringify({ message }),
+    }),
+    deleteTicket: (id) => request(`/admin/tickets/${id}`, { method: 'DELETE' }),
   },
 
   // 🏆 GAMIFICATION
@@ -450,6 +492,20 @@ const api = {
     claimBadge: (badgeId) => request(`/gamification/badges/${badgeId}/claim`, {
       method: 'POST',
     })
+  },
+
+  // 🎫 SUPPORT
+  support: {
+    createTicket: (data) => request('/support/tickets', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+    getTickets: () => request('/support/tickets'),
+    getTicket: (id) => request(`/support/tickets/${id}`),
+    replyTicket: (id, message) => request(`/support/tickets/${id}/reply`, {
+      method: 'POST',
+      body: JSON.stringify({ message }),
+    }),
   },
 
   // 🔧 UTILITAIRES

@@ -1050,4 +1050,492 @@ router.get('/coach/conversations/:id', requireAdmin, async (req, res, next) => {
   }
 });
 
+// ==================== FAMILIES / PARENT-CHILD MANAGEMENT ====================
+
+router.get('/families', requireAdmin, async (req, res, next) => {
+  try {
+    const { page = 1, limit = 20, search = '' } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    const where = search ? {
+      OR: [
+        { users_parent_child_links_parent_idTousers: { firstName: { contains: search, mode: 'insensitive' } } },
+        { users_parent_child_links_parent_idTousers: { lastName: { contains: search, mode: 'insensitive' } } },
+        { users_parent_child_links_parent_idTousers: { email: { contains: search, mode: 'insensitive' } } },
+        { users_parent_child_links_child_idTousers: { firstName: { contains: search, mode: 'insensitive' } } },
+        { users_parent_child_links_child_idTousers: { lastName: { contains: search, mode: 'insensitive' } } },
+      ]
+    } : {};
+
+    const [links, total, parentCount, childCount] = await Promise.all([
+      prisma.parent_child_links.findMany({
+        where,
+        skip,
+        take: parseInt(limit),
+        orderBy: { created_at: 'desc' },
+        include: {
+          users_parent_child_links_parent_idTousers: {
+            select: { id: true, firstName: true, lastName: true, email: true, phone: true, phoneNumber: true, isParent: true, createdAt: true, isActive: true }
+          },
+          users_parent_child_links_child_idTousers: {
+            select: { id: true, firstName: true, lastName: true, email: true, username: true, level: true, xp: true, streak: true, isActive: true, createdAt: true }
+          }
+        }
+      }),
+      prisma.parent_child_links.count({ where }),
+      prisma.user.count({ where: { isParent: true } }),
+      prisma.parent_child_links.groupBy({ by: ['child_id'], _count: true }).then(r => r.length),
+    ]);
+
+    const families = links.map(l => ({
+      id: l.id,
+      approved: l.approved,
+      createdAt: l.created_at,
+      parent: l.users_parent_child_links_parent_idTousers,
+      child: l.users_parent_child_links_child_idTousers,
+    }));
+
+    res.json({
+      families,
+      stats: { totalLinks: total, parentCount, childCount },
+      pagination: { page: parseInt(page), limit: parseInt(limit), total, totalPages: Math.ceil(total / parseInt(limit)) }
+    });
+  } catch (error) {
+    console.error('Admin families error:', error);
+    next(error);
+  }
+});
+
+router.delete('/families/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const link = await prisma.parent_child_links.findUnique({ where: { id: req.params.id } });
+    if (!link) return res.status(404).json({ error: 'Lien non trouvé' });
+
+    await prisma.parent_child_links.delete({ where: { id: req.params.id } });
+
+    // Also clear parentId on child if it matches
+    await prisma.user.updateMany({
+      where: { id: link.child_id, parentId: link.parent_id },
+      data: { parentId: null, parentInvitationCode: null }
+    });
+
+    await logAdminAction(req.user.id, 'UNLINK_FAMILY', 'parent_child_links', req.params.id,
+      `Unlinked parent ${link.parent_id} from child ${link.child_id}`, req.ip);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Admin delete family link error:', error);
+    next(error);
+  }
+});
+
+router.post('/families/link', requireAdmin, async (req, res, next) => {
+  try {
+    const { parentEmail, childEmail } = req.body;
+    if (!parentEmail || !childEmail) return res.status(400).json({ error: 'parentEmail et childEmail requis' });
+
+    const [parent, child] = await Promise.all([
+      prisma.user.findUnique({ where: { email: parentEmail.toLowerCase().trim() } }),
+      prisma.user.findUnique({ where: { email: childEmail.toLowerCase().trim() } }),
+    ]);
+
+    if (!parent) return res.status(404).json({ error: 'Parent non trouvé' });
+    if (!child) return res.status(404).json({ error: 'Enfant non trouvé' });
+    if (parent.id === child.id) return res.status(400).json({ error: 'Impossible de lier un utilisateur à lui-même' });
+
+    const existing = await prisma.parent_child_links.findUnique({
+      where: { parent_id_child_id: { parent_id: parent.id, child_id: child.id } }
+    });
+    if (existing) return res.status(400).json({ error: 'Ce lien existe déjà' });
+
+    await prisma.$transaction([
+      prisma.parent_child_links.create({
+        data: { parent_id: parent.id, child_id: child.id, approved: true }
+      }),
+      prisma.user.update({ where: { id: parent.id }, data: { isParent: true } }),
+      prisma.user.update({ where: { id: child.id }, data: { parentId: parent.id } }),
+    ]);
+
+    await logAdminAction(req.user.id, 'LINK_FAMILY', 'parent_child_links', null,
+      `Linked parent ${parent.email} to child ${child.email}`, req.ip);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Admin create family link error:', error);
+    next(error);
+  }
+});
+
+// ==================== REFUNDS / INVOICES ====================
+
+router.get('/refunds', requireAdmin, async (req, res, next) => {
+  try {
+    const { page = 1, limit = 20, status = 'all' } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    const where = status !== 'all' ? { status } : {};
+
+    const [refunds, total, stats] = await Promise.all([
+      prisma.refund.findMany({
+        where,
+        skip,
+        take: parseInt(limit),
+        orderBy: { createdAt: 'desc' },
+        include: {
+          user: { select: { id: true, firstName: true, lastName: true, email: true } },
+          admin: { select: { id: true, firstName: true, lastName: true } },
+          payment: { select: { id: true, amount: true, paymentMethod: true, createdAt: true, status: true } },
+        }
+      }),
+      prisma.refund.count({ where }),
+      prisma.refund.groupBy({
+        by: ['status'],
+        _sum: { amount: true },
+        _count: true,
+      }),
+    ]);
+
+    const statusStats = {};
+    stats.forEach(s => { statusStats[s.status] = { count: s._count, totalAmount: s._sum.amount || 0 }; });
+
+    res.json({
+      refunds,
+      stats: statusStats,
+      pagination: { page: parseInt(page), limit: parseInt(limit), total, totalPages: Math.ceil(total / parseInt(limit)) }
+    });
+  } catch (error) {
+    console.error('Admin refunds error:', error);
+    next(error);
+  }
+});
+
+router.post('/refunds', requireAdmin, async (req, res, next) => {
+  try {
+    const { paymentId, reason, amount, adminNote } = req.body;
+    if (!paymentId || !reason) return res.status(400).json({ error: 'paymentId et reason requis' });
+
+    const payment = await prisma.payment.findUnique({
+      where: { id: paymentId },
+      include: { user: { select: { id: true, firstName: true, email: true } } }
+    });
+    if (!payment) return res.status(404).json({ error: 'Paiement non trouvé' });
+    if (payment.status !== 'completed') return res.status(400).json({ error: 'Seuls les paiements complétés peuvent être remboursés' });
+
+    // Check no existing pending/approved refund for this payment
+    const existingRefund = await prisma.refund.findFirst({
+      where: { paymentId, status: { in: ['pending', 'approved', 'processed'] } }
+    });
+    if (existingRefund) return res.status(400).json({ error: 'Un remboursement existe déjà pour ce paiement' });
+
+    const refundAmount = amount || payment.amount;
+
+    const refund = await prisma.refund.create({
+      data: {
+        paymentId,
+        userId: payment.userId,
+        adminId: req.user.id,
+        amount: refundAmount,
+        reason,
+        adminNote: adminNote || null,
+        status: 'pending',
+      },
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, email: true } },
+        payment: { select: { id: true, amount: true, paymentMethod: true } },
+      }
+    });
+
+    await logAdminAction(req.user.id, 'CREATE_REFUND', 'refunds', refund.id,
+      `Refund ${refundAmount} FCFA for payment ${paymentId} — ${reason}`, req.ip);
+
+    res.json(refund);
+  } catch (error) {
+    console.error('Admin create refund error:', error);
+    next(error);
+  }
+});
+
+router.patch('/refunds/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const { status, adminNote } = req.body;
+    const refund = await prisma.refund.findUnique({ where: { id: req.params.id } });
+    if (!refund) return res.status(404).json({ error: 'Remboursement non trouvé' });
+
+    const updateData = {};
+    if (adminNote !== undefined) updateData.adminNote = adminNote;
+
+    if (status) {
+      updateData.status = status;
+      if (status === 'processed') {
+        updateData.processedAt = new Date();
+        // Cancel the associated subscription if refund is processed
+        const payment = await prisma.payment.findUnique({ where: { id: refund.paymentId } });
+        if (payment && payment.subscriptionId) {
+          await prisma.subscription.update({
+            where: { id: payment.subscriptionId },
+            data: { status: 'cancelled', cancelledAt: new Date() }
+          });
+        }
+        // Notify user
+        try {
+          await sendNotification(refund.userId, 'Remboursement effectué',
+            `Votre remboursement de ${refund.amount} FCFA a été traité.`, '/profile/payments');
+        } catch (e) { /* ignore */ }
+      }
+      if (status === 'rejected') {
+        try {
+          await sendNotification(refund.userId, 'Remboursement refusé',
+            `Votre demande de remboursement a été refusée.`, '/profile/payments');
+        } catch (e) { /* ignore */ }
+      }
+    }
+
+    const updated = await prisma.refund.update({
+      where: { id: req.params.id },
+      data: updateData,
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, email: true } },
+        admin: { select: { id: true, firstName: true, lastName: true } },
+        payment: { select: { id: true, amount: true, paymentMethod: true } },
+      }
+    });
+
+    await logAdminAction(req.user.id, 'UPDATE_REFUND', 'refunds', req.params.id,
+      `Updated refund status to ${status || 'note updated'}`, req.ip);
+
+    res.json(updated);
+  } catch (error) {
+    console.error('Admin update refund error:', error);
+    next(error);
+  }
+});
+
+// Financial summary
+router.get('/finance/summary', requireAdmin, async (req, res, next) => {
+  try {
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
+    const [
+      totalRevenue,
+      monthRevenue,
+      lastMonthRevenue,
+      totalRefunds,
+      pendingRefunds,
+      paymentsByMethod,
+      recentPayments,
+    ] = await Promise.all([
+      prisma.payment.aggregate({ where: { status: 'completed' }, _sum: { amount: true } }),
+      prisma.payment.aggregate({ where: { status: 'completed', createdAt: { gte: monthStart } }, _sum: { amount: true } }),
+      prisma.payment.aggregate({ where: { status: 'completed', createdAt: { gte: lastMonthStart, lt: monthStart } }, _sum: { amount: true } }),
+      prisma.refund.aggregate({ where: { status: 'processed' }, _sum: { amount: true }, _count: true }),
+      prisma.refund.count({ where: { status: 'pending' } }),
+      prisma.payment.groupBy({ by: ['paymentMethod'], where: { status: 'completed' }, _sum: { amount: true }, _count: true }),
+      prisma.payment.findMany({
+        where: { status: 'completed' },
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+        include: { user: { select: { firstName: true, lastName: true, email: true } } }
+      }),
+    ]);
+
+    res.json({
+      totalRevenue: totalRevenue._sum.amount || 0,
+      monthRevenue: monthRevenue._sum.amount || 0,
+      lastMonthRevenue: lastMonthRevenue._sum.amount || 0,
+      revenueGrowth: lastMonthRevenue._sum.amount
+        ? Math.round(((monthRevenue._sum.amount || 0) - lastMonthRevenue._sum.amount) / lastMonthRevenue._sum.amount * 100)
+        : 0,
+      totalRefunded: totalRefunds._sum.amount || 0,
+      totalRefundCount: totalRefunds._count || 0,
+      pendingRefunds,
+      paymentsByMethod: paymentsByMethod.map(p => ({
+        method: p.paymentMethod,
+        total: p._sum.amount || 0,
+        count: p._count,
+      })),
+      recentPayments,
+    });
+  } catch (error) {
+    console.error('Admin finance summary error:', error);
+    next(error);
+  }
+});
+
+// ==================== SUPPORT TICKETS ====================
+
+router.get('/tickets', requireAdmin, async (req, res, next) => {
+  try {
+    const { page = 1, limit = 20, status = 'all', category = 'all', priority = 'all', search = '' } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    const where = {};
+    if (status !== 'all') where.status = status;
+    if (category !== 'all') where.category = category;
+    if (priority !== 'all') where.priority = priority;
+    if (search) {
+      where.OR = [
+        { subject: { contains: search, mode: 'insensitive' } },
+        { message: { contains: search, mode: 'insensitive' } },
+        { user: { firstName: { contains: search, mode: 'insensitive' } } },
+        { user: { email: { contains: search, mode: 'insensitive' } } },
+      ];
+    }
+
+    const [tickets, total, statusCounts] = await Promise.all([
+      prisma.supportTicket.findMany({
+        where,
+        skip,
+        take: parseInt(limit),
+        orderBy: [{ priority: 'asc' }, { createdAt: 'desc' }],
+        include: {
+          user: { select: { id: true, firstName: true, lastName: true, email: true, username: true } },
+          admin: { select: { id: true, firstName: true, lastName: true } },
+          _count: { select: { replies: true } },
+        }
+      }),
+      prisma.supportTicket.count({ where }),
+      prisma.supportTicket.groupBy({ by: ['status'], _count: true }),
+    ]);
+
+    const counts = {};
+    statusCounts.forEach(s => { counts[s.status] = s._count; });
+
+    res.json({
+      tickets,
+      statusCounts: counts,
+      pagination: { page: parseInt(page), limit: parseInt(limit), total, totalPages: Math.ceil(total / parseInt(limit)) }
+    });
+  } catch (error) {
+    console.error('Admin tickets error:', error);
+    next(error);
+  }
+});
+
+router.get('/tickets/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const ticket = await prisma.supportTicket.findUnique({
+      where: { id: req.params.id },
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, email: true, username: true, phone: true } },
+        admin: { select: { id: true, firstName: true, lastName: true } },
+        replies: {
+          orderBy: { createdAt: 'asc' },
+          include: { user: { select: { id: true, firstName: true, lastName: true, is_admin: true } } }
+        },
+      }
+    });
+    if (!ticket) return res.status(404).json({ error: 'Ticket non trouvé' });
+    res.json(ticket);
+  } catch (error) {
+    console.error('Admin get ticket error:', error);
+    next(error);
+  }
+});
+
+router.patch('/tickets/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const { status, priority, adminNote, adminId } = req.body;
+    const ticket = await prisma.supportTicket.findUnique({ where: { id: req.params.id } });
+    if (!ticket) return res.status(404).json({ error: 'Ticket non trouvé' });
+
+    const updateData = {};
+    if (status) {
+      updateData.status = status;
+      if (status === 'resolved') updateData.resolvedAt = new Date();
+      if (status === 'closed') updateData.closedAt = new Date();
+    }
+    if (priority) updateData.priority = priority;
+    if (adminNote !== undefined) updateData.adminNote = adminNote;
+    if (adminId) updateData.adminId = adminId;
+    if (!ticket.adminId) updateData.adminId = req.user.id;
+
+    const updated = await prisma.supportTicket.update({
+      where: { id: req.params.id },
+      data: updateData,
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, email: true } },
+        admin: { select: { id: true, firstName: true, lastName: true } },
+      }
+    });
+
+    // Notify user on status change
+    if (status && status !== ticket.status) {
+      const statusLabels = { in_progress: 'en cours de traitement', resolved: 'résolu', closed: 'fermé' };
+      try {
+        await sendNotification(ticket.userId, 'Ticket mis à jour',
+          `Votre ticket "${ticket.subject}" est maintenant ${statusLabels[status] || status}.`, null);
+      } catch (e) { /* ignore */ }
+    }
+
+    await logAdminAction(req.user.id, 'UPDATE_TICKET', 'support_tickets', req.params.id,
+      `Updated ticket: ${Object.keys(updateData).join(', ')}`, req.ip);
+
+    res.json(updated);
+  } catch (error) {
+    console.error('Admin update ticket error:', error);
+    next(error);
+  }
+});
+
+router.post('/tickets/:id/reply', requireAdmin, async (req, res, next) => {
+  try {
+    const { message } = req.body;
+    if (!message) return res.status(400).json({ error: 'Message requis' });
+
+    const ticket = await prisma.supportTicket.findUnique({ where: { id: req.params.id } });
+    if (!ticket) return res.status(404).json({ error: 'Ticket non trouvé' });
+
+    const reply = await prisma.ticketReply.create({
+      data: {
+        ticketId: req.params.id,
+        userId: req.user.id,
+        message,
+        isAdmin: true,
+      },
+      include: { user: { select: { id: true, firstName: true, lastName: true, is_admin: true } } }
+    });
+
+    // Auto assign + set in_progress if not yet
+    if (ticket.status === 'open') {
+      await prisma.supportTicket.update({
+        where: { id: req.params.id },
+        data: { status: 'in_progress', adminId: req.user.id }
+      });
+    }
+
+    // Notify user
+    try {
+      await sendNotification(ticket.userId, 'Réponse à votre ticket',
+        `Un administrateur a répondu à votre ticket "${ticket.subject}".`, null);
+    } catch (e) { /* ignore */ }
+
+    await logAdminAction(req.user.id, 'REPLY_TICKET', 'support_tickets', req.params.id,
+      `Admin replied to ticket`, req.ip);
+
+    res.json(reply);
+  } catch (error) {
+    console.error('Admin reply ticket error:', error);
+    next(error);
+  }
+});
+
+router.delete('/tickets/:id', requireAdmin, async (req, res, next) => {
+  try {
+    const ticket = await prisma.supportTicket.findUnique({ where: { id: req.params.id } });
+    if (!ticket) return res.status(404).json({ error: 'Ticket non trouvé' });
+
+    await prisma.supportTicket.delete({ where: { id: req.params.id } });
+
+    await logAdminAction(req.user.id, 'DELETE_TICKET', 'support_tickets', req.params.id,
+      `Deleted ticket: ${ticket.subject}`, req.ip);
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Admin delete ticket error:', error);
+    next(error);
+  }
+});
+
 module.exports = router;
