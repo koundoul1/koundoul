@@ -518,6 +518,11 @@ const api = {
     })
   },
 
+  // 🎁 PARRAINAGE
+  referral: {
+    getCode: () => request('/auth/referral'),
+  },
+
   // 🎫 SUPPORT
   support: {
     createTicket: (data) => request('/support/tickets', {

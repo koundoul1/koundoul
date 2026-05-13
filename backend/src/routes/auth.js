@@ -187,6 +187,61 @@ router.post('/register', registerLimiter, async (req, res, next) => {
       }
     }
 
+    // Handle referral code — both referrer and new user get 24h premium
+    const referralCode = req.body.referralCode || req.body.ref;
+    if (referralCode) {
+      try {
+        const referrer = await prisma.user.findFirst({
+          where: { invitationCode: referralCode }
+        });
+        // Store referral link on the new user
+        if (referrer) {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { parentInvitationCode: referralCode }
+          }).catch(() => {});
+        }
+        if (referrer && referrer.id !== user.id) {
+          // Find PREMIUM_DAILY plan
+          const dailyPlan = await prisma.subscriptionPlan.findFirst({
+            where: { name: 'PREMIUM_DAILY', isActive: true }
+          });
+          if (dailyPlan) {
+            const now = new Date();
+            const endDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+
+            // Give 24h premium to new user
+            await prisma.subscription.create({
+              data: { userId: user.id, planId: dailyPlan.id, status: 'active', startDate: now, endDate, autoRenew: false }
+            }).catch(() => {});
+
+            // Give 24h premium to referrer (only if not already premium)
+            const referrerSub = await prisma.subscription.findFirst({
+              where: { userId: referrer.id, status: { in: ['active', 'ACTIVE'] }, endDate: { gte: now } }
+            });
+            if (!referrerSub) {
+              await prisma.subscription.create({
+                data: { userId: referrer.id, planId: dailyPlan.id, status: 'active', startDate: now, endDate, autoRenew: false }
+              }).catch(() => {});
+            }
+
+            // Notify referrer
+            const { sendNotification } = require('../utils/notificationService');
+            sendNotification(
+              referrer.id,
+              'Parrainage reussi !',
+              `${user.firstName || user.username} s'est inscrit avec ton code ! Vous avez tous les deux recu Premium 24h gratuit.`,
+              '/dashboard'
+            ).catch(() => {});
+
+            console.log(`[Referral] ${user.email} referred by ${referrer.email} — both get 24h premium`);
+          }
+        }
+      } catch (refErr) {
+        console.warn('[Referral] Error:', refErr.message);
+      }
+    }
+
     const token = buildToken(user);
 
     res.status(201).json({
@@ -545,6 +600,52 @@ router.post('/refresh-token', async (req, res, next) => {
       return res.status(401).json({ error: 'Token invalide ou expire' });
     }
     next(error);
+  }
+});
+
+// ── GET /referral — Get or generate referral code ──
+router.get('/referral', authenticateToken, async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.userId },
+      select: { id: true, invitationCode: true, firstName: true }
+    });
+
+    let code = user.invitationCode;
+    if (!code) {
+      // Generate a unique 8-char referral code
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let attempts = 0;
+      do {
+        code = '';
+        for (let i = 0; i < 8; i++) code += chars[Math.floor(Math.random() * chars.length)];
+        const exists = await prisma.user.findFirst({ where: { invitationCode: code } });
+        if (!exists) break;
+        attempts++;
+      } while (attempts < 10);
+
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { invitationCode: code }
+      });
+    }
+
+    // Count successful referrals
+    const referralCount = await prisma.user.count({
+      where: { parentInvitationCode: code }
+    });
+
+    res.json({
+      success: true,
+      data: {
+        code,
+        referralCount,
+        shareUrl: `${process.env.FRONTEND_URL || 'https://koundoul.com'}/register?ref=${code}`
+      }
+    });
+  } catch (error) {
+    console.error('Referral code error:', error);
+    res.status(500).json({ error: 'Erreur serveur' });
   }
 });
 

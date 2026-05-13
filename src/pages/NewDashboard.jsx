@@ -12,6 +12,7 @@ import {
   Play, BookMarked, BarChart3, Lock
 } from 'lucide-react'
 import api from '../services/api'
+import useAiQuota from '../hooks/useAiQuota'
 
 const SUBJECT_ICONS = { 'Mathématiques': '📐', 'Physique': '⚛️', 'Chimie': '🧪' }
 const SUBJECT_COLORS = {
@@ -102,9 +103,16 @@ const NewDashboard = () => {
   const [dashboard, setDashboard] = useState(null)
   const [activityData, setActivityData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [promoDismissed, setPromoDismissed] = useState(false)
+  const [referralCode, setReferralCode] = useState(null)
+  const aiQuota = useAiQuota()
+  const isFreeUser = !aiQuota.quota?.plan || aiQuota.quota?.plan === 'FREE' || aiQuota.quota?.plan === 'Gratuit'
 
   useEffect(() => {
     fetchDashboard()
+    api.referral.getCode().then(r => {
+      if (r.success) setReferralCode(r.data)
+    }).catch(() => {})
   }, [])
 
   const fetchDashboard = async () => {
@@ -234,6 +242,56 @@ const NewDashboard = () => {
             </div>
           </div>
         </div>
+
+        {/* Premium 24h Promo Banner — free users only */}
+        {isFreeUser && !promoDismissed && (
+          <div className="relative overflow-hidden rounded-2xl mb-6 bg-gradient-to-r from-purple-600/90 to-pink-600/90 border border-purple-500/30">
+            <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')]" />
+            <button onClick={() => setPromoDismissed(true)} className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-black/20 text-white/60 hover:text-white flex items-center justify-center text-xs">&times;</button>
+            <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 p-4 sm:p-5">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                <Zap className="w-6 h-6 text-yellow-300" />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-white font-bold text-base sm:text-lg">
+                  Premium 24h des 125 FCFA
+                </h3>
+                <p className="text-white/80 text-sm mt-0.5">
+                  Teste toutes les fonctionnalites et debloque 20 appels IA/jour
+                </p>
+              </div>
+              <button
+                onClick={() => navigate('/subscriptions?period=daily')}
+                className="flex-shrink-0 px-5 py-2.5 bg-white text-purple-700 font-bold rounded-xl text-sm hover:bg-white/90 transition-all shadow-lg"
+              >
+                Essayer maintenant
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Referral Share Card */}
+        {referralCode && (
+          <div className="k-card p-4 sm:p-5 mb-6 flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+              <span className="text-lg">🎁</span>
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <p className="text-white font-bold text-sm">Invite un ami, recevez Premium 24h gratuit !</p>
+              <p className="text-gray-400 text-xs mt-0.5">Ton ami et toi recevez 24h premium a l&apos;inscription</p>
+            </div>
+            <button
+              onClick={() => {
+                const msg = `Rejoins-moi sur Koundoul ! Inscris-toi avec mon code et on recoit tous les deux Premium 24h gratuit 🎁\n\n${referralCode.shareUrl}`
+                window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank')
+              }}
+              className="flex-shrink-0 flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-xl text-sm font-bold transition-all"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.643-1.216A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-2.168 0-4.19-.587-5.932-1.61l-.425-.253-2.753.722.735-2.686-.278-.442A9.776 9.776 0 012.182 12c0-5.418 4.4-9.818 9.818-9.818S21.818 6.582 21.818 12s-4.4 9.818-9.818 9.818z"/></svg>
+              Inviter via WhatsApp
+            </button>
+          </div>
+        )}
 
         {/* 7-Day Activity Grid */}
         <div className="k-card p-5 mb-6">

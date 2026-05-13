@@ -39,6 +39,8 @@ const Register = () => {
   const { register, isAuthenticated, error, clearError } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+  const referralCode = searchParams.get('ref') || ''
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -119,7 +121,8 @@ const Register = () => {
         lastName: lastName.trim(),
         username: username.trim(),
         email: email.trim(),
-        role: role === 'parent' ? 'parent' : 'student'
+        role: role === 'parent' ? 'parent' : 'student',
+        ...(referralCode ? { referralCode } : {})
       }
       if (authMode === 'password') {
         data.password = password
@@ -147,6 +150,15 @@ const Register = () => {
       </div>
 
       <div className="relative max-w-md w-full">
+        {/* Referral badge */}
+        {referralCode && (
+          <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-xl p-3 mb-4 text-center">
+            <p className="text-sm text-purple-300 font-medium">
+              🎁 Tu as ete invite ! Inscris-toi et recois <strong>Premium 24h gratuit</strong>
+            </p>
+          </div>
+        )}
+
         {/* Header */}
         <div className="text-center mb-6">
           <Link to="/" className="inline-flex items-center justify-center mb-4">
