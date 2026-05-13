@@ -1055,7 +1055,7 @@ router.get('/coach/conversations/:id', requireAdmin, async (req, res, next) => {
 router.get('/pending-payments', requireAdmin, async (req, res, next) => {
   try {
     const payments = await prisma.payment.findMany({
-      where: { status: 'awaiting_confirmation' },
+      where: { status: 'pending_manual' },
       orderBy: { createdAt: 'desc' },
       include: {
         user: { select: { id: true, firstName: true, lastName: true, email: true, phone: true, phoneNumber: true, username: true } }
@@ -1092,7 +1092,7 @@ router.post('/activate-payment/:id', requireAdmin, async (req, res, next) => {
     });
 
     if (!payment) return res.status(404).json({ error: 'Paiement non trouve' });
-    if (payment.status !== 'awaiting_confirmation') return res.status(400).json({ error: 'Ce paiement n\'est pas en attente' });
+    if (payment.status !== 'pending_manual') return res.status(400).json({ error: 'Ce paiement n\'est pas en attente' });
 
     const planId = payment.metadata?.planId;
     if (!planId) return res.status(400).json({ error: 'Plan ID manquant dans la demande' });
@@ -1163,7 +1163,7 @@ router.post('/reject-payment/:id', requireAdmin, async (req, res, next) => {
     const payment = await prisma.payment.findUnique({ where: { id: req.params.id } });
 
     if (!payment) return res.status(404).json({ error: 'Paiement non trouve' });
-    if (payment.status !== 'awaiting_confirmation') return res.status(400).json({ error: 'Ce paiement n\'est pas en attente' });
+    if (payment.status !== 'pending_manual') return res.status(400).json({ error: 'Ce paiement n\'est pas en attente' });
 
     await prisma.payment.update({
       where: { id: payment.id },

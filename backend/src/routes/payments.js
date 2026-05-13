@@ -390,9 +390,10 @@ router.post('/manual-request', authenticateToken, async (req, res) => {
     if (plan.price <= 0) return res.status(400).json({ success: false, error: 'Ce plan est gratuit' });
 
     // Check no pending manual request for same plan
-    const existing = await prisma.payment.findFirst({
-      where: { userId, status: 'awaiting_confirmation', metadata: { path: ['planId'], equals: planId } }
+    const existingPending = await prisma.payment.findMany({
+      where: { userId, status: 'pending_manual' }
     });
+    const existing = existingPending.find(p => p.metadata?.planId === planId);
     if (existing) {
       return res.status(400).json({ success: false, error: 'Tu as deja une demande en attente pour ce plan. Envoie ta confirmation WhatsApp.' });
     }
@@ -407,7 +408,7 @@ router.post('/manual-request', authenticateToken, async (req, res) => {
         userId,
         amount: plan.price,
         currency: plan.currency || 'xof',
-        status: 'awaiting_confirmation',
+        status: 'pending_manual',
         paymentMethod: paymentMethod || 'wave',
         metadata: {
           planId,
@@ -441,7 +442,7 @@ router.post('/manual-request', authenticateToken, async (req, res) => {
 router.delete('/manual-request/:id', authenticateToken, async (req, res) => {
   try {
     const payment = await prisma.payment.findFirst({
-      where: { id: req.params.id, userId: req.user.userId, status: 'awaiting_confirmation' }
+      where: { id: req.params.id, userId: req.user.userId, status: 'pending_manual' }
     });
     if (!payment) return res.status(404).json({ success: false, error: 'Demande non trouvee' });
 
