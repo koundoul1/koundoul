@@ -32,30 +32,27 @@ const PAYMENT_CONFIG = {
     label: 'Wave',
     phone: '+221 78 792 89 89',
     // QR code image: mettre le fichier wave-qr.png dans public/ puis remplacer qrImage ci-dessous
-    qrImage: null, // sera '/wave-qr.png' une fois l'image fournie
-    qrValue: '+221787928989',
+    qrImage: null, // mettre '/wave-qr.png' une fois l'image deposee dans public/
     color: '#1DC8FF',
     bgColor: '#0A1929',
     instructions: [
       'Ouvre ton appli Wave',
-      'Scanne le QR code ou envoie au numero affiche',
+      'Copie le numero ci-dessus',
       'Envoie le montant exact indique',
-      'Clique sur "J\'ai paye" ci-dessous'
+      'Reviens ici et clique "J\'ai paye"'
     ]
   },
   orange_money: {
     label: 'Orange Money',
     phone: '+221 78 792 89 89',
-    // QR code image: mettre le fichier om-qr.png dans public/ puis remplacer qrImage ci-dessous
-    qrImage: null, // sera '/om-qr.png' une fois l'image fournie
-    qrValue: '+221787928989',
+    qrImage: null, // mettre '/om-qr.png' une fois l'image deposee dans public/
     color: '#FF6600',
     bgColor: '#1A0E00',
     instructions: [
       'Ouvre ton appli Orange Money',
-      'Scanne le QR code ou envoie au numero affiche',
+      'Copie le numero ci-dessus',
       'Envoie le montant exact indique',
-      'Clique sur "J\'ai paye" ci-dessous'
+      'Reviens ici et clique "J\'ai paye"'
     ]
   },
   whatsapp: '221787928989'
@@ -474,41 +471,40 @@ const Subscriptions = () => {
                     <p className="text-xs text-gray-500 mt-1">{qrModal.plan.duration} jours</p>
                   </div>
 
-                  {/* QR Code — image fournie ou genere */}
-                  <div className="flex justify-center mb-5">
-                    <div className="bg-white rounded-2xl p-4">
-                      {PAYMENT_CONFIG[qrModal.method]?.qrImage ? (
+                  {/* QR Code — uniquement si image fournie */}
+                  {PAYMENT_CONFIG[qrModal.method]?.qrImage && (
+                    <div className="flex justify-center mb-5">
+                      <div className="bg-white rounded-2xl p-4">
                         <img
                           src={PAYMENT_CONFIG[qrModal.method].qrImage}
                           alt={`QR Code ${PAYMENT_CONFIG[qrModal.method]?.label}`}
-                          className="w-[180px] h-[180px] object-contain"
+                          className="w-[200px] h-[200px] object-contain"
                         />
-                      ) : (
-                        <QRCodeSVG
-                          value={PAYMENT_CONFIG[qrModal.method]?.qrValue || PAYMENT_CONFIG[qrModal.method]?.phone}
-                          size={180}
-                          fgColor="#000000"
-                          bgColor="#FFFFFF"
-                          level="H"
-                        />
-                      )}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Phone number */}
-                  <div className="flex items-center justify-center gap-2 mb-5">
-                    <Phone size={16} className="text-gray-400" />
-                    <span className="text-white font-mono font-bold text-lg">{PAYMENT_CONFIG[qrModal.method]?.phone}</span>
-                    <button
-                      onClick={() => {
-                        navigator.clipboard.writeText(PAYMENT_CONFIG[qrModal.method]?.phone?.replace(/\s/g, '') || '');
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 2000);
-                      }}
-                      className="p-1 text-gray-500 hover:text-white"
-                    >
-                      {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
-                    </button>
+                  {/* Phone number — toujours visible, plus grand si pas de QR */}
+                  <div className={`rounded-xl p-4 mb-5 text-center ${!PAYMENT_CONFIG[qrModal.method]?.qrImage ? 'bg-white/5 border-2 border-dashed' : ''}`}
+                    style={{ borderColor: !PAYMENT_CONFIG[qrModal.method]?.qrImage ? PAYMENT_CONFIG[qrModal.method]?.color : undefined }}>
+                    {!PAYMENT_CONFIG[qrModal.method]?.qrImage && (
+                      <p className="text-xs text-gray-400 mb-2">Envoie le montant a ce numero :</p>
+                    )}
+                    <div className="flex items-center justify-center gap-3">
+                      <Phone size={20} style={{ color: PAYMENT_CONFIG[qrModal.method]?.color }} />
+                      <span className="text-white font-mono font-bold text-2xl tracking-wide">{PAYMENT_CONFIG[qrModal.method]?.phone}</span>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(PAYMENT_CONFIG[qrModal.method]?.phone?.replace(/\s/g, '') || '');
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className="p-1.5 rounded-lg bg-white/10 text-gray-400 hover:text-white hover:bg-white/20 transition-all"
+                      >
+                        {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
+                      </button>
+                    </div>
+                    {copied && <p className="text-xs text-green-400 mt-1">Numero copie !</p>}
                   </div>
 
                   {/* Instructions */}
