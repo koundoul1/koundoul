@@ -8,8 +8,9 @@ var prisma = require('../config/database');
 async function getUserPlanInfo(userId) {
   var now = new Date();
   var sub = await prisma.subscription.findFirst({
-    where: { userId: userId, status: 'ACTIVE', endDate: { gte: now } },
-    include: { plan: true }
+    where: { userId: userId, status: { in: ['ACTIVE', 'active'] }, endDate: { gte: now } },
+    include: { plan: true },
+    orderBy: { endDate: 'desc' }
   });
 
   if (sub && sub.plan) {
@@ -27,7 +28,7 @@ async function getUserPlanInfo(userId) {
   });
   if (parentLink) {
     var parentSub = await prisma.subscription.findFirst({
-      where: { userId: parentLink.parent_id, status: 'ACTIVE', endDate: { gte: now } },
+      where: { userId: parentLink.parent_id, status: { in: ['ACTIVE', 'active'] }, endDate: { gte: now } },
       include: { plan: true }
     });
     if (parentSub && (parentSub.plan.name === 'FAMILY' || parentSub.plan.name === 'FAMILY_YEARLY')) {

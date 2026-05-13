@@ -6,10 +6,19 @@ const crypto = require('crypto');
 const prisma = require('../config/database');
 const { sendNotification } = require('../utils/notificationService');
 
+const { generateInvoice } = require('../utils/invoiceGenerator');
+
 const WAVE_API_KEY = process.env.WAVE_API_KEY;
 const WAVE_WEBHOOK_SECRET = process.env.WAVE_WEBHOOK_SECRET;
 const WAVE_BASE_URL = 'https://api.wave.com/v1';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3002';
+
+// Orange Money config
+const OM_CLIENT_ID = process.env.OM_CLIENT_ID;
+const OM_CLIENT_SECRET = process.env.OM_CLIENT_SECRET;
+const OM_MERCHANT_KEY = process.env.OM_MERCHANT_KEY;
+const OM_BASE_URL = process.env.OM_BASE_URL || 'https://api.orange.com/orange-money-webpay/dev/v1';
+const OM_AUTH_URL = 'https://api.orange.com/oauth/v3/token';
 
 // ──────────────────────────────────────────────
 // 1. POST /wave/initiate — Initier un paiement Wave
@@ -361,6 +370,330 @@ router.get('/:id/status', authenticateToken, async (req, res) => {
     res.json({ success: true, data: payment });
   } catch (error) {
     console.error('Erreur vérification statut:', error);
+    res.status(500).json({ success: false, error: 'Erreur serveur' });
+  }
+});
+
+// ──────────────────────────────────────────────
+// INVOICE / RECEIPT — Generate PDF
+// ──────────────────────────────────────────────
+
+router.get('/:id/invoice', authenticateToken, async (req, res) => {
+  try {
+    const payment = await prisma.payment.findFirst({
+      where: { id: req.params.id, userId: req.user.userId, status: 'completed' },
+      include: {
+        user: { select: { id: true, firstName: true, lastName: true, email: true, username: true, phone: true, phoneNumber: true } },
+        subscription: {
+          include: { plan: true }
+        }
+      }
+    });
+
+    if (!payment) {
+      return res.status(404).json({ success: false, error: 'Paiement non trouve ou non complete' });
+    }
+
+    const pdfBuffer = await generateInvoice(
+      payment,
+      payment.user,
+      payment.subscription,
+      payment.subscription?.plan
+    );
+
+    const filename = `recu-koundoul-${payment.id.slice(-8).toUpperCase()}.pdf`;
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Length', pdfBuffer.length);
+    res.send(pdfBuffer);
+  } catch (error) {
+    console.error('Invoice generation error:', error);
+    res.status(500).json({ success: false, error: 'Erreur generation facture' });
+  }
+});
+
+// Admin can generate invoice for any payment
+router.get('/:id/invoice/admin', async (req, res, next) => {
+  try {
+    // Import requireAdmin inline to avoid circular
+    const { requireAdmin } = require('../middlewares/auth');
+    // Manual middleware check
+    requireAdmin(req, res, async () => {
+      const payment = await prisma.payment.findFirst({
+        where: { id: req.params.id },
+        include: {
+          user: { select: { id: true, firstName: true, lastName: true, email: true, username: true, phone: true, phoneNumber: true } },
+          subscription: { include: { plan: true } }
+        }
+      });
+
+      if (!payment) return res.status(404).json({ success: false, error: 'Paiement non trouve' });
+
+      const pdfBuffer = await generateInvoice(payment, payment.user, payment.subscription, payment.subscription?.plan);
+      const filename = `recu-koundoul-${payment.id.slice(-8).toUpperCase()}.pdf`;
+
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.setHeader('Content-Length', pdfBuffer.length);
+      res.send(pdfBuffer);
+    });
+  } catch (error) {
+    console.error('Admin invoice error:', error);
+    res.status(500).json({ success: false, error: 'Erreur generation facture' });
+  }
+});
+
+// ──────────────────────────────────────────────
+// ORANGE MONEY — Initier un paiement
+// ──────────────────────────────────────────────
+
+async function getOmAccessToken() {
+  const response = await axios.post(OM_AUTH_URL,
+    'grant_type=client_credentials',
+    {
+      headers: {
+        'Authorization': 'Basic ' + Buffer.from(`${OM_CLIENT_ID}:${OM_CLIENT_SECRET}`).toString('base64'),
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+  );
+  return response.data.access_token;
+}
+
+router.post('/om/initiate', authenticateToken, async (req, res) => {
+  try {
+    const { planId } = req.body;
+    const userId = req.user.userId;
+
+    if (!planId) return res.status(400).json({ success: false, error: 'Plan ID requis' });
+    if (!OM_CLIENT_ID || !OM_CLIENT_SECRET) {
+      return res.status(503).json({ success: false, error: 'Orange Money non configuré' });
+    }
+
+    const plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+    if (!plan) return res.status(404).json({ success: false, error: 'Plan non trouvé' });
+    if (plan.price <= 0) return res.status(400).json({ success: false, error: 'Ce plan est gratuit' });
+
+    const orderId = `KDL_${userId.slice(-6)}_${Date.now()}`;
+
+    // Create payment record
+    const payment = await prisma.payment.create({
+      data: {
+        userId,
+        amount: plan.price,
+        currency: plan.currency || 'xof',
+        status: 'pending',
+        paymentMethod: 'orange_money',
+        metadata: { planId, planName: plan.name, orderId }
+      }
+    });
+
+    try {
+      const accessToken = await getOmAccessToken();
+
+      const omResponse = await axios.post(
+        `${OM_BASE_URL}/webpayment`,
+        {
+          merchant_key: OM_MERCHANT_KEY,
+          currency: 'OUV',
+          order_id: orderId,
+          amount: plan.price,
+          return_url: `${FRONTEND_URL}/payment/success?method=om&ref=${payment.id}`,
+          cancel_url: `${FRONTEND_URL}/payment/error?method=om`,
+          notif_url: `${process.env.BACKEND_URL || 'https://koundoul-backend.onrender.com'}/api/payments/om/webhook`,
+          lang: 'fr',
+          reference: payment.id
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      const payToken = omResponse.data.pay_token;
+      const paymentUrl = omResponse.data.payment_url;
+
+      await prisma.payment.update({
+        where: { id: payment.id },
+        data: {
+          orange_money_id: payToken,
+          metadata: { ...payment.metadata, payToken, paymentUrl }
+        }
+      });
+
+      res.json({
+        success: true,
+        data: {
+          payment_url: paymentUrl,
+          pay_token: payToken,
+          payment_id: payment.id
+        }
+      });
+    } catch (omError) {
+      console.error('Erreur Orange Money API:', omError.response?.data || omError.message);
+      await prisma.payment.update({
+        where: { id: payment.id },
+        data: {
+          status: 'failed',
+          metadata: { ...payment.metadata, errorMessage: omError.response?.data?.message || omError.message }
+        }
+      });
+      res.status(500).json({
+        success: false,
+        error: 'Erreur lors de la création du paiement Orange Money',
+        details: omError.response?.data || omError.message
+      });
+    }
+  } catch (error) {
+    console.error('Erreur paiement OM:', error);
+    res.status(500).json({ success: false, error: 'Erreur serveur' });
+  }
+});
+
+// ──────────────────────────────────────────────
+// ORANGE MONEY — Webhook (notif_url callback)
+// ──────────────────────────────────────────────
+
+router.post('/om/webhook', async (req, res) => {
+  res.status(200).json({ received: true });
+
+  try {
+    const { status, pay_token, txnid } = req.body;
+
+    if (status !== 'SUCCESS') {
+      console.log('[OM Webhook] Non-success status:', status);
+      return;
+    }
+
+    // Find payment by pay_token (stored as orange_money_id)
+    const payment = await prisma.payment.findFirst({
+      where: { orange_money_id: pay_token, status: 'pending' }
+    });
+
+    if (!payment) {
+      console.error('[OM Webhook] Payment not found for pay_token:', pay_token);
+      return;
+    }
+
+    // Update payment status
+    await prisma.payment.update({
+      where: { id: payment.id },
+      data: {
+        status: 'completed',
+        metadata: { ...payment.metadata, omTransactionId: txnid, completedAt: new Date().toISOString() }
+      }
+    });
+
+    // Create subscription (same logic as Wave)
+    const planId = payment.metadata?.planId;
+    if (planId) {
+      const plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+      if (plan) {
+        await prisma.subscription.updateMany({
+          where: { userId: payment.userId, status: 'active' },
+          data: { status: 'cancelled', cancelledAt: new Date() }
+        });
+
+        const startDate = new Date();
+        const endDate = new Date();
+        endDate.setDate(endDate.getDate() + plan.duration);
+
+        const subscription = await prisma.subscription.create({
+          data: {
+            userId: payment.userId,
+            planId: plan.id,
+            status: 'active',
+            startDate,
+            endDate,
+            autoRenew: false
+          }
+        });
+
+        await prisma.payment.update({
+          where: { id: payment.id },
+          data: { subscriptionId: subscription.id }
+        });
+
+        sendNotification(
+          payment.userId,
+          'payment_confirmed',
+          'Abonnement activé via Orange Money !',
+          `Ton abonnement ${plan.displayName || plan.name} est actif jusqu'au ${endDate.toLocaleDateString('fr-FR')}.`,
+          { planId: plan.id, subscriptionId: subscription.id }
+        );
+
+        console.log(`✅ [OM] Abonnement créé pour user ${payment.userId}, plan ${plan.name}`);
+      }
+    }
+  } catch (error) {
+    console.error('Erreur webhook Orange Money:', error);
+  }
+});
+
+// ──────────────────────────────────────────────
+// ORANGE MONEY — Vérifier statut paiement
+// ──────────────────────────────────────────────
+
+router.get('/om/status/:paymentId', authenticateToken, async (req, res) => {
+  try {
+    const payment = await prisma.payment.findFirst({
+      where: { id: req.params.paymentId, userId: req.user.userId },
+      include: { subscription: { include: { plan: true } } }
+    });
+
+    if (!payment) return res.status(404).json({ success: false, error: 'Paiement non trouvé' });
+
+    // If still pending, check with OM API
+    if (payment.status === 'pending' && payment.orange_money_id) {
+      try {
+        const accessToken = await getOmAccessToken();
+        const omStatus = await axios.get(
+          `${OM_BASE_URL}/webpayment/${payment.orange_money_id}`,
+          { headers: { 'Authorization': `Bearer ${accessToken}` } }
+        );
+
+        if (omStatus.data.status === 'SUCCESS' || omStatus.data.status === 'SUCCESSFULL') {
+          // Trigger same logic as webhook
+          await prisma.payment.update({
+            where: { id: payment.id },
+            data: { status: 'completed', metadata: { ...payment.metadata, completedAt: new Date().toISOString() } }
+          });
+
+          const planId = payment.metadata?.planId;
+          if (planId) {
+            const plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+            if (plan) {
+              await prisma.subscription.updateMany({
+                where: { userId: payment.userId, status: 'active' },
+                data: { status: 'cancelled', cancelledAt: new Date() }
+              });
+              const startDate = new Date();
+              const endDate = new Date();
+              endDate.setDate(endDate.getDate() + plan.duration);
+              const subscription = await prisma.subscription.create({
+                data: { userId: payment.userId, planId: plan.id, status: 'active', startDate, endDate, autoRenew: false }
+              });
+              await prisma.payment.update({ where: { id: payment.id }, data: { subscriptionId: subscription.id } });
+            }
+          }
+
+          const updated = await prisma.payment.findFirst({
+            where: { id: payment.id },
+            include: { subscription: { include: { plan: true } } }
+          });
+          return res.json({ success: true, data: { status: 'completed', payment: updated, subscription: updated?.subscription } });
+        }
+      } catch (omErr) {
+        console.error('OM status check error:', omErr.message);
+      }
+    }
+
+    res.json({ success: true, data: { status: payment.status, payment, subscription: payment.subscription } });
+  } catch (error) {
+    console.error('Erreur vérification statut OM:', error);
     res.status(500).json({ success: false, error: 'Erreur serveur' });
   }
 });

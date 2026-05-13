@@ -148,6 +148,7 @@ app.use(morgan('combined'));
 // IMPORTANT: Raw body pour le webhook Wave (AVANT express.json)
 // Nécessaire pour vérifier la signature HMAC
 app.use('/api/payments/wave/webhook', express.raw({ type: 'application/json' }));
+app.use('/api/payments/om/webhook', express.json());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -323,6 +324,14 @@ const server = app.listen(PORT, async () => {
       setupParentAlertsJob();
     } catch (error) {
       console.error('Erreur cron parent alerts:', error.message);
+    }
+
+    // Setup subscription expiry cron (daily at 00:05 UTC)
+    try {
+      const { setupSubscriptionExpiryJob } = require('./jobs/subscriptionExpiryJob');
+      setupSubscriptionExpiryJob();
+    } catch (error) {
+      console.error('Erreur cron subscription expiry:', error.message);
     }
   }
 });

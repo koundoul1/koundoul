@@ -74,17 +74,30 @@ const Subscriptions = () => {
     setLoading(false);
   };
 
+  const [paymentMethod, setPaymentMethod] = useState('wave'); // 'wave' | 'orange_money'
+
   const handleSubscribe = async (plan) => {
     if (!isAuthenticated) { navigate('/login'); return; }
     try {
       setProcessingPlanId(plan.id);
       setPaymentError('');
-      const response = await api.payments.initiateWave({ planId: plan.id });
-      if (response.success && response.data.wave_launch_url) {
-        window.location.href = response.data.wave_launch_url;
+
+      if (paymentMethod === 'orange_money') {
+        const response = await api.payments.initiateOm({ planId: plan.id });
+        if (response.success && response.data.payment_url) {
+          window.location.href = response.data.payment_url;
+        } else {
+          setPaymentError('Erreur lors du paiement Orange Money');
+          setProcessingPlanId(null);
+        }
       } else {
-        setPaymentError('Erreur lors de l\'initiation du paiement');
-        setProcessingPlanId(null);
+        const response = await api.payments.initiateWave({ planId: plan.id });
+        if (response.success && response.data.wave_launch_url) {
+          window.location.href = response.data.wave_launch_url;
+        } else {
+          setPaymentError('Erreur lors du paiement Wave');
+          setProcessingPlanId(null);
+        }
       }
     } catch (error) {
       setPaymentError(error.message || 'Erreur lors du paiement');
@@ -187,6 +200,26 @@ const Subscriptions = () => {
               }`}
             >
               {t('subscriptions.toggleYearly')}
+            </button>
+          </div>
+
+          {/* Payment method selector */}
+          <div className="mt-6 inline-flex items-center bg-black/30 backdrop-blur-md rounded-full p-1 border border-white/20">
+            <button
+              onClick={() => setPaymentMethod('wave')}
+              className={`px-5 py-2 text-sm rounded-full font-bold transition-all flex items-center gap-2 ${
+                paymentMethod === 'wave' ? 'bg-blue-500 text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Wave
+            </button>
+            <button
+              onClick={() => setPaymentMethod('orange_money')}
+              className={`px-5 py-2 text-sm rounded-full font-bold transition-all flex items-center gap-2 ${
+                paymentMethod === 'orange_money' ? 'bg-orange-500 text-white shadow-lg' : 'text-white/70 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Orange Money
             </button>
           </div>
         </div>

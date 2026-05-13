@@ -322,11 +322,20 @@ const api = {
 
     getWaveStatus: (checkoutId) => request(`/payments/wave/status/${checkoutId}`),
 
+    initiateOm: (data) => request('/payments/om/initiate', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+    getOmStatus: (paymentId) => request(`/payments/om/status/${paymentId}`),
+
     getHistory: () => request('/payments/history'),
 
     getMyPayments: () => request('/payments/my-payments'),
 
-    getStatus: (paymentId) => request(`/payments/${paymentId}/status`)
+    getStatus: (paymentId) => request(`/payments/${paymentId}/status`),
+
+    getInvoice: (paymentId) => request(`/payments/${paymentId}/invoice`),
   },
 
   // 📦 ABONNEMENTS
