@@ -15,6 +15,7 @@ router.post('/', authenticateToken, async function(req, res, next) {
   try {
     var userId = req.user.userId;
     var subject = req.body.subject || 'Mathematiques';
+    var level = req.body.level || null;
     var maxPlayers = req.body.maxPlayers || 3;
     var difficulty = req.body.difficulty || 2;
 
@@ -31,8 +32,10 @@ router.post('/', authenticateToken, async function(req, res, next) {
     // Get questions from qcm_questions
     var questions = [];
     try {
+      var bankWhere = { subject: { contains: subject, mode: 'insensitive' } };
+      if (level) bankWhere.level = { contains: level, mode: 'insensitive' };
       var banks = await prisma.questionBank.findMany({
-        where: { subject: { contains: subject, mode: 'insensitive' } },
+        where: bankWhere,
         select: { id: true }
       });
       if (banks.length > 0) {
@@ -71,6 +74,7 @@ router.post('/', authenticateToken, async function(req, res, next) {
       data: {
         creatorId: userId,
         subject: subject,
+        level: level,
         difficulty: difficulty,
         maxPlayers: maxPlayers,
         questions: questions,

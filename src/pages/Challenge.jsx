@@ -958,11 +958,40 @@ const Challenge = () => {
                         <option value="Chimie">Chimie</option>
                       </select>
                     </div>
+                    <div>
+                      <label className="block text-sm text-gray-400 mb-2">Niveau</label>
+                      <select value={duelLevel} onChange={(e) => setDuelLevel(e.target.value)} className="w-full px-4 py-3 bg-gray-800 border border-white/10 rounded-xl text-white">
+                        <option value="Seconde">Seconde</option>
+                        <option value="Première">Premiere</option>
+                        <option value="Terminale">Terminale</option>
+                        <option value="Supérieur">Superieur</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm text-gray-400 mb-2">Difficulte</label>
+                      <div className="grid grid-cols-3 gap-3">
+                        {['Facile', 'Moyen', 'Difficile'].map(d => (
+                          <button
+                            key={d}
+                            type="button"
+                            onClick={() => setDuelDifficulty(d)}
+                            className={`py-3 rounded-lg font-medium transition-all ${
+                              duelDifficulty === d
+                                ? 'bg-orange-600 text-white border-2 border-orange-400'
+                                : 'bg-white/10 text-gray-300 border-2 border-transparent hover:bg-white/20'
+                            }`}
+                          >
+                            {d}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                     <button
                       onClick={async () => {
                         try {
                           setCreatingDuel(true);
-                          var res = await api.groupDuels.create({ subject: duelSubject, maxPlayers: groupMaxPlayers, difficulty: parseInt(duelDifficulty) || 2 });
+                          var diffMap = { 'Facile': 1, 'Moyen': 2, 'Difficile': 3 };
+                          var res = await api.groupDuels.create({ subject: duelSubject, level: duelLevel, maxPlayers: groupMaxPlayers, difficulty: diffMap[duelDifficulty] || 2 });
                           if (res.success) {
                             setGroupCreated(res.data);
                             setDuelView('group-created');
