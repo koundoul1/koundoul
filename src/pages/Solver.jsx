@@ -427,21 +427,20 @@ const Solver = () => {
       {/* Header avec design sombre */}
       <div className="koundoul-navbar">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-2xl font-bold koundoul-text-gradient flex items-center">
-                <Brain className="h-8 w-8 text-blue-400 mr-3" />
-                {t('solver.title')}
-              </h1>
-            </div>
-            <div className="flex items-center gap-3">
+          <div className="flex flex-wrap justify-between items-center gap-3 py-4 sm:py-6">
+            <h1 className="text-xl sm:text-2xl font-bold koundoul-text-gradient flex items-center">
+              <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-blue-400 mr-2 sm:mr-3" />
+              {t('solver.title')}
+            </h1>
+            <div className="flex items-center gap-2 sm:gap-3">
               <AiQuotaBadge quota={quota} />
               <button
                 onClick={() => setShowHistory(!showHistory)}
-                className="koundoul-btn-primary flex items-center px-4 py-2"
+                className="koundoul-btn-primary flex items-center px-3 py-1.5 sm:px-4 sm:py-2 text-sm"
               >
-                <History className="h-5 w-5 mr-2" />
-                Historique
+                <History className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
+                <span className="hidden sm:inline">Historique</span>
+                <span className="sm:hidden">Histo.</span>
               </button>
             </div>
           </div>
