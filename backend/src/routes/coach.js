@@ -98,6 +98,13 @@ router.post('/chat', authenticateToken, checkAiQuota, async (req, res) => {
 
   sendEvent('meta', { conversationId: conversation.id, status: 'streaming' });
 
+  // SSE heartbeat to prevent proxy disconnects (Render, Cloudflare, etc.)
+  const heartbeat = setInterval(() => {
+    try { res.write(': heartbeat\n\n'); } catch (e) { clearInterval(heartbeat); }
+  }, 15000);
+  req.on('close', () => clearInterval(heartbeat));
+  res.on('finish', () => clearInterval(heartbeat));
+
   try {
     // Build Gemini history from last N messages (excluding the new one which becomes userPrompt)
     const recentMessages = allMessages.slice(-MAX_HISTORY_MESSAGES);

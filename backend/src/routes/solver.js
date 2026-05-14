@@ -107,6 +107,13 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
 
   sendEvent('meta', { historyId, status: 'streaming' });
 
+  // SSE heartbeat to prevent proxy disconnects (Render, Cloudflare, etc.)
+  const heartbeat = setInterval(() => {
+    try { res.write(': heartbeat\n\n'); } catch (e) { clearInterval(heartbeat); }
+  }, 15000);
+  req.on('close', () => clearInterval(heartbeat));
+  res.on('finish', () => clearInterval(heartbeat));
+
   // Update status helper
   const updateHistory = async (data) => {
     if (!historyId) return;
@@ -135,7 +142,7 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
     try {
       const jsonPrompt = SOLVER_STRUCTURED_PROMPT
         .replace('{problem}', problem.trim().slice(0, 500))
-        .replace('{solution}', fullText.slice(0, 3000));
+        .replace('{solution}', fullText);
 
       const jsonText = await generate({
         role: 'solver',

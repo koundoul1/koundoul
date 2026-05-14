@@ -95,7 +95,7 @@ async function withRetry(fn, maxRetries = 2) {
 
 // ── Timeout wrapper ──────────────────────────────────────────────────
 
-function withTimeout(promise, ms = 30000) {
+function withTimeout(promise, ms = 120000) {
   return Promise.race([
     promise,
     new Promise((_, reject) =>
