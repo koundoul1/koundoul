@@ -31,14 +31,13 @@ const PAYMENT_CONFIG = {
   wave: {
     label: 'Wave',
     phone: '+221 78 792 89 89',
-    // QR code image: mettre le fichier wave-qr.png dans public/ puis remplacer qrImage ci-dessous
-    qrImage: null,
+    qrImage: '/wave-qr.png',
     qrValue: '787928989',
     color: '#1DC8FF',
     bgColor: '#0A1929',
     instructions: [
       'Ouvre ton appli Wave',
-      'Scanne le QR code ou envoie au numero affiche',
+      'Scanne le QR code ci-dessous',
       'Envoie le montant exact indique',
       'Reviens ici et clique "J\'ai paye"'
     ]
@@ -46,13 +45,13 @@ const PAYMENT_CONFIG = {
   orange_money: {
     label: 'Orange Money',
     phone: '+221 78 792 89 89',
-    qrImage: null,
+    qrImage: '/om-qr.png',
     qrValue: '787928989',
     color: '#FF6600',
     bgColor: '#1A0E00',
     instructions: [
       'Ouvre ton appli Orange Money',
-      'Scanne le QR code ou envoie au numero affiche',
+      'Scanne le QR code ci-dessous',
       'Envoie le montant exact indique',
       'Reviens ici et clique "J\'ai paye"'
     ]
@@ -494,12 +493,9 @@ const Subscriptions = () => {
                     </div>
                   </div>
 
-                  {/* Phone number — toujours visible, plus grand si pas de QR */}
-                  <div className={`rounded-xl p-4 mb-5 text-center ${!PAYMENT_CONFIG[qrModal.method]?.qrImage ? 'bg-white/5 border-2 border-dashed' : ''}`}
-                    style={{ borderColor: !PAYMENT_CONFIG[qrModal.method]?.qrImage ? PAYMENT_CONFIG[qrModal.method]?.color : undefined }}>
-                    {!PAYMENT_CONFIG[qrModal.method]?.qrImage && (
-                      <p className="text-xs text-gray-400 mb-2">Envoie le montant a ce numero :</p>
-                    )}
+                  {/* Phone number — toujours visible */}
+                  <div className="rounded-xl p-3 mb-5 text-center bg-white/5">
+                    <p className="text-xs text-gray-400 mb-2">Ou envoie le montant a ce numero :</p>
                     <div className="flex items-center justify-center gap-3">
                       <Phone size={20} style={{ color: PAYMENT_CONFIG[qrModal.method]?.color }} />
                       <span className="text-white font-mono font-bold text-2xl tracking-wide">{PAYMENT_CONFIG[qrModal.method]?.phone}</span>
