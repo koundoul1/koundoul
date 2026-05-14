@@ -57,32 +57,35 @@ const Sidebar = () => {
   ] : [
     { name: 'Accueil', href: '/', icon: Home, public: true },
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
-    { name: t('nav.courses'), href: '/courses', icon: BookOpen },
-    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked },
   ]
 
-  // ── Section: Outils ──
-  const toolsNav = [
-    { name: t('dashboard.actions.solver') || 'Résolveur', href: '/solver', icon: Brain },
-    { name: 'Quiz', href: '/quiz', icon: Zap },
-    { name: t('nav.defi') || 'Défi', href: '/challenge', icon: Trophy },
-    { name: 'Exercices', href: '/exercices', icon: Dumbbell },
-    { name: 'Défi Smart', href: '/defi', icon: Sparkles },
+  // ── Section: IA (top priority) ──
+  const aiNav = [
+    { name: t('dashboard.actions.solver') || 'Resolveur IA', href: '/solver', icon: Brain },
+    { name: 'Coach Virtuel', href: '/coach', icon: Bot },
   ]
 
   // ── Section: Apprentissage ──
   const learnNav = [
-    { name: 'Coach Virtuel', href: '/coach', icon: Bot },
+    { name: t('nav.courses'), href: '/courses', icon: BookOpen },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked },
+    { name: 'Exercices', href: '/exercices', icon: Dumbbell },
+    { name: 'Quiz', href: '/quiz', icon: Zap },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck },
-    { name: 'Ressources', href: '/resources', icon: Lightbulb },
-    { name: 'Visualisations', href: '/visualizations', icon: Eye },
   ]
 
-  // ── Section: Communauté ──
-  const communityNav = [
-    // Forum masqué — en développement
-    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award },
+  // ── Section: Competition ──
+  const competitionNav = [
+    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy },
+    { name: 'Defi Smart', href: '/defi', icon: Sparkles },
     { name: 'Classement', href: '/leaderboard', icon: Medal },
+    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award },
+  ]
+
+  // ── Section: Ressources ──
+  const resourcesNav = [
+    { name: 'Ressources', href: '/resources', icon: Lightbulb },
+    { name: 'Visualisations', href: '/visualizations', icon: Eye },
   ]
 
   // ── Section: Compte ──
@@ -178,9 +181,10 @@ const Sidebar = () => {
       {/* Navigation sections — parent sees only parent modules */}
       <nav className="flex-1 px-2 py-1 overflow-y-auto scrollbar-hide">
         {renderSection('Navigation', mainNav)}
-        {!user?.isParent && renderSection('Outils', toolsNav)}
+        {!user?.isParent && renderSection('IA', aiNav)}
         {!user?.isParent && renderSection('Apprentissage', learnNav)}
-        {!user?.isParent && renderSection('Communaute', communityNav)}
+        {!user?.isParent && renderSection('Competition', competitionNav)}
+        {!user?.isParent && renderSection('Ressources', resourcesNav)}
         {isAuthenticated && renderSection('Compte', accountNav)}
         {isAuthenticated && renderSection('Administration', adminNav)}
       </nav>

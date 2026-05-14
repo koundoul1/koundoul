@@ -79,28 +79,32 @@ const MobileNavBar = () => {
     { name: 'Profil', href: '/profile', icon: User },
   ] : [
     { name: t('nav.home'), href: '/', icon: Home, public: true },
-    { name: t('nav.courses'), href: '/courses', icon: BookOpen },
-    { name: t('nav.defi') || 'Defi', href: '/challenge', icon: Trophy },
+    { name: t('dashboard.actions.solver') || 'Solver', href: '/solver', icon: Brain },
+    { name: 'Coach', href: '/coach', icon: Bot },
     { name: 'Notifs', href: '/notifications', icon: Bell },
-    { name: 'Profil', href: '/profile', icon: User },
   ];
 
   // Drawer items — parent only sees account modules
   const studentDrawerItems = [
+    // IA & Outils principaux
+    { name: t('dashboard.actions.solver') || 'Resolveur', href: '/solver', icon: Brain, emoji: '🤖' },
+    { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3, emoji: '📊' },
+    // Apprentissage
     { name: t('nav.courses') || 'Cours', href: '/courses', icon: BookOpen, emoji: '📖' },
     { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯' },
     { name: 'Exercices', href: '/exercices', icon: Dumbbell, emoji: '🧩' },
     { name: 'Quiz', href: '/quiz', icon: Zap, emoji: '📝' },
-    { name: t('dashboard.actions.solver') || 'Resolveur', href: '/solver', icon: Brain, emoji: '🤖' },
-    { name: 'Defi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
-    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy, emoji: '🏆' },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏' },
-    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
+    // Competition
+    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy, emoji: '🏆' },
+    { name: 'Defi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
     { name: 'Classement', href: '/leaderboard', icon: Trophy, emoji: '🥇' },
-    { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
+    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
+    // Ressources & Compte
     { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚' },
     { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '👁️' },
+    { name: 'Profil', href: '/profile', icon: User, emoji: '👤' },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
     ...(user?.is_admin ? [{ name: 'Admin', href: '/admin', icon: Shield, emoji: '🛡️' }] : []),
   ];
