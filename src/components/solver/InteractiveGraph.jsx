@@ -197,7 +197,7 @@ const InteractiveGraph = ({
       {!error && (
         <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
           <Suspense fallback={
-            <div className="flex items-center justify-center h-[400px] text-white/40 text-sm">
+            <div className="flex items-center justify-center h-[280px] sm:h-[400px] text-white/40 text-sm">
               Chargement du graphique...
             </div>
           }>
@@ -205,7 +205,8 @@ const InteractiveGraph = ({
               data={plotData}
               layout={plotLayout}
               config={plotConfig}
-              style={{ width: '100%', height: '400px' }}
+              style={{ width: '100%', height: '100%' }}
+              className="plotly-graph min-h-[280px] sm:min-h-[400px]"
               useResizeHandler={true}
               className="plotly-graph"
             />

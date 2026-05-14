@@ -44,7 +44,7 @@ const PythagorasDemo = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <svg width="250" height="200" viewBox="0 0 250 200" className="border border-gray-600 rounded bg-gray-900">
+          <svg viewBox="0 0 250 200" className="border border-gray-600 rounded bg-gray-900 w-full max-w-[250px]">
             <line x1="50" y1="50" x2="50" y2={50 + sideA * 15} stroke="#3b82f6" strokeWidth="3" />
             <text x="45" y={75 + sideA * 7.5} fill="#3b82f6" fontSize="14" fontWeight="bold">a={sideA}</text>
             <line x1="50" y1={50 + sideA * 15} x2={50 + sideB * 15} y2={50 + sideA * 15} stroke="#ef4444" strokeWidth="3" />
@@ -288,7 +288,7 @@ const InteractiveVisualizations = () => {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="250" height="200" viewBox="0 0 250 200" className="border border-gray-600 rounded bg-gray-900">
+            <svg viewBox="0 0 250 200" className="border border-gray-600 rounded bg-gray-900 w-full max-w-[250px]">
               <line x1="50" y1="50" x2="50" y2={50 + sideA * 15} stroke="#3b82f6" strokeWidth="3" />
               <text x="45" y={75 + sideA * 7.5} fill="#3b82f6" fontSize="14" fontWeight="bold">a={sideA}</text>
               <line x1="50" y1={50 + sideA * 15} x2={50 + sideB * 15} y2={50 + sideA * 15} stroke="#ef4444" strokeWidth="3" />
@@ -339,7 +339,7 @@ const InteractiveVisualizations = () => {
   const Geometry3D = () => (
     <div className="bg-white/5 rounded-lg p-6">
       <h3 className="text-white font-bold mb-4">Formes Géométriques 3D</h3>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {['Cube', 'Sphère', 'Pyramide'].map((shape, idx) => (
           <div key={idx} className="bg-black/20 rounded-lg p-4 text-center">
             <div className="text-white font-bold mb-2">{shape}</div>
@@ -403,7 +403,7 @@ const InteractiveVisualizations = () => {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="250" height="250" viewBox="-130 -130 260 260" className="bg-gray-900 rounded">
+            <svg viewBox="-130 -130 260 260" className="bg-gray-900 rounded w-full max-w-[250px]">
               <circle cx="0" cy="0" r="100" fill="none" stroke="#888" strokeWidth="2" />
               <line x1="-120" y1="0" x2="120" y2="0" stroke="#666" strokeWidth="1" />
               <line x1="0" y1="-120" x2="0" y2="120" stroke="#666" strokeWidth="1" />
@@ -431,7 +431,7 @@ const InteractiveVisualizations = () => {
             <div className="bg-black/20 p-4 rounded text-white text-sm">∫sin(x)dx = {integral.toFixed(3)}</div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="300" height="200" viewBox="0 0 300 200" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 300 200" className="bg-gray-900 rounded w-full max-w-[300px]">
               <path d={`M 0 100 ${Array.from({length: 300}, (_, i) => {
                 const x = i * 6.28 / 300;
                 return `L ${i} ${100 - 50 * Math.sin(x)}`;
@@ -462,7 +462,7 @@ const InteractiveVisualizations = () => {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="200" height="300" viewBox="0 0 200 300" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 200 300" className="bg-gray-900 rounded w-full max-w-[200px]">
               <line x1="100" y1="0" x2={100 + 50 * Math.sin(angle * Math.PI / 180)} y2={50 * Math.cos(angle * Math.PI / 180)} stroke="white" strokeWidth="2" />
               <circle cx={100 + 50 * Math.sin(angle * Math.PI / 180)} cy={50 * Math.cos(angle * Math.PI / 180)} r="10" fill="#ef4444" />
             </svg>
@@ -492,7 +492,7 @@ const InteractiveVisualizations = () => {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="300" height="200" viewBox="0 0 300 200" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 300 200" className="bg-gray-900 rounded w-full max-w-[300px]">
               <line x1="0" y1="180" x2="300" y2="180" stroke="#888" strokeWidth="2" />
               <path d={`M 10 180 Q ${maxRange/2 + 10} ${180 - maxHeight*2} ${maxRange + 10} 180`} fill="none" stroke="#3b82f6" strokeWidth="2" />
             </svg>
@@ -527,7 +527,7 @@ const InteractiveVisualizations = () => {
             <div><label className="block text-white text-sm mb-2">Amplitude: {amplitude}</label><input type="range" min="10" max="60" value={amplitude} onChange={(e) => setAmplitude(Number(e.target.value))} className="w-full" /></div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="300" height="200" viewBox="0 0 300 200" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 300 200" className="bg-gray-900 rounded w-full max-w-[300px]">
               <path d={`M 0 100 ${Array.from({length: 300}, (_, i) => {
                 return `L ${i} ${100 + amplitude * Math.sin(i * frequency * 0.1)}`;
               }).join(' ')}`} fill="none" stroke="#3b82f6" strokeWidth="2" />
@@ -551,7 +551,7 @@ const InteractiveVisualizations = () => {
             <div><label className="block text-white text-sm mb-2">Fréquence: {frequency} Hz</label><input type="range" min="0.5" max="5" step="0.1" value={frequency} onChange={(e) => setFrequency(Number(e.target.value))} className="w-full" /></div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="300" height="200" viewBox="0 0 300 200" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 300 200" className="bg-gray-900 rounded w-full max-w-[300px]">
               <path d={`M 0 100 ${Array.from({length: 300}, (_, i) => {
                 return `L ${i} ${100 + amplitude * Math.sin(i * frequency / 10)}`;
               }).join(' ')}`} fill="none" stroke="#3b82f6" strokeWidth="2" />
@@ -580,7 +580,7 @@ const InteractiveVisualizations = () => {
             <div className="bg-black/20 p-4 rounded text-white text-sm">F = {(force/1e6).toFixed(2)} N</div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="300" height="200" viewBox="0 0 300 200" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 300 200" className="bg-gray-900 rounded w-full max-w-[300px]">
               <circle cx="50" cy="100" r="15" fill="#ef4444" />
               <text x="42" y="105" fill="white" fontSize="12" fontWeight="bold">+</text>
               <circle cx="250" cy="100" r="15" fill="#ef4444" />
@@ -611,7 +611,7 @@ const InteractiveVisualizations = () => {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="300" height="200" viewBox="0 0 300 200" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 300 200" className="bg-gray-900 rounded w-full max-w-[300px]">
               <line x1="0" y1="100" x2="300" y2="100" stroke="#3b82f6" strokeWidth="2" />
               <line x1="100" y1="0" x2="200" y2="100" stroke="yellow" strokeWidth="2" />
             </svg>
@@ -766,7 +766,7 @@ const InteractiveVisualizations = () => {
 
         {/* Visualisation 3D */}
         <div className="flex items-center justify-center bg-black/20 rounded-lg p-8">
-          <svg width="400" height="400" viewBox="0 0 400 400" className="border border-gray-600 rounded bg-gray-900">
+          <svg viewBox="0 0 400 400" className="border border-gray-600 rounded bg-gray-900 w-full max-w-[400px]">
             {/* Axes de référence */}
             <line x1="50" y1="200" x2="350" y2="200" stroke="#333" strokeWidth="1" strokeDasharray="5,5" />
             <line x1="200" y1="50" x2="200" y2="350" stroke="#333" strokeWidth="1" strokeDasharray="5,5" />
@@ -1365,7 +1365,7 @@ const InteractiveVisualizations = () => {
             <div className="bg-black/20 p-4 rounded text-white text-sm">Loi d'Arrhenius appliquée</div>
           </div>
           <div className="flex items-center justify-center">
-            <svg width="300" height="200" viewBox="0 0 300 200" className="bg-gray-900 rounded">
+            <svg viewBox="0 0 300 200" className="bg-gray-900 rounded w-full max-w-[300px]">
               <path d={`M 0 180 ${Array.from({length: 300}, (_, i) => {
                 return `L ${i} ${180 - (i * 100 / 300)}`;
               }).join(' ')}`} fill="none" stroke="#3b82f6" strokeWidth="2" />
@@ -1472,7 +1472,7 @@ const InteractiveVisualizations = () => {
 
           {/* Visualisation */}
           <div className="flex items-center justify-center">
-            <svg width="400" height="300" viewBox="0 0 400 300" className="bg-gray-900 rounded-lg">
+            <svg viewBox="0 0 400 300" className="bg-gray-900 rounded-lg w-full max-w-[400px]">
               {/* Titre */}
               <text x="200" y="30" fill="white" fontSize="14" fontWeight="bold" textAnchor="middle">
                 Position de l'équilibre
