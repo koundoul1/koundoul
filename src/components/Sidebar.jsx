@@ -169,9 +169,7 @@ const Sidebar = () => {
       {/* Logo */}
       <div className="p-5 pb-2">
         <Link to="/" className="flex items-center space-x-3 group">
-          <div className="w-10 h-10 bg-gradient-to-br from-kprimary to-ksecondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-kprimary/30">
-            <span className="text-white font-black text-lg">K</span>
-          </div>
+          <img src="/favicon.svg" alt="Koundoul" className="w-10 h-10 rounded-xl group-hover:scale-110 transition-transform shadow-lg shadow-kprimary/30" />
           <span className="text-xl font-black gradient-text">
             Koundoul
           </span>
