@@ -110,7 +110,7 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
   // SSE heartbeat to prevent proxy disconnects (Render, Cloudflare, etc.)
   const heartbeat = setInterval(() => {
     try { res.write(': heartbeat\n\n'); } catch (e) { clearInterval(heartbeat); }
-  }, 15000);
+  }, 10000);
   req.on('close', () => clearInterval(heartbeat));
   res.on('finish', () => clearInterval(heartbeat));
 
@@ -126,7 +126,7 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
     // Stream the solution text with calibrated prompt
     const userPrompt = `Resous ce probleme de ${domain || 'mathematiques'} (niveau ${level || 'lycee'}):\n\n${problem.trim()}`;
     let fullText = '';
-    let chunkCount = 0;
+    const streamMeta = {};
 
     console.log(`[Solver] Starting stream for user=${userId} problem=${problem.trim().length}chars domain=${domain || 'general'}`);
 
@@ -134,14 +134,14 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
       role: 'solver',
       systemInstruction: SOLVER_SYSTEM_PROMPT,
       userPrompt,
-      generationConfig: { temperature: 0.4, maxOutputTokens: 16384 }
+      generationConfig: { temperature: 0.4, maxOutputTokens: 65536 },
+      meta: streamMeta
     })) {
-      chunkCount++;
       fullText += chunk;
       sendEvent('chunk', { text: chunk });
     }
 
-    console.log(`[Solver] Stream complete: chunks=${chunkCount} totalChars=${fullText.length} (~${Math.round(fullText.length / 5)} words)`);
+    console.log(`[Solver] Stream complete: chunks=${streamMeta.chunkCount} totalChars=${fullText.length} (~${Math.round(fullText.length / 5)} words) finishReason=${streamMeta.finishReason}`);
 
     // Detect domain and graph requirement from content (no 2nd Gemini call)
     const problemLower = problem.trim().toLowerCase();
@@ -176,7 +176,7 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
     // Increment AI quota counter after successful completion
     try { await incrementUsage(userId); } catch (e) { console.warn('[Solver] incrementUsage error:', e.message); }
 
-    sendEvent('done', { historyId, status: 'completed' });
+    sendEvent('done', { historyId, status: 'completed', finishReason: streamMeta.finishReason || 'STOP' });
   } catch (err) {
     console.error('[Solver] Stream error:', err.message);
     const message = err instanceof GeminiError

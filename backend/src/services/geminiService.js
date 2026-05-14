@@ -140,7 +140,12 @@ async function generate({ role, systemInstruction, userPrompt, history, generati
  * @param {{ role: 'solver'|'coach', systemInstruction: string, userPrompt: string, history?: Array, generationConfig?: object }} opts
  * @yields {string} text chunks
  */
-async function* streamGenerate({ role, systemInstruction, userPrompt, history, generationConfig }) {
+/**
+ * Pass a `meta` object to receive stream metadata after iteration completes.
+ * e.g. const meta = {}; for await (const chunk of streamGenerate({ ..., meta })) { ... }
+ * After the loop: meta.finishReason, meta.totalChars, meta.chunkCount
+ */
+async function* streamGenerate({ role, systemInstruction, userPrompt, history, generationConfig, meta }) {
   const model = getModel(role, systemInstruction, generationConfig);
   if (!model) throw new GeminiError('Gemini non configure (GOOGLE_AI_API_KEY absent)');
 
@@ -166,11 +171,17 @@ async function* streamGenerate({ role, systemInstruction, userPrompt, history, g
       totalChars += text.length;
       yield text;
     }
-    // Capture finish reason from the last chunk (Gemini SDK exposes it on candidates)
     const candidates = chunk.candidates;
     if (candidates && candidates[0]?.finishReason) {
       lastFinishReason = candidates[0].finishReason;
     }
+  }
+
+  // Expose metadata to caller via shared object
+  if (meta && typeof meta === 'object') {
+    meta.finishReason = lastFinishReason;
+    meta.totalChars = totalChars;
+    meta.chunkCount = chunkCount;
   }
 
   const duration = Date.now() - start;

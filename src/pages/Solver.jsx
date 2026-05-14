@@ -139,6 +139,7 @@ const Solver = () => {
   
   // Graphiques
   const [showGraph, setShowGraph] = useState(false)
+  const [finishReason, setFinishReason] = useState(null)
 
   const subjects = [
     { value: 'math', label: t('solver.subjects.math'), icon: '📐' },
@@ -208,6 +209,7 @@ const Solver = () => {
     setDetectedErrors([])
     setUsedHints([])
     setShowGraph(false)
+    setFinishReason(null)
 
     let streamedText = ''
 
@@ -238,9 +240,10 @@ const Solver = () => {
           setShowGraph(true)
         }
       },
-      onDone: () => {
+      onDone: (data) => {
         setIsSolving(false)
         streamRef.current = null
+        if (data?.finishReason) setFinishReason(data.finishReason)
         loadHistory()
         refreshQuota()
         window.dispatchEvent(new Event('ai-quota-changed'))
@@ -758,6 +761,16 @@ const Solver = () => {
                       <SolutionDisplay content={solution.solution || 'Aucune solution affichée'} />
                     </div>
                   </div>
+
+                  {/* Info banner if response was truncated */}
+                  {finishReason === 'MAX_TOKENS' && (
+                    <div className="mt-4 p-4 rounded-lg bg-blue-500/10 border border-blue-400/30 flex items-start gap-3">
+                      <Lightbulb className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-blue-200">
+                        Cette reponse pourrait etre incomplete. Pour les problemes tres complexes, n'hesitez pas a poser vos questions une par une pour une resolution exhaustive.
+                      </p>
+                    </div>
+                  )}
 
                   {/* Étapes pédagogiques avec le nouveau composant */}
                   {solution.steps && solution.steps.length > 0 && (

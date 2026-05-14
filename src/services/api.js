@@ -176,15 +176,15 @@ const api = {
         onDone?.(data || {});
       };
 
-      // Safety timeout: if stream hangs, force-finish after 180s
+      // Safety timeout: if stream hangs, force-finish after 360s
       let totalCharsReceived = 0;
       const timeout = setTimeout(() => {
         if (!finished) {
-          console.warn(`[Solver] Frontend timeout after 180s — totalCharsReceived=${totalCharsReceived}`);
-          finish({});
+          console.warn(`[Solver] Frontend timeout after 360s — totalCharsReceived=${totalCharsReceived}`);
+          finish({ finishReason: 'TIMEOUT' });
           controller.abort();
         }
-      }, 180000);
+      }, 360000);
 
       const run = async () => {
         try {
