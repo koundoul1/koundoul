@@ -134,7 +134,7 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
       role: 'solver',
       systemInstruction: SOLVER_SYSTEM_PROMPT,
       userPrompt,
-      generationConfig: { temperature: 0.4, maxOutputTokens: 8192 }
+      generationConfig: { temperature: 0.4, maxOutputTokens: 16384 }
     })) {
       chunkCount++;
       fullText += chunk;
