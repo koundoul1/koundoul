@@ -215,11 +215,21 @@ router.post('/register', registerLimiter, async (req, res, next) => {
               data: { userId: user.id, planId: dailyPlan.id, status: 'active', startDate: now, endDate, autoRenew: false }
             }).catch(() => {});
 
-            // Give 24h premium to referrer (only if not already premium)
+            // Give 24h premium to referrer — cumulative (extends if already premium)
             const referrerSub = await prisma.subscription.findFirst({
-              where: { userId: referrer.id, status: { in: ['active', 'ACTIVE'] }, endDate: { gte: now } }
+              where: { userId: referrer.id, status: { in: ['active', 'ACTIVE'] }, endDate: { gte: now } },
+              orderBy: { endDate: 'desc' }
             });
-            if (!referrerSub) {
+            if (referrerSub) {
+              // Extend existing subscription by 24h
+              const newEnd = new Date(referrerSub.endDate.getTime() + 24 * 60 * 60 * 1000);
+              await prisma.subscription.update({
+                where: { id: referrerSub.id },
+                data: { endDate: newEnd }
+              }).catch(() => {});
+              console.log(`[Referral] Extended ${referrer.email} premium to ${newEnd.toISOString()}`);
+            } else {
+              // Create new 24h subscription
               await prisma.subscription.create({
                 data: { userId: referrer.id, planId: dailyPlan.id, status: 'active', startDate: now, endDate, autoRenew: false }
               }).catch(() => {});
