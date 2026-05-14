@@ -320,22 +320,43 @@ export default {
       },
       solverDemo: {
         title: 'Le Resolveur en Action',
-        subtitle: 'Colle ton enonce, recois une solution complete',
-        input: 'Resoudre x^2 - 5x + 6 = 0',
-        outputTitle: 'Solution Koundoul',
-        step1: 'On calcule le discriminant :',
-        step1math: '\\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1',
-        step2: 'Comme \\Delta > 0, deux solutions :',
-        step2math: 'x_1 = \\frac{5+1}{2} = 3 \\quad x_2 = \\frac{5-1}{2} = 2',
-        step3: 'Les solutions sont x = 2 et x = 3.'
+        subtitle: 'Des problemes simples aux exercices de prepa, il resout tout',
+        tab: { math: 'Maths', physics: 'Physique', chemistry: 'Chimie' },
+        math: {
+          input: 'Etudier les variations de f(x) = x^3 - 3x + 1 et determiner ses extrema locaux.',
+          step1: 'On calcule la derivee :',
+          step1math: 'f\'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x-1)(x+1)',
+          step2: 'f\'(x) = 0 pour x = -1 et x = 1. Signe de f\' :',
+          step2math: 'f\'(x) > 0 sur ]-\\infty;-1[, \\quad f\'(x) < 0 sur ]-1;1[, \\quad f\'(x) > 0 sur ]1;+\\infty[',
+          step3: 'f(-1) = 3 est un maximum local, f(1) = -1 est un minimum local.',
+          badge: 'Terminale S'
+        },
+        physics: {
+          input: 'Un projectile est lance avec v0 = 20 m/s a 45 deg. Calculer la portee et la hauteur max. (g = 9.81 m/s^2)',
+          step1: 'Composantes de la vitesse initiale :',
+          step1math: 'v_{0x} = 20\\cos(45^\\circ) = 14.14 \\text{ m/s}, \\quad v_{0y} = 20\\sin(45^\\circ) = 14.14 \\text{ m/s}',
+          step2: 'Hauteur max quand v_y = 0 et portee quand y = 0 :',
+          step2math: 'H = \\frac{v_{0y}^2}{2g} = \\frac{200}{19.62} = 10.19 \\text{ m}, \\quad R = \\frac{v_0^2 \\sin(90^\\circ)}{g} = 40.77 \\text{ m}',
+          step3: 'La hauteur maximale est H = 10.19 m et la portee est R = 40.77 m.',
+          badge: 'Mecanique'
+        },
+        chemistry: {
+          input: 'Equilibrer la reaction d\'oxydoreduction : Fe + HNO3 -> Fe(NO3)3 + NO + H2O',
+          step1: 'Demi-equations electroniques :',
+          step1math: 'Fe \\to Fe^{3+} + 3e^- \\quad ; \\quad NO_3^- + 4H^+ + 3e^- \\to NO + 2H_2O',
+          step2: 'Les electrons s\'annulent (3e- de chaque cote) :',
+          step2math: 'Fe + 4H^+ + NO_3^- \\to Fe^{3+} + NO + 2H_2O',
+          step3: 'Equation equilibree : Fe + 4HNO3 -> Fe(NO3)3 + NO + 2H2O.',
+          badge: 'Oxydo-Reduction'
+        }
       },
       coachDemo: {
         title: 'Le Coach Repond a Tout',
         subtitle: 'Comme un prof particulier, disponible 24h/24',
-        q1: 'C\'est quoi la loi d\'Ohm ?',
-        a1: 'La loi d\'Ohm relie tension, resistance et intensite : U = R x I. Par exemple, si R = 100 ohms et I = 0.5 A, alors U = 50 V.',
-        q2: 'Comment calculer une derivee ?',
-        a2: 'Pour deriver f(x) = x^n, on utilise la formule f\'(x) = n * x^(n-1). Exemple : si f(x) = x^3, alors f\'(x) = 3x^2.'
+        q1: 'Quelle est la difference entre vitesse moyenne et vitesse instantanee ?',
+        a1: 'La vitesse moyenne est le deplacement total divise par le temps total (v = d/t). La vitesse instantanee est la derivee de la position par rapport au temps : v(t) = dx/dt. Exemple : une voiture peut rouler a 60 km/h en moyenne mais etre a 90 km/h a un instant precis.',
+        q2: 'Comment savoir si une reaction est exothermique ?',
+        a2: 'Une reaction exothermique libere de l\'energie sous forme de chaleur : son enthalpie de reaction est negative (delta H < 0). Exemple : la combustion du methane CH4 + 2O2 -> CO2 + 2H2O degage 890 kJ/mol. L\'inverse (delta H > 0) est endothermique.'
       },
       subjects: {
         title: 'Trois Matieres, Un Objectif',
@@ -1302,22 +1323,43 @@ export default {
       },
       solverDemo: {
         title: 'The Solver in Action',
-        subtitle: 'Paste your problem, get a complete solution',
-        input: 'Solve x^2 - 5x + 6 = 0',
-        outputTitle: 'Koundoul Solution',
-        step1: 'We compute the discriminant:',
-        step1math: '\\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1',
-        step2: 'Since \\Delta > 0, two solutions:',
-        step2math: 'x_1 = \\frac{5+1}{2} = 3 \\quad x_2 = \\frac{5-1}{2} = 2',
-        step3: 'The solutions are x = 2 and x = 3.'
+        subtitle: 'From simple problems to college-prep exercises, it solves everything',
+        tab: { math: 'Math', physics: 'Physics', chemistry: 'Chemistry' },
+        math: {
+          input: 'Study the variations of f(x) = x^3 - 3x + 1 and find its local extrema.',
+          step1: 'We compute the derivative:',
+          step1math: 'f\'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x-1)(x+1)',
+          step2: 'f\'(x) = 0 for x = -1 and x = 1. Sign of f\':',
+          step2math: 'f\'(x) > 0 on ]-\\infty;-1[, \\quad f\'(x) < 0 on ]-1;1[, \\quad f\'(x) > 0 on ]1;+\\infty[',
+          step3: 'f(-1) = 3 is a local maximum, f(1) = -1 is a local minimum.',
+          badge: '12th Grade'
+        },
+        physics: {
+          input: 'A projectile is launched at v0 = 20 m/s at 45 deg. Calculate the range and max height. (g = 9.81 m/s^2)',
+          step1: 'Initial velocity components:',
+          step1math: 'v_{0x} = 20\\cos(45^\\circ) = 14.14 \\text{ m/s}, \\quad v_{0y} = 20\\sin(45^\\circ) = 14.14 \\text{ m/s}',
+          step2: 'Max height when v_y = 0 and range when y = 0:',
+          step2math: 'H = \\frac{v_{0y}^2}{2g} = \\frac{200}{19.62} = 10.19 \\text{ m}, \\quad R = \\frac{v_0^2 \\sin(90^\\circ)}{g} = 40.77 \\text{ m}',
+          step3: 'Maximum height is H = 10.19 m and range is R = 40.77 m.',
+          badge: 'Mechanics'
+        },
+        chemistry: {
+          input: 'Balance the redox reaction: Fe + HNO3 -> Fe(NO3)3 + NO + H2O',
+          step1: 'Half-reaction equations:',
+          step1math: 'Fe \\to Fe^{3+} + 3e^- \\quad ; \\quad NO_3^- + 4H^+ + 3e^- \\to NO + 2H_2O',
+          step2: 'Electrons cancel out (3e- on each side):',
+          step2math: 'Fe + 4H^+ + NO_3^- \\to Fe^{3+} + NO + 2H_2O',
+          step3: 'Balanced equation: Fe + 4HNO3 -> Fe(NO3)3 + NO + 2H2O.',
+          badge: 'Redox'
+        }
       },
       coachDemo: {
         title: 'The Coach Answers Everything',
         subtitle: 'Like a private tutor, available 24/7',
-        q1: 'What is Ohm\'s law?',
-        a1: 'Ohm\'s law relates voltage, resistance and current: U = R x I. For example, if R = 100 ohms and I = 0.5 A, then U = 50 V.',
-        q2: 'How to calculate a derivative?',
-        a2: 'To differentiate f(x) = x^n, use the formula f\'(x) = n * x^(n-1). Example: if f(x) = x^3, then f\'(x) = 3x^2.'
+        q1: 'What is the difference between average and instantaneous velocity?',
+        a1: 'Average velocity is total displacement divided by total time (v = d/t). Instantaneous velocity is the derivative of position with respect to time: v(t) = dx/dt. Example: a car may average 60 km/h but be at 90 km/h at a specific instant.',
+        q2: 'How to know if a reaction is exothermic?',
+        a2: 'An exothermic reaction releases energy as heat: its reaction enthalpy is negative (delta H < 0). Example: combustion of methane CH4 + 2O2 -> CO2 + 2H2O releases 890 kJ/mol. The opposite (delta H > 0) is endothermic.'
       },
       subjects: {
         title: 'Three Subjects, One Goal',

@@ -29,10 +29,18 @@ import {
 } from 'lucide-react'
 import { useTranslation } from '../hooks/useTranslation'
 
+const SOLVER_SUBJECTS = ['math', 'physics', 'chemistry']
+const SUBJECT_COLORS = {
+  math: { gradient: 'from-blue-500 to-indigo-600', border: 'border-blue-500/30', bg: 'bg-blue-500/10', text: 'text-blue-400', emoji: '📐' },
+  physics: { gradient: 'from-purple-500 to-pink-600', border: 'border-purple-500/30', bg: 'bg-purple-500/10', text: 'text-purple-400', emoji: '⚛️' },
+  chemistry: { gradient: 'from-orange-500 to-red-600', border: 'border-orange-500/30', bg: 'bg-orange-500/10', text: 'text-orange-400', emoji: '🧪' },
+}
+
 const NewHome = () => {
   const { t, language, changeLanguage, getAvailableLanguages } = useTranslation()
   const languages = getAvailableLanguages()
   const [showLangMenu, setShowLangMenu] = useState(false)
+  const [solverTab, setSolverTab] = useState('math')
 
   // Animated counter hook
   const useCounter = (end, duration = 2000) => {
@@ -191,10 +199,10 @@ const NewHome = () => {
         </div>
       </section>
 
-      {/* ════════ SOLVER DEMO ════════ */}
+      {/* ════════ SOLVER DEMO — 3 MATIERES ════════ */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10">
             <h2 className="text-4xl sm:text-5xl font-black mb-3">
               <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
                 {t('newHome.solverDemo.title')}
@@ -203,48 +211,94 @@ const NewHome = () => {
             <p className="text-gray-400 text-lg">{t('newHome.solverDemo.subtitle')}</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 items-start">
-            {/* Input side */}
-            <div className="bg-gray-800/60 rounded-2xl p-6 border border-white/10">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ml-2 text-xs text-gray-500">Solver</span>
-              </div>
-              <div className="bg-gray-900/80 rounded-xl p-4 border border-gray-700 mb-4">
-                <p className="text-gray-300 font-mono text-sm">{t('newHome.solverDemo.input')}</p>
-              </div>
-              <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold flex items-center justify-center gap-2 opacity-90">
-                <Send className="w-4 h-4" />
-                Resoudre
-              </button>
-            </div>
+          {/* Tab selector */}
+          <div className="flex justify-center gap-2 mb-8">
+            {SOLVER_SUBJECTS.map((sub) => {
+              const c = SUBJECT_COLORS[sub]
+              const active = solverTab === sub
+              return (
+                <button
+                  key={sub}
+                  onClick={() => setSolverTab(sub)}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                    active
+                      ? `bg-gradient-to-r ${c.gradient} text-white shadow-lg scale-105`
+                      : 'bg-gray-800/60 text-gray-400 hover:text-white hover:bg-gray-700/60'
+                  }`}
+                >
+                  <span>{c.emoji}</span>
+                  {t(`newHome.solverDemo.tab.${sub}`)}
+                </button>
+              )
+            })}
+          </div>
 
-            {/* Output side */}
-            <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-6 border border-green-500/30">
-              <div className="flex items-center gap-2 mb-4">
-                <CheckCircle className="w-5 h-5 text-green-400" />
-                <span className="font-bold text-green-300">{t('newHome.solverDemo.outputTitle')}</span>
-              </div>
-              <div className="space-y-4 text-sm">
-                <div>
-                  <p className="text-gray-300 mb-1">{t('newHome.solverDemo.step1')}</p>
-                  <div className="bg-gray-900/80 rounded-lg px-4 py-2 text-center">
-                    <span className="text-blue-300 font-mono text-xs sm:text-sm">{t('newHome.solverDemo.step1math')}</span>
+          {/* Demo card */}
+          {(() => {
+            const c = SUBJECT_COLORS[solverTab]
+            return (
+              <div className="grid md:grid-cols-2 gap-6 items-start">
+                {/* Input side */}
+                <div className={`bg-gray-800/60 rounded-2xl p-6 border ${c.border}`}>
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                    <span className="ml-2 text-xs text-gray-500">Solver</span>
+                    <span className={`ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full ${c.bg} ${c.text}`}>
+                      {t(`newHome.solverDemo.${solverTab}.badge`)}
+                    </span>
+                  </div>
+                  <div className="bg-gray-900/80 rounded-xl p-4 border border-gray-700 mb-4">
+                    <p className="text-gray-300 text-sm leading-relaxed">{t(`newHome.solverDemo.${solverTab}.input`)}</p>
+                  </div>
+                  <button className={`w-full py-3 bg-gradient-to-r ${c.gradient} rounded-xl font-bold flex items-center justify-center gap-2`}>
+                    <Send className="w-4 h-4" />
+                    Resoudre
+                  </button>
+                </div>
+
+                {/* Output side */}
+                <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-6 border border-green-500/30">
+                  <div className="flex items-center gap-2 mb-4">
+                    <CheckCircle className="w-5 h-5 text-green-400" />
+                    <span className="font-bold text-green-300">Solution Koundoul</span>
+                  </div>
+                  <div className="space-y-4 text-sm">
+                    <div>
+                      <p className="text-gray-300 mb-1">{t(`newHome.solverDemo.${solverTab}.step1`)}</p>
+                      <div className="bg-gray-900/80 rounded-lg px-4 py-2 overflow-x-auto">
+                        <span className={`${c.text} font-mono text-xs sm:text-sm whitespace-nowrap`}>
+                          {t(`newHome.solverDemo.${solverTab}.step1math`)}
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-gray-300 mb-1">{t(`newHome.solverDemo.${solverTab}.step2`)}</p>
+                      <div className="bg-gray-900/80 rounded-lg px-4 py-2 overflow-x-auto">
+                        <span className={`${c.text} font-mono text-xs sm:text-sm whitespace-nowrap`}>
+                          {t(`newHome.solverDemo.${solverTab}.step2math`)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20">
+                      <p className="text-green-300 font-semibold text-sm">{t(`newHome.solverDemo.${solverTab}.step3`)}</p>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <p className="text-gray-300 mb-1">{t('newHome.solverDemo.step2')}</p>
-                  <div className="bg-gray-900/80 rounded-lg px-4 py-2 text-center">
-                    <span className="text-blue-300 font-mono text-xs sm:text-sm">{t('newHome.solverDemo.step2math')}</span>
-                  </div>
-                </div>
-                <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20">
-                  <p className="text-green-300 font-semibold">{t('newHome.solverDemo.step3')}</p>
-                </div>
               </div>
-            </div>
+            )
+          })()}
+
+          {/* CTA under demo */}
+          <div className="text-center mt-8">
+            <Link
+              to="/register"
+              className="inline-flex items-center gap-2 text-purple-400 font-semibold hover:text-purple-300 transition-colors"
+            >
+              Essayer le Resolveur gratuitement
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
