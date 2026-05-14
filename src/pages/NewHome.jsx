@@ -212,7 +212,7 @@ const NewHome = () => {
           </div>
 
           {/* Tab selector */}
-          <div className="flex justify-center gap-2 mb-8">
+          <div className="flex justify-center gap-1.5 sm:gap-2 mb-8">
             {SOLVER_SUBJECTS.map((sub) => {
               const c = SUBJECT_COLORS[sub]
               const active = solverTab === sub
@@ -220,7 +220,7 @@ const NewHome = () => {
                 <button
                   key={sub}
                   onClick={() => setSolverTab(sub)}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                  className={`flex items-center gap-1.5 px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all duration-300 ${
                     active
                       ? `bg-gradient-to-r ${c.gradient} text-white shadow-lg scale-105`
                       : 'bg-gray-800/60 text-gray-400 hover:text-white hover:bg-gray-700/60'
@@ -239,7 +239,7 @@ const NewHome = () => {
             return (
               <div className="grid md:grid-cols-2 gap-6 items-start">
                 {/* Input side */}
-                <div className={`bg-gray-800/60 rounded-2xl p-6 border ${c.border}`}>
+                <div className={`bg-gray-800/60 rounded-2xl p-4 sm:p-6 border ${c.border}`}>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-3 h-3 rounded-full bg-red-500" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500" />
@@ -259,7 +259,7 @@ const NewHome = () => {
                 </div>
 
                 {/* Output side */}
-                <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-6 border border-green-500/30">
+                <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-4 sm:p-6 border border-green-500/30">
                   <div className="flex items-center gap-2 mb-4">
                     <CheckCircle className="w-5 h-5 text-green-400" />
                     <span className="font-bold text-green-300">Solution Koundoul</span>
@@ -267,16 +267,16 @@ const NewHome = () => {
                   <div className="space-y-4 text-sm">
                     <div>
                       <p className="text-gray-300 mb-1">{t(`newHome.solverDemo.${solverTab}.step1`)}</p>
-                      <div className="bg-gray-900/80 rounded-lg px-4 py-2 overflow-x-auto">
-                        <span className={`${c.text} font-mono text-xs sm:text-sm whitespace-nowrap`}>
+                      <div className="bg-gray-900/80 rounded-lg px-3 py-2 overflow-x-auto">
+                        <span className={`${c.text} font-mono text-[11px] sm:text-sm break-all sm:break-normal`}>
                           {t(`newHome.solverDemo.${solverTab}.step1math`)}
                         </span>
                       </div>
                     </div>
                     <div>
                       <p className="text-gray-300 mb-1">{t(`newHome.solverDemo.${solverTab}.step2`)}</p>
-                      <div className="bg-gray-900/80 rounded-lg px-4 py-2 overflow-x-auto">
-                        <span className={`${c.text} font-mono text-xs sm:text-sm whitespace-nowrap`}>
+                      <div className="bg-gray-900/80 rounded-lg px-3 py-2 overflow-x-auto">
+                        <span className={`${c.text} font-mono text-[11px] sm:text-sm break-all sm:break-normal`}>
                           {t(`newHome.solverDemo.${solverTab}.step2math`)}
                         </span>
                       </div>
