@@ -157,16 +157,24 @@ async function* streamGenerate({ role, systemInstruction, userPrompt, history, g
   }
 
   let totalChars = 0;
+  let chunkCount = 0;
+  let lastFinishReason = null;
   for await (const chunk of stream) {
+    chunkCount++;
     const text = chunk.text();
     if (text) {
       totalChars += text.length;
       yield text;
     }
+    // Capture finish reason from the last chunk (Gemini SDK exposes it on candidates)
+    const candidates = chunk.candidates;
+    if (candidates && candidates[0]?.finishReason) {
+      lastFinishReason = candidates[0].finishReason;
+    }
   }
 
   const duration = Date.now() - start;
-  console.log(`[Gemini] stream role=${role} prompt=${userPrompt.length}chars total=${totalChars}chars duration=${duration}ms`);
+  console.log(`[Gemini] stream role=${role} prompt=${userPrompt.length}chars total=${totalChars}chars chunks=${chunkCount} finishReason=${lastFinishReason || 'unknown'} duration=${duration}ms`);
 }
 
 module.exports = {

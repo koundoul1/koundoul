@@ -3,8 +3,8 @@ const router = express.Router();
 const { authenticateToken } = require('../middlewares/auth');
 const { checkAiQuota } = require('../middlewares/aiQuota');
 const prisma = require('../config/database');
-const { isConfigured, streamGenerate, generate, GeminiError } = require('../services/geminiService');
-const { SOLVER_SYSTEM_PROMPT, SOLVER_STRUCTURED_PROMPT, parseStructured } = require('../prompts/solver');
+const { isConfigured, streamGenerate, GeminiError } = require('../services/geminiService');
+const { SOLVER_SYSTEM_PROMPT } = require('../prompts/solver');
 const { incrementUsage } = require('../services/aiQuotaService');
 const { getUserPlanInfo } = require('../middlewares/premiumCheck');
 
@@ -126,46 +126,47 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
     // Stream the solution text with calibrated prompt
     const userPrompt = `Resous ce probleme de ${domain || 'mathematiques'} (niveau ${level || 'lycee'}):\n\n${problem.trim()}`;
     let fullText = '';
+    let chunkCount = 0;
+
+    console.log(`[Solver] Starting stream for user=${userId} problem=${problem.trim().length}chars domain=${domain || 'general'}`);
 
     for await (const chunk of streamGenerate({
       role: 'solver',
       systemInstruction: SOLVER_SYSTEM_PROMPT,
       userPrompt,
-      generationConfig: { temperature: 0.4, maxOutputTokens: 4096 }
+      generationConfig: { temperature: 0.4, maxOutputTokens: 8192 }
     })) {
+      chunkCount++;
       fullText += chunk;
       sendEvent('chunk', { text: chunk });
     }
 
-    // Post-process: extract structured data via second call (low temperature for deterministic JSON)
-    let structured;
-    try {
-      const jsonPrompt = SOLVER_STRUCTURED_PROMPT
-        .replace('{problem}', problem.trim())
-        .replace('{solution}', fullText);
+    console.log(`[Solver] Stream complete: chunks=${chunkCount} totalChars=${fullText.length} (~${Math.round(fullText.length / 5)} words)`);
 
-      const jsonText = await generate({
-        role: 'solver',
-        systemInstruction: 'Tu retournes uniquement du JSON valide. Aucun markdown, aucun backtick, aucun commentaire.',
-        userPrompt: jsonPrompt,
-        generationConfig: { temperature: 0.1, maxOutputTokens: 4096 }
-      });
-      structured = parseStructured(jsonText);
-    } catch (err) {
-      console.warn('[Solver] Structured extraction failed, using defaults:', err.message);
-      structured = parseStructured(null);
-    }
-
-    // Keyword-based override: force requiresGraph=true if problem explicitly asks for a graph
-    const GRAPH_KEYWORDS = ['tracer', 'tracé', 'courbe', 'graphe', 'graphique', 'représenter', 'représentation graphique'];
+    // Detect domain and graph requirement from content (no 2nd Gemini call)
     const problemLower = problem.trim().toLowerCase();
-    if (!structured.requiresGraph && GRAPH_KEYWORDS.some(kw => problemLower.includes(kw))) {
-      structured.requiresGraph = true;
-    }
+    const GRAPH_KEYWORDS = ['tracer', 'tracé', 'courbe', 'graphe', 'graphique', 'représenter', 'représentation graphique'];
+    const requiresGraph = GRAPH_KEYWORDS.some(kw => problemLower.includes(kw));
+
+    let detectedDomain = 'math';
+    const PHYSICS_KW = ['vitesse', 'acceleration', 'force', 'energie', 'newton', 'joule', 'watt', 'volt', 'ampere', 'projectile', 'trajectoire', 'cinetique', 'lorentz', 'champ', 'potentiel'];
+    const CHEMISTRY_KW = ['mole', 'reaction', 'acide', 'base', 'oxydation', 'reduction', 'concentration', 'titrage', 'element', 'atome', 'ion'];
+    if (PHYSICS_KW.some(kw => problemLower.includes(kw))) detectedDomain = 'physics';
+    else if (CHEMISTRY_KW.some(kw => problemLower.includes(kw))) detectedDomain = 'chemistry';
+
+    const structured = {
+      steps: [],
+      requiresGraph,
+      functionString: null,
+      functionName: null,
+      hints: [],
+      points: fullText.length > 5000 ? 15 : 10,
+      detectedDomain
+    };
 
     sendEvent('structured', structured);
 
-    // Persist
+    // Persist full markdown text
     await updateHistory({
       status: 'completed',
       solution: JSON.stringify({ text: fullText, ...structured }),

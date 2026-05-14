@@ -176,13 +176,15 @@ const api = {
         onDone?.(data || {});
       };
 
-      // Safety timeout: if stream hangs, force-finish after 90s
+      // Safety timeout: if stream hangs, force-finish after 180s
+      let totalCharsReceived = 0;
       const timeout = setTimeout(() => {
         if (!finished) {
+          console.warn(`[Solver] Frontend timeout after 180s — totalCharsReceived=${totalCharsReceived}`);
           finish({});
           controller.abort();
         }
-      }, 90000);
+      }, 180000);
 
       const run = async () => {
         try {
@@ -216,9 +218,15 @@ const api = {
             try {
               const data = JSON.parse(dataLine.slice(6));
               if (event === 'meta') onMeta?.(data);
-              else if (event === 'chunk') onChunk?.(data);
+              else if (event === 'chunk') {
+                totalCharsReceived += (data.text || '').length;
+                onChunk?.(data);
+              }
               else if (event === 'structured') onStructured?.(data);
-              else if (event === 'done') { clearTimeout(timeout); finish(data); }
+              else if (event === 'done') {
+                console.log(`[Solver] Stream done — totalCharsReceived=${totalCharsReceived}`);
+                clearTimeout(timeout); finish(data);
+              }
               else if (event === 'error') { clearTimeout(timeout); onError?.(data.message); }
             } catch (_e) { /* malformed SSE event */ }
           };
