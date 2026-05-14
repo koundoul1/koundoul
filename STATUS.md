@@ -6,6 +6,25 @@
 
 ---
 
+## 2026-05-14 — Bug Solver "Long content truncation" RESOLU
+
+Bug Solver resolu apres 8 iterations. Le Solver supporte maintenant les problemes ultra-complexes type Olympiades de Physique (5+ questions avec equations differentielles, LaTeX dense, jusqu'a 6000 mots de resolution).
+
+**Cause :** LaTeX dense consomme 3-16 tokens/commande. maxOutputTokens=4096 (initial) permettait seulement ~1500 mots. Chaque augmentation (8192, 16384) s'averait insuffisante car finishReason=MAX_TOKENS persistait. Le 2e appel Gemini (extraction JSON) echouait systematiquement sur les problemes complexes. Le timeout frontend (90s) coupait les longues generations.
+
+**Commits :** `55b1574` → `5afd68a` → `18e1ce0` → `ccb21c1` (5 commits sur main)
+
+**Changements :**
+- maxOutputTokens: 4096 → 65536 (max Gemini 2.5 Flash)
+- Suppression du 2e appel Gemini (parseStructured) — detection domain/graph par keywords cote backend
+- Timeout frontend: 90s → 360s
+- Heartbeat SSE: 15s → 10s
+- Timeout Gemini: 30s → 120s
+- Banniere UI informative si finishReason=MAX_TOKENS
+- Logs detailles: finishReason, totalChars, chunkCount
+
+---
+
 ## EN ATTENTE — A valider plus tard
 
 - [ ] **Wave Payment end-to-end** : tester le flow complet en sandbox des que les cles Wave seront disponibles dans `.env.local`. Verifier :

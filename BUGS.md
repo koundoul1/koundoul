@@ -147,18 +147,33 @@ Une issue rapportée par plusieurs testeurs = priorité accrue (champ `severity`
 - **Étapes** : 1. After quiz 2. Check profile
 - **Attendu** : XP added to student's total
 
-### Solver (8 issues)
+### Solver (8 issues) — ✅ RÉSOLU (2026-05-14)
 
-**1. Simple equation** 🔥🔥 _(rapporté par 2 testeurs: Student, Student2)_
+> **Bug "Long content truncation" — RÉSOLU après 8 itérations.**
+>
+> **Cause finale :** LaTeX dense (vec, frac, times, etc.) consomme 3-16 tokens par commande.
+> Avec maxOutputTokens=4096 puis 8192 puis 16384, Gemini atteignait systématiquement
+> MAX_TOKENS sur les problèmes complexes (5 questions physique/chimie). Le 2e appel Gemini
+> (extraction JSON structuré) échouait en cascade. Le timeout frontend (90s) coupait les
+> longues générations avant réception complète.
+>
+> **Solution appliquée :**
+> - maxOutputTokens porté à 65536 (max Gemini 2.5 Flash)
+> - Suppression du 2e appel Gemini (parseStructured) — détection domain/graph par keywords
+> - Timeout frontend 90s → 360s
+> - Heartbeat SSE 10s pour éviter coupure proxy
+> - Bannière UI informative si finishReason=MAX_TOKENS
+> - Logs détaillés : finishReason, totalChars, chunkCount à chaque appel
+
+**1. Simple equation** ✅ _(rapporté par 2 testeurs: Student, Student2)_
 - **Étapes** : 1. Enter 'x^2 - 4 = 0' 2. Solve
 - **Attendu** : Solutions x=2 and x=-2 displayed
-- **Constats** :
-  - [Student] error displayed
-  - [Student2] Ai not working
+- **Statut** : Corrigé — Solver fonctionnel, réponse complète avec LaTeX
 
-**2. LaTeX rendered answer** 🔥🔥 _(rapporté par 2 testeurs: Student, Student2)_
+**2. LaTeX rendered answer** ✅ _(rapporté par 2 testeurs: Student, Student2)_
 - **Étapes** : 1. Enter complex formula
 - **Attendu** : Answer with LaTeX formulas rendered correctly
+- **Statut** : Corrigé — SolutionDisplay rend le markdown + LaTeX streamé
 
 **3. Interactive graph** 🔥🔥 _(rapporté par 2 testeurs: Student, Student2)_
 - **Étapes** : 1. Request graph of f(x)=x²
@@ -168,19 +183,20 @@ Une issue rapportée par plusieurs testeurs = priorité accrue (champ `severity`
 - **Étapes** : 1. Open DevTools Network 2. Go to /solver
 - **Attendu** : Plotly.js loaded ONLY when Solver is opened (not at app start)
 
-**5. Resolution history** 🔥🔥 _(rapporté par 2 testeurs: Student, Student2)_
+**5. Resolution history** ✅ _(rapporté par 2 testeurs: Student, Student2)_
 - **Étapes** : 1. Solve 3 equations
 - **Attendu** : History visible or accessible
-- **Constats** :
-  - [Student] because the solver is not working
+- **Statut** : Corrigé — historique sauvegardé en DB avec texte complet
 
-**6. Invalid equation** 🔥🔥 _(rapporté par 2 testeurs: Student, Student2)_
+**6. Invalid equation** ✅ _(rapporté par 2 testeurs: Student, Student2)_
 - **Étapes** : 1. Enter non-mathematical text
 - **Attendu** : Understandable error message
+- **Statut** : Corrigé — Solver refuse poliment et redirige vers le Coach
 
-**7. Access Solver** 🔥 _(rapporté par 1 testeur: Student)_
+**7. Access Solver** ✅ _(rapporté par 1 testeur: Student)_
 - **Étapes** : 1. /solver
 - **Attendu** : Problem-solving interface visible
+- **Statut** : Corrigé — interface accessible
 
 **8. Solver on mobile** 🔥 _(rapporté par 1 testeur: Student2)_
 - **Étapes** : 1. Mobile 2. Enter equation
