@@ -610,7 +610,18 @@ const Solver = () => {
                           try {
                             var res = await api.solver.extractFromImage(reader.result);
                             if (res.success && res.data?.extractedText) {
-                              setProblem(res.data.extractedText);
+                              var extracted = res.data.extractedText;
+                              if (extracted.includes('Aucun probleme detecte')) {
+                                setError('Aucun probleme scolaire detecte dans cette image. Reessaie avec une photo plus nette.');
+                              } else {
+                                setProblem(extracted);
+                                // Auto-solve after short delay so user sees the extracted text
+                                setIsExtracting(false);
+                                setTimeout(() => {
+                                  document.getElementById('solver-submit-btn')?.click();
+                                }, 500);
+                                return;
+                              }
                             } else {
                               setError('Impossible d\'extraire le texte de cette image');
                             }
@@ -664,6 +675,7 @@ const Solver = () => {
 
                 {/* Bouton de résolution amélioré */}
                 <button
+                  id="solver-submit-btn"
                   onClick={handleSolve}
                   disabled={isSolving || !(problem || '').trim()}
                   className="relative w-full koundoul-btn-primary py-4 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center overflow-hidden group"

@@ -40,13 +40,17 @@ router.post('/extract-from-image', authenticateToken, async (req, res, next) => 
     var genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
     var model = genAI.getGenerativeModel({ model: process.env.GOOGLE_AI_MODEL_SOLVER || 'gemini-2.5-flash' });
 
-    // Remove data:image/...;base64, prefix if present
+    // Detect mimeType and strip data URI prefix
+    var mimeMatch = imageData.match(/^data:(image\/\w+);base64,/);
+    var mimeType = mimeMatch ? mimeMatch[1] : 'image/jpeg';
     var base64 = imageData.replace(/^data:image\/\w+;base64,/, '');
+
+    console.log(`[Solver] Image extraction: mimeType=${mimeType} base64Length=${base64.length}chars`);
 
     var result = await model.generateContent([
       {
         inlineData: {
-          mimeType: 'image/jpeg',
+          mimeType: mimeType,
           data: base64
         }
       },
