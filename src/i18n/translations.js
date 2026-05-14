@@ -251,75 +251,124 @@ export default {
     
     // NewHome - Page d'accueil moderne
     newHome: {
-      platformBadge: 'Nouvelle plateforme 2026',
-      title: 'Réussis en Sciences',
+      platformBadge: 'Plateforme educative #1 au Senegal',
+      title: 'Reussis en Sciences',
       titleWith: 'Avec Koundoul',
-      subtitle: '1800 exercices corrigés + 450 micro-leçons + Explications détaillées. Progressez à votre rythme de la Seconde à la Terminale.',
+      subtitle: 'La plateforme tout-en-un pour exceller en Maths, Physique et Chimie. Du college a la prepa.',
       startButton: 'Commencer Gratuitement',
-      seeExercises: 'Voir les Exercices',
+      seeExercises: 'Decouvrir la Plateforme',
       stats: {
-        exercises: 'Exercices',
-        microLessons: 'Micro-Leçons',
+        exercises: 'Exercices corriges',
+        microLessons: 'Micro-Lecons',
         chapters: 'Chapitres',
-        free: 'Gratuit'
+        free: 'Gratuit',
+        subjects: 'Matieres'
       },
-      features: {
-        title: 'Fonctionnalités Révolutionnaires',
-        subtitle: 'Tout ce dont vous avez besoin pour réussir',
+      modules: {
+        title: 'Tout Pour Reussir',
+        subtitle: '10 modules complementaires pour une progression complete',
         solver: {
-          title: 'Résolveur Révolutionnaire',
-          desc: 'Résolvez vos problèmes efficacement. Mode guidé avec indices progressifs.'
+          title: 'Resolveur IA',
+          desc: 'Colle ton enonce, recois une resolution complete etape par etape avec LaTeX. Supporte jusqu\'a 10 questions par probleme.',
+          badge: 'IA Avancee'
+        },
+        coach: {
+          title: 'Coach Virtuel',
+          desc: 'Pose tes questions comme a un prof particulier. Reponses pedagogiques adaptees a ton niveau.',
+          badge: 'Conversation IA'
         },
         microLessons: {
-          title: '450 Micro-Leçons',
-          desc: 'Capsules de 5-10 min pour maîtriser tous les concepts. Structurées et progressives.'
+          title: 'Micro-Lecons',
+          desc: 'Capsules de 5-10 min structurees et progressives. 450 lecons couvrant tout le programme.',
+          badge: '450 Lecons'
         },
         exercises: {
-          title: '1800 Exercices Corrigés',
-          desc: '900 QCM + 900 Exercices avec corrections détaillées. Tous les chapitres du programme.'
+          title: 'Banque d\'Exercices',
+          desc: '900 QCM + 900 exercices avec corrections detaillees. Filtres par matiere, niveau et difficulte.',
+          badge: '1800 Exercices'
+        },
+        quiz: {
+          title: 'Quiz Interactifs',
+          desc: 'Teste tes connaissances avec des quiz chronometres. Score instantane et XP gagnes.',
+          badge: 'Score & XP'
+        },
+        flashcards: {
+          title: 'Flashcards',
+          desc: 'Memorise les formules cles avec l\'algorithme de repetition espacee SuperMemo.',
+          badge: 'SuperMemo'
+        },
+        challenge: {
+          title: 'Defis Hebdo',
+          desc: 'Affronte d\'autres eleves dans des challenges chronometres. Classement et recompenses.',
+          badge: 'Competition'
+        },
+        duels: {
+          title: 'Duels 1v1',
+          desc: 'Defie tes amis en duel sur 10 questions. Le gagnant remporte 200 XP !',
+          badge: 'Multijoueur'
+        },
+        badges: {
+          title: 'Badges & XP',
+          desc: '15 badges a debloquer, systeme de niveaux et series consecutives pour rester motive.',
+          badge: 'Gamification'
+        },
+        parent: {
+          title: 'Espace Parent',
+          desc: 'Suivez la progression de vos enfants : activite, scores, temps d\'etude.',
+          badge: 'Suivi Parental'
         }
       },
+      solverDemo: {
+        title: 'Le Resolveur en Action',
+        subtitle: 'Colle ton enonce, recois une solution complete',
+        input: 'Resoudre x^2 - 5x + 6 = 0',
+        outputTitle: 'Solution Koundoul',
+        step1: 'On calcule le discriminant :',
+        step1math: '\\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1',
+        step2: 'Comme \\Delta > 0, deux solutions :',
+        step2math: 'x_1 = \\frac{5+1}{2} = 3 \\quad x_2 = \\frac{5-1}{2} = 2',
+        step3: 'Les solutions sont x = 2 et x = 3.'
+      },
+      coachDemo: {
+        title: 'Le Coach Repond a Tout',
+        subtitle: 'Comme un prof particulier, disponible 24h/24',
+        q1: 'C\'est quoi la loi d\'Ohm ?',
+        a1: 'La loi d\'Ohm relie tension, resistance et intensite : U = R x I. Par exemple, si R = 100 ohms et I = 0.5 A, alors U = 50 V.',
+        q2: 'Comment calculer une derivee ?',
+        a2: 'Pour deriver f(x) = x^n, on utilise la formule f\'(x) = n * x^(n-1). Exemple : si f(x) = x^3, alors f\'(x) = 3x^2.'
+      },
       subjects: {
-        title: 'Trois Matières, Un Objectif',
-        subtitle: 'Mathématiques, Physique et Chimie au programme',
+        title: 'Trois Matieres, Un Objectif',
+        subtitle: 'Programme complet de la Seconde a la Terminale',
         math: {
-          name: 'Mathématiques',
-          topics: 'Algèbre, Géométrie, Analyse'
+          name: 'Mathematiques',
+          topics: 'Algebre, Geometrie, Analyse, Probabilites, Suites'
         },
         physics: {
           name: 'Physique',
-          topics: 'Mécanique, Électricité, Optique'
+          topics: 'Mecanique, Electricite, Optique, Ondes, Thermodynamique'
         },
         chemistry: {
           name: 'Chimie',
-          topics: 'Atomes, Réactions, Organique'
+          topics: 'Atomes, Reactions, Organique, Acides-Bases, Oxydo-Reduction'
         },
         explore: 'Explorer'
       },
-      testimonials: {
-        title: 'Ils Ont Réussi Avec Koundoul',
-        marie: {
-          name: 'Marie L.',
-          level: 'Terminale S',
-          text: 'Le résolveur avec le mode guidé m\'a sauvé la vie ! J\'ai gagné 3 points en maths !'
-        },
-        lucas: {
-          name: 'Lucas D.',
-          level: 'Première STI2D',
-          text: 'Les 1800 exercices corrigés sont une mine d\'or. C\'est comme avoir un prof particulier 24/7.'
-        },
-        sarah: {
-          name: 'Sarah K.',
-          level: 'Seconde',
-          text: 'Le profil d\'apprentissage visuel change tout ! Les graphiques interactifs m\'aident vraiment.'
-        }
+      howItWorks: {
+        title: 'Comment Ca Marche ?',
+        step1: 'Inscris-toi gratuitement',
+        step1desc: 'Cree ton compte en 30 secondes',
+        step2: 'Choisis ta matiere',
+        step2desc: 'Maths, Physique ou Chimie',
+        step3: 'Progresse a ton rythme',
+        step3desc: 'Lecons, exercices, quiz et defis'
       },
       finalCta: {
-        title: 'Prêt à Réussir ?',
-        subtitle: 'Rejoignez des milliers d\'élèves qui progressent chaque jour',
+        title: 'Pret a Reussir ?',
+        subtitle: 'Rejoins des milliers d\'eleves qui progressent chaque jour',
         button: 'Commencer Maintenant'
       },
-      footer: '© 2026 Koundoul. Fait avec ❤️ pour votre réussite.'
+      footer: '© 2026 Koundoul. Fait avec passion pour la reussite scolaire.'
     },
     
     dashboard: {
@@ -1184,75 +1233,124 @@ export default {
     
     // NewHome - Modern home page
     newHome: {
-      platformBadge: 'New Platform 2026',
+      platformBadge: '#1 Educational Platform in Senegal',
       title: 'Succeed in Science',
       titleWith: 'With Koundoul',
-      subtitle: '1800 solved exercises + 450 micro-lessons + Detailed explanations. Progress at your own pace from 10th to 12th grade.',
+      subtitle: 'The all-in-one platform to excel in Math, Physics and Chemistry. From middle school to college prep.',
       startButton: 'Start for Free',
-      seeExercises: 'View Exercises',
+      seeExercises: 'Discover the Platform',
       stats: {
-        exercises: 'Exercises',
+        exercises: 'Solved Exercises',
         microLessons: 'Micro-Lessons',
         chapters: 'Chapters',
-        free: 'Free'
+        free: 'Free',
+        subjects: 'Subjects'
       },
-      features: {
-        title: 'Revolutionary Features',
-        subtitle: 'Everything you need to succeed',
+      modules: {
+        title: 'Everything You Need',
+        subtitle: '10 complementary modules for complete progress',
         solver: {
-          title: 'Revolutionary Solver',
-          desc: 'Solve your problems effectively. Guided mode with progressive hints.'
+          title: 'AI Solver',
+          desc: 'Paste your problem, receive a complete step-by-step solution with LaTeX. Supports up to 10 questions per problem.',
+          badge: 'Advanced AI'
+        },
+        coach: {
+          title: 'Virtual Coach',
+          desc: 'Ask questions like to a private tutor. Pedagogical answers adapted to your level.',
+          badge: 'AI Chat'
         },
         microLessons: {
-          title: '450 Micro-Lessons',
-          desc: '5-10 min capsules to master all concepts. Structured and progressive.'
+          title: 'Micro-Lessons',
+          desc: 'Structured 5-10 min capsules. 450 lessons covering the full curriculum.',
+          badge: '450 Lessons'
         },
         exercises: {
-          title: '1800 Solved Exercises',
-          desc: '900 MCQ + 900 Exercises with detailed corrections. All curriculum chapters.'
+          title: 'Exercise Bank',
+          desc: '900 MCQ + 900 exercises with detailed corrections. Filter by subject, level and difficulty.',
+          badge: '1800 Exercises'
+        },
+        quiz: {
+          title: 'Interactive Quizzes',
+          desc: 'Test your knowledge with timed quizzes. Instant score and XP earned.',
+          badge: 'Score & XP'
+        },
+        flashcards: {
+          title: 'Flashcards',
+          desc: 'Memorize key formulas with the SuperMemo spaced repetition algorithm.',
+          badge: 'SuperMemo'
+        },
+        challenge: {
+          title: 'Weekly Challenges',
+          desc: 'Compete against other students in timed challenges. Rankings and rewards.',
+          badge: 'Competition'
+        },
+        duels: {
+          title: '1v1 Duels',
+          desc: 'Challenge your friends to a 10-question duel. Winner gets 200 XP!',
+          badge: 'Multiplayer'
+        },
+        badges: {
+          title: 'Badges & XP',
+          desc: '15 badges to unlock, level system and streaks to stay motivated.',
+          badge: 'Gamification'
+        },
+        parent: {
+          title: 'Parent Dashboard',
+          desc: 'Track your children\'s progress: activity, scores, study time.',
+          badge: 'Parental Tracking'
         }
+      },
+      solverDemo: {
+        title: 'The Solver in Action',
+        subtitle: 'Paste your problem, get a complete solution',
+        input: 'Solve x^2 - 5x + 6 = 0',
+        outputTitle: 'Koundoul Solution',
+        step1: 'We compute the discriminant:',
+        step1math: '\\Delta = (-5)^2 - 4(1)(6) = 25 - 24 = 1',
+        step2: 'Since \\Delta > 0, two solutions:',
+        step2math: 'x_1 = \\frac{5+1}{2} = 3 \\quad x_2 = \\frac{5-1}{2} = 2',
+        step3: 'The solutions are x = 2 and x = 3.'
+      },
+      coachDemo: {
+        title: 'The Coach Answers Everything',
+        subtitle: 'Like a private tutor, available 24/7',
+        q1: 'What is Ohm\'s law?',
+        a1: 'Ohm\'s law relates voltage, resistance and current: U = R x I. For example, if R = 100 ohms and I = 0.5 A, then U = 50 V.',
+        q2: 'How to calculate a derivative?',
+        a2: 'To differentiate f(x) = x^n, use the formula f\'(x) = n * x^(n-1). Example: if f(x) = x^3, then f\'(x) = 3x^2.'
       },
       subjects: {
         title: 'Three Subjects, One Goal',
-        subtitle: 'Mathematics, Physics and Chemistry in the curriculum',
+        subtitle: 'Complete curriculum from 10th to 12th grade',
         math: {
           name: 'Mathematics',
-          topics: 'Algebra, Geometry, Analysis'
+          topics: 'Algebra, Geometry, Analysis, Probability, Sequences'
         },
         physics: {
           name: 'Physics',
-          topics: 'Mechanics, Electricity, Optics'
+          topics: 'Mechanics, Electricity, Optics, Waves, Thermodynamics'
         },
         chemistry: {
           name: 'Chemistry',
-          topics: 'Atoms, Reactions, Organic'
+          topics: 'Atoms, Reactions, Organic, Acids-Bases, Redox'
         },
         explore: 'Explore'
       },
-      testimonials: {
-        title: 'They Succeeded With Koundoul',
-        marie: {
-          name: 'Marie L.',
-          level: '12th Grade Science',
-          text: 'The solver with guided mode saved my life! I gained 3 points in math!'
-        },
-        lucas: {
-          name: 'Lucas D.',
-          level: '11th Grade STI2D',
-          text: 'The 1800 solved exercises are a gold mine. It\'s like having a private tutor 24/7.'
-        },
-        sarah: {
-          name: 'Sarah K.',
-          level: '10th Grade',
-          text: 'The visual learning profile changes everything! Interactive graphs really help me.'
-        }
+      howItWorks: {
+        title: 'How It Works',
+        step1: 'Sign up for free',
+        step1desc: 'Create your account in 30 seconds',
+        step2: 'Choose your subject',
+        step2desc: 'Math, Physics or Chemistry',
+        step3: 'Progress at your pace',
+        step3desc: 'Lessons, exercises, quizzes and challenges'
       },
       finalCta: {
         title: 'Ready to Succeed?',
         subtitle: 'Join thousands of students who progress every day',
         button: 'Start Now'
       },
-      footer: '© 2026 Koundoul. Made with ❤️ for your success.'
+      footer: '© 2026 Koundoul. Made with passion for academic success.'
     },
     
     dashboard: {
