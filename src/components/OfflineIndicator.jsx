@@ -27,7 +27,7 @@ export default function OfflineIndicator() {
             </div>
             <button
               onClick={installPWA}
-              className="bg-white text-blue-600 px-3 py-1.5 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-colors flex-shrink-0"
+              className="bg-yellow-400 text-gray-900 px-3 py-1.5 rounded-lg font-bold text-sm hover:bg-yellow-300 transition-colors flex-shrink-0"
             >
               Installer
             </button>
