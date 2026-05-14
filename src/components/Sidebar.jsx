@@ -177,7 +177,7 @@ const Sidebar = () => {
       </div>
 
       {/* Navigation sections — parent sees only parent modules */}
-      <nav className="flex-1 px-2 py-1 overflow-y-auto scrollbar-hide">
+      <nav className="flex-1 px-2 py-1 overflow-y-auto sidebar-scroll">
         {renderSection('Navigation', mainNav)}
         {!user?.isParent && renderSection('IA', aiNav)}
         {!user?.isParent && renderSection('Apprentissage', learnNav)}

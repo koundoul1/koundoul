@@ -297,6 +297,25 @@ html {
   scrollbar-width: none;
 }
 
+/* Sidebar thin scrollbar — visible on hover */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.sidebar-scroll:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+}
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
 /* Custom gradient backgrounds */
 .gradient-dark {
   background: linear-gradient(to bottom, #0f172a, #1e293b, #0f172a);
