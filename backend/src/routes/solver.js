@@ -141,14 +141,14 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
     let structured;
     try {
       const jsonPrompt = SOLVER_STRUCTURED_PROMPT
-        .replace('{problem}', problem.trim().slice(0, 500))
+        .replace('{problem}', problem.trim())
         .replace('{solution}', fullText);
 
       const jsonText = await generate({
         role: 'solver',
         systemInstruction: 'Tu retournes uniquement du JSON valide. Aucun markdown, aucun backtick, aucun commentaire.',
         userPrompt: jsonPrompt,
-        generationConfig: { temperature: 0.1, maxOutputTokens: 2048 }
+        generationConfig: { temperature: 0.1, maxOutputTokens: 4096 }
       });
       structured = parseStructured(jsonText);
     } catch (err) {
