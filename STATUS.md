@@ -23,6 +23,16 @@ Bug Solver resolu apres 8 iterations. Le Solver supporte maintenant les probleme
 - Banniere UI informative si finishReason=MAX_TOKENS
 - Logs detailles: finishReason, totalChars, chunkCount
 
+### Production Status
+
+- ✅ Solver IA : supporte problemes ultra-complexes type bac S (jusqu'a 5 questions, equations differentielles, LaTeX dense)
+- ✅ Coach IA : heartbeat SSE 10s, timeout adapte
+- ✅ Streaming SSE : pipeline simplifie (1 seul appel Gemini, pas de post-traitement JSON)
+
+### Backlog
+
+- [ ] Multi-pass automatique pour enonces 6+ questions (consommation 2-3 quotas, reserve Premium+) — Estimation : 2h, priorite MEDIUM
+
 ---
 
 ## EN ATTENTE — A valider plus tard
