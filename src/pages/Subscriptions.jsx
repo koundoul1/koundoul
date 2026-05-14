@@ -615,16 +615,16 @@ function PromoCodeInput() {
   };
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
-      <h3 className="text-lg font-bold text-white mb-2">Code promo</h3>
-      <p className="text-xs text-gray-500 mb-4">Tu as un code ? Entre-le ici pour activer ton plan.</p>
-      <div className="flex gap-2">
+    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 text-center">
+      <h3 className="text-base sm:text-lg font-bold text-white mb-2">Code promo</h3>
+      <p className="text-xs text-gray-500 mb-3 sm:mb-4">Tu as un code ? Entre-le ici pour activer ton plan.</p>
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
           placeholder="CODE PROMO"
           maxLength={20}
-          className="flex-1 px-4 py-2.5 bg-gray-800 border border-white/10 rounded-xl text-white text-center font-mono text-lg tracking-widest uppercase placeholder-gray-600 focus:outline-none focus:border-kprimary"
+          className="flex-1 px-3 sm:px-4 py-2.5 bg-gray-800 border border-white/10 rounded-xl text-white text-center font-mono text-base sm:text-lg tracking-wider sm:tracking-widest uppercase placeholder-gray-600 focus:outline-none focus:border-kprimary"
           onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(); }}
         />
         <button
