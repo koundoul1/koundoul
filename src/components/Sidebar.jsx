@@ -169,7 +169,7 @@ const Sidebar = () => {
       {/* Logo */}
       <div className="p-5 pb-2">
         <Link to="/" className="flex items-center space-x-3 group">
-          <img src="/favicon.svg" alt="Koundoul" className="w-10 h-10 rounded-xl bg-white p-0.5 group-hover:scale-110 transition-transform" />
+          <img src="/favicon.svg" alt="Koundoul" className="w-11 h-11 rounded-2xl ring-2 ring-white/30 group-hover:scale-110 transition-transform" />
           <span className="text-xl font-black gradient-text">
             Koundoul
           </span>
