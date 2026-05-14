@@ -25,13 +25,13 @@ Bug Solver resolu apres 8 iterations. Le Solver supporte maintenant les probleme
 
 ### Production Status
 
-- ✅ Solver IA : supporte problemes ultra-complexes type bac S (jusqu'a 5 questions, equations differentielles, LaTeX dense)
+- ✅ Solver IA : supporte jusqu'a 10+ questions complexes en 1 seule requete (LaTeX dense, demonstrations mathematiques, niveau prepa scientifique)
 - ✅ Coach IA : heartbeat SSE 10s, timeout adapte
 - ✅ Streaming SSE : pipeline simplifie (1 seul appel Gemini, pas de post-traitement JSON)
 
 ### Backlog
 
-- [ ] Multi-pass automatique pour enonces 6+ questions (consommation 2-3 quotas, reserve Premium+) — Estimation : 2h, priorite MEDIUM
+_(Aucun item Solver en attente — le Solver gere nativement 10+ questions en 1 appel.)_
 
 ---
 

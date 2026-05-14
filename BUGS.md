@@ -149,7 +149,7 @@ Une issue rapportée par plusieurs testeurs = priorité accrue (champ `severity`
 
 ### Solver (8 issues) — ✅ RÉSOLU (2026-05-14)
 
-> **Bug "Long content truncation" — RÉSOLU après 8 itérations.**
+> **Bug "Long content truncation" — DÉFINITIVEMENT RÉSOLU après 8 itérations.**
 >
 > **Cause finale :** LaTeX dense (vec, frac, times, etc.) consomme 3-16 tokens par commande.
 > Avec maxOutputTokens=4096 puis 8192 puis 16384, Gemini atteignait systématiquement
@@ -164,6 +164,12 @@ Une issue rapportée par plusieurs testeurs = priorité accrue (champ `severity`
 > - Heartbeat SSE 10s pour éviter coupure proxy
 > - Bannière UI informative si finishReason=MAX_TOKENS
 > - Logs détaillés : finishReason, totalChars, chunkCount à chaque appel
+>
+> **Validation prod (2026-05-14) — 3 tests successifs, finishReason=STOP :**
+> - 6 questions maths (étude fonction polynomiale) : ✅ 6/6 traitées
+> - 8 questions physique (plan incliné + énergie) : ✅ 8/8 traitées
+> - 10 questions chimie niveau prépa (estérification + Van't Hoff + diagramme) : ✅ 10/10 traitées
+> - Tous traités en 1 seul appel Gemini.
 
 **1. Simple equation** ✅ _(rapporté par 2 testeurs: Student, Student2)_
 - **Étapes** : 1. Enter 'x^2 - 4 = 0' 2. Solve
