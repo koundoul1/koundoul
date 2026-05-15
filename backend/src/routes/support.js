@@ -14,7 +14,7 @@ router.post('/tickets', authenticateToken, async (req, res, next) => {
 
     const ticket = await prisma.supportTicket.create({
       data: {
-        userId: req.user.id,
+        userId: req.user.userId,
         subject: subject.slice(0, 200),
         message: message.slice(0, 2000),
         category: cat,
@@ -32,7 +32,7 @@ router.post('/tickets', authenticateToken, async (req, res, next) => {
 router.get('/tickets', authenticateToken, async (req, res, next) => {
   try {
     const tickets = await prisma.supportTicket.findMany({
-      where: { userId: req.user.id },
+      where: { userId: req.user.userId },
       orderBy: { createdAt: 'desc' },
       include: {
         _count: { select: { replies: true } },
@@ -50,7 +50,7 @@ router.get('/tickets', authenticateToken, async (req, res, next) => {
 router.get('/tickets/:id', authenticateToken, async (req, res, next) => {
   try {
     const ticket = await prisma.supportTicket.findFirst({
-      where: { id: req.params.id, userId: req.user.id },
+      where: { id: req.params.id, userId: req.user.userId },
       include: {
         replies: {
           orderBy: { createdAt: 'asc' },
@@ -74,7 +74,7 @@ router.post('/tickets/:id/reply', authenticateToken, async (req, res, next) => {
     if (!message) return res.status(400).json({ error: 'Message requis' });
 
     const ticket = await prisma.supportTicket.findFirst({
-      where: { id: req.params.id, userId: req.user.id }
+      where: { id: req.params.id, userId: req.user.userId }
     });
     if (!ticket) return res.status(404).json({ error: 'Ticket non trouvé' });
     if (ticket.status === 'closed') return res.status(400).json({ error: 'Ticket fermé' });
@@ -82,7 +82,7 @@ router.post('/tickets/:id/reply', authenticateToken, async (req, res, next) => {
     const reply = await prisma.ticketReply.create({
       data: {
         ticketId: req.params.id,
-        userId: req.user.id,
+        userId: req.user.userId,
         message: message.slice(0, 2000),
         isAdmin: false,
       },
