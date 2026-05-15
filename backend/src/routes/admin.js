@@ -335,7 +335,7 @@ router.post('/users/:id/assign-plan', requireAdmin, async (req, res, next) => {
 
     // Deactivate existing active subscriptions
     await prisma.subscription.updateMany({
-      where: { userId: userId, status: 'ACTIVE' },
+      where: { userId: userId, status: { in: ['active', 'ACTIVE'] } },
       data: { status: 'cancelled', cancelledAt: new Date() }
     });
 

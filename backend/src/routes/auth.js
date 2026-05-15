@@ -202,10 +202,14 @@ router.post('/register', registerLimiter, async (req, res, next) => {
           }).catch(() => {});
         }
         if (referrer && referrer.id !== user.id) {
-          // Find PREMIUM_DAILY plan
+          // Find a daily plan for referral reward (try PREMIUM_DAILY, then DAILY)
           const dailyPlan = await prisma.subscriptionPlan.findFirst({
-            where: { name: 'PREMIUM_DAILY', isActive: true }
+            where: { name: { in: ['PREMIUM_DAILY', 'DAILY'] }, isActive: true },
+            orderBy: { name: 'asc' }
           });
+          if (!dailyPlan) {
+            console.warn('[Referral] No daily plan found (PREMIUM_DAILY or DAILY) — skipping premium reward');
+          }
           if (dailyPlan) {
             const now = new Date();
             const endDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
