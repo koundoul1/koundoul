@@ -44,7 +44,7 @@ async function getUserPlan(userId) {
   const ownSub = await prisma.subscription.findFirst({
     where: {
       userId,
-      status: 'ACTIVE',
+      status: { in: ['ACTIVE', 'active'] },
       endDate: { gte: new Date() }
     },
     include: { plan: true },
@@ -64,7 +64,7 @@ async function getUserPlan(userId) {
     const parentSub = await prisma.subscription.findFirst({
       where: {
         userId: parentLink.parent_id,
-        status: 'ACTIVE',
+        status: { in: ['ACTIVE', 'active'] },
         endDate: { gte: new Date() }
       },
       include: { plan: true },

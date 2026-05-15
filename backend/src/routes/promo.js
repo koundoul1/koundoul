@@ -28,7 +28,7 @@ router.post('/validate', authenticateToken, async function(req, res, next) {
 
     // Deactivate existing active subscriptions
     await prisma.subscription.updateMany({
-      where: { userId: userId, status: 'ACTIVE' },
+      where: { userId: userId, status: { in: ['ACTIVE', 'active'] } },
       data: { status: 'cancelled', cancelledAt: new Date() }
     });
 

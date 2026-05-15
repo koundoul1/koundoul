@@ -401,7 +401,7 @@ router.get('/advanced-stats', authenticateToken, async (req, res, next) => {
     // Check if user has active subscription (premium)
     var now = new Date();
     var activeSub = await prisma.subscription.findFirst({
-      where: { userId: userId, status: 'ACTIVE', endDate: { gte: now } },
+      where: { userId: userId, status: { in: ['ACTIVE', 'active'] }, endDate: { gte: now } },
       include: { plan: true }
     });
 

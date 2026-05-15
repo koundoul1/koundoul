@@ -82,7 +82,7 @@ router.get('/stats', requireAdmin, async (req, res, next) => {
 
     // Level 3 — Revenue
     const [activeSubscriptions, monthlyRevenueResult] = await Promise.all([
-      prisma.subscription.count({ where: { status: 'ACTIVE' } }),
+      prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'active'] } } }),
       prisma.payment.aggregate({
         _sum: { amount: true },
         where: { status: { in: ['COMPLETED', 'SUCCESS'] }, createdAt: { gte: monthStart } }
@@ -92,7 +92,7 @@ router.get('/stats', requireAdmin, async (req, res, next) => {
 
     let subsByPlan = [];
     try {
-      const raw = await prisma.subscription.groupBy({ by: ['planId'], _count: true, where: { status: 'ACTIVE' } });
+      const raw = await prisma.subscription.groupBy({ by: ['planId'], _count: true, where: { status: { in: ['ACTIVE', 'active'] } } });
       const plans = await prisma.subscriptionPlan.findMany({ select: { id: true, name: true, displayName: true } });
       const planMap = {};
       plans.forEach(p => { planMap[p.id] = p.displayName || p.name; });
@@ -103,7 +103,7 @@ router.get('/stats', requireAdmin, async (req, res, next) => {
 
     let conversionRate = 0;
     try {
-      const recentSubs = await prisma.subscription.count({ where: { status: 'ACTIVE', createdAt: { gte: thirtyDaysAgo } } });
+      const recentSubs = await prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'active'] }, createdAt: { gte: thirtyDaysAgo } } });
       conversionRate = totalUsers > 0 ? Math.round((recentSubs / totalUsers) * 10000) / 100 : 0;
     } catch (e) { /* ignore */ }
 
@@ -238,7 +238,7 @@ router.get('/users', requireAdmin, async (req, res, next) => {
           createdAt: true,
           lastLoginAt: true,
           subscriptions: {
-            where: { status: 'ACTIVE' },
+            where: { status: { in: ['ACTIVE', 'active'] } },
             take: 1,
             orderBy: { createdAt: 'desc' },
             include: { plan: { select: { name: true, displayName: true } } }
@@ -738,7 +738,7 @@ router.delete('/plans/:id', requireAdmin, async (req, res, next) => {
 
     // Check for active subscriptions
     const activeCount = await prisma.subscription.count({
-      where: { planId: id, status: 'ACTIVE' }
+      where: { planId: id, status: { in: ['ACTIVE', 'active'] } }
     });
 
     if (activeCount > 0) {

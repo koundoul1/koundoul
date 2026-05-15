@@ -100,7 +100,7 @@ async function checkChildAlerts(childId) {
     if (usage && usage.count > 0) {
       // Get child plan quota
       var sub = await prisma.subscription.findFirst({
-        where: { userId: childId, status: 'ACTIVE', endDate: { gte: now } },
+        where: { userId: childId, status: { in: ['ACTIVE', 'active'] }, endDate: { gte: now } },
         include: { plan: true }
       });
       var limit = sub ? (sub.plan.aiCallsPerDay || 6) : 6;
