@@ -2831,15 +2831,38 @@ const TicketsSection = ({ showToast, showConfirm }) => {
 
                   {/* Reply form */}
                   {ticketDetail.status !== 'closed' && (
-                    <div className="flex gap-2">
-                      <input value={replyText} onChange={(e) => setReplyText(e.target.value)}
-                        placeholder="Répondre au ticket..."
-                        onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleReply(t.id)}
-                        className="flex-1 px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
-                      <button onClick={() => handleReply(t.id)} disabled={replyLoading || !replyText.trim()}
-                        className="px-4 py-2 bg-[#FF4757] text-white rounded-lg text-sm hover:bg-[#FF4757]/80 disabled:opacity-50">
-                        {replyLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
-                      </button>
+                    <div className="space-y-2">
+                      <div className="flex gap-2">
+                        <input value={replyText} onChange={(e) => setReplyText(e.target.value)}
+                          placeholder="Repondre au ticket..."
+                          onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleReply(t.id)}
+                          className="flex-1 px-3 py-2 bg-white/5 border border-gray-700 rounded-lg text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#FF4757]" />
+                        <button onClick={() => handleReply(t.id)} disabled={replyLoading || !replyText.trim()}
+                          className="px-4 py-2 bg-[#FF4757] text-white rounded-lg text-sm hover:bg-[#FF4757]/80 disabled:opacity-50">
+                          {replyLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                        </button>
+                      </div>
+                      {/* WhatsApp / Email reply buttons */}
+                      <div className="flex gap-2">
+                        {ticketDetail.user?.phone && (
+                          <a
+                            href={`https://wa.me/${ticketDetail.user.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Bonjour ${ticketDetail.user.firstName || ''}, concernant votre ticket Koundoul "${ticketDetail.subject}" :\n\n`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-green-600/20 border border-green-500/30 text-green-400 rounded-lg text-xs font-medium hover:bg-green-600/30 transition-colors"
+                          >
+                            <span>📱</span> WhatsApp
+                          </a>
+                        )}
+                        {ticketDetail.user?.email && (
+                          <a
+                            href={`mailto:${ticketDetail.user.email}?subject=Re: ${encodeURIComponent(ticketDetail.subject)}&body=${encodeURIComponent(`Bonjour ${ticketDetail.user.firstName || ''},\n\nConcernant votre demande :\n\n`)}`}
+                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-500/30 text-blue-400 rounded-lg text-xs font-medium hover:bg-blue-600/30 transition-colors"
+                          >
+                            <span>📧</span> Email
+                          </a>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>

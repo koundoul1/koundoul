@@ -92,6 +92,7 @@ const Sidebar = () => {
   const accountNav = [
     { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
     { name: 'Notifications', href: '/notifications', icon: Bell },
+    { name: 'Contact', href: '/contact', icon: MessageSquare },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
     ...(user?.isParent ? [
       { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield },

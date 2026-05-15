@@ -53,6 +53,7 @@ const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
 const QuestionBanks = lazy(() => import('./pages/QuestionBanks'))
 const QuestionBankDetail = lazy(() => import('./pages/QuestionBankDetail'))
 const TestHintSystem = lazy(() => import('./pages/TestHintSystem'))
+const Contact = lazy(() => import('./pages/Contact'))
 const Terms = lazy(() => import('./pages/Terms'))
 const Privacy = lazy(() => import('./pages/Privacy'))
 const Subscriptions = lazy(() => import('./pages/Subscriptions'))
@@ -147,6 +148,7 @@ function AppLayout() {
             <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
             <Route path="/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
             <Route path="/flashcards/review" element={<ProtectedRoute><FlashcardsReview /></ProtectedRoute>} />
+            <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
             <Route path="/forum" element={<ProtectedRoute><Forum /></ProtectedRoute>} />
             <Route path="/forum/:id" element={<ProtectedRoute><DiscussionDetail /></ProtectedRoute>} />
             <Route path="/forum/new" element={<ProtectedRoute><CreateDiscussion /></ProtectedRoute>} />

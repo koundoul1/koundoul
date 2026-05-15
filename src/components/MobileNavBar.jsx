@@ -104,6 +104,7 @@ const MobileNavBar = () => {
     // Ressources & Compte
     { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚' },
     { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '👁️' },
+    { name: 'Contact', href: '/contact', icon: MessageSquare, emoji: '✉️' },
     { name: 'Profil', href: '/profile', icon: User, emoji: '👤' },
     { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
     ...(user?.is_admin ? [{ name: 'Admin', href: '/admin', icon: Shield, emoji: '🛡️' }] : []),
