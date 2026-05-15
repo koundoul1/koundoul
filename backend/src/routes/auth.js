@@ -216,7 +216,7 @@ router.post('/register', registerLimiter, async (req, res, next) => {
 
             // Give 24h premium to new user
             await prisma.subscription.create({
-              data: { userId: user.id, planId: dailyPlan.id, status: 'active', startDate: now, endDate, autoRenew: false }
+              data: { userId: user.id, planId: dailyPlan.id, status: 'ACTIVE', startDate: now, endDate, autoRenew: false }
             }).catch(() => {});
 
             // Give 24h premium to referrer — cumulative (extends if already premium)
@@ -235,7 +235,7 @@ router.post('/register', registerLimiter, async (req, res, next) => {
             } else {
               // Create new 24h subscription
               await prisma.subscription.create({
-                data: { userId: referrer.id, planId: dailyPlan.id, status: 'active', startDate: now, endDate, autoRenew: false }
+                data: { userId: referrer.id, planId: dailyPlan.id, status: 'ACTIVE', startDate: now, endDate, autoRenew: false }
               }).catch(() => {});
             }
 
@@ -364,10 +364,17 @@ router.get('/profile', authenticateToken, async (req, res, next) => {
       return res.status(404).json({ error: 'Utilisateur non trouve' });
     }
 
+    // Check premium status (same as POST /login)
+    var { getUserPlanInfo } = require('../middlewares/premiumCheck');
+    var planInfo = await getUserPlanInfo(user.id);
+
     res.json({
       success: true,
       data: {
         ...user,
+        isPremium: planInfo.isPremium,
+        planName: planInfo.displayName,
+        planType: planInfo.planName,
         hasPassword: !!(await prisma.user.findUnique({ where: { id: user.id }, select: { password: true } }))?.password,
         hasPin: !!(await prisma.user.findUnique({ where: { id: user.id }, select: { pinHash: true } }))?.pinHash
       }
