@@ -6,6 +6,21 @@
 
 ---
 
+## 2026-05-15 — Fix Premium 24h non reconnu apres refresh
+
+**Cause :** GET /profile ne renvoyait pas isPremium/planName. Au login, le backend calculait le statut premium, mais au refresh (checkAuth via GET /profile), l'info etait perdue. Le frontend ecrasait le user avec les donnees du profile sans premium.
+
+**Fix :**
+- GET /profile appelle maintenant getUserPlanInfo() et renvoie isPremium, planName, planType
+- Referral ecrit desormais status: 'ACTIVE' (majuscule) — coherent avec admin/promo
+- Harmonisation de TOUTES les queries de lecture subscription avec `{ in: ['ACTIVE', 'active'] }`
+
+**Fichiers modifies :** auth.js, dashboard.js, admin.js, aiQuotaService.js, promo.js, parentAlertsJob.js
+
+**Tech debt :** Harmoniser la casse du champ subscription.status en DB (mix 'active'/'ACTIVE'). Migration a planifier en fenetre maintenance.
+
+---
+
 ## 2026-05-14 — Bug Solver "Long content truncation" RESOLU
 
 Bug Solver resolu apres 8 iterations. Le Solver supporte maintenant les problemes ultra-complexes type Olympiades de Physique (5+ questions avec equations differentielles, LaTeX dense, jusqu'a 6000 mots de resolution).
