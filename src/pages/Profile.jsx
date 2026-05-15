@@ -508,7 +508,7 @@ const Profile = () => {
     )
   }
 
-  const inputClasses = "w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-kprimary focus:border-transparent disabled:opacity-50 disabled:bg-white/[0.02] font-medium"
+  const inputClasses = "w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-kprimary focus:border-transparent disabled:opacity-50 disabled:bg-white/[0.02] font-medium [&>option]:bg-gray-800 [&>option]:text-white"
 
   return (
     <div className="min-h-screen text-white pb-20 lg:pb-0">
