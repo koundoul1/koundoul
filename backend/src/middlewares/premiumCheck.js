@@ -23,6 +23,8 @@ async function getUserPlanInfo(userId) {
   }
 
   // Check parent family plan
+  // TODO(family-multi-parent): Currently only first parent link is checked.
+  // See STATUS.md for full implementation plan.
   var parentLink = await prisma.parent_child_links.findFirst({
     where: { child_id: userId, approved: true }
   });

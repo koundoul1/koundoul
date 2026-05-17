@@ -6,6 +6,32 @@
 
 ---
 
+## 2026-05-17 — Audit complet subscriptions : 10 bugs fixes
+
+**Scope :** Audit complet du systeme d'abonnements (subscriptions, referral, paiements, quotas).
+
+**Bugs critiques corriges :**
+1. Status casing harmonise — toutes les ecritures utilisent 'ACTIVE', toutes les lectures acceptent les 2 cas
+2. Paiement sans planId ne reste plus silencieux — fallback par montant + notification user si echec
+3. Frontend isFreeUser comparait un objet plan a une string 'FREE' — corrige
+
+**Bugs importants corriges :**
+4. endDate fallback 30j si plan.interval est undefined (subscriptions.js)
+5. Stats admin revenue sous-comptees — accepte maintenant completed/COMPLETED/success/SUCCESS
+6. Code mort seedSubscriptionPlans.js supprime (remplace par initPlans.js)
+7. Job expiry rendu idempotent (condition atomique sur le updateMany)
+
+**Confirmations :**
+- Plan PREMIUM_DAILY existe bien dans initPlans.js (id: plan-premium-daily, 125 XOF, 20 IA/j) — pas de bug
+- Referral code frontend→backend : chaine complete, fonctionne correctement
+- Job expiry correctement enregistre dans index.js
+
+**Tech debt restante :**
+- Harmoniser la casse subscription.status en DB via migration (fenetre maintenance)
+- Family plan : implementer support multi-parent (actuellement seul le 1er lien parent est verifie)
+
+---
+
 ## 2026-05-15 — Fix Premium 24h non reconnu apres refresh
 
 **Cause :** GET /profile ne renvoyait pas isPremium/planName. Au login, le backend calculait le statut premium, mais au refresh (checkAuth via GET /profile), l'info etait perdue. Le frontend ecrasait le user avec les donnees du profile sans premium.
