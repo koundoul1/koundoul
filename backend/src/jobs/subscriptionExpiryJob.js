@@ -13,7 +13,7 @@ async function expireSubscriptions() {
   try {
     const now = new Date();
 
-    // 1. Find and expire overdue active subscriptions
+    // 1. Find and expire overdue active subscriptions (atomic: only update if still active)
     const expired = await prisma.subscription.findMany({
       where: {
         status: { in: ['active', 'ACTIVE'] },
@@ -26,8 +26,9 @@ async function expireSubscriptions() {
     });
 
     if (expired.length > 0) {
+      // Atomic update: only expire subscriptions still in active state (idempotent)
       await prisma.subscription.updateMany({
-        where: { id: { in: expired.map(s => s.id) } },
+        where: { id: { in: expired.map(s => s.id) }, status: { in: ['active', 'ACTIVE'] } },
         data: { status: 'expired' }
       });
 
