@@ -106,7 +106,8 @@ const NewDashboard = () => {
   const [promoDismissed, setPromoDismissed] = useState(false)
   const [referralCode, setReferralCode] = useState(null)
   const aiQuota = useAiQuota()
-  const isFreeUser = !aiQuota.quota?.plan || aiQuota.quota?.plan === 'FREE' || aiQuota.quota?.plan === 'Gratuit'
+  const planName = aiQuota.quota?.plan?.name || aiQuota.quota?.plan
+  const isFreeUser = !planName || planName === 'FREE' || planName === 'Gratuit'
 
   useEffect(() => {
     fetchDashboard()
