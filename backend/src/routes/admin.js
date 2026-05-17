@@ -85,7 +85,7 @@ router.get('/stats', requireAdmin, async (req, res, next) => {
       prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'active'] } } }),
       prisma.payment.aggregate({
         _sum: { amount: true },
-        where: { status: { in: ['COMPLETED', 'SUCCESS'] }, createdAt: { gte: monthStart } }
+        where: { status: { in: ['COMPLETED', 'completed', 'SUCCESS', 'success'] }, createdAt: { gte: monthStart } }
       })
     ]);
     const monthlyRevenue = monthlyRevenueResult._sum.amount || 0;
@@ -127,7 +127,7 @@ router.get('/stats', requireAdmin, async (req, res, next) => {
     const revenueByMonthRaw = await prisma.$queryRaw`
       SELECT TO_CHAR("created_at", 'YYYY-MM') as month, SUM(amount)::int as revenue
       FROM payments
-      WHERE "created_at" >= ${sixMonthsAgo} AND status IN ('COMPLETED', 'SUCCESS')
+      WHERE "created_at" >= ${sixMonthsAgo} AND status IN ('COMPLETED', 'completed', 'SUCCESS', 'success')
       GROUP BY TO_CHAR("created_at", 'YYYY-MM')
       ORDER BY month ASC
     `;
@@ -1124,7 +1124,7 @@ router.post('/activate-payment/:id', requireAdmin, async (req, res, next) => {
       data: {
         userId: payment.userId,
         planId: plan.id,
-        status: 'active',
+        status: 'ACTIVE',
         startDate,
         endDate,
         autoRenew: false

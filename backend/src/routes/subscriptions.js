@@ -30,7 +30,7 @@ router.get('/my-subscription', authenticateToken, async (req, res) => {
     const subscription = await prisma.subscription.findFirst({
       where: {
         userId: req.user.userId,
-        status: 'active'
+        status: { in: ['ACTIVE', 'active'] }
       },
       include: {
         plan: true
@@ -107,7 +107,7 @@ router.post('/create', authenticateToken, async (req, res) => {
     await prisma.subscription.updateMany({
       where: {
         userId: req.user.userId,
-        status: 'active'
+        status: { in: ['ACTIVE', 'active'] }
       },
       data: {
         status: 'cancelled',
@@ -118,13 +118,16 @@ router.post('/create', authenticateToken, async (req, res) => {
     // Calculer la date de fin
     const startDate = new Date();
     const endDate = new Date();
-    
+
     if (plan.interval === 'daily') {
       endDate.setDate(endDate.getDate() + 1);
     } else if (plan.interval === 'monthly') {
       endDate.setMonth(endDate.getMonth() + 1);
     } else if (plan.interval === 'yearly') {
       endDate.setFullYear(endDate.getFullYear() + 1);
+    } else {
+      console.error(`[SUB] Unknown plan interval: ${plan.interval} for plan ${plan.id}, using 30d fallback`);
+      endDate.setDate(endDate.getDate() + 30);
     }
 
     // Créer le nouvel abonnement
@@ -132,7 +135,7 @@ router.post('/create', authenticateToken, async (req, res) => {
       data: {
         userId: req.user.userId,
         planId: planId,
-        status: 'active',
+        status: 'ACTIVE',
         startDate,
         endDate,
         autoRenew: true

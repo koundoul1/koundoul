@@ -207,52 +207,71 @@ router.post('/wave/webhook', async (req, res) => {
       });
 
       // Créer l'abonnement
-      const planId = payment.metadata?.planId;
+      let planId = payment.metadata?.planId;
+      let plan = null;
+
       if (planId) {
-        const plan = await prisma.subscriptionPlan.findUnique({
-          where: { id: planId }
+        plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+      }
+
+      // Fallback: try to match plan by payment amount if planId missing or invalid
+      if (!plan && payment.amount) {
+        plan = await prisma.subscriptionPlan.findFirst({
+          where: { price: payment.amount, isActive: true }
+        });
+        if (plan) {
+          console.warn(`[PAYMENT] Missing planId for payment ${payment.id}, matched plan ${plan.name} by amount ${payment.amount}`);
+        }
+      }
+
+      if (plan) {
+        // Annuler les abonnements actifs existants
+        await prisma.subscription.updateMany({
+          where: { userId: payment.userId, status: { in: ['ACTIVE', 'active'] } },
+          data: { status: 'cancelled', cancelledAt: new Date() }
         });
 
-        if (plan) {
-          // Annuler les abonnements actifs existants
-          await prisma.subscription.updateMany({
-            where: { userId: payment.userId, status: 'active' },
-            data: { status: 'cancelled', cancelledAt: new Date() }
-          });
+        // Créer le nouvel abonnement
+        const startDate = new Date();
+        const endDate = new Date();
+        endDate.setDate(endDate.getDate() + plan.duration);
 
-          // Créer le nouvel abonnement
-          const startDate = new Date();
-          const endDate = new Date();
-          endDate.setDate(endDate.getDate() + plan.duration);
+        const subscription = await prisma.subscription.create({
+          data: {
+            userId: payment.userId,
+            planId: plan.id,
+            status: 'ACTIVE',
+            startDate,
+            endDate,
+            autoRenew: false
+          }
+        });
 
-          const subscription = await prisma.subscription.create({
-            data: {
-              userId: payment.userId,
-              planId: plan.id,
-              status: 'active',
-              startDate,
-              endDate,
-              autoRenew: false
-            }
-          });
+        // Lier le paiement à l'abonnement
+        await prisma.payment.update({
+          where: { id: payment.id },
+          data: { subscriptionId: subscription.id }
+        });
 
-          // Lier le paiement à l'abonnement
-          await prisma.payment.update({
-            where: { id: payment.id },
-            data: { subscriptionId: subscription.id }
-          });
+        // Notify user of successful payment
+        sendNotification(
+          payment.userId,
+          'payment_confirmed',
+          'Abonnement activé !',
+          `Ton abonnement ${plan.name} est maintenant actif. Bon apprentissage !`,
+          { planId: plan.id, subscriptionId: subscription.id }
+        );
 
-          // Notify user of successful payment
-          sendNotification(
-            payment.userId,
-            'payment_confirmed',
-            'Abonnement activé !',
-            `Ton abonnement ${plan.name} est maintenant actif. Bon apprentissage !`,
-            { planId: plan.id, subscriptionId: subscription.id }
-          );
-
-          console.log(`✅ Abonnement créé pour user ${payment.userId}, plan ${plan.name}, expire le ${endDate.toISOString()}`);
-        }
+        console.log(`✅ Abonnement créé pour user ${payment.userId}, plan ${plan.name}, expire le ${endDate.toISOString()}`);
+      } else if (!plan) {
+        console.error(`[PAYMENT] CRITICAL: No plan found for payment ${payment.id} (planId=${planId}, amount=${payment.amount}). User ${payment.userId} paid but got no subscription.`);
+        sendNotification(
+          payment.userId,
+          'payment_issue',
+          'Paiement recu - activation en cours',
+          'Ton paiement a ete recu mais nous rencontrons un probleme pour activer ton abonnement. Notre equipe va te contacter sous 24h.',
+          { paymentId: payment.id }
+        );
       }
     }
   } catch (error) {
@@ -672,45 +691,66 @@ router.post('/om/webhook', async (req, res) => {
     });
 
     // Create subscription (same logic as Wave)
-    const planId = payment.metadata?.planId;
+    let planId = payment.metadata?.planId;
+    let plan = null;
+
     if (planId) {
-      const plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+      plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+    }
+
+    if (!plan && payment.amount) {
+      plan = await prisma.subscriptionPlan.findFirst({
+        where: { price: payment.amount, isActive: true }
+      });
       if (plan) {
-        await prisma.subscription.updateMany({
-          where: { userId: payment.userId, status: 'active' },
-          data: { status: 'cancelled', cancelledAt: new Date() }
-        });
-
-        const startDate = new Date();
-        const endDate = new Date();
-        endDate.setDate(endDate.getDate() + plan.duration);
-
-        const subscription = await prisma.subscription.create({
-          data: {
-            userId: payment.userId,
-            planId: plan.id,
-            status: 'active',
-            startDate,
-            endDate,
-            autoRenew: false
-          }
-        });
-
-        await prisma.payment.update({
-          where: { id: payment.id },
-          data: { subscriptionId: subscription.id }
-        });
-
-        sendNotification(
-          payment.userId,
-          'payment_confirmed',
-          'Abonnement activé via Orange Money !',
-          `Ton abonnement ${plan.displayName || plan.name} est actif jusqu'au ${endDate.toLocaleDateString('fr-FR')}.`,
-          { planId: plan.id, subscriptionId: subscription.id }
-        );
-
-        console.log(`✅ [OM] Abonnement créé pour user ${payment.userId}, plan ${plan.name}`);
+        console.warn(`[OM] Missing planId for payment ${payment.id}, matched plan ${plan.name} by amount ${payment.amount}`);
       }
+    }
+
+    if (plan) {
+      await prisma.subscription.updateMany({
+        where: { userId: payment.userId, status: { in: ['ACTIVE', 'active'] } },
+        data: { status: 'cancelled', cancelledAt: new Date() }
+      });
+
+      const startDate = new Date();
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + plan.duration);
+
+      const subscription = await prisma.subscription.create({
+        data: {
+          userId: payment.userId,
+          planId: plan.id,
+          status: 'ACTIVE',
+          startDate,
+          endDate,
+          autoRenew: false
+        }
+      });
+
+      await prisma.payment.update({
+        where: { id: payment.id },
+        data: { subscriptionId: subscription.id }
+      });
+
+      sendNotification(
+        payment.userId,
+        'payment_confirmed',
+        'Abonnement activé via Orange Money !',
+        `Ton abonnement ${plan.displayName || plan.name} est actif jusqu'au ${endDate.toLocaleDateString('fr-FR')}.`,
+        { planId: plan.id, subscriptionId: subscription.id }
+      );
+
+      console.log(`✅ [OM] Abonnement créé pour user ${payment.userId}, plan ${plan.name}`);
+    } else {
+      console.error(`[OM] CRITICAL: No plan found for payment ${payment.id} (planId=${planId}, amount=${payment.amount}). User ${payment.userId} paid but got no subscription.`);
+      sendNotification(
+        payment.userId,
+        'payment_issue',
+        'Paiement recu - activation en cours',
+        'Ton paiement Orange Money a ete recu mais nous rencontrons un probleme pour activer ton abonnement. Notre equipe va te contacter sous 24h.',
+        { paymentId: payment.id }
+      );
     }
   } catch (error) {
     console.error('Erreur webhook Orange Money:', error);
@@ -746,22 +786,29 @@ router.get('/om/status/:paymentId', authenticateToken, async (req, res) => {
             data: { status: 'completed', metadata: { ...payment.metadata, completedAt: new Date().toISOString() } }
           });
 
-          const planId = payment.metadata?.planId;
+          let planId = payment.metadata?.planId;
+          let plan = null;
           if (planId) {
-            const plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
-            if (plan) {
-              await prisma.subscription.updateMany({
-                where: { userId: payment.userId, status: 'active' },
-                data: { status: 'cancelled', cancelledAt: new Date() }
-              });
-              const startDate = new Date();
-              const endDate = new Date();
-              endDate.setDate(endDate.getDate() + plan.duration);
-              const subscription = await prisma.subscription.create({
-                data: { userId: payment.userId, planId: plan.id, status: 'active', startDate, endDate, autoRenew: false }
-              });
-              await prisma.payment.update({ where: { id: payment.id }, data: { subscriptionId: subscription.id } });
-            }
+            plan = await prisma.subscriptionPlan.findUnique({ where: { id: planId } });
+          }
+          if (!plan && payment.amount) {
+            plan = await prisma.subscriptionPlan.findFirst({ where: { price: payment.amount, isActive: true } });
+            if (plan) console.warn(`[OM-STATUS] Matched plan ${plan.name} by amount for payment ${payment.id}`);
+          }
+          if (plan) {
+            await prisma.subscription.updateMany({
+              where: { userId: payment.userId, status: { in: ['ACTIVE', 'active'] } },
+              data: { status: 'cancelled', cancelledAt: new Date() }
+            });
+            const startDate = new Date();
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + plan.duration);
+            const subscription = await prisma.subscription.create({
+              data: { userId: payment.userId, planId: plan.id, status: 'ACTIVE', startDate, endDate, autoRenew: false }
+            });
+            await prisma.payment.update({ where: { id: payment.id }, data: { subscriptionId: subscription.id } });
+          } else {
+            console.error(`[OM-STATUS] No plan found for payment ${payment.id}. User ${payment.userId} paid without subscription.`);
           }
 
           const updated = await prisma.payment.findFirst({
