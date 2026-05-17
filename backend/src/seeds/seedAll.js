@@ -1,14 +1,13 @@
 const prisma = require('../config/database');
 const seedBadges = require('./seedBadges');
 const seedConceptNodes = require('./seedConceptNodes');
-const seedSubscriptionPlans = require('./seedSubscriptionPlans');
 
 async function main() {
   console.log('🌱 Starting database seed...\n');
 
   await seedBadges();
   await seedConceptNodes();
-  await seedSubscriptionPlans();
+  // Subscription plans are managed by scripts/initPlans.js (not seeds)
 
   console.log('\n🎉 All seeds completed successfully!');
 }
