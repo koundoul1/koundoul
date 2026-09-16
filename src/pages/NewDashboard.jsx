@@ -351,7 +351,7 @@ const NewDashboard = () => {
         {/* CTA — Continue last lesson */}
         {recommendations && recommendations.length > 0 && (
           <Link
-            to={`/micro-lessons/${recommendations[0].lessonId}`}
+            to={`/microlessons/${recommendations[0].lessonId}`}
             className="block mb-6 p-5 rounded-2xl bg-gradient-to-r from-kaccent to-orange-500 shadow-lg shadow-kaccent/30 hover:scale-[1.02] transition-transform"
           >
             <div className="flex items-center justify-between">
@@ -455,7 +455,7 @@ const NewDashboard = () => {
               {recentActivity && recentActivity.length > 0 ? (
                 <div className="space-y-2">
                   {recentActivity.map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors cursor-pointer group" onClick={() => navigate(`/micro-lessons/${item.lessonId}`)}>
+                    <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors cursor-pointer group" onClick={() => navigate(`/microlessons/${item.lessonId}`)}>
                       <div className="text-2xl flex-shrink-0 mt-0.5">{SUBJECT_ICONS[item.subject] || '📖'}</div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
@@ -497,7 +497,7 @@ const NewDashboard = () => {
                 </h2>
                 <div className="space-y-2">
                   {recommendations.slice(1).map((rec, i) => (
-                    <Link key={i} to={`/micro-lessons/${rec.lessonId}`} className="block p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-all group">
+                    <Link key={i} to={`/microlessons/${rec.lessonId}`} className="block p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-all group">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-3 min-w-0 flex-1">
                           <div className="text-xl flex-shrink-0">{SUBJECT_ICONS[rec.subject] || '📖'}</div>
