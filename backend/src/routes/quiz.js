@@ -214,6 +214,48 @@ router.get('/attempts/history', authenticateToken, async (req, res, next) => {
   }
 });
 
+// GET /:id/last-attempt — fetch most recent completed attempt for this quiz (used when results page is reloaded)
+router.get('/:id/last-attempt', authenticateToken, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+    const bankId = req.params.id;
+
+    const attempt = await prisma.quizAttempt.findFirst({
+      where: { userId, bankId, completedAt: { not: null } },
+      orderBy: { completedAt: 'desc' },
+      include: {
+        bank: {
+          select: { quiz_questions: { select: { id: true, correctAnswer: true } } }
+        }
+      }
+    });
+
+    if (!attempt) {
+      return res.status(404).json({ success: false, error: 'Aucune tentative trouvée' });
+    }
+
+    // Re-derive correct count from stored answers + questions
+    const questions = attempt.bank?.quiz_questions || [];
+    const answers = attempt.answers || {};
+    const correct = questions.filter(q => answers[q.id] === q.correctAnswer).length;
+    const xpEarned = correct * 10;
+
+    res.json({
+      success: true,
+      data: {
+        score: attempt.score,
+        correct,
+        xpEarned,
+        answers,
+        passed: attempt.passed,
+        completedAt: attempt.completedAt
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Get user quiz stats
 router.get('/stats/user', authenticateToken, async (req, res, next) => {
   try {

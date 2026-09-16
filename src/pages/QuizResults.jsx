@@ -1,8 +1,9 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Trophy, CheckCircle, XCircle, Award, TrendingUp, RotateCcw, Home, Star, Clock } from 'lucide-react';
-import { useEffect } from 'react';
+import { Trophy, CheckCircle, XCircle, Award, TrendingUp, RotateCcw, Home, Star, Clock, Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useGamification } from '../hooks/useGamification';
 import { useTranslation } from '../hooks/useTranslation';
+import api from '../services/api';
 
 export default function QuizResults() {
   const location = useLocation();
@@ -11,7 +12,9 @@ export default function QuizResults() {
   const { processActionResult } = useGamification();
   const { t } = useTranslation();
 
-  const results = location.state?.results;
+  const [results, setResults] = useState(location.state?.results ?? null);
+  const [fetchError, setFetchError] = useState(null);
+  const [fetching, setFetching] = useState(!location.state?.results);
   const timeExpired = location.state?.timeExpired;
 
   // Process gamification on mount (badges, XP update in context)
@@ -19,14 +22,34 @@ export default function QuizResults() {
     if (results?.gamification) {
       processActionResult(results.gamification);
     }
-  }, []);
+  }, [results]);
+
+  // Fallback: fetch last attempt from backend if page was reloaded / navigated directly
+  useEffect(() => {
+    if (results || !quizId) return;
+    api.quiz.getLastAttempt(quizId)
+      .then(res => setResults(res.data))
+      .catch(() => setFetchError(true))
+      .finally(() => setFetching(false));
+  }, [quizId]);
+
+  if (fetching) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-10 h-10 animate-spin text-kprimary" />
+      </div>
+    );
+  }
 
   if (!results) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="k-card p-8 text-center max-w-md">
           <XCircle className="w-12 h-12 text-red-400 mx-auto mb-3" />
-          <p className="text-white font-bold mb-4">Resultats non disponibles</p>
+          <p className="text-white font-bold mb-2">Résultats non disponibles</p>
+          {fetchError && (
+            <p className="text-gray-500 text-sm mb-4">Le serveur est temporairement indisponible. Réessaie dans quelques secondes.</p>
+          )}
           <button onClick={() => navigate('/quiz')} className="px-6 py-2.5 bg-kprimary text-white rounded-xl font-bold">
             Retour aux quiz
           </button>

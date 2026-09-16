@@ -293,7 +293,8 @@ const api = {
       }),
     getAttempts: () => request('/quiz/attempts/history'),
     getQuizAttempts: (quizId) => request(`/quiz/${quizId}/attempts`),
-    getStats: () => request('/quiz/stats/user')
+    getStats: () => request('/quiz/stats/user'),
+    getLastAttempt: (quizId) => request(`/quiz/${quizId}/last-attempt`)
   },
 
   // 👤 UTILISATEURS
