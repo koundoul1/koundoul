@@ -8,6 +8,7 @@ import {
 import { useAuth } from '../context/AuthContext'
 import { useGamification } from '../hooks/useGamification'
 import { useTranslation } from '../hooks/useTranslation'
+import LessonChat from '../components/LessonChat'
 
 export default function MicroLessonDetail() {
   const { id } = useParams()
@@ -313,6 +314,15 @@ export default function MicroLessonDetail() {
           </div>
         )}
       </div>
+
+      {user && lesson && (
+        <LessonChat
+          lessonTitle={lesson.title}
+          subject={lesson.subject}
+          level={lesson.level}
+          chapter={lesson.chapter}
+        />
+      )}
     </div>
   )
 }

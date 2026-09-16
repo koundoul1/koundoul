@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Clock, Target, BookOpen, ChevronRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import LessonChat from '../components/LessonChat';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -229,6 +230,14 @@ export default function Lesson() {
 
         </div>
       </div>
+
+      {lesson && (
+        <LessonChat
+          lessonTitle={lesson.title}
+          subject={lesson.chapter?.subject?.name}
+          chapter={lesson.chapter?.title}
+        />
+      )}
     </div>
   );
 }
