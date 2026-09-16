@@ -511,8 +511,7 @@ const Challenge = () => {
     }
   };
 
-  const startChallenge = useCallback(async () => {
-    const challengeId = selectedChallengeId;
+  const startChallenge = useCallback(async (challengeId) => {
     const ch = weeklyChallenge?.challenges?.find(c => c.id === challengeId);
     if (!challengeId || !ch) {
       setError('Aucun challenge sélectionné');
@@ -540,7 +539,7 @@ const Challenge = () => {
     } finally {
       setLoading(false);
     }
-  }, [weeklyChallenge, navigate, isValidChallenge]);
+  }, [weeklyChallenge, navigate]);
 
   // Fermer le menu si on clique ailleurs
   useEffect(() => {
@@ -693,7 +692,7 @@ const Challenge = () => {
                             </div>
                           ) : (
                             <button
-                              onClick={() => { setSelectedChallengeId(ch.id); startChallenge(); }}
+                              onClick={() => startChallenge(ch.id)}
                               disabled={loading}
                               className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-xl font-bold text-sm hover:from-yellow-600 hover:to-orange-600 transition-all disabled:opacity-50"
                             >
