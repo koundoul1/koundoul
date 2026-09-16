@@ -1,299 +1,308 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, ThumbsUp, ThumbsDown, MessageSquare, CheckCircle, Award, Send } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import {
+  ArrowLeft, ThumbsUp, ThumbsDown, MessageSquare,
+  Award, Send, Eye, Clock, Loader2
+} from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+
+function timeAgo(dateStr) {
+  const diff = (Date.now() - new Date(dateStr)) / 1000;
+  if (diff < 60) return "à l'instant";
+  if (diff < 3600) return `il y a ${Math.floor(diff / 60)} min`;
+  if (diff < 86400) return `il y a ${Math.floor(diff / 3600)} h`;
+  return new Date(dateStr).toLocaleDateString('fr-FR');
+}
+
+function Avatar({ name, size = 'md' }) {
+  const letter = (name || '?').charAt(0).toUpperCase();
+  const s = size === 'sm' ? 'w-8 h-8 text-sm' : 'w-10 h-10 text-base';
+  return (
+    <div className={`${s} rounded-full bg-gradient-to-br from-kprimary to-ksecondary flex items-center justify-center text-white font-bold flex-shrink-0`}>
+      {letter}
+    </div>
+  );
+}
 
 export default function DiscussionDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  
+  const textareaRef = useRef(null);
+
   const [discussion, setDiscussion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [replyContent, setReplyContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [replyError, setReplyError] = useState('');
 
-  useEffect(() => {
-    fetchDiscussion();
-  }, [id]);
+  useEffect(() => { fetchDiscussion(); }, [id]);
 
   const fetchDiscussion = async () => {
     try {
       const response = await api.forum.getDiscussion(id);
       setDiscussion(response.data);
-    } catch (error) {
-      console.error('Erreur:', error);
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
   const handleVoteDiscussion = async (value) => {
+    if (!user) return navigate('/login');
     try {
       await api.forum.voteDiscussion(id, value);
       fetchDiscussion();
-    } catch (error) {
-      console.error('Erreur:', error);
-    }
+    } catch (e) { console.error(e); }
   };
 
   const handleVoteReply = async (replyId, value) => {
+    if (!user) return navigate('/login');
     try {
       await api.forum.voteReply(replyId, value);
       fetchDiscussion();
-    } catch (error) {
-      console.error('Erreur:', error);
-    }
+    } catch (e) { console.error(e); }
   };
 
   const handleSubmitReply = async (e) => {
     e.preventDefault();
-    
     if (!replyContent.trim()) return;
-    
+    if (!user) return navigate('/login');
     try {
       setSubmitting(true);
-      await api.forum.reply(id, replyContent);
+      setReplyError('');
+      await api.forum.reply(id, replyContent.trim());
       setReplyContent('');
+      if (textareaRef.current) textareaRef.current.style.height = 'auto';
       fetchDiscussion();
-    } catch (error) {
-      console.error('Erreur:', error);
-      alert('Erreur lors de l\'envoi de la réponse');
+    } catch (err) {
+      setReplyError(err.message || 'Erreur lors de l\'envoi');
     } finally {
       setSubmitting(false);
     }
   };
 
   const handleMarkBestAnswer = async (replyId) => {
-    if (!confirm('Marquer cette réponse comme la meilleure ?')) return;
-    
+    if (!window.confirm('Marquer cette réponse comme la meilleure ?')) return;
     try {
       await api.forum.markBestAnswer(id, replyId);
       fetchDiscussion();
-    } catch (error) {
-      console.error('Erreur:', error);
-      alert('Impossible de marquer cette réponse');
-    }
+    } catch (e) { console.error(e); }
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-kprimary" />
       </div>
     );
   }
 
   if (!discussion) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 text-center">
-          <p className="text-red-700 font-semibold">Discussion non trouvée</p>
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="k-card p-8 text-center max-w-md">
+          <p className="text-red-400 font-semibold mb-3">Discussion non trouvée</p>
+          <button onClick={() => navigate('/forum')} className="text-kprimary hover:underline text-sm">
+            ← Retour au forum
+          </button>
         </div>
       </div>
     );
   }
 
   const isAuthor = user && user.id === discussion.userId;
+  const authorName = discussion.user?.username || discussion.user?.firstName || 'Anonyme';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 py-8">
-        
-        {/* Navigation */}
+    <div className="min-h-screen text-white pb-20 lg:pb-0">
+      <div className="max-w-3xl mx-auto px-4 py-8">
+
+        {/* Back */}
         <button
           onClick={() => navigate('/forum')}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-semibold mb-6"
+          className="flex items-center gap-2 text-gray-400 hover:text-white font-medium mb-6 transition-colors"
         >
-          <ArrowLeft className="w-5 h-5" />
-          Retour au forum
+          <ArrowLeft className="w-5 h-5" /> Forum
         </button>
 
-        {/* Discussion principale */}
-        <div className="bg-white rounded-xl p-8 border-2 border-gray-200 mb-6">
-          
-          {/* Header */}
-          <div className="flex items-start gap-4 mb-6">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-2xl">
-              {discussion.user.username.charAt(0).toUpperCase()}
-            </div>
-            
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-3xl font-bold text-gray-900">
-                  {discussion.title}
-                </h1>
-                {discussion.solved && (
-                  <span className="flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">
-                    <CheckCircle className="w-4 h-4" />
-                    Résolu
-                  </span>
-                )}
-              </div>
-              
-              <div className="flex items-center gap-3 text-gray-600">
-                <span className="font-semibold text-blue-600">{discussion.user.username}</span>
-                <span>•</span>
-                <span>{new Date(discussion.createdAt).toLocaleDateString('fr-FR')}</span>
-                {discussion.subject && (
-                  <>
-                    <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <span>{discussion.subject.icon}</span>
-                      {discussion.subject.name}
-                    </span>
-                  </>
-                )}
-                <span>•</span>
-                <span>{discussion.views} vues</span>
-              </div>
+        {/* Main discussion */}
+        <div className="k-card p-6 sm:p-8 mb-6">
+          {/* Meta */}
+          <div className="flex items-center gap-2 flex-wrap mb-4">
+            {discussion.subject && (
+              <span className="px-2.5 py-1 rounded-full bg-kprimary/10 text-kprimary text-xs font-semibold">
+                {discussion.subject}
+              </span>
+            )}
+            {discussion.level && (
+              <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs">
+                {discussion.level}
+              </span>
+            )}
+            {discussion.bestAnswerId && (
+              <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold flex items-center gap-1">
+                <Award className="w-3 h-3" /> Résolu
+              </span>
+            )}
+          </div>
+
+          <h1 className="text-xl sm:text-2xl font-black text-white mb-4 leading-tight">
+            {discussion.title}
+          </h1>
+
+          {/* Author */}
+          <div className="flex items-center gap-3 mb-5">
+            <Avatar name={authorName} />
+            <div>
+              <p className="text-sm font-bold text-white">{authorName}</p>
+              <p className="text-xs text-gray-500 flex items-center gap-1">
+                <Clock className="w-3 h-3" /> {timeAgo(discussion.createdAt)}
+                <span className="mx-1">·</span>
+                <Eye className="w-3 h-3" /> {discussion.views ?? 0} vues
+              </p>
             </div>
           </div>
 
-          {/* Contenu */}
-          <div className="prose max-w-none mb-6">
-            <p className="text-lg text-gray-800 leading-relaxed whitespace-pre-wrap">
-              {discussion.content}
-            </p>
-          </div>
+          <p className="text-gray-300 leading-relaxed whitespace-pre-wrap text-sm mb-6">
+            {discussion.content}
+          </p>
 
-          {/* Actions */}
-          <div className="flex items-center gap-4 pt-4 border-t">
+          {/* Vote actions */}
+          <div className="flex items-center gap-3 pt-4 border-t border-white/5">
             <button
               onClick={() => handleVoteDiscussion(1)}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-green-50 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-emerald-500/10 hover:text-emerald-400 text-gray-400 transition-colors text-sm"
             >
-              <ThumbsUp className="w-5 h-5 text-gray-600" />
-              <span className="font-semibold text-gray-900">{discussion.upvotes}</span>
+              <ThumbsUp className="w-4 h-4" />
+              <span className="font-bold">{discussion.votes ?? 0}</span>
             </button>
-            
             <button
               onClick={() => handleVoteDiscussion(-1)}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-red-50 rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-red-500/10 hover:text-red-400 text-gray-400 transition-colors"
             >
-              <ThumbsDown className="w-5 h-5 text-gray-600" />
+              <ThumbsDown className="w-4 h-4" />
             </button>
-            
-            <div className="flex items-center gap-2 px-4 py-2 text-gray-600">
-              <MessageSquare className="w-5 h-5" />
-              <span className="font-semibold">{discussion.repliesCount} réponses</span>
+            <div className="flex items-center gap-1.5 px-3 py-2 text-gray-500 text-sm">
+              <MessageSquare className="w-4 h-4" />
+              {discussion.replies?.length ?? 0} réponse{discussion.replies?.length !== 1 ? 's' : ''}
             </div>
           </div>
         </div>
 
-        {/* Réponses */}
-        <div className="space-y-4 mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <MessageSquare className="w-7 h-7 text-blue-600" />
-            Réponses ({discussion.replies.length})
-          </h2>
+        {/* Replies */}
+        <h2 className="text-base font-bold text-white mb-3 flex items-center gap-2">
+          <MessageSquare className="w-5 h-5 text-kprimary" />
+          Réponses ({discussion.replies?.length ?? 0})
+        </h2>
 
-          {discussion.replies.map((reply) => (
-            <div
-              key={reply.id}
-              className={`bg-white rounded-xl p-6 border-2 ${
-                reply.isBestAnswer ? 'border-green-400 bg-green-50' : 'border-gray-200'
-              }`}
-            >
-              {reply.isBestAnswer && (
-                <div className="flex items-center gap-2 text-green-700 font-semibold mb-4">
-                  <Award className="w-5 h-5" />
-                  Meilleure réponse
-                </div>
-              )}
-              
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold">
-                  {reply.user.username.charAt(0).toUpperCase()}
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="font-semibold text-gray-900">{reply.user.username}</span>
-                    <span className="text-gray-500">•</span>
-                    <span className="text-gray-500 text-sm">
-                      {new Date(reply.createdAt).toLocaleDateString('fr-FR')}
-                    </span>
-                  </div>
-                  
-                  <p className="text-gray-800 mb-4 whitespace-pre-wrap">
-                    {reply.content}
-                  </p>
-                  
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => handleVoteReply(reply.id, 1)}
-                      className="flex items-center gap-2 px-3 py-1 bg-gray-50 hover:bg-green-50 rounded-lg transition-colors"
-                    >
-                      <ThumbsUp className="w-4 h-4 text-gray-600" />
-                      <span className="font-semibold text-gray-900">{reply.upvotes}</span>
-                    </button>
-                    
-                    <button
-                      onClick={() => handleVoteReply(reply.id, -1)}
-                      className="flex items-center gap-2 px-3 py-1 bg-gray-50 hover:bg-red-50 rounded-lg transition-colors"
-                    >
-                      <ThumbsDown className="w-4 h-4 text-gray-600" />
-                    </button>
-                    
-                    {isAuthor && !reply.isBestAnswer && (
-                      <button
-                        onClick={() => handleMarkBestAnswer(reply.id)}
-                        className="ml-auto flex items-center gap-2 px-4 py-2 bg-green-50 hover:bg-green-100 text-green-700 rounded-lg font-semibold transition-colors"
-                      >
-                        <Award className="w-4 h-4" />
-                        Marquer comme meilleure réponse
-                      </button>
-                    )}
+        <div className="space-y-3 mb-6">
+          {discussion.replies?.length === 0 ? (
+            <div className="k-card p-10 text-center">
+              <MessageSquare className="w-10 h-10 text-gray-600 mx-auto mb-3" />
+              <p className="text-gray-500 text-sm">Aucune réponse pour le moment. Soyez le premier !</p>
+            </div>
+          ) : (
+            discussion.replies.map(reply => {
+              const replyAuthor = reply.user?.username || reply.user?.firstName || 'Anonyme';
+              return (
+                <div
+                  key={reply.id}
+                  className={`k-card p-5 ${reply.isBestAnswer ? 'border-emerald-500/30 bg-emerald-500/5' : ''}`}
+                >
+                  {reply.isBestAnswer && (
+                    <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold mb-3">
+                      <Award className="w-4 h-4" /> Meilleure réponse
+                    </div>
+                  )}
+                  <div className="flex items-start gap-3">
+                    <Avatar name={replyAuthor} size="sm" />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-sm font-bold text-white">{replyAuthor}</span>
+                        <span className="text-xs text-gray-500">{timeAgo(reply.createdAt)}</span>
+                      </div>
+                      <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap mb-3">
+                        {reply.content}
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleVoteReply(reply.id, 1)}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-emerald-500/10 hover:text-emerald-400 text-gray-400 transition-colors text-xs"
+                        >
+                          <ThumbsUp className="w-3.5 h-3.5" />
+                          <span className="font-bold">{reply.votes ?? 0}</span>
+                        </button>
+                        <button
+                          onClick={() => handleVoteReply(reply.id, -1)}
+                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-red-500/10 hover:text-red-400 text-gray-400 transition-colors"
+                        >
+                          <ThumbsDown className="w-3.5 h-3.5" />
+                        </button>
+                        {isAuthor && !reply.isBestAnswer && (
+                          <button
+                            onClick={() => handleMarkBestAnswer(reply.id)}
+                            className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-semibold transition-colors"
+                          >
+                            <Award className="w-3.5 h-3.5" /> Meilleure réponse
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-
-          {discussion.replies.length === 0 && (
-            <div className="bg-white rounded-xl p-12 text-center border-2 border-gray-200">
-              <MessageSquare className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">
-                Aucune réponse pour le moment. Soyez le premier à répondre !
-              </p>
-            </div>
+              );
+            })
           )}
         </div>
 
-        {/* Formulaire de réponse */}
-        <div className="bg-white rounded-xl p-6 border-2 border-gray-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">
-            Votre réponse
+        {/* Reply form */}
+        <div className="k-card p-5">
+          <h3 className="text-sm font-bold text-white mb-4">
+            {user ? 'Votre réponse' : 'Connecte-toi pour répondre'}
           </h3>
-          
-          <form onSubmit={handleSubmitReply}>
-            <textarea
-              value={replyContent}
-              onChange={(e) => setReplyContent(e.target.value)}
-              placeholder="Écrivez votre réponse..."
-              rows="6"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-              required
-            ></textarea>
-            
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                disabled={submitting || !replyContent.trim()}
-                className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
-              >
-                <Send className="w-5 h-5" />
-                {submitting ? 'Envoi...' : 'Publier'}
-              </button>
-            </div>
-          </form>
+
+          {!user ? (
+            <button
+              onClick={() => navigate('/login')}
+              className="w-full py-3 rounded-xl bg-kprimary text-white font-bold text-sm hover:opacity-90 transition-opacity"
+            >
+              Se connecter
+            </button>
+          ) : (
+            <form onSubmit={handleSubmitReply}>
+              {replyError && (
+                <p className="text-red-400 text-xs mb-3">{replyError}</p>
+              )}
+              <textarea
+                ref={textareaRef}
+                value={replyContent}
+                onChange={e => {
+                  setReplyContent(e.target.value);
+                  const el = textareaRef.current;
+                  if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; }
+                }}
+                placeholder="Écris ta réponse ici..."
+                rows={4}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-kprimary/50 transition-colors resize-none mb-3"
+              />
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={submitting || !replyContent.trim()}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-kprimary to-ksecondary text-white font-bold text-sm hover:opacity-90 active:scale-95 transition-all disabled:opacity-40"
+                >
+                  {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  {submitting ? 'Envoi...' : 'Publier'}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
 
       </div>
     </div>
   );
 }
-
-

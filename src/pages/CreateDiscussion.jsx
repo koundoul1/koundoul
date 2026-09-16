@@ -1,219 +1,192 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Send } from 'lucide-react';
 import api from '../services/api';
 
+const SUBJECTS = [
+  { label: '📐 Mathématiques', value: 'Mathématiques' },
+  { label: '⚛️ Physique', value: 'Physique' },
+  { label: '🧪 Chimie', value: 'Chimie' }
+];
+
+const LEVELS = [
+  { label: 'Seconde', value: 'Seconde' },
+  { label: 'Première', value: 'Première' },
+  { label: 'Terminale', value: 'Terminale' }
+];
+
 export default function CreateDiscussion() {
   const navigate = useNavigate();
-  const [subjects, setSubjects] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     content: '',
-    category: 'QUESTION',
-    subjectId: ''
+    subject: '',
+    level: ''
   });
   const [submitting, setSubmitting] = useState(false);
-
-  useEffect(() => {
-    fetchSubjects();
-  }, []);
-
-  const fetchSubjects = async () => {
-    try {
-      const response = await api.content.getSubjects();
-      setSubjects(response.data);
-    } catch (error) {
-      console.error('Erreur:', error);
-    }
-  };
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!formData.title.trim() || !formData.content.trim()) {
-      alert('Veuillez remplir tous les champs requis');
+    if (!formData.title.trim() || !formData.content.trim()) return;
+    if (formData.content.trim().length < 20) {
+      setError('Le contenu doit faire au moins 20 caractères.');
       return;
     }
-    
+
     try {
       setSubmitting(true);
+      setError('');
       const response = await api.forum.create({
-        title: formData.title,
-        content: formData.content,
-        category: formData.category,
-        subjectId: formData.subjectId || undefined
+        title: formData.title.trim(),
+        content: formData.content.trim(),
+        subject: formData.subject || undefined,
+        level: formData.level || undefined
       });
-      
-      // Rediriger vers la discussion créée
       navigate(`/forum/${response.data.id}`);
-    } catch (error) {
-      console.error('Erreur:', error);
-      alert('Erreur lors de la création de la discussion');
+    } catch (err) {
+      setError(err.message || 'Erreur lors de la publication.');
     } finally {
       setSubmitting(false);
     }
   };
 
-  const categories = [
-    { value: 'QUESTION', label: '❓ Question', description: 'Poser une question sur un cours ou exercice' },
-    { value: 'EXPLANATION', label: '💡 Explication', description: 'Partager une explication ou méthode' },
-    { value: 'RESOURCE', label: '📚 Ressource', description: 'Partager une ressource utile' },
-    { value: 'BUG', label: '🐛 Bug', description: 'Signaler un problème technique' },
-    { value: 'OTHER', label: '💬 Autre', description: 'Discussion générale' }
-  ];
+  const isValid = formData.title.trim().length > 0 && formData.content.trim().length >= 20;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 py-8">
-        
-        {/* Navigation */}
+    <div className="min-h-screen text-white pb-20 lg:pb-0">
+      <div className="max-w-2xl mx-auto px-4 py-8">
+
+        {/* Back */}
         <button
           onClick={() => navigate('/forum')}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-semibold mb-6"
+          className="flex items-center gap-2 text-gray-400 hover:text-white font-medium mb-6 transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           Retour au forum
         </button>
 
-        {/* Formulaire */}
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-xl p-8 border-2 border-gray-200">
-            
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">
-              Nouvelle discussion
-            </h1>
+        <div className="k-card p-6 sm:p-8">
+          <h1 className="text-2xl font-black text-white mb-6">Nouvelle discussion</h1>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              
-              {/* Catégorie */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-3">
-                  Catégorie *
-                </label>
-                <div className="grid md:grid-cols-2 gap-3">
-                  {categories.map(cat => (
-                    <button
-                      key={cat.value}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, category: cat.value })}
-                      className={`p-4 rounded-lg border-2 text-left transition-all ${
-                        formData.category === cat.value
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <div className="font-semibold text-gray-900 mb-1">
-                        {cat.label}
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        {cat.description}
-                      </div>
-                    </button>
-                  ))}
-                </div>
+          {error && (
+            <div className="mb-4 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+
+            {/* Titre */}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">
+                Titre *
+              </label>
+              <input
+                type="text"
+                value={formData.title}
+                onChange={e => setFormData({ ...formData, title: e.target.value })}
+                placeholder="Ex : Comment résoudre une équation du second degré ?"
+                maxLength={200}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-kprimary/50 transition-colors"
+                required
+              />
+              <p className="text-xs text-gray-600 mt-1 text-right">{formData.title.length}/200</p>
+            </div>
+
+            {/* Contenu */}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">
+                Description *
+              </label>
+              <textarea
+                value={formData.content}
+                onChange={e => setFormData({ ...formData, content: e.target.value })}
+                placeholder="Décris ta question en détail, ce que tu as déjà essayé..."
+                rows={7}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-kprimary/50 transition-colors resize-none"
+                required
+              />
+              <p className={`text-xs mt-1 text-right ${formData.content.length >= 20 ? 'text-emerald-500' : 'text-gray-600'}`}>
+                {formData.content.length} caractères (min. 20)
+              </p>
+            </div>
+
+            {/* Matière */}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">
+                Matière (optionnel)
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {SUBJECTS.map(s => (
+                  <button
+                    key={s.value}
+                    type="button"
+                    onClick={() => setFormData({ ...formData, subject: formData.subject === s.value ? '' : s.value })}
+                    className={`px-3 py-2 rounded-xl text-sm font-semibold transition-all ${
+                      formData.subject === s.value
+                        ? 'bg-kprimary text-white shadow-md shadow-kprimary/30'
+                        : 'bg-white/5 border border-white/10 text-gray-400 hover:border-kprimary/40 hover:text-white'
+                    }`}
+                  >
+                    {s.label}
+                  </button>
+                ))}
               </div>
+            </div>
 
-              {/* Matière (optionnel) */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Matière (optionnel)
-                </label>
-                <select
-                  value={formData.subjectId}
-                  onChange={(e) => setFormData({ ...formData, subjectId: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Aucune matière spécifique</option>
-                  {subjects.map(subject => (
-                    <option key={subject.id} value={subject.id}>
-                      {subject.icon} {subject.name}
-                    </option>
-                  ))}
-                </select>
+            {/* Niveau */}
+            <div>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">
+                Niveau (optionnel)
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {LEVELS.map(l => (
+                  <button
+                    key={l.value}
+                    type="button"
+                    onClick={() => setFormData({ ...formData, level: formData.level === l.value ? '' : l.value })}
+                    className={`px-3 py-2 rounded-xl text-sm font-semibold transition-all ${
+                      formData.level === l.value
+                        ? 'bg-kprimary text-white shadow-md shadow-kprimary/30'
+                        : 'bg-white/5 border border-white/10 text-gray-400 hover:border-kprimary/40 hover:text-white'
+                    }`}
+                  >
+                    {l.label}
+                  </button>
+                ))}
               </div>
+            </div>
 
-              {/* Titre */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Titre *
-                </label>
-                <input
-                  type="text"
-                  value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Ex: Comment résoudre une équation du second degré ?"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                  maxLength={200}
-                />
-                <p className="text-sm text-gray-500 mt-1">
-                  {formData.title.length}/200 caractères
-                </p>
-              </div>
+            {/* Conseils */}
+            <div className="px-4 py-3 rounded-xl bg-kprimary/5 border border-kprimary/15 text-xs text-gray-400 space-y-1">
+              <p className="font-semibold text-kprimary/80 mb-1">💡 Conseils</p>
+              <p>• Sois clair et précis dans ton titre</p>
+              <p>• Décris ce que tu as déjà essayé</p>
+              <p>• Reste respectueux et courtois</p>
+            </div>
 
-              {/* Contenu */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Description *
-                </label>
-                <textarea
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  placeholder="Décrivez votre question ou partagez vos idées en détail..."
-                  rows="12"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                ></textarea>
-                <div className="flex justify-between items-center mt-2">
-                  <p className="text-sm text-gray-500">
-                    Minimum 20 caractères
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {formData.content.length} caractères
-                  </p>
-                </div>
-              </div>
-
-              {/* Conseils */}
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
-                <p className="text-sm text-blue-900 font-semibold mb-2">
-                  💡 Conseils pour une bonne discussion
-                </p>
-                <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-                  <li>Soyez clair et précis dans votre titre</li>
-                  <li>Décrivez le contexte et ce que vous avez déjà essayé</li>
-                  <li>Restez respectueux et courtois</li>
-                  <li>Marquez la discussion comme résolue une fois que vous avez votre réponse</li>
-                </ul>
-              </div>
-
-              {/* Boutons */}
-              <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => navigate('/forum')}
-                  className="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
-                >
-                  Annuler
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting || !formData.title.trim() || !formData.content.trim() || formData.content.length < 20}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50"
-                >
-                  <Send className="w-5 h-5" />
-                  {submitting ? 'Publication...' : 'Publier la discussion'}
-                </button>
-              </div>
-
-            </form>
-
-          </div>
+            {/* Buttons */}
+            <div className="flex gap-3 pt-1">
+              <button
+                type="button"
+                onClick={() => navigate('/forum')}
+                className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-400 font-semibold text-sm hover:text-white transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                type="submit"
+                disabled={submitting || !isValid}
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-kprimary to-ksecondary text-white font-bold text-sm hover:opacity-90 active:scale-95 transition-all disabled:opacity-40"
+              >
+                <Send className="w-4 h-4" />
+                {submitting ? 'Publication...' : 'Publier'}
+              </button>
+            </div>
+          </form>
         </div>
-
       </div>
     </div>
   );
 }
-
-
