@@ -83,6 +83,7 @@ const request = async (url, options = {}) => {
       const errorMsg = (typeof errorData.error === 'string' ? errorData.error : errorData.error?.message) || errorData.message || 'Une erreur est survenue'
       const error = new Error(errorMsg)
       error.status = response.status
+      if (errorData.premiumRequired) error.premiumRequired = true
       throw error
     }
 

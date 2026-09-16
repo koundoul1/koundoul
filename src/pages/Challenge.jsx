@@ -76,6 +76,7 @@ const Challenge = () => {
   const [leaderboards, setLeaderboards] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [premiumError, setPremiumError] = useState(false);
   const [leaderboardScope, setLeaderboardScope] = useState('international');
   const [userRank, setUserRank] = useState(null);
   const [showCountryMenu, setShowCountryMenu] = useState(false);
@@ -535,7 +536,11 @@ const Challenge = () => {
       }
     } catch (err) {
       console.error('Erreur démarrage challenge:', err);
-      setError(err.message || 'Erreur lors du démarrage du challenge');
+      if (err.premiumRequired) {
+        setPremiumError(true);
+      } else {
+        setError(err.message || 'Erreur lors du démarrage du challenge');
+      }
     } finally {
       setLoading(false);
     }
@@ -626,6 +631,35 @@ const Challenge = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Premium upsell banner */}
+        {premiumError && (
+          <div className="mb-6 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/40 rounded-xl p-5">
+            <div className="flex items-start gap-3">
+              <Crown className="h-6 w-6 text-yellow-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                <p className="font-bold text-yellow-300 mb-1">Limite hebdomadaire atteinte</p>
+                <p className="text-yellow-100/80 text-sm mb-3">
+                  En plan gratuit, tu peux participer à <strong>1 challenge par semaine</strong>. Passe Premium pour débloquer les 3 challenges et le classement !
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => { window.location.href = '/pricing'; }}
+                    className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
+                  >
+                    Passer Premium
+                  </button>
+                  <button
+                    onClick={() => setPremiumError(false)}
+                    className="px-4 py-2 bg-white/10 text-white rounded-lg text-sm hover:bg-white/20 transition-colors"
+                  >
+                    Fermer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Messages d'erreur */}
         {error && (
           <div className="mb-6 bg-red-500/20 border border-red-500/50 rounded-lg p-4 flex items-center">
