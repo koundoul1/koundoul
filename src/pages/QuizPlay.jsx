@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { Clock, AlertCircle, Trophy } from 'lucide-react';
 import api from '../services/api';
 import { useGamification } from '../hooks/useGamification';
@@ -7,6 +7,9 @@ import { useGamification } from '../hooks/useGamification';
 export default function QuizPlay() {
   const { quizId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const challengeId = searchParams.get('challenge');
   const { processActionResult } = useGamification();
   
   const [quiz, setQuiz] = useState(null);
@@ -36,12 +39,27 @@ export default function QuizPlay() {
         if (prev <= 1) {
           // Auto-submit with latest answers via ref (no stale closure)
           setSubmitting(true);
-          api.quiz.submit(attemptRef.current?.id, answersRef.current)
-            .then(response => {
-              processActionResult(response.data?.gamification);
-              navigate(`/quiz/${quizId}/results`, { state: { results: response.data, timeExpired: true } });
-            })
-            .catch(() => setSubmitting(false));
+          const submitFn = challengeId
+            ? api.challenges.submit(challengeId, { answers: answersRef.current, timeSpent: null })
+                .then(response => {
+                  const d = response.data;
+                  const results = {
+                    score: d.percentage ?? 0,
+                    correct: d.results?.filter(r => r.isCorrect).length ?? 0,
+                    xpEarned: d.xpEarned ?? 0,
+                    gamification: d.gamification,
+                    isChallenge: true,
+                    answers: answersRef.current,
+                  };
+                  processActionResult(results.gamification);
+                  navigate(`/quiz/${quizId}/results`, { state: { results, timeExpired: true } });
+                })
+            : api.quiz.submit(attemptRef.current?.id, answersRef.current)
+                .then(response => {
+                  processActionResult(response.data?.gamification);
+                  navigate(`/quiz/${quizId}/results`, { state: { results: response.data, timeExpired: true } });
+                });
+          submitFn.catch(() => setSubmitting(false));
           return 0;
         }
         return prev - 1;
@@ -52,6 +70,25 @@ export default function QuizPlay() {
   }, [timeLeft > 0, quiz]);
 
   const startQuiz = async () => {
+    // Challenge flow: session data already returned by challenges.start()
+    const sessionData = location.state?.session;
+    if (challengeId && sessionData?.quiz) {
+      const q = sessionData.quiz;
+      setQuiz({
+        ...q,
+        title: sessionData.challenge?.title || 'Challenge hebdomadaire',
+        questions: q.questions.map(question => ({
+          ...question,
+          questionText: question.question ?? question.questionText,
+        })),
+      });
+      setAttempt({ id: sessionData.attemptId });
+      setTimeLeft((q.timeLimit || 20) * 60);
+      setLoading(false);
+      return;
+    }
+
+    // Regular quiz flow
     try {
       const response = await api.quiz.start(quizId);
       setQuiz(response.data.quiz);
@@ -99,11 +136,24 @@ export default function QuizPlay() {
   const submitQuiz = async () => {
     setSubmitting(true);
     try {
-      const response = await api.quiz.submit(attempt.id, answers);
-      processActionResult(response.data?.gamification);
-      navigate(`/quiz/${quizId}/results`, {
-        state: { results: response.data }
-      });
+      let results;
+      if (challengeId) {
+        const response = await api.challenges.submit(challengeId, { answers, timeSpent: null });
+        const d = response.data;
+        results = {
+          score: d.percentage ?? 0,
+          correct: d.results?.filter(r => r.isCorrect).length ?? 0,
+          xpEarned: d.xpEarned ?? 0,
+          gamification: d.gamification,
+          isChallenge: true,
+          answers,
+        };
+      } else {
+        const response = await api.quiz.submit(attempt.id, answers);
+        results = response.data;
+      }
+      processActionResult(results?.gamification);
+      navigate(`/quiz/${quizId}/results`, { state: { results } });
     } catch (error) {
       console.error('Erreur:', error);
       alert('Erreur lors de la soumission');
