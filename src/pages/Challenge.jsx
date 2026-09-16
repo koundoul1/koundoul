@@ -643,7 +643,7 @@ const Challenge = () => {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <button
-                    onClick={() => { window.location.href = '/pricing'; }}
+                    onClick={() => { window.location.href = '/subscriptions'; }}
                     className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg font-bold text-sm hover:opacity-90 transition-opacity"
                   >
                     Passer Premium
