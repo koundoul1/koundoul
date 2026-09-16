@@ -1,30 +1,20 @@
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
-// Transporter configured via env vars — supports any SMTP provider
-// (Gmail, SendGrid, Brevo, etc.)
-const createTransporter = () => {
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM } = process.env;
-
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    throw new Error('Email service not configured. Set SMTP_HOST, SMTP_USER, SMTP_PASS in env.');
-  }
-
-  return nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: parseInt(SMTP_PORT || '587', 10),
-    secure: parseInt(SMTP_PORT || '587', 10) === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
-  });
-};
-
-const FROM = process.env.SMTP_FROM || 'Koundoul <noreply@koundoul.com>';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'https://www.koundoul.com';
+const FROM = process.env.RESEND_FROM || 'Koundoul <noreply@koundoul.com>';
+
+const getResend = () => {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('Email service not configured. Set RESEND_API_KEY in env.');
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+};
 
 const sendPasswordResetEmail = async (to, firstName, token) => {
   const resetUrl = `${FRONTEND_URL}/reset-password?token=${token}`;
-  const transporter = createTransporter();
+  const resend = getResend();
 
-  await transporter.sendMail({
+  await resend.emails.send({
     from: FROM,
     to,
     subject: 'Réinitialisation de ton mot de passe — Koundoul',
