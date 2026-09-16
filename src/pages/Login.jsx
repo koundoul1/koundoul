@@ -32,7 +32,7 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated && user && !hasNavigated.current) {
       hasNavigated.current = true
-      const defaultRoute = user.is_admin ? '/admin' : '/dashboard'
+      const defaultRoute = user.is_admin ? '/admin' : '/coach'
       const from = location.state?.from?.pathname || defaultRoute
       navigate(from, { replace: true })
     }
@@ -75,7 +75,7 @@ const Login = () => {
       const result = await login(credentials)
       if (result.success) {
         hasNavigated.current = true
-        const defaultRoute = result.user?.is_admin ? '/admin' : '/dashboard'
+        const defaultRoute = result.user?.is_admin ? '/admin' : '/coach'
         const from = location.state?.from?.pathname || defaultRoute
         navigate(from, { replace: true })
       }
