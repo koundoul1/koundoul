@@ -7,6 +7,7 @@ const { authenticateToken } = require('../middlewares/auth');
 const prisma = require('../config/database');
 const { normalizePhoneNumber, isPhoneIdentifier, isValidPin } = require('../utils/phoneValidator');
 const { findUserByIdentifier, verifyCredential, isLockedOut, handleLoginAttempt } = require('../services/authService');
+const { sendPasswordResetEmail } = require('../services/emailService');
 
 // ── Rate limiters ──
 const loginLimiter = rateLimit({
@@ -667,6 +668,85 @@ router.get('/referral', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Referral code error:', error);
     res.status(500).json({ error: 'Erreur serveur' });
+  }
+});
+
+// ── POST /forgot-password — Request a password reset link ──
+const forgotPasswordLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: { error: 'Trop de demandes. Réessaie dans 1 heure.' }
+});
+
+router.post('/forgot-password', forgotPasswordLimiter, async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: 'Email requis' });
+
+    const user = await prisma.user.findUnique({ where: { email: email.toLowerCase().trim() } });
+
+    // Always return 200 to avoid email enumeration
+    if (!user) {
+      return res.json({ success: true, message: 'Si cet email existe, un lien de réinitialisation a été envoyé.' });
+    }
+
+    // Generate a secure token (32 random bytes → hex)
+    const crypto = require('crypto');
+    const token = crypto.randomBytes(32).toString('hex');
+    const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { resetPasswordToken: token, resetPasswordExpires: expires }
+    });
+
+    await sendPasswordResetEmail(user.email, user.firstName, token);
+
+    res.json({ success: true, message: 'Si cet email existe, un lien de réinitialisation a été envoyé.' });
+  } catch (err) {
+    console.error('forgot-password error:', err);
+    // If email service not configured, give admin-friendly error in dev
+    if (err.message?.includes('not configured') && process.env.NODE_ENV !== 'production') {
+      return res.status(503).json({ error: 'Service email non configuré. Définis SMTP_HOST, SMTP_USER et SMTP_PASS dans le .env du backend.' });
+    }
+    next(err);
+  }
+});
+
+// ── POST /reset-password — Set new password using token ──
+router.post('/reset-password', async (req, res, next) => {
+  try {
+    const { token, password } = req.body;
+    if (!token || !password) return res.status(400).json({ error: 'Token et nouveau mot de passe requis' });
+    if (password.length < 8) return res.status(400).json({ error: 'Le mot de passe doit faire au moins 8 caractères' });
+
+    const user = await prisma.user.findFirst({
+      where: {
+        resetPasswordToken: token,
+        resetPasswordExpires: { gt: new Date() }
+      }
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: 'Lien invalide ou expiré. Fais une nouvelle demande.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        password: hashedPassword,
+        resetPasswordToken: null,
+        resetPasswordExpires: null,
+        loginAttemptsCount: 0,
+        lockedUntil: null
+      }
+    });
+
+    res.json({ success: true, message: 'Mot de passe réinitialisé avec succès. Tu peux maintenant te connecter.' });
+  } catch (err) {
+    next(err);
   }
 });
 
