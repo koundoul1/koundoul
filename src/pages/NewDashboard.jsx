@@ -455,20 +455,24 @@ const NewDashboard = () => {
               {recentActivity && recentActivity.length > 0 ? (
                 <div className="space-y-2">
                   {recentActivity.map((item, i) => (
-                    <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors cursor-pointer group" onClick={() => navigate(`/micro-lessons/${item.lessonId}`)}>
-                      <div className="text-2xl">{SUBJECT_ICONS[item.subject] || '📖'}</div>
+                    <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-colors cursor-pointer group" onClick={() => navigate(`/micro-lessons/${item.lessonId}`)}>
+                      <div className="text-2xl flex-shrink-0 mt-0.5">{SUBJECT_ICONS[item.subject] || '📖'}</div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-sm truncate">{item.title}</div>
-                        <div className="text-xs text-gray-500">{t(`common.subjects.${item.subject}`) || item.subject}</div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {item.score !== null && <span className="text-xs text-emerald-400 font-bold">{item.score}%</span>}
-                        {!item.completed && (
-                          <button className="px-3 py-1 bg-kprimary/20 text-kprimary rounded-lg text-xs font-bold hover:bg-kprimary/30 transition-colors flex items-center gap-1">
-                            <Play className="w-3 h-3" /> {t('dashboard.resume')}
-                          </button>
-                        )}
-                        {item.completed && <span className="text-emerald-400 text-sm">✓</span>}
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <div className="font-semibold text-sm truncate">{item.title}</div>
+                            <div className="text-xs text-gray-500 mt-0.5">{t(`common.subjects.${item.subject}`) || item.subject}</div>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            {item.score !== null && <span className="text-xs text-emerald-400 font-bold">{item.score}%</span>}
+                            {!item.completed && (
+                              <button className="px-2.5 py-1 bg-kprimary/20 text-kprimary rounded-lg text-xs font-bold hover:bg-kprimary/30 transition-colors flex items-center gap-1 whitespace-nowrap">
+                                <Play className="w-3 h-3" /> <span className="hidden sm:inline">{t('dashboard.resume')}</span>
+                              </button>
+                            )}
+                            {item.completed && <span className="text-emerald-400 text-sm">✓</span>}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -494,12 +498,12 @@ const NewDashboard = () => {
                 <div className="space-y-2">
                   {recommendations.slice(1).map((rec, i) => (
                     <Link key={i} to={`/micro-lessons/${rec.lessonId}`} className="block p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] transition-all group">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="text-xl">{SUBJECT_ICONS[rec.subject] || '📖'}</div>
-                          <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-3 min-w-0 flex-1">
+                          <div className="text-xl flex-shrink-0">{SUBJECT_ICONS[rec.subject] || '📖'}</div>
+                          <div className="min-w-0">
                             <div className="font-semibold text-sm group-hover:text-kprimary transition-colors truncate">{rec.title}</div>
-                            <div className="text-xs text-gray-500">
+                            <div className="text-xs text-gray-500 truncate">
                               {t(`common.subjects.${rec.subject}`) || rec.subject} • {t(`common.levels.${rec.level}`) || rec.level}
                             </div>
                           </div>
