@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../services/api';
-import { BookOpen, Clock, Star, Target, TrendingUp, CheckCircle2, AlertTriangle, RefreshCw } from 'lucide-react';
+import { BookOpen, Clock, Star, Target, TrendingUp, CheckCircle2, AlertTriangle, RefreshCw, Search, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -26,6 +26,7 @@ const MicroLessons = () => {
   };
 
   const [filter, setFilter] = useState(() => getInitialFilter());
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const urlSubject = searchParams.get('subject');
@@ -154,7 +155,16 @@ const MicroLessons = () => {
     );
   };
 
-  const filteredLessons = lessons;
+  const filteredLessons = searchQuery.trim()
+    ? lessons.filter(l => {
+        const q = searchQuery.toLowerCase()
+        return (
+          l.title?.toLowerCase().includes(q) ||
+          l.chapter?.toLowerCase().includes(q) ||
+          l.subject?.toLowerCase().includes(q)
+        )
+      })
+    : lessons;
 
   if (loading) {
     return (
@@ -197,6 +207,26 @@ const MicroLessons = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Search bar */}
+        <div className="relative mb-4">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Rechercher une leçon, un chapitre..."
+            className="w-full pl-11 pr-10 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-kprimary/50 transition-colors"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
         </div>
 
         {/* Filter pills */}
@@ -243,6 +273,13 @@ const MicroLessons = () => {
           </div>
         </div>
 
+        {/* Result count when searching */}
+        {searchQuery.trim() && (
+          <p className="text-sm text-gray-400 mb-4">
+            {filteredLessons.length} résultat{filteredLessons.length !== 1 ? 's' : ''} pour <span className="text-white font-medium">"{searchQuery}"</span>
+          </p>
+        )}
+
         {/* Lessons Grid */}
         {error ? (
           <div className="k-card p-12 text-center">
@@ -260,8 +297,14 @@ const MicroLessons = () => {
         ) : filteredLessons.length === 0 ? (
           <div className="k-card p-12 text-center">
             <BookOpen className="h-12 w-12 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400 text-lg mb-2">{t('microLessons.noLessons')}</p>
-            {(filter.subject !== 'all' || filter.level !== 'all') && (
+            <p className="text-gray-400 text-lg mb-2">
+              {searchQuery.trim() ? `Aucun résultat pour "${searchQuery}"` : t('microLessons.noLessons')}
+            </p>
+            {searchQuery.trim() ? (
+              <button onClick={() => setSearchQuery('')} className="text-kprimary text-sm hover:underline">
+                Effacer la recherche
+              </button>
+            ) : (filter.subject !== 'all' || filter.level !== 'all') && (
               <p className="text-gray-600 text-sm">{t('actions.filter')} — {t('actions.retry')}</p>
             )}
           </div>
