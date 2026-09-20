@@ -512,59 +512,6 @@ const Solver = () => {
                   </div>
                 )}
 
-                {/* Sélecteurs */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Domaine
-                    </label>
-                    <select
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      className="koundoul-input w-full"
-                    >
-                      {subjects.map((subj) => (
-                        <option key={subj.value} value={subj.value}>
-                          {subj.icon} {subj.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Difficulté
-                    </label>
-                    <div className="flex gap-2">
-                      {difficulties.map((diff) => {
-                        const isSelected = difficulty === diff.value;
-                        const buttonClasses = {
-                          green: isSelected 
-                            ? 'bg-green-500/20 text-green-300 border-green-400 shadow-md scale-105'
-                            : 'bg-gray-700/50 text-gray-400 border-gray-600 hover:bg-gray-600/50',
-                          yellow: isSelected
-                            ? 'bg-yellow-500/20 text-yellow-300 border-yellow-400 shadow-md scale-105'
-                            : 'bg-gray-700/50 text-gray-400 border-gray-600 hover:bg-gray-600/50',
-                          red: isSelected
-                            ? 'bg-red-500/20 text-red-300 border-red-400 shadow-md scale-105'
-                            : 'bg-gray-700/50 text-gray-400 border-gray-600 hover:bg-gray-600/50'
-                        };
-
-                        return (
-                          <button
-                            key={diff.value}
-                            type="button"
-                            onClick={() => setDifficulty(diff.value)}
-                            className={`flex-1 px-3 py-2.5 sm:px-4 rounded-lg text-sm sm:text-base font-medium transition-all duration-200 border-2 ${buttonClasses[diff.color]}`}
-                          >
-                            {diff.label}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-
                 {/* Zone de texte */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
