@@ -705,8 +705,11 @@ const api = {
 
   // 💬 FORUM
   forum: {
-    getDiscussions: (filters = {}, page = 1, limit = 20) => {
-      const params = new URLSearchParams({ ...filters, page, limit }).toString();
+    getDiscussions: (filters = {}) => {
+      const clean = Object.fromEntries(
+        Object.entries(filters).filter(([, v]) => v !== undefined && v !== '')
+      );
+      const params = new URLSearchParams(clean).toString();
       return request(`/forum?${params}`);
     },
     getDiscussion: (discussionId) => request(`/forum/${discussionId}`),

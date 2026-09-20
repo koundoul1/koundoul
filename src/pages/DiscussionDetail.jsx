@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, ThumbsUp, ThumbsDown, MessageSquare,
-  Award, Send, Eye, Clock, Loader2
+  Award, Send, Eye, Clock, Loader2, AlertTriangle, RefreshCw
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -26,25 +26,32 @@ function Avatar({ name, size = 'md' }) {
 }
 
 export default function DiscussionDetail() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const { id }     = useParams();
+  const navigate   = useNavigate();
+  const { user }   = useAuth();
   const textareaRef = useRef(null);
 
-  const [discussion, setDiscussion] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [replyContent, setReplyContent] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [replyError, setReplyError] = useState('');
+  const [discussion,    setDiscussion]    = useState(null);
+  const [loading,       setLoading]       = useState(true);
+  const [loadError,     setLoadError]     = useState(null);
+  const [replyContent,  setReplyContent]  = useState('');
+  const [submitting,    setSubmitting]    = useState(false);
+  const [replyError,    setReplyError]    = useState('');
+  const [voteError,     setVoteError]     = useState('');
+  // Suivi optimiste des votes de l'utilisateur { discId: ±1, replyId: ±1 }
+  const [userVotes,     setUserVotes]     = useState({});
+  const [votingId,      setVotingId]      = useState(null); // id en cours de vote
 
   useEffect(() => { fetchDiscussion(); }, [id]);
 
   const fetchDiscussion = async () => {
+    setLoadError(null);
+    setLoading(true);
     try {
       const response = await api.forum.getDiscussion(id);
       setDiscussion(response.data);
     } catch (err) {
-      console.error(err);
+      setLoadError(err.message || 'Impossible de charger la discussion');
     } finally {
       setLoading(false);
     }
@@ -52,18 +59,82 @@ export default function DiscussionDetail() {
 
   const handleVoteDiscussion = async (value) => {
     if (!user) return navigate('/login');
+    if (votingId === 'disc') return;
+    const key = `disc_${id}`;
+    const currentVote = userVotes[key] ?? 0;
+    const newVote     = currentVote === value ? 0 : value; // toggle
+
+    // Mise à jour optimiste
+    setUserVotes(v => ({ ...v, [key]: newVote }));
+    setDiscussion(d => {
+      const delta = newVote === 0 ? -currentVote : currentVote === 0 ? value : value * 2;
+      return { ...d, votes: (d.votes ?? 0) + delta };
+    });
+    setVoteError('');
+    setVotingId('disc');
+
     try {
-      await api.forum.voteDiscussion(id, value);
-      fetchDiscussion();
-    } catch (e) { console.error(e); }
+      const res = await api.forum.voteDiscussion(id, value);
+      // Synchroniser avec la valeur serveur réelle
+      setDiscussion(d => ({ ...d, votes: res.votes ?? d.votes }));
+      setUserVotes(v => ({ ...v, [key]: res.userVote ?? newVote }));
+    } catch (e) {
+      // Rollback
+      setUserVotes(v => ({ ...v, [key]: currentVote }));
+      setDiscussion(d => {
+        const delta = newVote === 0 ? -currentVote : currentVote === 0 ? value : value * 2;
+        return { ...d, votes: (d.votes ?? 0) - delta };
+      });
+      setVoteError('Erreur lors du vote. Réessaie.');
+    } finally {
+      setVotingId(null);
+    }
   };
 
   const handleVoteReply = async (replyId, value) => {
     if (!user) return navigate('/login');
+    if (votingId === replyId) return;
+    const key         = `reply_${replyId}`;
+    const currentVote = userVotes[key] ?? 0;
+    const newVote     = currentVote === value ? 0 : value;
+
+    // Mise à jour optimiste
+    setUserVotes(v => ({ ...v, [key]: newVote }));
+    setDiscussion(d => ({
+      ...d,
+      replies: d.replies.map(r => {
+        if (r.id !== replyId) return r;
+        const delta = newVote === 0 ? -currentVote : currentVote === 0 ? value : value * 2;
+        return { ...r, votes: (r.votes ?? 0) + delta };
+      })
+    }));
+    setVoteError('');
+    setVotingId(replyId);
+
     try {
-      await api.forum.voteReply(replyId, value);
-      fetchDiscussion();
-    } catch (e) { console.error(e); }
+      const res = await api.forum.voteReply(replyId, value);
+      setDiscussion(d => ({
+        ...d,
+        replies: d.replies.map(r =>
+          r.id === replyId ? { ...r, votes: res.votes ?? r.votes } : r
+        )
+      }));
+      setUserVotes(v => ({ ...v, [key]: res.userVote ?? newVote }));
+    } catch (e) {
+      // Rollback
+      setUserVotes(v => ({ ...v, [key]: currentVote }));
+      setDiscussion(d => ({
+        ...d,
+        replies: d.replies.map(r => {
+          if (r.id !== replyId) return r;
+          const delta = newVote === 0 ? -currentVote : currentVote === 0 ? value : value * 2;
+          return { ...r, votes: (r.votes ?? 0) - delta };
+        })
+      }));
+      setVoteError('Erreur lors du vote. Réessaie.');
+    } finally {
+      setVotingId(null);
+    }
   };
 
   const handleSubmitReply = async (e) => {
@@ -76,7 +147,7 @@ export default function DiscussionDetail() {
       await api.forum.reply(id, replyContent.trim());
       setReplyContent('');
       if (textareaRef.current) textareaRef.current.style.height = 'auto';
-      fetchDiscussion();
+      await fetchDiscussion();
     } catch (err) {
       setReplyError(err.message || 'Erreur lors de l\'envoi');
     } finally {
@@ -88,10 +159,13 @@ export default function DiscussionDetail() {
     if (!window.confirm('Marquer cette réponse comme la meilleure ?')) return;
     try {
       await api.forum.markBestAnswer(id, replyId);
-      fetchDiscussion();
-    } catch (e) { console.error(e); }
+      await fetchDiscussion();
+    } catch (e) {
+      setVoteError(e.message || 'Erreur lors du marquage de la meilleure réponse');
+    }
   };
 
+  // ── Loading ──────────────────────────────────────────────────────────────────
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -100,21 +174,29 @@ export default function DiscussionDetail() {
     );
   }
 
-  if (!discussion) {
+  if (loadError || !discussion) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="k-card p-8 text-center max-w-md">
-          <p className="text-red-400 font-semibold mb-3">Discussion non trouvée</p>
-          <button onClick={() => navigate('/forum')} className="text-kprimary hover:underline text-sm">
-            ← Retour au forum
-          </button>
+          <AlertTriangle className="w-10 h-10 text-amber-400 mx-auto mb-3" />
+          <p className="text-gray-300 font-semibold mb-1">Discussion introuvable</p>
+          <p className="text-gray-500 text-sm mb-5">{loadError || 'Cette discussion n\'existe pas ou a été supprimée.'}</p>
+          <div className="flex gap-3 justify-center">
+            <button onClick={fetchDiscussion} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm font-semibold hover:bg-white/10 transition-colors">
+              <RefreshCw className="w-4 h-4" /> Réessayer
+            </button>
+            <button onClick={() => navigate('/forum')} className="px-4 py-2 rounded-xl bg-kprimary text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+              ← Forum
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
-  const isAuthor = user && user.id === discussion.userId;
+  const isAuthor   = user && user.id === discussion.userId;
   const authorName = discussion.user?.username || discussion.user?.firstName || 'Anonyme';
+  const discVote   = userVotes[`disc_${id}`] ?? 0;
 
   return (
     <div className="min-h-screen text-white pb-20 lg:pb-0">
@@ -127,6 +209,15 @@ export default function DiscussionDetail() {
         >
           <ArrowLeft className="w-5 h-5" /> Forum
         </button>
+
+        {/* Erreur vote globale */}
+        {voteError && (
+          <div className="mb-4 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+            {voteError}
+            <button onClick={() => setVoteError('')} className="ml-auto text-red-400 hover:text-red-300 text-lg leading-none">×</button>
+          </div>
+        )}
 
         {/* Main discussion */}
         <div className="k-card p-6 sm:p-8 mb-6">
@@ -142,7 +233,7 @@ export default function DiscussionDetail() {
                 {discussion.level}
               </span>
             )}
-            {discussion.bestAnswerId && (
+            {discussion.solved && (
               <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold flex items-center gap-1">
                 <Award className="w-3 h-3" /> Résolu
               </span>
@@ -174,14 +265,24 @@ export default function DiscussionDetail() {
           <div className="flex items-center gap-3 pt-4 border-t border-white/5">
             <button
               onClick={() => handleVoteDiscussion(1)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-emerald-500/10 hover:text-emerald-400 text-gray-400 transition-colors text-sm"
+              disabled={votingId === 'disc'}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-colors text-sm ${
+                discVote === 1
+                  ? 'bg-emerald-500/20 text-emerald-400'
+                  : 'bg-white/5 hover:bg-emerald-500/10 hover:text-emerald-400 text-gray-400'
+              }`}
             >
               <ThumbsUp className="w-4 h-4" />
               <span className="font-bold">{discussion.votes ?? 0}</span>
             </button>
             <button
               onClick={() => handleVoteDiscussion(-1)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-red-500/10 hover:text-red-400 text-gray-400 transition-colors"
+              disabled={votingId === 'disc'}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-colors ${
+                discVote === -1
+                  ? 'bg-red-500/20 text-red-400'
+                  : 'bg-white/5 hover:bg-red-500/10 hover:text-red-400 text-gray-400'
+              }`}
             >
               <ThumbsDown className="w-4 h-4" />
             </button>
@@ -207,6 +308,7 @@ export default function DiscussionDetail() {
           ) : (
             discussion.replies.map(reply => {
               const replyAuthor = reply.user?.username || reply.user?.firstName || 'Anonyme';
+              const replyVote   = userVotes[`reply_${reply.id}`] ?? 0;
               return (
                 <div
                   key={reply.id}
@@ -230,14 +332,24 @@ export default function DiscussionDetail() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleVoteReply(reply.id, 1)}
-                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-emerald-500/10 hover:text-emerald-400 text-gray-400 transition-colors text-xs"
+                          disabled={votingId === reply.id}
+                          className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg transition-colors text-xs ${
+                            replyVote === 1
+                              ? 'bg-emerald-500/20 text-emerald-400'
+                              : 'bg-white/5 hover:bg-emerald-500/10 hover:text-emerald-400 text-gray-400'
+                          }`}
                         >
                           <ThumbsUp className="w-3.5 h-3.5" />
                           <span className="font-bold">{reply.votes ?? 0}</span>
                         </button>
                         <button
                           onClick={() => handleVoteReply(reply.id, -1)}
-                          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-red-500/10 hover:text-red-400 text-gray-400 transition-colors"
+                          disabled={votingId === reply.id}
+                          className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg transition-colors ${
+                            replyVote === -1
+                              ? 'bg-red-500/20 text-red-400'
+                              : 'bg-white/5 hover:bg-red-500/10 hover:text-red-400 text-gray-400'
+                          }`}
                         >
                           <ThumbsDown className="w-3.5 h-3.5" />
                         </button>

@@ -86,6 +86,7 @@ const Sidebar = () => {
   const resourcesNav = [
     { name: 'Ressources', href: '/resources', icon: Lightbulb },
     { name: 'Visualisations', href: '/visualizations', icon: Eye },
+    { name: 'Forum', href: '/forum', icon: MessageSquare },
   ]
 
   // ── Section: Compte ──

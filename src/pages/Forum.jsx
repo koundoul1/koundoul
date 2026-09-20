@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   MessageSquare, Search, Plus, ThumbsUp, Eye, Clock,
-  BookOpen, AlertTriangle, RefreshCw, ChevronLeft, ChevronRight, X
+  Award, AlertTriangle, RefreshCw, ChevronLeft, ChevronRight, X
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -45,9 +45,11 @@ export default function Forum() {
   const [level, setLevel] = useState('');
   const [page, setPage] = useState(1);
 
+  // Debounce la recherche pour ne pas spammer le backend
   useEffect(() => {
-    fetchDiscussions();
-  }, [subject, level, page]);
+    const timer = setTimeout(() => { fetchDiscussions(); }, search ? 400 : 0);
+    return () => clearTimeout(timer);
+  }, [subject, level, page, search]);
 
   const fetchDiscussions = async () => {
     setLoading(true);
@@ -56,7 +58,8 @@ export default function Forum() {
       const params = { page, limit: 20 };
       if (subject) params.subject = subject;
       if (level) params.level = level;
-      const res = await api.forum.getDiscussions(params, page, 20);
+      if (search.trim()) params.search = search.trim();
+      const res = await api.forum.getDiscussions(params);
       setDiscussions(res.data || []);
       setPagination(res.pagination || { page: 1, pages: 1, total: 0 });
     } catch (e) {
@@ -67,14 +70,8 @@ export default function Forum() {
   };
 
   const handleFilterSubject = (val) => { setSubject(val); setPage(1); };
-  const handleFilterLevel = (val) => { setLevel(val); setPage(1); };
-
-  const filtered = search.trim()
-    ? discussions.filter(d =>
-        d.title.toLowerCase().includes(search.toLowerCase()) ||
-        d.content?.toLowerCase().includes(search.toLowerCase())
-      )
-    : discussions;
+  const handleFilterLevel   = (val) => { setLevel(val);   setPage(1); };
+  const handleSearch        = (val) => { setSearch(val);  setPage(1); };
 
   return (
     <div className="min-h-screen text-white pb-20 lg:pb-0">
@@ -108,12 +105,12 @@ export default function Forum() {
           <input
             type="text"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={e => handleSearch(e.target.value)}
             placeholder="Rechercher dans le forum..."
             className="w-full pl-11 pr-10 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-kprimary/50 transition-colors"
           />
           {search && (
-            <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white">
+            <button onClick={() => handleSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white">
               <X className="w-4 h-4" />
             </button>
           )}
@@ -172,7 +169,7 @@ export default function Forum() {
               <RefreshCw className="w-4 h-4" /> Réessayer
             </button>
           </div>
-        ) : filtered.length === 0 ? (
+        ) : discussions.length === 0 ? (
           <div className="k-card p-12 text-center">
             <MessageSquare className="w-12 h-12 text-gray-600 mx-auto mb-4" />
             <p className="text-gray-400 mb-2">
@@ -189,7 +186,7 @@ export default function Forum() {
           </div>
         ) : (
           <div className="space-y-3">
-            {filtered.map(disc => (
+            {discussions.map(disc => (
               <button
                 key={disc.id}
                 onClick={() => navigate(`/forum/${disc.id}`)}
@@ -208,11 +205,18 @@ export default function Forum() {
                       <h3 className="font-bold text-white text-sm leading-snug group-hover:text-kprimary transition-colors line-clamp-2">
                         {disc.title}
                       </h3>
-                      {disc.subject && (
-                        <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-kprimary/10 text-kprimary text-xs font-semibold">
-                          {disc.subject}
-                        </span>
-                      )}
+                      <div className="flex-shrink-0 flex items-center gap-1.5">
+                        {disc.solved && (
+                          <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">
+                            <Award className="w-3 h-3" /> Résolu
+                          </span>
+                        )}
+                        {disc.subject && (
+                          <span className="px-2 py-0.5 rounded-full bg-kprimary/10 text-kprimary text-xs font-semibold">
+                            {disc.subject}
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     <p className="text-gray-500 text-xs line-clamp-2 mb-3">{disc.content}</p>

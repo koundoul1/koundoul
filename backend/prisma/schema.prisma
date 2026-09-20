@@ -237,6 +237,8 @@ model ForumDiscussion {
   id               String             @id @default(cuid())
   title            String
   content          String
+  subject          String?
+  level            String?
   category         DiscussionCategory @default(QUESTION)
   lessonId         String?
   exerciseId       String?
@@ -454,7 +456,7 @@ model concept_nodes {
 }
 
 model discussion_votes {
-  id           String          @id
+  id           String          @id @default(cuid())
   discussionId String
   userId       String
   value        Int
@@ -716,7 +718,7 @@ model quizzes {
 }
 
 model reply_votes {
-  id        String     @id
+  id        String     @id @default(cuid())
   replyId   String
   userId    String
   value     Int
