@@ -1,241 +1,348 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, RotateCcw, Check, X, Eye, EyeOff, Lightbulb } from 'lucide-react';
+import {
+  ArrowLeft, RotateCcw, Check, X, Eye, EyeOff,
+  Loader2, AlertTriangle, RefreshCw, Trophy
+} from 'lucide-react';
 import api from '../services/api';
+
+const QUALITY_OPTIONS = [
+  {
+    value: 2,
+    label: 'Difficile',
+    sub: 'Revoir bientôt',
+    icon: X,
+    colors: 'bg-red-500/10 border-red-500/20 text-red-400 hover:bg-red-500/20 hover:border-red-500/40'
+  },
+  {
+    value: 3,
+    label: 'Bon',
+    sub: 'Dans quelques jours',
+    icon: RotateCcw,
+    colors: 'bg-amber-500/10 border-amber-500/20 text-amber-400 hover:bg-amber-500/20 hover:border-amber-500/40'
+  },
+  {
+    value: 5,
+    label: 'Facile',
+    sub: 'Plus tard',
+    icon: Check,
+    colors: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/40'
+  }
+];
 
 export default function FlashcardsReview() {
   const navigate = useNavigate();
-  const [flashcards, setFlashcards] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [startTime, setStartTime] = useState(Date.now());
-  const [stats, setStats] = useState({
-    reviewed: 0,
-    correct: 0,
-    incorrect: 0
-  });
 
-  useEffect(() => {
-    fetchFlashcards();
-  }, []);
+  const [flashcards,    setFlashcards]    = useState([]);
+  const [currentIndex,  setCurrentIndex]  = useState(0);
+  const [showAnswer,    setShowAnswer]    = useState(false);
+  const [loading,       setLoading]       = useState(true);
+  const [loadError,     setLoadError]     = useState(null);
+  const [submitting,    setSubmitting]    = useState(false);
+  const [startTime,     setStartTime]     = useState(Date.now());
+  const [stats,         setStats]         = useState({ reviewed: 0, correct: 0, incorrect: 0 });
+  const [sessionDone,   setSessionDone]   = useState(false);
+
+  useEffect(() => { fetchFlashcards(); }, []);
 
   const fetchFlashcards = async () => {
+    setLoadError(null);
+    setLoading(true);
     try {
       const response = await api.flashcards.getDue(20);
-      setFlashcards(response.data);
-      
-      if (response.data.length === 0) {
-        alert('Aucune flashcard à réviser !');
-        navigate('/flashcards');
-      }
+      setFlashcards(response.data || []);
     } catch (error) {
-      console.error('Erreur:', error);
+      setLoadError(error.message || 'Impossible de charger les flashcards');
     } finally {
       setLoading(false);
     }
   };
 
   const handleReview = async (quality) => {
+    if (submitting) return;
     const flashcard = flashcards[currentIndex];
     const timeSpent = Math.floor((Date.now() - startTime) / 1000);
 
+    setSubmitting(true);
     try {
       await api.flashcards.submitReview(flashcard.id, quality, timeSpent);
-      
-      // Mettre à jour les stats
-      setStats(prev => ({
-        reviewed: prev.reviewed + 1,
-        correct: quality >= 3 ? prev.correct + 1 : prev.correct,
-        incorrect: quality < 3 ? prev.incorrect + 1 : prev.incorrect
-      }));
 
-      // Passer à la carte suivante
+      const newStats = {
+        reviewed:  stats.reviewed  + 1,
+        correct:   quality >= 3 ? stats.correct   + 1 : stats.correct,
+        incorrect: quality <  3 ? stats.incorrect + 1 : stats.incorrect
+      };
+      setStats(newStats);
+
       if (currentIndex < flashcards.length - 1) {
-        setCurrentIndex(currentIndex + 1);
+        setCurrentIndex(i => i + 1);
         setShowAnswer(false);
         setStartTime(Date.now());
       } else {
-        // Fin de la session
-        navigate('/flashcards', {
-          state: { sessionComplete: true, stats }
-        });
+        setSessionDone(true);
       }
     } catch (error) {
-      console.error('Erreur:', error);
-      alert('Erreur lors de la soumission');
+      // Erreur non bloquante : on passe quand même à la carte suivante
+      if (currentIndex < flashcards.length - 1) {
+        setCurrentIndex(i => i + 1);
+        setShowAnswer(false);
+        setStartTime(Date.now());
+      } else {
+        setSessionDone(true);
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
+  // ── Loading ──────────────────────────────────────────────────────────────────
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <Loader2 className="w-10 h-10 animate-spin text-kprimary" />
       </div>
     );
   }
 
-  if (flashcards.length === 0) {
-    return null;
+  // ── Erreur ───────────────────────────────────────────────────────────────────
+  if (loadError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="k-card p-8 text-center max-w-md">
+          <AlertTriangle className="w-10 h-10 text-amber-400 mx-auto mb-3" />
+          <p className="text-gray-300 font-semibold mb-1">Erreur de chargement</p>
+          <p className="text-gray-500 text-sm mb-5">{loadError}</p>
+          <div className="flex gap-3 justify-center">
+            <button
+              onClick={fetchFlashcards}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm font-semibold hover:bg-white/10 transition-colors"
+            >
+              <RefreshCw className="w-4 h-4" /> Réessayer
+            </button>
+            <button
+              onClick={() => navigate('/flashcards')}
+              className="px-4 py-2 rounded-xl bg-kprimary text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              ← Flashcards
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
+  // ── Aucune carte à réviser ───────────────────────────────────────────────────
+  if (flashcards.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="k-card p-8 text-center max-w-md">
+          <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-3" />
+          <h2 className="text-xl font-black text-white mb-2">Tout est à jour !</h2>
+          <p className="text-gray-400 text-sm mb-5">Aucune flashcard à réviser pour le moment. Reviens plus tard.</p>
+          <button
+            onClick={() => navigate('/flashcards')}
+            className="px-5 py-2.5 rounded-xl bg-kprimary text-white font-bold text-sm hover:opacity-90 transition-opacity"
+          >
+            ← Mes flashcards
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Session terminée ─────────────────────────────────────────────────────────
+  if (sessionDone) {
+    const pct = flashcards.length > 0 ? Math.round((stats.correct / flashcards.length) * 100) : 0;
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4 pb-20 lg:pb-0">
+        <div className="k-card p-8 text-center max-w-md w-full">
+          <Trophy className="w-14 h-14 text-yellow-400 mx-auto mb-4" />
+          <h2 className="text-2xl font-black text-white mb-1">Session terminée !</h2>
+          <p className="text-gray-400 text-sm mb-6">Tu as révisé {stats.reviewed} flashcard{stats.reviewed !== 1 ? 's' : ''}</p>
+
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="k-card p-3 text-center">
+              <p className="text-2xl font-black text-white">{stats.reviewed}</p>
+              <p className="text-xs text-gray-500 mt-0.5">Révisées</p>
+            </div>
+            <div className="k-card p-3 text-center">
+              <p className="text-2xl font-black text-emerald-400">{stats.correct}</p>
+              <p className="text-xs text-gray-500 mt-0.5">Correctes</p>
+            </div>
+            <div className="k-card p-3 text-center">
+              <p className="text-2xl font-black text-red-400">{stats.incorrect}</p>
+              <p className="text-xs text-gray-500 mt-0.5">À retravailler</p>
+            </div>
+          </div>
+
+          {/* Score */}
+          <div className="mb-6">
+            <div className="flex justify-between text-xs text-gray-500 mb-1">
+              <span>Score</span>
+              <span>{pct}%</span>
+            </div>
+            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-kprimary to-ksecondary rounded-full transition-all duration-700"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={() => navigate('/flashcards')}
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-kprimary to-ksecondary text-white font-bold text-sm hover:opacity-90 active:scale-95 transition-all"
+          >
+            Retour aux flashcards
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Révision ─────────────────────────────────────────────────────────────────
   const currentCard = flashcards[currentIndex];
-  const progress = ((currentIndex + 1) / flashcards.length) * 100;
+  const progress    = ((currentIndex + 1) / flashcards.length) * 100;
+
+  // subject peut être une string (id ou nom) ou null
+  const subjectLabel = typeof currentCard.subject === 'string'
+    ? currentCard.subject
+    : currentCard.subject?.name ?? null;
+
+  const difficultyColor = {
+    FACILE:   'text-emerald-400 bg-emerald-500/10',
+    MOYEN:    'text-amber-400   bg-amber-500/10',
+    DIFFICILE:'text-red-400     bg-red-500/10'
+  }[currentCard.difficulty] ?? 'text-gray-400 bg-white/5';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 py-8">
-        
+    <div className="min-h-screen text-white pb-20 lg:pb-0">
+      <div className="max-w-3xl mx-auto px-4 py-8">
+
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <button
             onClick={() => navigate('/flashcards')}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-semibold"
+            className="flex items-center gap-2 text-gray-400 hover:text-white font-medium transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Retour
           </button>
-          
+
           <div className="text-center">
-            <p className="text-sm text-gray-600">Progression</p>
-            <p className="text-2xl font-bold text-gray-900">
-              {currentIndex + 1} / {flashcards.length}
+            <p className="text-xs text-gray-500 uppercase tracking-wide">Progression</p>
+            <p className="text-xl font-black text-white">
+              {currentIndex + 1} <span className="text-gray-500 font-normal">/</span> {flashcards.length}
             </p>
           </div>
 
           <div className="text-right">
-            <p className="text-sm text-gray-600">Session</p>
-            <p className="text-lg font-bold text-green-600">
-              {stats.correct} ✓ / {stats.incorrect} ✗
+            <p className="text-xs text-gray-500 uppercase tracking-wide">Session</p>
+            <p className="text-sm font-bold">
+              <span className="text-emerald-400">{stats.correct} ✓</span>
+              {' · '}
+              <span className="text-red-400">{stats.incorrect} ✗</span>
             </p>
           </div>
         </div>
 
         {/* Barre de progression */}
-        <div className="w-full h-2 bg-gray-200 rounded-full mb-8 overflow-hidden">
+        <div className="w-full h-1.5 bg-white/5 rounded-full mb-8 overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-blue-500 to-green-500 rounded-full transition-all duration-500"
+            className="h-full bg-gradient-to-r from-kprimary to-ksecondary rounded-full transition-all duration-500"
             style={{ width: `${progress}%` }}
-          ></div>
+          />
         </div>
 
-        {/* Flashcard */}
-        <div className="max-w-3xl mx-auto">
-          
-          {/* Contexte */}
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-3xl">{currentCard.subject.icon}</span>
-            <div>
-              <p className="text-sm text-gray-600">{currentCard.subject.name}</p>
-              {currentCard.lesson && (
-                <p className="text-xs text-gray-500">{currentCard.lesson.title}</p>
-              )}
-            </div>
-            {currentCard.isNew && (
-              <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-bold rounded-full">
-                NOUVEAU
-              </span>
-            )}
+        {/* Contexte (matière / difficulté) */}
+        <div className="flex items-center gap-2 mb-4 flex-wrap">
+          {subjectLabel && (
+            <span className="px-2.5 py-1 rounded-full bg-kprimary/10 text-kprimary text-xs font-semibold">
+              {subjectLabel}
+            </span>
+          )}
+          {currentCard.chapter && (
+            <span className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gray-400 text-xs">
+              {currentCard.chapter}
+            </span>
+          )}
+          {currentCard.difficulty && (
+            <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${difficultyColor}`}>
+              {currentCard.difficulty}
+            </span>
+          )}
+        </div>
+
+        {/* Carte */}
+        <div
+          className="k-card p-8 min-h-[320px] flex flex-col justify-center cursor-pointer hover:border-kprimary/30 transition-all select-none"
+          onClick={() => !submitting && setShowAnswer(v => !v)}
+        >
+          {/* Question */}
+          <div className="mb-6">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+              {showAnswer
+                ? <><Eye className="w-4 h-4" /> Question &amp; Réponse</>
+                : <><EyeOff className="w-4 h-4" /> Question</>
+              }
+            </p>
+            <p className="text-xl sm:text-2xl font-bold text-white leading-relaxed">
+              {currentCard.front}
+            </p>
           </div>
 
-          {/* Carte */}
-          <div 
-            className="bg-white rounded-2xl p-8 shadow-2xl border-2 border-gray-200 min-h-[400px] flex flex-col justify-center cursor-pointer hover:shadow-3xl transition-all"
-            onClick={() => setShowAnswer(!showAnswer)}
-          >
-            
-            {/* Question */}
-            <div className="mb-6">
-              <p className="text-sm text-gray-500 uppercase font-semibold mb-3 flex items-center gap-2">
-                {showAnswer ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                {showAnswer ? 'Question & Réponse' : 'Question'}
-              </p>
-              <p className="text-2xl font-bold text-gray-900 leading-relaxed">
-                {currentCard.question}
+          {/* Réponse */}
+          {showAnswer ? (
+            <div className="pt-5 border-t border-white/10">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Réponse</p>
+              <p className="text-lg text-gray-200 leading-relaxed">
+                {currentCard.back}
               </p>
             </div>
-
-            {/* Réponse */}
-            {showAnswer ? (
-              <div className="pt-6 border-t-2 border-gray-200">
-                <p className="text-sm text-gray-500 uppercase font-semibold mb-3">
-                  Réponse
-                </p>
-                <p className="text-xl text-gray-800 leading-relaxed mb-4">
-                  {currentCard.answer}
-                </p>
-                
-                {currentCard.explanation && (
-                  <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-blue-600 font-semibold mb-2 flex items-center gap-2">
-                      <Lightbulb className="w-4 h-4" />
-                      Explication
-                    </p>
-                    <p className="text-gray-700">
-                      {currentCard.explanation}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="text-center py-8">
-                <p className="text-gray-400">
-                  Cliquez pour révéler la réponse
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Boutons de réponse (si réponse affichée) */}
-          {showAnswer && (
-            <div className="mt-8">
-              <p className="text-center text-gray-700 font-semibold mb-4">
-                Comment avez-vous répondu ?
-              </p>
-              
-              <div className="grid grid-cols-3 gap-4">
-                {/* Difficile */}
-                <button
-                  onClick={() => handleReview(2)}
-                  className="group px-6 py-4 bg-red-50 hover:bg-red-100 border-2 border-red-200 hover:border-red-400 rounded-xl transition-all"
-                >
-                  <X className="w-6 h-6 text-red-600 mx-auto mb-2" />
-                  <p className="font-bold text-red-700">Difficile</p>
-                  <p className="text-xs text-red-600 mt-1">Revoir demain</p>
-                </button>
-
-                {/* Bon */}
-                <button
-                  onClick={() => handleReview(3)}
-                  className="group px-6 py-4 bg-yellow-50 hover:bg-yellow-100 border-2 border-yellow-200 hover:border-yellow-400 rounded-xl transition-all"
-                >
-                  <RotateCcw className="w-6 h-6 text-yellow-600 mx-auto mb-2" />
-                  <p className="font-bold text-yellow-700">Bon</p>
-                  <p className="text-xs text-yellow-600 mt-1">Dans quelques jours</p>
-                </button>
-
-                {/* Facile */}
-                <button
-                  onClick={() => handleReview(5)}
-                  className="group px-6 py-4 bg-green-50 hover:bg-green-100 border-2 border-green-200 hover:border-green-400 rounded-xl transition-all"
-                >
-                  <Check className="w-6 h-6 text-green-600 mx-auto mb-2" />
-                  <p className="font-bold text-green-700">Facile</p>
-                  <p className="text-xs text-green-600 mt-1">Plus tard</p>
-                </button>
-              </div>
-
-              <p className="text-center text-sm text-gray-500 mt-4">
-                Votre choix détermine la prochaine révision selon l'algorithme SM-2
-              </p>
+          ) : (
+            <div className="text-center py-6">
+              <p className="text-gray-600 text-sm">Appuie pour révéler la réponse</p>
             </div>
           )}
-
         </div>
+
+        {/* Boutons d'évaluation */}
+        {showAnswer && (
+          <div className="mt-6">
+            <p className="text-center text-xs text-gray-500 uppercase tracking-widest mb-4">
+              Comment as-tu répondu ?
+            </p>
+            <div className="grid grid-cols-3 gap-3">
+              {QUALITY_OPTIONS.map(opt => {
+                const Icon = opt.icon;
+                return (
+                  <button
+                    key={opt.value}
+                    onClick={() => handleReview(opt.value)}
+                    disabled={submitting}
+                    className={`
+                      flex flex-col items-center gap-2 px-4 py-4 rounded-xl border
+                      font-semibold text-sm transition-all active:scale-95
+                      disabled:opacity-40 ${opt.colors}
+                    `}
+                  >
+                    {submitting
+                      ? <Loader2 className="w-5 h-5 animate-spin" />
+                      : <Icon className="w-5 h-5" />
+                    }
+                    <span>{opt.label}</span>
+                    <span className="text-[11px] font-normal opacity-70">{opt.sub}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-center text-xs text-gray-600 mt-3">
+              Ton choix détermine la prochaine révision (algorithme SM-2)
+            </p>
+          </div>
+        )}
 
       </div>
     </div>
   );
 }
-
-
