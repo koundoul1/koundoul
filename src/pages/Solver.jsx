@@ -35,11 +35,8 @@ import HintSystem from '../components/solver/HintSystem'
 import StudentWorkspace from '../components/solver/StudentWorkspace'
 import ErrorFeedback from '../components/solver/ErrorFeedback'
 import InteractiveGraph from '../components/solver/InteractiveGraph'
-import LearningProfileSelector from '../components/solver/LearningProfileSelector'
-
 // Nouveaux utils
 import { analyzeStudentAttempt } from '../utils/errorAnalyzer'
-import { loadProfileFromStorage, saveProfileToStorage } from '../utils/learningProfiles'
 
 // Quota IA
 import useAiQuota from '../hooks/useAiQuota'
@@ -131,11 +128,6 @@ const Solver = () => {
   const [studentAttempts, setStudentAttempts] = useState([])
   const [detectedErrors, setDetectedErrors] = useState([])
   const [usedHints, setUsedHints] = useState([])
-  
-  // Profil d'apprentissage
-  const [learningProfile, setLearningProfile] = useState(
-    loadProfileFromStorage()
-  )
   
   // Graphiques
   const [showGraph, setShowGraph] = useState(false)
@@ -495,22 +487,6 @@ const Solver = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* NOUVEAU: Profil d'apprentissage (si mode guidé actif) */}
-                {showGuidedMode && (
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-300 mb-3">
-                      🎯 Comment apprends-tu le mieux ?
-                    </h4>
-                    <LearningProfileSelector
-                      selectedProfile={learningProfile}
-                      onProfileChange={(profileId) => {
-                        setLearningProfile(profileId)
-                        saveProfileToStorage(profileId)
-                      }}
-                    />
-                  </div>
-                )}
 
                 {/* Zone de texte */}
                 <div>
