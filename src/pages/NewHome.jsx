@@ -88,9 +88,9 @@ const NewHome = () => {
   ]
 
   const stats = [
-    { value: '1800+', label: t('newHome.stats.exercises'), color: 'from-blue-400 to-blue-600' },
-    { value: '450+', label: t('newHome.stats.microLessons'), color: 'from-purple-400 to-purple-600' },
-    { value: '18', label: t('newHome.stats.chapters'), color: 'from-pink-400 to-pink-600' },
+    { value: '900+', label: t('newHome.stats.exercises'), color: 'from-blue-400 to-blue-600' },
+    { value: '395', label: t('newHome.stats.microLessons'), color: 'from-purple-400 to-purple-600' },
+    { value: '9', label: t('newHome.stats.chapters'), color: 'from-pink-400 to-pink-600' },
     { value: '3', label: t('newHome.stats.subjects'), color: 'from-emerald-400 to-emerald-600' },
   ]
 

@@ -31,12 +31,7 @@ import {
 } from 'lucide-react'
 
 // Nouveaux composants pédagogiques
-import HintSystem from '../components/solver/HintSystem'
-import StudentWorkspace from '../components/solver/StudentWorkspace'
-import ErrorFeedback from '../components/solver/ErrorFeedback'
 import InteractiveGraph from '../components/solver/InteractiveGraph'
-// Nouveaux utils
-import { analyzeStudentAttempt } from '../utils/errorAnalyzer'
 
 // Quota IA
 import useAiQuota from '../hooks/useAiQuota'
@@ -123,10 +118,6 @@ const Solver = () => {
   const [showSuccessFeedback, setShowSuccessFeedback] = useState(false)
   const [xpGained, setXpGained] = useState(0)
 
-  // NOUVEAUX ÉTATS - Mode guidé et composants pédagogiques
-  const [showGuidedMode, setShowGuidedMode] = useState(false)
-  const [studentAttempts, setStudentAttempts] = useState([])
-  const [detectedErrors, setDetectedErrors] = useState([])
   const [usedHints, setUsedHints] = useState([])
   
   // Graphiques
@@ -198,7 +189,6 @@ const Solver = () => {
     setIsSolving(true)
     setError('')
     setSolution(null)
-    setDetectedErrors([])
     setUsedHints([])
     setShowGraph(false)
     setFinishReason(null)
@@ -356,47 +346,6 @@ const Solver = () => {
     setSolution(null)
   }
 
-  /**
-   * Gérer les tentatives de l'élève dans le workspace
-   */
-  const handleStudentAttempt = ({ content, isCorrect }) => {
-    const attempt = {
-      content,
-      isCorrect,
-      timestamp: new Date().toISOString(),
-      hintsUsed: usedHints.length
-    }
-    
-    setStudentAttempts([...studentAttempts, attempt])
-    
-    // Analyser les erreurs si incorrect
-    if (!isCorrect && solution) {
-      const errors = analyzeStudentAttempt(
-        content,
-        solution.solution,
-        subject
-      )
-      
-      if (errors.length > 0) {
-        setDetectedErrors(errors)
-        
-        // Scroll vers le feedback d'erreurs après un court délai
-        setTimeout(() => {
-          const errorElement = document.getElementById('error-feedback')
-          if (errorElement) {
-            errorElement.scrollIntoView({ 
-              behavior: 'smooth',
-              block: 'start'
-            })
-          }
-        }, 100)
-      }
-    } else if (isCorrect) {
-      // Réinitialiser les erreurs si correct
-      setDetectedErrors([])
-    }
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950">
       {/* Quota reached modal */}
@@ -452,42 +401,6 @@ const Solver = () => {
               </div>
 
               <div className="space-y-6">
-                {/* NOUVEAU: Toggle Mode Guidé */}
-                <div className="bg-blue-500/10 border-2 border-blue-400/30 rounded-lg p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <Lightbulb className="h-6 w-6 text-blue-400" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between flex-wrap gap-3">
-                        <div>
-                          <h4 className="font-semibold text-blue-300 mb-1">
-                            Mode Apprentissage Guidé
-                          </h4>
-                          <p className="text-sm text-gray-400">
-                            Résous le problème étape par étape avec des indices progressifs et un espace de travail
-                          </p>
-                        </div>
-                        <button
-                          onClick={() => setShowGuidedMode(!showGuidedMode)}
-                          className={`
-                            relative inline-flex h-8 w-14 items-center rounded-full transition-colors
-                            ${showGuidedMode ? 'bg-blue-500' : 'bg-gray-600'}
-                          `}
-                          aria-label="Toggle mode guidé"
-                        >
-                          <span
-                            className={`
-                              inline-block h-6 w-6 transform rounded-full bg-white transition-transform
-                              ${showGuidedMode ? 'translate-x-7' : 'translate-x-1'}
-                            `}
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Zone de texte */}
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -736,56 +649,6 @@ const Solver = () => {
               </div>
             )}
 
-            {/* NOUVEAU: Section Mode Guidé */}
-            {showGuidedMode && solution && (
-              <div className="mt-8 space-y-6">
-                {/* Système de Hints */}
-                {solution.hints && solution.hints.length > 0 && (
-                  <div className="koundoul-card">
-                    <HintSystem
-                      hints={solution.hints}
-                      onHintUsed={(hintData) => {
-                        setUsedHints([...usedHints, hintData])
-                        console.log(`💡 Indice ${hintData.index + 1} débloqué, -${hintData.penalty} XP`)
-                      }}
-                      maxHints={3}
-                    />
-                  </div>
-                )}
-                
-                {/* Espace de Travail Élève */}
-                <div className="koundoul-card">
-                  <StudentWorkspace
-                    onSubmitAttempt={handleStudentAttempt}
-                    expectedAnswer={solution.solution}
-                  />
-                </div>
-                
-                {/* Feedback d'Erreurs */}
-                {detectedErrors.length > 0 && (
-                  <div id="error-feedback" className="koundoul-card">
-                    <h3 className="text-lg font-semibold text-white mb-4">
-                      🔍 Analyse des Erreurs
-                    </h3>
-                    <ErrorFeedback
-                      errors={detectedErrors}
-                      onWatchVideo={(url) => {
-                        console.log('📺 Ouvrir vidéo:', url)
-                        window.open(url, '_blank')
-                      }}
-                      onDoExercise={(url) => {
-                        console.log('🎯 Naviguer vers exercice:', url)
-                        // TODO: Navigation vers exercice
-                      }}
-                      onReviewLesson={(type) => {
-                        console.log('📚 Revoir leçon:', type)
-                        // TODO: Navigation vers leçon appropriée
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
 
             {/* NOUVEAU: Graphique Interactif */}
             {showGraph && solution && solution.requiresGraph && (
