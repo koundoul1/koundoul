@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, Component } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { I18nProvider, useTranslation } from './hooks/useTranslation.jsx'
@@ -62,21 +62,64 @@ const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'))
 const PaymentError = lazy(() => import('./pages/PaymentError'))
 
 function NotFoundPage() {
-  const { t } = useTranslation()
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('notFound.title')}</h1>
-        <p className="text-gray-600 mb-8">{t('notFound.message')}</p>
+        <p className="text-7xl font-black text-white/10 mb-4">404</p>
+        <h1 className="text-2xl font-black text-white mb-2">Page introuvable</h1>
+        <p className="text-gray-400 text-sm mb-8">Cette page n'existe pas ou a été déplacée.</p>
         <a
           href="/"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-block px-6 py-3 rounded-xl bg-kprimary text-white font-bold text-sm hover:opacity-90 transition-opacity"
         >
-          {t('notFound.backHome')}
+          ← Retour à l'accueil
         </a>
       </div>
     </div>
   )
+}
+
+// ErrorBoundary global — intercepte les chunk load errors (nouveau déploiement Vercel)
+// et force un rechargement pour récupérer les nouveaux chunks
+class ChunkErrorBoundary extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { hasError: false }
+  }
+  static getDerivedStateFromError(error) {
+    const isChunkError =
+      error?.name === 'ChunkLoadError' ||
+      /Loading chunk \d+ failed/i.test(error?.message || '') ||
+      /Failed to fetch dynamically imported module/i.test(error?.message || '') ||
+      /Importing a module script failed/i.test(error?.message || '')
+    if (isChunkError) {
+      // Recharge la page une seule fois pour récupérer les nouveaux chunks
+      if (!sessionStorage.getItem('chunk_reload')) {
+        sessionStorage.setItem('chunk_reload', '1')
+        window.location.reload()
+      }
+    }
+    return { hasError: true }
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <div className="text-center">
+            <p className="text-white font-bold text-lg mb-2">Une erreur est survenue</p>
+            <p className="text-gray-400 text-sm mb-6">Rechargement en cours…</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-5 py-2.5 rounded-xl bg-kprimary text-white font-bold text-sm hover:opacity-90"
+            >
+              Recharger la page
+            </button>
+          </div>
+        </div>
+      )
+    }
+    return this.props.children
+  }
 }
 
 // Routes sans app shell (login, register, terms — standalone pages)
@@ -110,6 +153,7 @@ function AppLayout() {
 
       {/* Main content */}
       <main className={showAppShell ? 'flex-1 pb-20 md:pb-0 md:ml-60 md:mt-16' : 'flex-1'}>
+        <ChunkErrorBoundary>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Routes publiques (full width, sans sidebar) */}
@@ -167,6 +211,7 @@ function AppLayout() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
+        </ChunkErrorBoundary>
       </main>
     </div>
   )
