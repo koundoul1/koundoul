@@ -46,30 +46,6 @@ router.post('/chat', optionalAuth, async (req, res) => {
     return res.status(503).json({ error: 'Service IA non configure.' });
   }
 
-  // Free users: max 3 conversations
-  if (!conversationId) {
-    var planInfo = await getUserPlanInfo(userId);
-    if (!planInfo.isPremium) {
-      var convCount = await prisma.coachConversation.count({
-        where: { userId: userId, title: { not: { startsWith: '[Parent]' } } }
-      });
-      if (convCount >= 3) {
-        return res.status(403).json({ error: 'Maximum 3 conversations Coach en plan gratuit. Supprime une conversation ou passe Premium !', premiumRequired: true });
-      }
-    }
-  }
-
-  // SSE headers
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.setHeader('X-Accel-Buffering', 'no');
-  res.flushHeaders();
-
-  const sendEvent = (event, data) => {
-    try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
-  };
-
   // ── Conversation management ──
   let conversation = null;
   let allMessages = [];
@@ -115,7 +91,7 @@ router.post('/chat', optionalAuth, async (req, res) => {
     allMessages = [...clientHistory, { role: 'user', content: message.trim(), createdAt: new Date().toISOString() }];
   }
 
-  // ── SSE stream ──
+  // ── SSE headers ──
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
