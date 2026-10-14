@@ -742,7 +742,7 @@ const api = {
      * SSE streaming chat — same pattern as solver.solveStream.
      * Returns an object with an abort() method.
      */
-    chatStream: ({ message, conversationId, onMeta, onChunk, onDone, onError }) => {
+    chatStream: ({ message, conversationId, history, onMeta, onChunk, onDone, onError }) => {
       const token = localStorage.getItem('token');
       const controller = new AbortController();
       let finished = false;
@@ -759,13 +759,16 @@ const api = {
 
       const run = async () => {
         try {
+          const body = { message };
+          if (conversationId) body.conversationId = conversationId;
+          if (history) body.history = history;
           const res = await fetch(`${API_BASE}/coach/chat`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               ...(token ? { Authorization: `Bearer ${token}` } : {})
             },
-            body: JSON.stringify({ message, conversationId }),
+            body: JSON.stringify(body),
             signal: controller.signal
           });
 

@@ -13,9 +13,30 @@ const MAX_HISTORY_MESSAGES = 20;
 
 // ── POST /chat — SSE streaming conversational endpoint ──────────────
 
-router.post('/chat', authenticateToken, checkAiQuota, async (req, res) => {
-  const userId = req.user.userId;
-  const { message, conversationId } = req.body;
+router.post('/chat', optionalAuth, async (req, res) => {
+  const isAuth = !!req.user;
+  const userId = isAuth ? req.user.userId : null;
+  const { message, conversationId, history } = req.body;
+
+  // ── Quota check ──
+  if (isAuth) {
+    const { checkQuota } = require('../services/aiQuotaService');
+    const quota = await checkQuota(userId);
+    if (!quota.allowed) {
+      return res.status(429).json({ error: 'Quota IA quotidien atteint', quotaReached: true, limit: quota.limit, used: quota.used, resetAt: quota.resetAt });
+    }
+  } else {
+    const { todayUTC, nextMidnightUTC } = require('../services/aiQuotaService');
+    const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+    const guestKey = 'guest:' + ip;
+    const today = todayUTC();
+    const usage = await prisma.dailyAiUsage.findUnique({ where: { userId_date: { userId: guestKey, date: today } } }).catch(() => null);
+    const used = usage?.count ?? 0;
+    const GUEST_LIMIT = 3;
+    if (used >= GUEST_LIMIT) {
+      return res.status(429).json({ error: 'Quota atteint (' + GUEST_LIMIT + '/jour). Inscris-toi pour continuer gratuitement.', quotaReached: true, guestLimit: true, limit: GUEST_LIMIT, used, resetAt: nextMidnightUTC() });
+    }
+  }
 
   if (!message || !message.trim()) {
     return res.status(400).json({ error: 'Message requis' });
@@ -49,56 +70,64 @@ router.post('/chat', authenticateToken, checkAiQuota, async (req, res) => {
     try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
   };
 
-  let conversation;
+  // ── Conversation management ──
+  let conversation = null;
+  let allMessages = [];
 
-  try {
-    if (conversationId) {
-      // Load existing conversation
-      conversation = await prisma.coachConversation.findUnique({
-        where: { id: conversationId }
-      });
-      if (!conversation || conversation.userId !== userId) {
-        sendEvent('error', { message: 'Conversation non trouvée' });
-        res.end();
-        return;
-      }
-    } else {
-      // Create new conversation — title = first 50 chars of first message
-      const title = message.trim().length > 50
-        ? message.trim().slice(0, 50) + '...'
-        : message.trim();
-      conversation = await prisma.coachConversation.create({
-        data: {
-          userId,
-          title,
-          messages: []
+  if (isAuth) {
+    // Auth users: load/create DB conversation
+    // Free users: max 3 conversations
+    if (!conversationId) {
+      var planInfo = await getUserPlanInfo(userId);
+      if (!planInfo.isPremium) {
+        var convCount = await prisma.coachConversation.count({
+          where: { userId, title: { not: { startsWith: '[Parent]' } } }
+        });
+        if (convCount >= 3) {
+          return res.status(403).json({ error: 'Maximum 3 conversations Coach en plan gratuit. Supprime une conversation ou passe Premium !', premiumRequired: true });
         }
-      });
+      }
     }
-  } catch (err) {
-    console.error('[Coach] Conversation load/create error:', err.message);
-    sendEvent('error', { message: 'Erreur de session' });
-    res.end();
-    return;
+
+    try {
+      if (conversationId) {
+        conversation = await prisma.coachConversation.findUnique({ where: { id: conversationId } });
+        if (!conversation || conversation.userId !== userId) {
+          return res.status(404).json({ error: 'Conversation non trouvée' });
+        }
+      } else {
+        const title = message.trim().length > 50 ? message.trim().slice(0, 50) + '...' : message.trim();
+        conversation = await prisma.coachConversation.create({ data: { userId, title, messages: [] } });
+      }
+    } catch (err) {
+      console.error('[Coach] Conversation error:', err.message);
+      return res.status(500).json({ error: 'Erreur de session' });
+    }
+
+    const userMessage = { role: 'user', content: message.trim(), createdAt: new Date().toISOString() };
+    allMessages = [...(conversation.messages || []), userMessage];
+    try {
+      await prisma.coachConversation.update({ where: { id: conversation.id }, data: { messages: allMessages } });
+    } catch (err) { console.error('[Coach] Message persist error:', err.message); }
+  } else {
+    // Guest: stateless — history comes from client
+    const clientHistory = Array.isArray(history) ? history : [];
+    allMessages = [...clientHistory, { role: 'user', content: message.trim(), createdAt: new Date().toISOString() }];
   }
 
-  // Append user message
-  const userMessage = { role: 'user', content: message.trim(), createdAt: new Date().toISOString() };
-  const allMessages = [...(conversation.messages || []), userMessage];
+  // ── SSE stream ──
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.flushHeaders();
 
-  // Persist user message immediately
-  try {
-    await prisma.coachConversation.update({
-      where: { id: conversation.id },
-      data: { messages: allMessages }
-    });
-  } catch (err) {
-    console.error('[Coach] Message persist error:', err.message);
-  }
+  const sendEvent = (event, data) => {
+    try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
+  };
 
-  sendEvent('meta', { conversationId: conversation.id, status: 'streaming' });
+  sendEvent('meta', { conversationId: conversation?.id || null, status: 'streaming' });
 
-  // SSE heartbeat to prevent proxy disconnects (Render, Cloudflare, etc.)
   const heartbeat = setInterval(() => {
     try { res.write(': heartbeat\n\n'); } catch (e) { clearInterval(heartbeat); }
   }, 15000);
@@ -106,50 +135,56 @@ router.post('/chat', authenticateToken, checkAiQuota, async (req, res) => {
   res.on('finish', () => clearInterval(heartbeat));
 
   try {
-    // Build Gemini history from last N messages (excluding the new one which becomes userPrompt)
     const recentMessages = allMessages.slice(-MAX_HISTORY_MESSAGES);
-    const history = recentMessages.slice(0, -1).map(m => ({
+    const geminiHistory = recentMessages.slice(0, -1).map(m => ({
       role: m.role === 'user' ? 'user' : 'model',
       parts: [{ text: m.content }]
     }));
     const userPrompt = recentMessages[recentMessages.length - 1].content;
 
-    // Stream the response
     let fullText = '';
     for await (const chunk of streamGenerate({
       role: 'coach',
       systemInstruction: COACH_SYSTEM_PROMPT,
       userPrompt,
-      history,
+      history: geminiHistory,
       generationConfig: { temperature: 0.6, maxOutputTokens: 2048 }
     })) {
       fullText += chunk;
       sendEvent('chunk', { text: chunk });
     }
 
-    // Persist assistant response
-    const assistantMessage = { role: 'assistant', content: fullText, createdAt: new Date().toISOString() };
-    const updatedMessages = [...allMessages, assistantMessage];
-
-    try {
-      await prisma.coachConversation.update({
-        where: { id: conversation.id },
-        data: { messages: updatedMessages }
-      });
-    } catch (err) {
-      console.error('[Coach] Assistant message persist error:', err.message);
+    // Persist assistant response (auth only)
+    if (isAuth && conversation) {
+      const assistantMessage = { role: 'assistant', content: fullText, createdAt: new Date().toISOString() };
+      try {
+        await prisma.coachConversation.update({
+          where: { id: conversation.id },
+          data: { messages: [...allMessages, assistantMessage] }
+        });
+      } catch (err) { console.error('[Coach] Assistant persist error:', err.message); }
     }
 
-    // Increment AI quota counter after successful completion
-    try { await incrementUsage(userId); } catch (e) { console.warn('[Coach] incrementUsage error:', e.message); }
+    // Increment quota
+    try {
+      if (isAuth) {
+        await incrementUsage(userId);
+      } else {
+        const { todayUTC } = require('../services/aiQuotaService');
+        const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+        const guestKey = 'guest:' + ip;
+        await prisma.dailyAiUsage.upsert({
+          where: { userId_date: { userId: guestKey, date: todayUTC() } },
+          create: { userId: guestKey, date: todayUTC(), count: 1 },
+          update: { count: { increment: 1 } }
+        });
+      }
+    } catch (e) { console.warn('[Coach] incrementUsage error:', e.message); }
 
-    sendEvent('done', { conversationId: conversation.id, status: 'completed' });
+    sendEvent('done', { conversationId: conversation?.id || null, status: 'completed' });
   } catch (err) {
     console.error('[Coach] Stream error:', err.message);
-    const errMsg = err instanceof GeminiError
-      ? err.message
-      : 'Erreur lors de la réponse. Réessayez.';
-    sendEvent('error', { message: errMsg });
+    sendEvent('error', { message: err instanceof GeminiError ? err.message : 'Erreur lors de la réponse. Réessayez.' });
   } finally {
     res.end();
   }

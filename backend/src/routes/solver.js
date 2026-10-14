@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateToken } = require('../middlewares/auth');
+const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const { checkAiQuota } = require('../middlewares/aiQuota');
 const prisma = require('../config/database');
 const { isConfigured, streamGenerate, GeminiError } = require('../services/geminiService');
@@ -75,9 +75,30 @@ router.post('/extract-from-image', authenticateToken, async (req, res, next) => 
 
 // ── POST /solve — SSE streaming endpoint ─────────────────────────────
 
-router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
-  const userId = req.user.userId;
+router.post('/solve', optionalAuth, async (req, res) => {
   const { problem, domain, level } = req.body;
+  const isAuth = !!req.user;
+  const userId = isAuth ? req.user.userId : null;
+
+  // ── Quota check ──
+  if (isAuth) {
+    const { checkQuota } = require('../services/aiQuotaService');
+    const quota = await checkQuota(userId);
+    if (!quota.allowed) {
+      return res.status(429).json({ error: 'Quota IA quotidien atteint', quotaReached: true, limit: quota.limit, used: quota.used, resetAt: quota.resetAt });
+    }
+  } else {
+    const { checkQuota: checkQ, todayUTC, nextMidnightUTC } = require('../services/aiQuotaService');
+    const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+    const guestKey = 'guest:' + ip;
+    const today = todayUTC();
+    const usage = await prisma.dailyAiUsage.findUnique({ where: { userId_date: { userId: guestKey, date: today } } }).catch(() => null);
+    const used = usage?.count ?? 0;
+    const GUEST_LIMIT = 3;
+    if (used >= GUEST_LIMIT) {
+      return res.status(429).json({ error: 'Quota atteint (' + GUEST_LIMIT + '/jour). Inscris-toi pour continuer gratuitement.', quotaReached: true, guestLimit: true, limit: GUEST_LIMIT, used, resetAt: nextMidnightUTC() });
+    }
+  }
 
   if (!problem || !problem.trim()) {
     return res.status(400).json({ error: 'Probleme requis' });
@@ -98,15 +119,17 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
     try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
   };
 
-  // Create history record
+  // Create history record (auth users only)
   let historyId = null;
-  try {
-    const record = await prisma.solverHistory.create({
-      data: { userId, problem: problem.trim(), domain: domain || 'general', status: 'pending' }
-    });
-    historyId = record.id;
-  } catch (err) {
-    console.error('[Solver] History create error:', err.message);
+  if (isAuth) {
+    try {
+      const record = await prisma.solverHistory.create({
+        data: { userId, problem: problem.trim(), domain: domain || 'general', status: 'pending' }
+      });
+      historyId = record.id;
+    } catch (err) {
+      console.error('[Solver] History create error:', err.message);
+    }
   }
 
   sendEvent('meta', { historyId, status: 'streaming' });
@@ -178,7 +201,20 @@ router.post('/solve', authenticateToken, checkAiQuota, async (req, res) => {
     });
 
     // Increment AI quota counter after successful completion
-    try { await incrementUsage(userId); } catch (e) { console.warn('[Solver] incrementUsage error:', e.message); }
+    try {
+      if (isAuth) {
+        await incrementUsage(userId);
+      } else {
+        const { todayUTC } = require('../services/aiQuotaService');
+        const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+        const guestKey = 'guest:' + ip;
+        await prisma.dailyAiUsage.upsert({
+          where: { userId_date: { userId: guestKey, date: todayUTC() } },
+          create: { userId: guestKey, date: todayUTC(), count: 1 },
+          update: { count: { increment: 1 } }
+        });
+      }
+    } catch (e) { console.warn('[Solver] incrementUsage error:', e.message); }
 
     sendEvent('done', { historyId, status: 'completed', finishReason: streamMeta.finishReason || 'STOP' });
   } catch (err) {
