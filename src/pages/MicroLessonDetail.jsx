@@ -315,7 +315,7 @@ export default function MicroLessonDetail() {
         )}
       </div>
 
-      {user && lesson && (
+      {lesson && (
         <LessonChat
           lessonTitle={lesson.title}
           subject={lesson.subject}

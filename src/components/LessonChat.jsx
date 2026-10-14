@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { MessageCircle, X, Send, Loader2, Bot, User } from 'lucide-react'
 import api from '../services/api'
+import { useAuth } from '../context/AuthContext'
 
 /**
  * LessonChat — Floating contextual AI chat panel for course pages.
@@ -8,6 +10,7 @@ import api from '../services/api'
  * silently in the first message so the Coach knows what's being studied.
  */
 export default function LessonChat({ lessonTitle, subject, level, chapter }) {
+  const { isAuthenticated } = useAuth()
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
@@ -43,6 +46,14 @@ export default function LessonChat({ lessonTitle, subject, level, chapter }) {
   const sendMessage = async () => {
     const text = input.trim()
     if (!text || streaming) return
+
+    if (!isAuthenticated) {
+      setMessages([{
+        role: 'assistant',
+        content: '__guest__'
+      }])
+      return
+    }
 
     setInput('')
     if (textareaRef.current) textareaRef.current.style.height = 'auto'
@@ -187,6 +198,23 @@ export default function LessonChat({ lessonTitle, subject, level, chapter }) {
                     <Bot className="w-3.5 h-3.5 text-kprimary" />
                   </div>
                 )}
+                {msg.content === '__guest__' ? (
+                  <div className="max-w-[78%] px-3 py-3 rounded-xl bg-white/5 border border-kprimary/20 rounded-bl-sm">
+                    <p className="text-xs text-white/70 mb-2">Inscris-toi pour poser des questions à l'IA sur cette leçon.</p>
+                    <Link
+                      to="/register"
+                      className="block w-full text-center py-1.5 rounded-lg bg-kprimary text-white text-xs font-bold hover:bg-kprimary/80 transition-colors"
+                    >
+                      S'inscrire gratuitement →
+                    </Link>
+                    <Link
+                      to="/login"
+                      className="block w-full text-center mt-1 py-1 text-xs text-white/40 hover:text-white/70 transition-colors"
+                    >
+                      Déjà un compte ? Se connecter
+                    </Link>
+                  </div>
+                ) : (
                 <div className={`max-w-[78%] px-3 py-2 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${
                   msg.role === 'user'
                     ? 'bg-kprimary text-white rounded-br-sm'
@@ -204,6 +232,7 @@ export default function LessonChat({ lessonTitle, subject, level, chapter }) {
                       : null
                   )}
                 </div>
+                )}
                 {msg.role === 'user' && (
                   <div className="w-7 h-7 rounded-full bg-white/8 border border-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <User className="w-3.5 h-3.5 text-white/50" />
