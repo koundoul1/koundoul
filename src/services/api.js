@@ -823,7 +823,88 @@ const api = {
     },
     getConversations: (limit = 20) => request(`/coach/conversations?limit=${limit}`),
     getConversation: (id) => request(`/coach/conversations/${id}`),
-    deleteConversation: (id) => request(`/coach/conversations/${id}`, { method: 'DELETE' })
+    deleteConversation: (id) => request(`/coach/conversations/${id}`, { method: 'DELETE' }),
+
+    /**
+     * SSE lesson chat — accessible sans connexion.
+     * history: tableau { role: 'user'|'assistant', content: string }[]
+     */
+    lessonChatStream: ({ message, history, onMeta, onChunk, onDone, onError }) => {
+      const token = localStorage.getItem('token');
+      const controller = new AbortController();
+      let finished = false;
+
+      const finish = (data) => {
+        if (finished) return;
+        finished = true;
+        onDone?.(data || {});
+      };
+
+      const timeout = setTimeout(() => {
+        if (!finished) { finish({}); controller.abort(); }
+      }, 120000);
+
+      const run = async () => {
+        try {
+          const res = await fetch(`${API_BASE}/coach/lesson-chat`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(token ? { Authorization: `Bearer ${token}` } : {})
+            },
+            body: JSON.stringify({ message, history: history || [] }),
+            signal: controller.signal
+          });
+
+          if (!res.ok) {
+            clearTimeout(timeout);
+            const err = await res.json().catch(() => ({ error: 'Erreur serveur' }));
+            onError?.(err.error || `Erreur ${res.status}`, err.quotaReached ? err : null);
+            return;
+          }
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          const processLine = (part) => {
+            const lines = part.split('\n');
+            const eventLine = lines.find(l => l.startsWith('event: '));
+            const dataLine = lines.find(l => l.startsWith('data: '));
+            if (!eventLine || !dataLine) return;
+            const event = eventLine.slice(7).trim();
+            try {
+              const data = JSON.parse(dataLine.slice(6));
+              if (event === 'meta') onMeta?.(data);
+              else if (event === 'chunk') onChunk?.(data);
+              else if (event === 'done') { clearTimeout(timeout); finish(data); }
+              else if (event === 'error') { clearTimeout(timeout); onError?.(data.message); }
+            } catch (_e) {}
+          };
+
+          let reading = true;
+          while (reading) {
+            const { done, value } = await reader.read();
+            if (done) { reading = false; break; }
+            buffer += decoder.decode(value, { stream: true });
+            const segments = buffer.split('\n\n');
+            buffer = segments.pop() || '';
+            for (const seg of segments) {
+              if (seg.trim()) processLine(seg);
+            }
+          }
+          if (buffer.trim()) processLine(buffer);
+          clearTimeout(timeout);
+          if (!finished) finish({});
+        } catch (err) {
+          clearTimeout(timeout);
+          if (err.name !== 'AbortError') onError?.(err.message || 'Erreur de connexion');
+        }
+      };
+
+      run();
+      return { abort: () => { clearTimeout(timeout); controller.abort(); } };
+    }
   },
 
   // 📊 AI QUOTA

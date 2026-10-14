@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateToken } = require('../middlewares/auth');
+const { authenticateToken, optionalAuth } = require('../middlewares/auth');
 const { checkAiQuota } = require('../middlewares/aiQuota');
 const prisma = require('../config/database');
 const { isConfigured, streamGenerate, GeminiError } = require('../services/geminiService');
@@ -149,6 +149,143 @@ router.post('/chat', authenticateToken, checkAiQuota, async (req, res) => {
     const errMsg = err instanceof GeminiError
       ? err.message
       : 'Erreur lors de la réponse. Réessayez.';
+    sendEvent('error', { message: errMsg });
+  } finally {
+    res.end();
+  }
+});
+
+// ── POST /lesson-chat — guest-accessible lesson AI chat ─────────────
+// Stateless (no DB conversation). Quota: userId pour connectés,
+// guest:IP pour les visiteurs (même limite FREE = 3/jour).
+
+const GUEST_DAILY_LIMIT = 3;
+
+async function checkGuestQuota(ip) {
+  const { todayUTC, nextMidnightUTC } = require('../services/aiQuotaService');
+  const guestKey = 'guest:' + ip;
+  const today = todayUTC();
+  const usage = await prisma.dailyAiUsage.findUnique({
+    where: { userId_date: { userId: guestKey, date: today } }
+  });
+  const used = usage?.count ?? 0;
+  return {
+    allowed: used < GUEST_DAILY_LIMIT,
+    used,
+    limit: GUEST_DAILY_LIMIT,
+    resetAt: nextMidnightUTC()
+  };
+}
+
+async function incrementGuestUsage(ip) {
+  const { todayUTC } = require('../services/aiQuotaService');
+  const guestKey = 'guest:' + ip;
+  const today = todayUTC();
+  await prisma.dailyAiUsage.upsert({
+    where: { userId_date: { userId: guestKey, date: today } },
+    create: { userId: guestKey, date: today, count: 1 },
+    update: { count: { increment: 1 } }
+  });
+}
+
+router.post('/lesson-chat', optionalAuth, async (req, res) => {
+  const { message, history } = req.body;
+
+  if (!message || !message.trim()) {
+    return res.status(400).json({ error: 'Message requis' });
+  }
+  if (!isConfigured()) {
+    return res.status(503).json({ error: 'Service IA non configuré.' });
+  }
+
+  // ── Quota check ──
+  const isAuth = !!req.user;
+  let quotaKey;
+
+  if (isAuth) {
+    // Authenticated: use existing per-user quota
+    const { checkQuota } = require('../services/aiQuotaService');
+    const quota = await checkQuota(req.user.userId);
+    if (!quota.allowed) {
+      return res.status(429).json({
+        error: 'Quota IA quotidien atteint',
+        quotaReached: true,
+        limit: quota.limit,
+        used: quota.used,
+        resetAt: quota.resetAt
+      });
+    }
+    quotaKey = req.user.userId;
+  } else {
+    // Guest: IP-based quota
+    const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+    const quota = await checkGuestQuota(ip);
+    if (!quota.allowed) {
+      return res.status(429).json({
+        error: 'Quota atteint (' + GUEST_DAILY_LIMIT + '/jour). Inscris-toi pour continuer gratuitement.',
+        quotaReached: true,
+        guestLimit: true,
+        limit: quota.limit,
+        used: quota.used,
+        resetAt: quota.resetAt
+      });
+    }
+    quotaKey = ip;
+  }
+
+  // ── SSE headers ──
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.flushHeaders();
+
+  const sendEvent = (event, data) => {
+    try { res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`); } catch {}
+  };
+
+  const heartbeat = setInterval(() => {
+    try { res.write(': heartbeat\n\n'); } catch (e) { clearInterval(heartbeat); }
+  }, 15000);
+  req.on('close', () => clearInterval(heartbeat));
+  res.on('finish', () => clearInterval(heartbeat));
+
+  sendEvent('meta', { status: 'streaming' });
+
+  try {
+    // Build Gemini history from client-provided history array
+    const clientHistory = Array.isArray(history) ? history.slice(-MAX_HISTORY_MESSAGES) : [];
+    const geminiHistory = clientHistory.map(m => ({
+      role: m.role === 'user' ? 'user' : 'model',
+      parts: [{ text: m.content }]
+    }));
+
+    let fullText = '';
+    for await (const chunk of streamGenerate({
+      role: 'coach',
+      systemInstruction: COACH_SYSTEM_PROMPT,
+      userPrompt: message.trim(),
+      history: geminiHistory,
+      generationConfig: { temperature: 0.6, maxOutputTokens: 2048 }
+    })) {
+      fullText += chunk;
+      sendEvent('chunk', { text: chunk });
+    }
+
+    // Increment quota after successful response
+    try {
+      if (isAuth) {
+        await incrementUsage(quotaKey);
+      } else {
+        const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.ip || 'unknown';
+        await incrementGuestUsage(ip);
+      }
+    } catch (e) { console.warn('[LessonChat] incrementUsage error:', e.message); }
+
+    sendEvent('done', { status: 'completed' });
+  } catch (err) {
+    console.error('[LessonChat] Stream error:', err.message);
+    const errMsg = err instanceof GeminiError ? err.message : 'Erreur lors de la réponse. Réessayez.';
     sendEvent('error', { message: errMsg });
   } finally {
     res.end();

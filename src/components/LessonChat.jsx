@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { MessageCircle, X, Send, Loader2, Bot, User } from 'lucide-react'
 import api from '../services/api'
-import { useAuth } from '../context/AuthContext'
 
 /**
  * LessonChat — Floating contextual AI chat panel for course pages.
@@ -10,12 +9,10 @@ import { useAuth } from '../context/AuthContext'
  * silently in the first message so the Coach knows what's being studied.
  */
 export default function LessonChat({ lessonTitle, subject, level, chapter }) {
-  const { isAuthenticated } = useAuth()
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [streaming, setStreaming] = useState(false)
-  const [conversationId, setConversationId] = useState(null)
   const abortRef = useRef(null)
   const bottomRef = useRef(null)
   const isFirstMessage = useRef(true)
@@ -47,18 +44,10 @@ export default function LessonChat({ lessonTitle, subject, level, chapter }) {
     const text = input.trim()
     if (!text || streaming) return
 
-    if (!isAuthenticated) {
-      setMessages([{
-        role: 'assistant',
-        content: '__guest__'
-      }])
-      return
-    }
-
     setInput('')
     if (textareaRef.current) textareaRef.current.style.height = 'auto'
 
-    // On first message, prefix with lesson context (invisible to user)
+    // On first message, inject lesson context silently
     let messageToSend = text
     if (isFirstMessage.current) {
       isFirstMessage.current = false
@@ -71,20 +60,22 @@ export default function LessonChat({ lessonTitle, subject, level, chapter }) {
       messageToSend = parts.join('\n')
     }
 
-    setMessages(prev => [...prev, { role: 'user', content: text }])
+    const newUserMsg = { role: 'user', content: text }
+    setMessages(prev => [...prev, newUserMsg])
     setStreaming(true)
 
-    // Placeholder for streaming assistant response
+    // Snapshot history before adding placeholder (sent to backend)
+    const historySnapshot = [...messages, newUserMsg]
+
+    // Placeholder streaming response
     setMessages(prev => [...prev, { role: 'assistant', content: '' }])
 
     let assistantText = ''
 
-    abortRef.current = api.coach.chatStream({
+    abortRef.current = api.coach.lessonChatStream({
       message: messageToSend,
-      conversationId,
-      onMeta: (data) => {
-        if (data.conversationId) setConversationId(data.conversationId)
-      },
+      history: historySnapshot,
+      onMeta: () => {},
       onChunk: (data) => {
         assistantText += data.text || ''
         setMessages(prev => {
@@ -97,13 +88,14 @@ export default function LessonChat({ lessonTitle, subject, level, chapter }) {
         setStreaming(false)
         abortRef.current = null
       },
-      onError: (err) => {
+      onError: (err, quotaData) => {
         setMessages(prev => {
           const updated = [...prev]
           updated[updated.length - 1] = {
             role: 'assistant',
-            content: err || 'Une erreur est survenue. Réessaie.',
-            error: true
+            content: quotaData?.guestLimit ? '__quota_guest__' : (err || 'Une erreur est survenue. Réessaie.'),
+            error: !quotaData?.guestLimit,
+            quotaGuest: !!quotaData?.guestLimit
           }
           return updated
         })
@@ -198,9 +190,10 @@ export default function LessonChat({ lessonTitle, subject, level, chapter }) {
                     <Bot className="w-3.5 h-3.5 text-kprimary" />
                   </div>
                 )}
-                {msg.content === '__guest__' ? (
+                {msg.quotaGuest ? (
                   <div className="max-w-[78%] px-3 py-3 rounded-xl bg-white/5 border border-kprimary/20 rounded-bl-sm">
-                    <p className="text-xs text-white/70 mb-2">Inscris-toi pour poser des questions à l'IA sur cette leçon.</p>
+                    <p className="text-xs text-white/70 mb-2 font-semibold">Quota atteint (3/jour)</p>
+                    <p className="text-xs text-white/50 mb-2">Inscris-toi gratuitement pour continuer.</p>
                     <Link
                       to="/register"
                       className="block w-full text-center py-1.5 rounded-lg bg-kprimary text-white text-xs font-bold hover:bg-kprimary/80 transition-colors"
