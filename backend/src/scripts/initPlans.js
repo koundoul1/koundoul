@@ -17,10 +17,10 @@ const PLANS = [
     currency: 'XOF',
     duration: 30,
     interval: 'monthly',
-    aiCallsPerDay: 6,
+    aiCallsPerDay: 3,
     maxChildren: 0,
     features: [
-      '6 appels IA par jour (Solver + Coach)',
+      '3 appels IA par jour (Solver + Coach)',
       '1800 exercices corrigés',
       '450 micro-leçons',
       'Quiz et défis',

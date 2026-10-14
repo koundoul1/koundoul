@@ -43,7 +43,7 @@ async function getUserPlanInfo(userId) {
     }
   }
 
-  return { isPremium: false, planName: 'FREE', displayName: 'Gratuit', aiCallsPerDay: 6 };
+  return { isPremium: false, planName: 'FREE', displayName: 'Gratuit', aiCallsPerDay: 3 };
 }
 
 async function countTodayUsage(userId, type) {

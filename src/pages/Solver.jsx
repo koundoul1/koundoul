@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { BlockMath, InlineMath } from 'react-katex'
 import 'katex/dist/katex.min.css'
 import { useAuth } from '../context/AuthContext'
@@ -104,7 +104,9 @@ const Solver = () => {
   const { user, isAuthenticated } = useAuth()
   const { t } = useTranslation()
   const { quota, refreshQuota, warningToast } = useAiQuota()
+  const location = useLocation()
   const [quotaModalData, setQuotaModalData] = useState(null)
+  const [showGuestModal, setShowGuestModal] = useState(false)
   const [problem, setProblem] = useState('')
   const [subject, setSubject] = useState('math')
   const [difficulty, setDifficulty] = useState('easy')
@@ -178,6 +180,10 @@ const Solver = () => {
   const streamRef = React.useRef(null)
 
   const handleSolve = () => {
+    if (!isAuthenticated) {
+      setShowGuestModal(true)
+      return
+    }
     if (!(problem || '').trim()) {
       setError(t('solver.enterProblem') || 'Entre ton probleme a resoudre')
       return
@@ -351,6 +357,42 @@ const Solver = () => {
       {/* Quota reached modal */}
       {quotaModalData && (
         <QuotaReachedModal quotaData={quotaModalData} onClose={() => setQuotaModalData(null)} />
+      )}
+
+      {/* Guest modal — s'affiche quand un visiteur tente de résoudre sans compte */}
+      {showGuestModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+          <div className="bg-gray-900 rounded-2xl p-7 max-w-sm w-full text-center border border-white/10 shadow-2xl">
+            <div className="text-4xl mb-4">🧠</div>
+            <h2 className="text-white font-bold text-xl mb-2">Résous ce problème gratuitement</h2>
+            <p className="text-gray-400 text-sm mb-1">
+              Crée un compte gratuit et accède à
+            </p>
+            <p className="text-white font-semibold text-sm mb-5">
+              3 résolutions IA/jour · Cours · Exercices · Forum
+            </p>
+            <Link
+              to="/register"
+              state={{ from: location }}
+              className="block w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold mb-3 transition-colors"
+            >
+              S'inscrire — c'est gratuit →
+            </Link>
+            <Link
+              to="/login"
+              state={{ from: location }}
+              className="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 text-sm font-medium mb-4 transition-colors"
+            >
+              Déjà un compte ? Se connecter
+            </Link>
+            <button
+              onClick={() => setShowGuestModal(false)}
+              className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
+            >
+              Continuer sans compte
+            </button>
+          </div>
+        </div>
       )}
 
       {/* Warning toast at 80% usage */}

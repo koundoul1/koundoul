@@ -7,6 +7,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BlockMath, InlineMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import api from '../services/api';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import {
   Brain,
   Send,
@@ -74,6 +76,10 @@ const MessageContent = ({ content }) => {
 // ── Main component ──────────────────────────────────────────────────
 
 const VirtualCoach = () => {
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+  const [showGuestModal, setShowGuestModal] = useState(false);
+
   // AI Quota
   const { quota, refreshQuota, warningToast } = useAiQuota();
   const [quotaModalData, setQuotaModalData] = useState(null);
@@ -153,6 +159,10 @@ const VirtualCoach = () => {
   // ── Send message ──
 
   const handleSend = () => {
+    if (!isAuthenticated) {
+      setShowGuestModal(true);
+      return;
+    }
     const text = input.trim();
     if (!text || isStreaming) return;
 
@@ -228,6 +238,42 @@ const VirtualCoach = () => {
       {/* Quota reached modal */}
       {quotaModalData && (
         <QuotaReachedModal quotaData={quotaModalData} onClose={() => setQuotaModalData(null)} />
+      )}
+
+      {/* Guest modal — visiteur sans compte */}
+      {showGuestModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+          <div className="bg-gray-900 rounded-2xl p-7 max-w-sm w-full text-center border border-white/10 shadow-2xl">
+            <div className="text-4xl mb-4">🤖</div>
+            <h2 className="text-white font-bold text-xl mb-2">Parle avec ton Coach IA</h2>
+            <p className="text-gray-400 text-sm mb-1">
+              Crée un compte gratuit et accède à
+            </p>
+            <p className="text-white font-semibold text-sm mb-5">
+              3 messages IA/jour · Cours · Exercices · Forum
+            </p>
+            <Link
+              to="/register"
+              state={{ from: location }}
+              className="block w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold mb-3 transition-colors"
+            >
+              S'inscrire — c'est gratuit →
+            </Link>
+            <Link
+              to="/login"
+              state={{ from: location }}
+              className="block w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 text-sm font-medium mb-4 transition-colors"
+            >
+              Déjà un compte ? Se connecter
+            </Link>
+            <button
+              onClick={() => setShowGuestModal(false)}
+              className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
+            >
+              Continuer sans compte
+            </button>
+          </div>
+        </div>
       )}
 
       {/* Warning toast */}

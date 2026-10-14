@@ -103,7 +103,7 @@ async function checkChildAlerts(childId) {
         where: { userId: childId, status: { in: ['ACTIVE', 'active'] }, endDate: { gte: now } },
         include: { plan: true }
       });
-      var limit = sub ? (sub.plan.aiCallsPerDay || 6) : 6;
+      var limit = sub ? (sub.plan.aiCallsPerDay || 3) : 3;
       if (usage.count >= limit * 0.8) {
         alerts.push({
           type: 'quota_high',

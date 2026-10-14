@@ -59,42 +59,42 @@ const Sidebar = () => {
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
   ]
 
-  // ── Section: IA (top priority) ──
+  // ── Section: IA (top priority) — public: page ouverte, mur au submit ──
   const aiNav = [
-    { name: t('dashboard.actions.solver') || 'Resolveur IA', href: '/solver', icon: Brain },
-    { name: 'Coach Virtuel', href: '/coach', icon: Bot },
+    { name: t('dashboard.actions.solver') || 'Resolveur IA', href: '/solver', icon: Brain, public: true },
+    { name: 'Coach Virtuel', href: '/coach', icon: Bot, public: true },
   ]
 
   // ── Section: Apprentissage ──
   const learnNav = [
-    { name: t('nav.courses'), href: '/courses', icon: BookOpen },
-    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked },
-    { name: 'Exercices', href: '/exercices', icon: Dumbbell },
-    { name: 'Quiz', href: '/quiz', icon: Zap },
+    { name: t('nav.courses'), href: '/courses', icon: BookOpen, public: true },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked, public: true },
+    { name: 'Exercices', href: '/exercices', icon: Dumbbell, public: true },
+    { name: 'Quiz', href: '/quiz', icon: Zap, public: true },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck },
   ]
 
   // ── Section: Competition ──
   const competitionNav = [
-    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy },
-    { name: 'Defi Smart', href: '/defi', icon: Sparkles },
-    { name: 'Classement', href: '/leaderboard', icon: Medal },
-    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award },
+    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy, public: true },
+    { name: 'Defi Smart', href: '/defi', icon: Sparkles, public: true },
+    { name: 'Classement', href: '/leaderboard', icon: Medal, public: true },
+    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, public: true },
   ]
 
   // ── Section: Ressources ──
   const resourcesNav = [
-    { name: 'Ressources', href: '/resources', icon: Lightbulb },
-    { name: 'Visualisations', href: '/visualizations', icon: Eye },
-    { name: 'Forum', href: '/forum', icon: MessageSquare },
+    { name: 'Ressources', href: '/resources', icon: Lightbulb, public: true },
+    { name: 'Visualisations', href: '/visualizations', icon: Eye, public: true },
+    { name: 'Forum', href: '/forum', icon: MessageSquare, public: true },
   ]
 
   // ── Section: Compte ──
   const accountNav = [
     { name: t('nav.profile') || 'Profil', href: '/profile', icon: User },
     { name: 'Notifications', href: '/notifications', icon: Bell },
-    { name: 'Contact', href: '/contact', icon: MessageSquare },
-    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard },
+    { name: 'Contact', href: '/contact', icon: MessageSquare, public: true },
+    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, public: true },
     ...(user?.isParent ? [
       { name: 'Espace Parent', href: '/parent-dashboard', icon: Shield },
       { name: 'Coach Parent', href: '/parent-coach', icon: Bot },
@@ -231,27 +231,34 @@ const Sidebar = () => {
       ) : (
         /* Auth buttons for non-authenticated */
         <div className="p-3 border-t border-white/5 space-y-2">
-          <button
-            onClick={() => setShowShareModal(true)}
-            className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl text-white/50 hover:text-white/80 hover:bg-white/5 text-[13px] font-medium transition-colors"
-          >
-            <Share2 className="w-4 h-4" />
-            Partager l'app
-          </button>
-          <Link
-            to="/login"
-            className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-xl border border-kprimary/40 text-kprimary hover:bg-kprimary/10 text-[13px] font-semibold transition-colors"
-          >
-            <LogIn className="w-4 h-4" />
-            Se connecter
-          </Link>
+          {/* Bannière upsell */}
+          <div className="px-3 py-2.5 rounded-xl bg-gradient-to-r from-kprimary/15 to-purple-500/10 border border-kprimary/20 mb-1">
+            <p className="text-[11px] font-bold text-white/80 mb-0.5">✨ Accès gratuit</p>
+            <p className="text-[10px] text-white/40 leading-snug">
+              3 résolutions IA/jour · Cours · Forum · Classement
+            </p>
+          </div>
           <Link
             to="/register"
             className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-xl bg-kprimary text-white hover:bg-kprimary/90 text-[13px] font-semibold transition-colors"
           >
             <UserPlus className="w-4 h-4" />
-            S'inscrire
+            S'inscrire gratuitement
           </Link>
+          <Link
+            to="/login"
+            className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl border border-white/10 text-white/60 hover:bg-white/5 text-[13px] font-medium transition-colors"
+          >
+            <LogIn className="w-4 h-4" />
+            Se connecter
+          </Link>
+          <button
+            onClick={() => setShowShareModal(true)}
+            className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl text-white/30 hover:text-white/60 hover:bg-white/5 text-[12px] transition-colors"
+          >
+            <Share2 className="w-3.5 h-3.5" />
+            Partager l'app
+          </button>
         </div>
       )}
       {showShareModal && <ShareModal onClose={() => setShowShareModal(false)} />}

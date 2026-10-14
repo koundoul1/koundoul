@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { I18nProvider, useTranslation } from './hooks/useTranslation.jsx'
 import ProtectedRoute from './components/ProtectedRoute'
+import GuestRoute from './components/GuestRoute'
 import PageLoader from './components/PageLoader'
 // Navigation : mobile bottom nav + desktop sidebar/topbar
 import MobileNavBar from './components/MobileNavBar'
@@ -167,45 +168,52 @@ function AppLayout() {
             <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
             <Route path="/payment/error" element={<PaymentError />} />
 
-            {/* Routes protégées (avec sidebar) */}
+            {/* ── Routes protégées (données personnelles) ── */}
             <Route path="/dashboard" element={<ProtectedRoute><NewDashboard /></ProtectedRoute>} />
-            <Route path="/solver" element={<ProtectedRoute><Solver /></ProtectedRoute>} />
-            <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-            <Route path="/quiz/:quizId" element={<ProtectedRoute><QuizPlay /></ProtectedRoute>} />
-            <Route path="/quiz/:quizId/results" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><QuizResults /></Layout></Suspense></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/settings" element={<Navigate to="/profile" replace />} />
-            <Route path="/subscriptions" element={<ProtectedRoute><Subscriptions /></ProtectedRoute>} />
-            <Route path="/resources" element={<ProtectedRoute><EducationalResources /></ProtectedRoute>} />
-            <Route path="/coach" element={<ProtectedRoute><VirtualCoach /></ProtectedRoute>} />
-            <Route path="/visualizations" element={<ProtectedRoute><InteractiveVisualizations /></ProtectedRoute>} />
-            <Route path="/micro-lessons" element={<ProtectedRoute><MicroLessons /></ProtectedRoute>} />
-            <Route path="/microlessons/:id" element={<ProtectedRoute><MicroLessonDetail /></ProtectedRoute>} />
-            <Route path="/defi" element={<ProtectedRoute><SmartExercises /></ProtectedRoute>} />
-            <Route path="/exercices" element={<ProtectedRoute><QuestionBanks /></ProtectedRoute>} />
-            <Route path="/exercices/:id" element={<ProtectedRoute><QuestionBankDetail /></ProtectedRoute>} />
-            <Route path="/question-banks/:id" element={<ProtectedRoute><QuestionBankDetail /></ProtectedRoute>} />
-            <Route path="/why-it-works" element={<ProtectedRoute><WhyItWorks /></ProtectedRoute>} />
-            <Route path="/advanced-features" element={<ProtectedRoute><AdvancedFeatures /></ProtectedRoute>} />
-            <Route path="/test-hints" element={<ProtectedRoute><TestHintSystem /></ProtectedRoute>} />
-            <Route path="/challenge" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
-            <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
-            <Route path="/badges" element={<ProtectedRoute><Badges /></ProtectedRoute>} />
             <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
             <Route path="/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
             <Route path="/flashcards/review" element={<ProtectedRoute><FlashcardsReview /></ProtectedRoute>} />
-            <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
-            <Route path="/forum" element={<ProtectedRoute><Forum /></ProtectedRoute>} />
-            <Route path="/forum/:id" element={<ProtectedRoute><DiscussionDetail /></ProtectedRoute>} />
             <Route path="/forum/new" element={<ProtectedRoute><CreateDiscussion /></ProtectedRoute>} />
-            <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
-            <Route path="/courses/:slug" element={<ProtectedRoute><SubjectChapters /></ProtectedRoute>} />
-            <Route path="/courses/:slug/chapters/:chapterSlug" element={<ProtectedRoute><ChapterDetail /></ProtectedRoute>} />
-            <Route path="/lessons/:lessonId" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><Lesson /></Layout></Suspense></ProtectedRoute>} />
-            <Route path="/exercises/:exerciseId" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><Exercise /></Layout></Suspense></ProtectedRoute>} />
             <Route path="/parent-dashboard" element={<ProtectedRoute><ParentDashboard /></ProtectedRoute>} />
             <Route path="/parent-coach" element={<ProtectedRoute><ParentCoach /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/quiz/:quizId/results" element={<ProtectedRoute><Suspense fallback={<PageLoader />}><Layout><QuizResults /></Layout></Suspense></ProtectedRoute>} />
+
+            {/* ── Routes ouvertes (GuestRoute — pas de redirect /login) ── */}
+            {/* IA : page accessible, mur au moment du submit si non connecté */}
+            <Route path="/solver" element={<GuestRoute><Solver /></GuestRoute>} />
+            <Route path="/coach" element={<GuestRoute><VirtualCoach /></GuestRoute>} />
+            {/* Contenu — lecture seule */}
+            <Route path="/courses" element={<GuestRoute><Courses /></GuestRoute>} />
+            <Route path="/courses/:slug" element={<GuestRoute><SubjectChapters /></GuestRoute>} />
+            <Route path="/courses/:slug/chapters/:chapterSlug" element={<GuestRoute><ChapterDetail /></GuestRoute>} />
+            <Route path="/lessons/:lessonId" element={<GuestRoute><Suspense fallback={<PageLoader />}><Layout><Lesson /></Layout></Suspense></GuestRoute>} />
+            <Route path="/exercises/:exerciseId" element={<GuestRoute><Suspense fallback={<PageLoader />}><Layout><Exercise /></Layout></Suspense></GuestRoute>} />
+            <Route path="/micro-lessons" element={<GuestRoute><MicroLessons /></GuestRoute>} />
+            <Route path="/microlessons/:id" element={<GuestRoute><MicroLessonDetail /></GuestRoute>} />
+            <Route path="/exercices" element={<GuestRoute><QuestionBanks /></GuestRoute>} />
+            <Route path="/exercices/:id" element={<GuestRoute><QuestionBankDetail /></GuestRoute>} />
+            <Route path="/question-banks/:id" element={<GuestRoute><QuestionBankDetail /></GuestRoute>} />
+            {/* Quiz — listing + détail ouverts, jouer/soumettre requiert auth backend */}
+            <Route path="/quiz" element={<GuestRoute><Quiz /></GuestRoute>} />
+            <Route path="/quiz/:quizId" element={<GuestRoute><QuizPlay /></GuestRoute>} />
+            {/* Social */}
+            <Route path="/forum" element={<GuestRoute><Forum /></GuestRoute>} />
+            <Route path="/forum/:id" element={<GuestRoute><DiscussionDetail /></GuestRoute>} />
+            <Route path="/leaderboard" element={<GuestRoute><Leaderboard /></GuestRoute>} />
+            <Route path="/badges" element={<GuestRoute><Badges /></GuestRoute>} />
+            {/* Découverte */}
+            <Route path="/subscriptions" element={<GuestRoute><Subscriptions /></GuestRoute>} />
+            <Route path="/resources" element={<GuestRoute><EducationalResources /></GuestRoute>} />
+            <Route path="/visualizations" element={<GuestRoute><InteractiveVisualizations /></GuestRoute>} />
+            <Route path="/challenge" element={<GuestRoute><Challenge /></GuestRoute>} />
+            <Route path="/defi" element={<GuestRoute><SmartExercises /></GuestRoute>} />
+            <Route path="/contact" element={<GuestRoute><Contact /></GuestRoute>} />
+            <Route path="/why-it-works" element={<GuestRoute><WhyItWorks /></GuestRoute>} />
+            <Route path="/advanced-features" element={<GuestRoute><AdvancedFeatures /></GuestRoute>} />
+            <Route path="/test-hints" element={<GuestRoute><TestHintSystem /></GuestRoute>} />
 
             {/* Route 404 */}
             <Route path="*" element={<NotFoundPage />} />

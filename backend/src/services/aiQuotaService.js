@@ -12,7 +12,7 @@ const FREE_DEFAULTS = {
   id: 'plan-free',
   name: 'FREE',
   displayName: 'Gratuit',
-  aiCallsPerDay: 6,
+  aiCallsPerDay: 3,
   maxChildren: 0
 };
 

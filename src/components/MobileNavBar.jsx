@@ -79,35 +79,35 @@ const MobileNavBar = () => {
     { name: 'Profil', href: '/profile', icon: User },
   ] : [
     { name: t('nav.home'), href: '/', icon: Home, public: true },
-    { name: t('dashboard.actions.solver') || 'Solver', href: '/solver', icon: Brain },
-    { name: 'Coach', href: '/coach', icon: Bot },
+    { name: t('dashboard.actions.solver') || 'Solver', href: '/solver', icon: Brain, public: true },
+    { name: 'Coach', href: '/coach', icon: Bot, public: true },
     { name: 'Notifs', href: '/notifications', icon: Bell },
   ];
 
   // Drawer items — parent only sees account modules
   const studentDrawerItems = [
     // IA & Outils principaux
-    { name: t('dashboard.actions.solver') || 'Resolveur', href: '/solver', icon: Brain, emoji: '🤖' },
-    { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓' },
+    { name: t('dashboard.actions.solver') || 'Resolveur', href: '/solver', icon: Brain, emoji: '🤖', public: true },
+    { name: 'Coach Virtuel', href: '/coach', icon: Bot, emoji: '🎓', public: true },
     { name: 'Dashboard', href: '/dashboard', icon: BarChart3, emoji: '📊' },
     // Apprentissage
-    { name: t('nav.courses') || 'Cours', href: '/courses', icon: BookOpen, emoji: '📖' },
-    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯' },
-    { name: 'Exercices', href: '/exercices', icon: Dumbbell, emoji: '🧩' },
-    { name: 'Quiz', href: '/quiz', icon: Zap, emoji: '📝' },
+    { name: t('nav.courses') || 'Cours', href: '/courses', icon: BookOpen, emoji: '📖', public: true },
+    { name: t('dashboard.actions.microLessons') || 'Micro-Lecons', href: '/micro-lessons', icon: BookMarked, emoji: '🎯', public: true },
+    { name: 'Exercices', href: '/exercices', icon: Dumbbell, emoji: '🧩', public: true },
+    { name: 'Quiz', href: '/quiz', icon: Zap, emoji: '📝', public: true },
     { name: 'Flashcards', href: '/flashcards', icon: BookOpenCheck, emoji: '🃏' },
     // Competition
-    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy, emoji: '🏆' },
-    { name: 'Defi Smart', href: '/defi', icon: Sparkles, emoji: '⚡' },
-    { name: 'Classement', href: '/leaderboard', icon: Trophy, emoji: '🥇' },
-    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅' },
+    { name: t('nav.defi') || 'Defis', href: '/challenge', icon: Trophy, emoji: '🏆', public: true },
+    { name: 'Defi Smart', href: '/defi', icon: Sparkles, emoji: '⚡', public: true },
+    { name: 'Classement', href: '/leaderboard', icon: Trophy, emoji: '🥇', public: true },
+    { name: t('dashboard.badges') || 'Badges', href: '/badges', icon: Award, emoji: '🏅', public: true },
     // Ressources & Compte
-    { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚' },
-    { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '👁️' },
-    { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬' },
-    { name: 'Contact', href: '/contact', icon: MessageSquare, emoji: '✉️' },
+    { name: 'Ressources', href: '/resources', icon: Lightbulb, emoji: '📚', public: true },
+    { name: 'Visualisations', href: '/visualizations', icon: Eye, emoji: '👁️', public: true },
+    { name: 'Forum', href: '/forum', icon: MessageSquare, emoji: '💬', public: true },
+    { name: 'Contact', href: '/contact', icon: MessageSquare, emoji: '✉️', public: true },
     { name: 'Profil', href: '/profile', icon: User, emoji: '👤' },
-    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳' },
+    { name: 'Abonnements', href: '/subscriptions', icon: CreditCard, emoji: '💳', public: true },
     ...(user?.is_admin ? [{ name: 'Admin', href: '/admin', icon: Shield, emoji: '🛡️' }] : []),
   ];
 
@@ -345,22 +345,27 @@ const MobileNavBar = () => {
                   <span>Se déconnecter</span>
                 </button>
               ) : (
-                <div className="flex gap-3">
-                  <Link
-                    to="/login"
-                    onClick={() => setShowDrawer(false)}
-                    className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl border border-kprimary/40 text-kprimary text-sm font-semibold transition-colors hover:bg-kprimary/10"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    Connexion
-                  </Link>
+                <div className="space-y-2">
+                  {/* Bannière avantages */}
+                  <div className="px-4 py-3 rounded-xl bg-gradient-to-r from-kprimary/15 to-purple-500/10 border border-kprimary/20 text-center mb-3">
+                    <p className="text-white text-sm font-bold mb-0.5">✨ Accès gratuit inclus</p>
+                    <p className="text-white/50 text-xs">3 résolutions IA/jour · Cours · Forum · Classement</p>
+                  </div>
                   <Link
                     to="/register"
                     onClick={() => setShowDrawer(false)}
-                    className="flex items-center justify-center gap-2 flex-1 py-3 rounded-xl bg-kprimary text-white text-sm font-semibold transition-colors hover:bg-kprimary/90"
+                    className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-kprimary text-white text-sm font-semibold transition-colors hover:bg-kprimary/90"
                   >
                     <UserPlus className="w-4 h-4" />
-                    S'inscrire
+                    S'inscrire gratuitement →
+                  </Link>
+                  <Link
+                    to="/login"
+                    onClick={() => setShowDrawer(false)}
+                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-white/10 text-white/60 text-sm font-medium transition-colors hover:bg-white/5"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    Déjà un compte ? Se connecter
                   </Link>
                 </div>
               )}
