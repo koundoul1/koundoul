@@ -13,6 +13,16 @@ import PhoneInput from '../components/PhoneInput'
 import PinInput from '../components/PinInput'
 import { Eye, EyeOff, Mail, Lock, User, Phone, Loader2, ArrowRight, ArrowLeft } from 'lucide-react'
 
+// Plan display names for the subscription banner
+const PLAN_LABELS = {
+  PREMIUM_DAILY: { label: 'Premium 1 jour', emoji: '⚡' },
+  PREMIUM: { label: 'Premium Mensuel', emoji: '🌟' },
+  PREMIUM_YEARLY: { label: 'Premium Annuel', emoji: '🚀' },
+  PREMIUM_MAX: { label: 'Premium Max', emoji: '💎' },
+  PREMIUM_MAX_DAILY: { label: 'Premium Max 1 jour', emoji: '💎' },
+  PREMIUM_MAX_YEARLY: { label: 'Premium Max Annuel', emoji: '💎' },
+}
+
 const Register = () => {
   const { t } = useTranslation()
   const [step, setStep] = useState(0) // 0 = role, 1 = auth method, 2 = profile info
@@ -41,12 +51,22 @@ const Register = () => {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const referralCode = searchParams.get('ref') || ''
+  const selectedPlan = location.state?.selectedPlan || null
+  const fromPath = location.state?.from?.pathname || null
+
+  // If coming from subscriptions to buy a plan, skip role step → default student
+  useEffect(() => {
+    if (selectedPlan && step === 0) {
+      setRole('student')
+      setStep(1)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(location.state?.from?.pathname || '/dashboard', { replace: true })
+      navigate(fromPath || '/dashboard', { replace: true, state: selectedPlan ? { selectedPlan } : undefined })
     }
-  }, [isAuthenticated, navigate, location])
+  }, [isAuthenticated, navigate]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (error) clearError()
@@ -133,7 +153,8 @@ const Register = () => {
 
       const result = await register(data)
       if (result.success) {
-        navigate(role === 'parent' ? '/parent-dashboard' : '/dashboard', { replace: true })
+        const destination = fromPath || (role === 'parent' ? '/parent-dashboard' : '/dashboard')
+        navigate(destination, { replace: true, state: selectedPlan ? { selectedPlan } : undefined })
       }
     } catch (err) {
       if (!error) setErrors(prev => ({ ...prev, api: err.message || 'Erreur lors de l\'inscription' }))
@@ -150,6 +171,16 @@ const Register = () => {
       </div>
 
       <div className="relative max-w-md w-full">
+        {/* Subscription intent banner */}
+        {selectedPlan && PLAN_LABELS[selectedPlan] && (
+          <div className="bg-gradient-to-r from-kprimary/20 to-ksecondary/20 border border-kprimary/40 rounded-xl p-3 mb-4 text-center">
+            <p className="text-sm text-white font-semibold">
+              {PLAN_LABELS[selectedPlan].emoji} Plan <strong>{PLAN_LABELS[selectedPlan].label}</strong> sélectionné
+            </p>
+            <p className="text-xs text-white/50 mt-0.5">Inscris-toi en 30 secondes pour finaliser ton achat</p>
+          </div>
+        )}
+
         {/* Referral badge */}
         {referralCode && (
           <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border border-purple-500/30 rounded-xl p-3 mb-4 text-center">
@@ -444,6 +475,8 @@ const Register = () => {
               >
                 {isLoading ? (
                   <><Loader2 className="animate-spin h-4 w-4 mr-2" />{t('auth.register.submitting')}</>
+                ) : selectedPlan ? (
+                  <>Créer mon compte et payer <ArrowRight className="w-4 h-4 ml-2" /></>
                 ) : (
                   t('auth.register.submitButton')
                 )}

@@ -2,8 +2,8 @@
  * Page Abonnements — 4 plans avec toggle Mensuel/Annuel.
  */
 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Crown,
   Users,
@@ -79,6 +79,7 @@ const YEARLY_TO_MONTHLY = {
 const Subscriptions = () => {
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const [allPlans, setAllPlans] = useState([]);
   const [currentSubscription, setCurrentSubscription] = useState(null);
@@ -86,10 +87,29 @@ const Subscriptions = () => {
   const [processingPlanId, setProcessingPlanId] = useState(null);
   const [paymentError, setPaymentError] = useState('');
   const [billingPeriod, setBillingPeriod] = useState('monthly'); // 'daily' | 'monthly' | 'yearly'
+  const autoOpenDone = useRef(false);
 
   useEffect(() => {
     loadData();
   }, []);
+
+  // Auto-open payment modal when returning from register with a selectedPlan
+  useEffect(() => {
+    const pendingPlanId = location.state?.selectedPlan;
+    if (!pendingPlanId || !isAuthenticated || loading || autoOpenDone.current) return;
+    const plan = allPlans.find(p => p.id === pendingPlanId || p.name === pendingPlanId);
+    if (!plan) return;
+    autoOpenDone.current = true;
+    // Switch billing period to match the plan
+    if (plan.name?.includes('DAILY')) setBillingPeriod('daily');
+    else if (plan.name?.includes('YEARLY')) setBillingPeriod('yearly');
+    // Clear state then open modal
+    window.history.replaceState({}, '', location.pathname);
+    setConfirmStep(false);
+    setCopied(false);
+    setPaymentError('');
+    setQrModal({ plan, method: 'wave' });
+  }, [allPlans, isAuthenticated, loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [loadError, setLoadError] = useState('');
 
