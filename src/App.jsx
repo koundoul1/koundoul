@@ -158,7 +158,8 @@ function AppLayout() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Routes publiques (full width, sans sidebar) */}
-            <Route path="/" element={<NewHome />} />
+            <Route path="/" element={<GuestRoute><Solver /></GuestRoute>} />
+            <Route path="/accueil" element={<NewHome />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -183,7 +184,7 @@ function AppLayout() {
 
             {/* ── Routes ouvertes (GuestRoute — pas de redirect /login) ── */}
             {/* IA : page accessible, mur au moment du submit si non connecté */}
-            <Route path="/solver" element={<GuestRoute><Solver /></GuestRoute>} />
+            <Route path="/solver" element={<Navigate to="/" replace />} />
             <Route path="/coach" element={<GuestRoute><VirtualCoach /></GuestRoute>} />
             {/* Contenu — lecture seule */}
             <Route path="/courses" element={<GuestRoute><Courses /></GuestRoute>} />
