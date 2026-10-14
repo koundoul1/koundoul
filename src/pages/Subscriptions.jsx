@@ -119,7 +119,10 @@ const Subscriptions = () => {
   const [copied, setCopied] = useState(false);
 
   const handleSubscribe = (plan) => {
-    if (!isAuthenticated) { navigate('/login'); return; }
+    if (!isAuthenticated) {
+      navigate('/register', { state: { from: { pathname: '/subscriptions' }, selectedPlan: plan.id } });
+      return;
+    }
     setPaymentError('');
     setConfirmStep(false);
     setCopied(false);
